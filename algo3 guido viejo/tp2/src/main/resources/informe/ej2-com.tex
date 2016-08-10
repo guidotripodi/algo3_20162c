@@ -1,0 +1,5 @@
+La complejidad de este algoritmo es la misma que la complejidad del BFS (ya que el algoritmo es equivalente), es decir $O(E + V)$ con $E$ y $V$ la cantidad de aristas y vertices del grafo respectivamente.
+
+Como en nuestro grafo tenemos un nodo por posicion posible dentro de cada piso y un nodo interno por cada portal, tenemos en total $N * L + P$ vertices en nuestro grafo. Por otra parte, por cada piso tenemos $L-1$ conexiones horizontales (entre posiciones vecinas dentro del mismo piso), mientras que se tienen dos aristas por cada portal (una para conectar cada puerta al nodo interno). Concluimos asi que nuestro grafo tiene $(L-1) * N + 2P$ aristas.
+
+Volviendo a la complejidad, como la complejidad de nuestro algoritmo es $O(E + V)$ con $E$ y $V$ la cantidad de aristas y vertices del grafo, podemos decir que es $O(N * L + P + (L-1) * N + 2P)$, que equivale a $(N * L + P)$, que cumple con lo pedido por el enuniciado.

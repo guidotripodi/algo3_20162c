@@ -1,0 +1,13 @@
+El capitan de Las Girasoles quiere evitar los problemas en el fog\'on del a\~no anterior, cuando las peque\~nas exploradoras rompieron en llanto por no poder sentarse en la ronda junto a sus mejores amigas. En secreto
+les asign\'o una letra a cada ni\~na y relev\'o qui\'en se llevaba con qui\'en.\\\\
+Su idea es organizar la ronda de manera que exista la menor distancia posible entre cada amistad (S\'i, mi
+querido computador minimizando la suma de las distancias entre todos los pares de amigas).\\
+Resolver en una complejidad estrictamente mejor que O($e^ea^2$). Donde $e$ es la cantidad de exploradoras
+en cada grupo, y $a$ la cantidad de amistades.\\\\
+\textbf{Entrada Tp1Ej3.in}\\
+El archivo contiene una l\'inea por cada grupo de exploradoras.\\\
+Cada l\'inea se compone de una sucesi\'on de amistades separadas por ; de la forma amistad[;amistad]
+Cada amistad es un par x xs donde x es una letra y xs una cadena de letras.\\\\
+\textbf{Salida Tp1Ej3.out}\\
+Para cada grupo de exploradoras, se debe indicar un nro. entero correpondiente a la distancia m\'axima lograda, un espacio y la cadena de letras resultante. En caso de m\'ultiples soluciones, dar la que este primera
+alfab\'eticamente.\\

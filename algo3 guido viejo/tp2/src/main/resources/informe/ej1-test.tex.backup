@@ -1,0 +1,32 @@
+\indent Por medio de los tests dados por la c\'atedra, desarrollamos nuestros tests,
+para corroborar que nuestro algoritmo era el indicado.\\
+
+A continuaci\'on enunciaremos los tipos de casos diferentes que encontramos con mayor relevancia a la hora de realizar
+testeos sobre el algoritmo:\\
+
+\begin{center}
+ \textbf{Unico portal que lleva a un unico piso N}
+\end{center}
+ Para este tipo de testeo mostraremos a continuaci\'on un ejemplo del mismo, exponiendo su respectivo resultado.\\
+
+ Con un:\\\\
+  \indent  $Piso:$ $10$
+  
+  Obtuvimos el siguiente resultado:\\
+  
+  $Cantidad$ $de$ $portales$ $usados:$ $1$
+
+
+ \begin{center}
+ \textbf{Portales que pueden conectar todos los pisos desde el 0 hasta el N}
+\end{center}
+ Como ejemplo mostraremos, exponiendo su respectivo resultad el siguiente testeo.\\
+
+ Con un secuencia de pisos:\\\\
+  \indent  $Piso:$ $0 10 20 $
+  
+  Obtuvimos el siguiente resultado:\\
+  
+  $Cantidad$ $de$ $portales$ $usados:$ $3$
+  
+  

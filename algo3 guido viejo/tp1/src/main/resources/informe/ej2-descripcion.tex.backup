@@ -1,0 +1,11 @@
+La mediana de un conjunto ordenado de n numeros se define como x\_{(n+1)/2} si n es impar, o como
+(x n/2 + x n/2+1 )/2 si n es par. Dados n numeros enteros en cualquier orden se deben devolver otros n
+numeros, donde el i- ́esimo de ellos represente la parte entera de la mediana de los primeros i numeros de
+la entrada.\\\\
+Resolver en una complejidad estrictamente mejor que O(n2 ) donde n es el numero total de enteros de
+entrada\\
+Entrada \textbf{Tp1Ej2.in} y Salida \textbf{Tp1Ej2.out}
+Tendran una sucesion enteros separados por espacios a razon de una instancia del problema por l ́ınea
+respectivamente.\\
+PISTA: Mantener luego de cada entero leıdo de la entrada el conjunto actual dividido en dos mitades, los
+mas chicos y los mas grandes. Considerar una estructura de datos eficiente para manipular esos conjuntos.\\
