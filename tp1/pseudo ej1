@@ -1,0 +1,8 @@
+recorro desde 0 hasta n+m
+	mientras que la cant(n)>cant(m)
+		elegir el n mas rapido para ir y volver
+	sino
+		tomo m
+sumar tiempo de ida + tiempo de vuelta
+
+

@@ -1,0 +1,25 @@
+
+ACA VA EL PSEUDOCODIGO
+LA IDEA DE USAR ESTA MACRO ESTA BUENA PORQUE YA PODEMOS IR PONIENDO LA COMPLEJIDAD
+Y DSP CUANDO NOS TOQUE HACER LA DEMOSTRACION SALE MAS FACIL
+
+\begin{algorithm}[H]
+\caption{CRUZANDO EL PUENTE}
+\begin{algorithmic}[1]
+\Function{Solve}{\param{in}{cableSize}{Integer}, \param{in}{stationDistances}{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
+\state List<Integer> distanceDifferences $\gets$ List<Integer>(vacio) \hfill //O(1)
+\state Integer lastStation $\gets$ 0 \hfill //O(1)
+\state Integer distance $\gets$ 0 \hfill //O(1)
+\while{i < stationDistances} \hfill //O(N)
+\state distance $\gets$ stationDistances \hfill //O(1)
+\state distanceDifferences.Agregar(distance - lastStation) \hfill //O(1)
+\state lastStation $\gets$ distance \hfill //O(1)
+\state i++ \hfill //O(1)
+\endwhile
+\state res $\gets$ getMaxRangeLength(cableSize, distanceDifferences) \hfill //O(N)
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{n}
+\end{algorithm}
+
