@@ -9,11 +9,11 @@
 \contentsline {section}{\numberline {2}Ejercicio 2}{8}{section.2}
 \contentsline {subsection}{\numberline {2.1}Descripci\'on de problema}{8}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Explicaci\'on de resoluci\'on del problema}{8}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Algoritmos}{8}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.3}Algoritmos}{9}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}An\'alisis de complejidades}{9}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Experimientos y conclusiones}{9}{subsection.2.5}
 \contentsline {subsubsection}{\numberline {2.5.1}2.5}{9}{subsubsection.2.5.1}
-\contentsline {subsubsection}{\numberline {2.5.2}2.5}{9}{subsubsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.2}2.5}{10}{subsubsection.2.5.2}
 \contentsline {section}{\numberline {3}Ejercicio 3}{12}{section.3}
 \contentsline {subsection}{\numberline {3.1}Descripci\'on de problema}{12}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Explicaci\'on de resoluci\'on del problema}{12}{subsection.3.2}

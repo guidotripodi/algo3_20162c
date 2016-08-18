@@ -1,2 +1,22 @@
-ACA IRIA LA EXPLICACION DE COMO SOLUCIONAMOS EL PROBLEMA
-INFORMAL Y FORMALMENTE
+
+Para solucionar este problema y poder quitar la llave y dejar equilibrado como se encontraba anteriormente realizamos un algoritmo el cual se encuentra dividido en tres partes, la primera realiza lo siguiente:\\
+
+Como las pesas, presentan un peso en potencia de 3, recorremos desde $3^0$ hasta un $3^i$, donde dicho $3^i$ sea el primero mayor o igual a $P$.\\
+Guardamos dicho valor en una variable, crearemos un array el cual nombraremos $arrayPesasUtilizadas$ y crearemos tambien otra variable $saldoEnBalanza$ que inicializaremos con el valor de $P$.\\
+
+
+Luego, la segunda parte consiste de un ciclo en el cual:\\
+
+	Inicialmente, restamos al valor de $saldoEnBalanza$ el valor que teniamos almacenado anteriormente el cual simboliza a la pesa con valor inmediatamente mayor a $P$ o en su defecto igual a $P$.\\
+	Una vez obtenida dicha diferencia, la cual denominaremos $N$ chequearemos la misma con ciertos valores:
+	\begin{itemize}
+	\item Si $N$ es igual a 0, eso significa que nuestra diferencia entre el valor inicial y la pesa utilizada presentan el mismo peso, dejamos guardado el valor de la pesa en el array $arrayPesasUtilizadas$ y finalizamos la segunda etapa.
+	\item Si $N$ es igual a +-1, eso significa que con agregar la pesa del menor valor que es 1 finalizariamos la etapa sin la necesidad de chequear el resto de las pesas, por lo cual, guardaremos en nuestro array el valor de las dos pesas y finalizamos esta segunda etapa.
+	\item Si $N$ es distinto de estos dos n\'umeros pero es menor a $saldoEnBalanza$, esto significa que todavia no se llego al peso original pero se pudo disminuir por ende pudimos acercarnos al valor que deseamos llegar, por lo cual, agregamos esta pesa al array, restamos el contador para poder realizar la pr\'oxima iteraci\'on y modificamos el valor de $saldoEnBalanza$ con el valor de N.
+	\item Si $N$ resulta mayor o igual a $P$ no contaremos esta pesa ya que en vez de acercarnos al valor deseado nos alejamos, por lo tanto restamos el contador para poder realizar la pr\'oxima iteraci\'on.
+	\end{itemize}
+
+
+Una vez finalizada la segunda etapa tendremos en nuestro array las pesas que se colocar\'an en la balanza.\\
+Para saber cuales ir\'an del lado derecho y cual del lado izquierdo realizamos esta tercer etapa, en la cual al valor inicial de $P$ iremos restando cada una de las pesas, hasta llegar a 0, en caso de que alguna diferencia diera negativa esa pesa ir\'a al array $arrayIzquierda$ mientras que el resto, ir\'an en el array $arrayDerecha$ para as\'i poder dejar la balanza como se encontraba inicialmente con la llave.
+
