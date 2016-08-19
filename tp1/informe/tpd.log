@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.22)  19 AUG 2016 16:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.22)  19 AUG 2016 16:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -951,12 +951,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./ej2-test1.tex
+[9]) (./ej2-test1.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--3
 
  []
 
-[9]
+
 Underfull \hbox (badness 10000) in paragraph at lines 4--6
 
  []
@@ -991,7 +991,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
 
-
+[10]
 Underfull \hbox (badness 10000) in paragraph at lines 52--53
 
  []
@@ -1012,7 +1012,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 58--60
 
  []
 
-[10]
+
 Underfull \hbox (badness 10000) in paragraph at lines 68--69
 
  []
@@ -1032,7 +1032,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 83--85
 
  []
 
-
+[11]
 Underfull \hbox (badness 10000) in paragraph at lines 109--110
 
  []
@@ -1042,7 +1042,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 111--73
 
  []
 
-[11] (./ej3-descripcion.tex)
+[12] (./ej3-descripcion.tex)
 Underfull \hbox (badness 10000) in paragraph at lines 2--78
 
  []
@@ -1052,9 +1052,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--80
 
  []
 
-(./ej3-alg.tex [12]) (./ej3-com.tex)
+(./ej3-alg.tex [13]) (./ej3-com.tex)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 84.
- [13]
+ [14]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 84.
  (./tpd.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 84.
@@ -1064,8 +1064,8 @@ Package rerunfilecheck Info: File `tpd.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 84.
  ) 
 Here is how much of TeX's memory you used:
- 8314 strings out of 493109
- 116306 string characters out of 6135009
+ 8315 strings out of 493109
+ 116313 string characters out of 6135009
  219753 words of memory out of 5000000
  11527 multiletter control sequences out of 15000+600000
  21539 words of font info for 53 fonts, out of 8000000 for 9000
@@ -1087,10 +1087,10 @@ ve/2014/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb></usr/local/texlive
 4/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2014/
 texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/texlive/2014/te
 xmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on tpd.pdf (13 pages, 244967 bytes).
+Output written on tpd.pdf (14 pages, 246516 bytes).
 PDF statistics:
- 247 PDF objects out of 1000 (max. 8388607)
- 214 compressed objects within 3 object streams
- 40 named destinations out of 1000 (max. 500000)
+ 251 PDF objects out of 1000 (max. 8388607)
+ 217 compressed objects within 3 object streams
+ 41 named destinations out of 1000 (max. 500000)
  169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

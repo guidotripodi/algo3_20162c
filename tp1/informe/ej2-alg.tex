@@ -1,26 +1,35 @@
 
-ACA EL PSEUDOCODIGO
 
 \begin{algorithm}[H]
 \caption{BALANZA}
 \begin{algorithmic}[1]
 \Function{Solve}{\param{in}{list}{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{List<Integer>}}
-\If{list == null} \hfill //O(1)
-\state res $\gets$ Error \hfill //O(1)
+\state int i = 0 \hfill //O(1)
+\state Recorro desde $3^0$ hasta $3^i$ $\geq$ P  \hfill //O($\sqrt{P}$)
+\state int saldoEnBalanza  $\gets$ P \hfill //O(1)
+\state List<Integer> arrayPesasUtilizadas $\gets$ List<Integer>(vacio) \hfill //O(1)
+\state int N = saldoEnBalanza - $3^i$ \hfill //O(1)
+\state mientras que Terminar = False \hfill //O($\sqrt{P}$)
+\If{N == 0} \hfill //O(1)
+\state arrayPesasUtilizadas $\cup$ {$3^i$} \hfill //O(1)
+\state Terminar \hfill //O(1)
 \endif
-\state List<Integer> ret $\gets$ List<Integer>(vacio) \hfill //O(1)
-\state Heap medianCalculator $\gets$ Heap(list.size) \hfill //O(log(N))
-\state Integer i $\gets$ 0 \hfill //O(1)
-\while{i < list} \hfill //O(N) % i < list.size() ??
-\state Integer element  $\gets$ list(i) \hfill //O(1)
-\state medianCalculator.Agregar(element) \hfill //O(log(N))
-\state ret.Agregar(medianCalculator.getMedian()) \hfill //O(log(N))
-\state i++ \hfill //O(1)
-\endwhile
-\state res $\gets$  ret \hfill //O(N.log(N))
+\If{N == 1} \hfill //O(1)
+\state arrayPesasUtilizadas $\cup$ {$3^i$} \hfill //O(1)
+\state arrayPesasUtilizadas $\cup$ {$3^0$} \hfill //O(1)
+\state Terminar \hfill //O(1)
+\endif
+\If{N > 1 \&\& N < saldoEnBalanza} \hfill //O(1)
+\state arrayPesasUtilizadas $\cup$ {$3^i$} \hfill //O(1)
+\state i-- \hfill //O(1)
+\state saldoEnBalanza $\gets$ N \hfill //O(1)
+\endif
+\If{N $\geq$ saldoEnBalanza} \hfill //O(1)
+\state i-- \hfill //O(1)
+\endif
 \EndFunction 
 \end{algorithmic}
 \hrule
-\complejidad{N.log(N)}
+\complejidad{$\sqrt{P}$}
 \end{algorithm}
 
