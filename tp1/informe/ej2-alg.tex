@@ -3,7 +3,7 @@
 \begin{algorithm}[H]
 \caption{BALANZA}
 \begin{algorithmic}[1]
-\Function{Solve}{\param{in}{list}{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{List<Integer>}}
+\Function{Algoritmo}{\param{in}{Integer}{P}}{$\ensuremath{\rightarrow}$ \param{out}{S}{Integer} \param{out}{T}{Integer} \param{out}{arrayI}{List<Integer>} \param{out}{arrayD}{List<Integer>}}
 \state int i = 0 \hfill //O(1)
 \state Recorro desde $3^0$ hasta $3^i$ $\geq$ P  \hfill //O($\sqrt{P}$)
 \state int saldoEnBalanza  $\gets$ P \hfill //O(1)
