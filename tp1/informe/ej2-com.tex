@@ -1,4 +1,29 @@
 
+Nuestro algoritmo como mencionamos anteriormente presenta 3 etapas.\\
+La primera de ellas consta en recorrer desde $3^0$ hasta $3^i$ donde este ultimo sea igual a $P$ o en su defecto el inmediato mayor. Esto, en el peor de los casos cuesta O($\sqrt{P}$). Luego, creamos dos enteros \textit{saldoEnBalanza} y \textit{N} y un array \textit{arrayPesasUtilizadas} inicializado vacio, por lo tanto, como son enteros y el array es vacio esto insume O(1), finalizando as\'i la primera etapa.\\
+Luego, la segunda etapa y m\'as importante de nuestro algoritmo, consiste en un ciclo donde realizaremos iterativamente la busqueda de las pesas que, sumando sus valores, nos de el valor $P$. Dicho ciclo en el peor de los casos recorrer\'a desde el valor de i que conten\'ia la pesa de mayor valor hasta i = 0, lo cual ser\'a O($\sqrt{P}$) ya que al trabajar con potencias de 3 la cantidad de vueltas del ciclo entraran en el orden de $\sqrt{P}$.\\ 
+
+Dentro de este ciclo, realizamos 6 comparaciones en O(1) las cuales son:
+
+\begin{itemize}
+\item si N=0, si N=1, aqu\'i agregamos el valor de la pesa al array y terminamos el ciclo, esto insumir\'a O(1)
+ \item si N es menor al valor de \textit{saldoEnBalanza}, estas opcion no finaliza el ciclo,
+ agrega la pesa n el array, modifica el valor de saldoEnBalanza por el valor de N y disminuye en 1 a i, luego se chequea aqui mismo si $N < 0$ de ser verdadero se modifica el valor de $estaEnNegativo$ por verdadero o por falso en caso de ser falsa la guarda, lo cual insumir\'a O(1) cada una de las operaciones mencionadas, luego se chequea aqui mismo si $N < 0$ de ser verdadero se modifica el valor de $estaEnNegativo$ por verdadero o por falso en caso de ser falsa la guarda
+ \item por ultimo, si $N \geq saldoEnBalanza$ solamente descontamos en uno a i para continuar con el ciclo.
+\end{itemize} 
+Una vez finalizado esto y por consiguiente la segunda etapa, pasamos a la tercera la cual consiste en guardar en \textit{arrayI} o \textit{arrayD} los valores de los elementos del \textit{arrayPesasUtilizadas} para colocarlos en la balanza del lado derecho o del izquierdo.\\
+Para realizar esto recorremos el array \textit{arrayPesasUtilizadas} el cual en el peor de los casos tendr\'a todas las pesas, en este caso queremos mostrar que la cantidad de elementos $X$ es menor o igual a $\sqrt{P}$.\\
+
+Por lo tanto, queremos ver que $X \leq \sqrt{P}$:\\
+
+
+
+Luego de ver esto, dentro del ciclo realizamos operaciones en O(1).\\
+Por ultimo, devolvemos los array invirtiendo las posiciones de los elementos lo que insumir\'a en el peor de los caso O($\sqrt{P}$).\\
+
+En conclusi\'on nuestro algoritmo realiza 4 ciclos que demandan en el peor de los casos O($\sqrt{P}$) donde dentro de los mismos se realizan operaciones en O(1), por lo tanto nuestra complejidad final ser\'a
+O($\sqrt{P}$).
+
 
 
 
