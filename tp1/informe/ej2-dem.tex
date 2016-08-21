@@ -1,0 +1,29 @@
+
+En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on, la etapa m\'as importante es a la hora de obtener las pesas, la segunda, en donde realizamos un ciclo que va disminuyendo el valor $saldoEnBalanza$ hasta llegar a 0. 
+
+Queremos demostrar que en cada iteraci\'on del ciclo es posible disminuir dicho valor hasta llegar a 0 siempre y cuando, la diferencia que nombramos $N$ es menor que $saldoEnBalanza$:\\
+
+Para facilitar esta demostraci\'on nos abstraemos del modulo utilizado para N ya que tomar m\'odulo a $saldoEnBalanza - {3^i} = N < 0$ es lo mismo que multiplicar $N$ o sea el resultado de la diferencia por -1 e iterear nuevamente.\\ 
+
+Por lo tanto queremos ver que:\\
+
+Sea $saldoEnBalanza - {3^i} = N$ y supongamos que $N < saldoEnBalanza$
+
+Si $saldoEnBalanza < {3^i} \Rightarrow N < 0$ caso en el cual, en el algoritmo, tomamos m\'odulo para trabajar con las otras potencias y poner a estas en el otro lado de la balanza hasta equilibrar la misma.\\
+
+Sea ${3^j}$ con $j \leq i-1$ y ${3^j} > N$. Entonces sabemos que, $saldoEnBalanza > \frac{{3^i}+ {3^{i-1}}}{2} \geq \frac{{3^i}+ {3^{j}}}{2}$.\\
+
+En particular $\frac{{3^i}+ {3^{i-1}}}{2} = {3^{i-1}}\ast\frac{3+1}{2} = 2\ast{3^{i-1}}$.\\
+
+Entonces, como  $saldoEnBalanza - {3^i} = N \Rightarrow saldoEnBalanza = {3^i} + N, como N < 0 \Rightarrow {3^i} - N > 0$. Sabemos que ${3^i} - N > 2\ast{3^{i-1}} \Rightarrow N < {3^i} -2\ast{3^{i-1}} \Rightarrow N < {3^{i-1}}$, y como $j \leq i-1 \Rightarrow N < {3^{j}}$
+
+
+
+
+
+\begin{enumerate}
+\item[1]  ${3^i} + |N| > 0$ 
+\item[2]  ${3^i} + |N| < 0$
+\end{enumerate}
+
+[1]  ${3^i} + |N| > 0$  $\Rightarrow$  ${3^i} + |N| > 0$

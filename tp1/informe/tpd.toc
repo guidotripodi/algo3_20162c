@@ -11,11 +11,12 @@
 \contentsline {subsection}{\numberline {2.2}Explicaci\'on de resoluci\'on del problema}{8}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Algoritmos}{11}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}An\'alisis de complejidades}{12}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Experimientos y conclusiones}{13}{subsection.2.5}
-\contentsline {subsubsection}{\numberline {2.5.1}2.5}{13}{subsubsection.2.5.1}
-\contentsline {subsubsection}{\numberline {2.5.2}2.5}{13}{subsubsection.2.5.2}
-\contentsline {section}{\numberline {3}Ejercicio 3}{16}{section.3}
-\contentsline {subsection}{\numberline {3.1}Descripci\'on de problema}{16}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Explicaci\'on de resoluci\'on del problema}{16}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Algoritmos}{16}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}An\'alisis de complejidades}{17}{subsection.3.4}
+\contentsline {subsection}{\numberline {2.5}Demostraci\'on de correctitud}{13}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Experimientos y conclusiones}{13}{subsection.2.6}
+\contentsline {subsubsection}{\numberline {2.6.1}2.5}{13}{subsubsection.2.6.1}
+\contentsline {subsubsection}{\numberline {2.6.2}2.5}{14}{subsubsection.2.6.2}
+\contentsline {section}{\numberline {3}Ejercicio 3}{17}{section.3}
+\contentsline {subsection}{\numberline {3.1}Descripci\'on de problema}{17}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Explicaci\'on de resoluci\'on del problema}{17}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Algoritmos}{17}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}An\'alisis de complejidades}{18}{subsection.3.4}

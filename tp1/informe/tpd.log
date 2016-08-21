@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.8.15)  20 AUG 2016 18:15
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.8.15)  20 AUG 2016 20:53
 entering extended mode
  %&-line parsing enabled.
 **tpd.tex
@@ -929,7 +929,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 17--18
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 21--23
+Underfull \hbox (badness 10000) in paragraph at lines 23--25
+
+ []
+
+) (./ej2-dem.tex
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--17
 
  []
 
@@ -943,7 +973,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./ej2-test1.tex
+[13]) (./ej2-test1.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--3
 
  []
@@ -968,7 +998,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--19
 
  []
 
-[13]
+
 Underfull \hbox (badness 10000) in paragraph at lines 26--29
 
  []
@@ -983,7 +1013,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 32--33
 
  []
 
-
+[14]
 Underfull \hbox (badness 10000) in paragraph at lines 52--53
 
  []
@@ -1014,7 +1044,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 76--79
 
  []
 
-[14]
+
 Underfull \hbox (badness 10000) in paragraph at lines 80--82
 
  []
@@ -1024,32 +1054,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 83--85
 
  []
 
-
+[15]
 Underfull \hbox (badness 10000) in paragraph at lines 109--110
 
  []
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 111--73
+Underfull \hbox (badness 10000) in paragraph at lines 111--75
 
  []
 
-[15] (./ej3-descripcion.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 2--78
+[16] (./ej3-descripcion.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 2--80
 
  []
 
 (./ej3-explicacion.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 3--80
+Underfull \hbox (badness 10000) in paragraph at lines 3--82
 
  []
 
-(./ej3-alg.tex [16]) (./ej3-com.tex) [17] (./tpd.aux) ) 
+(./ej3-alg.tex [17]) (./ej3-com.tex) [18] (./tpd.aux) ) 
 Here is how much of TeX's memory you used:
- 7285 strings out of 495061
- 98580 string characters out of 1182621
+ 7291 strings out of 495061
+ 98648 string characters out of 1182621
  186984 words of memory out of 3000000
- 10200 multiletter control sequences out of 15000+50000
+ 10201 multiletter control sequences out of 15000+50000
  21539 words of font info for 53 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  38i,10n,38p,585b,360s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1063,12 +1093,16 @@ ecbx1200.600pk> </root/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> <
 /root/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </root/.texmf-var/
 fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk></usr/share/texmf-texlive/fonts/type
 1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
-r12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
-/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on tpd.pdf (17 pages, 216265 bytes).
+sfonts/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
+mi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf
+-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/font
+s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
+/cm/cmsy8.pfb>
+Output written on tpd.pdf (18 pages, 252286 bytes).
 PDF statistics:
- 575 PDF objects out of 1000 (max. 8388607)
- 45 named destinations out of 1000 (max. 500000)
- 169 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 601 PDF objects out of 1000 (max. 8388607)
+ 47 named destinations out of 1000 (max. 500000)
+ 177 words of extra memory for PDF output out of 10000 (max. 10000000)
 
