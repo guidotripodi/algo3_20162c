@@ -1,29 +1,23 @@
 
-En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on, la etapa m\'as importante es a la hora de obtener las pesas, la segunda, en donde realizamos un ciclo que va disminuyendo el valor $saldoEnBalanza$ hasta llegar a 0. 
+En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on, la etapa m\'as importante es a la hora de obtener las pesas, la segunda, en donde realizamos un ciclo que va disminuyendo el valor $equilibrioActual$ hasta llegar a 0. 
 
-Queremos demostrar que en cada iteraci\'on del ciclo es posible disminuir dicho valor hasta llegar a 0 siempre y cuando, la diferencia que nombramos $N$ es menor que $saldoEnBalanza$:\\
+Queremos demostrar que en cada iteraci\'on del ciclo es posible disminuir dicho valor hasta llegar a 0 siempre y cuando, la diferencia que nombramos $N$ es menor que $equilibrioActual$:\\
 
-Para facilitar esta demostraci\'on nos abstraemos del modulo utilizado para N ya que tomar m\'odulo a $saldoEnBalanza - {3^i} = N < 0$ es lo mismo que multiplicar $N$ o sea el resultado de la diferencia por -1 e iterear nuevamente.\\ 
+%Para facilitar esta demostraci\'on nos abstraemos del m\'odulo utilizado para N ya que tomar m\'odulo a $equilibrioActual - {3^i} = N < 0$ es lo mismo que multiplicar $N$ o sea el resultado de la diferencia por -1 e iterear nuevamente.\\ 
 
-Por lo tanto queremos ver que:\\
+Llamemos $j$ a cada una de las iteraciones del ciclo la cual inicializaremos $j = i$.\\
+Por lo tanto para probar que dentro del ciclo se disminuye hasta llegar a $equilibrioActual$ = 0 probemos que:\\
 
-Sea $saldoEnBalanza - {3^i} = N$ y supongamos que $N < saldoEnBalanza$
+Para $j$, luego de la iteraci\'on $j-esima$ el valor $N$ es $< equilibrioActual$ hasta llegar a $N = 0$ o $N = 1$. Por lo tanto como iniciamos con un valor i donde ${3^i}\geq equilibrioActual$ como $j=i$ si ${3^j} = equilibrioActual$. Llamemos $equilibrioActual' = equilibrioActual$ como valor inicial. Realizando la primera iteraci\'on j $equilibrioActual' - {3^j} = N$, $N < equilibrioActual'$ por lo cual para la primera iteraci\'on j $N < equilibrioActual' \leq equilibrioActual$, lo cual si no fuese cierto ${3^j}$ no ser\'ia igual a equilibrioActual, contradiciendo la igualdad de los mismos enunciada anteriormente.\\
 
-Si $saldoEnBalanza < {3^i} \Rightarrow N < 0$ caso en el cual, en el algoritmo, tomamos m\'odulo para trabajar con las otras potencias y poner a estas en el otro lado de la balanza hasta equilibrar la misma.\\
+Luego, si ${3^j} > equilibrioActual$ con $j=i$. $equilibrioActual - {3^j} = |N|$, Si $|N| > equilibrioActual$ ser\'a el caso no utilizado como mencionamos anteriormente, por lo cual pasamos a la pr\'oxima iteraci\'on $j'= j-1$ Siempre y cuando $N \neq 0 \wedge N \neq 1$ (Estos casos finalizan nuestra ejecuci\'on de ciclo). Si $|N| < equilibrioActual$, llamamos $equilibrioActual' = |N|$, por definici\'on $equilibrioActual' < equilibrioActual$ con lo cual, habremos disminuido para esta $j-esima$ iteraci\'on el valor de $equilibrioActual$, en caso de que $N = 0$ habremos finalizado el ciclo habiendo alcanzado el valor de equilibrio, lo mismo suceder\'a para el caso de que $N = 1$ ya que contaremos con la pesa ${3^0}$ que no utilizamos nunca ya que arrancamos siempre por la potencia m\'as grande.\\
 
-Sea ${3^j}$ con $j \leq i-1$ y ${3^j} > N$. Entonces sabemos que, $saldoEnBalanza > \frac{{3^i}+ {3^{i-1}}}{2} \geq \frac{{3^i}+ {3^{j}}}{2}$.\\
-
-En particular $\frac{{3^i}+ {3^{i-1}}}{2} = {3^{i-1}}\ast\frac{3+1}{2} = 2\ast{3^{i-1}}$.\\
-
-Entonces, como  $saldoEnBalanza - {3^i} = N \Rightarrow saldoEnBalanza = {3^i} + N, como N < 0 \Rightarrow {3^i} - N > 0$. Sabemos que ${3^i} - N > 2\ast{3^{i-1}} \Rightarrow N < {3^i} -2\ast{3^{i-1}} \Rightarrow N < {3^{i-1}}$, y como $j \leq i-1 \Rightarrow N < {3^{j}}$
+Siguiendo con los casos, si ${3^j} < equilibrioActual$, $equilibrioActual - {3^j} = |N|$ $N$ siempre ser\'a menor que $equilibrioActual$ por lo tanto para este caso en cada iteraci\'on j-esima que cumpla ${3^j} < equilibrioActual$, y $equilibrioActual' = N$, $equilibrioActual' < equilibrioActual$. Adem\'as, si el resultado de la diferencia es 0 o 1, significar\'a que hemos alcanzado el equilibrio que necesitabamos por lo cual finaliza el ciclo.\\
 
 
+Luego, como guardamos en nuestro array todas las pesas con signo positivo si fueron restando o con signo negativo si terminaron sumando, nos queda que:\\
 
+\[
+\sum_{x=1}^{arrayPesasUtilizadas.size}arrayPesasUtilizadas{x}= P 
+\]
 
-
-\begin{enumerate}
-\item[1]  ${3^i} + |N| > 0$ 
-\item[2]  ${3^i} + |N| < 0$
-\end{enumerate}
-
-[1]  ${3^i} + |N| > 0$  $\Rightarrow$  ${3^i} + |N| > 0$
