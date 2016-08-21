@@ -1,0 +1,65 @@
+dem2:
+
+En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on del mismo, la etapa m\'as importante es a la hora de obtener las pesas que equilibran la balanza, la segunda, en donde realizamos un ciclo que va disminuyendo el valor $equilibrioActual$ hasta llegar a 0. 
+
+Queremos demostrar que en cada iteraci\'on del ciclo sea posible disminuir dicho valor hasta llegar a 0 siempre y cuando, la diferencia que obtenemos, a la que nombramos $nuevoEquilibrio_{i}$ que representa el nuevo equilibrio en el paso $i-esimo$ con $i > 0$ sea menor que $equilibrioActual$. Recordemos que $i$ decrece dado que representa el exponente actual que es menor en cada iteración y que en los pasos donde $nuevoEquilibrio_{i} > equilibrioActual$  se descarta	 la potencia de exponente $i$ y se prueba con $i-1$.\\
+
+Además enunciemos una propiedad que nos será de utilidad:
+
+\begin{equation}
+\forall P > 0, P \in \mathbb{N}, \exists i > 0, i \in \mathbb{N} / (3^i \geq P \geq 3^{i-1})  
+\end{equation} \label{eq:prop}
+
+Queremos ver entonces que siempre existirá $i > 0$ tal que :\\
+
+$|equilibrioActual - {3^i}| = nuevoEquilibrio_{i}$ y $nuevoEquilibrio_{i} < equilibrioActual$\\ 
+
+Es importante aclarar que en el algoritmo $nuevoEquilibrio_{i}$ podria ser negativo dado que siempre se realiza la resta $equilibrioActual - {3^i}$, lo cual, como hemos mencionado, se utiliza en el algoritmo para saber de manera más rápida que las siguientes potencias son las que restan. Aunque es visible que esta condición se cumple cuando ${3^i}$ $>$ $equilibrioActual$. 
+  
+Pero para esta demostración haremos las restas de manera tal que siempre de positivo.\\ 
+ 
+
+Y que además tendremos siempre una potencia no utilizada que lo cumpla, con lo cual al final del algoritmo, cada potencia será única.\\ 
+
+Para demostrar que esto es posible, veamos que el ciclo termina:\\ 
+
+Sea $equilibrioActual \leq 4 $ podemos formarlo con 3 y 1 dado que
+\begin{itemize}
+\item 4 = 3+1
+\item 2 = 3-1
+\end{itemize}
+
+Además si $equilibrioActual$ = 4 entonces 4-3 = 1 $<$ 4 y 1-1 = 0 $<$ 1. 
+
+Si $equilibrioActual$ = 2, 3-2 = 1 $<$ 2 y 1-1 = 0 $<$ 1.\\ 
+
+Por lo tanto para el caso $i \leq 1$ hemos probado que podemos generar todos los naturales entre 4 y 0 y que además podemos elegir una combinación de potencias diferentes de 3 para lograrlo. Por lo tanto cuando el algoritmo se encuentre con un $equilibrioActual$ $\leq$ 4, habrá terminado en 1 o 2 pasos.\\ 
+
+Veamos que se cumple para qualquier $i > j > 1$: \\
+
+Sea $3^i > equilibrioActual > 3^{i-1}$ (usando \eqref{eq:prop}) supongamos que se cumple la primera valuación: \\
+
+1) $3^i - equilibrioActual = nuevoEquilibrio_{i} < equilibrioActual$ \\  
+
+En este caso, nuestro algoritmo usará $3^i$ como una de las pesas para equilibrar. \\
+
+Notemos que $nuevoEquilibrio_{i}$ puede ser mayor que $3^{i-1}$: 27-16 = 11 $>$ 9 o menor: 27-25 = 2 $<$ 9 \\
+
+En cualquier caso, veamos que como $i-1 > 0$; por la propiedad \eqref{eq:prop} $\exists$ $j$ $\leq$ $i-1$ $t.q$  $|nuevoEquilibrio_{i} - 3^j|$ $<$ $nuevoEquilibrio_{i}$: \\
+
+$a)$ Si $3^j < nuevoEquilibrio_{i}$ es obvio que $nuevoEquilibrio_{i}$ - $3^j$ < $nuevoEquilibrio_{i}$ \\
+ 
+$b)$ Si $3^j > nuevoEquilibrio_{i}$ como $j > 0$ entonces o bien:\\
+
+$3^j$ - $nuevoEquilibrio_{i}$ < $nuevoEquilibrio_{i}$ (siempre evaluamos primero la potencia mayor) o bien lo es \\  
+
+$nuevoEquilibrio_{i}$ - $3^{j-1}$ < $nuevoEquilibrio_{i}$ \\
+
+2) La valuación 1) no se cumple, por lo tanto se cumple:\\
+
+$equilibrioActual - 3^{i-1} = nuevoEquilibrio_{i} < equilibrioActual$. \\
+
+Y nuevamente por la propiedad \eqref{eq:prop} y por ser $i-1 > 0$ $\exists$ $j$ $<$ $i-1$ $t.q$  $|nuevoEquilibrio_{i} - 3^j|$ $<$ $nuevoEquilibrio_{i}$: \\
+
+Como $equilibrioActual$ valdrá 0 en algún momento bien por ser potencia de 3 o bien por ser 4 o 2.
+Hemos conseguido mediante sumas o restas de potencias de 3 disminuir el valor inicial de la llave a  0, es decir que encontramos un equilibrio mediante las pesas.
