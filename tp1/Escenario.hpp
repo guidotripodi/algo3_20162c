@@ -1,7 +1,7 @@
 class Escenario {
 private:
 	//Guardo numeros de pares intercalados con el numero de los faroleros que viajan en cada paso
-	int * parActual_x_paso;
+	int * eleccion_x_paso;
 	int pares_totales;
 
 	int * personas_ladoA;
@@ -39,8 +39,10 @@ public:
 	bool backtrackFarolero();
 	int pasaronTodos();
 
+	//Para ver el estado del sistema
 	void printPar(int par) const;
 	void printPersona(int persona) const;
+	void printStatus()const;
 	
 
 };

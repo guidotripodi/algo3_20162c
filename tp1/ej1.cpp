@@ -46,6 +46,8 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 	cout<<"Escenario listo\n";
 	int i = 0;
 	while(exitoBackLampara && exitoBackPar){
+		cout<<"----------------------------------------------\nNuevo paso:\n";
+		escenario.printStatus();
 
 		//De haber encontrado una solucion, obtengo el tiempo logrado
 		if (escenario.pasaronTodos())
@@ -54,7 +56,7 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 			{
 				minimo = escenario.tiempo;
 			}
-			cout<<"Fin de rama: minimo logrado = "<<escenario.tiempo<<"\n";
+			cout<<" < Fin de rama: minimo logrado = "<<escenario.tiempo<<" > \n";
 		}
 
 		exitoBackPar = true;
@@ -66,39 +68,39 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 			//me sigue dando una mejor solucion a la ya encontrada
 			if (par>-1 && (minimo == -1 || escenario.tiempo<minimo))
 			{
-				cout<<"Enviando ";
+				cout<<"-Enviando ";
 				escenario.printPar(par);
 				cout<<"\n";
 
 				escenario.enviarPar(par);
 			}else{
 				//vuelve al paso anterior
-				cout<<"No se pudo enviar ningun par, aplicando backtracking a farolero\n";
+				cout<<"-Backtracking a farolero\n";
 				exitoBackLampara = escenario.backtrackFarolero();
-				cout<<"Fin backtrack\n";
+
 			}
 		}else{
 			int farolero = escenario.faroleroPosible();
-			//cout<<"Farolero "<<farolero<<" evaluado como candidato\n";
+
 			//Si hay un farolero que pueda hacer que retorne y que me mantenga el tiempo menor al ya encontrado
-			
 			if (farolero>-1 && (minimo == -1 || escenario.tiempo < minimo))
 			{
-				cout<<"Enviando como farolero a ";
+				cout<<"-Enviando como farolero a ";
 				escenario.printPersona(farolero);
 				cout<<"\n";
 				escenario.enviarFarolero(farolero);
-				//cout<<"Persona "<<farolero<<" enviada como farolero\n";
+
 			}else{
-				cout<<"No se pudo enviar ningun farolero, aplicando backtracking a par\n";
+				cout<<"-Backtracking a par\n";
 				exitoBackPar = escenario.backtrackPar();
-				cout<<"Fin backtrack\n";
-				//cout<<"Resultado backtrack de par: "<<exitoBackPar<<"\n";
+
 			}
 		}
 
 		
 	}
+
+	cout<<"Say no more\n";
 
 	return minimo;
 }
