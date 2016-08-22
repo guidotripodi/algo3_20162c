@@ -5,7 +5,7 @@ La primera de ellas consta en recorrer desde $3^0$ hasta $3^i$ donde este ultimo
 
 Si $i = 0$ $\Rightarrow$ terminamos.\\
 Luego sea $3^i \geq P \geq 3^{i-1}$ con $i > 0$. Queremos ver que $i \leq \sqrt{P}$:\\
-Se que por definici\'on $P \geq 3^{i-1}$ $\Rightarrow$ $\sqrt{P} \geq \sqrt{3^{i-1}}$\\
+Sabemos que $P \geq 3^{i-1}$ $\Rightarrow$ $\sqrt{P} \geq \sqrt{3^{i-1}}$\\
 Veamos que $\sqrt{3^{i-1}} \geq i \Rightarrow 3^{i-1} \geq {i^2}$. Para $i = 1$ tenemos que $3^{1-1} \geq 1$ siempre. Luego, para $i > 1$ como ${3^{i-1}}$ es creciente y mayor o igual que $i^2$ se cumple siempre esta desigualdad. Por lo tanto queda probado que recorrer hasta un i tal que $3^i \geq P$ se encuentra en el orden de  O($\sqrt{P}$).\\
 
 
