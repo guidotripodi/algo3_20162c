@@ -4,11 +4,11 @@
 \Function{Algoritmo}{\param{in}{Integer}{P}}{$\ensuremath{\rightarrow}$ \param{out}{S} {Integer} \param{out}{T} {Integer} \param{out}{arrayI} {List<Integer>} \param{out}{arrayD}{List<Integer>}}
 \state i = 0 \hfill //O(1)
 \state Recorro desde $3^0$ hasta $3^i$ $\geq$ P  \hfill //O($\sqrt{P}$)
-\state saldoEnBalanza  $\gets$ P \hfill //O(1)
+\state equilibrioActual  $\gets$ P \hfill //O(1)
 \state creo arrayPesasUtilizadas vacio \hfill //O(1)
 \state estaEnNegativo $\gets$ falso \hfill //O(1)
 \state pesaActual  $\gets$  {$3^i$} \hfill //O(1)
-\state N = saldoEnBalanza - pesaActual \hfill //O(1)
+\state N = equilibrioActual - pesaActual \hfill //O(1)
 \while {Terminar = False} \hfill //O($\sqrt{P}$)
 \If{N == 0} \hfill //O(1)
 \state arrayPesasUtilizadas $\cup$ pesaActual \hfill //O(1)
@@ -19,20 +19,18 @@
 \state arrayPesasUtilizadas $\cup$ {$3^0$} \hfill //O(1)
 \state Terminar \hfill //O(1)
 \endif
-\If{|N| > 1 $\wedge$ |N| < saldoEnBalanza} \hfill //O(1)
+\If{|N| > 1 $\wedge$ |N| < equilibrioActual} \hfill //O(1)
 \state arrayPesasUtilizadas $\cup$ pesaActual \hfill //O(1)
 \state i-- \hfill //O(1)
-\state saldoEnBalanza $\gets$ N \hfill //O(1)
+\state equilibrioActual $\gets$ N \hfill //O(1)
 \If{N < 0} \hfill //O(1)
 \state estaEnNegativo $\gets$  verdadero \hfill //O(1)
 \Else
 \state estaEnNegativo $\gets$  falso \hfill //O(1)
 \endif
+\state equilibrioActual $\gets$ |N| \hfill //O(1)
 \endif
-\If{|N| $\geq$ saldoEnBalanza} \hfill //O(1)
-\state i-- \hfill //O(1)
-\endif
-\If{|N| $\geq$ saldoEnBalanza} \hfill //O(1)
+\If{|N| $\geq$ equilibrioActual} \hfill //O(1)
 \state i-- \hfill //O(1)
 \endif
 \If{estaEnNegativo} \hfill //O(1)
@@ -42,7 +40,7 @@
 \state pesaActual  $\gets$  {$3^i$} \hfill //O(1)
 \state pesaUno  $\gets$  {$3^0$}  \hfill //O(1)
 \endif
-\state N = saldoEnBalanza - pesaActual \hfill //O(1)
+\state N = equilibrioActual - pesaActual \hfill //O(1)
 \endwhile
 \state devolver(armadoBalanza) \hfill //O(1)
 \EndFunction 

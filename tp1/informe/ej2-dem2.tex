@@ -1,4 +1,3 @@
-dem2:
 
 En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on del mismo, la etapa m\'as importante es a la hora de obtener las pesas que equilibran la balanza, la segunda, en donde realizamos un ciclo que va disminuyendo el valor $equilibrioActual$ hasta llegar a 0. 
 
@@ -12,7 +11,10 @@ Además enunciemos una propiedad que nos será de utilidad:
 
 Queremos ver entonces que siempre existirá $i > 0$ tal que :\\
 
+\begin{center}
 $|equilibrioActual - {3^i}| = nuevoEquilibrio_{i}$ y $nuevoEquilibrio_{i} < equilibrioActual$\\ 
+\end{center}
+
 
 Y que además tendremos siempre una potencia no utilizada que lo cumpla, con lo cual al final del algoritmo, cada potencia será única.\\ 
 
@@ -28,7 +30,7 @@ Sea $equilibrioActual \leq 4 $ podemos formarlo con 3 y 1 dado que
 \item 2 = 3-1
 \end{itemize}
 
-Además si $equilibrioActual$ = 4 entonces 4-3 = 1 $<$ 4 y 1-1 = 0 $<$ 1. 
+Además si $equilibrioActual$ = 4 entonces 4-3 = 1 $<$ 4 y 1-1 = 0 $<$ 1. \\
 
 Si $equilibrioActual$ = 2, 3-2 = 1 $<$ 2 y 1-1 = 0 $<$ 1.\\ 
 
@@ -56,9 +58,15 @@ $nuevoEquilibrio_{i}$ - $3^{j-1}$ < $nuevoEquilibrio_{i}$ \\
 
 2) La valuación 1) no se cumple, por lo tanto se cumple:\\
 
+\begin{center}
+
 $equilibrioActual - 3^{i-1} = nuevoEquilibrio_{i} < equilibrioActual$. \\
 
+\end{center}
+
 Aquí debemos notar que para continuar debe cumplirse que 
+
+\begin{center}
 
 $nuevoEquilibrio_{i}$ $<$ $3^{i-1}$ es decir \\
 
@@ -66,15 +74,19 @@ $equilibrioActual - 3^{i-1}$ $<$ $3^{i-1}$ osea
 
 $equilibrioActual$ $<$ $2 \ast 3^{i-1}$ = $\frac{3^{i}+3^{i-1}}{2}$ \\ 
 
-Es decir que $equilibrioActual$ sea menor al promedio del intervalo que lo contiene. Lo cual es cierto dado que como 1) no se cumplió, $equilibrioActual$ tiene un valor menor a la mitad de ese intervalo (incluso menor a la mitad de $3^i$). Por lo tanto la potencia que tendremos que elegir es si o si menor a $3^{i-1}$ y debe cumplir que la diferencia con $nuevoEquilibrio_{i}$ es menor que $nuevoEquilibrio_{i}$.
+\end{center}
 
-Y nuevamente por la propiedad \eqref{eq:prop} y por ser $i-1 > 0$ existe un intervalo con $j > 0$ tal que  $(3^j$ $\geq$ $nuevoEquilibrio_{i}$ $\geq$ $3^{j-1})$. Si $j$ $<$ $i-1$ entonces puedo empezar probando con la potencia mayor y luego con la menor.
+Es decir que $equilibrioActual$ sea menor al promedio del intervalo que lo contiene. Lo cual es cierto dado que como 1) no se cumplió, $equilibrioActual$ tiene un valor menor a la mitad de ese intervalo (incluso menor a la mitad de $3^i$). Por lo tanto la potencia que tendremos que elegir es si o si menor a $3^{i-1}$ y debe cumplir que la diferencia con $nuevoEquilibrio_{i}$ es menor que $nuevoEquilibrio_{i}$.\\
+
+Y nuevamente por la propiedad \eqref{eq:prop} y por ser $i-1 > 0$ existe un intervalo con $j > 0$ tal que  $(3^j$ $\geq$ $nuevoEquilibrio_{i}$ $\geq$ $3^{j-1})$. Si $j$ $<$ $i-1$ entonces puedo empezar probando con la potencia mayor y luego con la menor.\\
 
 De manera que $|nuevoEquilibrio_{i} - 3^j|$ $<$ $nuevoEquilibrio_{i}$: \\
 
 Supongamos en el peor caso que $j=i-1$ luego $(3^{i-1}$ $\geq$ $nuevoEquilibrio_{i}$ $\geq$ $3^{i-2})$ \\
 
-En este caso veamos que se cumplirá que 
+En este caso veamos que se cumplirá que \\
+
+\begin{center}
 
 $3^{i-1}$ - $nuevoEquilibrio_{i}$ $>$ $nuevoEquilibrio_{i}$ \\
 
@@ -88,11 +100,17 @@ $3^{i}$ $>$ 2 $\ast$ $equilibrioActual$ = \\
 
 $\frac{3^{i}}{2}$ $>$ $equilibrioActual$ \\
 
+\end{center}
+
 Lo cual es cierto dado que no se había cumplido 1), lo que significaba que  \\
+
+\begin{center}
 
 $3^i$ - $equilibrioActual$ $>$ $equilibrioActual$ = \\
 
 $\frac{3^i}{2}$ $>$ $equilibrioActual$ \\
+
+\end{center}
 
 Por lo tanto, siempre tendremos una potencia de 3 para elegir que haga que la diferencia sea menor.
 
