@@ -14,13 +14,12 @@ Queremos ver entonces que siempre existirá $i > 0$ tal que :\\
 
 $|equilibrioActual - {3^i}| = nuevoEquilibrio_{i}$ y $nuevoEquilibrio_{i} < equilibrioActual$\\ 
 
+Y que además tendremos siempre una potencia no utilizada que lo cumpla, con lo cual al final del algoritmo, cada potencia será única.\\ 
+
 Es importante aclarar que en el algoritmo $nuevoEquilibrio_{i}$ podria ser negativo dado que siempre se realiza la resta $equilibrioActual - {3^i}$, lo cual, como hemos mencionado, se utiliza en el algoritmo para saber de manera más rápida que las siguientes potencias son las que restan. Aunque es visible que esta condición se cumple cuando ${3^i}$ $>$ $equilibrioActual$. 
   
 Pero para esta demostración haremos las restas de manera tal que siempre de positivo.\\ 
  
-
-Y que además tendremos siempre una potencia no utilizada que lo cumpla, con lo cual al final del algoritmo, cada potencia será única.\\ 
-
 Para demostrar que esto es posible, veamos que el ciclo termina:\\ 
 
 Sea $equilibrioActual \leq 4 $ podemos formarlo con 3 y 1 dado que
@@ -59,7 +58,43 @@ $nuevoEquilibrio_{i}$ - $3^{j-1}$ < $nuevoEquilibrio_{i}$ \\
 
 $equilibrioActual - 3^{i-1} = nuevoEquilibrio_{i} < equilibrioActual$. \\
 
-Y nuevamente por la propiedad \eqref{eq:prop} y por ser $i-1 > 0$ $\exists$ $j$ $<$ $i-1$ $t.q$  $|nuevoEquilibrio_{i} - 3^j|$ $<$ $nuevoEquilibrio_{i}$: \\
+Aquí debemos notar que para continuar debe cumplirse que 
+
+$nuevoEquilibrio_{i}$ $<$ $3^{i-1}$ es decir \\
+
+$equilibrioActual - 3^{i-1}$ $<$ $3^{i-1}$ osea 
+
+$equilibrioActual$ $<$ $2 \ast 3^{i-1}$ = $\frac{3^{i}+3^{i-1}}{2}$ \\ 
+
+Es decir que $equilibrioActual$ sea menor al promedio del intervalo que lo contiene. Lo cual es cierto dado que como 1) no se cumplió, $equilibrioActual$ tiene un valor menor a la mitad de ese intervalo (incluso menor a la mitad de $3^i$). Por lo tanto la potencia que tendremos que elegir es si o si menor a $3^{i-1}$ y debe cumplir que la diferencia con $nuevoEquilibrio_{i}$ es menor que $nuevoEquilibrio_{i}$.
+
+Y nuevamente por la propiedad \eqref{eq:prop} y por ser $i-1 > 0$ existe un intervalo con $j > 0$ tal que  $(3^j$ $\geq$ $nuevoEquilibrio_{i}$ $\geq$ $3^{j-1})$. Si $j$ $<$ $i-1$ entonces puedo empezar probando con la potencia mayor y luego con la menor.
+
+De manera que $|nuevoEquilibrio_{i} - 3^j|$ $<$ $nuevoEquilibrio_{i}$: \\
+
+Supongamos en el peor caso que $j=i-1$ luego $(3^{i-1}$ $\geq$ $nuevoEquilibrio_{i}$ $\geq$ $3^{i-2})$ \\
+
+En este caso veamos que se cumplirá que 
+
+$3^{i-1}$ - $nuevoEquilibrio_{i}$ $>$ $nuevoEquilibrio_{i}$ \\
+
+Es decir $3^{i-1}$ $>$ 2 $\ast$ $nuevoEquilibrio_{i}$ = \\
+
+$3^{i-1}$ $>$ 2 $\ast$ ($equilibrioActual - 3^{i-1}$) =  \\
+
+$3\ast3^{i-1}$ $>$ 2 $\ast$ $equilibrioActual$ = \\
+
+$3^{i}$ $>$ 2 $\ast$ $equilibrioActual$ = \\
+
+$\frac{3^{i}}{2}$ $>$ $equilibrioActual$ \\
+
+Lo cual es cierto dado que no se había cumplido 1), lo que significaba que  \\
+
+$3^i$ - $equilibrioActual$ $>$ $equilibrioActual$ = \\
+
+$\frac{3^i}{2}$ $>$ $equilibrioActual$ \\
+
+Por lo tanto, siempre tendremos una potencia de 3 para elegir que haga que la diferencia sea menor.
 
 Como $equilibrioActual$ valdrá 0 en algún momento bien por ser potencia de 3 o bien por ser 4 o 2.
 Hemos conseguido mediante sumas o restas de potencias de 3 disminuir el valor inicial de la llave a  0, es decir que encontramos un equilibrio mediante las pesas.
