@@ -23,6 +23,7 @@ private:
 	int primero(int par) const;
 	int segundo(int par) const;
 	int getTiempoPersona(int persona);
+	int sigPar() const;
 
 public:
 	int tiempo;

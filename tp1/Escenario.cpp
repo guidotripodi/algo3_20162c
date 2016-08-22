@@ -198,7 +198,7 @@ int Escenario::parPosible() const
 	//Busco, a partir del siguiente par evaluado en el paso actual, un par que exista (no se vaya de los limites) y que 
 	//produzca, al cruzar el puente, una instancia valida del escenario, si no existe tal par se devuelve un -1
 
-	int parEvaluar = this->eleccion_x_paso[this->paso] + 1;
+	int parEvaluar = this->sigPar();//this->eleccion_x_paso[this->paso] + 1;
 	
 	while(parEvaluar<this->pares_totales && !parValido(parEvaluar)){
 
@@ -321,7 +321,8 @@ bool Escenario::backtrackPar()
 	// de estructura que esto implica). Finalmente resto el tiempo al tiempo total de la rama evaluada.
 		
 	//Si no hay más pasos para atras entonces devuelvo false
-	if (this->paso--<0)
+	this->paso = this->paso -1;
+	if (this->paso<0)
 	{
 		return false;
 	} 
@@ -383,5 +384,13 @@ bool Escenario::backtrackFarolero()
 int Escenario::pasaronTodos()
 {
 	return (this->cant_canibales_ladoA + this->cant_arqueologos_ladoA) == 0;
+}
+
+int Escenario::sigPar() const{
+
+	int par = this->eleccion_x_paso[this->paso] + 1;
+	int persona_1 = this->primero(par) + 1; //Para que sea en base 1 en vez de 0
+	int parNoExplorado = persona_1 * persona_1 + 1;//haciendo el dibujo de la matriz se ve
+	return parNoExplorado;
 }
 
