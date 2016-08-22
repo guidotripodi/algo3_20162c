@@ -159,8 +159,8 @@ Escenario::Escenario(const int cantA, const int cantC, const int * tiempos_arque
 	this->cant_arqueologos_ladoB = 0; 
 	this->cant_canibales_ladoB = 0;
 
-	//Todos los pares posibles (los irrelevantes despues se filtran)
-	this->pares_totales = this->personas_totales * this->personas_totales;
+	//Todos los pares posibles (combinatorio)
+	this->pares_totales = this->personas_totales * this->personas_totales - this->personas_totales;
 	this->eleccion_x_paso = new int[this->pares_totales];
 	this->personas_ladoA = new int[this->personas_totales];
 
@@ -170,13 +170,16 @@ Escenario::Escenario(const int cantA, const int cantC, const int * tiempos_arque
 
 
 	//A cada paso lo inicializo en -1 simbolizando que ninguna pareja ni persona fue evaluada
-	//cout<<"Pares: \n";
+	cout<<"Pares: \n";
 	for (int i = 0; i < this->pares_totales; i++)
 	{
-		//this->printPar(i);
-		this->eleccion_x_paso[i]=-1;
-		//cout<<"\n";
+		i=this->sigPar();
+		this->eleccion_x_paso[i]=0;
+		this->eleccion_x_paso[0] = i;
+		//cout<<i<<" ";
+		this->printPar(i);
 	}
+	this->eleccion_x_paso[0] = 0;
 	cout<<"\n";
 
 	//Todas las personas empiezan del lado A
@@ -220,11 +223,11 @@ int Escenario::faroleroPosible() const
 
 	int faroleroAEvaluar = this->eleccion_x_paso[this->paso] + 1;
 	//cout<<"\t> evaluando farolero "<<faroleroAEvaluar<<"\n";
-	while(!faroleroValido(faroleroAEvaluar) && faroleroAEvaluar<=this->personas_totales){
+	while(!faroleroValido(faroleroAEvaluar) && faroleroAEvaluar<this->personas_totales){
 		faroleroAEvaluar += 1;
 	}
 
-	if (faroleroAEvaluar<=this->personas_totales)
+	if (faroleroAEvaluar<this->personas_totales)
 	{
 		return faroleroAEvaluar;
 	}else{
@@ -303,7 +306,7 @@ void Escenario::enviarFarolero(const int persona)
 	{
 		this->paso += 1;
 		//Reseteo las personas a probar, la primer persona a ser evaluada va a ser la 0
-		this->eleccion_x_paso[this->paso] = -1;
+		this->eleccion_x_paso[this->paso] = 0;
 		
 	}
 
@@ -389,8 +392,16 @@ int Escenario::pasaronTodos()
 int Escenario::sigPar() const{
 
 	int par = this->eleccion_x_paso[this->paso] + 1;
-	int persona_1 = this->primero(par) + 1; //Para que sea en base 1 en vez de 0
-	int parNoExplorado = persona_1 * persona_1 + 1;//haciendo el dibujo de la matriz se ve
-	return parNoExplorado;
+	int a  = this->primero(par);
+	int b  = this->segundo(par);
+
+	if (b>=a)
+	{
+			
+		return par;
+	}else{
+		return (a + 1) * (a + 1) + 1;
+	}
 }
+
 
