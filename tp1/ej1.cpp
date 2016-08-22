@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 	cout<<"Entrada inicializada: comenzando algoritmo...\n";
 	int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
 	
-	cout << "Resultado: "<<t<<"\n";
+	cout << "Tiempo minimo: "<<t<<"\n";
 
 	return 1;
 }
@@ -40,6 +40,7 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 {
 	bool exitoBackPar = true;
 	bool exitoBackLampara = true;
+	int sol = 0;
 	int minimo = -1; 
 	cout<<"Inicializando escenario...\n";
 	Escenario escenario = Escenario(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
@@ -56,6 +57,7 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 			{
 				minimo = escenario.tiempo;
 			}
+			sol++;
 			cout<<" < Fin de rama: minimo logrado = "<<escenario.tiempo<<" > \n";
 		}
 
@@ -100,7 +102,7 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 		
 	}
 
-	cout<<"Say no more\n";
+	cout<<"Soluciones encontradas: "<<sol<<"\n";
 
 	return minimo;
 }
