@@ -78,3 +78,10 @@ void Balanza::armadoBalanza(){//O(sqrt(p))
 	invertir(platoDerecho, size_der);
 	invertir(platoIzquierdo, size_izq);
 }
+
+void Balanza::invertir(int* arreglo, int size){
+	int *otro = new int[size];
+	for(int i = 0; i < size ; i++){
+		otro[size - i] = arreglo[i];
+	}
+}
