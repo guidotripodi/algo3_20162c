@@ -4,6 +4,14 @@
 //con el mismo razonamiento que en la demo las pesas usadas son siempre menos que raiz de P
 
 
+Balanza::Balanza(){
+	cant_pesas = (int) sqrt(peso_llave) + 1; // valor tentativo
+	pesasUtilizadas = (int *)malloc(cant_pesas * sizeof(int));
+	size_izq = 0;
+	size_der = 0;
+}
+
+
 void Balanza::balancear(){
 	int equilibrioActual = peso_llave;
 	// La primera potencia mayor que p
@@ -21,9 +29,11 @@ void Balanza::balancear(){
 		if( n == 0 ){
 			pesasUtilizadas[j] = pesaActual;
 			terminar = true;
+			//cant_pesas = j;
 		} else if( abs(n) == 1 ){
 			pesasUtilizadas[j] = pesaActual;
 			pesasUtilizadas[j+1] = 1; //pow(3, 0)
+			//cant_pesas = j+1;
 			terminar = true;
 		} else if( abs(n) > 1 && abs(n) < equilibrioActual ){
 			pesasUtilizadas[j] = pesaActual;

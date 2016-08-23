@@ -6,7 +6,7 @@ class Balanza{
 		//inicializacion es O(sqrt(p)) si no es todo una mentira
 		Balanza(int p); 
 		void balancear();
-	
+		void imprimir(); //o recargo el operador?	
 	private:
 		void armadoBalanza();
 		int peso_llave;
@@ -20,7 +20,9 @@ class Balanza{
 		int *pesasUtilizadas;
 		int *platoDerecho;
 		int *platoIzquierdo;
+		int size_der;
+		int size_izq;
 
 		//sino listas enlazadas con iteradores
 		//mas bonito, pero bastante laburo
-}
+};

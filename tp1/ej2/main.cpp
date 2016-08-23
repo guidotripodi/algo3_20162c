@@ -1,6 +1,7 @@
 #include "balanza.h"
 
 int main(){
-	balancear(6);
+	Balanza b1(5);
+	b1.balancear();
 	return 0;
 }
