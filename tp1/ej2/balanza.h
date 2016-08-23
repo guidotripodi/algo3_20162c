@@ -3,8 +3,24 @@
 
 class Balanza{
 	public:
-		void balancear(int p);
+		//inicializacion es O(sqrt(p)) si no es todo una mentira
+		Balanza(int p); 
+		void balancear();
 	
 	private:
+		void armadoBalanza();
+		int peso_llave;
 		//arrays? necesita ser armado medio dinamico esto
+		//en caso de hacerllo con arreglos normales de C
+		//necesito las siguientes variables
+		//tamaño varia con la llave
+		
+		void invertir(int* arreglo);
+		int cant_pesas;
+		int *pesasUtilizadas;
+		int *platoDerecho;
+		int *platoIzquierdo;
+
+		//sino listas enlazadas con iteradores
+		//mas bonito, pero bastante laburo
 }

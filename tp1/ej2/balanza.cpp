@@ -1,16 +1,18 @@
 #include <stdio.h>
 #include <math.h>
+#include "balanza.h"
 //con el mismo razonamiento que en la demo las pesas usadas son siempre menos que raiz de P
 
 
-void Balanza::balancear(int p){
-	int equilibrioActual = p;
+void Balanza::balancear(){
+	int equilibrioActual = peso_llave;
 	// La primera potencia mayor que p
 	int i = 0;
-	while( pow(3,i) < p ) i++;
+	while( pow(3,i) < peso_llave ) i++;
 	
-	int cantidadPesas = (int) sqrt(p) + 1;
-	int pesasUtilizadas[cantidadPesas]; //array vacio de pesas
+	//TODO trasladar a metodo constructor
+	//int cantidadPesas = (int) sqrt(peso_llave) + 1;
+	//int pesasUtilizadas[cantidadPesas]; //array vacio de pesas
 	int j = 0; //itera el array de pesas utilizadas
 	bool estaEnNegativo = false;
 	int pesaActual = pow(3, i);
@@ -41,7 +43,20 @@ void Balanza::balancear(int p){
 		}
 		n = equilibrioActual - pesaActual;
 	}
+	armadoBalanza();
 	//devolver(armadoBalanza);
 }
 
-
+void Balanza::armadoBalanza(){//O(sqrt(p))
+	int x = 0;
+	while(x < cant_pesas){//pesasUtilizadas.size
+		if( pesasUtilizadas[x] < 0 ){
+			platoDerecho[i] = pesasUtilizadas[x] * -1;
+		} else{
+			platoIzquierdo[j] = pesasUtilizadas[x];
+		}
+		x++;
+	}
+	invertir(platoDerecho);
+	invertir(platoIzquierdo);
+}
