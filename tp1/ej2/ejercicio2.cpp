@@ -38,7 +38,10 @@ void balancear(int p){
 		} else{
 			pesaActual = pow(3, i);
 			pesaUno = pow(3, 0);
+		}
+		n = equilibrioActual - pesaActual;
 	}
+	//devolver(armadoBalanza);
 }
 
 
