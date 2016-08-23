@@ -5,11 +5,13 @@ class Balanza{
 	public:
 		//inicializacion es O(sqrt(p)) si no es todo una mentira
 		Balanza(int p); 
-		void balancear();
 		void imprimir(); //o recargo el operador?	
+	
 	private:
 		void armadoBalanza();
+		void balancear();
 		int peso_llave;
+		
 		//arrays? necesita ser armado medio dinamico esto
 		//en caso de hacerllo con arreglos normales de C
 		//necesito las siguientes variables
