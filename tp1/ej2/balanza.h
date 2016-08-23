@@ -15,7 +15,7 @@ class Balanza{
 		//necesito las siguientes variables
 		//tamaño varia con la llave
 		
-		void invertir(int* arreglo);
+		void invertir(int* arreglo, int size);
 		int cant_pesas;
 		int *pesasUtilizadas;
 		int *platoDerecho;

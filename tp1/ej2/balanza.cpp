@@ -1,14 +1,20 @@
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h> // abs (modulo)
+#include <math.h> // sqrt y potencia
 #include "balanza.h"
 //con el mismo razonamiento que en la demo las pesas usadas son siempre menos que raiz de P
 
-
-Balanza::Balanza(){
+//crea una balanza, en lo posible inmutable
+//Al crearse resuelve el problema
+Balanza::Balanza(int p){
+	peso_llave = p;
 	cant_pesas = (int) sqrt(peso_llave) + 1; // valor tentativo
-	pesasUtilizadas = (int *)malloc(cant_pesas * sizeof(int));
+	pesasUtilizadas = new int[cant_pesas];
+	platoIzquierdo = new int[cant_pesas];
+	platoDerecho = new int[cant_pesas];
 	size_izq = 0;
 	size_der = 0;
+	balancear();
 }
 
 
@@ -18,9 +24,6 @@ void Balanza::balancear(){
 	int i = 0;
 	while( pow(3,i) < peso_llave ) i++;
 	
-	//TODO trasladar a metodo constructor
-	//int cantidadPesas = (int) sqrt(peso_llave) + 1;
-	//int pesasUtilizadas[cantidadPesas]; //array vacio de pesas
 	int j = 0; //itera el array de pesas utilizadas
 	bool estaEnNegativo = false;
 	int pesaActual = pow(3, i);
@@ -54,7 +57,6 @@ void Balanza::balancear(){
 		n = equilibrioActual - pesaActual;
 	}
 	armadoBalanza();
-	//devolver(armadoBalanza);
 }
 
 void Balanza::armadoBalanza(){//O(sqrt(p))
