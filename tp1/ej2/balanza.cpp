@@ -3,7 +3,7 @@
 //con el mismo razonamiento que en la demo las pesas usadas son siempre menos que raiz de P
 
 
-void balancear(int p){
+void Balanza::balancear(int p){
 	int equilibrioActual = p;
 	// La primera potencia mayor que p
 	int i = 0;
@@ -45,7 +45,3 @@ void balancear(int p){
 }
 
 
-int main(){
-	balancear(6);
-	return 0;
-}
