@@ -92,11 +92,13 @@ void Balanza::invertir(int* arreglo, int size){
 	arreglo = otro;
 }
 void Balanza::imprimir(){
-	printf("%d %d\n",this.size_izq, this.size_der);
-	for(int i = 0, i < size_izq, i++){
+	printf("%d %d\n",this->size_izq, this->size_der);
+	for(int i = 0; i < size_izq; i++){
 		printf("%d ", platoIzquierdo[i]);
 	}
-	for(int j = 0, j < size_der, j++){
+	printf("\n");
+	for(int j = 0; j < size_der; j++){
 		printf("%d ", platoDerecho[j]);
 	}
+	printf("\n");
 }
