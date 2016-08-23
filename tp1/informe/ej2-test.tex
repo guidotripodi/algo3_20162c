@@ -1,20 +1,16 @@
-\indent Por medio de los tests dados por la c\'atedra, desarrollamos nuestros tests,
+\indent Luego de realizar la implementaci\'on de nuestro algoritmo, desarrollamos tests,
 para corroborar que nuestro algoritmo era el indicado.\\
 
 A continuaci\'on enunciaremos varios de nuestros tests:\\
 
 \begin{center}
- \textbf{Ambas ramas estan Ordenadas}
+ \textbf{El valor de entrada $P$ es de la forma ${3^i}$ para un i$\gets$[0, N] }
 \end{center}
- Este caso se cumple cuando se recibe una lista con una sucesi\'on con una pinta de la forma:
+ Este caso se cumple cuando se recibe un P el cual al realizar nuestro primer ciclo que chequea cual es la potencia igual o mayor, termina siendo igual y de esta forma solo se itera una unica vez el segundo y tercer ciclo.
  
- {i $\gets$ n/2} [X\_i, X\_{i+1}] 
-
 
 \begin{center}
- \textbf{Ambas ramas se encuentran desordenadas}
+ \textbf{El valor de entrada $P$ es de la forma ${3^i} + R$ para  (i, R) $\gets$[0, N]}
 \end{center}
- Este caso se cumple cuando se recibe una lista con una sucesi\'on con una pinta de la forma:
- 
- {i $\gets$ n/2} [X\_i, X\_{n-i+1}] 
 
+ Este caso se cumple cuando se recibe un P el cual al realizar nuestro primer ciclo que chequea cual es la potencia igual o mayor, termina siendo mayor y de esta forma se itera mas de una vez el segundo y tercer ciclo.

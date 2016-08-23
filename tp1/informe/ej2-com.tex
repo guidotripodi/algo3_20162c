@@ -1,4 +1,34 @@
 
+Nuestro algoritmo como mencionamos anteriormente presenta 3 etapas.\\
+La primera de ellas consta en recorrer desde $3^0$ hasta $3^i$ donde este ultimo sea igual a $P$ o en su defecto el inmediato mayor. Por lo tanto mostraremos que recorrer hasta un i donde $3^i$ sea igual o inmediatamente mayor a P es menor o igual a $\sqrt{P}$.\\
+
+
+Si $i = 0$ $\Rightarrow$ terminamos.\\
+Luego sea $3^i \geq P \geq 3^{i-1}$ con $i > 0$. Queremos ver que $i \leq \sqrt{P}$:\\
+Sabemos que $P \geq 3^{i-1}$ $\Rightarrow$ $\sqrt{P} \geq \sqrt{3^{i-1}}$\\
+Veamos que $\sqrt{3^{i-1}} \geq i \Rightarrow 3^{i-1} \geq {i^2}$. Para $i = 1$ tenemos que $3^{1-1} \geq 1$ siempre. Luego, para $i > 1$ como ${3^{i-1}}$ es creciente y mayor o igual que $i^2$ se cumple siempre esta desigualdad. Por lo tanto queda probado que recorrer hasta un i tal que $3^i \geq P$ se encuentra en el orden de  O($\sqrt{P}$).\\
+
+
+ Luego, creamos dos enteros \textit{equilibrioActual} y \textit{N} y un array \textit{arrayPesasUtilizadas} inicializado vacio, por lo tanto, como son enteros y el array es vacio esto insume O(1), finalizando as\'i la primera etapa.\\
+Luego, la segunda etapa y m\'as importante de nuestro algoritmo, consiste en un ciclo donde realizaremos iterativamente la busqueda de las pesas que, sumando sus valores, nos de el valor $P$. Dicho ciclo en el peor de los casos recorrer\'a desde el valor de i que conten\'ia la pesa de mayor valor hasta i = 0, lo cual ser\'a O($\sqrt{P}$) ya que al trabajar con potencias de 3 la cantidad de vueltas del ciclo entraran en el orden de $\sqrt{P}$ como hab\'iamos demostrado anteriormente.\\ 
+
+Dentro de este ciclo, realizamos 6 comparaciones en O(1) las cuales son:
+
+\begin{itemize}
+\item si N=0, si N=1, aqu\'i agregamos el valor de la pesa al array y terminamos el ciclo, esto insumir\'a O(1)
+ \item si N es menor al valor de \textit{equilibrioActual}, estas opcion no finaliza el ciclo,
+ agrega la pesa n el array, modifica el valor de saldoEnBalanza por el valor de N y disminuye en 1 a i, luego se chequea aqui mismo si $N < 0$ de ser verdadero se modifica el valor de $estaEnNegativo$ por verdadero o por falso en caso de ser falsa la guarda, lo cual insumir\'a O(1) cada una de las operaciones mencionadas, luego se chequea aqui mismo si $N < 0$ de ser verdadero se modifica el valor de $estaEnNegativo$ por verdadero o por falso en caso de ser falsa la guarda
+ \item por ultimo, si $N \geq equilibrioActual$ solamente descontamos en uno a i para continuar con el ciclo.
+\end{itemize} 
+Una vez finalizado esto y por consiguiente la segunda etapa, pasamos a la tercera la cual consiste en guardar en \textit{arrayI} o \textit{arrayD} los valores de los elementos del \textit{arrayPesasUtilizadas} para colocarlos en la balanza del lado derecho o del izquierdo.\\
+Para realizar esto recorremos el array \textit{arrayPesasUtilizadas} el cual en el peor de los casos tendr\'a todas las pesas, lo cual como vimoss recorrer la totalidad de elementos del array se encuentra en el orden de O($\sqrt{P}$).\\
+
+Luego de ver esto, dentro del ciclo realizamos operaciones en O(1).\\
+Por ultimo, devolvemos los array invirtiendo las posiciones de los elementos lo que insumir\'a en el peor de los caso O($\sqrt{P}$).\\
+
+En conclusi\'on nuestro algoritmo realiza 4 ciclos que demandan en el peor de los casos O($\sqrt{P}$) donde dentro de los mismos se realizan operaciones en O(1), por lo tanto nuestra complejidad final ser\'a
+O($\sqrt{P}$).
+
 
 
 

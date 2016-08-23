@@ -1,30 +1,6 @@
 La soluci\'on planteada utiliza la t\'ecnica algor\'itmica de \textit{backtracking}. La idea es recorrer todas las configuraciones posibles manteniendo la mejor soluci\'on encontrada hasta el momento. 
-Se representa a la ronda como un array donde cada posici\'on equivale a un lugar para sentarse, y su valor en dicha posici\'on indica qui\'en esta sentado all\'i. Para evaluar todas las posibles configuraciones, vamos sentando a las niñas desde la posici\'on 1 a la posici\'on |ronda| en el array. Para esto se implementa una funci\'on que dado el \'indice que indica la siguiente posici\'on a ocupar, prueba sentar a cada chica posible (es decir, dentro de las que no estan sentadas a\'un) en la posici\'on vac\'ia y llama recursivamente aumentando en uno el \'indice (Cuando finaliza cada llamada recursiva, se "vuelve hacia atras" y se coloca a la niña que estaba originalmente en esa posici\'on). Cuando el array (o la ronda) est\'a llena, ya se puede calcular la suma de las distancias y por lo tanto se puede decidir si es la mejor soluci\'on encontrada (hasta ese momento).
 
-Se puede demostrar por inducci\'on en la cantidad de personas que esta funci\'on eval\'ua todas las posibilidades. 
-\begin{itemize}
-\item Caso base: Si hay solo una chica, la funci\'on calcula la suma de distancias para la \'unica configuraci\'on posible.
-\item Paso inductivo: Si la cantidad de chicas es $n > 1$. Como la funci\'on coloca todos las posibles en la primera posicio\'n, y para las restantes llama recursivamente ($n-1$ chicas). Por nuestra hip\'otesis inductiva, sabemos que la funci\'on para $n-1$ chicas eval\'ua todas las posibles. Por lo tanto, como la funci\'on para $n$ se llama recursivamente para $n-1$ para todas las particiones posibles de [chica de la primer posicion] - [chicas de las demas posiciones], podemos afirmar por inducci\'on que $f$ eval\'ua todas las permutaciones de las $n$ chicas.
-\end{itemize}
-
-Como nuestro algoritmo pasa por todas las permutaciones posibles y estas son $n!$, su complejidad tiene un factor $n!$.
-Calcular la suma de distancias de todas las amigas tiene costo $n^2 * log(n)$, ya que para cada pareja de chicas se hace lo siguiente:
-
-\begin{itemize}
-\item Se fija si son amigas (Costo $log(n)$ por la implementacion de set)
-\item Si son amigas se calcula la distancia. (Costo $O(1)$)
-\end{itemize}
-
-Podas:
-Se puede mejorar el algoritmo propuesto anteriormente efectuando algunas podas. Es decir, si pensamos al \textit{backtracking} como un \'arbol en el nos vamos moviendo por diversas posiciones intermedias (nodos internos) hasta llegar a las finales (hojas). Si a partir de un nodo intermedio podemos afirmar que todas las soluciones que derivan del mismo no son la \'optima, podemos rechazarlas y pasar a analizar otras ramas, ahorrando asi un importante costo en c\'alculos. A esta t\'ecnica se la conoce como "podas" (o \textit{backtrack}) en un \textit{backtracking}.
-
-\begin{itemize}
-\item Poda de permutaciones circulares: Como estamos representando a la ronda en una array, existen permutaciones equivalentes a la misma ronda. Por ejemplo, $ABC$ es equivalente a $BCA$. Este problema se soluciona dejando fija a la niña de la primera posici\'on. Ahora bien, como el problema nos pide devolver la configuraci\'on con el menor orden lexicogr\'afico, fijamos a la niña de menor orden lexicogr\'afico en la primera posici\'on del array. De esta manera todas las soluciones generadas ser\'an la de menor orden lexicogr\'afico entre sus equivalentes.
-
-\item Poda de distancia parcial: Si en vez de calcular las distancias al final las calculamos a medida que agregamos a alguien nuevo, podemos calcular esta suma parcial con la mejor suma obtenida hasta ahora. Es decir, si en un "nodo interno" ya nos pasamos de la mejor suma obtenida hasta ese momento, no tiene sentido seguir investigando esta rama del \'arbol (ya que esta suma s\'olo puede aumentar, y por lo tanto nunca ser\'a la mejor). 
-¿Suma complejidad calcular la suma de distancias parcial cada vez que sentamos a una niña? Si bien esto parece agregar complejidad, lo cierto es que cada vez que se sienta una niña s\'olo se actualiza la suma actual con las distancias de las amistades de la niña agregada, es decir, no se vuelven a mirar amistadas ya miradas previamente. Por lo tanto, para cada hoja del arbol del \textit{backtracking}, solo habremos mirado una vez cada pareja de niñas, que no es m\'as veces que en el caso sin la poda.
-De hecho, sin esta poda hay distancias que se calculan repetidas veces. Si calculamos las distancias al final, ($A$ y $B$ amigos) para las permutaciones $ABCD$ y $ABDC$ estaremos calculando varias veces la distancia entre $A$ y $B$, mientras que con la poda esa distancia ya la tenemos calculada.
-
-\item Poda de amistades restantes: Resulta evidente que si ninguna de las niñas que resta sentar tiene amigas, no tiene sentido probar todas las permutaciones, ya que el orden en que se sienten no modificar\'a la suma total. Por lo tanto, esta poda consiste en llevar la cuenta de cu\'antas amistades ya se calcul\'o la distancia (i.e. ambas niñas de la amistad est\'an sentadas) y si ya no quedan amistades para calcular ordena a las siguientes niñas. Esto \'ultimo es porque de todas las permutaciones queremos la de menor orden lexicogr\'afico.
-\end{itemize}
-
+Inicialmente, ordenaremos en base al peso y el valor de todos los objetos.\\
+Luego de realizar esto iremos agregando en las mochilas los objetos de mayor valor teniendo en cuenta el peso de los mismos con la mochila, en caso de que al agregar un objeto la suma de los pesos de los objetos que se encuentran en la mochila diera igual o mayor al peso m\'aximo de la mochila, se quitar\'a el objeto ultimo y se probar\'a con otro objeto de menor peso.\\
+As\'i realizaremos todas las posibles permutaciones de objetos en la mochila.\\
+Una vez que obtuvimos todas las permutaciones posibles nos quedaremos con la m\'axima, de esta manera tendr\'iamos en las mochilas una cantidad \'ptima de objetos con el mayor valor posible y un peso acorde a lo soportado por las mochilas.\\
