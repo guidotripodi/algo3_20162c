@@ -59,14 +59,20 @@ void Balanza::balancear(){
 
 void Balanza::armadoBalanza(){//O(sqrt(p))
 	int x = 0;
+	int i = 0;
+	int j = 0;
 	while(x < cant_pesas){//pesasUtilizadas.size
 		if( pesasUtilizadas[x] < 0 ){
 			platoDerecho[i] = pesasUtilizadas[x] * -1;
+			i++;
 		} else{
 			platoIzquierdo[j] = pesasUtilizadas[x];
+			j++;
 		}
 		x++;
 	}
-	invertir(platoDerecho);
-	invertir(platoIzquierdo);
+	size_izq = j;
+	size_der = i;
+	invertir(platoDerecho, size_der);
+	invertir(platoIzquierdo, size_izq);
 }
