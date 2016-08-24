@@ -13,7 +13,7 @@ Si $M_2$ se lleva objetos que entraban en $M_1$, y quedan objetos que no entran 
 
 Supongamos que queremos optimizar $M_2$, $M_3$, $M_1$: 
 
-Si quisieramos optimizar de esta manera, todos los objetos que se lleve $M_2$ entran tambien en $M_3$ por lo tanto cuando optimize $M_3$ podria pasar que no haya objetos que entren por lo cual aqui terminaria el proceso porque tampoco habria objetos que entren en $M_1$ o podria optimizar con objetos que tambien entren en $M_1$. Luego de optimizar $M_2$ y $M_3$, estas mochilas podrian tener objetos que entren en $M_1$. De esta manera tal vez convenia hacer $M_1$, $M_2$, $M_3$.
+Si quisieramos optimizar de esta manera, todos los objetos que se lleve $M_2$ entran tambien en $M_3$ por lo tanto cuando optimize $M_3$ podria pasar que no haya objetos que entren en $M_3$ por lo cual aqui terminaria el proceso porque tampoco habria objetos que entren en $M_1$ o podria optimizar con objetos que tambien entren en $M_1$. Luego de optimizar $M_2$ y $M_3$, estas mochilas podrian tener objetos que entren en $M_1$. De esta manera tal vez convenia hacer $M_1$, $M_2$, $M_3$.
 Entonces nuevamente, convenia hacer $M_1$, $M_2$, $M_3$ o bien era lo mismo. 
 
 El caso $M_3$, $M_2$, $M_1$ es el caso usual. Esta puede ser una mala o una buena optimización dependiendo de los objetos considerados. En cada optimización la mochila más grande se llevará lo mejor con la única condición que es la de no exceder su capacidad. En ese proceso las mochilas subsecuentes estarán restringidas a lo que quede en cada paso, pudiendo suceder que lo único que quede para agregar a las mochilas sean objetos que entraban en las mochilas anteriores pero no en la que intentamos optimizar, por lo cual era conveniente invertir el orden de las mochilas. 
