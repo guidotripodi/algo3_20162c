@@ -24,5 +24,5 @@ $(EXECUTABLE): $(OBJECTS)
 clean:
 	rm -rf $(EXECUTABLE) $(OBJECTS)
 
-%.cpp: %.o
+%.o: %.cpp
 	$(CC) $(CFLAGS) $< -c -o $@

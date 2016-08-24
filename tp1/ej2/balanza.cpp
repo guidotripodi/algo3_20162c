@@ -91,6 +91,7 @@ void Balanza::invertir(int* arreglo, int size){
 	delete(arreglo);
 	arreglo = otro;
 }
+
 void Balanza::imprimir(){
 	printf("%d %d\n",this->size_izq, this->size_der);
 	for(int i = 0; i < size_izq; i++){
