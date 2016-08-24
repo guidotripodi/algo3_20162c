@@ -20,3 +20,4 @@
 \contentsline {subsection}{\numberline {3.2}Explicaci\'on de resoluci\'on del problema}{17}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}Algoritmos}{17}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}An\'alisis de complejidades}{18}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Demostraci\'on de correctitud}{19}{subsection.3.5}
