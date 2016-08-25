@@ -1,7 +1,7 @@
 \begin{algorithm}[H]
 \caption{CRUZANDO EL PUENTE}
 \begin{algorithmic}[1]
-\Function{algoritmo principal}{\param{in}{ }{Integer}, \param{in}{ }{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
+\Function{main}{\param{in}{ }{Integer}, \param{in}{ }{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
 \state creo bool exitoBackPar con valor verdadero \hfill //O(1)
 \state creo bool exitoBackLampara con valor verdadero \hfill //O(1)
 \while{exitoBackLampara $\vee$ exitoBackPar} \hfill //O(N??)
@@ -34,6 +34,56 @@
 \begin{algorithm}[H]
 \caption{CRUZANDO EL PUENTE}
 \begin{algorithmic}[1]
+\Function{Algoritmo Principal}{\param{in}{ }{Integer},\param{in}{ }{Integer}, \param{in}{ }{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
+\state creo bool exitoBackPar con valor verdadero \hfill //O(1)
+\state creo bool exitoBackLampara con valor verdadero \hfill //O(1)
+\while{exitoBackLampara $\vee$ exitoBackPar} \hfill //O(N??)
+\If{pasaronTodos(escenario)} \hfill //O(1)
+
+\If{escenario.tiempo < minimo $\vee$ minimo == -1} \hfill //O(1)
+\state minimo $\gets$ escenario.tiempo \hfill //O(1)
+\endif
+\state sol++  \hfill //O(1)
+\endif
+
+\state exitoBackPar $\gets$ verdadero \hfill //O(1)
+\state exitoBackLampara $\gets$ verdadero \hfill //O(1)
+
+\If{escenario.tienenLampara} \hfill //O(1)
+\state creo entero par con escenario.parPosible() \hfill //O(??)
+
+\If{par > -1 $\wedge$ (minimo == -1 $\vee$ escenario.tiempo < minimo)} \hfill //O(1)
+\state escenario.printPar(par) \hfill //O(??)
+\state escenario.enviarPar(par) \hfill //O(??)
+\Else
+\state exitoBackLampara $\gets$ escenario.backtrackFarolero() \hfill //O(??)
+\endif
+
+
+\Else
+\state creo entero farolero con faroleroPosible(escenario) \hfill //O(N?)
+\If{farolero>-1 $\wedge$ (minimo == -1 $\vee$ escenario.tiempo < minimo} \hfill //O(1)
+\state escenario.printPersona(farolero) \hfill //O(??)
+\state escenario.enviarFarolero(farolero) \hfill //O(??)
+
+\Else
+\state exitoBackPar $\gets$ escenario.backtrackPar() \hfill //O(??)
+\endif
+\endif
+\endwhile
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{??}
+\end{algorithm}
+
+
+
+
+
+\begin{algorithm}[H]
+\caption{CRUZANDO EL PUENTE}
+\begin{algorithmic}[1]
 \Function{parPosible}{}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
 \state creo entero parEvaluar con parActual$\_$x$\_$paso[paso] + 1 \hfill //O(1)
 \state creo entero tot$\_$pares con arq$\_$totales*can$\_$totales \hfill //O(1)
@@ -50,6 +100,7 @@
 \hrule
 \complejidad{N??}
 \end{algorithm}
+
 
 \begin{algorithm}[H]
 \caption{CRUZANDO EL PUENTE}
