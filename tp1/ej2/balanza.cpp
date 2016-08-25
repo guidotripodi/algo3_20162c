@@ -63,7 +63,7 @@ void Balanza::balancear(){
 			pesaActual = pow(3, i);
 			pesaUno = pow(3, 0);
 		}
-		n = equilibrioActual - pesaActual;
+		n = equilibrioActual - abs(pesaActual);
 	}
 	armadoBalanza();
 }
