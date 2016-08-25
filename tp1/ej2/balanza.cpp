@@ -17,6 +17,11 @@ Balanza::Balanza(int p){
 	balancear();
 }
 
+Balanza::~Balanza(){
+	delete[] pesasUtilizadas;
+	delete[] platoDerecho;
+	delete[] platoIzquierdo;
+}
 
 void Balanza::balancear(){
 	int equilibrioActual = peso_llave;
@@ -88,7 +93,7 @@ void Balanza::invertir(int* arreglo, int size){
 	for(int i = 0; i < size ; i++){
 		otro[size - i] = arreglo[i];
 	}
-	delete(arreglo);
+	delete[] arreglo;
 	arreglo = otro;
 }
 

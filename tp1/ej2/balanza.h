@@ -5,6 +5,7 @@ class Balanza{
 	public:
 		//inicializacion es O(sqrt(p)) si no es todo una mentira
 		Balanza(int p); 
+		~Balanza();
 		void imprimir(); //o recargo el operador?	
 	
 	private:
