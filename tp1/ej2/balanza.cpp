@@ -72,7 +72,7 @@ void Balanza::armadoBalanza(){//O(sqrt(p))
 	int x = 0;
 	int i = 0;
 	int j = 0;
-	while(x < cant_pesas){//pesasUtilizadas.size
+	while( x < cant_pesas ){//pesasUtilizadas.size
 		if( pesasUtilizadas[x] < 0 ){
 			platoDerecho[i] = pesasUtilizadas[x] * -1;
 			i++;
@@ -89,21 +89,22 @@ void Balanza::armadoBalanza(){//O(sqrt(p))
 }
 
 void Balanza::invertir(int* arreglo, int size){
-	int *otro = new int[size];
-	for(int i = 0; i < size ; i++){
-		otro[size - i] = arreglo[i];
+	if( size < 2 ) return;
+	int temp; 
+	for( int i = 0; i < size/2 ; i++ ){
+		temp = arreglo[i];
+		arreglo[i] = arreglo[size - i - 1];
+		arreglo[size - i - 1] = temp;
 	}
-	delete[] arreglo;
-	arreglo = otro;
 }
 
 void Balanza::imprimir(){
 	printf("%d %d\n",this->size_izq, this->size_der);
-	for(int i = 0; i < size_izq; i++){
+	for( int i = 0; i < size_izq; i++ ){
 		printf("%d ", platoIzquierdo[i]);
 	}
 	printf("\n");
-	for(int j = 0; j < size_der; j++){
+	for( int j = 0; j < size_der; j++ ){
 		printf("%d ", platoDerecho[j]);
 	}
 	printf("\n");
