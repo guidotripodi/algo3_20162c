@@ -41,7 +41,11 @@ void Balanza::balancear(){
 			cant_pesas = j+1;
 		} else if( abs(n) == 1 ){
 			pesasUtilizadas[j] = pesaActual;
-			pesasUtilizadas[j+1] = pesaUno; //pow(3, 0)
+			if( n < 0 ){
+				pesasUtilizadas[j+1] = pesaUno * -1;
+			} else{
+				pesasUtilizadas[j+1] = pesaUno;
+			}
 			cant_pesas = j+2;
 			terminar = true;
 		} else if( abs(n) > 1 && abs(n) < equilibrioActual ){
@@ -49,7 +53,7 @@ void Balanza::balancear(){
 			pesasUtilizadas[j] = pesaActual;
 			j++;
 			i--;
-			//equilibrioActual = n;
+			equilibrioActual = n;
 			estaEnNegativo = n < 0; //se setea true si n menor 0
 			equilibrioActual = abs(n);
 		} else if( abs(n) >= equilibrioActual ){
@@ -63,7 +67,7 @@ void Balanza::balancear(){
 			pesaActual = pow(3, i);
 			pesaUno = pow(3, 0);
 		}
-		n = equilibrioActual - abs(pesaActual);
+		n = abs(equilibrioActual) - abs(pesaActual);
 	}
 	armadoBalanza();
 }
