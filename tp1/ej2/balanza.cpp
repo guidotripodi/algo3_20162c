@@ -37,17 +37,15 @@ void Balanza::balancear(){
 	for( bool terminar = false; !terminar; ){
 	
 		if( n == 0 ){
-			printf("n == 0\n");
 			pesasUtilizadas[j] = pesaActual;
 			terminar = true;
 			cant_pesas = j+1;
 		} else if( abs(n) == 1 ){
-			printf("n == 1\n");
 			pesasUtilizadas[j] = pesaActual;
 			if( n < 0 ){
-				pesasUtilizadas[j+1] = pesaUno * -1;
+				pesasUtilizadas[j+1] = -1;//-1 si o si??
 			} else{
-				pesasUtilizadas[j+1] = pesaUno;
+				pesasUtilizadas[j+1] = 1;
 			}
 			cant_pesas = j+2;
 			terminar = true;
