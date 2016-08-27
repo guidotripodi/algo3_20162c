@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+//con el mismo razonamiento que en la demo las pesas usadas son siempre menos que raiz de P
+FILE *doc;
+
+void balancear(long long  p){
+    
+	long long  equilibrioActual = p;
+	// obtengo la ultima suma parcial junto con el exponente de la ultima potencia
+    long long  i = 0;
+    long long  sumaParcial = 0;
+    while( sumaParcial < p ) {
+        sumaParcial+= pow(3,i);
+        i++;
+    };
+    
+    long long  size = i+1; // mas uno para el 0
+    
+    long long  sumasParciales[size];
+    
+    // armo el arreglo de sumas parciales
+    while (i >= 0) {
+        sumasParciales[i] = sumaParcial;
+        sumaParcial=(sumaParcial-pow(3,i-1)); // -1 porque el exponente termina en +1 en el while anterior
+        i--;
+    }
+    
+    long long  middle = (size)/2;
+    
+    while (llabs(equilibrioActual) > 0) {
+        if (sumasParciales[middle] >= llabs(equilibrioActual) && sumasParciales[middle-1] < llabs(equilibrioActual)) {
+        
+            long long  potencia = sumasParciales[middle]-sumasParciales[middle-1];
+            if (equilibrioActual < 0) {
+                equilibrioActual = potencia + equilibrioActual;
+                printf("plato derecho %lld \n", potencia);
+            }else {
+                equilibrioActual = equilibrioActual - potencia;
+                printf("plato izquierdo %lld \n", potencia);
+            }
+            
+            // me voy al intervalo mas chico
+            size = middle;
+            middle = middle/2;
+        }else if (sumasParciales[middle] < llabs(equilibrioActual)) {
+            // estoy muy adentro, voy mas afuera
+            middle = (middle+(size))/2;
+        }else if (sumasParciales[middle-1] >= llabs(equilibrioActual)) {
+            // estoy muy afuera, voy mas adentro
+            size = middle;
+            middle = (middle)/2;
+        }
+    }
+}
+
+
+int main(){ 
+    long long i = 5;
+    long long  pesa = 0;
+    while (i > 0) {
+        pesa = pow(10,15); 
+        printf("pesa : %lld \n", pesa);
+        balancear(pesa);
+        i--;
+    }
+    
+	return 0;
+}
