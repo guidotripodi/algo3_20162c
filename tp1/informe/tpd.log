@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.8.15)  28 AUG 2016 13:24
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.8.15)  28 AUG 2016 13:36
 entering extended mode
  %&-line parsing enabled.
 **tpd.tex
@@ -904,7 +904,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--3
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4--6
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
+ []
+
+
+Overfull \hbox (8.71368pt too wide) in paragraph at lines 6--7
+[]\T1/cmr/m/n/12 Como las pe-sas, pre-sen-tan un peso en po-ten-cia de 3, cream
+os una vari-able de-nom-i-nada $\OML/cmm/m/it/12 sumaParcial$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
 
@@ -913,19 +924,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 13.
-(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 13.
- [11]
-Underfull \hbox (badness 10000) in paragraph at lines 20--22
+
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
+
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
 
  []
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 23--65
+Underfull \hbox (badness 10000) in paragraph at lines 16--65
 
  []
 
@@ -935,22 +950,92 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--4
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6--10
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 12--14
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+
+ []
+
+
+Overfull \hbox (16.28242pt too wide) in paragraph at lines 15--18
+\T1/cmr/m/n/12 ando si en la mi-tad del ar-ray nues-tra suma-Parcial es mayor o
+ igual al valor en mó-dulo de $\OML/cmm/m/it/12 equilibrioActual$\T1/cmr/m/n/12
+ .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--18
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 23--25
+Overfull \hbox (7.86491pt too wide) in paragraph at lines 19--20
+\T1/cmr/m/n/12 nal-izando así nue-stro al-go-ritmo. Di-cho in-ver-tir costará O
+($\OT1/cmr/m/n/12 #$\T1/cmr/m/n/12 elementosArrayD) y O($\OT1/cmr/m/n/12 #$\T1/
+cmr/m/n/12 elementosArrayI),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--28
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+
+ []
+
+) (./ej2-dem.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 5--6
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 14.
+(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 14.
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--21
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 40--41
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--49
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--51
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--58
 
  []
 
@@ -964,7 +1049,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-) (./ej2-test1.tex
+) [16] (./ej2-test1.tex
 Underfull \hbox (badness 10000) in paragraph at lines 1--3
 
  []
@@ -979,7 +1064,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--9
 
  []
 
-[15]
+
 Underfull \hbox (badness 10000) in paragraph at lines 10--11
 
  []
@@ -1009,7 +1094,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--53
 
  []
 
-
+[17]
 Underfull \hbox (badness 10000) in paragraph at lines 54--57
 
  []
@@ -1030,7 +1115,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--69
 
  []
 
-[16]
+
 Underfull \hbox (badness 10000) in paragraph at lines 76--79
 
  []
@@ -1055,7 +1140,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 111--77
 
  []
 
-[17] (./ej3-descripcion.tex)
+[18] (./ej3-descripcion.tex)
 Underfull \hbox (badness 10000) in paragraph at lines 2--82
 
  []
@@ -1065,32 +1150,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--84
 
  []
 
-(./ej3-alg.tex [18]) (./ej3-com.tex) [19] (./tpd.aux) ) 
+(./ej3-alg.tex [19]) (./ej3-com.tex) [20] (./tpd.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 7284 strings out of 495061
- 98520 string characters out of 1182621
- 190015 words of memory out of 3000000
- 10193 multiletter control sequences out of 15000+50000
+ 7305 strings out of 495061
+ 98793 string characters out of 1182621
+ 189131 words of memory out of 3000000
+ 10204 multiletter control sequences out of 15000+50000
  21539 words of font info for 53 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 38i,10n,38p,784b,364s stack positions out of 5000i,500n,10000p,200000b,50000s
- </root/.texmf-var/fonts
-/pk/ljfour/jknappen/ec/eccc1200.600pk> </root/.texmf-var/fonts/pk/ljfour/jknapp
-en/ec/ecrm1000.600pk> </root/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.60
-0pk> </root/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </root/.texm
-f-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </root/.texmf-var/fonts/pk/lj
-four/jknappen/ec/ecrm1200.600pk> </root/.texmf-var/fonts/pk/ljfour/jknappen/ec/
-ecbx1200.600pk> </root/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> <
-/root/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </root/.texmf-var/
-fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
-r12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr
-/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texm
-f-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on tpd.pdf (19 pages, 231303 bytes).
+ 38i,10n,38p,962b,331s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </root/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1200.600pk> </root/.texmf-
+var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </root/.texmf-var/fonts/pk/ljfo
+ur/jknappen/ec/ecti1200.600pk> </root/.texmf-var/fonts/pk/ljfour/jknappen/ec/ec
+bx1440.600pk> </root/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </r
+oot/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </root/.texmf-var/fo
+nts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </root/.texmf-var/fonts/pk/ljfour/jkn
+appen/ec/ecbx1728.600pk> </root/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440
+.600pk> </root/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk></usr/shar
+e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-tex
+live/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on tpd.pdf (20 pages, 255198 bytes).
 PDF statistics:
- 557 PDF objects out of 1000 (max. 8388607)
- 51 named destinations out of 1000 (max. 500000)
- 105 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 625 PDF objects out of 1000 (max. 8388607)
+ 58 named destinations out of 1000 (max. 500000)
+ 177 words of extra memory for PDF output out of 10000 (max. 10000000)
 
