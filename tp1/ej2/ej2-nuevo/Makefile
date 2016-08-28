@@ -2,16 +2,16 @@
 CC=g++
 
 # flags de compilación
-CFLAGS=-g -Wall
+CFLAGS=-g -Wall -std=c++11
 
 # flags de linkeo
 LDFLAGS=
 
 # Agregar acá los archivos .cpp a compilar
-SOURCES=ejercicio2.cpp
+SOURCES=main.cpp balanza.cpp
 
 # Objetos que serán generados
-OBJECTS=ejercicio2.o
+OBJECTS=main.o balanza.o
 
 # Nombre del ejecutable a generar
 EXECUTABLE=ej2
