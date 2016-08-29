@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 	{
 		input >> tiempos_arqueologos[i];
 	}
-	for (i = 0; i < cant_arqueologos; i++)
+	for (i = 0; i < cant_canibales; i++)
 	{
 		input >> tiempos_canibales[i];
 	}
