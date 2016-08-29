@@ -13,13 +13,13 @@ class Balanza{
 	private:
 		//void armadoBalanza();
 		void balancear();
-		int p;
+		long long p;
 		
 		void invertir(long long* arreglo, int size);
-		int cant_pesas;
+		long long cant_pesas;
 		long long *platoDerecho;
 		long long  *platoIzquierdo;
-		int sizeDer;
-		int sizeIzq;
+		long long sizeDer;
+		long long sizeIzq;
 
 };

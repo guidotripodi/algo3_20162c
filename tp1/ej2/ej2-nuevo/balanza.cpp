@@ -18,7 +18,7 @@ Balanza::~Balanza(){
 //void Balanza::imprimir(long long* derecho, long long* izquierdo, int sizeDer, int sizeIzq){
 
 void Balanza::imprimir(FILE* doc){
-	fprintf(doc, "%d %d\n",sizeIzq, sizeDer);
+	fprintf(doc, "%lld %lld \n",sizeIzq, sizeDer);
 	for( int i = 0; i < sizeIzq; i++ ){
 		fprintf(doc, "%lld ", platoIzquierdo[i]);
 	}
@@ -77,12 +77,12 @@ void Balanza::balancear(){
                 equilibrioActual = potencia + equilibrioActual;
                 platoDerecho[j] = potencia;
 				j++;
-				printf("plato derecho %lld \n", potencia);
+				//printf("plato derecho %lld \n", potencia);
             }else {
                 equilibrioActual = equilibrioActual - potencia;
 				platoIzquierdo[k] = potencia;
 				k++;
-                printf("plato izquierdo %lld \n", potencia);
+                //printf("plato izquierdo %lld \n", potencia);
             }
             
             // me voy al intervalo mas chico

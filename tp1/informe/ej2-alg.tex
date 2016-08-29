@@ -39,6 +39,17 @@
 \state middle $\gets$ middle + $\frac{size}{2}$ \hfill //O(1)
 \endif
 \endwhile
+\state devolver(armadoBalanza) \hfill //O($\sqrt{P}$)
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{$\sqrt{P}$}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{armadoBalanza}
+\begin{algorithmic}[1]
+\Function{armadoBalanza}{\param{}{}{}}{$\ensuremath{\rightarrow}$ \param{out}{S} {Integer} \param{out}{T} {Integer} \param{out}{arrayI} {List<Integer>} \param{out}{arrayD}{List<Integer>}}
 \state invertir(arrayD) \hfill //O($\sqrt{P}$)
 \state invertir(arrayI) \hfill //O($\sqrt{P}$)
 \state devolver arrayD.tamaño \hfill //O(1)
