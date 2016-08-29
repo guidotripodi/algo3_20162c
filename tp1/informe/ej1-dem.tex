@@ -1,0 +1,17 @@
+La elección de las podas tomadas en el backtracking se debieron a las siguientes razones:
+
+Siendo el conjunto total de combinaciones existentes contenedor de tuplas de elementos repetidos, (por ejemplo, para las personas P1 y P2, existe la tupla <P1, P2> y <P2, P1>), es trivial ver que evaluar estos casos carece de sentido, ya que es exactamente el mismo resultado el que se obtendra con una que con otra.\\
+
+La consigna del ejercicio plantea la necesidad de mantener un balance entre los personajes involucrados. En una aproximación con fuerza bruta, se desestimarían las soluciones que conlleven algun desbalance en la sucesion de traslados de los personajes, para lo cual primero se deberían calcular todas las posibilidades y luego analizarlas una por una, recorriendo cada uno de sus pasos, buscando algun desbalance. Para evitar tener que analizar, al final de la construccion de las soluciones, si son o no válidas, se decide chequear en cada paso de la construccion de cada solución, si el mismo produce una instancia balaceada. Al podar de esa forma, solo nos quedaremos al final del algoritmo con las soluciones que son validas.\\
+
+Teniendo ya las soluciones luego de ejecutar el algoritmo, se debería encontrar aquella que produzca el mínimo tiempo de viaje de los personajes. Esto quiere decir que habrá soluciones que estamos desestimando que consumieron tiempo en ser construidas. Lo que se resuelve es, al calcular una solucion factible, se guarda el tiempo que se logró, y todas las siguientes soluciones, si al construirse sobrepasan este tiempo, entonces quedan automáticamente desestimadas.\\
+
+Por ultimo se analizan las posibilidades que se tiene al efectuar 1 paso. Para esto se considera al envio de personas y al retorno del farol como un PASO notando \textbf{n - m} al envio de n personas al lado "A" y al retorno de m personas al lado "B", pudiendo construir, entonces, las siguientes posibilidades: {1-1, 1-2, 2-1, 2-2}.
+
+
+
+
+
+ 
+
+ 
