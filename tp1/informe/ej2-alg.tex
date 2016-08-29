@@ -1,48 +1,45 @@
 \begin{algorithm}[H]
 \caption{BALANZA}
 \begin{algorithmic}[1]
-\Function{Algoritmo}{\param{in}{Integer}{P}}{$\ensuremath{\rightarrow}$ \param{out}{S} {Integer} \param{out}{T} {Integer} \param{out}{arrayI} {List<Integer>} \param{out}{arrayD}{List<Integer>}}
-\state i = 0 \hfill //O(1)
-\state Recorro desde $3^0$ hasta $3^i$ $\geq$ P  \hfill //O($\sqrt{P}$)
-\state equilibrioActual  $\gets$ P \hfill //O(1)
-\state creo arrayPesasUtilizadas vacio \hfill //O(1)
-\state estaEnNegativo $\gets$ falso \hfill //O(1)
-\state pesaActual  $\gets$  {$3^i$} \hfill //O(1)
-\state N = equilibrioActual - pesaActual \hfill //O(1)
-\while {Terminar = False} \hfill //O($\sqrt{P}$)
-\If{N == 0} \hfill //O(1)
-\state arrayPesasUtilizadas $\cup$ pesaActual \hfill //O(1)
-\state Terminar \hfill //O(1)
-\endif
-\If{|N| == 1} \hfill //O(1)
-\state arrayPesasUtilizadas $\cup$ pesaActual \hfill //O(1)
-\state arrayPesasUtilizadas $\cup$ {$3^0$} \hfill //O(1)
-\state Terminar \hfill //O(1)
-\endif
-\If{|N| > 1 $\wedge$ |N| < equilibrioActual} \hfill //O(1)
-\state arrayPesasUtilizadas $\cup$ pesaActual \hfill //O(1)
-\state i-- \hfill //O(1)
-\state equilibrioActual $\gets$ N \hfill //O(1)
-\If{N < 0} \hfill //O(1)
-\state estaEnNegativo $\gets$  verdadero \hfill //O(1)
-\Else
-\state estaEnNegativo $\gets$  falso \hfill //O(1)
-\endif
-\state equilibrioActual $\gets$ |N| \hfill //O(1)
-\endif
-\If{|N| $\geq$ equilibrioActual} \hfill //O(1)
-\state i-- \hfill //O(1)
-\endif
-\If{estaEnNegativo} \hfill //O(1)
-\state pesaActual  $\gets$  {$3^i$} * (-1) \hfill //O(1)
-\state pesaUno  $\gets$  {$3^0$} * (-1) \hfill //O(1)
-\Else
-\state pesaActual  $\gets$  {$3^i$} \hfill //O(1)
-\state pesaUno  $\gets$  {$3^0$}  \hfill //O(1)
-\endif
-\state N = equilibrioActual - pesaActual \hfill //O(1)
+\Function{Algoritmo}{\param{in}{Long Long}{P}}{$\ensuremath{\rightarrow}$ \param{out}{S} {Long Long} \param{out}{T} {Long Long} \param{out}{arrayI} {List<Long Long>} \param{out}{arrayD}{List<Long Long>}}
+\state creo variable long long equilibrioActual = P \hfill //O(1)
+\state creo variable long long i = 0 \hfill //O(1)
+\state creo variable long long sumaParcial = 0 \hfill //O(1)
+\while {sumaParcial < P} \hfill //O($\sqrt{P}$)
+\state sumaParcial  $\gets$ sumaParcial + $3^i$ \hfill //O(1)
+\state i++ \hfill //O(1)
 \endwhile
-\state devolver(armadoBalanza) \hfill //O(1)
+\state creo long long size = i+1\hfill //O(1)
+\state creo long long sumasParciales[size]\hfill //O($\sqrt{P}$)
+\while {i $\geq$ 0} \hfill //O($\sqrt{P}$)
+\state sumasParciales[i]  $\gets$ sumaParcial \hfill //O(1)
+\state sumaParcial $\gets$ sumaParcial - $3^{i-1}$ \hfill //O(1)
+\state i-- \hfill //O(1)
+\endwhile
+\state creo long long middle = $\frac{size}{2}$ \hfill //O(1)
+\while {|equilibrioActual| > 0} \hfill //O($lg(\sqrt{P})$) 
+\If{sumasParciales[middle] $\geq$ |equilibrioActual| \state
+ $\wedge$ sumasParciales[middle-1] < |equilibrioActual|} \hfill //O(1)
+\state creo long long potencia = sumasParciales[middle]-sumasParciales[middle-1] \hfill //O(1)
+\If{equilibrioActual < 0} \hfill //O(1)
+\state  equilibrioActual $\gets$ potencia + equilibrioActual \hfill //O(1)
+\state arrayD $\cup$ potencia \hfill //O(1)
+\Else
+\state  equilibrioActual $\gets$ equilibrioActual -potencia \hfill //O(1)
+\state arrayI $\cup$ potencia \hfill //O(1)
+\endif
+\state size $\gets$ middle \hfill //O(1)
+\state middle $\gets$ $\frac{middle}{2}$ \hfill //O(1)
+\endif
+\If{sumasParciales[middle] < |equilibrioActual|} \hfill //O(1)
+\state middle $\gets$ middle + $\frac{size}{2}$ \hfill //O(1)
+\endif
+\If{sumasParciales[middle-1] $\geq$ |equilibrioActual|} \hfill //O(1)
+\state size $\gets$ middle  \hfill //O(1)
+\state middle $\gets$ middle + $\frac{size}{2}$ \hfill //O(1)
+\endif
+\endwhile
+\state devolver(armadoBalanza) \hfill //O($\sqrt{P}$)
 \EndFunction 
 \end{algorithmic}
 \hrule
@@ -53,19 +50,12 @@
 \caption{armadoBalanza}
 \begin{algorithmic}[1]
 \Function{armadoBalanza}{\param{}{}{}}{$\ensuremath{\rightarrow}$ \param{out}{S} {Integer} \param{out}{T} {Integer} \param{out}{arrayI} {List<Integer>} \param{out}{arrayD}{List<Integer>}}
-\state creo x = 0 \hfill //O(1)
-\while {x < arrayPesasUtilizadas.size} \hfill //O($\sqrt{P}$)
-\If{arrayPesasUtilizadas[x] < 0} \hfill //O(1)
-\state arrayD $\cup$ arrayPesasUtilizadas[x]*(-1) \hfill //O(1)
-\Else
-\state arrayI $\cup$ arrayPesasUtilizadas[x] \hfill //O(1)
-\endif
-\state x-- \hfill //O(1)
-\endwhile
-\state devolver arrayD.size \hfill //O(1)
-\state devolver arrayI.size \hfill //O(1)
-\state devolver invertido(arrayD) \hfill //O($\sqrt{P}$)
-\state devolver invertido(arrayI) \hfill //O($\sqrt{P}$)
+\state invertir(arrayD) \hfill //O($\sqrt{P}$)
+\state invertir(arrayI) \hfill //O($\sqrt{P}$)
+\state devolver arrayD.tamaño \hfill //O(1)
+\state devolver arrayI.tamaño \hfill //O(1)
+\state devolver(arrayD) \hfill //O($\sqrt{P}$)
+\state devolver(arrayI) \hfill //O($\sqrt{P}$)
 \EndFunction 
 \end{algorithmic}
 \hrule

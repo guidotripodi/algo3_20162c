@@ -1,23 +1,16 @@
 
 Para solucionar este problema y poder quitar la llave y dejar equilibrado como se encontraba anteriormente realizamos un algoritmo el cual se encuentra dividido en tres partes, la primera realiza lo siguiente:\\
 
-Como las pesas, presentan un peso en potencia de 3, recorremos desde $3^0$ hasta un $3^i$, donde dicho $3^i$ sea el primero mayor o igual a $P$.\\
-Guardamos dicho valor en una variable denominada $pesaActual$, crearemos un array el cual nombraremos $arrayPesasUtilizadas$, crearemos tambien otra variable $equilibrioActual$ que inicializaremos con el valor de $P$ y por ultimo, un booleano $estaEnNegativo$ con valor Falso.\\
+Una aclaraci\'on previa que ser\'a de utilidad, como se dio como precondicion que la llave puede llegar a tomar el valor hasta $10^{15}$ trabajaremos con variables del tipo long long las cuales nos permitiran llegar hasta dicho valor.\\
 
+Como las pesas, presentan un peso en potencia de 3, creamos una variable denominada $sumaParcial$ como la palabra lo indica iremos sumando las potencias desde $3^0$ hasta un $3^i$, donde dicha suma sea igual al valor de entrada denominado $P$ o en su defecto el inmediato mayor al mismo.\\
 
-Luego, la segunda parte consiste de un ciclo en el cual:\\
+Luego de tener dicha $sumaParcial$ guardada crearemos un array que nombramos $sumasParciales$ de tamaño $i+1$ el cual iniciaremos vacio. Una vez creado el mismo, llenaremos el array con cada una de las sumas parciales desde el valor que finalizo i hasta 0 de la forma que nos quede \textit{sumasParciales[i] = sumaParcial} donde $sumaParcial$ ser\'a \textit{sumaParcial = sumaParcial-$3^{i-1}$}.\\
 
-	Inicialmente, restamos al valor de $equilibrioActual$ el valor que teniamos almacenado anteriormente el cual simboliza a la pesa con valor inmediatamente mayor a $P$ o en su defecto igual a $P$.\\
-	Una vez obtenida dicha diferencia, la cual denominaremos $N$ chequearemos la misma en m\'odulo con ciertos valores:
-	\begin{itemize}
-	\item Si $N$ es igual a 0, eso significa que nuestra diferencia entre el valor inicial y la pesa utilizada presentan el mismo peso, dejamos guardado el valor de la pesa en el array $arrayPesasUtilizadas$ y finalizamos la segunda etapa.
-	\item Si $|N|$ es igual a +-1, eso significa que con agregar la pesa del menor valor que es 1 finalizariamos la etapa sin la necesidad de chequear el resto de las pesas, por lo cual, guardaremos en nuestro array el valor de las dos pesas y finalizamos esta segunda etapa.
-	\item Si $|N|$ es distinto de estos dos n\'umeros pero es menor a $equilibrioActual$, esto significa que todavia no se llego al peso original pero se pudo disminuir por ende pudimos acercarnos al valor que deseamos llegar, por lo cual, agregamos esta pesa al array, restamos el contador para poder realizar la pr\'oxima iteraci\'on y modificamos el valor de $equilibrioActual$ con el valor de N. Adem\'as chequeamos si el valor de N queda por debajo de 0 o no, en caso de quedar debajo cambiamos el valor de $estaEnNegativo$ por Verdadero.
-	\item Si $N$ resulta mayor o igual a $P$ no contaremos esta pesa ya que en vez de acercarnos al valor deseado nos alejamos, por lo tanto restamos el contador para poder realizar la pr\'oxima iteraci\'on.
-	\end{itemize}
-	Adem\'as, chequeamos en cada vuelta de ciclo si el valor de $estaEnNegativo$ es verdadero o falso, en caso de ser verdadero guardamos el valor de la pesa en $pesaActual$ multiplicado por (-1) y de ser falso se guardar\'a con el valor original de la pesa.
+Finalizado esto, realizaremos una busqueda binaria para llevar el valor de p a 0. Para un trabajo m\'as sencillo guardamos el valor inicial de $P$ en la variable $equilibrioActual$ a la cual le iremos restando y/o sumando el valor de nuestras pesas.\\
 
-Una vez finalizada la segunda etapa tendremos en nuestro array las pesas que se colocar\'an en la balanza.\\
-Para saber cuales ir\'an del lado derecho y cual del lado izquierdo realizamos esta tercer etapa, en la cual iremos chequeando en cada \'indice si el valor es positivo o negativo, en caso de que alguno sea negativo esa pesa ir\'a al array $arrayD$ previa multiplicaci\'on de la pesa con (-1), para dejar la pesa con su valor real y original. Mientras tanto, las positivas, ir\'an en el array $arrayI$ para as\'i poder dejar la balanza como se encontraba inicialmente con la llave.\\
+Dicha busqueda binaria la realizaremos en un ciclo que ir\a desde el valor en m\'odulo de equilibrioActual e iteraremos el mismo hasta que sea 0. Luego, como en toda busqueda binaria, trabajaremos con nuestro array $sumasParciales$ chequeando si en la mitad del array nuestra sumaParcial es mayor o igual al valor en m\'odulo de $equilibrioActual$. En caso de que fuese verdadero, chequeamos si el valor de $equilibrioActual$ es mayor o menor a 0. Si es menor a 0, sumaremos nuestra pesa correspondiente al \'indice en el que estamos de nuestro array $sumasParciales$, al valor de $equilibrioActual$ y guardaremos nuestra pesa en el $arrayD$ que simboliza al plato derecho de la balanza. Si es mayor a 0, en vez de sumarla la restamos y la guardamos en el array $arrayI$ que simboliza el otro plato. Siguiendo el razonamiento de la busqueda binaria, volveremos a partir nuestro array en dos y haremos el mismo chequeo.\\
 
-Por ultimo, devolvemos estos array mencionados invirtiendo las posiciones para que los elementos del arreglo queden ordenados de menor a mayor, ya que los mismos por como fue realizado nuestro algoritmo se encuentran de mayor a menor.\\
+En caso de que el valor en m\'odulo de $equilibrioActual$ sea mayor que la mitad de $sumasParciales$ nos quedaremos con la mitad m\'as grande del arreglo e iteraremos nuevamente.\\
+
+Una vez que llegamos a 0 y por consiguiente salimos de dicho ciclo, tendremos nuestras pesas ordenadas de mayor a menor en $arrayD$ y en $arrayI$, bastara con invertir los arreglos para que queden de menor a mayor y devolver los mismos, finalizando as\'i nuestro algoritmo.\\

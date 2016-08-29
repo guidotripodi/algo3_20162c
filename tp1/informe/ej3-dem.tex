@@ -1,0 +1,26 @@
+Supongamos que disponemos de 3 mochilas (el caso con dos solo tiene dos combinaciones). 
+Sean $K_i$ con $i \in M$ y $M$ = 3 los pesos de las mochilas $M_i$ respectivamente. Si $K_i$ = $K_j$ para todo $i \neq j$ $j \in M$ entonces el resultado es trivial y cualquier combinacion da el mismo resultado. \\
+
+Supongamos entonces que $K_3 > K_2 > K_1$ y objetos disponibles para llenar las mochilas. Queremos ver que empezar optimizando por la mochila $M_2$ es igual a empezar optimizando por la más chica en orden. 
+
+Sabemos que en cada paso de optimización se quitan los objetos cargados en la mochila $M_i$ y se continúa optimizando, con lo cual luego del primer paso tendremos menos objetos para cargar y así sucesivamente.
+
+Tengamos en cuenta para empezar que todos los objetos que entran en $M_1$ entran en $M_2$ (tambien en $M_3$) y todo lo que entra en $M_2$ tambien entra en $M_3$ 
+
+Supongamos que queremos optimizar $M_2$, $M_1$, $M_3$:
+
+Si $M_2$ se lleva objetos que entraban en $M_1$, y quedan objetos que NO entran en $M_1$ pero si en $M_3$ o $M_2$ entonces tal vez convenía optimizar $M_1$, $M_2$, $M_3$. Como todos los objetos que entran en $M_2$ entran en $M_3$ si lo que me queda luego de optimizar $M_2$ no entra en $M_3$ entonces la optimización lograda es la mejor y por lo tanto era lo mismo empezar con $M_2$ que con $M_1$ o podría haber obtenido un caso menos optimo.
+
+Supongamos que queremos optimizar $M_2$, $M_3$, $M_1$: 
+
+Si quisieramos optimizar de esta manera, todos los objetos que se lleve $M_2$ entran tambien en $M_3$ por lo tanto cuando optimize $M_3$ podria pasar que no haya objetos que entren en $M_3$ por lo cual aqui terminaria el proceso porque tampoco habria objetos que entren en $M_1$ o podria optimizar con objetos que tambien entren en $M_1$. Luego de optimizar $M_2$ y $M_3$, estas mochilas podrian tener objetos que entren en $M_1$. De esta manera tal vez convenia hacer $M_1$, $M_2$, $M_3$.
+Entonces nuevamente, convenia hacer $M_1$, $M_2$, $M_3$ o bien era lo mismo. 
+
+El caso $M_3$, $M_2$, $M_1$ es el caso usual. Esta puede ser una mala o una buena optimización dependiendo de los objetos considerados. En cada optimización la mochila más grande se llevará lo mejor con la única condición que es la de no exceder su capacidad. En ese proceso las mochilas subsecuentes estarán restringidas a lo que quede en cada paso, pudiendo suceder que lo único que quede para agregar a las mochilas sean objetos que entraban en las mochilas anteriores pero no en la que intentamos optimizar, por lo cual era conveniente invertir el orden de las mochilas. 
+
+De esta manera, si $M_3$ se lleva objetos que entran en $M_2$ y deja objetos que entran en $M_3$ afuera pero mayores a $M_2$, lo más conveniente era hacer $M_2$, $M_3$, $M_1$. Pero ya vimos que si $M_2$ o $M_3$ se llevan algo que entra en $M_1$ dejando objetos que entraban $M_2$ o $M_3$ entonces convenia hacer $M_1$, $M_2$, $M_3$ y si no sucedía esto entonces resulta lo mismo $M_1$, $M_2$, $M_3$ que $M_2$, $M_3$, $M_1$ dado que de cualquier forma todas las mochilas se llevarian todo.
+
+Si consideramos el caso en que $M_3$ se lleva solo objetos que entran en $M_1$ entonces tal vez es conveniente hacer $M_1$, $M_3$, $M_2$, aquí $M_1$ puede dejar objetos con peso menor a si misma o solo objetos que entren en $M_3$ y $M_2$ y aqui sucede lo mismo que antes, con $M_3$ podemos llevarnos objetos que entren en $M_2$ y dejar aquellos con peso menor (pero mayor a $M_2$) que no optimizaban $M_3$ por lo cual tal vez era conveniente invertir el orden de $M_3$ por $M_2$.
+Al final tendriamos que resolver $M_1$, $M_2$, $M_3$ para obtener el mismo resultado o bien era el mismo. 
+
+Por todo lo mencionado, cualquier caso es peor o igual a resolver $M_1$, $M_2$, $M_3$, por lo tanto siempre nos restringimos a analizar ese caso dado que siempre obtendremos una solución optima mejor o igual a cualquier otro caso.
