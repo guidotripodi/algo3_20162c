@@ -2,7 +2,7 @@
 \contentsline {subsection}{\numberline {1.1}Descripci\'on de problema}{3}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Explicaci\'on de resoluci\'on del problema}{3}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Algoritmos}{3}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}An\'alisis de complejidades}{3}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.4}An\'alisis de complejidades}{4}{subsection.1.4}
 \contentsline {subsection}{\numberline {1.5}Experimientos y conclusiones}{4}{subsection.1.5}
 \contentsline {subsubsection}{\numberline {1.5.1}1.5}{4}{subsubsection.1.5.1}
 \contentsline {subsubsection}{\numberline {1.5.2}1.5}{5}{subsubsection.1.5.2}
