@@ -1,7 +1,7 @@
 
 Nuestro algoritmo como mencionamos anteriormente presenta 3 ciclos predominantes de los cuales uno corresponde a la busqueda binaria.\\
 El primero de ellos consta en recorrer desde $3^0$ hasta $3^i$ donde la suma de estos sea igual a $P$ o en su defecto el inmediato mayor. Por lo tanto, como la suma se realiza en O(1), mostraremos que recorrer hasta un i donde la suma de dichos valores sea igual o inmediatamente mayor a P es menor o igual a $\sqrt{P}$.\\
-  
+
 Si $i = 0$ $\Rightarrow$ terminamos.\\
 Luego sea $3^i \geq P \geq 3^{i-1}$ con $i > 0$. Queremos ver que $i \leq \sqrt{P}$:\\
 Sabemos que $P \geq 3^{i-1}$ $\Rightarrow$ $\sqrt{P} \geq \sqrt{3^{i-1}}$\\

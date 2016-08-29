@@ -1,0 +1,72 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=2cm, top=2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[spanish]{babel}
+\usepackage{aed2-symb,aed2-itef,aed2-tad,aed2-tokenizer}
+\usepackage{newalgo}
+\usepackage{interfaz}
+\usepackage{caratula}
+\newcommand{\comment}[1]{}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}
+\usepackage[colorlinks,citecolor=black,filecolor=black,linkcolor=black,    urlcolor=black]{hyperref}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+\let\state\State
+\let\while\While
+\let\endwhile\EndWhile
+%\let\if\If
+\let\endif\EndIf
+%\let\else\Else
+\let\elseif\ElsIf
+
+
+\titulo{Trabajo Pr\'actico Diseño}
+\materia{Algoritmos y Estructura de Datos III}
+\grupo{Grupo 1}
+\integrante{}{}{}
+\integrante{}{}{}
+\integrante{Shaurli, Tomas}{671/10}{atshaurli@gmail.com}
+\integrante{Tripodi, Guido}{843/10}{guido.tripodi@hotmail.com}
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Ejercicio 1} 
+\subsection{Interfaz}
+\input{arbolCategorias-int}
+\subsection{Representaci\'on}
+\input{arbolCategorias-rep}
+\subsection{Algoritmos}
+\input{arbolCategorias-alg}
+\subsection{Analisis de complejidades}
+\input{arbolCategorias-com}
+
+\section{Ejercicio 1} 
+\subsection{Interfaz}
+\input{arbolCategorias-int}
+\subsection{Representaci\'on}
+\input{arbolCategorias-rep}
+\subsection{Algoritmos}
+\input{arbolCategorias-alg}
+\subsection{Analisis de complejidades}
+\input{arbolCategorias-com}
+
+\section{Ejercicio 1} 
+\subsection{Interfaz}
+\input{arbolCategorias-int}
+\subsection{Representaci\'on}
+\input{arbolCategorias-rep}
+\subsection{Algoritmos}
+\input{arbolCategorias-alg}
+\subsection{Analisis de complejidades}
+\input{arbolCategorias-com}
+ 
+\newpage
+\end{document}

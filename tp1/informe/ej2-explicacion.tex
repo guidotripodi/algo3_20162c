@@ -2,7 +2,7 @@
 Para solucionar este problema y poder quitar la llave y dejar equilibrado como se encontraba anteriormente realizamos un algoritmo el cual se encuentra dividido en tres partes, la primera realiza lo siguiente:\\
 
 Una aclaraci\'on previa que ser\'a de utilidad, como se dio como precondicion que la llave puede llegar a tomar el valor hasta $10^{15}$ trabajaremos con variables del tipo long long las cuales nos permitiran llegar hasta dicho valor.\\
- 
+
 Como las pesas, presentan un peso en potencia de 3, creamos una variable denominada $sumaParcial$ como la palabra lo indica iremos sumando las potencias desde $3^0$ hasta un $3^i$, donde dicha suma sea igual al valor de entrada denominado $P$ o en su defecto el inmediato mayor al mismo.\\
 
 Luego de tener dicha $sumaParcial$ guardada crearemos un array que nombramos $sumasParciales$ de tamaño $i+1$ el cual iniciaremos vacio. Una vez creado el mismo, llenaremos el array con cada una de las sumas parciales desde el valor que finalizo i hasta 0 de la forma que nos quede \textit{sumasParciales[i] = sumaParcial} donde $sumaParcial$ ser\'a \textit{sumaParcial = sumaParcial-$3^{i-1}$}.\\
