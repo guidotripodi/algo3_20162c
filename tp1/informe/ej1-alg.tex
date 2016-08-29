@@ -1,25 +1,135 @@
+\begin{algorithm}[H]
+\caption{CRUZANDO EL PUENTE}
+\begin{algorithmic}[1]
+\Function{EJ1}{\param{in}{ }{Integer}, \param{in}{ }{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
+\state creo bool exitoBackPar con valor verdadero \hfill //O(1)
+\state creo bool exitoBackLampara con valor verdadero \hfill //O(1)
+\while{exitoBackLampara $\vee$ exitoBackPar} \hfill //O(N??)
+\If{tienenLampara} \hfill //O(1)
+\state par $\gets$ parPosible() \hfill //O(???)
+\If{par > -1} \hfill //O(1)
+\state funcion enviarPar(par) \hfill //O(??)
+\Else
+\state exitoBackLampara $\gets$ backtrackRetorno(farolero) \hfill //O(??)
+\endif
+\Else
+\state farolero $\gets$ retornoPosible \hfill //O(N?)
+\If{farolero > -1} \hfill //O(1)
+\state retornarLampara(farolero) \hfill //O(??)
+\Else
+\state exitoBackPar $\gets$ backtrackPar(par) \hfill //O(??)
+\endif
+\endif
+\If{pasaronTodos()} \hfill //O(1)
+\state guardarTiempo() \hfill //O(??)
+\endif
+\endwhile
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{??}
+\end{algorithm}
 
-ACA VA EL PSEUDOCODIGO
-LA IDEA DE USAR ESTA MACRO ESTA BUENA PORQUE YA PODEMOS IR PONIENDO LA COMPLEJIDAD
-Y DSP CUANDO NOS TOQUE HACER LA DEMOSTRACION SALE MAS FACIL
 
 \begin{algorithm}[H]
 \caption{CRUZANDO EL PUENTE}
 \begin{algorithmic}[1]
-\Function{minimoTiepoDeCruce}{\param{in}{cableSize}{Integer}, \param{in}{stationDistances}{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
-\state List<Integer> distanceDifferences $\gets$ List<Integer>(vacio) \hfill //O(1)
-\state Integer lastStation $\gets$ 0 \hfill //O(1)
-\state Integer distance $\gets$ 0 \hfill //O(1)
-\while{i < stationDistances} \hfill //O(N)
-\state distance $\gets$ stationDistances \hfill //O(1)
-\state distanceDifferences.Agregar(distance - lastStation) \hfill //O(1)
-\state lastStation $\gets$ distance \hfill //O(1)
-\state i++ \hfill //O(1)
+\Function{Algoritmo Principal}{\param{in}{ }{Integer},\param{in}{ }{Integer}, \param{in}{ }{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
+\state creo bool exitoBackPar con valor verdadero \hfill //O(1)
+\state creo bool exitoBackLampara con valor verdadero \hfill //O(1)
+\while{exitoBackLampara $\vee$ exitoBackPar} \hfill //O(N??)
+\If{pasaronTodos(escenario)} \hfill //O(1)
+
+\If{escenario.tiempo < minimo $\vee$ minimo == -1} \hfill //O(1)
+\state minimo $\gets$ escenario.tiempo \hfill //O(1)
+\endif
+\state sol++  \hfill //O(1)
+\endif
+
+\state exitoBackPar $\gets$ verdadero \hfill //O(1)
+\state exitoBackLampara $\gets$ verdadero \hfill //O(1)
+
+\If{escenario.tienenLampara} \hfill //O(1)
+\state creo entero par con escenario.parPosible() \hfill //O(??)
+
+\If{par > -1 $\wedge$ (minimo == -1 $\vee$ escenario.tiempo < minimo)} \hfill //O(1)
+\state escenario.printPar(par) \hfill //O(??)
+\state escenario.enviarPar(par) \hfill //O(??)
+\Else
+\state exitoBackLampara $\gets$ escenario.backtrackFarolero() \hfill //O(??)
+\endif
+
+
+\Else
+\state creo entero farolero con faroleroPosible(escenario) \hfill //O(N?)
+\If{farolero>-1 $\wedge$ (minimo == -1 $\vee$ escenario.tiempo < minimo} \hfill //O(1)
+\state escenario.printPersona(farolero) \hfill //O(??)
+\state escenario.enviarFarolero(farolero) \hfill //O(??)
+
+\Else
+\state exitoBackPar $\gets$ escenario.backtrackPar() \hfill //O(??)
+\endif
+\endif
 \endwhile
-\state res $\gets$ getMaxRangeLength(cableSize, distanceDifferences) \hfill //O(N)
 \EndFunction 
 \end{algorithmic}
 \hrule
-\complejidad{n}
+\complejidad{??}
 \end{algorithm}
 
+//ESTOS DOS PUEDEN NO IR
+//ESTOS DOS PUEDEN NO IR
+//ESTOS DOS PUEDEN NO IR
+
+\begin{algorithm}[H]
+\caption{CRUZANDO EL PUENTE}
+\begin{algorithmic}[1]
+\Function{parPosible}{}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
+\state creo entero parEvaluar con parActual$\_$x$\_$paso[paso] + 1 \hfill //O(1)
+\state creo entero tot$\_$pares con arq$\_$totales*can$\_$totales \hfill //O(1)
+\while{$\neq$parValido(parEvaluar) $\wedge$ parEvaluar $\leq$ tot$\_$pares} \hfill //O(N??)
+\state parEvaluar++ \hfill //O(1)
+\endwhile
+\If{parEvaluar $\leq$ tot$\_$pares} \hfill //O(1)
+\state devolver  parEvaluar \hfill //O(1)
+\Else
+\state devolver -1 \hfill //O(1)
+\endif
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{N??}
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+\caption{CRUZANDO EL PUENTE}
+\begin{algorithmic}[1]
+\Function{parValido}{}{\param{in}{par}{Bool}$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
+\state creo entero aux$\_$arq$\_$destino con aux$\_$arq$\_$destino \hfill //O(1)
+\state creo entero aux$\_$can$\_$destino con can$\_$destino \hfill //O(1)
+\If{par > arq$\_$totales $\ast$ can$\_$totales} \hfill //O(1)
+\state devolver  falso \hfill //O(1)
+\endif
+\state creo a con primero(par) \hfill //O(1)
+\state creo b con segundo(par) \hfill //O(1)
+\If{$\neq$((esCanibal(a) $\vee$ esArquitecto(a)) $\wedge$  (esCanibal(b) $\vee$ esArquitecto(b)))} \hfill //O(1)
+\state devolver  falso \hfill //O(1)
+\endif
+\state aux$\_$can$\_$destino $\gets$  esCanibal(a) $\wedge$ canibal$\_$origen[a] \hfill //O(1)
+\state aux$\_$arq$\_$destino $\gets$  esArquitecto(a) $\wedge$ arquitecto$\_$origen[a] \hfill //O(1)
+\state aux$\_$can$\_$destino $\gets$  esCanibal(b) $\wedge$ canibal$\_$origen[b] \hfill //O(1)
+\state aux$\_$arq$\_$destino $\gets$  esArquitecto(b) $\wedge$ arquitecto$\_$origen[b] \hfill //O(1)
+\state creo arq$\_$origen con arq$\_$totales - aux$\_$arq$\_$destino \hfill //O(1)
+\state creo can$\_$origen con can$\_$totales - aux$\_$can$\_$destino \hfill //O(1)
+\If{arq$\_$origen $\geq$ can$\_$origen $\wedge$ arq$\_$destino $\geq$ can$\_$destino} \hfill //O(1)
+\state devolver  verdadero \hfill //O(1)
+\Else
+\state devolver  falso \hfill //O(1)
+\endif
+
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{???}
+\end{algorithm}
