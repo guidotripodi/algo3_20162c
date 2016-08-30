@@ -2,6 +2,38 @@
 #include <math.h>
 #include <stdlib.h>
 
+struct KnapSackMaxForObject {
+    int M3;
+    int M2;
+    int M1;
+
+    KnapSackMaxForObject() : M3(0),M2(0),M1(0) {}
+    //pre: M3 >= M2 >= M1
+    //pre: M == 3 or M == 2
+    void create(int *knapSacksCapacities, int M, int objectValue, int objectWeight)
+    {
+        int kM3 = 0;
+        int kM2 = 0;
+        int kM1 = 0;
+        
+        kM2 = knapSacksCapacities[1];
+        kM1 = knapSacksCapacities[0];
+        
+        if(M == 3){
+            kM3 = knapSacksCapacities[2];
+            M3 = objectValue;
+        }
+        
+        if(kM2 >= objectWeight){
+            M2 = objectValue;
+            
+            if(kM1 >= objectWeight){
+                M1 = objectValue;
+            }
+        }
+    }
+};
+
 int max(int a, int b){
     return (a > b) ? a : b;
 }
@@ -197,18 +229,118 @@ void multipleKnapSackProblem(int M, int N, int *knapSacksCapacities, int *object
     
     printf("\n total value: %d \n", totalValue);
     
+    for(int i = 0; i < N; i++)
+        delete [] objectsInfo[i];
+
     delete [] objectsInfo;
+}
+
+int calculateMaxForKnapSackWithKof(int kM, int i, KnapSackMaxForObject *maxObjecti, int N, int *objectsValues, int *objectsWeights){
+    int totalValue = objectsValues[i];
+    int objectWeight = objectsWeights[i];
+    
+    int restWeight = kM - objectWeight;
+    //voy a iterar desde el peso que me sobra hasta 1 buscando cuanto es lo maximo que puedo sumar llenando con objetos de pesos desde restWeight hasta 1.
+    //cuando restWeight decremente es posible que pueda meter mas de un objeto con ese nuevo peso de sobra.
+    for (int z = restWeight; z > 0; z--) {
+        int maxProfitForRestWeight = 0;
+        
+        int untilObjectWeightWereFilled = restWeight;
+        int j = 0;
+        while (untilObjectWeightWereFilled+objectWeight <= kM){
+            int maxValueFoundForRestWeight = 0;
+            
+            //busco un objeto que maximize el valor para el peso que me sobra
+            //notar que puedo buscar varios objetos para ese peso restante porque a medida que voy decrementando restWeight
+            //hay posibilidades de meter mas de un objeto de ese peso. Asi que se conserva j para continuar desde j+1 encontrado
+            while (j < N) {
+                int iteratedWeight = objectsWeights[j];
+                int iteratedValue = objectsValues[j];
+                //busco el maximo para ese peso restante
+                if (j != i && iteratedWeight == restWeight && iteratedValue > maxValueFoundForRestWeight) {
+                    maxValueFoundForRestWeight = iteratedValue;
+                }
+                j++;
+            }
+            
+            if (maxValueFoundForRestWeight) {
+                maxProfitForRestWeight+=maxValueFoundForRestWeight;
+                //si todavia no lleno la mochila sigo buscando
+                untilObjectWeightWereFilled+=restWeight;
+            }else {
+                //invalido la guarda: finalizo el ciclo porque no encontre ningun valor para ese peso restante
+                untilObjectWeightWereFilled = kM;
+            }
+        }
+        
+        if (maxProfitForRestWeight > totalValue) {
+            totalValue = maxProfitForRestWeight; //guardo el mejor beneficio para esa mochila calculado con el resto actual
+        }
+    }
+    
+    printf("object (%d, %d) maximize with value %d for knapsack %d kg \n\n", objectsValues[i], objectsWeights[i], totalValue, kM);
+    
+    return totalValue;
+}
+
+void realMultipleKnapSackProblem(int M, int N, int *knapSacksCapacities, int *objectsValues, int *objectsWeights){
+    
+    // Asumo para hacer mas simple por ahora que las mochilas vienen ordenadas por peso, lo mismo los objetos de menor a mayor.
+    // Y que las clases son resueltas antes de esta llamada. Por lo tanto N es el TOTAL de objetos.
+    
+    KnapSackMaxForObject **objectsCalculation = new KnapSackMaxForObject*[N];
+    
+    int *objectsUsed = new int[N]; // deberia inciializar en 0 (false)
+
+    for(int i = 0; i < N; i++){
+        // la diferencia con new ObjectWithKnapSacksStr; es que con parentisis inicializa atributos.
+        KnapSackMaxForObject *maxObjecti = new KnapSackMaxForObject();
+        maxObjecti->create(knapSacksCapacities, M, objectsValues[i], objectsWeights[i]);
+        objectsCalculation[i] = maxObjecti;
+    }
+    
+    for(int i = 0; i < N; i++){
+        KnapSackMaxForObject *maxObjecti = objectsCalculation[i];
+        
+        int objectWeight = objectsWeights[i];
+        
+        int kM3 = 0;
+        int kM2 = 0;
+        int kM1 = 0;
+        
+        // M == 3 or M == 2
+        if (M == 3) {
+            kM3 = knapSacksCapacities[2];
+        }
+        
+        kM2 = knapSacksCapacities[1];
+        kM1 = knapSacksCapacities[0];
+        
+        if (kM3 >= objectWeight) {
+            maxObjecti->M3 = calculateMaxForKnapSackWithKof(kM3, i, maxObjecti, N, objectsValues, objectsWeights);
+        }
+        
+        if (kM2 >= objectWeight) {
+            maxObjecti->M2 = calculateMaxForKnapSackWithKof(kM2, i, maxObjecti, N, objectsValues, objectsWeights);
+        }
+        
+        if (kM1 >= objectWeight) {
+            maxObjecti->M1 = calculateMaxForKnapSackWithKof(kM1, i, maxObjecti, N, objectsValues, objectsWeights);
+        }
+    }
 }
 
 int main(){
     
-    int knapSacks[] = {3, 5, 12};
+    int knapSacks[] = {3, 5, 7};
     
     int values[] = {7, 3, 5, 5, 7};
     
     int weights[] = {2, 3, 3, 5, 7};
     
-    multipleKnapSackProblem(3, 5, knapSacks, values, weights);
+    //multipleKnapSackProblem(3, 5, knapSacks, values, weights);
+    
+    realMultipleKnapSackProblem(3, 5, knapSacks, values, weights);
     
 	return 0;
 }
