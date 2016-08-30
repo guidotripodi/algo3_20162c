@@ -36,16 +36,16 @@ void Escenario::printPar(int par) const
 
 	if (this->isCanibal(a))
 	{
-	//	cout <<"[C"<<a-this->cant_arqueologos_ladoA-this->cant_arqueologos_ladoB<<" ";
+		cout <<"[C"<<a-this->cant_arqueologos_ladoA-this->cant_arqueologos_ladoB<<" ";
 	}else{
-	//	cout <<"[A"<<a<<" ";
+		cout <<"[A"<<a<<" ";
 	}
 
 	if (this->isCanibal(b))
 	{
-	//	cout << "C"<<b-this->cant_arqueologos_ladoA-this->cant_arqueologos_ladoB<<"]";
+		cout << "C"<<b-this->cant_arqueologos_ladoA-this->cant_arqueologos_ladoB<<"]";
 	}else{
-	//	cout << "A"<<b<<"]";
+		cout << "A"<<b<<"]";
 	}
 }
 
@@ -54,16 +54,16 @@ void Escenario::printPersona(int a) const
 
 	if (this->isCanibal(a))
 	{
-	//	cout << "C"<<a - (this->cant_arqueologos_ladoA + this->cant_arqueologos_ladoB);
+		cout << "C"<<a - (this->cant_arqueologos_ladoA + this->cant_arqueologos_ladoB);
 	}else{
-	//	cout << "A"<<a;
+		cout << "A"<<a;
 	}
 
 }
 
 void Escenario::printStatus() const
 {
-	//cout<<"\tEscenario\n\t Islas       |\tA \tB\n\t canibales   |\t"<<this->cant_canibales_ladoA <<"\t"<<this->cant_canibales_ladoB<<"\n\t arqueologos |\t"<<this->cant_arqueologos_ladoA<<"\t"<<this->cant_arqueologos_ladoB<<"\n\n";
+	cout<<"\tEscenario\n\t Islas       |\tA \tB\n\t canibales   |\t"<<this->cant_canibales_ladoA <<"\t"<<this->cant_canibales_ladoB<<"\n\t arqueologos |\t"<<this->cant_arqueologos_ladoA<<"\t"<<this->cant_arqueologos_ladoB<<"\n\n";
 
 }
 
@@ -170,7 +170,7 @@ Escenario::Escenario(const int cantA, const int cantC, const int * tiempos_arque
 
 
 	//A cada paso lo inicializo en 0 simbolizando que ninguna pareja valida ni persona fue evaluada
-	//cout<<"Pares:"<<this->pares_totales<< "\n";
+	cout<<"Pares:"<<this->pares_totales<< "\n";
 	for (int i = 0; i < this->pares_totales; i++)
 	{
 		i=this->sigPar();
@@ -394,7 +394,7 @@ int Escenario::sigPar() const{
 	int par = this->eleccion_x_paso[this->paso] + 1;
 	int a  = this->primero(par);
 	int b  = this->segundo(par);
-	//cout <<par<< " a: " << a << " b: " << b<<"\n";
+	cout <<par<< " a: " << a << " b: " << b<<"\n";
 	if (b>a)
 	{			
 		return par;
@@ -402,5 +402,3 @@ int Escenario::sigPar() const{
 		return (a + 1 ) * (a + 1 ) + a * (this->personas_totales);
 	}
 }
-
-
