@@ -1,5 +1,5 @@
-//#include "ejercicio2.cpp"
 #include "balanza.h"
+#include "tests.cpp"
 #include <iostream>
 #include <string.h>
 #include <sstream>
@@ -10,8 +10,15 @@ int main(int argc, char* argv[]){
 	if(argc > 1){
 		if(strcmp(argv[1], "test") == 0){
 			//tests
+			test3i();
+			testPSumaDePotencias();
+			testPnumerosPares();
+			testPnumerosImpares();
+			test_random();
 		} else{
-			printf("Bad input\n");
+			printf("Modo de uso:\n");
+			printf("	./ej2 (Toma la entrada por stdin)\n");
+			printf("	./ej2 test (Corre las funciones de test)\n");
 		}
 	} else{
 		//toma un valor de stdin y lo procesa

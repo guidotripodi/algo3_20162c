@@ -1,6 +1,6 @@
  #include "balanza.h"
 
-Balanza::Balanza(int peso){
+Balanza::Balanza(long long peso){
 	p = peso;
 	cant_pesas = (int) sqrt(p) + 1; // valor tentativo
 	platoIzquierdo = new long long[cant_pesas];
