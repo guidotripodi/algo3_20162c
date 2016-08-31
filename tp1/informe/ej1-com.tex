@@ -1,3 +1,18 @@
 \vspace*{1em}
 
-ACA IRIA LOS COMENTARIOS DE COMPLEJIDAD Y LA DEMOSTRACION
+Realizando pasos 2-1, cada solución construída tendrá a lo sumo n-1 pasos, siendo n la cantidad total de personas en la comitiva.\\
+
+En el primer paso se analizan $\binom  {n} {2}$ parejas posibles a enviar y por cada una de ellas se eligirá de entre 2 personas para ser el farlero.\\
+
+En el segundo paso se tendran $\binom  {n-1} {2}$ parejas posibles y 3 faroleros para elegir.\\
+
+Para el (i)-esimo paso se tendrán $\binom  {n-i-1} {2}$ parejas e i+1 faroleros.\\
+
+Siendo que el segundo paso se ejecuta $\binom  {n} {2}$ veces, el tercero $\binom  {n} {2} \binom{n-1} {2}.3$, podemos ver que en combinación, todos los pasos demandarían:
+\[
+\prod_{i=0}^{n-1}\binom {n-i-1}{2}*(i+1) = \prod_{i=0}^{n-1}\binom {n-i-1}{2} * \prod_{i=0}^{n-1}(i+1)
+\]
+
+\[
+n! * \prod_{i=0}^{n-1}\binom {n-i-1}{2} = n! \prod_{i=0}^{n-1}\frac{(n-i-1)*(n-i-2)}{2} \leq \frac{n!^{3}}{2^{n}} 
+\]
