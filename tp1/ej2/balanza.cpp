@@ -1,101 +1,37 @@
-#include <stdio.h>
-#include <stdlib.h> // abs (modulo)
-#include <math.h> // sqrt y potencia
-#include "balanza.h"
-//con el mismo razonamiento que en la demo las pesas usadas son siempre menos que raiz de P
+ #include "balanza.h"
 
-//crea una balanza, en lo posible inmutable
-//Al crearse resuelve el problema
-Balanza::Balanza(int p){
-	peso_llave = p;
-	cant_pesas = (int) sqrt(peso_llave) + 1; // valor tentativo
-	pesasUtilizadas = new int[cant_pesas];
-	platoIzquierdo = new int[cant_pesas];
-	platoDerecho = new int[cant_pesas];
-	size_izq = 0;
-	size_der = 0;
+Balanza::Balanza(long long peso){
+	p = peso;
+	cant_pesas = (int) sqrt(p) + 1; // valor tentativo
+	platoIzquierdo = new long long[cant_pesas];
+	platoDerecho = new long long[cant_pesas];
+	sizeIzq = 0;
+	sizeDer = 0;
 	balancear();
 }
 
 Balanza::~Balanza(){
-	delete[] pesasUtilizadas;
 	delete[] platoDerecho;
 	delete[] platoIzquierdo;
 }
 
-void Balanza::balancear(){
-	int equilibrioActual = peso_llave;
-	// La primera potencia mayor que p
-	int i = 0;
-	while( pow(3,i) < peso_llave ) i++;
-	
-	int j = 0; //itera el array de pesas utilizadas
-	bool estaEnNegativo = false;
-	int pesaActual = pow(3, i);
-	int n = equilibrioActual - pesaActual;
-	int pesaUno = 1;
-	for( bool terminar = false; !terminar; ){
-	
-		if( n == 0 ){
-			pesasUtilizadas[j] = pesaActual;
-			terminar = true;
-			cant_pesas = j+1;
-		} else if( abs(n) == 1 ){
-			pesasUtilizadas[j] = pesaActual;
-			if( n < 0 ){
-				pesasUtilizadas[j+1] = -1;//-1 si o si??
-			} else{
-				pesasUtilizadas[j+1] = 1;
-			}
-			cant_pesas = j+2;
-			terminar = true;
-		} else if( abs(n) > 1 && abs(n) < abs(equilibrioActual) ){
-			//agrego una pesa y sigo loopeando
-			//printf("n == 0\n");
-			pesasUtilizadas[j] = pesaActual;
-			j++;
-			i--;
-			equilibrioActual = n;
-			estaEnNegativo = n < 0; //se setea true si n menor 0
-		} else if( abs(n) >= equilibrioActual ){
-			//La pesa que trate de usar es muy grande
-			i--;
-		}
-		if( estaEnNegativo ){
-			pesaActual = pow(3,i) * -1;
-			pesaUno = pow(3,0) * -1; 
-		} else{
-			pesaActual = pow(3, i);
-			pesaUno = pow(3, 0);
-		}
-		n = equilibrioActual - pesaActual;
+//void Balanza::imprimir(long long* derecho, long long* izquierdo, int sizeDer, int sizeIzq){
+
+void Balanza::imprimir(FILE* doc){
+	fprintf(doc, "%lld %lld \n",sizeIzq, sizeDer);
+	for( int i = 0; i < sizeIzq; i++ ){
+		fprintf(doc, "%lld ", platoIzquierdo[i]);
 	}
-	armadoBalanza();
+	fprintf(doc, "\n");
+	for( int j = 0; j < sizeDer; j++ ){
+		fprintf(doc, "%lld ", platoDerecho[j]);
+	}
+	fprintf(doc, "\n");
 }
 
-void Balanza::armadoBalanza(){//O(sqrt(p))
-	int x = 0;
-	int i = 0;
-	int j = 0;
-	while( x < cant_pesas ){//pesasUtilizadas.size
-		if( pesasUtilizadas[x] < 0 ){
-			platoDerecho[i] = pesasUtilizadas[x] * -1;
-			i++;
-		} else{
-			platoIzquierdo[j] = pesasUtilizadas[x];
-			j++;
-		}
-		x++;
-	}
-	size_izq = j;
-	size_der = i;
-	invertir(platoDerecho, size_der);
-	invertir(platoIzquierdo, size_izq);
-}
-
-void Balanza::invertir(int* arreglo, int size){
+void Balanza::invertir(long long* arreglo, int size){
 	if( size < 2 ) return;
-	int temp; 
+	long long temp; 
 	for( int i = 0; i < size/2 ; i++ ){
 		temp = arreglo[i];
 		arreglo[i] = arreglo[size - i - 1];
@@ -103,14 +39,67 @@ void Balanza::invertir(int* arreglo, int size){
 	}
 }
 
-void Balanza::imprimir(){
-	printf("%d %d\n",this->size_izq, this->size_der);
-	for( int i = 0; i < size_izq; i++ ){
-		printf("%d ", platoIzquierdo[i]);
-	}
-	printf("\n");
-	for( int j = 0; j < size_der; j++ ){
-		printf("%d ", platoDerecho[j]);
-	}
-	printf("\n");
+void Balanza::balancear(){
+    
+	long long  equilibrioActual = p;
+	// obtengo la ultima suma parcial junto con el exponente de la ultima potencia
+    long long  i = 0;
+    long long  sumaParcial = 0;
+    while( sumaParcial < p ) {
+        sumaParcial+= pow(3,i);
+        i++;
+    };
+    
+    long long  size = i+1; // mas uno para el 0
+    
+    long long  sumasParciales[size];
+    
+    // armo el arreglo de sumas parciales
+    while (i >= 0) {
+        sumasParciales[i] = sumaParcial;
+		// -1 porque el exponente termina en +1 en el while anterior
+        sumaParcial=(sumaParcial-pow(3,i-1));
+        i--;
+    }
+    
+    long long  middle = (size)/2;
+	//long long platoDerecho[size];
+	//long long platoIzquierdo[size];
+	int j = 0;
+	int k = 0;
+
+    while (llabs(equilibrioActual) > 0) {
+        if (sumasParciales[middle] >= llabs(equilibrioActual) &&
+				sumasParciales[middle-1] < llabs(equilibrioActual)) {
+
+            long long  potencia = sumasParciales[middle]-sumasParciales[middle-1];
+            if (equilibrioActual < 0) {
+                equilibrioActual = potencia + equilibrioActual;
+                platoDerecho[j] = potencia;
+				j++;
+				//printf("plato derecho %lld \n", potencia);
+            }else {
+                equilibrioActual = equilibrioActual - potencia;
+				platoIzquierdo[k] = potencia;
+				k++;
+                //printf("plato izquierdo %lld \n", potencia);
+            }
+            
+            // me voy al intervalo mas chico
+            size = middle;
+            middle = middle/2;
+        }else if (sumasParciales[middle] < llabs(equilibrioActual)) {
+            // estoy muy adentro, voy mas afuera
+            middle = (middle+(size))/2;
+        }else if (sumasParciales[middle-1] >= llabs(equilibrioActual)) {
+            // estoy muy afuera, voy mas adentro
+            size = middle;
+            middle = (middle)/2;
+        }
+    }
+	sizeDer = j;
+	sizeIzq = k;
+	invertir(platoDerecho, sizeDer);
+	invertir(platoIzquierdo, sizeIzq);
 }
+

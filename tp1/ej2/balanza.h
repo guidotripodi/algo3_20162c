@@ -1,31 +1,25 @@
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h> // abs (modulo)
 
 class Balanza{
 	public:
 		//inicializacion es O(sqrt(p)) si no es todo una mentira
-		Balanza(int p); 
+		Balanza(long long p); 
 		~Balanza();
-		void imprimir(); //o recargo el operador?	
+		void imprimir(FILE*); 
+		//puedo imprimir por consola o a un archivo
 	
 	private:
-		void armadoBalanza();
+		//void armadoBalanza();
 		void balancear();
-		int peso_llave;
+		long long p;
 		
-		//arrays? necesita ser armado medio dinamico esto
-		//en caso de hacerllo con arreglos normales de C
-		//necesito las siguientes variables
-		//tamaño varia con la llave
-		
-		void invertir(int* arreglo, int size);
-		int cant_pesas;
-		int *pesasUtilizadas;
-		int *platoDerecho;
-		int *platoIzquierdo;
-		int size_der;
-		int size_izq;
+		void invertir(long long* arreglo, int size);
+		long long cant_pesas;
+		long long *platoDerecho;
+		long long  *platoIzquierdo;
+		long long sizeDer;
+		long long sizeIzq;
 
-		//sino listas enlazadas con iteradores
-		//mas bonito, pero bastante laburo
 };
