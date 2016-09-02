@@ -129,3 +129,34 @@ int j,x,h;
 	}
 	i++;
 	}
+
+}
+
+
+/* TIEMPO */
+
+/* COMPLEJIDAD */
+
+void complejidad(){
+	int i,x,j,l,h,x;
+	l = 0;
+	while(l < 6){
+		h = 0;
+		while(h < 6){
+			x = 0;
+			while(x < 6){
+				i = 0;
+				while(i < 6){
+					j = 0;
+					while(j < i)
+						j++;
+					}
+				i++;
+			}
+			x++;
+		}
+		h++;
+	}
+	l++;
+}
+
