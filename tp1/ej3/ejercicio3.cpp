@@ -10,6 +10,7 @@ int M = 0;
 int N = 0;
 int *objectsWeights = NULL;
 int *objectsValues = NULL;
+bool *objectsUsed = NULL;
 int *knapSacksCapacities = NULL;
 int**** objects3dMatrices = NULL;
 int*** objects2dMatrices = NULL;
@@ -18,10 +19,10 @@ int max(int a, int b){
     return (a > b) ? a : b;
 }
 
-void simpleKnapSackProblem() {
+int simpleKnapSackProblem(int knapsack) {
     int i, w;
     
-    int knapSackCapacity = knapSacksCapacities[M];
+    int knapSackCapacity = knapSacksCapacities[knapsack];
     
     int K[N][knapSackCapacity + 1]; // la mochila con peso 0 es para finalizar
     
@@ -29,7 +30,7 @@ void simpleKnapSackProblem() {
         for (w = 0; w <= knapSackCapacity; w++) {
             if (w == 0){
                 K[i][w] = 0;
-            }else if (objectsWeights[i] <= w){
+            }else if (objectsWeights[i] <= w && objectsUsed[i] == false){
                 // condiciones adicionales: que esta mochila maximize para el objeto, y que no se haya usado en otra que tambien maximize
                 if (i == 0) {
                     K[i][w] = objectsValues[i];
@@ -37,7 +38,7 @@ void simpleKnapSackProblem() {
                     K[i][w] = max(objectsValues[i] + K[i - 1][w - objectsWeights[i]], K[i - 1][w]);
                 }
             }else {
-                //entra acá si no habia espacio o el objeto no me convenia meterlo en la mochila knapsack
+                //entra acá si no habia espacio o el objeto ya fue usado
                 if (i == 0) {
                     K[i][w] = 0;
                 }else {
@@ -57,10 +58,12 @@ void simpleKnapSackProblem() {
             actualCol=-1;
         }else if (actualRow == 0) {
             if (K[actualRow][actualCol]) {
+                objectsUsed[actualRow] = true;
                 printf("used object (%d, %d) \n", objectsValues[actualRow], objectsWeights[actualRow]);
             }
             actualRow=-1;
         }else if (K[actualRow-1][actualCol] != K[actualRow][actualCol]) {
+            objectsUsed[actualRow] = true;
             printf("used object (%d, %d) \n", objectsValues[actualRow], objectsWeights[actualRow]);
             actualCol = abs(actualCol-objectsWeights[actualRow]); // por si acaso, valor absoluto.
             actualRow--;
@@ -71,7 +74,11 @@ void simpleKnapSackProblem() {
     
     printf("} \n");
     
-    printf("maximo logrado %d", K[N-1][knapSackCapacity]);
+    int max = K[N-1][knapSackCapacity];
+    
+    printf("maximo logrado %d en mochila %d \n", max, knapsack+1);
+    
+    return max;
 }
 
 void create3dMatrices() {
@@ -374,6 +381,14 @@ void bidimentionalKnapSackProblem() {
     printf("maximo logrado %d \n", max);
 }
 
+void initArrOfObjectsUsed() {
+    objectsUsed = new bool[N];
+    
+    for(int i = 0; i < N; i++) {
+        objectsUsed[i] = false;
+    }
+}
+
 int main(){
     
     int knapSacks[] = {3, 5, 7};
@@ -393,11 +408,18 @@ int main(){
     knapSacksCapacities = knapSacks;
     
     if (M == 1) {
-        simpleKnapSackProblem();
+        initArrOfObjectsUsed();
+        simpleKnapSackProblem(0);
     }else if (M == 2) {
         if (knapSacksCapacities[0] == knapSacksCapacities[1]) {
             //habria que calcular dos veces el simple.....pero para esto hay que modificar un toque el codigo.
             //hay que marcar objetos usados.
+            initArrOfObjectsUsed();
+            
+            int max = simpleKnapSackProblem(0);
+            max += simpleKnapSackProblem(1);
+            
+            printf("maximo logrado %d \n", max);
         }else {
             objects2dMatrices = new int**[N];
             bidimentionalKnapSackProblem();
@@ -406,6 +428,13 @@ int main(){
     	if (knapSacksCapacities[0] == knapSacksCapacities[1] && knapSacksCapacities[1] == knapSacksCapacities[2]) {
 	    //habria que calcular dos veces el simple.....pero para esto hay que modificar un toque el codigo.
             //hay que marcar objetos usados.
+            initArrOfObjectsUsed();
+            
+            int max = simpleKnapSackProblem(0);
+            max += simpleKnapSackProblem(1);
+            max += simpleKnapSackProblem(2);
+            
+            printf("maximo logrado %d \n", max);
     	}else {
     	    objects3dMatrices = new int***[N];
             tridimentionalKnapSackProblem();	
