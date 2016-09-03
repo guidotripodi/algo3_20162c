@@ -8,7 +8,7 @@ Sabemos que $P \geq 3^{i-1}$ $\Rightarrow$ $\sqrt{P} \geq \sqrt{3^{i-1}}$\\
 Veamos que $\sqrt{3^{i-1}} \geq i \Rightarrow 3^{i-1} \geq {i^2}$. Para $i = 1$ tenemos que $3^{1-1} \geq 1$ siempre. Luego, para $i > 1$ como ${3^{i-1}}$ es creciente y mayor o igual que $i^2$ se cumple siempre esta desigualdad. Por lo tanto queda probado que recorrer hasta un i tal que \[
 \sum_{x=0}^{i}3^{i} \geq P \] se encuentra en el orden de  O($\sqrt{P}$).\\
 
- Luego, creamos un long long \textit{size} inicializado en i+1 y un array \textit{sumasParciales} de tamaño size inicializado vacio, por lo tanto, la creacion de la variable size y el array vacio insumir\'an O(1) y O($\sqrt{P}$).\\
+ Luego, creamos un long long \textit{size} inicializado en i+1 y un array \textit{sumasParciales} de tamaño size inicializado vacio, por lo tanto, la creaci\'on de la variable size y el array vacio insumir\'an O(1) y O($\sqrt{P}$).\\
  
 Siguiendo el desarrollo del algoritmo, pasamos a nuestro segundo ciclo, en el cual llenaremos el array $sumasParciales$, como vimos anteriormente iterar desde el valor i hasta 0 es O($\sqrt{P}$), y dentro de dicho ciclo lo \'unico que hacemos es ir guardando en la posici\'on i-esima del array el valor de sumaParcial - 3$^{i-1}$ y a sumaParcial le guardamos el valor de sumaParcial - 3$^{i-1}$. Como estas dos operaciones se realizan en O(1), nuestro segundo ciclo terminar\'a insumiendo O($\sqrt{P}$).\\
 

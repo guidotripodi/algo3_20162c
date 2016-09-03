@@ -1,8 +1,8 @@
-Para solucionar este problema, se debe ver la combinacion de viajes entre lados del puente (lado A, origen y lado B, destino) que nos permiten pasar a todos los integrantes
+Para solucionar este problema, se debe ver la combinaci\'on de viajes entre lados del puente (lado A, origen y lado B, destino) que nos permiten pasar a todos los integrantes
 del grupo, del lado A al B en el menor tiempo posible. Siendo esta busqueda una tarea exponencial, buscamos la forma de poder disminuir los casos evaluados, acotandonos solo a los relevantes
-para la consigna, aplicando de este modo la busqueda del mínimo a travez de backtracking.\\
+para la consigna, aplicando de este modo la busqueda del m\'inimo a travez de backtracking.\\
 
-Para implementar la solución se atomizo cada ciclo a 1 solo viaje: el envio de gente de A a B o el regreso de 'faroleros' de B a A. De esta forma, el backtracking se puede realizar en 
+Para implementar la solución se atomizo cada ciclo a 1 solo viaje: el env\'io de gente de A a B o el regreso de 'faroleros' de B a A. De esta forma, el backtracking se puede realizar en 
 la desición de la gente que va de A a B, independientemente de la elección de los faroleros.
 
 Dadas las restricciones del problema, se pudieron aplicar las siguientes podas sobre el arbol de posibilidades:
