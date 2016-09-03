@@ -2,6 +2,8 @@ Para solucionar este problema, se debe ver la combinaci\'on de viajes entre lado
 del grupo, del lado A al B en el menor tiempo posible. Siendo esta busqueda una tarea exponencial, buscamos la forma de poder disminuir los casos evaluados, acotandonos solo a los relevantes
 para la consigna, aplicando de este modo la busqueda del m\'inimo a travez de backtracking.\\
 
+%Previa explicaci\'on de como fue realizada la implentaci\'on explicaremos que ser\'ia para nosotros un $parValido$.
+
 Para implementar la solución se atomizo cada ciclo a 1 solo viaje: el env\'io de gente de A a B o el regreso de 'faroleros' de B a A. De esta forma, el backtracking se puede realizar en 
 la desición de la gente que va de A a B, independientemente de la elección de los faroleros.
 
