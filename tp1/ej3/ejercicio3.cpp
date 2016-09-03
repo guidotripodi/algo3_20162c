@@ -403,8 +403,13 @@ int main(){
             bidimentionalKnapSackProblem();
         }
     }else {
-        objects3dMatrices = new int***[N];
-        tridimentionalKnapSackProblem();
+    	if (knapSacksCapacities[0] == knapSacksCapacities[1] && knapSacksCapacities[1] == knapSacksCapacities[2]) {
+	    //habria que calcular dos veces el simple.....pero para esto hay que modificar un toque el codigo.
+            //hay que marcar objetos usados.
+    	}else {
+    	    objects3dMatrices = new int***[N];
+            tridimentionalKnapSackProblem();	
+    	}
     }
     
 	return 0;
