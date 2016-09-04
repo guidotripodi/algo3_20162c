@@ -129,8 +129,33 @@ void create2dMatrices() {
         objects2dMatrices[i] = K;
     }
 }
-void del2d(){}
-void del3d(){}
+
+void delete2d(){
+	for(int i = 0; i < N; i++){
+		int** matrix = objects2dMatrices[i];
+		for(int x = 0; x < knapSacksCapacities[0]; x++){
+			delete[](matrix[x]);	
+		}
+		delete[](matrix);
+	}
+	delete[](objects2dMatrices);
+}
+
+void delete3d(){
+
+	for(int i = 0; i < N; i++){
+		int*** matrix = objects3dMatrices[i];
+		for(int x = 0; x < knapSacksCapacities[0]; x++){
+			for(int y = 0; y < knapSacksCapacities[1]; y++){
+				delete[](matrix[x][y]);	
+			}
+			delete[](matrix[x]);
+		}
+		delete[](matrix);
+
+	}	
+	delete[](objects3dMatrices);
+}
 
 void copy3dMatrixTo(int i) {
     
@@ -505,8 +530,8 @@ int main(){
 	delete[](values);
 	delete[](weights);
 	
-	if( objects2dMatrices != NULL ) del2d();
-	if( objects3dMatrices != NULL ) del3d();
+	if( objects2dMatrices != NULL ) delete2d();
+	if( objects3dMatrices != NULL ) delete3d();
 
 	return 0;
 }
