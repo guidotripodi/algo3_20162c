@@ -4,7 +4,7 @@
 \Function{EJ1}{\param{in}{ }{Integer}, \param{in}{ }{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
 \state creo bool exitoBackPar con valor verdadero \hfill //O(1)
 \state creo bool exitoBackLampara con valor verdadero \hfill //O(1)
-\while{exitoBackLampara $\vee$ exitoBackPar} \hfill //O($\frac{n!^{3}}{2^{n}}$)
+\while{exitoBackLampara $\vee$ exitoBackPar} \hfill //O($n!^{3} \ast n$)
 \If{$\exists$ parPosible()} \hfill //O(1)
 \state par $\gets$ dameParPosible() \hfill //O(1)
 \Else
@@ -22,7 +22,7 @@
 \EndFunction 
 \end{algorithmic}
 \hrule
-\complejidad{$\frac{n!^{3}}{2^{n}}$}
+\complejidad{$n!^{3} \ast n$}
 \end{algorithm}
 
 
