@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <iostream>
+#include <vector>
 
 #define M1 1
 #define M2 2
@@ -102,7 +104,9 @@ void create3dMatrices() {
             }
         }
     
-        objects3dMatrices[i] = K;
+        objects3dMatrices[i] = K; 
+		//para cada elemento de este arreglo de matrices 3d va un delete
+		//en realidad, me tengo que meter por todos los niveles y hacer delete[] a cada uno
     }
 }
 
@@ -125,6 +129,8 @@ void create2dMatrices() {
         objects2dMatrices[i] = K;
     }
 }
+void del2d(){}
+void del3d(){}
 
 void copy3dMatrixTo(int i) {
     
@@ -391,19 +397,71 @@ void initArrOfObjectsUsed() {
 
 int main(){
     
-    int knapSacks[] = {3, 5, 7};
+//    int knapSacks[] = {3, 5, 7};
     
-    int values[] = {7, 3, 5, 5, 7};
+//    int values[] = {7, 3, 5, 5, 7};
     
-    int weights[] = {2, 3, 3, 5, 7};
+//    int weights[] = {2, 3, 3, 5, 7};
   
 //    int values[] = {7, 3, 5, 1, 2};
     
 //    int weights[] = {2, 3, 3, 5, 7};
     
-    N = 5;
-    M = 3;
-    objectsWeights = weights;
+//    N = 5;
+//    M = 3;
+
+	int i = 0;
+
+	std::cin >> M;
+	std::cin >> N;
+	
+    int knapSacks[M];
+	
+	while(i < M){
+		std::cin >> knapSacks[i];
+		i++;
+	}
+	int cantidad; //o sea la posta
+	i = 0;
+
+    int* values = new int[N];
+    int* weights = new int[N];
+	int* amounts = new int[N];
+
+	while(i < N){ //N es cantidad de tipos de objeto
+		int cant;
+		int weight;
+		int value;
+		std::cin >> cant;
+		std::cin >> weight;
+		std::cin >> value;
+		cantidad = cantidad + cant;
+		weights[i] = weight;
+		values[i] = value;
+		amounts[i] = cant;
+		i++;
+	}
+	
+	int* auxval = new int[cantidad];
+	int* auxweight = new int[cantidad];
+
+	i = 0;
+	while(i < N){ //N es cantidad de tipos de objeto
+		
+		for(int j = 0; j < amounts[i]; j++){
+			auxweight[i + j] = weights[i];
+			auxval[i + j] = values[i];
+		}
+		i++;
+	}
+
+	delete[](values);
+	delete[](weights);
+
+	values = auxval;
+	weights = auxweight;
+	
+	objectsWeights = weights;
     objectsValues = values;
     knapSacksCapacities = knapSacks;
     
@@ -440,6 +498,15 @@ int main(){
             tridimentionalKnapSackProblem();	
     	}
     }
-    
+
+
+	//Limpiar memoria
+
+	delete[](values);
+	delete[](weights);
+	
+	if( objects2dMatrices != NULL ) del2d();
+	if( objects3dMatrices != NULL ) del3d();
+
 	return 0;
 }
