@@ -1,38 +1,35 @@
-A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algoritmo incluyendo las podas:
-
-for i = 1 to n do
-  for w1 = maxW1 down to a[i].weight do
-    for w2 = maxW2 down to a[i].weight do
-      dp[w1, w2] = max
-                   {
-                       dp[w1, w2], <- we already have the best choice for this pair
-                       dp[w1 - a[i].weight, w2] + a[i].gain <- put in knapsack 1
-                       dp[w1, w2 - a[i].weight] + a[i].gain <- put in knapsack 2
-                   }
-
-
+A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algoritmo:
 
 \begin{algorithm}[H]
 \caption{Mochilas}
 \begin{algorithmic}[1]
 \Function{Algoritmo}{\param{in}{Integer}{M}\param{in}{Integer}{N}}{$\ensuremath{\rightarrow}$ \param{out}{S} {Integer} \param{out}{elementos} {List<Integer>}}
-\state creo matriz[N][M] \hfill //O(N $\ast$ M)
-\while {i < n} \hfill //O(N $\ast$ $M^{3}$)
-\state w1 $gets$ maxM1 \hfill //O(1)
-\while {w1 < matriz[i][M]} \hfill //O(M)
-\state w2 $gets$ maxM2 \hfill //O(1)
-\while {w2 < matriz[i][M]} \hfill //O(M)
-\state w3 $gets$ maxM3 \hfill //O(1)
-\while {w3 < matriz[i][M]} \hfill //O(M)
-
-\endwhile
-\endwhile
-\endwhile
-\endwhile
-\state devolver arrayMaximo.size \hfill //O($cantidadElementos$)
-\state devolver arrayMaximo \hfill //O($cantidadElementos$)
+\If{M == 1} \hfill //O(1)
+\state maximizoSimple(1) \hfill //O(M * N)
+\endif
+\If{M == 2} \hfill //O(1)
+\If{capacidad[M${_1}$] == capacidad[M${_2}$]} \hfill //O(1)
+\state maximizoSimple(1) \hfill //O(M * N)
+\state maximizoSimple(2) \hfill //O(M * N)
+\Else
+\state maximizoDoble(1,2) \hfill //O(M * N)
+\endif
+\endif
+\If{M == 3} \hfill //O(1)
+\If{capacidad[M${_1}$] == capacidad[M${_2}$] $\wedge$ capacidad[M${_2}$] == capacidad[M${_3}$] } \hfill //O(1)
+\state maximizoSimple(1) \hfill //O(M * N)
+\state maximizoSimple(2) \hfill //O(M * N)
+\state maximizoSimple(3) \hfill //O(M * N)
+\Else
+\state maximizoTriple(1,2,3) \hfill //O(M * N)
+\endif
+\endif
+\state devolver arrayMaximo.size \hfill //O(N)
+\state devolver arrayMaximo \hfill //O(N)
 \EndFunction 
 \end{algorithmic}
 \hrule
-\complejidad{$\sqrt{P}$}
+\complejidad{$M^3 \ast N$}
 \end{algorithm}
+
+/*QUEDARIA VER SI PONGO EL PSEUDO DE COMO SE MAXIMIZA PARA 3 MOCHILAS*/
