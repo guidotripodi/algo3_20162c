@@ -4,13 +4,12 @@ seg\'un la complejidad del algoritmo calculada anteriormente.\\
 Luego de varios experimentos, pudimos llegar a la conclusi\'on que uno de los tipos de casos que resulta m\'as beneficioso para nuestro algoritmo
 es en el cual \textbf{hay m\'as canibales que arqueologos}, esto se da ya que nuestro algoritmo va chequeando todos los posibles pares y como en la primera corrida ya encuentra que no es posible termina.\\
 
-Para llegar a dicha conclusi\'on trabajamos con los casos l\'imites en referencia a la cantidad de arqueologos y canibales ya que ten\'iamos como precondici\'on que $1 \leq N + M \leq 6$ por lo cual en los graficos posteriores mostraremos la funci\'on en referencia al tiempo de evaluar nuestro algoritmo con la cantidad de arqueologos y canibales igual a 2 y 4 respectivamente, y alterando el tiempo que insume a cada individuo el cruce del puente.\\
-
 Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instancias:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-% \includegraphics[scale=0.8]{./EJ1/mejorcasoej1.png}
+ \includegraphics[scale=0.6]{./EJ1/mejorcasoej1.png}
+ {$Gr$\'a$fico \ 1.1 - Mejor Caso$}
   \end{center}
   \vspace*{0.3cm}
 
@@ -19,46 +18,38 @@ Si a esto lo dividimos por la complejidad propuesta obtenemos:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- %\includegraphics[scale=0.8]{./EJ1/mejorcasoej11.png}
+ \includegraphics[scale=0.6]{./EJ1/mejorcasoej11.png}
+ {$Gr$\'a$fico \ 1.2 - Mejor Caso / Complejidad$}
   \end{center}
   \vspace*{0.3cm}
 
  Para realizar esta divisi\'on realizamos un promedio con el mismo input de aproximadamente 20 corridas tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para
 obtener resultados m\'as consisos.\\ 
 
-A continuaci\'on, adjuntamos una tabla con los considerados “mejor” caso que nos parecieron m\'as relevantes
+Luego de realizar dicha divisi\'on, el promedio de dichos valores resultante fue el siguiente:
 
+\begin{center}
 \begin{table}[H]
 
-    \begin{tabular}{ | l | l |l |}
+    \begin{tabular}{ | l |l |}
     \hline
-		Tamaño($n$) & Tiempo($t$) & \textbf{$t /n$}  \\ \hline
-610000 & 114000 & 0,186 \\ \hline
-650000 & 121000 & 0,185 \\ \hline
-690000 & 128000 & 0,185 \\ \hline
-730000 & 135000 & 0,184 \\ \hline
-770000 & 142000 & 0,184 \\ \hline
-810000 & 149000 & 0,183 \\ \hline
-850000 & 156000 & 0,183 \\ \hline
-890000 & 163000 & 0,183 \\ \hline
-930000 & 170000 & 0,182 \\ \hline
-970000 & 177000 & 0,182 \\ \hline
-1010000 & 184000 & 0,182 \\ \hline
 
-\textbf{Promedio} & & 0.217 \\ \hline
+\textbf{Promedio} & 0.83 \\ \hline
 
     \end{tabular}
 \end{table}
+\end{center}
 
-Dando un \textbf{promedio igual a 0.217 }\\
+
+Se puede observar en la figura 1.2 como luego de realizar la divisi\'on de los tiempos la funcion resultante permanece siempre por debajo de 1 lo cual corrobora para el mejor caso que el mismo se encuentra correctamente acotado por la complejidad calculada anteriormente.\\
 
 Luego, uno de los peores casos para nuestro algoritmo es en el cual tanto \textbf{los canibales como los arqueologos presentan la misma velocidad}, esto se da as\'i ya que nuestro algoritmo chequea todos los pares posibles y como todos pueden ser soluci\'on no se podr\'a efectuar ning\'un tipo de poda.\\
 
-Para llegar a dicha conclusi\'on trabajamos como enunciamos anteriormente con los casos l\'imites en referencia a la cantidad de arqueologos y canibales, por lo cual en los gr\'aficos posteriores mostraremos la funci\'on en referencia al tiempo de evaluar nuestro algoritmo con la cantidad de arqueologos y canibales igual a 3 y alterando el tiempo que insume a cada individuo el cruce del puente.\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- %\includegraphics[scale=0.8]{./EJ1/peorcasoej1.png}
+\includegraphics[scale=0.6]{./EJ1/peorcasoej1.png}
+{$Gr$\'a$fico \ 1.3 - Peor Caso$}
   \end{center}
   \vspace*{0.3cm}
 
@@ -66,39 +57,26 @@ Si a esto lo dividimos por la complejidad propuesta obtenemos:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- %\includegraphics[scale=0.8]{./EJ1/peorcasoej11.png}
+ \includegraphics[scale=0.6]{./EJ1/peorcasoej11.png}
+ {$Gr$\'a$fico \ 1.4 - Peor Caso / Complejidad$}
   \end{center}
-  \vspace*{0.3cm}
+   \vspace*{0.3cm}
   
-  Para realizar esta experimentaci\'on nos parecio acorde, realizar un promedio con el mismo input de aproximadamente 20 corridas tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para
-obtener resultados m\'as relevantes.\\ 
+  Para realizar esta experimentaci\'on nos parecio acorde, realizar un promedio con el mismo input de aproximadamente 20 corridas tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para obtener resultados m\'as relevantes.\\ 
 
+Luego de realizar dicha divisi\'on, el promedio de dichos valores resultante fue el siguiente:
 
-La informaci\'on de los 10 datos mas relevantes referiendonos al peor caso fueron:
-
+\begin{center}
 \begin{table}[H]
-
-    \begin{tabular}{ | l | l |l |}
+    \begin{tabular}{ | l |l |}
     \hline
-	Tamaño($n$) & Tiempo($t$) & \textbf{$t /n$}  \\ \hline
-610000 & 154000 & 0,251 \\ \hline
-650000 & 161000 & 0,247 \\ \hline
-690000 & 168000 & 0,243 \\ \hline
-730000 & 175000 & 0,239 \\ \hline
-770000 & 182000 & 0,236 \\ \hline
-810000 & 189000 & 0,233 \\ \hline
-850000 & 196000 & 0,230 \\ \hline
-890000 & 203000 & 0,227 \\ \hline
-930000 & 210000 & 0,225 \\ \hline
-970000 & 217000 & 0,223 \\ \hline
-1010000 & 224000 & 0,221 \\ \hline
-    \textbf{Promedio} & & 0.469 \\ \hline
+	
+    \textbf{Promedio} &  0.89 \\ \hline
 
     \end{tabular}
 \end{table}
+\end{center}
 
-Dando un \textbf{promedio igual a 0.469} \\
+Podemos observar en al figura 1.4 como la cota de complejidad del algoritmo y la de dicho caso tienden al mismo valor con el paso del tiempo.\\
 
-Aqu\'i, podemos observar como la cota de complejidad del algoritmo y la de dicho caso tienden al mismo valor con el paso del tiempo.\\
-
-Luego de lo mostrado, podemos ver que ya sea en el peor caso nuestro algoritmo en funcion al tiempo de ejecuci\'on queda asintotizado por debajo de la funci\'on del tiempo de la complejidad.
+Luego de lo mostrado, podemos ver que ya sea en el peor caso nuestro algoritmo en funci\'on al tiempo de ejecuci\'on queda asintotizado por debajo de la funci\'on del tiempo de la complejidad .
