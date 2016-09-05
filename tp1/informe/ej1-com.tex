@@ -8,7 +8,8 @@ En el segundo paso se tendran $\binom {n-1}{2}$ parejas posibles y 3 faroleros p
 
 Para el (i)-esimo paso se tendrán $\binom {n-(i-1)}{2}$ parejas e i+1 faroleros.\\
 
-Por cada una de las posibilidades de cada paso, se deberan analizar la cantidad total de posibilidades que haya en el paso subsiguiente, para dar lugar asi al analisis de todas las combinaciones posibles, es decir: siendo que el segundo paso se ejecuta $\binom {n}{2}$ veces, el tercero $\binom {n}{2} \binom{n-1} {2}.3$, podemos ver que en combinación, todos los pasos demandarían:
+Por cada una de las posibilidades de cada paso, se deberan analizar la cantidad total de
+posibilidades que haya en el paso subsiguiente, para dar lugar asi al analisis de todas las combinaciones posibles, es decir: siendo que el segundo paso se ejecuta $\binom {n}{2}$ veces, el tercero $\binom {n}{2} \binom{n-1} {2}.3$, podemos ver que en combinación, todos los pasos demandarían:
 \[
 \prod_{i=1}^{n-1}\binom {n-(i-1)}{2}*(i+1) = \prod_{i=1}^{n-1}\binom {n-(i-1)}{2} * \prod_{i=0}^{n-1}(i+1)
 \]
