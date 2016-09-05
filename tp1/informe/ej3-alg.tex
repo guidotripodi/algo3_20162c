@@ -3,25 +3,25 @@ A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algorit
 \begin{algorithm}[H]
 \caption{Mochilas}
 \begin{algorithmic}[1]
-\Function{Algoritmo}{\param{in}{Integer}{M}\param{in}{Integer}{N}}{$\ensuremath{\rightarrow}$ \param{out}{S} {Integer} \param{out}{elementos} {List<Integer>}}
-\If{M == 1} \hfill //O(1)
-\state maximizoSimple(1) \hfill //O(M * N)
+\Function{EJ3}{\param{in}{Lista<mochila>}{MOCHILAS} \param{in}{Lista<objeto>}{OBJETOS}}{$\ensuremath{\rightarrow}$ \param{out}{S} {Integer} \param{out}{elementos} {List<Integer>}}
+\If{\#(MOCHILAS) == 1} \hfill //O(1)
+\state maximizoSimple(MOCHILAS[1],OBJETOS) \hfill //O($K(M[1]) \ast N$)
 \endif
-\If{M == 2} \hfill //O(1)
+\If{\#(MOCHILAS) == 2} \hfill //O(1)
 \If{capacidad[M${_1}$] == capacidad[M${_2}$]} \hfill //O(1)
-\state maximizoSimple(1) \hfill //O(M * N)
-\state maximizoSimple(2) \hfill //O(M * N)
+\state maximizoSimple(MOCHILAS[1], OBJETOS) \hfill //O($K(M[1]) \ast N$)
+\state maximizoSimple(MOCHILAS[2], OBJETOS) \hfill //O($K(M[2]) \ast N$)
 \Else
-\state maximizoDoble(1,2) \hfill //O(M * N)
+\state maximizoDoble(MOCHILAS[1],MOCHILAS[2], OBJETOS) \hfill //O(M * N)
 \endif
 \endif
-\If{M == 3} \hfill //O(1)
+\If{\#(MOCHILAS) == 3} \hfill //O(1)
 \If{capacidad[M${_1}$] == capacidad[M${_2}$] $\wedge$ capacidad[M${_2}$] == capacidad[M${_3}$] } \hfill //O(1)
-\state maximizoSimple(1) \hfill //O(M * N)
-\state maximizoSimple(2) \hfill //O(M * N)
-\state maximizoSimple(3) \hfill //O(M * N)
+\state maximizoSimple(MOCHILAS[1], OBJETOS) \hfill //O($K(M[1]) \ast N$)
+\state maximizoSimple(MOCHILAS[2], OBJETOS) \hfill //O($K(M[2]) \ast N$)
+\state maximizoSimple(MOCHILAS[3], OBJETOS) \hfill //O($K(M[3]) \ast N$)
 \Else
-\state maximizoTriple(1,2,3) \hfill //O(M * N)
+\state maximizoTriple(MOCHILAS,OBJETOS) \hfill //O($K(M) \ast N$)
 \endif
 \endif
 \state devolver arrayMaximo.size \hfill //O(N)
@@ -29,7 +29,64 @@ A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algorit
 \EndFunction 
 \end{algorithmic}
 \hrule
-\complejidad{$M^3 \ast N$}
+\complejidad{$K(M) \ast N$}
 \end{algorithm}
 
-/*QUEDARIA VER SI PONGO EL PSEUDO DE COMO SE MAXIMIZA PARA 3 MOCHILAS*/
+
+\begin{algorithm}[H]
+\caption{Mochilas}
+\begin{algorithmic}[1]
+\Function{MaximizoSimple}{\param{in}{Lista<mochila>}{MOCHILAS} \param{in}{Lista<objeto>}{OBJETOS}}{$\ensuremath{\rightarrow}$ \param{out}{max} {Integer} \param{out}{arrayUsados} {List<Integer>}}
+\while{i < \#(OBJETOS)} \hfill //O(N)
+\while{j < capacidad(MOCHILAS[1])} \hfill //O(K(M[1]))
+\If{j == 0} \hfill //O(1)
+\state matriz[OBJETOS[i]][j] $\gets$ 0 \hfill //O(1)
+\endif
+\If{j > 0 $\wedge$ peso(OBJETOS[i]) $\leq$ j $\wedge$ $\neg$(Usado(OBJETOS[i]))} \hfill //O(1)
+\If{i == 0} \hfill //O(1)
+\state matriz[OBJETOS[i]][j] $\gets$ OBJETOS[i] \hfill //O(1)
+\Else
+\state matriz[elemento][j] $\gets$ MAX(valor(OBJETOS[i]) +  \state
+matriz[i-1][j - peso(OBJETOS[i])], matriz[i-1][j]) \hfill //O(1)
+\endif
+\Else
+\If{i == 0} \hfill //O(1)
+\state matriz[OBJETOS[i]][j] $\gets$ 0 \hfill //O(1)
+\Else
+\state matriz[elemento][j] $\gets$ matriz[i-1][j] \hfill //O(1)
+\endif
+\endif
+\state j++  \hfill //O(1)
+\endwhile
+\state i++  \hfill //O(1)
+\endwhile
+\state columnaActual $\gets$ K(M[1]) \hfill //O(1)
+\state filaActual $\gets$ N-1 \hfill //O(1)
+\while{filaActual $\geq$ 0 $\wedge$ columnaActual $\geq$ 0}
+\If{$\not$(vacia(columnaActual)) $\wedge$ filaActual == 0} \hfill //O(1)
+\If{matriz[filaActual][columnaActual]}\hfill //O(1)
+\state arrayUsados $\cup$ matriz[filaActual][columnaActual] \hfill //O(1)
+\endif
+\state filaActual-- \hfill //O(1)
+\endif
+\If{matriz[filaActual-1][columnaActual] $\neq$ matriz[filaActual][columnaActual] }\hfill //O(1)
+\state arrayUsados $\cup$ matriz[filaActual][columnaActual] \hfill //O(1)
+\state columnaActual $\gets$ columnaActual - peso(filaActual)  \hfill //O(1)
+\state filaActual-- \hfill //O(1)
+\Else
+\state filaActual-- \hfill //O(1)
+\endif
+\endwhile
+\state max $\gets$ matriz[filaActual-1][columnaActual] \hfill //O(1)
+\state devolver max  \hfill //O(1)
+\state devolver arrayUsados \hfill //O(N)
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{$K(M[1]) \ast N)$}
+\end{algorithm}
+
+\textbf{Aclaraciones:
+K = funci\'on capacidad()
+M = MOCHILAS
+N = \# OBJETOS }
