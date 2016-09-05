@@ -86,6 +86,58 @@ matriz[i-1][j - peso(OBJETOS[i])], matriz[i-1][j]) \hfill //O(1)
 \complejidad{$K(M[1]) \ast N)$}
 \end{algorithm}
 
+
+\begin{algorithm}[H]
+\caption{Mochilas}
+\begin{algorithmic}[1]
+\Function{MaximizoDoble}{\param{in}{Lista<mochila>}{MOCHILAS} \param{in}{Lista<objeto>}{OBJETOS}}{$\ensuremath{\rightarrow}$ \param{out}{max} {Integer} \param{out}{arrayUsados} {List<Integer>}}
+\state cap1 $\gets$ capacidad(M[1]) \hfill //O(1)
+\state cap2 $\gets$ capacidad(M[2]) \hfill //O(1)
+\state creo entero h $\gets$\hfill //O(1)
+\while{h < \#(OBJETOS)} \hfill //O(N)
+\state peso $\gets$ peso(OBJETOS[h]) \hfill //O(1)
+\state valor $\gets$ valor(OBJETOS[h]) \hfill //O(1)
+\state i $\gets$  cap2  \hfill //O(1)
+\while{i $\leq$ 0 } \hfill //O(K(M[1]))
+\state j $\gets$  cap1  \hfill //O(1)
+\while{j $\leq$ 0 } \hfill //O(K(M[2]))
+\state creo entero m0 $\gets$ matriz[j][i] \hfill //O(1)
+\state creo entero m1 $\gets$ 0 \hfill //O(1)
+\state creo entero m2 $\gets$ 0 \hfill //O(1)
+\If{j $\geq$ peso } \hfill //O(1)
+\state m1 $\gets$ matriz[j-peso][i] \hfill //O(1)
+\endif
+\If{i $\geq$ peso } \hfill //O(1)
+\state m2 $\gets$ matriz[j][i-peso] \hfill //O(1)
+\endif
+\If{j $\geq$ peso $\wedge$ m1 + valor $\geq$ m0 
+$\wedge$ m1 + valor $\geq$ m2 + valor } \hfill //O(1)
+\state matriz[j][i] $\gets$ m1 + valor \hfill //O(1)
+\Else
+\If{i $\geq$ peso $\wedge$ m2 + valor $\geq$ m0 
+$\wedge$ m2 + valor $\geq$ m1 + valor } \hfill //O(1)
+\state matriz[j][i] $\gets$ m2 + valor \hfill //O(1)
+\endif
+\If{matriz[j][i] > max } \hfill //O(1)
+\state max $\gets$ matriz[j][i] \hfill //O(1)
+\state jMax $\gets$ j \hfill //O(1)
+\state iMax $\gets$ i \hfill //O(1)
+\state objetoMax $\gets$ h \hfill //O(1)
+\endif
+\endif
+\state i++ \hfill //O(1)
+\endwhile
+\state j++ \hfill //O(1)
+\endwhile
+\state h++ \hfill //O(1)
+\endwhile
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{$[K(M[1]) + K(M[2])] \ast N)$}
+\end{algorithm}
+
+
 \textbf{Aclaraciones:
 K = funci\'on capacidad()
 M = MOCHILAS
