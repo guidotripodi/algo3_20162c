@@ -66,8 +66,12 @@ int simpleKnapSackProblem(int knapsack) {
             actualRow=-1;
         }else if (K[actualRow-1][actualCol] != K[actualRow][actualCol]) {
             objectsUsed[actualRow] = true;
-            printf("used object (%d, %d) \n", objectsValues[actualRow], objectsWeights[actualRow]);
-            actualCol = abs(actualCol-objectsWeights[actualRow]); // por si acaso, valor absoluto.
+            //printf("used object (%d, %d) \n", objectsValues[actualRow], objectsWeights[actualRow]);
+            
+			//TODO juntar objetos de la misma clase?
+			printf("1, %d %d", objectsValues[actualRow], objectsWeights[actualRow]); 
+
+			actualCol = abs(actualCol-objectsWeights[actualRow]); // por si acaso, valor absoluto.
             actualRow--;
         }else{
             actualRow--;
@@ -179,7 +183,7 @@ void copy2dMatrixTo(int i) {
     
     for (int x = 0; x <= km1; x++) {
         for (int y = 0; y <= km2; y++) {
-            objects3dMatrices[i][x][y] = objects3dMatrices[i-1][x][y];
+            objects2dMatrices[i][x][y] = objects2dMatrices[i-1][x][y];
         }
     }
 }
@@ -436,9 +440,9 @@ int main(){
 //    M = 3;
 
 	int i = 0;
-
+	int cantidad; 
 	std::cin >> M;
-	std::cin >> N;
+	std::cin >> cantidad;
 	
     int knapSacks[M];
 	
@@ -446,32 +450,32 @@ int main(){
 		std::cin >> knapSacks[i];
 		i++;
 	}
-	int cantidad; //o sea la posta
+
 	i = 0;
 
-    int* values = new int[N];
-    int* weights = new int[N];
-	int* amounts = new int[N];
+    int* values = new int[cantidad];
+    int* weights = new int[cantidad];
+	int* amounts = new int[cantidad];
 
-	while(i < N){ //N es cantidad de tipos de objeto
+	while(i < cantidad){ //cantidad de tipos de objeto
 		int cant;
 		int weight;
 		int value;
 		std::cin >> cant;
 		std::cin >> weight;
 		std::cin >> value;
-		cantidad = cantidad + cant;
+		N = N + cant;
 		weights[i] = weight;
 		values[i] = value;
 		amounts[i] = cant;
 		i++;
 	}
 	
-	int* auxval = new int[cantidad];
-	int* auxweight = new int[cantidad];
+	int* auxval = new int[N];
+	int* auxweight = new int[N];
 
 	i = 0;
-	while(i < N){ //N es cantidad de tipos de objeto
+	while(i < cantidad){ //cantidad de tipos de objeto
 		
 		for(int j = 0; j < amounts[i]; j++){
 			auxweight[i + j] = weights[i];
@@ -529,7 +533,7 @@ int main(){
 
 	delete[](values);
 	delete[](weights);
-	
+	delete[](amounts);
 	if( objects2dMatrices != NULL ) delete2d();
 	if( objects3dMatrices != NULL ) delete3d();
 
