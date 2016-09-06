@@ -61,7 +61,7 @@ int simpleKnapSackProblem(int knapsack) {
         }else if (actualRow == 0) {
             if (K[actualRow][actualCol]) {
                 objectsUsed[actualRow] = true;
-                printf("used object (%d, %d) \n", objectsValues[actualRow], objectsWeights[actualRow]);
+                printf("(%d, %d) \n\n", objectsValues[actualRow], objectsWeights[actualRow]);
             }
             actualRow=-1;
         }else if (K[actualRow-1][actualCol] != K[actualRow][actualCol]) {
@@ -69,7 +69,7 @@ int simpleKnapSackProblem(int knapsack) {
             //printf("used object (%d, %d) \n", objectsValues[actualRow], objectsWeights[actualRow]);
             
 			//TODO juntar objetos de la misma clase?
-			printf("1, %d %d", objectsValues[actualRow], objectsWeights[actualRow]); 
+			printf("(%d %d) \n\n", objectsValues[actualRow], objectsWeights[actualRow]);
 
 			actualCol = abs(actualCol-objectsWeights[actualRow]); // por si acaso, valor absoluto.
             actualRow--;
