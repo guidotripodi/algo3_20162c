@@ -443,7 +443,10 @@ int main(){
 	int cantidad; 
 	std::cin >> M;
 	std::cin >> cantidad;
-	
+    
+    printf("cantidad de mochilas: %d \n", M);
+    printf("cantidad de tipos: %d \n", cantidad);
+    
     int knapSacks[M];
 	
 	while(i < M){
@@ -457,6 +460,8 @@ int main(){
     int* weights = new int[cantidad];
 	int* amounts = new int[cantidad];
 
+    printf("------\n");
+    
 	while(i < cantidad){ //cantidad de tipos de objeto
 		int cant;
 		int weight;
@@ -464,31 +469,52 @@ int main(){
 		std::cin >> cant;
 		std::cin >> weight;
 		std::cin >> value;
-		N = N + cant;
+        printf("cant: %d, weight: %d, value: %d \n", cant, weight, value);
+		N = N + cant; // N es la cantidad total de objetos para el algoritmo
 		weights[i] = weight;
 		values[i] = value;
 		amounts[i] = cant;
 		i++;
 	}
+    
+    printf("------\n");
 	
 	int* auxval = new int[N];
 	int* auxweight = new int[N];
-
+    
+    printf("------\n");
+    
 	i = 0;
+    
+    int j = 0;
 	while(i < cantidad){ //cantidad de tipos de objeto
-		
-		for(int j = 0; j < amounts[i]; j++){
-			auxweight[i + j] = weights[i];
-			auxval[i + j] = values[i];
-		}
+        int z = 0;
+        int w = weights[i];
+        int v = values[i];
+        while (z < amounts[i]) {
+            printf("weight: %d, value: %d inserted \n", w, v);
+            auxweight[j] = w;
+            auxval[j] = v;
+            z++;
+            j++;
+        }
 		i++;
 	}
-
+    
+    printf("------\n");
+    
 	delete[](values);
 	delete[](weights);
 
 	values = auxval;
 	weights = auxweight;
+    
+    printf("------\n");
+    printf("%d objects: \n\n", N);
+    for (int i = 0; i < N; i++) {
+        printf("%d, %d \n", auxval[i], auxweight[i]);
+    }
+    printf("------\n");
 	
 	objectsWeights = weights;
     objectsValues = values;
