@@ -199,20 +199,20 @@ void tridimentionalKnapSackProblem() {
     int km2 = knapSacksCapacities[1];
     int km3 = knapSacksCapacities[2];
     
+    
     create3dMatrices();
     
-	int max = 0;
-	int k1Max = 0;
-	int k2Max = 0;
-	int k3Max = 0;
+    int max = 0;
+    int k1Max = 0;
+    int k2Max = 0;
+    int k3Max = 0;
     int objectMax = 0;
-	
-	int k1 = 0;
-	int k2 = 0;
-	int k3 = 0;
-	
-	for(int i = 0; i < N; i++) {
-		int weight = objectsWeights[i];
+    
+    int k1 = 0;
+    int k2 = 0;
+    int k3 = 0;
+    for(int i = 0; i < N; i++) {
+        int weight = objectsWeights[i];
         int value = objectsValues[i];
         
         if (i>0) {
@@ -220,11 +220,10 @@ void tridimentionalKnapSackProblem() {
         }
         
         int ***K = objects3dMatrices[i];
-        
-		for(k3 = km3; k3 >= 0; k3--){
-			for(k2 = km2; k2 >= 0; k2--){
-				for(k1 = km1; k1 >= 0; k1--){
-                    
+        for(k3 = km3; k3 >= 0; k3--){
+            for(k2 = km2; k2 >= 0; k2--){
+                for(k1 = km1; k1 >= 0; k1--){
+    
 					int m0 = K[k1][k2][k3];
 					int m1 = 0;
 					int m2 = 0;
@@ -525,34 +524,35 @@ int main(){
     M = 3;
     i = 0;
     j = 0;
-    int capacidad = 1;
-    int cant_objetos = 50;
-    int pesos[cant_objetos];
-    int valor[cant_objetos];
+    int capacidad = 25;
+    
+    int cantidad_objetos = 100;
+    int pesos[cantidad_objetos];
+    int valor[cantidad_objetos];
+    int x = 5;
 
-    while(j < cant_objetos){
-        pesos[j] = j *5;
-        j++;
+    while(x < cantidad_objetos){
+        N = x;
+        while(j < N){
+            pesos[j] = j *5;
+            j++;
 
-    }
-    j=0;
-
-    while(j < cant_objetos){
-        valor[j] = j *5;
-        j++;
-
-    }
-    while(capacidad < 50){
-        i=0;
+        }
+        j=0;
+        while(j < x){
+            valor[j] = j *5;
+            j++;
+        }
         while(i < M){
-            knapSacks[i] = capacidad*(i+5);
-        i++;
-    }
+            knapSacks[i] = capacidad;    
+            i++;
+        }
     j= 0;
     while(j < 1){
 	objectsWeights = pesos;
     objectsValues = valor;
     knapSacksCapacities = knapSacks;
+    //printf("Cantidad de objetos: %d\n", x );
     auto start = ya();
     if (M == 1) {
         initArrOfObjectsUsed();
@@ -591,9 +591,9 @@ int main(){
             auto end = ya();
             cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
             printf("\n");
-    j++;
+        j++;
     }
-            capacidad = capacidad +2;
+            x = x +5;
         }
     
 
