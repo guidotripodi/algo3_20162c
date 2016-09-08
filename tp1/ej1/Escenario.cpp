@@ -170,17 +170,17 @@ Escenario::Escenario(const int cantA, const int cantC, const int * tiempos_arque
 
 
 	//A cada paso lo inicializo en 0 simbolizando que ninguna pareja valida ni persona fue evaluada
-	cout<<"Pares:"<<this->pares_totales<< "\n";
+	//cout<<"Pares:"<<this->pares_totales<< "\n";
 	for (int i = 0; i < this->pares_totales; i++)
 	{
 		i=this->sigPar();
 		this->eleccion_x_paso[i]=0;
 		this->eleccion_x_paso[0] = i;
-		cout<<i<<" ";
+	//	cout<<i<<" ";
 		//this->printPar(i);
 	}
 	this->eleccion_x_paso[0] = 0;
-	cout<<"\n";
+	//cout<<"\n";
 
 	//Todas las personas empiezan del lado A
 	for (int i = 0; i < this->personas_totales; i++)
@@ -394,7 +394,7 @@ int Escenario::sigPar() const{
 	int par = this->eleccion_x_paso[this->paso] + 1;
 	int a  = this->primero(par);
 	int b  = this->segundo(par);
-	cout <<par<< " a: " << a << " b: " << b<<"\n";
+	//cout <<par<< " a: " << a << " b: " << b<<"\n";
 	if (b>a)
 	{			
 		return par;

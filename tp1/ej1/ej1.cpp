@@ -11,9 +11,10 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 
 int main(int argc, char* argv[])
 {
-	ifstream input( "ej1.in" );
+	//ifstream input( "ej1.in" );
+	//ifstream input = stdin;
 	int cant_arqueologos, cant_canibales;
-	input >> cant_arqueologos >> cant_canibales;
+	cin >> cant_arqueologos >> cant_canibales;
 
 
 	int tiempos_arqueologos[cant_arqueologos];
@@ -22,16 +23,16 @@ int main(int argc, char* argv[])
 	int i = 0;
 	for (i = 0; i < cant_arqueologos; i++)
 	{
-		input >> tiempos_arqueologos[i];
+		cin >> tiempos_arqueologos[i];
 	}
 	for (i = 0; i < cant_canibales; i++)
 	{
-		input >> tiempos_canibales[i];
+		cin >> tiempos_canibales[i];
 	}
-	cout<<"Entrada inicializada: comenzando algoritmo...\n";
+//	cout<<"Entrada inicializada: comenzando algoritmo...\n";
 	int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
 	
-	cout << "Tiempo minimo: "<<t<<"\n";
+	cout <<t<<"\n";
 
 	return 1;
 }
@@ -42,13 +43,13 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 	bool exitoBackLampara = true;
 	int sol = 0;
 	int minimo = -1; 
-	cout<<"Inicializando escenario...\n";
+//	cout<<"Inicializando escenario...\n";
 	Escenario escenario = Escenario(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
-	cout<<"Escenario listo\n";
+//	cout<<"Escenario listo\n";
 	int i = 0;
 	while(exitoBackLampara && exitoBackPar){
-		cout<<"----------------------------------------------\nNuevo paso:\n";
-		escenario.printStatus();
+//		cout<<"----------------------------------------------\nNuevo paso:\n";
+//		escenario.printStatus();
 
 		//De haber encontrado una solucion, obtengo el tiempo logrado
 		if (escenario.pasaronTodos())
@@ -58,7 +59,7 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 				minimo = escenario.tiempo;
 			}
 			sol++;
-			cout<<" < Fin de rama: minimo logrado = "<<escenario.tiempo<<" > \n";
+//			cout<<" < Fin de rama: minimo logrado = "<<escenario.tiempo<<" > \n";
 		}
 
 		exitoBackPar = true;
@@ -70,14 +71,14 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 			//me sigue dando una mejor solucion a la ya encontrada
 			if (par>-1 && (minimo == -1 || escenario.tiempo<minimo))
 			{
-				cout<<"-Enviando ";
-				escenario.printPar(par);
-				cout<<"\n";
+//				cout<<"-Enviando ";
+//				escenario.printPar(par);
+//				cout<<"\n";
 
 				escenario.enviarPar(par);
 			}else{
 				//vuelve al paso anterior
-				cout<<"-Backtracking a farolero\n";
+//				cout<<"-Backtracking a farolero\n";
 				exitoBackLampara = escenario.backtrackFarolero();
 
 			}
@@ -87,13 +88,13 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 			//Si hay un farolero que pueda hacer que retorne y que me mantenga el tiempo menor al ya encontrado
 			if (farolero>-1 && (minimo == -1 || escenario.tiempo < minimo))
 			{
-				cout<<"-Enviando como farolero a ";
-				escenario.printPersona(farolero);
-				cout<<"\n";
+//				cout<<"-Enviando como farolero a ";
+//				escenario.printPersona(farolero);
+//				cout<<"\n";
 				escenario.enviarFarolero(farolero);
 
 			}else{
-				cout<<"-Backtracking a par\n";
+//				cout<<"-Backtracking a par\n";
 				exitoBackPar = escenario.backtrackPar();
 
 			}
@@ -102,7 +103,7 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 		
 	}
 
-	cout<<"Soluciones encontradas: "<<sol<<"\n";
+//	cout<<"Soluciones encontradas: "<<sol<<"\n";
 
 	return minimo;
 }
