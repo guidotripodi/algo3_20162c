@@ -1,0 +1,69 @@
+El problema de la mochila, en cualquier dimension, se basa en maximizar un valor total teniendo en cuenta una o varias capacidades de las cuales no podemos excedernos. Como queden completadas las mochilas involucradas en cuanto a peso se refiere no dice nada, a priori, del valor total.\\
+
+La idea de aplicar una tecnica de programación dinámica en un problema de optimización (con lo cual utilizamos el principio de optimalidad de Bellman) es que podemos maximizar este valor total teniendo en cuenta lo mejor que pudimos hacer para subproblemas mas pequeños.\\
+
+En el caso de una dimension, estos subproblemas serán más facil de ver, y por lo tanto abordaremos esta pseudo-demostración desde la perspectiva de una mochila en primera instancia.\\
+
+Nuestro subproblema en este caso es: que es lo mejor que se pudo lograr con $i$ objetos y 0 $\leq k \leq K$ capacidades, siendo $K$ la capacidadad total de la mochila.
+Puede describirse de la siguiente manera:
+
+\begin{center}
+$S(i, k)$ = máximo valor en el paso $i$ para una capacidad disponible $k$
+\end{center}
+
+A cada paso asociamos un objeto con el cual haremos un análisis exhaustivo de las posibilidades, las cuales serán, sea un objeto $e_i$, si utilizo o no utilizo el mismo dado que tengo $k$ de capacidad disponible.
+Esta noción, junto con la idea de maximizar el valor total para la capacidad disponible nos da una idea de que es lo que tenemos que hacer en cada paso. \\
+
+Si no ponemos el objeto, entonces deberemos ver que es lo mejor que se hizo con los objetos anteriores para esa misma capacidad, si no, al utilizar el objeto, tenemos que ver que es lo mejor que se logró sumando el valor del objeto actual $valor(e_i)$ al valor dado por el resultado de lo mejor que se pudo lograr con los objetos anteriores para una capacidad de mochila disponible menor, la cual será $k$ - $peso(e_i)$ siempre que el peso del objeto sea menor que la capacidad disponible, dado que si no, estamos obligados a quedarnos con lo mejor que se pudo realizar con los anteriores $i-1$ objetos y la misma capacidad.
+
+Lo que nos queda es un máximo que se calcula de la siguiente manera:
+
+\begin{equation}
+S(i, k) = max(S(i-1, k-peso(e_i))+valor(e_i), S(i-1, k))
+\end{equation}
+
+Como puede verse, cada subproblema es recursivo y ofrece una solución optima para casos mas pequeños. Es decir, con menos objetos.
+
+Al final, en el último paso, es decir para el último objeto y luego de haber analizado cada una de las capacidades, obtendremos el optimo total que será el resultado de resolver $S(n, K)$, siendo $n$ la cantidad de objetos total.\\
+
+Como puede verse, en cada paso, para un objeto se puede determinar que acción realizar, con esta misma idea y con la ayuda de una matriz que nos permite hacer uso de memoizacion de cada paso, podemos obtener que objetos estuvieron involucrados en el optimo final.\\
+
+Para el caso de dos o tres mochilas estamos ante un problema de similar resolución, pero con más complicaciones relacionadas al logro de memoización para no perder información de cada paso realizado, la cual es fundamental para la obtención de los objetos de cada mochila.\\
+
+Aquí la idea es obtener un máximo general sin importar si las mochilas maximizan o no por su parte.
+
+Por cada objeto tendremos que decidir si no lo usamos, o en cuales de las mochilas disponibles nos conviene ingresarlo.\\
+Para simplificar la notación, utilizaremos el caso de dos mochilas, pero lo que sigue es facilmente adaptable a tres.
+
+Como mencionamos el subproblema que analizamos es:
+
+\begin{center}
+$S(i, k_1, k_2)$ = máximo valor en el paso $i$ dado que dispongo de dos capacidades $k_1$ y $k_2$
+\end{center}
+
+Lo que haremos como se mencionó, es decidir que haremos con cada objeto. Y esto se define como:
+
+\begin{equation}
+S(i, k_1, k_2) = 
+\end{equation}
+\begin{equation}
+max(S(i-1, k_1-peso(e_i), k_2)+valor(e_i), 
+        S(i-1, k_1, k_2-peso(e_i))+valor(e_i), 
+        S(i-1, k_1, k_2))
+\end{equation}
+
+Como puede verse, para dos mochilas (y tambien tres) podemos obtener el resultado del máximo general, haciendo un análisis exhaustivo de las posibilidades de manera similar a como se resuelve para una mochila, solo que viendo en dos (o tres) dimensiones, todas las posiblidades para menos objetos.\\
+Por lo cual, la respuesta a este problema será $S(n, K_1, K_2)$ siendo $n$ la cantidad de objetos total y $K_1$ y $K_2$ las capacidades de las mochilas.\\
+
+Como se mencionó en la explicación y desarrollo del problema, el mismo se resuelve tambien con el uso de matrices, pero cabe destacar el plural. 
+
+En un principio, para obtener el máximo, podriamos utilizar una única matriz. Pero dado que para cada objeto se la recorre completa, la información del máximo logrado para cada objeto puede no mantenerse, y además como los objetos no ocupan un lugar en la matriz, no podemos saber cual de estos lo logró.\\
+Por lo tanto, hacemos uso de $n$ matrices de dimensiones correspondientes a la capacidad de las mochilas involucradas. \\
+
+De esta manera, el máximo logrado para $i$ objetos estará alojado en la matriz correspondiente al objeto $i-esimo$.\\
+
+De aquí en más, lo visto en la explicación ayuda a obtener los objetos en los casos para una y dos o tres dimensiones, teniendo en cuenta que es lo que sucede o no al tomar un objeto. \\
+
+Por lo tanto, por el principio de optimalidad y debido al análisis exhaustivo, podemos asegurar que el máximo logrado es el optimo y que los objetos pueden obtenerse como una consecuencia de las elecciones realizadas y la información correctamente almacenada.
+
+
