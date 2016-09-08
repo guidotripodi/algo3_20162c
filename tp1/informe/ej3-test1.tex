@@ -20,7 +20,8 @@ Dividiendo por la complejidad calculada se obtuvo lo siguiente:\\
   \end{center}
   \vspace*{0.3cm}
   
-Se puede ver en el gr\'afico 3.2 como la funci\'on resultante tiende a 0 cuando las capacidades aumentan.\\
+Se puede ver en el gr\'afico 3.1 que, dado nuestro algoritmo, al tener las capacidades iguales el mismo realizar\'a la optimizaci\'on de 3 matrices que simbolizan a cada mochila por separado, lo que nos dar\'a una complejidad acotada por la capacidad de las mochilas por la cantidad de elementos que en esta evaluaci\'on es constante, simplificando lo dicho nos quedar\'ia O($K_{1}\ast N$) + O($K_{2}\ast N$) + O($K_{3}\ast N$) y como $K_{1} = K_{2} = K_{3}$ nos queda que la complejidad para el mejor caso esta acotada por O($K \ast N$) con N constante.\\
+Luego, en el gr\'afico 3.2, en el cual dividimos el tiempo de ejecuci\'on de dicho caso con el tiempo de realizar O(N*k) operaciones nos da una funci\'on resultante la cual tiende a 0 cuando la entrada aumenta corroborando lo que acabamos de decir.\\
 
 Manteniendo el mismo razonamiento, el peor caso para nuestro algoritmo se da cuando hay \textbf{mochilas con capacidades distintas} ya que el algoritmo deber\'a decidir en que mochila colocar el objeto para que el resultado sea \'optimo. Por consiguiente, mostraremos un gr\'afico que representa lo hablado:\\
 
@@ -38,7 +39,6 @@ Dividiendo por la complejidad calculada se obtuvo lo siguiente:\\
   \end{center}
   \vspace*{0.3cm}
   
-
 Se puede ver, tanto en el gr\'afico 3.2 como 3.4 la funciones resultantes siempre se mantienen por debajo de 1, con lo cual se ve que tanto en el mejor como en el peor caso nuestro algoritmo sigue estando acotado por la complejidad calculada.\\
 
 Luego, como nuestro algoritmo calcula lo mismo para cualquier tipo de objeto, ya sean todos iguales o no, todos ser\'an casos promedios, salvo el caso en el cual no haya ning\'un tipo de objeto que entre en alguna mochila, este caso podr\'iamos tomarlo como \'el mejor ya que nuestro algoritmo corta al ver que no puede colocar ning\'un objeto dentro de alguna mochila.\\
@@ -48,6 +48,11 @@ Mostraremos en el siguiente gr\'afico de ejemplo lo hablado recientemente:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-% \includegraphics[scale=0.8]{./EJ3/resized2.jpg}
+ \includegraphics[scale=0.65]{./EJ3/objetos.png}
+  {$Gr$\'a$fico$ \ 3.5 - $Objetos$ $Variables$ $y$ $Capacidades$ $Constantes$}
   \end{center}
   \vspace*{0.3cm}
+  
+Se puede ver en el gr\'afico 3.5 como las 3 funciones, las cuales simbolizan el tiempo de ejecuci\'on del algoritmo con todos los objetos iguales, todos distintos y random, presentan un tiempo de ejecuci\'on similar, como hab\'iamos comentado anteriormente esto se da ya que nuestro algoritmo realiza las mismas operaciones para cualquier tipo de objeto en las que chequea si es \'optimo o no agregar un elemento a alguna mochila.\\
+
+Trabajando con los objetos variables y habiendo dejado constante la capacidad de las mochilas se llega a que la complejidad esta acotada por la cantidad de elementos multiplicada por la capacidad de las mochilas, en este caso constante para las 3 e igual a 20 en todas las corridas y entradas.\\

@@ -1,8 +1,8 @@
-El problema de la mochila, en cualquier dimension, se basa en maximizar un valor total teniendo en cuenta una o varias capacidades de las cuales no podemos excedernos. Como queden completadas las mochilas involucradas en cuanto a peso se refiere no dice nada, a priori, del valor total.\\
+El problema de la mochila, en cualquier dimensi\'on, se basa en maximizar un valor total teniendo en cuenta una o varias capacidades de las cuales no podemos excedernos. Como queden completadas las mochilas involucradas en cuanto a peso se refiere no dice nada, a priori, del valor total.\\
 
-La idea de aplicar una tecnica de programación dinámica en un problema de optimización (con lo cual utilizamos el principio de optimalidad de Bellman) es que podemos maximizar este valor total teniendo en cuenta lo mejor que pudimos hacer para subproblemas mas pequeños.\\
+La idea de aplicar una tecnica de programación dinámica en un problema de optimización (con lo cual utilizamos el principio de optimalidad de Bellman) es que podemos maximizar este valor total teniendo en cuenta lo mejor que pudimos hacer para subproblemas m\'as pequeños.\\
 
-En el caso de una dimension, estos subproblemas serán más facil de ver, y por lo tanto abordaremos esta pseudo-demostración desde la perspectiva de una mochila en primera instancia.\\
+En el caso de una dimensi\'on, estos subproblemas serán más facil de ver, y por lo tanto abordaremos esta pseudo-demostración desde la perspectiva de una mochila en primera instancia.\\
 
 Nuestro subproblema en este caso es: que es lo mejor que se pudo lograr con $i$ objetos y 0 $\leq k \leq K$ capacidades, siendo $K$ la capacidadad total de la mochila.
 Puede describirse de la siguiente manera:
@@ -22,13 +22,13 @@ Lo que nos queda es un máximo que se calcula de la siguiente manera:
 S(i, k) = max(S(i-1, k-peso(e_i))+valor(e_i), S(i-1, k))
 \end{equation}
 
-Como puede verse, cada subproblema es recursivo y ofrece una solución optima para casos mas pequeños. Es decir, con menos objetos.
+Como puede verse, cada subproblema es recursivo y ofrece una solución \'optima para casos m\'as pequeños. Es decir, con menos objetos.
 
-Al final, en el último paso, es decir para el último objeto y luego de haber analizado cada una de las capacidades, obtendremos el optimo total que será el resultado de resolver $S(n, K)$, siendo $n$ la cantidad de objetos total.\\
+Al final, en el último paso, es decir para el último objeto y luego de haber analizado cada una de las capacidades, obtendremos el \'optimo total que será el resultado de resolver $S(n, K)$, siendo $n$ la cantidad de objetos total.\\
 
-Como puede verse, en cada paso, para un objeto se puede determinar que acción realizar, con esta misma idea y con la ayuda de una matriz que nos permite hacer uso de memoizacion de cada paso, podemos obtener que objetos estuvieron involucrados en el optimo final.\\
+Como puede verse, en cada paso, para un objeto se puede determinar que acción realizar, con esta misma idea y con la ayuda de una matriz que nos permite hacer uso de memorizaci\'on de cada paso, podemos obtener que objetos estuvieron involucrados en el \'optimo final.\\
 
-Para el caso de dos o tres mochilas estamos ante un problema de similar resolución, pero con más complicaciones relacionadas al logro de memoización para no perder información de cada paso realizado, la cual es fundamental para la obtención de los objetos de cada mochila.\\
+Para el caso de dos o tres mochilas estamos ante un problema de similar resolución, pero con más complicaciones relacionadas al logro de memorización para no perder información de cada paso realizado, la cual es fundamental para la obtención de los objetos de cada mochila.\\
 
 Aquí la idea es obtener un máximo general sin importar si las mochilas maximizan o no por su parte.
 
@@ -55,15 +55,15 @@ max(S(i-1, k_1-peso(e_i), k_2)+valor(e_i),
 Como puede verse, para dos mochilas (y tambien tres) podemos obtener el resultado del máximo general, haciendo un análisis exhaustivo de las posibilidades de manera similar a como se resuelve para una mochila, solo que viendo en dos (o tres) dimensiones, todas las posiblidades para menos objetos.\\
 Por lo cual, la respuesta a este problema será $S(n, K_1, K_2)$ siendo $n$ la cantidad de objetos total y $K_1$ y $K_2$ las capacidades de las mochilas.\\
 
-Como se mencionó en la explicación y desarrollo del problema, el mismo se resuelve tambien con el uso de matrices, pero cabe destacar el plural. 
+Como se mencionó en la explicación y desarrollo del problema, el mismo se resuelve tambi\'en con el uso de matrices, pero cabe destacar el plural. 
 
-En un principio, para obtener el máximo, podriamos utilizar una única matriz. Pero dado que para cada objeto se la recorre completa, la información del máximo logrado para cada objeto puede no mantenerse, y además como los objetos no ocupan un lugar en la matriz, no podemos saber cual de estos lo logró.\\
+En un principio, para obtener el máximo, podr\'iamos utilizar una única matriz. Pero dado que para cada objeto se la recorre completa, la información del máximo logrado para cada objeto puede no mantenerse, y además como los objetos no ocupan un lugar en la matriz, no podemos saber cual de estos lo logró.\\
 Por lo tanto, hacemos uso de $n$ matrices de dimensiones correspondientes a la capacidad de las mochilas involucradas. \\
 
 De esta manera, el máximo logrado para $i$ objetos estará alojado en la matriz correspondiente al objeto $i-esimo$.\\
 
 De aquí en más, lo visto en la explicación ayuda a obtener los objetos en los casos para una y dos o tres dimensiones, teniendo en cuenta que es lo que sucede o no al tomar un objeto. \\
 
-Por lo tanto, por el principio de optimalidad y debido al análisis exhaustivo, podemos asegurar que el máximo logrado es el optimo y que los objetos pueden obtenerse como una consecuencia de las elecciones realizadas y la información correctamente almacenada.
+Por lo tanto, por el principio de optimalidad y debido al análisis exhaustivo, podemos asegurar que el máximo logrado es el \'optimo y que los objetos pueden obtenerse como una consecuencia de las elecciones realizadas y la información correctamente almacenada.
 
 
