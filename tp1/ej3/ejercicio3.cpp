@@ -473,15 +473,15 @@ int main(){
     objectsValues = values;
     knapSacksCapacities = knapSacks;
     
-    if (M == 1) {
-        initArrOfObjectsUsed();
+	initArrOfObjectsUsed();
+    
+	if (M == 1) {
 		int max = simpleKnapSackProblem(0);
         printf("%d\n", max);
     }else if (M == 2) {
         if (knapSacksCapacities[0] == knapSacksCapacities[1]) {
             //habria que calcular dos veces el simple.....pero para esto hay que modificar un toque el codigo.
             //hay que marcar objetos usados.
-            initArrOfObjectsUsed();
             
             int max = simpleKnapSackProblem(0);
             max += simpleKnapSackProblem(1);
@@ -495,7 +495,6 @@ int main(){
     	if (knapSacksCapacities[0] == knapSacksCapacities[1] && knapSacksCapacities[1] == knapSacksCapacities[2]) {
 	    //habria que calcular dos veces el simple.....pero para esto hay que modificar un toque el codigo.
             //hay que marcar objetos usados.
-            initArrOfObjectsUsed();
             
             int max = simpleKnapSackProblem(0);
             max += simpleKnapSackProblem(1);
