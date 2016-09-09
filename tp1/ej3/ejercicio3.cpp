@@ -61,7 +61,7 @@ int simpleKnapSackProblem(int knapsack) {
             actualCol=-1;
         }else if (actualRow == 0) {
             if (K[actualRow][actualCol]) {
-                objectsUsed[actualRow] = knapsack;//TODO esta parte me causa mucho ruido
+                objectsUsed[actualRow] = knapsack+1;//TODO esta parte me causa mucho ruido
                 //printf("(%d, %d) \n\n", objectsValues[actualRow], objectsWeights[actualRow]);
             }
             actualRow=-1;
@@ -69,7 +69,7 @@ int simpleKnapSackProblem(int knapsack) {
             //objectsUsed[actualRow] = true;
             //printf("used object (%d, %d) \n", objectsValues[actualRow], objectsWeights[actualRow]);
             
-			objectsUsed[actualRow] = knapsack;
+			objectsUsed[actualRow] = knapsack+1;
 			//printf("(%d %d) \n\n", objectsValues[actualRow], objectsWeights[actualRow]);
 
 			actualCol = abs(actualCol-objectsWeights[actualRow]); // por si acaso, valor absoluto.
