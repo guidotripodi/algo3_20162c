@@ -24,7 +24,15 @@ S(i, k) = max(S(i-1, k-peso(e_i))+valor(e_i), S(i-1, k))
 
 Como puede verse, cada subproblema es recursivo y ofrece una solución \'optima para casos m\'as pequeños. Es decir, con menos objetos.
 
-Al final, en el último paso, es decir para el último objeto y luego de haber analizado cada una de las capacidades, obtendremos el \'optimo total que será el resultado de resolver $S(n, K)$, siendo $n$ la cantidad de objetos total.\\
+La solución a nuestro problema será el resultado de resolver $S(n, K)$, siendo $n$ la cantidad de objetos total, la cual será óptima para $n$ objetos.\\
+
+Si supusieramos que algún $S(i, k)$ que forma parte de la solución no es óptimo, entonces existe alguna solución óptima para  $S(j, k)$ con $j$ $<$ $i$. 
+
+Pero si esto sucede quiere decir que podemos cambiarlo en la solución final y obtener un resultado mejor.\\
+
+Esto no puede suceder debido al principio de optimalidad de Bellman que dicta \emph{<< dada una secuencia \'optima de decisiones, toda subsecuencia de ella es, a su vez, \'optima >>}.
+
+Por lo tanto todas las $S(i, k)$ que forman parte de la solución final son óptimas.
 
 Como puede verse, en cada paso, para un objeto se puede determinar que acción realizar, con esta misma idea y con la ayuda de una matriz que nos permite hacer uso de memorizaci\'on de cada paso, podemos obtener que objetos estuvieron involucrados en el \'optimo final.\\
 
@@ -55,7 +63,9 @@ max(S(i-1, k_1-peso(e_i), k_2)+valor(e_i),
 Como puede verse, para dos mochilas (y tambien tres) podemos obtener el resultado del máximo general, haciendo un análisis exhaustivo de las posibilidades de manera similar a como se resuelve para una mochila, solo que viendo en dos (o tres) dimensiones, todas las posiblidades para menos objetos.\\
 Por lo cual, la respuesta a este problema será $S(n, K_1, K_2)$ siendo $n$ la cantidad de objetos total y $K_1$ y $K_2$ las capacidades de las mochilas.\\
 
-Como se mencionó en la explicación y desarrollo del problema, el mismo se resuelve tambi\'en con el uso de matrices, pero cabe destacar el plural. 
+Como se mencionó para el caso de una mochila, aquí tambien puede aplicarse el principio de optimalidad para justificar que todas las soluciones a subproblemas son óptimos por ser $S(n, K_1, K_2)$ óptimo en si mismo.
+
+Además por lo explicado en la resolución del problema, tambi\'en se hace uso de matrices para resolver los casos con dos y tres mochilas, pero cabe destacar el plural. 
 
 En un principio, para obtener el máximo, podr\'iamos utilizar una única matriz. Pero dado que para cada objeto se la recorre completa, la información del máximo logrado para cada objeto puede no mantenerse, y además como los objetos no ocupan un lugar en la matriz, no podemos saber cual de estos lo logró.\\
 Por lo tanto, hacemos uso de $n$ matrices de dimensiones correspondientes a la capacidad de las mochilas involucradas. \\
