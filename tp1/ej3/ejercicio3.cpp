@@ -33,7 +33,6 @@ int simpleKnapSackProblem(int knapsack) {
             if (w == 0){
                 K[i][w] = 0;
             }else if (objectsWeights[i] <= w && objectsUsed[i] == false){ 
-				//TODO sigue funcionando asi no? si no esta usado va a estar en 0 que es lo mismo que false
                 // condiciones adicionales: que esta mochila maximize para el objeto, y que no se haya usado en otra que tambien maximize
                 if (i == 0) {
                     K[i][w] = objectsValues[i];
@@ -48,11 +47,8 @@ int simpleKnapSackProblem(int knapsack) {
                     K[i][w] = K[i - 1][w];
                 }
             }
-            //printf("%d |", K[i][w]);
         }
-        //printf("\n");
     }
-    //printf("\n");
     
     int actualCol = knapSackCapacity;
     int actualRow = N-1;
@@ -61,17 +57,11 @@ int simpleKnapSackProblem(int knapsack) {
             actualCol=-1;
         }else if (actualRow == 0) {
             if (K[actualRow][actualCol]) {
-                objectsUsed[actualRow] = knapsack+1;//TODO esta parte me causa mucho ruido
-                //printf("(%d, %d) \n\n", objectsValues[actualRow], objectsWeights[actualRow]);
+                objectsUsed[actualRow] = knapsack+1;
             }
             actualRow=-1;
         }else if (K[actualRow-1][actualCol] != K[actualRow][actualCol]) {
-            //objectsUsed[actualRow] = true;
-            //printf("used object (%d, %d) \n", objectsValues[actualRow], objectsWeights[actualRow]);
-            
 			objectsUsed[actualRow] = knapsack+1;
-			//printf("(%d %d) \n\n", objectsValues[actualRow], objectsWeights[actualRow]);
-
 			actualCol = abs(actualCol-objectsWeights[actualRow]); // por si acaso, valor absoluto.
             actualRow--;
         }else{
@@ -79,12 +69,7 @@ int simpleKnapSackProblem(int knapsack) {
         }
     }
     
-    //printf("} \n");
-    
     int max = K[N-1][knapSackCapacity];
-    
-    //printf("maximo logrado %d en mochila %d \n", max, knapsack+1);
-    
     return max;
 }
 
@@ -110,8 +95,6 @@ void create3dMatrices() {
         }
     
         objects3dMatrices[i] = K; 
-		//para cada elemento de este arreglo de matrices 3d va un delete
-		//en realidad, me tengo que meter por todos los niveles y hacer delete[] a cada uno
     }
 }
 
@@ -285,15 +268,12 @@ void tridimentionalKnapSackProblem() {
             // entiendo que seguro sucede que: kj[k1Max][k2Max][k1Max] + objectsValue[i] = kj[k1Max][k2Max][k1Max]
             if (k1Max >= weight && Kj[k1Max-weight][k2Max][k3Max] + value == Ki[k1Max][k2Max][k3Max]) {
                 k1Max -= weight;
-//              printf("objeto %d, %d en mochila de %d kg \n\n", value, weight, km1);
 				objectsUsed[i] = 1;
             }else if(k2Max >= weight && Kj[k1Max][k2Max-weight][k3Max] + value == Ki[k1Max][k2Max][k3Max]) {
                 k2Max -= weight;
-//              printf("objeto %d, %d en mochila de %d kg \n\n", value, weight, km2);
 				objectsUsed[i] = 2;
             }else {
                 k3Max -= weight;
-//				printf("objeto %d, %d en mochila de %d kg \n\n", value, weight, km3);
 				objectsUsed[i] = 3;
                 // deberia ser obligatorio...por alguna vino
             }
@@ -304,16 +284,12 @@ void tridimentionalKnapSackProblem() {
     
     if (i == 0 && max) {
         int weight = objectsWeights[0];
-        int value = objectsValues[0];
         
         if (k1Max >= weight) {
-//      	printf("objeto %d, %d en mochila de %d kg \n\n", value, weight, km1);
 			objectsUsed[0] = 1;
         }else if (k2Max >= weight) {
-//			printf("objeto %d, %d en mochila de %d kg \n\n", value, weight, km2);
 			objectsUsed[0] = 2;
         }else {
-//			printf("objeto %d, %d en mochila de %d kg \n\n", value, weight, km3);
 			objectsUsed[0] = 3;
         }
     }
@@ -398,11 +374,9 @@ void bidimentionalKnapSackProblem() {
             // entiendo que seguro sucede que: kj[k1Max][k2Max][k1Max] + objectsValue[i] = kj[k1Max][k2Max][k1Max]
             if (k1Max >= weight && Kj[k1Max-weight][k2Max] + value == Ki[k1Max][k2Max]) {
                 k1Max -= weight;
-//              printf("objeto %d, %d en mochila de %d kg \n\n", value, weight, km1);
 				objectsUsed[i] = 1;
             }else {
                 k2Max -= weight;
-//              printf("objeto %d, %d en mochila de %d kg \n\n", value, weight, km2);
 				objectsUsed[i] = 2;
                 // deberia ser obligatorio...por alguna vino
             }
@@ -412,13 +386,10 @@ void bidimentionalKnapSackProblem() {
     
     if (i == 0 && max) {
         int weight = objectsWeights[0];
-        int value = objectsValues[0];
         
         if (k1Max >= weight) {
-//          printf("objeto %d, %d en mochila de %d kg \n\n", value, weight, km1);
 			objectsUsed[0] = 1;
         }else {
-//          printf("objeto %d, %d en mochila de %d kg \n\n", value, weight, km2);
 			objectsUsed[0] = 2;
         }
     }
@@ -436,19 +407,6 @@ void initArrOfObjectsUsed() {
 
 int main(){
     
-//    int knapSacks[] = {3, 5, 7};
-    
-//    int values[] = {7, 3, 5, 5, 7};
-    
-//    int weights[] = {2, 3, 3, 5, 7};
-  
-//    int values[] = {7, 3, 5, 1, 2};
-    
-//    int weights[] = {2, 3, 3, 5, 7};
-    
-//    N = 5;
-//    M = 3;
-
 	int i = 0;
 	int cantidad; 
 	std::cin >> M;
