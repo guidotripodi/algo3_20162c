@@ -1,0 +1,7 @@
+La complejidad del algoritmo es $O(N^2)$ con $N$ la cantidad de pisos del edificio.
+Se puede demostrar la complejidad con los siguientes puntos:
+\begin{itemize}
+\item Si resolver el problema para $n-1$ pisos cuesta $(n-1)^2$ .
+\item Como vimos en la demostracion anterior, si tenemos resuelto el problema para los $n-1$ pisos anteriores podemos mirar todas las soluciones anteriores para encontrar la mejor solucion para el piso $n$. Esto en el peor caso toma $O(n-1)$.
+\item Los puntos anteriores indican que para resolver el problema con tamaño $n$ debemos realizar $O({n}^{2} + {n-1}^2 + ... + {2}^{2} + 1^{2})$ pasos, que implica que la complejidad de nuestro algoritmo es $O(n^{2})$.
+\end{itemize}

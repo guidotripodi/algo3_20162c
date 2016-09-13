@@ -1,0 +1,13 @@
+El Pabellon 0+infinito, nuevamente remodelado, ahora tiene un diseño basado en un conjunto de M
+pasillos de distintas longitudes con intersecciones en donde se unen dos o mas pasillos. Es ası que puede
+modelarse como un grafo con pesos en los ejes, donde cada eje es un pasillo (de peso igual a la longitud del
+pasillo), y cada vértices es una intersección o un extremo donde termina un pasillo sin unirse con ningun
+otro. El decano junto con el director del Departamento de Computacion, están preocupados porque talvez
+existen ciclos en dicho grafo, lo que podría perjudicar a los alumnos al hacer que se pierdan buscando
+las aulas. Por tal motivo el decano decidió clausurar los pasillos que sea necesario de manera tal que no
+queden ciclos en el grafo que representa al pabellon. El problema es que cuanto más largo es un pasillo,
+más costoso es clausurarlo. 
+Diseñar un algoritmo de complejidad O(M log M) para calcular la mínima
+suma posible de las longitudes de los pasillos que deberían ser clausurados (eventualmente ninguno) para
+que no existan ciclos formados por tres o mas pasillos en el grafo que representa al pabellón. Se asegura
+que en toda instancia del problema el grafo que representa al pabellon es conexo.

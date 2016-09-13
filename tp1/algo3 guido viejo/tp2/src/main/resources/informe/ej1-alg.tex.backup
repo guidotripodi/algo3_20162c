@@ -1,0 +1,22 @@
+
+\begin{algorithm}[H]
+\caption{TELEGRAFO}
+\begin{algorithmic}[1]
+\Function{Public}{\param{in}{cableSize}{Integer}, \param{in}{stationDistances}{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
+\If{cableSize < 0 || stationDistances == null} \hfill //O(1)
+\state res $\gets$ Error \hfill //O(1)
+\endif
+\state List<Integer> distanceDifferences $\gets$ List<vacio> \hfill //O(1)
+\state Integer lastStation $\gets$ 0 \hfill //O(1)
+\state Integer distance $\gets$ 0 \hfill //O(1)
+\while{distance < stationDistances} \hfill //O(N)
+\state distanceDifferences.Agregar(distance - lastStation) \hfill //O(1)
+\state lastStation $\gets$ distance \hfill //O(1)
+\endwhile
+\state res $\gets$ getMaxRangeLength(cableSize, distanceDifferences) \hfill //O(n)
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{n}
+\end{algorithm}
+

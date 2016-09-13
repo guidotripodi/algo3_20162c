@@ -1,0 +1,14 @@
+El algoritmo desarrollado representa a una heurística golosa constructiva.\\ 
+Este se basa en la idea intuitiva de que es conveniente comenzar pintando primero los nodos con más restricciones, dejando los que menos restricciones tienen para el final.\\
+ 
+Esto se debe a que cuando fijamos un color en un nodo, aumentamos las restricciones de sus vecinos, dejando a estos sin este color como opción. Por lo tanto, si realizamos lo contrario y empezamos por los nodos con menor cantidad de restricciones, en cada paso nos encontraremos con nodos con \textbf{"pocas"} opciones, lo que hará más probable que se nos agoten las opciones más rapidamente.\\
+	 
+En concreto, lo que hace nuestra heurística es mantener ordenadados a los nodos por su cantidad de opciones. Luego, mientras existan nodos sin colorear, toma el de menor cantidad de opciones y lo pinta del color \textbf{"más conveniente"}. Por color "mas conveniente" nos referimos al que genera menos conflictos entre sus vecinos ya pintados (si hay mas de uno alguno de ellos). Esto se puede calcular chequeando los colores de los vecinos ya pintados y tomar el que esta dentro de los colores posibles del nodo que aparece menos veces.\\
+	 
+Resumiendo, nuestro algoritmo recorre todos los vértices, tomando siempre el de menor cantidad de opciones y a cada uno lo pinta del "mejor color".\\
+
+En cuanto a implementación, se precisó de una estructura de datos que permitiera tener a los nodos ordenados por su cantidad de opciones, ademas de ir actualizando esa cantidad. La estructura \textit{ValueSortedMap} explicada en su sección correspondiente cumple con estos requisitos. \\
+Por otra parte, se necesitó de la estructura \textit{Graph}, que indicaba las opciones posibles de un nodo (las que no generan conflictos). \\
+Una vez teniendo estas estructuras, el algoritmo se reduce a un ciclo por los nodos, en el cual se pinta del "mejor color" al nodo de la iteración y, como esto modifica la cantidad de colores posibles de los vecinos, se actualiza esta cantidad en la estructura \textit{ValueSortedMap}.
+
+

@@ -1,0 +1,15 @@
+\vspace*{1em}
+\begin{enumerate}
+
+\item\textbf{Problema 1}
+\par Iniciamos chequeando que los valores recibidos sean validos, demandandonos O(1).\\
+Creamos una lista de enteros vacia  y un entero insumiendonos O(1) cada uno. 
+Realizamos un ciclo que recorre todo stationDistance el cual podra llegar a realizar hasta 
+N vueltas, en el mismo por cada vuelta, se iran agregando a la lista creada enteros con el valor de distancia
+recorrida costando en cada iteracion O(1).\\
+Luego, en un entero res, guardamos el valor resultante obtenido de la funcion
+getMaxRangeLength el cual insumio O(N).
+\par \textbf{Orden:} O(1) + O(1) + O(1) + O(1) + O(N) + O(N)
+\par \textbf{Orden Total:} \textbf{O(N)}
+
+\end{enumerate}
