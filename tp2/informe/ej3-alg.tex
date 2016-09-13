@@ -1,0 +1,300 @@
+A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algoritmo:
+
+\begin{algorithm}[H]
+\caption{Mochilas}
+\begin{algorithmic}[1]
+\Function{EJ3}{\param{in}{Lista<mochila>}{MOCHILAS} \param{in}{Lista<objeto>}{OBJETOS}}{$\ensuremath{\rightarrow}$ \param{out}{S} {Integer} \param{out}{elementos} {List<Integer>}}
+\If{\#(MOCHILAS) == 1} \hfill //O(1)
+\state maximizoSimple(MOCHILAS[1],OBJETOS) \hfill //O($K(M[1]) \ast N$)
+\endif
+\If{\#(MOCHILAS) == 2} \hfill //O(1)
+\If{capacidad[M${_1}$] == capacidad[M${_2}$]} \hfill //O(1)
+\state maximizoSimple(MOCHILAS[1], OBJETOS) \hfill //O($K(M[1]) \ast N$)
+\state maximizoSimple(MOCHILAS[2], OBJETOS) \hfill //O($K(M[2]) \ast N$)
+\Else
+\state maximizoDoble(MOCHILAS[1],MOCHILAS[2], OBJETOS) \hfill //O(M * N)
+\endif
+\endif
+\If{\#(MOCHILAS) == 3} \hfill //O(1)
+\If{capacidad[M${_1}$] == capacidad[M${_2}$] $\wedge$ capacidad[M${_2}$] == capacidad[M${_3}$] } \hfill //O(1)
+\state maximizoSimple(MOCHILAS[1], OBJETOS) \hfill //O($K(M[1]) \ast N$)
+\state maximizoSimple(MOCHILAS[2], OBJETOS) \hfill //O($K(M[2]) \ast N$)
+\state maximizoSimple(MOCHILAS[3], OBJETOS) \hfill //O($K(M[3]) \ast N$)
+\Else
+\state maximizoTriple(MOCHILAS,OBJETOS) \hfill //O($K(M) \ast N$)
+\endif
+\endif
+\state devolver arrayMaximo.size \hfill //O(N)
+\state devolver arrayMaximo \hfill //O(N)
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{$K(M) \ast N$}
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+\caption{Mochilas}
+\begin{algorithmic}[1]
+\Function{MaximizoSimple}{\param{in}{Lista<mochila>}{MOCHILAS} \param{in}{Lista<objeto>}{OBJETOS}}{$\ensuremath{\rightarrow}$ \param{out}{max} {Integer} \param{out}{arrayUsados} {List<Integer>}}
+\while{i < \#(OBJETOS)} \hfill //O(N)
+\while{j < capacidad(MOCHILAS[1])} \hfill //O(K(M[1]))
+\If{j == 0} \hfill //O(1)
+\state matriz[OBJETOS[i]][j] $\gets$ 0 \hfill //O(1)
+\endif
+\If{j > 0 $\wedge$ peso(OBJETOS[i]) $\leq$ j $\wedge$ $\neg$(Usado(OBJETOS[i]))} \hfill //O(1)
+\If{i == 0} \hfill //O(1)
+\state matriz[OBJETOS[i]][j] $\gets$ OBJETOS[i] \hfill //O(1)
+\Else
+\state matriz[elemento][j] $\gets$ MAX(valor(OBJETOS[i]) +  \state
+matriz[i-1][j - peso(OBJETOS[i])], matriz[i-1][j]) \hfill //O(1)
+\endif
+\Else
+\If{i == 0} \hfill //O(1)
+\state matriz[OBJETOS[i]][j] $\gets$ 0 \hfill //O(1)
+\Else
+\state matriz[elemento][j] $\gets$ matriz[i-1][j] \hfill //O(1)
+\endif
+\endif
+\state j++  \hfill //O(1)
+\endwhile
+\state i++  \hfill //O(1)
+\endwhile
+\state columnaActual $\gets$ K(M[1]) \hfill //O(1)
+\state filaActual $\gets$ N-1 \hfill //O(1)
+\while{filaActual $\geq$ 0 $\wedge$ columnaActual $\geq$ 0}
+\If{$\neg$(vacia(columnaActual)) $\wedge$ filaActual == 0} \hfill //O(1)
+\If{matriz[filaActual][columnaActual]}\hfill //O(1)
+\state arrayUsados $\cup$ matriz[filaActual][columnaActual] \hfill //O(1)
+\endif
+\state filaActual-- \hfill //O(1)
+\endif
+\If{matriz[filaActual-1][columnaActual] $\neq$ matriz[filaActual][columnaActual] }\hfill //O(1)
+\state arrayUsados $\cup$ matriz[filaActual][columnaActual] \hfill //O(1)
+\state columnaActual $\gets$ columnaActual - peso(filaActual)  \hfill //O(1)
+\state filaActual-- \hfill //O(1)
+\Else
+\state filaActual-- \hfill //O(1)
+\endif
+\endwhile
+\state max $\gets$ matriz[filaActual-1][columnaActual] \hfill //O(1)
+\state devolver max  \hfill //O(1)
+\state devolver arrayUsados \hfill //O(N)
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{$K(M[1]) \ast N)$}
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+\caption{Mochilas}
+\begin{algorithmic}[1]
+\Function{MaximizoDoble}{\param{in}{Lista<mochila>}{MOCHILAS} \param{in}{Lista<objeto>}{OBJETOS}}{$\ensuremath{\rightarrow}$ \param{out}{max} {Integer} \param{out}{arrayMaximo} {List<Integer>}}
+\state cap1 $\gets$ capacidad(M[1]) \hfill //O(1)
+\state cap2 $\gets$ capacidad(M[2]) \hfill //O(1)
+\state creo entero h $\gets$\hfill //O(1)
+\while{h < \#(OBJETOS)} \hfill //O(N)
+\state peso $\gets$ peso(OBJETOS[h]) \hfill //O(1)
+\state valor $\gets$ valor(OBJETOS[h]) \hfill //O(1)
+\state i $\gets$  cap2  \hfill //O(1)
+\while{i $\leq$ 0 } \hfill //O(K(M[1]))
+\state j $\gets$  cap1  \hfill //O(1)
+\while{j $\leq$ 0 } \hfill //O(K(M[2]))
+\state creo entero m0 $\gets$ matriz[j][i] \hfill //O(1)
+\state creo entero m1 y m2 inicializados en 0 \hfill //O(1)
+\If{j $\geq$ peso } \hfill //O(1)
+\state m1 $\gets$ matriz[j-peso][i] \hfill //O(1)
+\endif
+\If{i $\geq$ peso } \hfill //O(1)
+\state m2 $\gets$ matriz[j][i-peso] \hfill //O(1)
+\endif
+\If{j $\geq$ peso $\wedge$ m1 + valor $\geq$ m0 
+$\wedge$ m1 + valor $\geq$ m2 + valor } \hfill //O(1)
+\state matriz[j][i] $\gets$ m1 + valor \hfill //O(1)
+\Else
+\If{i $\geq$ peso $\wedge$ m2 + valor $\geq$ m0 
+$\wedge$ m2 + valor $\geq$ m1 + valor } \hfill //O(1)
+\state matriz[j][i] $\gets$ m2 + valor \hfill //O(1)
+\endif
+\If{matriz[j][i] > max } \hfill //O(1)
+\state max $\gets$ matriz[j][i] \hfill //O(1)
+\state jMax $\gets$ j \hfill //O(1)
+\state iMax $\gets$ i \hfill //O(1)
+\state max $\gets$ h \hfill //O(1)
+\endif
+\endif
+\state i++ \hfill //O(1)
+\endwhile
+\state j++ \hfill //O(1)
+\endwhile
+\state h++ \hfill //O(1)
+\endwhile
+\state i $\gets$ max \hfill //O(1)
+\state devolver organizarYDevolverDoble(MOCHILAS, OBJETOS, max,iMax,jMax) \hfill //O(N)
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{$[K(M[1]) + K(M[2])] \ast N)$}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Mochilas}
+\begin{algorithmic}[1]
+\Function{organizarYDevolverDoble}{\param{in}{Lista<mochila>}{MOCHILAS} \param{in}{Lista<objeto>}{OBJETOS}\param{in}{Integer}{max}\param{in}{Integer}{iMax}\param{in}{Integer}{jMax}}{$\ensuremath{\rightarrow}$ \param{out}{max} {Integer} \param{out}{arrayMaximo} {List<Integer>}}
+\while{i > 0} \hfill //O(i)
+\state peso $\gets$ peso(OBJETOS[i]) \hfill //O(1)
+\state valor $\gets$ valor(OBJETOS[i]) \hfill //O(1)
+\state creo matriz matriz1 $\gets$ matriz[j][i] \hfill //O(N)
+\state creo matriz matriz2 $\gets$ matriz[j][i-1] \hfill //O(N)
+\If{matriz1[jMax][iMax] $\neq$ matriz2[jMax][iMax]} \hfill //O(1)
+\If{jMax $\geq$ peso $\wedge$
+\state [iMax] matriz2[jMax - peso][iMax] + valor == 
+\state matriz1[jMax][iMax]} \hfill //O(1)
+\state jMax $\gets$ jMax - peso \hfill //O(1)
+\Else
+\state iMax $\gets$ iMax - peso \hfill //O(1)
+\endif
+\endif
+\state i-- \hfill //O(1)
+\endwhile
+\If{i == 0 $\wedge$ max} \hfill //O(1)
+\state peso $\gets$ peso(OBJETOS[0]) \hfill //O(1)
+\state valor $\gets$ valor(OBJETOS[0]) \hfill //O(1)
+\If{jMax $\geq$ peso} \hfill //O(1)
+\state arrayMochila1 $\cup$ objeto(peso, valor) \hfill //O(1)
+\Else
+\state arrayMochila2 $\cup$ objeto(peso, valor) \hfill //O(1)
+\endif
+\endif
+\state arrayMaximo $\cup$ arrayMochila1 \hfill //O(N)
+\state arrayMaximo $\cup$ arrayMochila2 \hfill //O(N)
+\state devolver arrayMaximo \hfill //O(N)
+\state devolver max \hfill //O(1)
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{$N$}
+\end{algorithm}
+
+
+
+
+\begin{algorithm}[H]
+\caption{Mochilas}
+\begin{algorithmic}[1]
+\Function{MaximizoTriple}{\param{in}{Lista<mochila>}{MOCHILAS} \param{in}{Lista<objeto>}{OBJETOS}}{$\ensuremath{\rightarrow}$ \param{out}{max} {Integer} \param{out}{arrayMaximo} {List<Integer>}}
+\state creo enteros cap1, cap2 y cap3 inicializados con las capacidades de cada mochila \hfill //O(1)
+\while{h < \#(OBJETOS)} \hfill //O(N)
+\state peso $\gets$ peso(OBJETOS[h]) \hfill //O(1)
+\state valor $\gets$ valor(OBJETOS[h]) \hfill //O(1)
+\state x $\gets$  cap3  \hfill //O(1)
+\while{x $\leq$ 0 } \hfill //O(K(M[3]))
+\state i $\gets$  cap2  \hfill //O(1)
+\while{i $\leq$ 0 } \hfill //O(K(M[2]))
+\state j $\gets$  cap1  \hfill //O(1)
+\while{j $\leq$ 0 } \hfill //O(K(M[1]))
+\state creo entero m0 $\gets$ matriz[j][i][x] \hfill //O(1)
+\state creo entero m1, m2 y m3 inicializados en 0 \hfill //O(1)
+\If{j $\geq$ peso } \hfill //O(1)
+\state m1 $\gets$ matriz[j-peso][i][x] \hfill //O(1)
+\endif
+\If{i $\geq$ peso } \hfill //O(1)
+\state m2 $\gets$ matriz[j][i-peso][x] \hfill //O(1)
+\endif
+\If{x $\geq$ peso } \hfill //O(1)
+\state m3 $\gets$ matriz[j][i][x-peso] \hfill //O(1)
+\endif
+\If{j $\geq$ peso $\wedge$ m1 + valor $\geq$ m0 
+$\wedge$ \state
+m1 + valor $\geq$ m2 + valor $\wedge$ 
+m1 + valor $\geq$ m3 + valor } \hfill //O(1)
+\state matriz[j][i][x] $\gets$ m1 + valor \hfill //O(1)
+\endif
+\If{i $\geq$ peso $\wedge$ m2 + valor $\geq$ m0 
+$\wedge$ \state m2 + valor $\geq$ m1 + valor $\wedge$ 
+m2 + valor $\geq$ m3 + valor } \hfill //O(1)
+\state matriz[j][i][x] $\gets$ m2 + valor \hfill //O(1)
+\endif
+\If{x $\geq$ peso $\wedge$ m3 + valor $\geq$ m0 
+$\wedge$ \state m3 + valor $\geq$ m1 + valor $\wedge$
+m3 + valor $\geq$ m2 + valor } \hfill //O(1)
+\state matriz[j][i][x] $\gets$ m3 + valor \hfill //O(1)
+\endif
+\If{matriz[j][i][x] > max } \hfill //O(1)
+\state max $\gets$ matriz[j][i][x] \hfill //O(1)
+\state creo enteros jMax, iMax y xMax inicializados con j i x \hfill //O(1)
+\state max $\gets$ h \hfill //O(1)
+\endif
+\state x++ \hfill //O(1)
+\endwhile
+\state i++ \hfill //O(1)
+\endwhile
+\state j++ \hfill //O(1)
+\endwhile
+\state h++ \hfill //O(1)
+\endwhile
+\state i $\gets$ max \hfill //O(1)
+\state devolver organizarYDevolverTriple(MOCHILAS, OBJETOS, max,iMax,jMax, xMax) \hfill //O(N)
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{$[K(M[1]) + K(M[2])] \ast N)$}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Mochilas}
+\begin{algorithmic}[1]
+\Function{organizarYDevolverTriple}{\param{in}{Lista<mochila>}{MOCHILAS} \param{in}{Lista<objeto>}{OBJETOS}\param{in}{Integer}{max}\param{in}{Integer}{iMax}\param{in}{Integer}{jMax}\param{in}{Integer}{xMax}}{$\ensuremath{\rightarrow}$ \param{out}{max} {Integer} \param{out}{arrayMaximo} {List<Integer>}}
+\while{i > 0} \hfill //O(i)
+\state peso $\gets$ peso(OBJETOS[i]) \hfill //O(1)
+\state valor $\gets$ valor(OBJETOS[i]) \hfill //O(1)
+\state creo matriz matriz1 $\gets$ matriz[j][i][x] \hfill //O(N)
+\state creo matriz matriz2 $\gets$ matriz[j][i-1][x] \hfill //O(N)
+\If{matriz1[jMax][iMax][xMax] $\neq$ matriz2[jMax][iMax][xMax]} \hfill //O(1)
+\If{jMax $\geq$ peso $\wedge$
+\state matriz2[jMax - peso][iMax][xMax] + valor == 
+\state matriz1[jMax][iMax][xMax]} \hfill //O(1)
+\state jMax $\gets$ jMax - peso \hfill //O(1)
+\endif
+\If{iMax $\geq$ peso $\wedge$
+\state matriz2[jMax][iMax-peso][xMax] + valor == 
+\state matriz1[jMax][iMax][xMax]} \hfill //O(1)
+\state iMax $\gets$ iMax - peso \hfill //O(1)
+\endif
+\If{xMax $\geq$ peso $\wedge$
+\state matriz2[jMax][iMax][xMax-peso] + valor == 
+\state matriz1[jMax][iMax][xMax]} \hfill //O(1)
+\state xMax $\gets$ xMax - peso \hfill //O(1)
+\endif
+\endif
+\state i-- \hfill //O(1)
+\endwhile
+\If{i == 0 $\wedge$ max} \hfill //O(1)
+\state peso $\gets$ peso(OBJETOS[0]) \hfill //O(1)
+\state valor $\gets$ valor(OBJETOS[0]) \hfill //O(1)
+\If{jMax $\geq$ peso} \hfill //O(1)
+\state arrayMochila1 $\cup$ objeto(peso, valor) \hfill //O(1)
+\endif
+\If{iMax $\geq$ peso} \hfill //O(1)
+\state arrayMochila2 $\cup$ objeto(peso, valor) \hfill //O(1)
+\endif
+\If{xMax $\geq$ peso} \hfill //O(1)
+\state arrayMochila3 $\cup$ objeto(peso, valor) \hfill //O(1)
+\endif
+\endif
+\state arrayMaximo $\cup$ arrayMochila1 \hfill //O(N)
+\state arrayMaximo $\cup$ arrayMochila2 \hfill //O(N)
+\state arrayMaximo $\cup$ arrayMochila3 \hfill //O(N)
+\state devolver arrayMaximo \hfill //O(N)
+\state devolver max \hfill //O(1)
+\EndFunction 
+\end{algorithmic}
+\hrule
+\complejidad{$N$}
+\end{algorithm}
+
+\textbf{Aclaraciones:
+K = funci\'on capacidad()
+M = MOCHILAS
+N = \# OBJETOS }
