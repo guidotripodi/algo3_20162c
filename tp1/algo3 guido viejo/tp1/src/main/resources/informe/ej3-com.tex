@@ -1,0 +1,16 @@
+
+El algoritmo recorre todas las permutaciones (que en total son $n!$), y para cad auna de ellas calcula la suma de las distancias, lo que nos agrega un factor $n^2 * log(n)$  en nuestra complejidad.
+
+Concluimos as\'i que la complejidad total es $O(n! . n^2 . log(n))$.
+
+Se puede ver que la complejidad de nuestro algoritmo es estrictamente menor que $O(n^n a^2)$, ya que \[
+O(n! . n^2 . log(n)) \subset O(n^n) \subset O(n^n a^2)
+ \]
+ 
+Por lo tanto, nuestro algoritmo cumple con lo pedido por el enunciado.
+
+Nuestra implementaci\'on final incluye las podas anteriormente explicadas, y como las mismas no empeoran la complejidad, sigue respetando la complejidad requerida por la c\'atedra.\\
+
+El peor caso de nuestro algoritmo es cuando todas las niñas son amigas entre s\'i. En este, no es posible aprovechar las podas aplicadas y por lo tanto se debe evaluar cada permutaci\'on.
+
+El mejor caso en cambio, se da cuando ninguna niña es amiga de otra. En este se da que en la primer llamada se ingresa en el caso de la poda por cantidad de amistades. Luego, la complejidad de este caso es $O(n^2)$, que es el costo de busar el par de amigas con mayor distancia.

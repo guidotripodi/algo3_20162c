@@ -1,0 +1,28 @@
+\vspace*{1em}
+
+Antes de calcular la complejidad del algoritmo debemos calcular la complejidad de las operaciones de Agregado y Calculo de Mediana.
+
+Para el c\'alculo de la mediana, entre operaciones despreciables, realizamos como mucho dos veces la operacion "C\'alculo de Menor". Como \'esta es $O(1)$, el costo total del c\'alculo de la mediana es $O(1)$.
+
+Para la inserci\'on de un nuevo elemento, entre operaciones despreciables, realizamos como mucho dos inserciones a los heaps \textit{menores} y \textit{mayores}. Como el costo de cada inserci\'on es $O(log(n))$, con $n$ la cantidad de elementos presentes, la complejidad total es $O(log(n))$.
+
+
+En nuestro algoritmo, efectuamos las siguientes operaciones:
+\begin{itemize}
+\item C\'alculo de distancia entre puntos. (Costo $O(n)$)
+\item Para cada distancia: (Costo $O(n)$)
+	\begin{itemize}
+		\item Inserci\'on en MedianCalculator. (Costo $O(log(n))$)
+		\item C\'alculo de la mediana (Costo $O(1)$)
+		\item Inserci\'on en la lista de output (Usamos una ArrayList). Si bien su costo de inserci\'on es $O(n)$, como fue construida con capacidad como p\'arametro, sabemos que no cambia de tamaño (nunca nos excedemos de esa capacidad) y por lo tanto todas sus inserciones tienen costo $O(1)$. 
+	\end{itemize}
+\end{itemize}
+
+Con esto nos alcanza para ver que nuestro algoritmo tiene complejidad $O(n log(n))$ que cumple con lo pedido por el enunciado.\\
+
+El mejor y pero caso de nuestro algoritmo estan fuertemente relacionados con el mejor y peor caso de la operacion de insercion en la estructura \textit{heap}. El peor caso de insercion en un \textit{heap} es cuando el elemento es el mayor y se lo tiene que mover desde la base hasta la punta. El mejor caso, por el contrario, es cuando el elemento insertado permanece en la base.\\
+
+El peor caso de nuestro algoritmo corresponde a cuando tenemos que insertar en las dos heaps (\textit{menores} y \textit{mayores}) y en ambas entramos en el peor caso. Para lograr este peor caso, generamos una lista de manera que el i-esimo elemento sea la mediana de los primeros $i$. Por ejemplo, con la lista $1, n, 2, n-2 \cdots$.\\
+Por otra parte, el mejor caso de nuestro algoritmo se da cuando se inserta con el peor caso unicamente en una de las dos heaps, mientras que en la otra se inserta con el mejor caso (Es imposible evitar el peor caso de alguna de las heaps). Esto se puede lograr con el input $1, 2, 3, \cdots$.
+
+

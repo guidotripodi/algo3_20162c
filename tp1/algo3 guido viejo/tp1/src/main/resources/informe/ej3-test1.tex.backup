@@ -1,0 +1,27 @@
+\indent En esta secci\'on, mostraremos buenos y malos casos para nuestro algoritmo, y a su vez, daremos el tiempo estimado 
+seg\'un la complejidad del algoritmo calculada anteriormente.\\
+
+Luego de varios experimentos, pudimos llegar a la conclusi\'on que uno de los tipos de casos que resulta m\'as beneficioso para nuestro algoritmo
+es en el cual \\
+
+
+
+Verificando el peor caso, llegamos a la conclusi\'on que el tipo de caso en el que menos provecho se podr\'a sacar ser\'a cuando
+todas las intregantes sean amigas de todas entre si.\\
+
+Para llegar a dicha conclusi\'on expondremos un ej de este caso y adjuntaremos una tabla correspondiente con varios casos del
+mismo tipo modificando la cantidad de exploradoras.\\
+
+Un ej. de dicho caso seria:\\
+
+Obteniendo el siguiente gr\'afico:
+
+GRAFICO DE TIEMPO
+
+Y dividiendo por la complejidad propuesta llegamos a:\\
+
+GRAFICO DE TIEMPO SOBRE COMPLEJIDAD
+
+
+
+

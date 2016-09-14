@@ -1,0 +1,7 @@
+Para resolver este problema, tuvimos que reducirlo a un problema con conocida solución polinomial llamado 2-SAT.
+Para pasar de un problema a otro podemos pensar, para cada nodo $i$, la siguiente preposición $p_i$: "El nodo está pintado del primer color". Como todo nodo tiene que estar pintado, podemos afirmar que si la preposición anterior es falsa, implica que el nodo está pintado del segundo color. \\
+Ahora bien, tomemos cualquier par de nodos conectados $i$, $j$ tales que estos comparten algún color entre sus opciones (supongamos el primer color sin pérdida de genearalidad). Entonces, para colorear ambos nodos, necesitamos que se cumpla la siguente preposición: $p_i \implies \neg p_j \wedge p_j \implies \neg p_i $. \\
+En conclusión, para generar una coloracion posible de dichos nodos, tenemos que encontrar una asignación de valores lógicos (verdadero o falso) a cada preposición $p_i$ tal que se cumpla, para todo par de nodos conectados y compartiendo por lo menos un color, las preposiciónes indicadas anteriormente. \\
+Como cada preposición de la forma $p \implies q$ se puede expresar como $\neg p \vee q$, el problema anterior se puede reducir a 2-SAT. \\\\
+
+Para su resolución, realizamos al algoritmo explicado en la cátedra. Cuya complejida es $O(E)$ para transformar el input al teorema de 2-SAT y $O(E+V)$ para encontrar el coloreo. La complejidad total termina siendo $O(E+V)$ que es polinomial con respecto al tamaño de la entrada. \\

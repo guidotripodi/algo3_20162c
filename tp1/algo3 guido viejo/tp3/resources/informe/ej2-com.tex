@@ -1,0 +1,17 @@
+La complejidad del peor caso del algoritmo, al ser un backtracking, depende principalmente de la cantidad de configuraciones posibles, ya que en el antes nombrado peor caso, se recorren todas las configuraciones posibles. \\
+Por lo tanto, si no tenemos encuenta las podas ni las estrategias, la complejidad del algoritmo resulta ser $O(C^{V})$ donde $V$ es la cantidad de vertices y $C$ la cantidad de colores en total. \\
+
+Ahora bien, las podas y estrategias realizadas modifican la complejidad del algoritmo, analicemoslas por separado:
+\begin{itemize}
+\item Al reducirle las opciones de colores a los vecinos del nodo que acabamos de pintar tenemos que realizar tantas operaciones de agregado a un \textit{Set} ( $O(1)$ ) como vecinos tenga el nodo. Como el nodo tiene como mucho $V$ vecinos, el costo de esta poda es $O(V)$.
+\item La poda que descarta soluciones en las que algun nodo se quedo sin opciones tiene el costo que tiene consultar cual es el nodo con menor cantidad de opciones. Como utilizamos la estructura \textit{ValueSortedMap} (explicada en secciones posteriores), realizamos esta operación en $O(log(V))$.
+\item Para encontrar un "color facil" debemos mirar todos los colores de todos los vecinos de un nodo, y guardarlos en un set. Luego, calcular la diferencia entre los colores del nodo y el set antes computado. Asumiendo que las operaciones de un set (hash table) son $O(1)$, calcular el color fácil tiene costo $O(V * C)$.
+\item La estrategia de tomar el el nodo con mas opciones en cada paso tiene varias etapas:
+	\begin{itemize}
+	\item Inicializar la estructura antes de empezar el backtracking. Costo $O(V * log(V))$.
+	\item Sacar el nodo con mas opciones de la estructura para pintar. Costo $O(log(V))$.
+	\item Actualizar a los vecinos luego de pintar. Costo $O(V * log(V))$.
+	\end{itemize}
+\end{itemize}
+
+Asumiendo el peor de los casos, donde las podas no ayudan a achicar el arbol de busqueda, si consideramos a los estados por los que pasa el backtracking como un arbol de $C^{V}$ hojas, para cada una de estas hojas habremos realizado $V$ operaciones de podas (por qué ya coloreamos los $V$ vértices). Como las operaciones de podas cuestan $O(V + log(V) + V* C + V * log(V)) = O(V * (C + log(V)))$ en total, y las realizamos $V$ veces, por cada hoja habremos realizado $O(V * (C + log(V)))$ operaciones. Finalmente, como en el backtracking pasamos por $C^{V}$ configuraciones, la complejidad total resulta $O(C^{V} * V * (C + log(V)))$.

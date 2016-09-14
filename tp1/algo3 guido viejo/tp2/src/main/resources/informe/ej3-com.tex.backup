@@ -1,0 +1,26 @@
+\vspace*{1em}
+\begin{enumerate}
+
+\item\textbf{Problema 3}
+\par Recibimos una lista de GirlFriendship, chequeamos si los valores recibidos son correctos en O(1). Creamos
+dos sets uno de $girls$ y otro de $friendship$ vacios insumiendo O(1) cada uno. Luego, realizamos un ciclo que recorre la lista
+recibida como paramentro, dando un total de e* vueltas de ciclo.\\Vamos obteniendo por cada vuelta del ciclo la girl correspondiente a su i-\'esimo
+lugar y agregandola a nuestro set de $girls$ insumiendo O(1).Luego, realizamos otro ciclo dentro del que estamos, en el cual recorremos con la variable
+$friend$ el set de amigos correspondiente a la $girls$ del i-\'esimo lugar en el cual estamos parados dando un total de ?? vueltas.\\
+Aqui, lo vamos agregando a nuestro set de $friendship$ al par $(girl$, $friend)$ y tambien al set de $girls$ costando O(1) respectivamente.\\
+Luego de esto, fuera de ambos ciclos, creamos una $bestRoundCalculator$ con el par de set de $girls$ y $friendship$ obtenido y realizamos
+la operacion calculate y devolvemos dicho valor dicha funci\'on realiza una serie de operaciones costandonos estricamente menos que
+O($e^ea^2$).\\
+
+\par \textbf{Orden Total:} \textbf{O($e^ea^2$)}
+
+\item\textbf{Calculate}
+\par Realizamos un sort del set de $girls$ recibido como par\'ametro costandonos O(log(n)), Luego realizamos una recursi\'on con una funci\'on privada llamada ``calculate'' a la cual
+le pasamos un 1 empleandonos O(??). Por consiguientem retornamos el valor que obtenemos entre la funci\'on $getMaxDistance$ y la variable $bestRound$, donde
+las operaciones de dicha funci\'on nos terminan invirtiendo estricamente menos que ($e^ea^2$).
+
+\item\textbf{Calculate privada}
+Inicialmente, chequeamos si el entero recibido como parametro es igual al tamaño de set $girls$ 
+\item\textbf{GetMaxDistance}
+
+\end{enumerate}

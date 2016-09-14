@@ -1,0 +1,52 @@
+Para la resoluci\'on de este problema se desarroll\'o una estructura llamada MedianCalculator que soporta dos operaciones: una de agregado de enteros y otra de calculo de la mediana de los elementos agregados. Con esta estructura la resoluci\'on del problema se vuelve directa. Simplemente consiste en una iteraraci\'on de la lista de entrada, haciendo en cada paso lo siguiente:
+
+\begin{itemize}
+\item Agregar el $i$-\'esimo elemento a la estructura
+\item Calcular la mediana de los primeros $i$ elementos
+\item Agregar la mediana calculada a una lista o vector de salida
+\end{itemize}
+
+Con esto es claro que la lista de salida cumple con los requisitos del problema, por lo que lo solo resta verificar que la estructura MedianCalculator realiza correctamente las operaciones indicadas.
+
+Para la implementaci\'on de la estructura MedianCalculator se utiliz\'o la estructura Heap, la cual admite las operaciones de agregado, tama\~no y c\'alculo del menor (para alg\'un orden dado). La estructura implementada consiste en dos Heaps: un $MIN$-Heap y un $MAX$-Heap. Es decir, el primero devuelve el menor n\'umero mientras que el segundo el mayor. A partir de ahora los llamaremos \textit{menores} a la $MAX$-Heap y \textit{mayores} a la $MIN$-Heap.
+
+Nuestra estructura mantiene el siguiente invariante: 
+\begin{itemize}
+\item La cantidad de elementos de \textit{menores} es mayor o igual a la cantidad de elementos de \textit{menores}
+\item La diferencia de cantidades de elementos entre \textit{mayores} y \textit{menores} es a lo sumo uno
+\item El mayor de \textit{menores} es menor o igual al menor de \textit{mayores}
+\end{itemize}
+
+Que puede escribirse m\'as formalmente como:
+
+\begin{center} $0 \le size(menores) - size(mayores) \le 1 \land mayor(menores) \le menor(mayores)$ \\
+\end{center}
+
+Para mantener este invariante a la hora del agregado miramos dos casos separados:
+\begin{itemize}
+\item \textit{menores} y \textit{mayores} con mismo tama\~no: En este caso hacemos lo siguiente:
+	\begin{itemize}	
+	\item Agregamos el nuevo elemento a \textit{mayores}: Este paso rompe el primer y tercer punto de nuestra invariante. Mientras que tampoco nos asegura que nos mantenga el segundo punto, ya que esto depende del numero agregado.
+	\item Sacamos el menor elemento de \textit{mayores} y lo agregamos a \textit{menores}: Podemos notar f\'acilmente que esto restablece el autom\'aticamente el primer y tercer punto de nuestra invariante. Para verificar que esto reestablece el segundo punto basta con lo siguiente:
+	Sea $m$ el mayor elemento de \textit{menores} y $M$ el menor elemento de \textit{mayores} (antes de agregar el nuevo elemento). Es claro que $m \le M$. Luego si $X$ es el elemento agregado, tenemos dos casos:
+		\begin{itemize}	
+		\item $X \ge M$: En este caso, sacaremos $M$ de \textit{mayores} y lo agregaremos en \textit{menores}. Luego de esto, el mayor elemento de \textit{menores} ser\'a $M$, mientras que el menor elemento de \textit{mayores} ser\'a un $M'$ y valdr\'a que $M \le M'$, ya que $M$ era el menor elemento de un conjunto que conten\'ia a $M'$. Por lo tanto, se restablece el segundo punto del invariante.
+		\item X < M: En este caso, sacaremos a X de \textit{mayores} y lo agregaremos a \textit{menores}. Luego de esto, el mayor elemento de \textit{mayores} ser\'a el m\'aximo entre X y m. Como para ambos vale que $m \le M$ y $X \le M$ entonces vale que $Max(m, X) \le M$ y por lo tanto se recompone el segundo punto del invariante.
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+\begin{itemize}
+\item \textit{menores} y \textit{mayores} de distinto tama\~no: En este caso hacemos lo siguiente:
+	\begin{itemize}
+	\item Agregamos el nuevo elemento a \textit{menores}.
+	\item Sacamos el mayor elemento de \textit{menores} y lo agregamos a \textit{mayores}.
+	\end{itemize}
+	La demostraci\'on de que esto reestablece el invariante es an\'aloga al caso anterior.
+
+\end{itemize}
+
+Ahora bien, como nuestra estructura mantiene este invariante, calcular la mediana s\'olo se reduce a realizar las siguientes operaciones:
+\begin{itemize}
+	\item Si el tama\~no total es impar: Devolver el mayor elemento de \textit{menores}.
+	\item Si el tama\~no total es par: Devolver el promedio entre el mayor elemento de \textit{menores} y el menor elemento de \textit{mayores}.
+\end{itemize}
