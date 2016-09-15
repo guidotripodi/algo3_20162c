@@ -8,7 +8,6 @@
 using std::queue;
 
 int PMax;
-int distMin;
 int F;
 int C;
 
@@ -82,6 +81,45 @@ void mazeBfs () {
 }
 
 int main(){
+	
+	F = 5;
+	C = 9;
+	PMax = 2;
+	
+	char map = {"#","#","#","#","#","#","#","#","#",
+				"#","o","#",".","#",".","#","x","#",
+				"#",".","#",".","#",".","#",".","#",
+				"#",".","#",".","#",".",".",".","#",
+				"#","#","#","#","#","#","#","#","#"}
+	
+	Map = new int*[F];
+	
+	for(int i = 0; i < F; i++){
+		Map[i] = new Node*[C]; 
+		for(int j = 0; j < C; j++){
+				Node *n = new Node();
+				n->i = i;
+				n->j = j;
+				Map[i][j] = n;
+				
+				char value = map[(i*F)+j];
+				if(value == "#"){
+					n->iAmWall = true;
+				}else if(value == "o"){
+					nodeStart = n;
+					n->iAmWall = false;
+				}else if(value == "x"){
+					nodeEnd = n;
+					n->iAmWall = false;
+				}else {
+					n->iAmWall = false;
+				}
+		}
+	}
+	
+	mazeBfs();
+	
+	printf("dist min %d", nodeEnd->distMinToNode);
   
 	return 0;
 }
