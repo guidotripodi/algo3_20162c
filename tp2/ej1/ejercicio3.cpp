@@ -24,7 +24,7 @@ struct Node {
        visited(false),
         marked(false),
        iAmWall(false),
-       wallsBroken(0),
+       wallsBroken(-1),
        distMinToNode(0) {}
 };
 
@@ -38,19 +38,22 @@ int max(int a, int b){
     return (a > b) ? a : b;
 }
 
-void proccessNode(Node *node, Node *actual) {
-	if(!node->visited) { // no comparo contra un nivel anterior
-		if (!(actual->iAmWall && node->iAmWall)){
-			if (actual->wallsBroken+(int)node->iAmWall < node->wallsBroken) { // realmente vale? consultar
-				node->distMinToNode = actual->distMinToNode+1;
-				actual->wallsBroken = actual->wallsBroken+(int)node->iAmWall;
-				if(!node->marked) { // quiero encolar solo una vez
-					node->marked = true;
-					cola.push(node);
-				}
-			}	
-		}
-	}
+void proccessNode(int i, int j, Node *actual) {
+    if (i > 0 && i < F && j > 0 && j < C) {
+        Node *node = Map[i][j];
+        if(!node->visited) { // no comparo contra un nivel anterior
+            if (!(actual->iAmWall && node->iAmWall)){
+                if (node->wallsBroken == -1 || actual->wallsBroken+(int)node->iAmWall < node->wallsBroken) { // realmente vale? consultar
+                    node->distMinToNode = actual->distMinToNode+1;
+                    node->wallsBroken = actual->wallsBroken+(int)node->iAmWall;
+                    if(!node->marked) { // quiero encolar solo una vez
+                        node->marked = true;
+                        cola.push(node);
+                    }
+                }	
+            }
+        }
+    }
 }
 
 void mazeBfs () {
@@ -62,64 +65,57 @@ void mazeBfs () {
 		actual->visited = true;
 		int i = actual->i;
 		int j = actual->j;
-		
-		Node *up;
-		Node *down;
-		Node *left;
-		Node *right;
-		
-		up = Map[i-1][j];
-		down = Map[i+1][j];
-	 	left = Map[i][j+1];
-		right = Map[i][j-1];
-		
-		proccessNode(up, actual);
-		proccessNode(down, actual);
-		proccessNode(left, actual);
-		proccessNode(right, actual);
+    
+		proccessNode(i-1, j, actual);
+		proccessNode(i+1, j, actual);
+		proccessNode(i, j-1, actual);
+		proccessNode(i, j+1, actual);
 	}
 }
 
 int main(){
-	
+    
 	F = 5;
 	C = 9;
 	PMax = 2;
 	
-	char map = {"#","#","#","#","#","#","#","#","#",
-				"#","o","#",".","#",".","#","x","#",
-				"#",".","#",".","#",".","#",".","#",
-				"#",".","#",".","#",".",".",".","#",
-				"#","#","#","#","#","#","#","#","#"}
+	char map[] = {'#','#','#','#','#','#','#','#','#',
+				  '#','o','#','.','#','.','#','x','#',
+				  '#','.','#','.','#','.','#','.','#',
+				  '#','.','#','.','#','.','.','.','#',
+                  '#','#','#','#','#','#','#','#','#'};
 	
-	Map = new int*[F];
+	Map = new Node**[F];
 	
 	for(int i = 0; i < F; i++){
-		Map[i] = new Node*[C]; 
+		Map[i] = new Node*[C];
 		for(int j = 0; j < C; j++){
-				Node *n = new Node();
-				n->i = i;
-				n->j = j;
-				Map[i][j] = n;
-				
-				char value = map[(i*F)+j];
-				if(value == "#"){
-					n->iAmWall = true;
-				}else if(value == "o"){
-					nodeStart = n;
-					n->iAmWall = false;
-				}else if(value == "x"){
-					nodeEnd = n;
-					n->iAmWall = false;
-				}else {
-					n->iAmWall = false;
-				}
+            
+            Node *n = new Node();
+            n->i = i;
+            n->j = j;
+            Map[i][j] = n;
+            
+            char value = map[(i*C)+j];
+            
+            if(value == '#'){
+                n->iAmWall = true;
+            }else if(value == 'o'){
+                nodeStart = n;
+                n->iAmWall = false;
+                n->wallsBroken = 0;
+            }else if(value == 'x'){
+                nodeEnd = n;
+                n->iAmWall = false;
+            }else {
+                n->iAmWall = false;
+            }
 		}
 	}
 	
 	mazeBfs();
 	
-	printf("dist min %d", nodeEnd->distMinToNode);
+	printf("dist min %d with walls broken %d \n\n", nodeEnd->distMinToNode, nodeEnd->wallsBroken);
   
 	return 0;
 }
