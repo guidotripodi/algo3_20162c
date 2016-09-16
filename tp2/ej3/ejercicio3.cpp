@@ -60,7 +60,8 @@ If we are only interested in a shortest path between vertices source and target,
 
 	distance[0] = 0;
 //Si hago un objeto grafo todo lo de arriba va en el constructor
-
+	
+	int contador = 0; // cuenta estaciones recorridas
 	while(!grafo.vacio()){
 		Node actual = grafo.min();
 		Cola vecinos = actual.vecinos();// o grafo.vecinos(actual)
@@ -74,11 +75,18 @@ If we are only interested in a shortest path between vertices source and target,
 			}
 
 		}
+		contador++;
 		if(actual == SALIDA) break;
 	}
 
 	//recorrer el arreglo prev y ahi tengo los vertices necesarios.
-	
-
+	int j = SALIDA;
+	printf("%d\n", distance[j]);
+	if(distance[j] != -1){
+		printf("%d\n", contador); // tengo que llevar cuenta de los niveles recorridos
+		while( j >= 0 ){
+			printf("%d", j); //imprimo estaciones
+			j = prev[j]; //prev[0] esta en -1
+		}
 	return 0;
 }
