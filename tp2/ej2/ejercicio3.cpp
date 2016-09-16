@@ -71,26 +71,84 @@ int find(int x) {
 	}
 }
 
+// el nodo es valido si tiene valor no infinito y esta en una componente que no sea la componente por la cual estoy checkeando.
+bool checkNode(int i, int j, int representante) {
+    if (i >= 0 && i < F && j >= 0 && j < C) {
+        Node *node = Map[i][j];
+        //Uso find en lugar de padre[] por si no esta actualizado
+        
+        if (node->value == 20 || find((i*C)+j) == representante) {
+            return false;
+        }
+        
+        printf("valida nodo valor %d indices (%d, %d) \n", node->value, i, j);
+        
+        return true;
+    }
+    
+    return false;
+}
+
 void uni(int x, int y, int costo) {
 	// union es una palabra reservada en C++, por eso usamos "uni"
 	// completar
-	//printf("une %d con %d \n", x, y);
+    
+    Node *nodoInicio = Map[x/C][x%C];
+    Node *nodoFin = Map[y/C][y%C];
+    int valorNodoInicio = nodoInicio->value;
+    int valorNodoFin = nodoFin->value;
+    
+    //piso con los referentes
 	x = find(x); y = find(y);
+    
+    if (!cantAristas[x] && !cantAristas[y] && valorNodoInicio > 0 && valorNodoFin > 0) {
+        //son dos nodos con valor > 0. Esto indica que no hay caminos
+        return;
+    }else if(!cantAristas[x] && valorNodoInicio > 0) {
+        //Estoy uniendo una componente a un nodo con valor mayor que 0.
+        //Solo si este nodo es viable puedo continuar.
+        
+        int ix = x/C;
+        int jx = x%C;
+        
+        //alguno de los vecinos de "x" sera "y", esa dara false por ser su mismo representante
+        
+        if (!(checkNode(ix-1, jx, y) || checkNode(ix+1, jx, y) || checkNode(ix, jx-1, y) || checkNode(ix, jx+1, y))) {
+            return;
+        }
+        
+    }else if(!cantAristas[y] && valorNodoFin > 0) {
+        //Estoy uniendo una componente a un nodo con valor mayor que 0.
+        //Solo si este nodo es viable puedo continuar.
+        
+        int iy = y/C;
+        int jy = y%C;
+        
+        //alguno de los vecinos de "y" sera "x", esa dara false por ser su mismo representante
+        
+        if (!(checkNode(iy-1, jy, x) || checkNode(iy+1, jy, x) || checkNode(iy, jy-1, x) || checkNode(iy, jy+1, x))) {
+            return;
+        }
+    }
+
+    //checkear vecinos
+    printf("une %d con %d \n", (nodoInicio->i*C)+nodoInicio->j, (nodoFin->i*C)+nodoFin->j);
+    
 	if(altura[x] == altura[y]) {
 		altura[x]++;
 		padre[x] = y;
         cantAristas[y] = cantAristas[y]+cantAristas[x]+1;
-        //printf("comp cost %d con comp cost %d y costo %d \n", costCompLider[x], costCompLider[y], costo);
+        printf("comp cost %d con comp cost %d y costo %d \n", costCompLider[x], costCompLider[y], costo);
         costCompLider[y] += costCompLider[x]+costo;
 	}else if(altura[x] < altura[y]) {
 		padre[x] = y;
         cantAristas[y] = cantAristas[y]+cantAristas[x]+1;
-        //printf("comp cost %d con comp cost %d y costo %d \n", costCompLider[x], costCompLider[y], costo);
+        printf("comp cost %d con comp cost %d y costo %d \n", costCompLider[x], costCompLider[y], costo);
         costCompLider[y] += costCompLider[x]+costo;
 	}else{
 		padre[y] = x;
         cantAristas[x] = cantAristas[x]+cantAristas[y]+1;
-        //printf("comp cost %d con comp cost %d y costo %d \n", costCompLider[y], costCompLider[x], costo);
+        printf("comp cost %d con comp cost %d y costo %d \n", costCompLider[y], costCompLider[x], costo);
         costCompLider[x] += costCompLider[y]+costo;
 	}
 }
@@ -185,9 +243,6 @@ int main() {
 	//sort(aristas.begin(), aristas.end(), comparePtrToArista); // ordeno las aristas por peso de menor a mayor
 	
     //printf("aristas size %lu \n", aristas.size());
-    
-    int totalDescartable = 0;
-    
 	while (aristas.size()) {
         //pila monticulo
 		Arista *a = aristas.front();
@@ -195,30 +250,14 @@ int main() {
         real_pop();
         
         //printf("popeo arista (%d, %d) con costo %d \n", a->inicio, a->fin, a->costo);
-        Node *nodoInicio = Map[a->inicio/C][a->inicio%C];
-        Node *nodoFin = Map[a->fin/C][a->fin%C];
-        int valorNodoInicio = nodoInicio->value;
-        int valorNodoFin = nodoFin->value;
-        
-		if (find(a->inicio) != find(a->fin) && a->costo < 20 && (valorNodoInicio == 0 || valorNodoFin == 0)) {
+		if (find(a->inicio) != find(a->fin) && a->costo < 20) {
 			//printf("proceso arista (%d, %d) con costo %d \n", a->inicio, a->fin, a->costo);
 			uni(a->inicio, a->fin, a->costo);
-        }else {
-            //Es una arista que tiene costo igual a otra unida a uno de los extremos de la misma
-            //Como forma un ciclo
-            if (a->costo < 20) {
-                if (valorNodoInicio > 0) {
-                    totalDescartable += a->costo;
-                }else {
-                    totalDescartable += a->costo;
-                }
-            }
-		}
+        }
 	}
-
-    printf("total descartable %d \n", totalDescartable);
+    
     for (int i = 0; i < F*C; i++) {
-        printf("cost comp %d is %d cant aristas %d altura %d \n", i, (costCompLider[i]-totalDescartable)/2, cantAristas[i], altura[i]);
+        printf("cost comp %d is %d cant aristas %d altura %d \n", i, (costCompLider[i])/2, cantAristas[i], altura[i]);
     }
     
     return 0;
