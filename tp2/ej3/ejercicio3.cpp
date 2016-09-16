@@ -45,5 +45,40 @@ If we are only interested in a shortest path between vertices source and target,
 
 
 
+	//parsear stdin
+	
+	//crear objeto grafo?
+	
+	int cantidad;
+	int distance[cantidad];
+	int prev[cantidad];
+	
+	for(int i = 0; i < cantidad; i++){
+		distance[i] = -1;
+		prev[i] = -1;
+	}
+
+	distance[0] = 0;
+//Si hago un objeto grafo todo lo de arriba va en el constructor
+
+	while(!grafo.vacio()){
+		Node actual = grafo.min();
+		Cola vecinos = actual.vecinos();// o grafo.vecinos(actual)
+		//for(int j = 0; j < vecinos.size(); j++){ //vector, lista enlazada o cola para los vecinos?
+		while(!vecinos.vacia()){
+			Node v = vecinos.pop();
+			int alt = distance[v.id] + grafo.peso(actual, v); //si la distancia la guarda el nodo: v.distance;
+			if( alt < distance[v.id] ){
+				distance[v] = alt;
+				prev[v] = actual;
+			}
+
+		}
+		if(actual == SALIDA) break;
+	}
+
+	//recorrer el arreglo prev y ahi tengo los vertices necesarios.
+	
+
 	return 0;
 }
