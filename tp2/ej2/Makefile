@@ -1,28 +1,13 @@
-# Compilador que será utilizado
-CC=g++
+CC=g++ -g
+CFLAGS=-c -Wall
 
-# flags de compilación
-CFLAGS=-g -Wall -std=c++11
+all: ej3
 
-# flags de linkeo
-LDFLAGS=
+ej3: ejercicio3.o
+	$(CC) ejercicio3.o -o ej3
 
-# Agregar acá los archivos .cpp a compilar
-SOURCES=ejercicio2.cpp Escenario.cpp
-
-# Objetos que serán generados
-OBJECTS=ej2.o Escenario.o
-
-# Nombre del ejecutable a generar
-EXECUTABLE=ej2
-
-all: $(EXECUTABLE)
-
-$(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(CFLAGS) $(OBJECTS) -o $@
+ejercicio3.o: ejercicio3.cpp
+	$(CC) $(CFLAGS) ejercicio3.cpp
 
 clean:
-	rm -rf $(EXECUTABLE) $(OBJECTS)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) $< -c -o $@
+	rm *o ej3
