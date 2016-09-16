@@ -39,7 +39,7 @@ int max(int a, int b){
 }
 
 void proccessNode(int i, int j, Node *actual) {
-    if (i > 0 && i < F && j > 0 && j < C) {
+    if (i > 0 && i < F-1 && j > 0 && j < C-1) {
         Node *node = Map[i][j];
         if(!node->visited) { // no comparo contra un nivel anterior
             if (!(actual->iAmWall && node->iAmWall)){
