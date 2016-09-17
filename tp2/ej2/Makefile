@@ -1,13 +1,13 @@
 CC=g++ -g
 CFLAGS=-c -Wall
 
-all: ej3
+all: ej2
 
-ej3: ejercicio3.o
-	$(CC) ejercicio3.o -o ej3
+ej2: ejercicio2.o
+	$(CC) ejercicio2.o -o ej2
 
-ejercicio3.o: ejercicio3.cpp
-	$(CC) $(CFLAGS) ejercicio3.cpp
+ejercicio2.o: ejercicio2.cpp
+	$(CC) $(CFLAGS) ejercicio2.cpp
 
 clean:
-	rm *o ej3
+	rm *o ej2
