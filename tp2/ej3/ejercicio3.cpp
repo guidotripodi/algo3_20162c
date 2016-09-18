@@ -1,21 +1,22 @@
-#include <stdio>
+#include <stdio.h>
+#include "grafo.h"
 
-#define NULL 0
-struct Node {
-	int id;
-	bool visited; // indica si el nivel fue recorrido
-	int distance;
-	Node():      id(0),
-		visited(false),
-		distance(0) {}
-};
+//TODO:
+//enunciado dice que las estaciones se numeran de 1 a n
+//me falta arreglar esos indices para que la salida se imprima correctamente
+//destructor del grafo
+//embellecimiento
+//TESTEO
 
+//capaz usar algo mas piola que cin para la entrada
+//con mas control de errores 
 
 int masCercano(bool* noVisitados, int* distancia, int cantNodos){ //O(n)
 	int minimo;
 	int i = 0;
-//inicializo el minimo con el primer elemento que exista
-//devuelvo -1 si no hay
+
+	//inicializo el minimo con el primer elemento que exista
+	//devuelvo -1 si no hay
 
 	while( i < cantNodos ){
 		if( noVisitados[i] && distancia[i] != -1){ // no distancia invalida
@@ -40,15 +41,22 @@ int masCercano(bool* noVisitados, int* distancia, int cantNodos){ //O(n)
 
 int main(){
 
+	int cantidad, vias;
 
 	//parsear stdin
 	
-	//crear objeto grafo?
-	//el grafo seria una forma facil de averiguar los vecinos y sacar datos de los nodos
-	//lista de vecinos (enteros) y un arreglo que contenga los nodos
+	std::cin >> cantidad;
+	std::cin >> vias;
+
+	int entrada[3*vias];
+	
+	for(int i = 0; i < 3*vias; i++){
+		std::cin >> entrada[i];
+	}
+
+	Grafo fortaleza = Grafo(entrada, cantidad, vias); //fancy arreglo de listas enlazadas
 
 
-	int cantidad;
 	int distance[cantidad];
 	int prev[cantidad];
 	int salida = cantidad - 1;	
@@ -72,6 +80,8 @@ int main(){
 	int contador = 0; // cuenta estaciones recorridas
 
 	int actual;
+	std::list<Arista>* vecinos; 
+	std::list<Arista>::iterator posActual;
 
 	while( (actual = masCercano(noVisitados, distance, cantidad)) != -1 ){//no visitados
 		//de los no visitados y ademas lo saca
@@ -79,14 +89,14 @@ int main(){
 		//if(actual == NULL) break; //visite todo
 		if(actual == salida) break; //ya tiene una distancia y prev asignados
 		
-		int* vecinos = grafo.vecinos(actual);
-		//for(int j = 0; j < vecinos.size(); j++){ //vector, lista enlazada o cola para los vecinos?
-		while(!vecinos.vacia()){
-			Node v = vecinos.pop();
-			int alt = distance[v.id] + grafo.peso(actual, v); //si la distancia la guarda el nodo: v.distance;
-			if( alt < distance[v.id] || distance[v.id] == -1){
-				distance[v] = alt;
-				prev[v] = actual;
+		vecinos = fortaleza.vecinos(actual);
+		for(posActual = vecinos->begin(); posActual != vecinos->end(); ++posActual){ 
+		//while(!vecinos.vacia()){
+			Arista v = *posActual;
+			int alt = distance[v.destino] + v.peso; //si la distancia la guarda el nodo: v.distance;
+			if( alt < distance[v.destino] || distance[v.destino] == -1){
+				distance[v.destino] = alt;
+				prev[v.destino] = actual;
 			}
 
 		}
@@ -100,8 +110,9 @@ int main(){
 		printf("%d\n", contador); // tengo que llevar cuenta de los niveles recorridos
 		while( j >= 0 ){
 			printf("%d", j); //imprimo estaciones
-			j = prev[j]; //prev[0] esta en -1
+			j = prev[j]; //prev[0] esta en -1 entonces ahi corta el ciclo
 		}
+	}
 	return 0;
 }
 /*

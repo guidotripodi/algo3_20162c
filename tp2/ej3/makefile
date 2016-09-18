@@ -1,13 +1,15 @@
-CC=g++ -g
-CFLAGS=-c -Wall
+CC=g++ 
+CFLAGS=-g -Wall
+OBJECTS=ejercicio3.o grafo.o
 
 all: ej3
 
-ej3: ejercicio3.o
-	$(CC) ejercicio3.o -o ej3
+ej3: $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) -o ej3
 
-ejercicio3.o: ejercicio3.cpp
-	$(CC) $(CFLAGS) ejercicio3.cpp
+%.o: %.cpp
+	$(CC) $(CFLAGS) $< -c -o $@
+
 
 clean:
 	rm *o ej3

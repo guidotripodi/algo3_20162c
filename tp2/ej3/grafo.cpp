@@ -10,6 +10,9 @@ Grafo::Grafo(int* aristas, int cantNodos, int cantAristas){
 	}
 }
 
+Grafo::~Grafo(){
+	//TODO
+}
 
 std::list<Arista>* Grafo::vecinos(int vertice){
 	return &adyacencia[vertice];
