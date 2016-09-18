@@ -8,6 +8,33 @@ struct Node {
 		distance(0) {}
 };
 
+
+int masCercano(int* noVisitados, int* distancia, int cantNodos){
+	int minimo;
+	int i = 0;
+//inicializo el minimo con el primer elemento que exista
+//devuelvo -1 si no hay
+
+	while( i < cantNodos ){
+		if( noVisitados[i] && distancia[i] != -1){ // no distancia invalida
+			minimo = distancia[i];
+			break;
+		}
+		i++;
+	}
+
+	if(i == cantNodos) return -1; //visite todos y no encontre un minimo
+	
+	for(; i < cantNodos; i++){
+		if( distancia[i] < minimo && 
+				noVisitados[i] &&
+				distancia[i] != -1){ // no distancia invalida
+			minimo = distancia[i];
+		}
+	}
+	return minimo;
+}
+
 int main(){
 /*
 	function Dijkstra(Graph, source):
@@ -48,35 +75,52 @@ If we are only interested in a shortest path between vertices source and target,
 	//parsear stdin
 	
 	//crear objeto grafo?
-	
+	//el grafo seria una forma facil de averiguar los vecinos y sacar datos de los nodos
+	//lista de vecinos (enteros) y un arreglo que contenga los nodos
+
+
 	int cantidad;
 	int distance[cantidad];
 	int prev[cantidad];
 	
+	//la cola de prioridad, true si ya lo visitamos
+	bool noVisitados[cantidad];
+	
 	for(int i = 0; i < cantidad; i++){
 		distance[i] = -1;
 		prev[i] = -1;
+		noVisitados[i] = false;
 	}
 
 	distance[0] = 0;
 //Si hago un objeto grafo todo lo de arriba va en el constructor
-	
+
+//no sabemos si el grafo es lo suficientemente esparso para
+//usar el min heap y no pasarnos en complejidad de O(n cuadrado)
+//asi que la cola se hace con arreglo
+
+
 	int contador = 0; // cuenta estaciones recorridas
-	while(!grafo.vacio()){
-		Node actual = grafo.min();
+
+
+	while(!noVisitados.vacio()){//no visitados
+		int actual = masCercano(noVisitados, distance);//de los no visitados y ademas lo saca
+	
+		if(actual == NULL) break; //visite todo
+		if(actual == SALIDA) break; //ya tiene una distancia y prev asignados
+		
 		Cola vecinos = actual.vecinos();// o grafo.vecinos(actual)
 		//for(int j = 0; j < vecinos.size(); j++){ //vector, lista enlazada o cola para los vecinos?
 		while(!vecinos.vacia()){
 			Node v = vecinos.pop();
 			int alt = distance[v.id] + grafo.peso(actual, v); //si la distancia la guarda el nodo: v.distance;
-			if( alt < distance[v.id] ){
+			if( alt < distance[v.id] || distance[v.id] == -1){
 				distance[v] = alt;
 				prev[v] = actual;
 			}
 
 		}
 		contador++;
-		if(actual == SALIDA) break;
 	}
 
 	//recorrer el arreglo prev y ahi tengo los vertices necesarios.
