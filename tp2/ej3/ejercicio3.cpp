@@ -1,4 +1,6 @@
+#include <stdio>
 
+#define NULL 0
 struct Node {
 	int id;
 	bool visited; // indica si el nivel fue recorrido
@@ -9,7 +11,7 @@ struct Node {
 };
 
 
-int masCercano(int* noVisitados, int* distancia, int cantNodos){
+int masCercano(bool* noVisitados, int* distancia, int cantNodos){ //O(n)
 	int minimo;
 	int i = 0;
 //inicializo el minimo con el primer elemento que exista
@@ -30,12 +32,78 @@ int masCercano(int* noVisitados, int* distancia, int cantNodos){
 				noVisitados[i] &&
 				distancia[i] != -1){ // no distancia invalida
 			minimo = distancia[i];
+			noVisitados[i] = false; //lo saco de la "cola"
 		}
 	}
 	return minimo;
 }
 
 int main(){
+
+
+	//parsear stdin
+	
+	//crear objeto grafo?
+	//el grafo seria una forma facil de averiguar los vecinos y sacar datos de los nodos
+	//lista de vecinos (enteros) y un arreglo que contenga los nodos
+
+
+	int cantidad;
+	int distance[cantidad];
+	int prev[cantidad];
+	int salida = cantidad - 1;	
+	//la cola de prioridad, true si ya lo visitamos
+	bool noVisitados[cantidad];
+	
+	for(int i = 0; i < cantidad; i++){
+		distance[i] = -1;
+		prev[i] = -1;
+		noVisitados[i] = true;
+	}
+
+	distance[0] = 0;
+//Si hago un objeto grafo todo lo de arriba va en el constructor
+
+//no sabemos si el grafo es lo suficientemente esparso para
+//usar el min heap y no pasarnos en complejidad de O(n cuadrado)
+//asi que la cola se hace con arreglo
+
+
+	int contador = 0; // cuenta estaciones recorridas
+
+	int actual;
+
+	while( (actual = masCercano(noVisitados, distance, cantidad)) != -1 ){//no visitados
+		//de los no visitados y ademas lo saca
+	
+		//if(actual == NULL) break; //visite todo
+		if(actual == salida) break; //ya tiene una distancia y prev asignados
+		
+		int* vecinos = grafo.vecinos(actual);
+		//for(int j = 0; j < vecinos.size(); j++){ //vector, lista enlazada o cola para los vecinos?
+		while(!vecinos.vacia()){
+			Node v = vecinos.pop();
+			int alt = distance[v.id] + grafo.peso(actual, v); //si la distancia la guarda el nodo: v.distance;
+			if( alt < distance[v.id] || distance[v.id] == -1){
+				distance[v] = alt;
+				prev[v] = actual;
+			}
+
+		}
+		contador++;
+	}
+
+	//recorrer el arreglo prev y ahi tengo los vertices necesarios.
+	int j = salida;
+	printf("%d\n", distance[j]);
+	if(distance[j] != -1){
+		printf("%d\n", contador); // tengo que llevar cuenta de los niveles recorridos
+		while( j >= 0 ){
+			printf("%d", j); //imprimo estaciones
+			j = prev[j]; //prev[0] esta en -1
+		}
+	return 0;
+}
 /*
 	function Dijkstra(Graph, source):
 
@@ -70,67 +138,3 @@ If we are only interested in a shortest path between vertices source and target,
 	insert u at the beginning of S             // Push the source onto the stack
 */
 
-
-
-	//parsear stdin
-	
-	//crear objeto grafo?
-	//el grafo seria una forma facil de averiguar los vecinos y sacar datos de los nodos
-	//lista de vecinos (enteros) y un arreglo que contenga los nodos
-
-
-	int cantidad;
-	int distance[cantidad];
-	int prev[cantidad];
-	
-	//la cola de prioridad, true si ya lo visitamos
-	bool noVisitados[cantidad];
-	
-	for(int i = 0; i < cantidad; i++){
-		distance[i] = -1;
-		prev[i] = -1;
-		noVisitados[i] = false;
-	}
-
-	distance[0] = 0;
-//Si hago un objeto grafo todo lo de arriba va en el constructor
-
-//no sabemos si el grafo es lo suficientemente esparso para
-//usar el min heap y no pasarnos en complejidad de O(n cuadrado)
-//asi que la cola se hace con arreglo
-
-
-	int contador = 0; // cuenta estaciones recorridas
-
-
-	while(!noVisitados.vacio()){//no visitados
-		int actual = masCercano(noVisitados, distance);//de los no visitados y ademas lo saca
-	
-		if(actual == NULL) break; //visite todo
-		if(actual == SALIDA) break; //ya tiene una distancia y prev asignados
-		
-		Cola vecinos = actual.vecinos();// o grafo.vecinos(actual)
-		//for(int j = 0; j < vecinos.size(); j++){ //vector, lista enlazada o cola para los vecinos?
-		while(!vecinos.vacia()){
-			Node v = vecinos.pop();
-			int alt = distance[v.id] + grafo.peso(actual, v); //si la distancia la guarda el nodo: v.distance;
-			if( alt < distance[v.id] || distance[v.id] == -1){
-				distance[v] = alt;
-				prev[v] = actual;
-			}
-
-		}
-		contador++;
-	}
-
-	//recorrer el arreglo prev y ahi tengo los vertices necesarios.
-	int j = SALIDA;
-	printf("%d\n", distance[j]);
-	if(distance[j] != -1){
-		printf("%d\n", contador); // tengo que llevar cuenta de los niveles recorridos
-		while( j >= 0 ){
-			printf("%d", j); //imprimo estaciones
-			j = prev[j]; //prev[0] esta en -1
-		}
-	return 0;
-}
