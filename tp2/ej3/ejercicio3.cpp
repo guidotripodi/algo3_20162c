@@ -85,6 +85,8 @@ int main(){
 
 	while( (actual = masCercano(noVisitados, distance, cantidad)) != -1 ){//no visitados
 		//de los no visitados y ademas lo saca
+		//capaz queda mas claro el algoritmo si lo marco visitado al mas cercano aca
+		//en lugar de adentro de la funcion masCercano
 	
 		//if(actual == NULL) break; //visite todo
 		if(actual == salida) break; //ya tiene una distancia y prev asignados
@@ -109,7 +111,7 @@ int main(){
 	if(distance[j] != -1){
 		printf("%d\n", contador); // tengo que llevar cuenta de los niveles recorridos
 		while( j >= 0 ){
-			printf("%d", j); //imprimo estaciones
+			printf("%d", j + 1); //imprimo estaciones
 			j = prev[j]; //prev[0] esta en -1 entonces ahi corta el ciclo
 		}
 	}

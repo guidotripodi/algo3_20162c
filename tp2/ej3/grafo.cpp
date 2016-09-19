@@ -3,15 +3,15 @@ Grafo::Grafo(int* aristas, int cantNodos, int cantAristas){
 	adyacencia = new std::list<Arista>[cantNodos];
 	int origen, destino, peso;
 	for(int i = 0; i < cantAristas; i++){
-		origen = aristas[0];
-		destino = aristas[1];
-		peso = aristas[1];
+		origen = aristas[i] -1;
+		destino = aristas[i + 1] - 1;
+		peso = aristas[i + 2];
 		adyacencia[origen].push_back(Arista(destino, peso));
 	}
 }
 
 Grafo::~Grafo(){
-	//TODO
+	delete[] adyacencia;
 }
 
 std::list<Arista>* Grafo::vecinos(int vertice){
