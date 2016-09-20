@@ -2,120 +2,134 @@
 los cuales ser\'an enunciados a continuaci\'on.\\
 
 \begin{center}
- \textbf{Todos los arqueologos y canibales presentan la misma velocidad}
+ \textbf{No existe camino para atravezar el laberinto}
 \end{center}
 
-Este caso se da cuando V$_{i}$ = W$_{j}$ $\forall$ (i,j)  $\gets$ [0..6] \\
+Este caso se da cuando en cualquier camino nos encontramos con paredes irrompibles sin la posibilidad de esquivarlas\\
 
  Para este tipo de testeo mostraremos a continuaci\'on un ejemplo del mismo, exponiendo su respectivo resultado. Adem\'as veremos m\'as adelante, que por el desarrollo de nuestro algoritmo y sus respectivas podas este ser\'a el peor caso en referencia a la perfomance del mismo.\\
  
  Con un:
  
-$Cantidad$ $de$ $arqueologos:$ $4 $
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.65]{./EJ1/ej1sinsolucion.jpeg}
+\\{$Ejemplo$ \ 1.1.1 - $Caso$ $Sin$ $Soluci$\'on}
+  \end{center}
+  \vspace*{0.3cm}
 
-$Cantidad$ $de$ $canibales:$ $2 $ 
+El grafo que representa a este tipo es de la siguiente forma:\\
 
-$Velocidad$ $de$ $arqueologos:$ $10$ $10$ $10$ $10$
-
-$Velocidad$ $de$ $canibales:$ $10$ $10 $
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.5]{./EJ1/ej1grafosinsolucion.jpeg}
+ \\{$Ejemplo$ \ 1.1.2 - $Caso$ $Sin$ $Soluci$\'on}
+  \end{center}
+  \vspace*{0.3cm}
 
   Obtuvimos el siguiente resultado:
 
-$Velocidad$ $de$ $cruce$ $total: $ $90$\\
+$Velocidad$ $de$ $cruce$ $total: $ $-1$\\
+
 
 
 
  \begin{center}
- \textbf{No hay canibales}
+ \textbf{Existe un camino sin atravesar paredes para recorrer todo el laberinto}
 \end{center}
 
-Esta versi\'on se da cuando M = 0. 
+Esta versi\'on se da cuando $P' = P$ con $P' = P - atravezadas$. 
 
 Para este tipo de testeo mostraremos a continuaci\'on un ejemplo del mismo, exponiendo su respectivo resultado.\\
 
+ 
  Con un:
+ 
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.65]{./EJ1/ej1solucionsinpared.jpeg}
+ \\{$Ejemplo$ \ 1.2.1 - $Caso$ $Sin$ $Romper$ $Paredes$}
+  \end{center}
+  \vspace*{0.3cm}
 
-$Cantidad$ $de$ $arqueologos:$ $5 $  
+El grafo que representa a este tipo es de la siguiente forma:\\
 
-$Cantidad$ $de$ $canibales:$ $0 $ 
-
-$Velocidad$ $de$ $arqueologos:$ $15$ $10$ $5$ $2$ $20$ 
-
-$Velocidad$ $de$ $canibales: $  
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.5]{./EJ1/ej1grafosolucionsinpared.jpeg}
+ \\{$Ejemplo$ \ 1.2.2 - $Caso$ $Sin$ $Romper$ $Paredes$}
+  \end{center}
+  \vspace*{0.3cm}
 
   Obtuvimos el siguiente resultado:
 
-$Velocidad$ $de$ $cruce$ $total: $ $56$
+$Velocidad$ $de$ $cruce$ $total: $ $10$
 
 
 \begin{center}
- \textbf{Todos los arqueologos y canibales presentan velocidades distintas}
+ \textbf{Rompiendo todas las paredes posibles para pasar el laberinto}
 \end{center}
 
-Este caso se da cuando V$_{i}$ $\neq$ W$_{j}$ $\forall$ (i,j)  $\gets$ [0..6] 
+Este caso se da cuando $P' = 0$ con $P' = P - atravezadas$ 
 
 Aqu\'i veremos, un ejemplo del conjunto de test de este tipo, exponiendo su respectivo resultado.\\
-
+ 
  Con un:
+ 
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.65]{./EJ1/ej1rompertodasparedes.jpeg}
+\\ {$Ejemplo$ \ 1.3.1 - $Caso$ $Rompiendo$ $Todas$ $Paredes$ $Las$ $Posibles$}
+  \end{center}
+  \vspace*{0.3cm}
 
-$Cantidad$ $de$ $arqueologos: 3 $ 
+El grafo que representa a este tipo es de la siguiente forma:\\
 
-$Cantidad$ $de$ $canibales: 2 $ 
-
-$Velocidad$ $de$ $arqueologos:$ $2$ $4$ $6 $
-
-$Velocidad$ $de$ $canibales:$ $1$ $3$ $5 $
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.5]{./EJ1/ej1grafosolucionconpared.jpeg}
+ \\{$Ejemplo$ \ 1.3.2 - $Caso$ $Rompiendo$ $Todas$ $Paredes$ $Las$ $Posibles$}
+  \end{center}
+  \vspace*{0.3cm}
 
   Obtuvimos el siguiente resultado:
 
-$Velocidad$ $de$ $cruce$ $total: $ $18$\\
+$Velocidad$ $de$ $cruce$ $total: $ $6$
 
 
 \begin{center}
- \textbf{Hay un canibal cada dos arqueologos}
+ \textbf{Rompiendo una cantidad menor de paredes posibles para pasar el laberinto}
 \end{center}
 
-Este tipo de caso se cumple cuando N = 2 $\ast$ M
+Este caso se da cuando $P \geq P' \geq 0$ con $P' = P - atravezadas$, tambi\'en denominado caso random debido al desarrollo de nuestro algoritmo.\\
 
-Un ejemplo que simboliza el conjunto de test de este tipo es el siguiente:\\
-
+Siguiendo el desarrollo de dicho informe a continuaci\'on mostraremos, un ejemplo del grupo de test de este estilo, exponiendo su respectivo resultado.\\
+ 
  Con un:
+ 
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.65]{./EJ1/ej1random.jpeg}
+\\ {$Ejemplo$ \ 1.4.1 - $Caso$ $Random$}
+  \end{center}
+  \vspace*{0.3cm}
 
-$Cantidad$ $de$ $arqueologos:$ $4 $
+El grafo que representa a este tipo es de la siguiente forma:\\
 
-$Cantidad$ $de$ $canibales:$ $2$
-
-$Velocidad$ $de$ $arqueologos:$ $3$ $6$ $9$ $12$
-
-$Velocidad$ $de$ $canibales:$ $1$ $2$ 
-
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.5]{./EJ1/ej1graforandom.jpeg}
+ \\{$Ejemplo$ \ 1.4.2 - $Caso$ $Random$}
+  \end{center}
+  \vspace*{0.3cm}
 
   Obtuvimos el siguiente resultado:
 
-$Velocidad$ $de$ $cruce$ $total: $ $33$
+$Velocidad$ $de$ $cruce$ $total: $ $9$\\
 
 
-
-\begin{center}
- \textbf{Hay mas canibales que arqueologos}
-\end{center}
-
-Este tipo de caso se cumple cuando N < M
-
-A continuaci\'on enunciaremos, un ejemplo del conjunto de test de este tipo, exponiendo su respectivo resultado.\\
-
- Con un:
-
-$Cantidad$ $de$ $arqueologos:$ $2 $
-
-$Cantidad$ $de$ $canibales:$ $3$
-
-$Velocidad$ $de$ $arqueologos:$ $3$ $6$
-
-$Velocidad$ $de$ $canibales:$ $1$ $2$ $5$
-
-  Obtuvimos el siguiente resultado:
-
-$Velocidad$ $de$ $cruce$ $total:$ \textit{NO HAY SOLUCI\'ON} \\
-
-
+\textbf{Aclaraciones:} 
+\begin{itemize}
+\item Linea punteada en el grafo significa que para llegar a ese nodo hay que atravezar una pared.
+\item Nodo aislado significa que esta rodeado de paredes irrompibles no hay camino posible de conectar dicho nodo a la componente conexa.
+\end{itemize}
