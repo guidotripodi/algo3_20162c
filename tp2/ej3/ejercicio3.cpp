@@ -2,14 +2,8 @@
 #include "grafo.h"
 
 //TODO:
-//enunciado dice que las estaciones se numeran de 1 a n
-//me falta arreglar esos indices para que la salida se imprima correctamente
-//destructor del grafo
 //embellecimiento
 //TESTEO
-
-//capaz usar algo mas piola que cin para la entrada
-//con mas control de errores 
 
 int masCercano(bool* noVisitados, int* distancia, int cantNodos){ //O(n)
 	int minimo;
@@ -27,9 +21,9 @@ int masCercano(bool* noVisitados, int* distancia, int cantNodos){ //O(n)
 	}
 
 	if(i == cantNodos) return -1; //visite todos y no encontre un minimo
-	
+
 	for(int j = i + 1; j < cantNodos; j++){
-		if( distancia[j] < distancia[minimo] && 
+		if( distancia[j] < distancia[minimo] &&
 				noVisitados[j] &&
 				distancia[j] != -1){ // no distancia invalida
 			minimo = j;
@@ -82,10 +76,7 @@ int main(){
 	std::list<Arista>* vecinos; 
 	std::list<Arista>::iterator posActual;
 
-	while( (actual = masCercano(noVisitados, distance, cantidad)) != -1 ){//no visitados
-		//de los no visitados y ademas lo saca
-		//capaz queda mas claro el algoritmo si lo marco visitado al mas cercano aca
-		//en lugar de adentro de la funcion masCercano
+	while( (actual = masCercano(noVisitados, distance, cantidad)) != -1 ){ //O(n)
 	
 		noVisitados[actual] = false; //lo saco de la "cola"
 		if(actual == salida) break; //ya tiene una distancia y prev asignados
@@ -140,7 +131,9 @@ int main(){
 
 	return dist[], prev[]
 
-If we are only interested in a shortest path between vertices source and target, we can terminate the search after line 13 if u = target. Now we can read the shortest path from source to target by reverse iteration:
+If we are only interested in a shortest path between vertices source and target,
+we can terminate the search after line 13 if u = target. Now we can read the shortest
+path from source to target by reverse iteration:
 
 	S ← empty sequence
 	u ← target
