@@ -20,7 +20,7 @@ int masCercano(bool* noVisitados, int* distancia, int cantNodos){ //O(n)
 
 	while( i < cantNodos ){
 		if( noVisitados[i] && distancia[i] != -1){ // no distancia invalida
-			minimo = distancia[i];
+			minimo = i;
 			break;
 		}
 		i++;
@@ -28,12 +28,11 @@ int masCercano(bool* noVisitados, int* distancia, int cantNodos){ //O(n)
 
 	if(i == cantNodos) return -1; //visite todos y no encontre un minimo
 	
-	for(; i < cantNodos; i++){
-		if( distancia[i] < minimo && 
-				noVisitados[i] &&
-				distancia[i] != -1){ // no distancia invalida
-			minimo = distancia[i];
-			noVisitados[i] = false; //lo saco de la "cola"
+	for(int j = i + 1; j < cantNodos; j++){
+		if( distancia[j] < distancia[minimo] && 
+				noVisitados[j] &&
+				distancia[j] != -1){ // no distancia invalida
+			minimo = j;
 		}
 	}
 	return minimo;
@@ -77,7 +76,7 @@ int main(){
 //asi que la cola se hace con arreglo
 
 
-	int contador = 0; // cuenta estaciones recorridas
+	int contador = 1; // cuenta estaciones recorridas
 
 	int actual;
 	std::list<Arista>* vecinos; 
@@ -88,14 +87,13 @@ int main(){
 		//capaz queda mas claro el algoritmo si lo marco visitado al mas cercano aca
 		//en lugar de adentro de la funcion masCercano
 	
-		//if(actual == NULL) break; //visite todo
+		noVisitados[actual] = false; //lo saco de la "cola"
 		if(actual == salida) break; //ya tiene una distancia y prev asignados
 		
 		vecinos = fortaleza.vecinos(actual);
 		for(posActual = vecinos->begin(); posActual != vecinos->end(); ++posActual){ 
-		//while(!vecinos.vacia()){
 			Arista v = *posActual;
-			int alt = distance[v.destino] + v.peso; //si la distancia la guarda el nodo: v.distance;
+			int alt = distance[actual] + v.peso; //si la distancia la guarda el nodo: v.distance;
 			if( alt < distance[v.destino] || distance[v.destino] == -1){
 				distance[v.destino] = alt;
 				prev[v.destino] = actual;
@@ -111,9 +109,10 @@ int main(){
 	if(distance[j] != -1){
 		printf("%d\n", contador); // tengo que llevar cuenta de los niveles recorridos
 		while( j >= 0 ){
-			printf("%d", j + 1); //imprimo estaciones
+			printf("%d ", j + 1); //imprimo estaciones
 			j = prev[j]; //prev[0] esta en -1 entonces ahi corta el ciclo
 		}
+		printf("\n");
 	}
 	return 0;
 }
