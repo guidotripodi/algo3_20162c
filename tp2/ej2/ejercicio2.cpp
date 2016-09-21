@@ -10,6 +10,7 @@ int *altura;
 int *padre;
 int *costCompLider;
 int *cantAristas;
+int representanteFinal;
 
 struct Arista {
     int inicio;
@@ -86,14 +87,26 @@ void uni(int x, int y, int costo) {
 		padre[x] = y;
         cantAristas[y] = cantAristas[y]+cantAristas[x]+1;
         costCompLider[y] += costCompLider[x]+costo;
+        
+        if (cantAristas[y] == V-1) {
+            representanteFinal = y;
+        }
 	}else if(altura[x] < altura[y]) {
 		padre[x] = y;
         cantAristas[y] = cantAristas[y]+cantAristas[x]+1;
         costCompLider[y] += costCompLider[x]+costo;
+        
+        if (cantAristas[y] == V-1) {
+            representanteFinal = y;
+        }
 	}else{
 		padre[y] = x;
         cantAristas[x] = cantAristas[x]+cantAristas[y]+1;
         costCompLider[x] += costCompLider[y]+costo;
+        
+        if (cantAristas[x] == V-1) {
+            representanteFinal = x;
+        }
 	}
 }
 
@@ -112,6 +125,8 @@ int main() {
     //Sirven para saber del grafo cuantos nodos y aristas tengo
     V = 0;
     E = 0;
+    
+    representanteFinal = -1;
     
     char map[] = {'#','#','#','#','#','#','#','#','#',
                   '#','0','1','0','#','0','#','0','#',
@@ -218,9 +233,21 @@ int main() {
 		if (find(a->inicio) != find(a->fin)) {
 			uni(a->inicio, a->fin, a->costo);
         }
+        
+        //PODA
+        if (representanteFinal > 0) {
+            break;
+        }
+        //FIN PODA
 	}
 
-    bool resuelto = false;
+    if (representanteFinal > 0) {
+        printf("%d \n", costCompLider[representanteFinal]);
+    }else {
+        printf("-1 \n");
+    }
+
+    /*bool resuelto = false;
     for (int i = 0; i < F*C; i++) {
         if (cantAristas[i] == V-1) {
             printf("%d \n", costCompLider[i]);
@@ -231,7 +258,7 @@ int main() {
     
     if (!resuelto) {
         printf("-1 \n");
-    }
+    }*/
     
     return 0;
 }
