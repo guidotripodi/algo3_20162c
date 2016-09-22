@@ -1,8 +1,17 @@
 \indent En lo que sigue, mostraremos buenos y malos casos para nuestro algoritmo, y a su vez, daremos el tiempo estimado 
 seg\'un la complejidad del algoritmo calculada anteriormente.\\
 
-Luego de varios experimentos, pudimos llegar a la conclusi\'on que uno de los tipos de casos que resulta m\'as beneficioso para nuestro algoritmo
-es en el cual \textbf{hay m\'as canibales que arqueologos}, esto se da ya que nuestro algoritmo va chequeando todos los posibles pares y como en la primera corrida ya encuentra que no es posible termina.\\
+Luego de varios experimentos, pudimos llegar a la conclusi\'on que uno de los tipos de casos que resulta m\'as beneficioso para nuestro algoritmo, dado que nuestro algoritmo es un BFS el cual va viendo todos los \textbf{caminos encuentra el camino m\'inimo m\'as r\'apido y corta la ejecuci\'on o ve que no puede romper la cantidad de paredes necesarias para avanzar por el camino en el inicio de cada camino posible}.\\
+
+Un grafo que simplifica lo dicho es el siguiente:
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.65]{./EJ1/ej1grafomejorcaso.jpeg}
+{$Ejemplo Grafo$ \ 1.1 - $Mejor$ $Caso$}
+  \end{center}
+  \vspace*{0.3cm}
+
 
 Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instancias:\\
 
@@ -43,7 +52,14 @@ Luego de realizar dicha divisi\'on, el promedio de dichos valores resultante fue
 
 Se puede observar en la figura 1.2 que luego de realizar la divisi\'on de los tiempos la funcion resultante permanece siempre por debajo de 1 lo cual corrobora para el mejor caso que el mismo se encuentra correctamente acotado por la complejidad calculada anteriormente.\\
 
-Luego, uno de los peores casos para nuestro algoritmo es en el cual tanto \textbf{los canibales como los arqueologos presentan la misma velocidad}, esto se da as\'i ya que nuestro algoritmo chequea todos los pares posibles y como todos pueden ser soluci\'on no se podr\'a efectuar ning\'un tipo de poda.\\
+Luego, uno de los peores casos para nuestro algoritmo es en el cual tanto \textbf{se debe recorrer todos los posibles caminos ya que son todos exactamente iguales}, esto se da as\'i ya que nuestro algoritmo chequea todos los caminos posibles y como todos pueden ser soluci\'on posible avanza por todos y llega al final del laberinto con el mismo valor en todos los posibles caminos\\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.65]{./EJ1/ej1grafopeorcaso.jpeg}
+{$Ejemplo Grafo$ \ 1.2 - $Peor$ $Caso$}
+  \end{center}
+  \vspace*{0.3cm}
 
 
 \vspace*{0.3cm} \vspace*{0.3cm}
@@ -77,6 +93,6 @@ Luego de realizar dicha divisi\'on, el promedio de dichos valores resultante fue
 \end{table}
 \end{center}
 
-Podemos observar en la figura 1.4 como la funci\'on resultante se mantiene por debajo de 1, a pesar de tener casos en los cuales la funci\'on llega a un m\'inimo el cual se encuentra muy por debajo de 1, lo cual se da por la implementaci\'on del algoritmo, donde el mismo resulta favorecido al tener igualdad de grupos (canibales y arqueologos).\\
+Podemos observar en la figura 1.4 como la funci\'on resultante se mantiene por debajo de 1, a pesar de tener casos en los cuales la funci\'on llega a un m\'inimo el cual se encuentra muy por debajo de 1, lo cual se da por la implementaci\'on del algoritmo.\\
 
 Luego de lo mostrado, podemos ver que ya sea en el peor caso nuestro algoritmo en funci\'on al tiempo de ejecuci\'on queda asintotizado por debajo de la funci\'on del tiempo de la complejidad .
