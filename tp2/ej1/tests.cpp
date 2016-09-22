@@ -7,8 +7,11 @@ void sinSolucion(){
 		F = l;
 		C = l+4;
 
+  char map[F*C];
 
-	char map[F*C];
+                 int h = F;
+                 int x = C;
+
 		for (int i = 0; i < h; ++i)	{
 				for (int j = 0; j < x; ++j)	{
 					if (i == 0 || j == 0 || j == x-1 || i == h-1)	{
