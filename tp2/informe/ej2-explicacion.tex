@@ -1,0 +1,8 @@
+En esta ocasión se debe encontrar, dada una serie de habitaciones, la forma menos costosa de unirlas, teniendo que derribar determinadas paredes para lograrlo. Dada 2 habitaciones: el muro menos costoso para derribar que las une será la elección a tomar para formar la solución, es decir, se deben elegir todos los muros menos costosos que unen las distintas habitaciones para obtener la solucion buscada.
+
+Un planteo de modelo sobre grafo caracteriza a cada habitación como un conjunto de puntos caminables y cada uno de estos como un nodo adyacente a los puntos de la misma habitacion, el cual posee H componentes conexas, siendo H la cantidad total de habitaciones en el mapa. Lo que se busca entonces es una forma de unir estas componentes de la forma menos costosa. Para ello las unimos a 2 habitaciones separadas por una pared con un eje de peso igual al esfuerzo de derribarla. A las aristas de las componentes les asignamos el peso nulo.
+
+CLAVAR EL DRAWING
+
+Para obtener la solucion, se busca el AGM del grafo planteado mediante el algoritmo de Kruskal; a él se le calcula el peso, el cual representa la respuesta al problema.
+
