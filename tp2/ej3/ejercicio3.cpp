@@ -70,8 +70,6 @@ int main(){
 //asi que la cola se hace con arreglo
 
 
-	int contador = 1; // cuenta estaciones recorridas
-
 	int actual;
 	std::list<Arista>* vecinos; 
 	std::list<Arista>::iterator posActual;
@@ -91,17 +89,21 @@ int main(){
 			}
 
 		}
-		contador++;
 	}
 
 	//recorrer el arreglo prev y ahi tengo los vertices necesarios.
 	int j = salida;
 	printf("%d\n", distance[j]);
 	if(distance[j] != -1){
-		printf("%d\n", contador); // tengo que llevar cuenta de los niveles recorridos
+		std::list<int> output;
+		std::list<int>::iterator itOut;
 		while( j >= 0 ){
-			printf("%d ", j + 1); //imprimo estaciones
+			output.push_front(j);
 			j = prev[j]; //prev[0] esta en -1 entonces ahi corta el ciclo
+		}
+		printf( "%lu\n", output.size() );
+		for(itOut = output.begin(); itOut != output.end(); ++itOut){ 
+			printf("%d ", *itOut + 1); //imprimo estaciones
 		}
 		printf("\n");
 	}
