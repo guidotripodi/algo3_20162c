@@ -52,7 +52,7 @@ void Balanza::balancear(){
     list<int> sumasParcialesList;
     
     // armo el arreglo de sumas parciales
-    while (sumaParcial < p) {
+    while (sumaParcial <= p) {
         sumasParcialesList.push_back(sumaParcial);
 		// -1 porque el exponente termina en +1 en el while anterior
         sumaParcial=(sumaParcial-pow(3,i));
