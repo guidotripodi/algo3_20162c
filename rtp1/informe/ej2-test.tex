@@ -1,0 +1,35 @@
+\indent Luego de realizar la implementaci\'on de nuestro algoritmo, desarrollamos tests,
+para corroborar que nuestro algoritmo es el indicado.\\
+
+A continuaci\'on enunciaremos varios de nuestros tests:\\
+
+\begin{center}
+ \textbf{El valor de entrada $P$ es de la forma ${3^i}$ para un i$\gets$[0, N] }
+\end{center}
+ Este caso se cumple cuando se recibe un P el cual al realizar nuestro primer ciclo que chequea cual es la potencia igual o mayor, termina siendo igual y de esta forma solo se itera una \'unica vez el segundo y tercer ciclo.
+ 
+\begin{center}
+ \textbf{El valor de entrada $P$ es de la forma \[
+\sum_{i=1}^{n}3^{i}=P 
+\]}
+\end{center}
+
+Veremos mas adelante que este caso ser\'a el peor a resolver ya que se iterar\'a la totalidad completa de elementos de nuestros arrays.
+
+\begin{center}
+ \textbf{El valor de entrada $P$ es de la forma ${3^i} + R$ para  (i, R) $\gets$[0, N]}
+\end{center}
+
+ Este caso se cumple cuando se recibe un P el cual al realizar nuestro primer ciclo que chequea cual es la potencia igual o mayor, termina siendo mayor y de esta forma se itera mas de una vez el segundo y tercer ciclo.
+
+\begin{center}
+ \textbf{El valor de entrada $P$ es impar}
+\end{center}
+
+ Este caso se cumple cuando se recibe un P el cual el mismo es de la forma $P MOD 2 = 1$.
+ 
+ \begin{center}
+ \textbf{El valor de entrada $P$ es par}
+\end{center}
+
+ Este caso se cumple cuando se recibe un P el cual el mismo es de la forma $P MOD 2 = 0$.

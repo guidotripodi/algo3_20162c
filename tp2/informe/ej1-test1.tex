@@ -26,7 +26,7 @@ Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instan
   \end{center}
   \vspace*{0.3cm}
 
-Como se trabaja con dos variables puntuales determinadas, decidimos tomar variable el valor de N (F * C) y dejar fijo P (en los gr\'aficos denominado como k).\\
+Como la complejidad que calculamos se basa en la cantidad de nodos posibles que puede haber multiplicado por las paredes contrastaremos nuestras mediciones con los valores de N (F * C) $\ast$ P (en los gr\'aficos denominado como k).\\
 A continuaci\'on mostraremos el gr\'afico comparativo de como se comporta nuestro algoritmo en el mejor caso con la poda descripta.\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
@@ -107,5 +107,22 @@ Como en el peor caso la poda no sirve ya que hay que recorrer todos los caminos 
  Para obtener dichas instancias nos resulto prudente realizar aproximadamente unas 20 corridas con el mismo input y sacar el promedio de estas 20 corridas para cada instancia para obtener resultados m\'as consisos.\\ 
 
 Podemos observar en la figura 1.5 como la funci\'on resultante de nuestro algoritmo en el peor caso se mantiene por debajo de la funci\'on final del tiempo de realizar O(N * k) operaciones lo cual fue la complejidad precalculada.\\
+
+Por \'ultimo mostraremos dos gr\'aficos comparativos con el mejor, el peor y el caso promedio sin realizar la poda contra la complejidad precalculada y el segundo mostrar\'a los mismos casos pero con la poda.\\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.65]{./EJ1/comparativo.png}
+{$Gr$\'a$fico$ \ 1.9 - $Comparativo$ $Sin$ $Poda$}
+  \end{center}
+  \vspace*{0.3cm}
+  
+  \vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.65]{./EJ1/comparativo1.png}
+{$Gr$\'a$fico$ \ 1.10 - $Comparativo$ $Con$ $Poda$}
+  \end{center}
+  \vspace*{0.3cm}
+
 
 Luego de lo mostrado, podemos ver que ya sea en el peor caso nuestro algoritmo en funci\'on al tiempo de ejecuci\'on queda asintotizado por debajo de la funci\'on del tiempo de la complejidad .

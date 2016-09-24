@@ -1,0 +1,23 @@
+\vspace*{1em}
+
+Realizando pasos 2-1, cada solución construída tendrá {\bf a lo sumo n-1 pasos}, siendo n la cantidad total de personas en la comitiva.
+
+En el primer paso se analizan $\binom {n}{2}$ parejas posibles a enviar y por cada una de ellas se eligirá de entre 2 personas para ser el farlero.\\
+
+En el segundo paso se tendr\'an $\binom {n-1}{2}$ parejas posibles y 3 faroleros para elegir.\\
+
+Para el (i)-esimo paso se tendrán $\binom {n-(i-1)}{2}$ parejas e i+1 faroleros.\\
+
+Por cada una de las posibilidades de cada paso, se deber\'an analizar la cantidad total de
+posibilidades que haya en el paso subsiguiente, para dar lugar as\'i al analisis de todas las combinaciones posibles, es decir: siendo que el segundo paso se ejecuta $2 \ast \binom {n}{2}$ veces, el tercero $2 \ast \binom {n}{2} \binom{n-1} {2} \ast 3$, podemos ver que en combinación, todos los pasos demandarían:
+\[
+\prod_{i=1}^{n-1}\binom {n-(i-1)}{2}*(i+1) = \prod_{i=1}^{n-1}\binom {n-(i-1)}{2} * \prod_{i=0}^{n-1}(i+1)
+\]
+
+\[
+n!\prod_{i=0}^{n-2}\binom {n-i}{2} = n!\prod_{i=0}^{n-2}\frac{(n-i)(n-(i-1))}{2}
+\]
+
+\[
+\frac{ n!}{2^{n-2}}.\prod_{i=0}^{n-2}(n-i).\prod_{i=0}^{n-2}(n-(i-1)) = \frac{n!}{2^{n-2}}.n!.\frac{(n+1)!}{2}\leq \frac{n!^{2}.(n+1)!}{2^{n-1}}\in O(n.n!^{3})
+\]
