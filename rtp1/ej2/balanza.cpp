@@ -62,10 +62,11 @@ void Balanza::balancear(){
     sumasParcialesList.push_back(sumaParcial);
 
     long long  sumasParciales[sumasParcialesList.size()];
-    
+	long long size = sumasParcialesList.size();
     i = 0;
-    while(i < sumasParcialesList.size()){
-    	sumasParciales[i] = sumasParcialesList.pop_front();
+    while(i < size){
+    	sumasParciales[i] = sumasParcialesList.front();
+		sumasParcialesList.pop_front();
     	i++;
     }
 
