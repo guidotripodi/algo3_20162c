@@ -6,13 +6,24 @@ Una aclaraci\'on previa que ser\'a de utilidad: como se dio como precondici\'on 
 $1)$ Obtendremos para empezar, el valor de la pesa que sea igual o mayor al peso de la llave $P$.
 Sabemos que si hay una pesa con el mismo peso que la llave, es decir, si la llave $P$ tiene peso potencia de 3, nuestro algoritmo puede dar por finalizado su proceso y solo deberemos colocar esa pesa en el balanzin donde se encontraba la llave $P$ para lograr el equlibrio deseado.
 
-Por otro lado, deberemos continuar para poder encontrar las pesas adecuadas.\\
+En caso contrario, deberemos continuar para poder encontrar las pesas adecuadas.\\
 
-$2$ Como las pesas, presentan un peso potencia de 3, creamos un arreglo de sumas parciales $sumasParciales$ donde iremos guardando las sumas parciales de las potencias desde $3^0$ hasta un $3^i$ en el paso $i-esimo$. La última suma parcial será hasta la potencia mayor que el valor que representa el peso de la llave ($P$) encontrado en el paso $1)$.\\
+$2)$ Como las pesas, presentan un peso potencia de 3, creamos un arreglo de sumas parciales $sumasParciales$ donde iremos guardando las sumas parciales de las potencias desde $3^0$ hasta un $3^i$ en el paso $i-esimo$. La última suma parcial será hasta la potencia mayor que el valor que representa el peso de la llave ($P$) encontrado en el paso $1)$.\\
 
-Cada valor en el arreglo $sumasParciales$ representa un intervalo 
+Cada valor en el arreglo $sumasParciales$ representa un intervalo:
 
-Finalizado esto, realizaremos una b\'usqueda binaria para llevar el valor de p a 0. Para un trabajo m\'as sencillo guardamos el valor inicial de $P$ en la variable $equilibrioActual$ a la cual le iremos restando y/o sumando el valor de nuestras pesas.\\
+\begin{equation}
+[0, \sum_{j=0}^{i}(3^j)]
+\end{equation} 
+
+Que es el número más grande representable con las potencias de 3 que realizan la sumatoria indicada en el limite superior del intervalo.
+Veremos luego que un número $x$ $\in$ $\mathbb{N}$ que esté contenido en un intervalo como el anterior puede formarse con una combinación de sumas y restas de las potencia de 3 que conforman el limite del intervalo (no necesariamente todas ellas).\\  
+
+Para que nuestro algoritmo pueda encontrar que pesas con valor potencia de 3 utilizar para equilibrar la balanza, empezaremos con $P$ (el valor de nuestra llave), buscando el intervalo que lo contiene. 
+
+Este intervalo, será por defecto el más grande, dado que así armamos nuestro arreglo $sumasParciales$. 
+Al valor $P$ le restaremos la pesa más grande posible que será en este caso $3^n$ donde $P$ $<$ $3^n$. Para obtener este valor simplemente debemos hacer una resta entre la posición $n-esima$ y la anterior del arreglo $sumasParciales$.   
+
 
 Dicha b\'usqueda binaria la realizaremos en un ciclo que ir\'a desde el valor en m\'odulo de $equilibrioActual$ e iteraremos el mismo hasta que sea 0. Luego, como en toda b\'usqueda binaria, trabajaremos con nuestro array $sumasParciales$ chequeando si en la mitad del array nuestra $sumaParcial$ es mayor o igual al valor en m\'odulo de $equilibrioActual$. En caso de que fuese verdadero, chequeamos si el valor de $equilibrioActual$ es mayor o menor a 0. Si es menor a 0, sumaremos nuestra pesa correspondiente al \'indice en el que estamos de nuestro array $sumasParciales$, al valor de $equilibrioActual$ y guardaremos nuestra pesa en el $arrayD$ que simboliza al plato derecho de la balanza. Si es mayor a 0, en vez de sumarla la restamos y la guardamos en el array $arrayI$ que simboliza el otro plato. Siguiendo el razonamiento de la b\'usqueda binaria, volveremos a partir nuestro array en dos y haremos el mismo chequeo.\\
 
