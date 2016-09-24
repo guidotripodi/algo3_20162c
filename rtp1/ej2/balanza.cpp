@@ -1,4 +1,7 @@
  #include "balanza.h"
+ #include <list>
+
+using namespace std;
 
 Balanza::Balanza(long long peso){
 	p = peso;
@@ -45,23 +48,25 @@ void Balanza::balancear(){
 	// obtengo la ultima suma parcial junto con el exponente de la ultima potencia
     long long  i = 0;
     long long  sumaParcial = 0;
-    while( sumaParcial < p ) {
-        sumaParcial+= pow(3,i);
-        i++;
-    };
-    
-    long long  size = i+1; // mas uno para el 0
-    
-    long long  sumasParciales[size];
+
+    list<int> sumasParcialesList;
     
     // armo el arreglo de sumas parciales
-    while (i >= 0) {
-        sumasParciales[i] = sumaParcial;
+    while (sumaParcial < p) {
+        sumasParcialesList.push_back(sumaParcial);
 		// -1 porque el exponente termina en +1 en el while anterior
-        sumaParcial=(sumaParcial-pow(3,i-1));
-        i--;
+        sumaParcial=(sumaParcial-pow(3,i));
+        i++;
     }
+
+    long long  sumasParciales[sumasParcialesList.size()];
     
+    i = 0;
+    while(i < sumasParcialesList.size()){
+    	sumasParciales[i] = sumasParcialesList.pop_front();
+    	i++;
+    }
+
     long long  middle = (size)/2;
 	//long long platoDerecho[size];
 	//long long platoIzquierdo[size];
