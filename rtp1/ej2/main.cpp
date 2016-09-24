@@ -22,12 +22,17 @@ int main(int argc, char* argv[]){
 		}
 	} else{
 		//toma un valor de stdin y lo procesa
-		std::string entrada;
 		int peso;
+		/*
+		std::string entrada;
 		while( getline(std::cin, entrada) ){
 			std::stringstream(entrada) >> peso;
 		}
+		*/
 		FILE* file = stdout;
+
+		std::cin >> peso;
+
 		Balanza b1(peso);
 		b1.imprimir(file);
 	}
