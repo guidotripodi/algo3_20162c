@@ -2,19 +2,34 @@
  \caption{Algoritmo EJ1}
 %     \SetAlgoLined
 
-	entero sumaParcial $\gets$ 0 \;
-	arreglo sumasParciales \;
+	entero sumaParcial $\gets$ 0 \\
+	arreglo sumasParciales \\
     \While{sumaParcial $\leq$ P}{
-      sumasParciales $\cup$ sumaParcial\;
-	  sumaParcial $\gets$ sumaParcial + 3$^{i}$\;
-     	incrementar i \;
-      \eIf{understand}{
-       go to next section\;
-       current section becomes this one\;
-       }{
-       go back to the beginning of current section\;
-      }
+      sumasParciales $\cup$ sumaParcial\\
+	para sumaParcial asignar sumaParcial + 3$^{i}$\\
+     	incrementar i \\
      }
+	entero medio $\gets$ $\frac{size(sumasParciales)}{2}$  \\
+	entero equilibrioActual $\gets$ P \\
+	entero potenciaActual $\gets$ 0 \\
+	    \While{|equilibrioActual| $>$ 0}{
+	          \eIf{sumasParciales[medio-1] $<$ |equilibrioActual| $\leq$ sumasParciales[medio]}{
+       para	potenciaActual asignar sumasParciales[medio] -  sumasParciales[medio-1]\\
+       	\eIf{equilibrioActual $<$ 0}{
+       	   	para equilibrioActual asignar potenciaActual + equilibrioActual \\
+                platoDerecho $\cup$ potenciaActual \\
+			}{
+			para equilibrioActual asignar equilibrioActual - potenciaActual \\
+                platoIzquierdo $\cup$ potenciaActual \\
+      }
+     }{resolver medio para busqueda binaria \\
+     }	
+	}
+	devolver size(platoDerecho) \\      
+		devolver size(platoIzquierdo) \\      
+			devolver invertir(platoDerecho) \\      
+				devolver invertir(platoIzquierdo) \\      
+     
 
 
 \end{algorithm}
