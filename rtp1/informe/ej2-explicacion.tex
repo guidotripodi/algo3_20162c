@@ -1,11 +1,16 @@
 
-Para solucionar este problema y poder quitar la llave y dejar equilibrado como se encontraba anteriormente realizamos un algoritmo el cual explicaremos a continuaci\'on:\\
+Para solucionar el problema de poder quitar la llave y dejar equilibrada la balanza, realizamos un algoritmo que explicaremos a continuaci\'on:\\
 
-Una aclaraci\'on previa que ser\'a de utilidad, como se dio como precondici\'on que la llave puede llegar a tomar el valor hasta $10^{15}$ trabajaremos con variables del tipo long long las cuales nos permitir\'an llegar hasta dicho valor.\\
+Una aclaraci\'on previa que ser\'a de utilidad: como se dio como precondici\'on que la llave puede llegar a tomar un valor limite de $10^{15}$, trabajaremos con variables del tipo long long las cuales nos permitir\'an alcanzarlo.\\
 
-Como las pesas, presentan un peso en potencia de 3, creamos una variable denominada $sumaParcial$ como la palabra lo indica iremos sumando las potencias desde $3^0$ hasta un $3^i$, donde dicha suma sea igual al valor de entrada denominado $P$ o en su defecto el inmediato mayor al mismo.\\
+$1)$ Obtendremos para empezar, el valor de la pesa que sea igual o mayor al peso de la llave $P$.
+Sabemos que si hay una pesa con el mismo peso que la llave, es decir, si la llave $P$ tiene peso potencia de 3, nuestro algoritmo puede dar por finalizado su proceso y solo deberemos colocar esa pesa en el balanzin donde se encontraba la llave $P$ para lograr el equlibrio deseado.
 
-Luego de tener dicha $sumaParcial$ guardada crearemos un array que nombramos $sumasParciales$ de tamaño $i+1$ el cual iniciaremos vacio. Una vez creado el mismo, llenaremos el array con cada una de las sumas parciales desde el valor que finalizo i hasta 0 de la forma que nos quede \textit{sumasParciales[i] = sumaParcial} donde $sumaParcial$ ser\'a \textit{sumaParcial = sumaParcial-$3^{i-1}$}.\\
+Por otro lado, deberemos continuar para poder encontrar las pesas adecuadas.\\
+
+$2$ Como las pesas, presentan un peso potencia de 3, creamos un arreglo de sumas parciales $sumasParciales$ donde iremos guardando las sumas parciales de las potencias desde $3^0$ hasta un $3^i$ en el paso $i-esimo$. La última suma parcial será hasta la potencia mayor que el valor que representa el peso de la llave ($P$) encontrado en el paso $1)$.\\
+
+Cada valor en el arreglo $sumasParciales$ representa un intervalo 
 
 Finalizado esto, realizaremos una b\'usqueda binaria para llevar el valor de p a 0. Para un trabajo m\'as sencillo guardamos el valor inicial de $P$ en la variable $equilibrioActual$ a la cual le iremos restando y/o sumando el valor de nuestras pesas.\\
 

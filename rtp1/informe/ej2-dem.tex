@@ -1,23 +1,69 @@
+En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on del mismo, la etapa m\'as importante es a la hora de obtener las pesas que equilibran la balanza, la segunda, en donde realizamos un ciclo que va disminuyendo el valor $equilibrioActual$ hasta llegar a 0. 
 
-En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on, la etapa m\'as importante es a la hora de obtener las pesas, la segunda, en donde realizamos un ciclo que va disminuyendo el valor $equilibrioActual$ hasta llegar a 0. 
+Este algoritmo utiliza una propiedad particular que es la de poder generar todos los números entre 0 y $\sum_{i=0}^{n}(3^i)$ con potencias de 3 diferentes (El 0 se incluye por definición). Pero para que esto sea válido debemos demostrarlo.\\
 
-Queremos demostrar que en cada iteraci\'on del ciclo es posible disminuir dicho valor hasta llegar a 0 siempre y cuando, la diferencia que nombramos $N$ es menor que $equilibrioActual$:\\
+Veamos para empezar que podemos generar todos los números entre $[0, 1]$ que son 0 y 1.\\
 
-%Para facilitar esta demostraci\'on nos abstraemos del m\'odulo utilizado para N ya que tomar m\'odulo a $equilibrioActual - {3^i} = N < 0$ es lo mismo que multiplicar $N$ o sea el resultado de la diferencia por -1 e iterear nuevamente.\\ 
+Este es un caso bastante trivial, por lo tanto veamos que sucede en el intervalo 
 
-Llamemos $j$ a cada una de las iteraciones del ciclo la cual inicializaremos $j = i$.\\
-Por lo tanto para probar que dentro del ciclo se disminuye hasta llegar a $equilibrioActual$ = 0 probemos que:\\
+\begin{equation}
+[0,  \sum_{i=0}^{1}(3^i)] = [0, 4]
+\end{equation}
 
-Para $j$, luego de la iteraci\'on $j-esima$ el valor $N$ es $< equilibrioActual$ hasta llegar a $N = 0$ o $N = 1$. Por lo tanto como iniciamos con un valor i donde ${3^i}\geq equilibrioActual$ como $j=i$ si ${3^j} = equilibrioActual$. Llamemos $equilibrioActual' = equilibrioActual$ como valor inicial. Realizando la primera iteraci\'on j $equilibrioActual' - {3^j} = N$, $N < equilibrioActual'$ por lo cual para la primera iteraci\'on j $N < equilibrioActual' \leq equilibrioActual$, lo cual si no fuese cierto ${3^j}$ no ser\'ia igual a equilibrioActual, contradiciendo la igualdad de los mismos enunciada anteriormente.\\
+\begin{itemize}
+\item 4 = 3+1
+\item 2 = 3-1
+\end{itemize}
 
-Luego, si ${3^j} > equilibrioActual$ con $j=i$. $equilibrioActual - {3^j} = |N|$, Si $|N| > equilibrioActual$ ser\'a el caso no utilizado como mencionamos anteriormente, por lo cual pasamos a la pr\'oxima iteraci\'on $j'= j-1$ Siempre y cuando $N \neq 0 \wedge N \neq 1$ (Estos casos finalizan nuestra ejecuci\'on de ciclo). Si $|N| < equilibrioActual$, llamamos $equilibrioActual' = |N|$, por definici\'on $equilibrioActual' < equilibrioActual$ con lo cual, habremos disminuido para esta $j-esima$ iteraci\'on el valor de $equilibrioActual$, en caso de que $N = 0$ habremos finalizado el ciclo habiendo alcanzado el valor de equilibrio, lo mismo suceder\'a para el caso de que $N = 1$ ya que contaremos con la pesa ${3^0}$ que no utilizamos nunca ya que arrancamos siempre por la potencia m\'as grande.\\
+Parece pues que para el caso base, es decir el primer intervalo, podemos generarlos todos con potencias de 3 diferentes. 
 
-Siguiendo con los casos, si ${3^j} < equilibrioActual$, $equilibrioActual - {3^j} = |N|$ $N$ siempre ser\'a menor que $equilibrioActual$ por lo tanto para este caso en cada iteraci\'on j-esima que cumpla ${3^j} < equilibrioActual$, y $equilibrioActual' = N$, $equilibrioActual' < equilibrioActual$. Adem\'as, si el resultado de la diferencia es 0 o 1, significar\'a que hemos alcanzado el equilibrio que necesitabamos por lo cual finaliza el ciclo.\\
+Asumamos pues que esto vale para $i = n \in \mathbb{N}$ y demostremos que vale para $n+1$ \\
 
+Es decir, puedo generar todos los números en el intervalo 
 
-Luego, como guardamos en nuestro array todas las pesas con signo positivo si fueron restando o con signo negativo si terminaron sumando, nos queda que:\\
+\begin{equation}
+[0, \sum_{i=0}^{n}(3^i)]
+\end{equation} \label{eq:hi}
 
-\[
-\sum_{x=1}^{arrayPesasUtilizadas.size}arrayPesasUtilizadas{x}= P 
-\]
+Veamos que podemos lograr lo mismo para 
 
+\begin{equation}
+[0,  \sum_{i=0}^{n+1}(3^i)]
+\end{equation}\label{eq:pi}
+
+Pues veamos que 
+
+\begin{equation}
+[0, \sum_{i=0}^{n+1}(3^i)] = [0, \sum_{i=0}^{n}(3^i)] + 3^{n+1} 
+\end{equation} 
+
+Con lo cual ya puede verse que los numeros entre 0 y $\sum_{i=0}^{n}(3^i)$ podemos generarlos por hipótesis inductiva \eqref{eq:hi}.\\
+
+Luego notemos que 
+
+\begin{equation}
+3^{n+1} = 3 \ast 3^n. 
+\end{equation}
+
+Como $3^n$ $<$ $\sum_{i=0}^{n}(3^i)$, $3^n$ está dentro del intervalo de la hipótesis inductiva \eqref{eq:hi} así que tambien podemos formarlo con potencias de 3, y en particular cualquier número menor a $3^n$ usando la misma hipótesis. \\
+
+Luego podemos generar cualquier $x \in \mathbb{N}$, $x \leq$ $\sum_{i=0}^{n+1}(3^i)$. \\
+
+Por lo tanto queda probado que la hipótesis inductiva vale $\forall n \in \mathbb{N}$ \\
+
+Además notemos que el número más cercano a $x$ será la $maxima$ $potencia$ $de$ $3$ $en$ $[0, $ $\sum_{i=0}^{n+1}(3^i)]$ es decir $3^{n+1}$.
+ 
+Pues este es el intervalo que genera a $x$ y sabemos que $\sum_{i=0}^{n}(3^i)$ $<$ $3^{n+1}$ y que
+$\sum_{i=0}^{n}(3^i)$ $<$ $x$.\\
+
+Y como al restar $x$ por $3^{n+1}$ obtenemos un número más pequeño que $\sum_{i=0}^{n}(3^i)$ en módulo, pues (el caso negativo es simétrico)
+
+\begin{equation}
+x < \sum_{i=0}^{n+1}(3^i) =
+x < \sum_{i=0}^{n}(3^i) + 3^{n+1} =
+x - 3^{n+1} < \sum_{i=0}^{n}(3^i) 
+\end{equation}
+
+Entonces nunca se repetir\'an potencias de 3 en el proceso.
+
+Con esto se concluye que se pueden generar todos los números mediante potencias de 3 únicas.
