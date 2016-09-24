@@ -4,12 +4,81 @@ A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algorit
  \caption{Algoritmo EJ3}
 %     \SetAlgoLined
 
-	\If{CantidadMochilas() = 1}{
-       	   	optimizoUnaMochila() \\
-                devolver max \\
-     }
-     
+	\For{objeto $\exists$ OBJETOS()}{
+	matriz[objetoActual] copiar matriz[objetoAnterior]\\
+	entero x $\gets$	 capacidad(Mochila3)\\
+	\While{x $\geq$ 0}{
+		entero y $\gets$	 capacidad(Mochila2)\\	
+		\While{x $\geq$ 0}{	
+				entero z $\gets$	 capacidad(Mochila1)\\	
+			\While{z $\geq$ 0}{
+				entero m0 $\gets$ matriz[objeto]\\	
+				\If{ x $\geq$ peso(objeto)}{
+				entero m1 $\gets$ matriz[objeto][x-1][y][z]\\	
+				}
+				\If{ y $\geq$ peso(objeto)}{
+				entero m2 $\gets$ matriz[objeto][x][y-1][z]\\	
+				}
+				\If{ z $\geq$ peso(objeto)}{
+				entero m3 $\gets$ matriz[objeto][x][y][z-1]\\	
+				}
+				\If{objeto optimiza maximo total poniendo en mochila3}
+{para matriz[objeto] asignar m1 + valor\\
+}
+						\If{objeto optimiza maximo total poniendo mochila2}
+{para matriz[objeto] asignar m2 + valor\\
+}
+				\If{objeto optimiza maximo total poniendo mochila3}{
+para matriz[objeto] asignar m3 + valor\\
+}
+\If{matriz[objeto] > max}{
+para max asignar matriz[objeto]\\
+enteros xMax, yMax, zMax con x y z\\
+para objetoMax asignar objeto \\
+}
+decrementar z \\
+}
+decrementar y \\
+}
+decrementar x \\
+}
 
+}
+
+devolver obtenerMaximo\\
 
 \end{algorithm}
 
+\newpage
+
+\begin{algorithm}[H] %or another one check
+ \caption{obtenerMaximo}
+%     \SetAlgoLined
+
+\For{objetoMax $\exists$ OBJETOS()}{
+	
+ \If{ValorActual(matrizHasta[objetoMax]) $\neq$ ValorActual(matrizHasta[objetoMaxAnterior])}{
+ \If{ el valor maximo obtenido de matrizHasta[objetoMaxAnterior] + valor = matrizHasta[objetoMax]}{ 
+ objetosUsados $\cup$ 1;
+ } \ElseIf{ el valor maximo obtenido de matrizHasta[objetoMaxAnterior] + valor = matrizHasta[objetoMax]}{ 
+ objetosUsados $\cup$ 2;
+ }{ el valor maximo obtenido de matrizHasta[objetoMaxAnterior] + valor = matrizHasta[objetoMax]}{ 
+ objetosUsados $\cup$ 3;
+ }
+}
+decrementar objetoMax en 1\\
+}
+
+\If{objetoMax = 0 $\wedge$ max}{
+entero peso $\gets$ pesosObjetos[0] \\
+\If{xMax $\geq$ peso}{
+ para objetoUsado[0] asignar 1 \\
+}\ElseIf{yMax $\geq$ peso}{
+para objetoUsado[0] asignar 2 \\
+}{
+para objetoUsado[0] asignar 3 \\
+}
+}
+
+devolver max\\
+\end{algorithm}

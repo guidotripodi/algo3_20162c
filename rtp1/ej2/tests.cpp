@@ -23,7 +23,7 @@ void testPSumaDePotencias(){
 	while(i < 30){
 		x = 0;
 		while(x <= i){
-			peso = pow(3,x);
+			peso = peso + pow(3,x);
 			x++;
 		}
 		Balanza b1(peso);

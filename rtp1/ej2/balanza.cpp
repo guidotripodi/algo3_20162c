@@ -32,6 +32,18 @@ void Balanza::imprimir(FILE* doc){
 	fprintf(doc, "\n");
 }
 
+void Balanza::imprimirPantalla(){
+	printf("%lld %lld \n",sizeIzq, sizeDer);
+	for( int i = 0; i < sizeIzq; i++ ){
+		printf("%lld ", platoIzquierdo[i]);
+	}
+	printf("\n");
+	for( int j = 0; j < sizeDer; j++ ){
+		printf("%lld ", platoDerecho[j]);
+	}
+	printf("\n");
+}
+
 void Balanza::invertir(long long* arreglo, int size){
 	if( size < 2 ) return;
 	long long temp; 
@@ -49,7 +61,7 @@ void Balanza::balancear(){
     long long  i = 0;
     long long  sumaParcial = 0;
 
-    list<int> sumasParcialesList;
+    list<long long> sumasParcialesList;
     
     // armo el arreglo de sumas parciales
     while (sumaParcial < p) {
