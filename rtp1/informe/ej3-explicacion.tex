@@ -1,17 +1,44 @@
 \subsubsection*{Obteniendo el valor máximo}
- El problema de la mochila analiza, para cada objeto, el máximo valor que se puede obtener para cada capacidad posible de la mochila. Si llamamos $K$ a la capacidad de la mochila, se evaluará introducir un elemento $e$ en la capacidad $k$ con 1 $\leq$ $k$ $\leq$ $K$. 
+%El problema de la mochila analiza, 
+	%Un problema no analiza nada, los algoritmos lo hacen
+% para cada objeto, el máximo valor que se puede obtener para cada capacidad posible de la mochila. Si llamamos $K$ a la capacidad de la mochila, se evaluará introducir un elemento $e$ en la capacidad $k$ con 1 $\leq$ $k$ $\leq$ $K$. 
 
-En cada evaluación se decide entre no meter el elemento, con lo cual el valor máximo de la mochila que tenga la capacidad $k$ será el calculado con algún elemento anterior (o cero en el caso de que sea el primero en ser evaluado); o meter el elemento, con lo cual, al valor del elemento se le suma el valor de la mochila de capacidad k - $peso(e)$ que sea máxima. De esta forma, se genera un subproblema que respeta el principio de optimalidad, con lo cual se puede aplicar programación dinámica para solucionar el problema. \\
+Si tenemos una sola mochila, nuestro algoritmo analiza para cada objeto el máximo valor que se puede obtener para cada capacidad posible de la mochila. Es decir, que si llamamos $K$ a la capacidad total de la mochila y a $k$ un numero entero con 1 $\leq$ $k$ $\leq$ $K$, entonces para todos los $k$ se evaluará introducir un elemento $e$ en la capacidad posible $k$.
+
+%En cada evaluación se decide entre no meter el elemento, con lo cual el valor máximo de la mochila que tenga la capacidad $k$ será el calculado con algún elemento anterior (o cero en el caso de que sea el primero en ser evaluado); o meter el elemento, con lo cual, al valor del elemento se le suma el valor de la mochila de capacidad k - $peso(e)$ que sea máxima. De esta forma, se genera un subproblema que respeta el principio de optimalidad, con lo cual se puede aplicar programación dinámica para solucionar el problema. \\
+
+
+En cada evaluación se decide si me llevo el elemento en la mochila o no. Dado el caso:
+
+\begin{itemize}
+	\item Decido no meter el elemento: Se calcula el valor máximo de la mochila que tenga la capacidad $k$ será el calculado solamente usando elementos anteriores. El valor será cero si no hay elementos anteriores o no es posible insertarlos en esa capacidad.
+	\item Decido meter el elemento en la mochila: Al valor del elemento se le suma el valor máximo de la mochila de capacidad k - $peso(e)$ y eso resulta en el valor máximo de la mochila con capacidad $k$.
+\end{itemize} 
+
+%TODO creo que lo del principio de optimalidad no iba no?
+ De esta forma, se genera un subproblema que respeta el principio de optimalidad, con lo cual se puede aplicar programación dinámica para solucionar el problema. \\ 
  
-  Extendiendonos a 2 mochilas, al evaluar la $k$ posibilidad de la primer mochila (con capacidad $K_{a}$), se debe tener en cuenta que tambien está la posibilidad de utilizar la segunda mochila (con capacidad $K_{b}$). Esto nos muestra que por cada elemento debemos calcular $K_{a} \times K_{b}$ combinaciones de capacidades. Sin contar el primer elemento, el resto calculará sus combinaciones en base a las del elemento que le precedió en la evaluación, siguiendo la idea del algoritmo original de una mochila. Para obtener el valor final, se buscará en la matriz resultante de evaluar el último elemento, a la combinación de capacidades entre ambas mochilas que resulte máxima.\\
+%Extendiendonos a 2 mochilas, al evaluar la $k$ posibilidad de la primer mochila (con capacidad $K_{a}$), 
+	% de donde sale el a
+% se debe tener en cuenta que tambien está la posibilidad de utilizar la segunda mochila (con capacidad $K_{b}$).
+	% de donde sale b
+	% definimos mochila a y b o aprovechando que dijimos primera y segunda uso k1 y k2 
+	%Los graficos de Esteban usan numeros tambien
+% Esto nos muestra que por cada elemento debemos calcular $K_{a} \times K_{b}$ combinaciones de capacidades. Sin contar el primer elemento, 
+	%por que   
+%el resto calculará sus combinaciones en base a las del elemento que le precedió en la evaluación, siguiendo la idea del algoritmo original de una mochila. Para obtener el valor final, se buscará en la matriz resultante de evaluar el último elemento, a la combinación de capacidades entre ambas mochilas que resulte máxima.\\
+ 	%Ok habia una matriz, como que sale de la nada, antes de este parrafo convendria explicar las estructuras? O abstraer un poco y hablar de eso mas tarde?
+
+  En el caso de 2 mochilas, al evaluar la $k$ posibilidad de la primer mochila (con capacidad $k_{1}$), se debe tener en cuenta que tambien está la posibilidad de utilizar la segunda mochila (con capacidad $k_{2}$). Esto nos muestra que por cada elemento debemos calcular $k_{1} \times k_{2}$ combinaciones de capacidades. Sin contar el primer elemento, en el resto se calcularán sus combinaciones en base a las del elemento que le precedió en la evaluación, siguiendo la idea del algoritmo original de una mochila. Para obtener el valor final, se buscará en la matriz resultante de evaluar el último elemento, a la combinación de capacidades entre ambas mochilas que resulte máxima.\\
   
+
   \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.6]{./EJ3/dibujo-matrices.jpg}
   \end{center}
   \vspace*{0.3cm}
   
-  Con la misma lógica podemos ver que para 3 mochilas donde se tienen capacidades  $K_{a}$,$K_{b}$ y $K_{c}$, cada elemento disponible evaluará $K_{a} \times K_{b} \times K_{c}$ posibilidades. En este caso se buscará la solución en la matriz tridimensionál de posibilidades obtenidas del último elemento evaluado.
+  Con la misma lógica podemos ver que para 3 mochilas donde se tienen capacidades  $K_{1}$,$K_{2}$ y $K_{3}$, cada elemento disponible evaluará $K_{1} \times K_{2} \times K_{3}$ posibilidades. En este caso se buscará la solución en la matriz tridimensionál de posibilidades obtenidas del último elemento evaluado.
 
 \subsubsection*{Recuperando los elementos utilizados}
 
