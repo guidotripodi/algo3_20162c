@@ -14,22 +14,17 @@ A continuaci\'on enunciaremos varios de nuestros tests:\\
 \]}
 \end{center}
 
-Veremos mas adelante que este caso ser\'a el peor a resolver ya que se iterar\'a la totalidad completa de elementos de nuestros arrays.
+Veremos m\'as adelante que este caso ser\'a el peor a resolver ya que se iterar\'a la totalidad completa de elementos de nuestros arrays.
 
 \begin{center}
- \textbf{El valor de entrada $P$ es de la forma ${3^i} + R$ para  (i, R) $\gets$[0, N]}
+ \textbf{El valor de entrada $P$ es m\'ultiplo de 3}
 \end{center}
 
- Este caso se cumple cuando se recibe un P el cual al realizar nuestro primer ciclo que chequea cual es la potencia igual o mayor, termina siendo mayor y de esta forma se itera mas de una vez el segundo y tercer ciclo.
+ Este caso se cumple cuando se recibe un $P MOD 3 = 0$.
 
 \begin{center}
- \textbf{El valor de entrada $P$ es impar}
+ \textbf{El valor de entrada $P$ no es m\'ultiplo de 3}
 \end{center}
 
- Este caso se cumple cuando se recibe un P el cual el mismo es de la forma $P MOD 2 = 1$.
+ Este caso se cumple cuando se recibe un P el cual el mismo es de la forma $P MOD 3 = 1$ o $P MOD 3 = 2$.
  
- \begin{center}
- \textbf{El valor de entrada $P$ es par}
-\end{center}
-
- Este caso se cumple cuando se recibe un P el cual el mismo es de la forma $P MOD 2 = 0$.
