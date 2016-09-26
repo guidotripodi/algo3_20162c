@@ -42,19 +42,18 @@ int main(int argc, char* argv[]){
 		b1.imprimir(file);*/
 	long long peso = 0;
 	int i = 0;
-	while(i < 1000){
-			peso = i;
-		if(peso % 3 == 1 || peso % 3 == 2){
-			peso = i;
+	int x = 0;
+	while(i < 30){
+		peso = pow(3,i);
 		 auto start = ya();
 			Balanza b1(peso);
 		auto end = ya();
             cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
             printf("\n");
 		
-		}
 		i++;
-	}
+		}
+	
 
 
 
