@@ -1,5 +1,5 @@
 \begin{algorithm}[H] %or another one check
- \caption{Algoritmo EJ2}
+ \caption{Algoritmo EJ1}
 %     \SetAlgoLined
 
 	entero sumaParcial $\gets$ 0 \\
@@ -9,12 +9,12 @@
 	para sumaParcial asignar sumaParcial + 3$^{i}$\\
      	incrementar i \\
      }
-	entero medio $\gets$ $\frac{size(sumasParciales)}{2}$  \\
+	entero indice $\gets$ size(sumasParciales)-1   \\
 	entero equilibrioActual $\gets$ P \\
 	entero potenciaActual $\gets$ 0 \\
 	    \While{|equilibrioActual| $>$ 0}{
-	          \eIf{sumasParciales[medio-1] $<$ |equilibrioActual| $\leq$ sumasParciales[medio]}{
-       para	potenciaActual asignar sumasParciales[medio] -  sumasParciales[medio-1]\\
+	          \eIf{sumasParciales[indice-1] $<$ |equilibrioActual| $\leq$ sumasParciales[indice]}{
+       para potenciaActual asignar sumasParciales[indice] -  sumasParciales[indice-1]\\
        	\eIf{equilibrioActual $<$ 0}{
        	   	para equilibrioActual asignar potenciaActual + equilibrioActual \\
                 platoDerecho $\cup$ potenciaActual \\
@@ -22,8 +22,8 @@
 			para equilibrioActual asignar equilibrioActual - potenciaActual \\
                 platoIzquierdo $\cup$ potenciaActual \\
       }
-     }{resolver medio para busqueda binaria \\
-     }	
+     }
+     indice--	
 	}
 	devolver size(platoDerecho) \\      
 		devolver size(platoIzquierdo) \\      

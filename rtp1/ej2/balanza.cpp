@@ -82,17 +82,16 @@ void Balanza::balancear(){
     	i++;
     }
 
-    long long  middle = (size)/2;
-	//long long platoDerecho[size];
-	//long long platoIzquierdo[size];
+    long long  index = size-1;
+
 	int j = 0;
 	int k = 0;
 
     while (llabs(equilibrioActual) > 0) {
-        if (sumasParciales[middle] >= llabs(equilibrioActual) &&
-				sumasParciales[middle-1] < llabs(equilibrioActual)) {
+        if (sumasParciales[index] >= llabs(equilibrioActual) &&
+				sumasParciales[index-1] < llabs(equilibrioActual)) {
 
-            long long  potencia = sumasParciales[middle]-sumasParciales[middle-1];
+            long long  potencia = sumasParciales[index]-sumasParciales[index-1];
             if (equilibrioActual < 0) {
                 equilibrioActual = potencia + equilibrioActual;
                 platoDerecho[j] = potencia;
@@ -104,18 +103,9 @@ void Balanza::balancear(){
 				k++;
                 //printf("plato izquierdo %lld \n", potencia);
             }
-            
-            // me voy al intervalo mas chico
-            size = middle;
-            middle = middle/2;
-        }else if (sumasParciales[middle] < llabs(equilibrioActual)) {
-            // estoy muy adentro, voy mas afuera
-            middle = (middle+(size))/2;
-        }else if (sumasParciales[middle-1] >= llabs(equilibrioActual)) {
-            // estoy muy afuera, voy mas adentro
-            size = middle;
-            middle = (middle)/2;
         }
+        
+        index = index-1;
     }
 	sizeDer = j;
 	sizeIzq = k;

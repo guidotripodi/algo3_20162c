@@ -1,40 +1,36 @@
-A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algoritmo:
+A continuaci\'on se detalla el pseudo-c\'odigo de los algoritmos que resuelven el problema:
 
 \begin{algorithm}[H] %or another one check
- \caption{Algoritmo EJ3}
+ \caption{BuscarMaximo}
 %     \SetAlgoLined
 
-	\For{objeto $\exists$ OBJETOS()}{
-	matriz[objetoActual] copiar matriz[objetoAnterior]\\
+	\For{matriz $\in$ matrices}{
+    objetoActual es último objeto que no fue optimizado\\
+    copiar matriz de la iteración previa a matriz\\
 	entero x $\gets$	 capacidad(Mochila3)\\
 	\While{x $\geq$ 0}{
 		entero y $\gets$	 capacidad(Mochila2)\\	
 		\While{x $\geq$ 0}{	
 				entero z $\gets$	 capacidad(Mochila1)\\	
 			\While{z $\geq$ 0}{
-				entero m0 $\gets$ matriz[objeto]\\	
-				\If{ x $\geq$ peso(objeto)}{
-				entero m1 $\gets$ matriz[objeto][x-1][y][z]\\	
-				}
-				\If{ y $\geq$ peso(objeto)}{
-				entero m2 $\gets$ matriz[objeto][x][y-1][z]\\	
-				}
-				\If{ z $\geq$ peso(objeto)}{
-				entero m3 $\gets$ matriz[objeto][x][y][z-1]\\	
-				}
-				\If{objeto optimiza maximo total poniendo en mochila3}
-{para matriz[objeto] asignar m1 + valor\\
+			
+				entero m1 $\gets$matriz[x-pesoObjetoActual][y][z] \\	
+				
+				entero m2 $\gets$ matriz[x][y-pesoObjetoActual][z]\\	
+				
+				entero m3 $\gets$ matriz[x][y][z-pesoObjetoActual]\\	
+				
+				\If{objeto optimiza máximo total poniendolo en mochila1}
+{para matriz[x][y][z] asignar m1 + valorObjetoActual\\
 }
-						\If{objeto optimiza maximo total poniendo mochila2}
-{para matriz[objeto] asignar m2 + valor\\
+				\ElseIf{objeto optimiza máximo total poniendolo en mochila2}
+{para matriz[x][y][z] asignar m2 + valorObjetoActual\\
 }
-				\If{objeto optimiza maximo total poniendo mochila3}{
-para matriz[objeto] asignar m3 + valor\\
+				\ElseIf{objeto optimiza máximo total poniendolo en mochila3}{
+para matriz[x][y][z] asignar m3 + valorObjetoActual\\
 }
-\If{matriz[objeto] > max}{
-para max asignar matriz[objeto]\\
-enteros xMax, yMax, zMax con x y z\\
-para objetoMax asignar objeto \\
+\If{matriz[x][y][z] es nuevo máximo}{
+	guardar nuevo máximo y las posiciones
 }
 decrementar z \\
 }
@@ -45,7 +41,7 @@ decrementar x \\
 
 }
 
-devolver obtenerMaximo\\
+devolver obtenerMaximo
 
 \end{algorithm}
 
@@ -55,30 +51,19 @@ devolver obtenerMaximo\\
  \caption{obtenerMaximo}
 %     \SetAlgoLined
 
-\For{objetoMax $\exists$ OBJETOS()}{
-	
- \If{ValorActual(matrizHasta[objetoMax]) $\neq$ ValorActual(matrizHasta[objetoMaxAnterior])}{
- \If{ el valor maximo obtenido de matrizHasta[objetoMaxAnterior] + valor = matrizHasta[objetoMax]}{ 
- objetosUsados $\cup$ 1;
- } \ElseIf{ el valor maximo obtenido de matrizHasta[objetoMaxAnterior] + valor = matrizHasta[objetoMax]}{ 
- objetosUsados $\cup$ 2;
- }{ el valor maximo obtenido de matrizHasta[objetoMaxAnterior] + valor = matrizHasta[objetoMax]}{ 
- objetosUsados $\cup$ 3;
- }
+\For{matrizActual $\in$ matrices}{
+objetoActual es último objeto que optimizó matrizActual\\
+ \If{matrizActual[x][y][z] $\neq$ matrizAnterior[x][y][z]}{
+ \If{ el valor máximo obtenido viene de agregarlo en la mochila 1 de matrizAnterior}{ 
+ Mochila1 $\cup$ objetoActual
+ }\ElseIf{ el valor máximo obtenido viene de agregarlo en la mochila 2 de matrizAnterior}{ 
+ Mochila2 $\cup$ objetoActual
+ }\ElseIf{ el valor máximo obtenido viene de agregarlo en la mochila 3 de matrizAnterior}{ 
+ Mochila3 $\cup$ objetoActual
 }
-decrementar objetoMax en 1\\
+}
 }
 
-\If{objetoMax = 0 $\wedge$ max}{
-entero peso $\gets$ pesosObjetos[0] \\
-\If{xMax $\geq$ peso}{
- para objetoUsado[0] asignar 1 \\
-}\ElseIf{yMax $\geq$ peso}{
-para objetoUsado[0] asignar 2 \\
-}{
-para objetoUsado[0] asignar 3 \\
-}
-}
 
 devolver max\\
 \end{algorithm}
