@@ -164,3 +164,121 @@ void complejidad(){
     i++;
     }
 }
+
+/* no entra ninguno*/
+void noEntraNinguno(){
+M = 3;
+    i = 0;
+    int h = 0;
+    int capacidad = 25;
+    
+    int cantidad_objetos = 100;
+    int x = 5;
+
+    while(x < cantidad_objetos){
+    int pesos[x];
+    int valor[x];
+        N = x;
+        while(h < N){
+            pesos[h] = capacidad * capacidad;
+            h++;
+
+        }
+        h=0;
+        while(h < N){
+            valor[h] = capacidad *5;
+            h++;
+        }
+        while(i < M){
+            knapSacks[i] = capacidad * i;    
+            i++;
+        }
+    h= 0;
+    i = 0;
+    objectsWeights = pesos;
+    objectsValues = valor;
+    knapSacksCapacities = knapSacks;
+    //printf("Cantidad de objetos: %d\n", x );
+    x = x +5;
+}
+}
+
+void entranTodos(){
+M = 3;
+    i = 0;
+    int h = 0;
+    int capacidad = 30;
+    
+    int cantidad_objetos = 100;
+    int x = 5;
+
+    while(x < cantidad_objetos){
+    int pesos[x];
+    int valor[x];
+        N = x;
+        while(h < N){
+            pesos[h] = capacidad / capacidad;
+            h++;
+
+        }
+        h=0;
+        while(h < N){
+            valor[h] = capacidad *5;
+            h++;
+        }
+        while(i < M){
+            knapSacks[i] = capacidad;    
+            i++;
+        }
+    h= 0;
+    i = 0;
+    objectsWeights = pesos;
+    objectsValues = valor;
+    knapSacksCapacities = knapSacks;
+    //printf("Cantidad de objetos: %d\n", x );
+    x = x +5;
+}
+}
+
+void cantidadPar(){
+      M = 3;
+    i = 0;
+    int h = 0;
+    int capacidad = 25;
+    
+    int cantidad_objetos = 100;
+    int x = 5;
+
+    while(x < cantidad_objetos){
+    int pesos[x];
+    int valor[x];
+        N = x;
+        while(h < N){
+            if(h % 2){
+                pesos[h] = h;
+            }else{
+                pesos[h] = capacidad + 1;
+            }
+            h++;
+
+        }
+        h=0;
+        while(h < N){
+            valor[h] = h *5;
+            h++;
+        }
+        while(i < M){
+            knapSacks[i] = capacidad * i;    
+            i++;
+        }
+    h= 0;
+    i = 0;
+    objectsWeights = pesos;
+    objectsValues = valor;
+    knapSacksCapacities = knapSacks;
+
+    x=x+5;
+}
+
+
+}
