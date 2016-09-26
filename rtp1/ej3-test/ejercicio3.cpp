@@ -479,9 +479,15 @@ int main(){
     
     int cantidad_objetos = 100;
     int x = 5;
+    int capacidadTotal = 0;
+    while(i < M){
+            knapSacks[i] = capacidad * i;    
+            capacidadTotal = knapSacks[i];
+            i++;
+        }
 
     while(x < cantidad_objetos){
-    int pesos[x];
+    /*int pesos[x];
     int valor[x];
         N = x;
         while(h < N){
@@ -506,10 +512,37 @@ int main(){
     i = 0;
     objectsWeights = pesos;
     objectsValues = valor;
-    knapSacksCapacities = knapSacks;
+    knapSacksCapacities = knapSacks;*/
     //printf("Cantidad de objetos: %d\n", x );
-    auto start = ya();
     
+    capacidadTotal = capacidadTotal + capacidadTotal ;
+    auto start = ya();
+
+    for (int d = 0; d < capacidadTotal; ++d)  {
+        for (int l = 0; l < x; ++l) {
+            h++;
+            
+        }
+    }
+      for (int d = 0; d < capacidadTotal; ++d)  {
+        for (int l = 0; l < x; ++l) {
+            h++;
+            
+        }
+    }
+      for (int d = 0; d < capacidadTotal; ++d)  {
+        for (int l = 0; l < x; ++l) {
+            h++;
+            
+        }
+    }
+     auto end = ya();
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");
+    
+            x = x +5;
+        }
+        /*
     initArrOfObjectsUsed();
     if (M == 1) {
         int max = simpleKnapSackProblem(0);
@@ -570,12 +603,7 @@ int main(){
                 break;
         }
     }*/
-     auto end = ya();
-            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-            printf("\n");
     
-            x = x +5;
-        }
     /*
     //Imprimir resultado
     printf("%d ", cantM1);  

@@ -102,27 +102,9 @@ Por \'ultimo un grafico comparativo entre el mejor y peor caso y la cota teorica
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- \includegraphics[scale=0.65]{./EJ3/comparativo3.png}
+ %\includegraphics[scale=0.65]{./EJ3/comparativo3.png}
  {$Gr$\'a$fico$ \ 3.8 - $Comparativo$ $peor$ $y$ $mejor$ $caso$ $del$ $algoritmo$ $contra$ $complejidad$ $te\'orica$}
   \end{center}
   \vspace*{0.3cm}
 
 Es notorio que, en el gr\'afico 3.8 la funciones resultantes siempre se mantienen por debajo de la cota de complejidad calculada anteriormente, con lo cual se ve que tanto en el mejor como en el peor caso nuestro algoritmo sigue estando acotado por la misma.\\
-
-Luego, como nuestro algoritmo calcula lo mismo para cualquier tipo de objeto, ya sean todos iguales o no, todos ser\'an casos promedios, salvo el caso en el cual no haya ning\'un tipo de objeto que entre en alguna mochila, este caso podr\'iamos tomarlo como \'el mejor ya que nuestro algoritmo corta al ver que no puede colocar ning\'un objeto dentro de alguna mochila.\\
-Dejando de lado este caso, el resto de los mismos tendr\'an un tiempo de ejecuci\'on similar.\\
-
-Mostraremos en el siguiente gr\'afico de ejemplo lo hablado recientemente:\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.65]{./EJ3/objetos.png}
-  {$Gr$\'a$fico$ \ 3.5 - $Objetos$ $Variables$ $y$ $Capacidades$ $Constantes$}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Se puede ver en el gr\'afico 3.5 como las 3 funciones, las cuales simbolizan el tiempo de ejecuci\'on del algoritmo con todos los objetos iguales, todos distintos y random, presentan un tiempo de ejecuci\'on similar, como hab\'iamos comentado anteriormente esto se da ya que nuestro algoritmo realiza las mismas operaciones para cualquier tipo de objeto en las que chequea si es \'optimo o no agregar un elemento a alguna mochila.\\
-
-Trabajando con los objetos variables y habiendo dejado constante la capacidad de las mochilas se llega a que la complejidad esta acotada por la cantidad de elementos multiplicada por la capacidad de las mochilas, en este caso constante para las 3 e igual a 20 en todas las corridas y entradas.\\
-
-Luego, podemos concluir que por lo visto en los gr\'aficos se puede afirmar que nuestro algoritmo esta acotado por la complejidad solicitada anteriormente.\\
