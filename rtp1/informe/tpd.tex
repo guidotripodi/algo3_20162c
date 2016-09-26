@@ -6,8 +6,8 @@
 \usepackage{interfaz}
 \usepackage{caratula}
 \newcommand{\comment}[1]{}
-\usepackage[spanish]{babel}
-\selectlanguage{spanish} 
+%\usepackage[spanish]{babel}
+%\selectlanguage{spanish} 
 \usepackage{algorithm2e} %for psuedo code
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -17,6 +17,9 @@
 \setcounter{tocdepth}{5}
 \SetKwIF{If}{ElseIf}{Else}{si}{entonces}{sin\'o, si}{de lo contrario}{fin si}
 \SetKwFor{While}{Mientras}{hacer}{fin ciclo}%
+\SetKwFor{For}{Para cada}{hacer}{fin para}%
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 
 \titulo{Trabajo Pr\'actico 1}
 
@@ -35,6 +38,9 @@
 \newpage
 
 \newpage
+\section{Informe de correcciones} 
+\subsection{Descripci\'on de correcciones}
+\input{correcciones}
 \section{Ejercicio 1} 
 \subsection{Descripci\'on de problema}
 \input{ej1-descripcion}
@@ -50,7 +56,7 @@
 \subsubsection[1.5]{Test}
 \input{ej1-test}
 \subsubsection[1.5]{Performance De Algoritmo y Gr\'afico}
-\input{ej1-test1}
+%\input{ej1-test1}
 
 \newpage
 \section{Ejercicio 2} 
@@ -68,7 +74,7 @@
 \subsubsection[2.5]{Test}
 \input{ej2-test}
 \subsubsection[2.5]{Performance De Algoritmo y Gr\'afico}
-\input{ej2-test1}
+%\input{ej2-test1}
 
 \newpage
 \section{Ejercicio 3} 
@@ -87,7 +93,7 @@
 \subsubsection[2.5]{Test}
 \input{ej3-test}
 \subsubsection[2.5]{Performance De Algoritmo y Gr\'afico}
-\input{ej3-test1}
+%\input{ej3-test1}
 
 \newpage
 \section{Aclaraciones} 

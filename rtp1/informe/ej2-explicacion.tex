@@ -1,7 +1,6 @@
+Una aclaraci\'on previa que ser\'a de utilidad: como se dio como precondici\'on que la llave puede llegar a tomar un valor limite de $10^{15}$, trabajaremos con variables del tipo long long las cuales nos permitir\'an alcanzarlo.\\
 
 Para solucionar el problema de poder quitar la llave y dejar equilibrada la balanza, realizamos un algoritmo que explicaremos a continuaci\'on:\\
-
-Una aclaraci\'on previa que ser\'a de utilidad: como se dio como precondici\'on que la llave puede llegar a tomar un valor limite de $10^{15}$, trabajaremos con variables del tipo long long las cuales nos permitir\'an alcanzarlo.\\
 
 $1)$ Como las pesas, presentan un peso potencia de 3, creamos un arreglo de sumas parciales $sumasParciales$ donde iremos guardando las sumas parciales de las potencias desde $3^0$ hasta un $3^i$ en el paso $i-esimo$. La última suma parcial (que llamaremos paso $n-esima$) será $\geq$ $P$.\\
 
@@ -21,13 +20,12 @@ Al valor $P$ le restaremos la pesa más grande posible que será en este caso $3
 
 Luego sabemos que el resto $x$ es un valor entero. Es decir, puede ser mayor, menor o igual a cero.
 
-Si $x$ es cero, quiere decir que $P$ era un valor potencia de 3. Por lo cual ya hemos finalizado y colocamos la pesa encontrada ($3^n$) en el balanzin donde se encontraba la llave $P$.
+Si $x$ es cero, quiere decir que $P$ era un valor potencia de 3. Por lo cual ya hemos finalizado y colocamos la pesa encontrada ($3^n$) en el balanzin donde se encontraba la llave $P$.\\
 
-Si el valor $x$ es menor que cero, sabemos que en los siguientes pasos, tendremos que cambiar de balanzin hasta que el valor vuelva a ser mayor que cero o cero (en cuyo caso habremos finalizado).
-Si el valor $x$ es mayor que cero, no cambiamos de balanzin y continuamos agregando pesas hasta llegar a cero.
+Si el valor $x$ es menor que cero, sabemos que en los siguientes pasos, tendremos que cambiar de plato hasta que el valor vuelva a ser mayor que cero o cero (en cuyo caso habremos finalizado).\\
 
-Los siguientes pasos seran iguales al primero, siempre buscando el intervalo donde se encuentra cada resto sucesivo en el arreglo $sumasParciales$. 
+Si el valor $x$ es mayor que cero, no cambiamos de plato y continuamos agregando pesas hasta llegar a cero.
 
-Dado que el arreglo está ordenado, podemos realizar busqueda binaria para encontrar el intervalo mencionado.
+Los siguientes pasos seran iguales al primero, siempre buscando el intervalo donde se encuentra cada resto sucesivo en el arreglo $sumasParciales$ recorriendo cada una de las posiciones del arreglo.\\
 
-Cuando hayamos llegado a cero, tendremos nuestras pesas en orden decreciente, con lo cual solo es necesario invertir este orden para cumplir con el formato de salida deseado.
+Cuando $X$ sea cero, tendremos nuestras pesas en orden decreciente, con lo cual solo es necesario invertir este orden para cumplir con el formato de salida deseado.

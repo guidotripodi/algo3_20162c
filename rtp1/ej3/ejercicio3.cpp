@@ -479,32 +479,11 @@ int main(){
 		int max = simpleKnapSackProblem(0);
         printf("%d\n", max);
     }else if (M == 2) {
-        if (knapSacksCapacities[0] == knapSacksCapacities[1]) {
-            //habria que calcular dos veces el simple.....pero para esto hay que modificar un toque el codigo.
-            //hay que marcar objetos usados.
-            
-            int max = simpleKnapSackProblem(0);
-            max += simpleKnapSackProblem(1);
-            
-            printf("%d\n", max);
-        }else {
-            objects2dMatrices = new int**[N];
-            bidimentionalKnapSackProblem(); //imprime el maximo
-        }
+        objects2dMatrices = new int**[N];
+        bidimentionalKnapSackProblem(); //imprime el maximo
     }else {
-    	if (knapSacksCapacities[0] == knapSacksCapacities[1] && knapSacksCapacities[1] == knapSacksCapacities[2]) {
-	    //habria que calcular dos veces el simple.....pero para esto hay que modificar un toque el codigo.
-            //hay que marcar objetos usados.
-            
-            int max = simpleKnapSackProblem(0);
-            max += simpleKnapSackProblem(1);
-            max += simpleKnapSackProblem(2);
-            
-            printf("%d\n", max);
-    	}else {
-    	    objects3dMatrices = new int***[N];
-            tridimentionalKnapSackProblem();//imprime el maximo	
-    	}
+    	objects3dMatrices = new int***[N];
+        tridimentionalKnapSackProblem();//imprime el maximo	
     }
 
 	

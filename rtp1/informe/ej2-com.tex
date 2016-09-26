@@ -1,23 +1,48 @@
 
-Nuestro algoritmo como mencionamos anteriormente presenta 3 ciclos predominantes de los cuales uno corresponde a la b\'usqueda binaria.\\
-El primero de ellos consta en recorrer desde $3^0$ hasta $3^i$ donde la suma de estos sea igual a $P$ o en su defecto el inmediato mayor. Por lo tanto, como la suma se realiza en O(1), mostraremos que recorrer hasta un i donde la suma de dichos valores sea igual o inmediatamente mayor a P es menor o igual a $\sqrt{P}$.\\
+Nuestro algoritmo como mencionamos anteriormente presenta dos ciclos predominantes de los cuales el segundo ciclo es el que realiza la busqueda de las pesas.\\
 
-Si $i = 0$ $\Rightarrow$ terminamos.\\
-Luego sea $3^i \geq P \geq 3^{i-1}$ con $i > 0$. Queremos ver que $i \leq \sqrt{P}$:\\
-Sabemos que $P \geq 3^{i-1}$ $\Rightarrow$ $\sqrt{P} \geq \sqrt{3^{i-1}}$\\
-Veamos que $\sqrt{3^{i-1}} \geq i \Rightarrow 3^{i-1} \geq {i^2}$. Para $i = 1$ tenemos que $3^{1-1} \geq 1$ siempre. Luego, para $i > 1$ como ${3^{i-1}}$ es creciente y mayor o igual que $i^2$ se cumple siempre esta desigualdad. Por lo tanto queda probado que recorrer hasta un i tal que \[
-\sum_{x=0}^{i}3^{i} \geq P \] se encuentra en el orden de  O($\sqrt{P}$).\\
+El primero ciclo consta en armar un arreglo de sumas de potencias de tres $sumasParciales$, donde la $i-esima$ posición es la suma desde $3^0$ hasta $3^i$ y la $n-esima$ será la suma desde $3^0$ hasta $3^n$  tal que es igual a $P$ o en su defecto el inmediato mayor. 
 
- Luego, creamos un long long \textit{size} inicializado en i+1 y un array \textit{sumasParciales} de tamaño size inicializado vacio, por lo tanto, la creaci\'on de la variable size y el array vacio insumir\'an O(1) y O($\sqrt{P}$).\\
+Podemos notar que para representar un número en base tres necesitamos $\ceil[\big]{log_3(P)}$ divisiones con lo que obtendremos un total de $\ceil[\big]{log_3(P)}$  potencias de tres. 
+En nuestro algoritmo, puede ser necesario tomar la potencia inmediatamente mayor a $P$ por lo cual tendriamos $\ceil[\big]{log_3(P)}$ + 1 potencias de tres en el peor caso. Veamos que esto es cierto:\\
+
+Sea $3^i \geq P  \geq 3^{i-1}$ con $(P, i) \in \mathbb{N}$.\\
+
+Si tomamos $log_3$ a ambos lados de la desigualdad tenemos
+
+\begin{equation}
+log_3(3^i) \geq log_3(P)  \geq log_3(3^{i-1}) \iff i \geq log_3(P)  \geq i-1
+\end{equation}
+
+tomando parte entera superior nos queda:
+
+\begin{equation}
+i \geq \ceil[\big]{log_3(P)}  \geq i-1 
+\end{equation}
+
+Con lo cual tenemos que $\ceil[\big]{log_3(P)}+1  \geq i$ potencias de tres a utilizar en el peor caso. Y este será el tamaño del arreglo de $sumasParciales$.\\
  
-Siguiendo el desarrollo del algoritmo, pasamos a nuestro segundo ciclo, en el cual llenaremos el array $sumasParciales$, como vimos anteriormente iterar desde el valor i hasta 0 es O($\sqrt{P}$), y dentro de dicho ciclo lo \'unico que hacemos es ir guardando en la posici\'on i-esima del array el valor de sumaParcial - 3$^{i-1}$ y a sumaParcial le guardamos el valor de sumaParcial - 3$^{i-1}$. Como estas dos operaciones se realizan en O(1), nuestro segundo ciclo terminar\'a insumiendo O($\sqrt{P}$).\\
+El segundo ciclo corresponde a la resolución del algoritmo.
+Se comienza con un equilibrio igual a $P$ al que nos referiremos como $equilibrioActual$ y se busca llevar este valor a cero mediante sumas o restas de potencias de tres. \\
+Si el valor inicial $P$ es suma de potencias, para lograr que $equilibrioActual$ sea cero, necesitaria utilizar todas las potencias, lo cual implica usar las $\ceil[\big]{log_3(P)}+1$ que hay en el arreglo $sumasParciales$. \\
+Independientemente de si lo anterior sucede o no, el arreglo $sumasParciales$ se recorre completo, es decir, las $\ceil[\big]{log_3(P)}+1$ posiciones del mismo.\\
 
-Luego, nuestro tercer y \'ultimo ciclo, corresponde a la b\'usqueda binaria, la cual se realiz\'a en O(lg($\sqrt{P}$)) como en toda b\'usqueda binaria, trabajaremos con nuestro array $sumasParciales$ chequeando si en la mitad del array nuestra sumaParcial es mayor o igual al valor en m\'odulo de $equilibrioActual$. En caso de que fuese verdadero, chequeamos si el valor de $equilibrioActual$ es mayor o menor a 0. Si es menor a 0, sumaremos nuestra pesa correspondiente al \'indice en el que estamos de nuestro array $sumasParciales$, al valor de $equilibrioActual$ y guardaremos nuestra pesa en el $arrayD$ que simboliza al plato derecho de la balanza. Si es mayor a 0, en vez de sumarla la restamos y la guardamos en el array $arrayI$ que simboliza el otro plato. Siguiendo el razonamiento de la b\'usqueda binaria, volveremos a partir nuestro array en dos y haremos el mismo chequeo.\\
-En caso de que el valor en m\'odulo de $equilibrioActual$ sea mayor que la mitad de $sumasParciales$ nos quedaremos con la mitad m\'as grande del arreglo e iteraremos nuevamente.\\
-Una vez llegado a 0 el valor de $equilibrioActual$ saldremos del ciclo. Como describimos dentro del ciclo realizaremos sumas, restas y chequeos los cuales se realizaran todos en O(1), por lo tanto. Nuestro tercer ciclo insumir\'a O(lg($\sqrt{P}$)).\\
+Por lo tanto la complejidad total será:
 
-Fuera de este \'ultimo ciclo, tendremos nuestras pesas ordenadas de mayor a menor en $arrayD$ y en $arrayI$, bastar\'a con invertir los arreglos para que queden de menor a mayor y devolver los mismos, finalizando as\'i nuestro algoritmo. Dicho invertir costar\'a O($\#$elementosArrayD) y O($\#$elementosArrayI), que como demostramos anteriormente en el caso de que todas las pesas fueran a parar a un \'unico plato y naturalmente a un \'unico array O($\#$elementos) $\leq$ O($\sqrt{P}$).\\
+\begin{equation}
+O(2 \ast \ceil[\big]{log_3(P)} + 1) \subseteq O(\ceil[\big]{log_3(P)})
+\end{equation}
 
-Por lo tanto, nuestro algoritmo realizar\'a en su defecto 3 ciclos (como vimos, se puede dar el caso de invertir el array y que est\'en todas las pesas en un \'unico array) O($\sqrt{P}$) y el ciclo de la busqueda binaria O(lg($\sqrt{P}$)), nos queda que la complejidad total de nuestro algoritmo es O($\sqrt{P}$).\\
+Como $log_3(P)$ y $\sqrt(P)$ son funciones estrictamente crecientes y $log_3(P)$ $<$ $\sqrt(P)$ para todo entero positivo.\\
 
-\textbf{Complejidad total:} O($\sqrt{P}$) [O(1) + O(1)] + O(1) + O($\sqrt{P}$) + O($\sqrt{P}$) [O(1) + O(1)] + O(lg($\sqrt{P}$))[O(1) + O(1) + O(1) + O(1) + O(1) + O(1)] = \textbf{O($\sqrt{P}$)}
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.65]{./EJ2/imgpsh_fullsize.png}
+  \end{center}
+  \vspace*{0.3cm}
+  
+Podemos concluir que:\\
+
+\begin{equation}
+O(\ceil[\big]{log_3(P)}) \subseteq O(\sqrt(P))
+\end{equation}
