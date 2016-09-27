@@ -63,7 +63,7 @@ void Escenario::printPersona(int a) const
 
 void Escenario::printStatus() const
 {
-	cout<<"\tEscenario\n\t Islas       |\tA \tB\n\t canibales   |\t"<<this->cant_canibales_ladoA <<"\t"<<this->cant_canibales_ladoB<<"\n\t arqueologos |\t"<<this->cant_arqueologos_ladoA<<"\t"<<this->cant_arqueologos_ladoB<<"\n\n";
+	cout<<"\tEscenario\n\t Islas       |\tA \tB\n\t canibales   |\t"<<this->cant_canibales_ladoA <<"\t"<<this->cant_canibales_ladoB<<"\n\t arqueologos |\t"<<this->cant_arqueologos_ladoA<<"\t"<<this->cant_arqueologos_ladoB<<"\n Con tiempo: "<<this->tiempo<<"\n";
 
 }
 

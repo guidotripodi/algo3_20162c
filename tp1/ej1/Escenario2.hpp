@@ -114,28 +114,52 @@ public:
 	};
 
 	struct Nodo{
-		nodo* presente = NULL;
-		nodo* ausente = NULL;
-	}
+		Nodo *presente;
+		Nodo *ausente;
+
+		
+	};
 
 	struct HistoricoEstados {
 		Escenario2* escenario;
 
-		//Voy a guardar unamatriz de #arqueologos x #canibales donde cada posicion va a tener 
-		//una lista con las combinaciones de i arqueologos y j canibales que sucedieron en la rama
-		
-		//MEJOR AUN: voy a guardar un trie en donde el alfabeto es 0 , 1: de esta forma puedo verificar si existioç
+		//Voy a guardar un trie en donde el alfabeto es 0 , 1: de esta forma puedo verificar si existioç
 		//la combinacion en O(n)
 
 		//Para implementarlo, al saber que va a ser un arbol con nodos de 2 posiciones y 2 aristas, lo mando a un array :)
 		//
-		Nodo historia;
+		Nodo* historia;
 
 		HistoricoEstados(Escenario2* esc){
 			escenario = esc;
+			historia = new Nodo();
 		}
 
-		void marcarHistoria(Eleccion eleccion){
+		void marcarHistoria(Eleccion eleccion, int islaAEnviar){
+
+			Nodo* node = historia;
+			
+			int idPersonaNodo = 0;
+
+			while(idPersonaNodo < escenario->personas_totales){
+				if (escenario->personas_ladoA[idPersonaNodo])
+				{
+					if (node->presente==NULL)
+					{
+						node->presente = new Nodo();
+					}
+					node = node->presente; 
+				}else{
+					if (node->ausente==NULL)
+					{
+						node->ausente = new Nodo();
+					}
+					node = node->ausente;
+				}
+
+				idPersonaNodo++;
+			}
+
 		}
 
 		bool ocurrioEstado(Eleccion eleccion, int islaAEnviar){
@@ -143,25 +167,25 @@ public:
 			bool ocurrio = false;
 			int idP1 = eleccion.primero.id;
 			int idP2 = eleccion.segundo.id;
-			Nodo node = historia;
+			Nodo* node = historia;
 			
-			idPersonaNodo = 0;
+			int idPersonaNodo = 0;
 			while(node!=NULL){
 				if (idPersonaNodo!=idP1 && idPersonaNodo!=idP2)
 				{
 					if (escenario->personas_ladoA[idPersonaNodo])
 					{
-						node = node.presente; 
+						node = node->presente; 
 					}else{
-						node = node.ausente;
+						node = node->ausente;
 					}
 				}else{
-					if (islaAEnviar)
+				 	//Simulo que ya lo envie a dicha isla, en la historia tiene que estar como ya del otro lado
+					if (islaAEnviar == 1)
 					{
-				 		//Simulo que ya lo envie a dicha isla, en la historia tiene que estar como ya del otro lado
-						node = node.presente;
+						node = node->presente;
 					}else{
-						node = node.ausente;
+						node = node->ausente;
 					}
 				} 
 				idPersonaNodo++;
@@ -196,6 +220,7 @@ public:
 	//Para ver el estado del sistema
 	void printEleccion(Eleccion par) const;
 	void printStatus()const;
+	HistoricoEstados* historial;
 
 private:
 

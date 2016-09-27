@@ -37,7 +37,12 @@ int main(int argc, char* argv[])
 
 	return t;
 }
+struct Nodo{
+	Nodo* nodo1;
+	Nodo* nodo2;
 
+	Nodo(int a):nodo1(NULL),nodo2(NULL){};
+};
 int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_arqueologos, int * tiempos_canibales)
 {
 
@@ -46,12 +51,15 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 	escenario.printStatus();
 //	cout<<"Escenario listo\n";
 	
+
 	cout<<"Enviando\n";
 	Escenario2::Eleccion eleccion = escenario.envioPosible();
-	//escenario.printEleccion(eleccion);
 	escenario.enviarEleccion(eleccion);
+	escenario.historial->marcarHistoria(eleccion, 1);
+	escenario.historial->ocurrioEstado(eleccion, 1);
+	cout<<"\n Ocurrio:"<<escenario.historial->ocurrioEstado(eleccion, 1);
 	escenario.printStatus();
-	
+	/*
 	cout<<"Retornando\n";
 	eleccion = escenario.retornoPosible();
 	//escenario.printEleccion(eleccion);
@@ -62,7 +70,7 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 	eleccion = escenario.envioPosible();
 	//escenario.printEleccion(eleccion);
 	escenario.enviarEleccion(eleccion);
-	escenario.printStatus();
+	escenario.printStatus();*/
 
 	return 1;
 }
