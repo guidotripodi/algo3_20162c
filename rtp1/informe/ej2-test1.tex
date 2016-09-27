@@ -19,7 +19,7 @@ Se puede observar en el gr\'afico, tres funciones las cuales representan el tiem
 \item P no es multiplo de 3
 \end{itemize}
 
-Como se observa en el gr\'afico la funci\'on representativa de la flia n\'umero 1, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que nuestro algoritmo como va realizando sumas parciales y chequeando las potencias ve que la entrada es exactamente una \'unica potencia por lo cual realiza una \'unica b\'usqueda binaria y finaliza su ejecuci\'on, mientras que para el segundo y tercer caso, como las entradas estan dadas por varias combinaciones de potencias indudablemente nuestro algoritmo necesitar\'a para obtener dicha combinaci\'on para lo cual deber\'a realizar m\'as de una b\'usqueda binaria.
+Como se observa en el gr\'afico la funci\'on representativa de la flia n\'umero 1, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que nuestro algoritmo como va realizando sumas parciales y chequeando las potencias ve que la entrada es exactamente una \'unica potencia por lo cual toma el valor final de la suma y finaliza su ejecuci\'on, mientras que para el segundo y tercer caso, como las entradas estan dadas por varias combinaciones de potencias indudablemente nuestro algoritmo necesitar\'a para obtener dicha combinaci\'on recorrer todo el arreglo de sumas parciales m\'as de una vez.
 
 Luego de chequear dichas instancias, pudimos llegar a la conclusi\'on que la familia de casos que presenta una mejor performance para nuestro algoritmo
 es en el cual se recibe $P$ con un valor exactamente igual a $3^i$ con 0 $\leq$ i $\leq$ n \\

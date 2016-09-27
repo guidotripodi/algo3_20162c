@@ -50,8 +50,8 @@ int main(int argc, char* argv[]){
 			peso = peso + pow(3,j);
 			j++;
 		}
-		x = log2l(peso);
-		x = x * 2 * x ;
+		x = logl(peso);
+		x = x * 50 ;
 		 auto start = ya();
 		for (h = 0; h < x; ++h)	{
 			peso = peso *2;
