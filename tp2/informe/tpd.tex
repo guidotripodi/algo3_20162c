@@ -3,27 +3,21 @@
 \usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=2cm, 		top=2cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-%\usepackage[spanish]{babel}
-\usepackage{aed2-symb,aed2-itef,aed2-tad,aed2-tokenizer}
-\usepackage{newalgo}
 \usepackage{interfaz}
 \usepackage{caratula}
 \newcommand{\comment}[1]{}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{algorithmicx}
+%\usepackage[spanish]{babel}
+%\selectlanguage{spanish} 
+\usepackage{algorithm2e} %for psuedo code
+\usepackage{amsmath}
+\usepackage{amsfonts}
 \usepackage{graphicx}
 \usepackage[colorlinks,citecolor=black,filecolor=black,linkcolor=black,    urlcolor=black]{hyperref}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{5}
-\let\state\State
-\let\while\While
-\let\endwhile\EndWhile
-%\let\if\If
-\let\endif\EndIf
-%\let\else\Else
-\let\elseif\ElsIf
-
+\SetKwIF{If}{ElseIf}{Else}{si}{entonces}{sin\'o, si}{de lo contrario}{fin si}
+\SetKwFor{While}{Mientras}{hacer}{fin ciclo}%
+\SetKwFor{For}{Para cada}{hacer}{fin para}%
 
 \titulo{Trabajo Pr\'actico 2}
 
@@ -66,7 +60,7 @@
 \subsection{Explicaci\'on de resoluci\'on del problema}
 \input{ej2-explicacion}
 \subsection{Algoritmos}
-\input{ej2-alg}
+%\input{ej2-alg}
 \subsection{An\'alisis de complejidades}
 \input{ej2-com}
 \subsection{Demostraci\'on de correctitud}
@@ -85,7 +79,7 @@
 \subsection{Explicaci\'on de resoluci\'on del problema}
 \input{ej3-explicacion}
 \subsection{Algoritmos}
-\input{ej3-alg}
+%\input{ej3-alg}
 \subsection{An\'alisis de complejidades}
 \input{ej3-com}
 \subsection{Demostraci\'on de correctitud}

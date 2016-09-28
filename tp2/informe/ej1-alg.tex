@@ -1,51 +1,35 @@
-\begin{algorithm}[H]
-\caption{Atravezando el laberinto}
-\begin{algorithmic}[1]
-\Function{EJ1 - Algoritmo BFS}{\param{in}{ }{Integer}, \param{in}{ }{List<Integer>}}{$\ensuremath{\rightarrow}$ \param{out}{res}{Integer}}
-\state cola<Nodo> encolo nodoInicial \hfill //O(log N)
-\while{cola $\neq$ VACIO} \hfill //O($N \ast M$)
-\state creo Nodo* actual $\gets$ tope(cola) \hfill //O(1)
-\state desencolo cola \hfill //O(1)
-\state actual.visitado $\gets$ Verdadero \hfill //O(1)
-\state creo entero i con actual.i \hfill //O(1)
-\state creo entero j con actual.i \hfill //O(1)
-\state procesoNodo(i-1, j, actual) \hfill //O(1??)
-\state procesoNodo(i+1, j, actual) \hfill //O(1??)
-\state procesoNodo(i, j-1, actual) \hfill //O(1??)
-\state procesoNodo(i,j+1, actual) \hfill //O(1??)
-\endwhile
-\EndFunction 
-\end{algorithmic}
-\hrule
-\complejidad{$N \ast M \ast P $}
+\begin{algorithm}[H] %or another one check
+ \caption{Algoritmo EJ1}
+ %     \SetAlgoLined
+	encolo nodoInicial en una cola de nodos \\
+	    \While{$\neg$ vacia(cola)}{
+	    nodo actual $\gets$ tope(cola) \\
+	    desencolo(cola) \\
+	    para visitado(actual) asignar Verdadero \\
+	    procesarNodo(actual, posicion del nodo)\\
+	    }
+	    
 \end{algorithm}
 
 
-\begin{algorithm}[H]
-\caption{Atravezando el laberinto}
-\begin{algorithmic}[1]
-\Function{EJ1 - ProcesoNodo}{\param{in}{i}{Integer}, \param{in}{j}{Integer}\param{in}{actual}{Nodo$\*$}}{$\ensuremath{\rightarrow}$ \param{out}{}{}}
-\If{i > 0 $\wedge$ i < filas $\wedge$ j > 0 $\wedge$ j < columnas} \hfill //O(1)
-\state creo Nodo* node $\gets$ Map[i][j] \hfill //O(1)
-\If{$\neg$visitado(node)} \hfill //O(1)
-\If{$\neg$EsPared(node) $\wedge$ $\neg$EsPared(actual)} \hfill //O(1)
-\If{cantParedes(node) ==-1 $\vee$ \state
-cantParedes(actual) + EsPared(node) <  cantParedes(node)} \hfill //O(1)
-\state node.distancia $\gets$ distMinANodo(actual) + 1  \hfill //O(1)
-\state node.cantidadParedesRotas $\gets$ cantParedes(actual) + EsPared(node)\hfill //O(1)
-\If{$\neg$marcado(node)} \hfill //O(1)
-\state node.marcado $\gets$ VERDADERO  \hfill //O(1)
-\state cola encolar (node)  \hfill //O(LOG N)
-\endif
-\endif
-\endif
-\endif
-\endif
-\EndFunction 
-\end{algorithmic}
-\hrule
-\complejidad{$????$}
+\begin{algorithm}[H] %or another one check
+ \caption{procesarNodo}
+ 	nodo node $\gets$ Map[posicionDelNodoActual]\\
+	\If{$\neg$ visitado(node)}{
+       	   	 \If{$\neg$ esPared(node) $\wedge$ $\neg$EsPared(actual)}{
+       	   	 \If{cantidadParedes(actual) + esPared(node) < cantidadParedes(node)}{
+       	   	 para distancia(node) asignar distanciaMinima(actual) + 1\\
+       	   	 para cantidadParedes(node) asignar cantidadParedes(actual) + esPared(node) \\
+       	   	 \If{$\neg$ marcado(node)}{
+       	   	 para marcado(node) asignar verdadero\\
+       	   	 encolar en cola node\\
+       	   	 }
+       	   	 }
+             
+			}
+			}
 \end{algorithm}
+
 
 \textbf{Aclaraciones de variables y transformaci\'on de entrada}
 
