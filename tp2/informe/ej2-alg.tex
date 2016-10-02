@@ -1,70 +1,80 @@
-\begin{algorithm}[H]
-\caption{}
-\begin{algorithmic}[1]
-\Function{EJ2 - Algoritmo Kruskal}{\param{in}{}{}}{$\ensuremath{\rightarrow}$ \param{out}{} {}}
-\state creo UF uf(n) \hfill //O(1)
-\state creo entero u,v \hfill //O(1)
-\While{i < e} \hfill //O($E$)
-\state u $\gets$ grafo[i].Second.First \hfill //O(1)
-\state u $\gets$ grafo[i].Second.Second \hfill //O(1)
-\If{$\neg$ uf.(find(u,v))} \hfill //O(N)
-\state uf.unir(u,v) \hfill //O(N)
-\state T $\gets$ T + grafo[i].First \hfill //O(1)
-\endif
-\state i++ \hfill //O(1)
-\endwhile
-\EndFunction 
-\end{algorithmic}
-\hrule
-\complejidad{  }
+\begin{algorithm}[H] %or another one check
+ \caption{Algoritmo EJ2}
+ %     \SetAlgoLined
+	    \For{casillero $\exists$ laberinto}{
+	    nodo n asignar casillero \\
+	    mapa[casillero] asignar n\\
+	    \eIf{valor(casillero) == \#}{
+	    para n.valor asignar invalido\\
+	    }{
+	    para n.valor asignar valor(casillero)}
+	    }
+	    \For{elemento $\exists$ mapa}{	para elemento.visitado asignar verdadero\\
+	    nodo abajo asignar mapa[elemento.i+1][elemento.j]\\
+	    incrementar cantidadNodos en 1 \\
+	    \If{valor(abajo) $\neq$ invalido}{
+	    arista a puntero\\
+	    para a.inicio asignar elemento.i $\ast$ C + elemento.j\\
+	    	    \eIf{valor(abajo) == invalido}{
+	    para a.fin asignar (elemento.i + 1)$\ast$ C + elemento.j\\
+	    }{
+	    para a.fin asignar (elemento.i + 2)$\ast$ C + elemento.j\\}
+	    para a.costo asignar valor(abajo)\\
+	    aristas.push(a)\\
+	    incrementar cantidadAristas en 1\\
+	    }
+	    nodo derecha asignar mapa[elemento.i][elemento.j+1]\\
+	    \If{valor(derecha) $\neq$ invalido}{
+	    arista a puntero\\
+	    para a.inicio asignar elemento.i $\ast$ C + elemento.j\\
+	    \eIf{valor(derecha) == 0}{
+	    para a.fin asignar (elemento.i $\ast$ C) + (elemento.j + 1)  }{
+	    para a.fin asignar (elemento.i $\ast$ C) + (elemento.j + 2)
+	    }
+	    para a.costo asignar valor(derecha)\\
+	    incrementar cantidadAristas en 1\\
+	    }
+	    }	   
+	    ordenar(aristas)\\
+	    \If{find(a.inicio) $\neq$ find(a.fin)}{
+	    unir(a.inicio, a.fin, a.costo)}
 \end{algorithm}
 
-\begin{algorithm}[H]
-\caption{}
-\begin{algorithmic}[1]
-\Function{EJ2 - Find}{\param{in}{P}{entero}}{$\ensuremath{\rightarrow}$ \param{out}{S} {entero}}
-\state creo entero root con P \hfill //O(1)
-\While{root $\neq$ id[root]} \hfill //O(1)
-\state root $\gets$ id[root] \hfill //O(1)
-\endwhile
-\While{p $\neq$ root} \hfill //O(1)
-\state creo entero nuevoP con id[P] \hfill //O(1)
-\state id[P] $\gets$ root \hfill //O(1)
-\state P $\gets$ nuevoP \hfill //O(1)
-\endwhile
-\state devolver root \hfill //O(1)
-\EndFunction 
-\end{algorithmic}
-\hrule
-\complejidad{??}
+
+\begin{algorithm}[H] %or another one check
+ \caption{Funcion Find}
+ %     \SetAlgoLined
+ 	\eIf{padre[entrada] == entrada}{devolver entrada}{
+ 	para entero p asignar find(padre[entrada])\\
+	para padre[entrada] asignar p\\
+	devolver p\\
+ 	}
 \end{algorithm}
 
-\begin{algorithm}[H]
-\caption{}
-\begin{algorithmic}[1]
-\Function{EJ2 - Unir}{\param{in}{X}{entero}\param{in}{Y}{entero}}{$\ensuremath{\rightarrow}$ \param{out}{S} {entero}}
-\state creo entero i con find(X) \hfill //O(1)
-\state creo entero j con find(Y) \hfill //O(1)
-\If{tamaño(i) < tamaño(j)} \hfill //O(1)
-\state id[i] $\gets$ j\hfill //O(1)
-\state size[j] $\gets$ size[j] + size[i] \hfill //O(1)
-\Else
-\state id[j] $\gets$ i\hfill //O(1)
-\state size[i] $\gets$ size[i] + size[j] \hfill //O(1)	
-\endif
-\state contador-- \hfill //O(1)	
-\EndFunction 
-\end{algorithmic}
-\hrule
-\complejidad{UV}
+
+\begin{algorithm}[H] %or another one check
+ \caption{Funcion Unir}
+ %     \SetAlgoLined
+ 	para entero x asignar find(entrada1)\\
+ 	para entero y asignar find(entrada2)\\
+	\eIf{altura[x] $\leq$ altura[y]} {
+	 	para padre[x] asignar y
+ 	para cantidadAristas[y] asignar cantidadAristas[y] + cantidadAristas[x] +1\\
+ 	para costo[y] asignar costo[y] + costo[x] + entrada3\\
+ 	\If{altura[x] == altura[y]}{
+ 	 	para altura[x] incrementar 1 }
+	}{ 	 	para padre[y] asignar x
+ 	para cantidadAristas[x] asignar cantidadAristas[y] + cantidadAristas[x] +1\\
+ 	para costo[x] asignar costo[x] + costo[y] + entrada3\\	}
+ 
 \end{algorithm}
 
 
 \textbf{Aclaraciones de variables y transformaci\'on de entrada}
 
 \begin{itemize}
-\item {\bf Tipo UF}: Dicho tipo, fue creado para contener m\'as informaci\'on del uni\'on find, como el id, la cantidad y el tamaño, como as\'i tambi\'en las operaciones unir buscar y ver si estan o no conectados.
-\item {\bf Tipo nodo}: Dicho tipo, es una tupla de enteros.
-\item {\bf Tipo arista}: Dicho tipo, es una tupla de entero y nodo.
-\item {\bf Variable grafo}: Dicha variable es un vector de arista
+
+\item {\bf Tipo nodo}: Dicho tipo, presenta su indice i,j en el mapa, el valor y si el mismo fue o no visitado.
+\item {\bf Tipo arista}: Dicho tipo, contiene el valor de inicio y fin de la misma como tambi\'en el costo de atravesarla
+\item {\bf Variable map}: Dicha variable es una matriz de nodos
 \end{itemize}  
