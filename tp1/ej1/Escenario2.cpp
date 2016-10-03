@@ -13,6 +13,13 @@ bool Escenario2::envioValido(Eleccion eleccion) const
 		return false;
 	}
 
+	if (this->historial->ocurrioEstado(eleccion, LADO_B))
+	{
+		cout<<"\t\t- error: Se detectó un ciclo\n";
+		
+		return false;
+	}
+
 	//Calculo cuantos quedarian de cada lado
 	if (this->estaBalanceadoEnviandoEleccion(eleccion))
 	{
@@ -113,6 +120,8 @@ Escenario2::Escenario2(const int cantA, const int cantC, const int * tiempos_arq
 
 	this->eleccionActual = Eleccion(this);
 
+	this->historial = new HistoricoEstados(this);
+	
 
 }
 
@@ -168,6 +177,8 @@ void Escenario2::enviarEleccion(Eleccion eleccion){
 
 	this->eleccionActual = Eleccion(this);
 
+	//this->historial->marcarHistoria(eleccion, LADO_B);
+
 	
 
 }
@@ -194,6 +205,8 @@ void Escenario2::retornarEleccion(const Eleccion eleccion)
 	this->tiempo = this->tiempo + eleccion.tiempo;
 
 	this->eleccionActual = Eleccion(this);
+
+	this->historial->marcarHistoria(eleccion, LADO_A);
 
 
 }
