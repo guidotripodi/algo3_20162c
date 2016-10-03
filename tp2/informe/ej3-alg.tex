@@ -4,7 +4,7 @@ A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algorit
  \caption{Algoritmo EJ3}
  %     \SetAlgoLined
  	para Grafo fortaleza asignar grafo(entrada, entrada1,entrada2)\\
- 	\For{nodo $\exists$ fortaleza}{
+ 	\For{nodo $\in$ fortaleza}{
  	para nodo.distancia asignar invalido\\
  	para nodo.visitado asignar falso\\
  	}
@@ -12,7 +12,7 @@ A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algorit
  	{
 	para visitados[actual] asignar verdadero\\
 	para vecinos asignar vecinos(fortaleza,actual)\\
-	\For{arista $\exists$ vecinos}{
+	\For{arista $\in$ vecinos}{
 	para dist asignar distancia(actual) + peso(arista)\\
 	\If{ dist < distancia(arista.destino) || distancia(arista.destino) == invalido}{
 	para distancia[v.destino] asignar dist\\
