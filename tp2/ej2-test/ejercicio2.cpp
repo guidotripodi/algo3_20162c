@@ -4,7 +4,13 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <chrono>
+
+#define ya chrono::high_resolution_clock::now
+
 using namespace std;
+
+
 
 int F, C;
 int V, E;
@@ -131,13 +137,36 @@ int main() {
     
     representanteFinal = -1;
     
-    char map[] = {'#','#','#','#','#','#','#','#','#',
-                  '#','.','#','.','#','.','#','.','#',
-                  '#','.','1','.','#','2','#','.','#',
-                  '#','.','#','.','1','.','1','.','#',
+   /* char map[] = {'#','#','#','#','#','#','#','#','#',
+                  '#','0','1','0','#','0','#','0','#',
+                  '#','0','#','0','3','0','5','0','#',
+                  '#','0','2','0','#','0','#','0','#',
                   '#','#','#','#','#','#','#','#','#'};
+*/
+
+        char map[F*C];
+    for (int l = 5; l < 50; ++l){
+        F = l;
+        C = l+4;
+        char map[F*C];
+        int h = F;
+        int x = C;
+
+         for (int i = 0; i < h; ++i) {
+                for (int j = 0; j < x; ++j) {
+                    if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
+                        map[(i*x)+j] = '#';
+                    }else{
+                          map[(i*x)+j] = '.';
+                    }
+
+                }
+        }
+   
+    //printf("LLEGUE ACA");
     
-    init ();
+    //init ();
+    auto start = ya();
     
     Map = new Node**[F];
     
@@ -245,9 +274,9 @@ int main() {
 	}
 
     if (representanteFinal > 0) {
-        printf("%d \n", costCompLider[representanteFinal]);
+    //    printf("%d \n", costCompLider[representanteFinal]);
     }else {
-        printf("-1 \n");
+    //    printf("-1 \n");
     }
 
     /*bool resuelto = false;
@@ -262,6 +291,10 @@ int main() {
     if (!resuelto) {
         printf("-1 \n");
     }*/
-    
+
+        auto end = ya();
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");
+    }
     return 0;
 }
