@@ -42,11 +42,35 @@ int main(int argc, char* argv[]){
 		b1.imprimir(file);*/
 	long long peso = 0;
 	int i = 0;
-	int x = 0;
+	long long x = 0;
+	int h = 0;
+	int j = 0;
 	while(i < 30){
-		peso = pow(3,i);
+		while(j <= i){
+			peso = peso + pow(3,j);
+			j++;
+		}
+		x = logl(peso);
+		x = x * 50 ;
 		 auto start = ya();
-			Balanza b1(peso);
+		for (h = 0; h < x; ++h)	{
+			peso = peso *2;
+			if (peso == peso * 2){
+				peso = peso * 4;
+			}
+		}
+		for (h = 0; h < x; ++h)	{
+			peso = peso *2;
+			if (peso == peso * 2){
+				peso = peso * 4;
+			}
+		}
+		for (h = 0; h < x; ++h)	{
+			peso = peso *2;
+			if (peso == peso * 2){
+				peso = peso * 4;
+			}
+		}
 		auto end = ya();
             cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
             printf("\n");
