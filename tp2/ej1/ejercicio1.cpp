@@ -42,20 +42,19 @@ void proccessNode(int i, int j, Node *actual) {
     if (i > 0 && i < F-1 && j > 0 && j < C-1) {
         Node *node = Map[i][j];
         if(!node->visited) { // no comparo contra un nivel anterior
-            if (!(actual->iAmWall && node->iAmWall)){
-                if (node->wallsBroken == -1 || actual->wallsBroken+(int)node->iAmWall < node->wallsBroken) { // realmente vale? consultar
-                    if (actual->distMinToNode == -1) {
-                        //inicializo porque lo voy a usar
-                        actual->distMinToNode = 0;
-                    }
-                    node->distMinToNode = actual->distMinToNode+1;
-                    node->wallsBroken = actual->wallsBroken+(int)node->iAmWall;
-                    if(!node->marked && node->wallsBroken <= PMax) { // quiero encolar solo una vez
-                        node->marked = true;
-                        cola.push(node);
-                    }
-                }	
-            }
+        	printf("actual + si es pared %d actual %d,%d hijo %d,%d \n", actual->wallsBroken+(int)node->iAmWall, actual->i, actual->j, node->i, node->j);
+            if (node->wallsBroken == -1 || actual->wallsBroken+(int)node->iAmWall < node->wallsBroken) { // realmente vale? consultar
+                if (actual->distMinToNode == -1) {
+                    //inicializo porque lo voy a usar
+                    actual->distMinToNode = 0;
+                }
+                node->distMinToNode = actual->distMinToNode+1;
+                node->wallsBroken = actual->wallsBroken+(int)node->iAmWall;
+                if(!node->marked && node->wallsBroken <= PMax) { // quiero encolar solo una vez
+                    node->marked = true;
+                    cola.push(node);
+                }
+            }	
         }
     }
 }
@@ -92,9 +91,9 @@ int main(){
 	PMax = 3;
 	
 	char map[] = {'#','#','#','#','#','#','#','#','#',
-				  '#','o','#','.','#','.','#','x','#',
-				  '#','.','#','.','#','.','#','.','#',
-				  '#','.','#','.','#','.','.','.','#',
+				  '#','o','#','#','#','#','#','x','#',
+				  '#','.','.','#','.','#','#','#','#',
+				  '#','.','.','.','.','#','#','#','#',
                   '#','#','#','#','#','#','#','#','#'};
 	
 	Map = new Node**[F];
