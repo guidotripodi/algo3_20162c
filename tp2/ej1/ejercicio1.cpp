@@ -66,9 +66,17 @@ void mazeBfs () {
 	while(cola.size()){
 		Node *actual = cola.front();
 		cola.pop();
+		
 		actual->visited = true;
 		int i = actual->i;
 		int j = actual->j;
+    
+		//PODA
+        if (i == nodeEnd->i && j == nodeEnd->j) {
+            //llegue al nodo final, por lo cual ya he finalizado
+            break;
+        }
+        //FIN PODA
     
 		proccessNode(i-1, j, actual);
 		proccessNode(i+1, j, actual);

@@ -39,7 +39,7 @@ struct Node {
     
     Node(): i(0),
     j(0),
-    value((int)'#'),
+    value(0),
     visited(false){}
 };
 
@@ -154,7 +154,7 @@ int main() {
             char value = map[(i*C)+j];
             if (value == '#') {
                 n->value = 10; // los valores van de 0..9 por lo tanto 10 seria inf.
-            }else {
+            }else if (value != '.'){
                 n->value = value - '0';
             }
         }
