@@ -4,7 +4,13 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <chrono>
+
+#define ya chrono::high_resolution_clock::now
+
 using namespace std;
+
+
 
 int F, C;
 int V, E;
@@ -50,67 +56,67 @@ bool comparePtrToArista(Arista* a, Arista* b) { return (*a < *b); }
 vector<Arista*> aristas;
 
 void init() {
-    // completar
+	// completar
     long n = F*C;
     altura = new int[n];
     padre = new int[n];
     costCompLider = new int[n];
     cantAristas = new int[n];
     
-    for(int i = 0; i < n; i++){
-        padre[i] = i;
-        altura[i] = 1;
+	for(int i = 0; i < n; i++){
+		padre[i] = i;
+		altura[i] = 1;
         costCompLider[i] = 0;
         cantAristas[i] = 0;
-    }
+	}
 }
 
 int find(int x) {
-    // completar
-    if (padre[x] == x) {
-        return x;
-    }else{
-        int p = find(padre[x]);
-        padre[x] = p;
-        return p;
-    }
+	// completar
+	if (padre[x] == x) {
+		return x;
+	}else{
+		int p = find(padre[x]);
+		padre[x] = p;
+		return p;
+	}
 }
 
 void uni(int x, int y, int costo) {
-    // union es una palabra reservada en C++, por eso usamos "uni"
-    // completar
+	// union es una palabra reservada en C++, por eso usamos "uni"
+	// completar
     
     //piso con los referentes
-    x = find(x); y = find(y);
+	x = find(x); y = find(y);
     
     //checkear vecinos
     
-    if(altura[x] == altura[y]) {
-        altura[x]++;
-        padre[x] = y;
+	if(altura[x] == altura[y]) {
+		altura[x]++;
+		padre[x] = y;
         cantAristas[y] = cantAristas[y]+cantAristas[x]+1;
         costCompLider[y] += costCompLider[x]+costo;
         
         if (cantAristas[y] == V-1) {
             representanteFinal = y;
         }
-    }else if(altura[x] < altura[y]) {
-        padre[x] = y;
+	}else if(altura[x] < altura[y]) {
+		padre[x] = y;
         cantAristas[y] = cantAristas[y]+cantAristas[x]+1;
         costCompLider[y] += costCompLider[x]+costo;
         
         if (cantAristas[y] == V-1) {
             representanteFinal = y;
         }
-    }else{
-        padre[y] = x;
+	}else{
+		padre[y] = x;
         cantAristas[x] = cantAristas[x]+cantAristas[y]+1;
         costCompLider[x] += costCompLider[y]+costo;
         
         if (cantAristas[x] == V-1) {
             representanteFinal = x;
         }
-    }
+	}
 }
 
 void real_pop () {
@@ -121,28 +127,27 @@ void real_pop () {
 }
 
 int main() {
+	
+    F = 0;
+    C = 0;
     
-    F = 7;
-    C = 11;
-    
-    /*
-    char map[] = {'#','#','#','#','#','#','#','#','#','#','#',
-                  '#','.','#','.','#','.','#','.','#','.','#',
-                  '#','.','6','.','8','.','1','.','3','.','#',
-                  '#','.','#','.','#','.','#','.','#','.','#',
-                  '#','.','1','.','3','.','5','.','7','.','#',
-                  '#','.','#','.','#','.','#','.','#','.','#',
-                  '#','#','#','#','#','#','#','#','#','#','#'};
-    */
-for (int l = 5; l < 50; ++l){
     //Sirven para saber del grafo cuantos nodos y aristas tengo
     V = 0;
     E = 0;
+    
     representanteFinal = -1;
     
+   /* char map[] = {'#','#','#','#','#','#','#','#','#',
+                  '#','0','1','0','#','0','#','0','#',
+                  '#','0','#','0','3','0','5','0','#',
+                  '#','0','2','0','#','0','#','0','#',
+                  '#','#','#','#','#','#','#','#','#'};
+*/
+       
+        
+        for (int l = 5; l < 8; ++l){
         F = l;
         C = l+4;
-
         char map[F*C];
         int h = F;
         int x = C;
@@ -182,8 +187,10 @@ for (int l = 5; l < 50; ++l){
        
     }
 
-
+    
+    
     init ();
+    //auto start = ya();
     
     Map = new Node**[F];
     
@@ -191,7 +198,6 @@ for (int l = 5; l < 50; ++l){
     for(int i = 0; i < F; i++){
         Map[i] = new Node*[C];
         for(int j = 0; j < C; j++){
-            
             Node *n = new Node();
             n->i = i;
             n->j = j;
@@ -234,10 +240,9 @@ for (int l = 5; l < 50; ++l){
                 
                 a->costo = abajo->value;
                 
-                //pusheo monticulo
+                
                 aristas.push_back(a);
-                //ordeno monticulo
-                //push_heap(aristas.begin(), aristas.end(), comparePtrToArista);
+                
                 E++;
             }
             
@@ -256,64 +261,42 @@ for (int l = 5; l < 50; ++l){
                 
                 a->costo = derecha->value;
                 
-                //pusheo monticulo
+                
                 aristas.push_back(a);
-                //ordeno monticulo
-                //push_heap(aristas.begin(), aristas.end(), comparePtrToArista);
                 
                 E++;
             }
         }
     }
     
-    sort(aristas.begin(), aristas.end(), comparePtrToArista); // ordeno las aristas por peso de menor a mayor
+	sort(aristas.begin(), aristas.end(), comparePtrToArista); // ordeno las aristas por peso de menor a mayor
     
-  
+   
     for (int i = 0; i < E; i++) {
         Arista *a = aristas[i];
         
-               
-        if (find(a->inicio) != find(a->fin)) {
-            uni(a->inicio, a->fin, a->costo);
+        
+        
+		if (find(a->inicio) != find(a->fin)) {
+			uni(a->inicio, a->fin, a->costo);
         }
-
-                
+        
         //PODA
         if (representanteFinal > 0) {
             break;
         }
         //FIN PODA
-    }
-    //printf("representanteFinal %d\n", representanteFinal);
+	}
+            printf("\n");
     if (representanteFinal > 0) {
         printf("%d \n", costCompLider[representanteFinal]);
     }else {
         printf("-1 \n");
     }
 
-    delete[] altura;
-    delete[] padre;
-    delete[] costCompLider;
-    delete[] cantAristas;
-
-    for(int i = 0; i < F; i++){
-        for(int j = 0; j < C; j++){    
-            Node *n = Map[i][j];
-            delete n;
-        }
-        delete[] Map[i];
+  //     auto end = ya();
+// cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");
     }
-
-    delete[] Map;
-
-    aristas.clear();
-
-    for (int i = 0; i < E; i++) {
-        Arista *a = aristas[i];
-        delete a;
-    }
-
-    }
-        return 0;
+    return 0;
 }
-                
