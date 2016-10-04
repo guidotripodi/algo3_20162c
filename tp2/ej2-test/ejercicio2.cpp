@@ -176,7 +176,7 @@ int main() {
                 
                 /* CON ESTO ES POSIBLE VER LA MATRIZ POR PANTALLA PARA VER RESULTADO 
                 DESCOMENTARLO AL FINAL Y COMENTAR LA MEDICION DEL CHRONO*/        
-   /*printf("FILAS: %d\n", F);
+   printf("FILAS: %d\n", F);
    printf("COLUMNAS: %d\n", C);
 
     for (int i = 0; i < F; ++i){
@@ -185,12 +185,12 @@ int main() {
             printf("%c",map[(i*C)+j] );
         }
        
-    }*/
+    }
 
     
     
     init ();
-    auto start = ya();
+    //auto start = ya();
     
     Map = new Node**[F];
     
@@ -287,15 +287,15 @@ int main() {
         }
         //FIN PODA
 	}
-
+            printf("\n");
     if (representanteFinal > 0) {
-       // printf("%d \n", costCompLider[representanteFinal]);
+        printf("%d \n", costCompLider[representanteFinal]);
     }else {
-       // printf("-1 \n");
+        printf("-1 \n");
     }
 
-       auto end = ya();
- cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+  //     auto end = ya();
+// cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
             printf("\n");
     }
     return 0;
