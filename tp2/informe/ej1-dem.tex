@@ -2,16 +2,17 @@ Para demostrar que nuestro algoritmo es v\'alido para solucionar el problema dad
 
 \begin{itemize}
 \item Si el grafo analizado tiene solución desde un nodo origen a un nodo destino dentro del limite de paredes a romper, el algoritmo siempre termina y si no posee solución solución tambien finaliza dado que no existen ciclos infinitos.
-\item El camino resultante es el m\'as corto dentro de los posibles
+\item El camino resultante es el m\'as corto dentro de los posibles.
 \end{itemize}
 
 
-PARA EL PUNTO 1: Como nuestro algoritmo puede encolar nodos ya visitados queremos ver que no se van a producir ciclos infinitos por lo enunciado.
-Si existe un camino que llega a un nodo ya visitado, dicho camino es aquel que requiere una mayor cantidad de pasos para llegar a \'el. A partir de aqui podran suceder X cosas:\\
-Llamemos N\_l al ultimo nodo del camino que conecta con el nodo visitado. Y N\_v al nodo ya visitado.
+Como nuestro algoritmo puede encolar nodos ya visitados queremos ver que no se producen ciclos infinitos entre nodos visitados.
 
-Si la cantidad de paredes rotas para llegar a N\_v (N\_l + 1 si N\_v es pared o N\_l) es mayor o igual a la de  N\_v, este nunca ser\'a actualizado ni encolado
-Si la cantidad de paredes rotas para llegar a N\_v (N\_l + 1 si N\_v es pared o N\_l) es menor a la cantidad de paredes rotas de N\_v, entonces, este ser\'a encolado y actualizado. Tomemos N\_v' como el nodo actualizado.
-N\_v' tendr\'a una cantidad de paredes rotas mayor o igual que N\_l por lo mencionado anteriormente. Ahora bien, cualquier nodo visitado de un camino que llegue a N\_v' tendrá cantidad de paredes rotas menor o igual a la cantidad de paredes rotas que habia en N\_v. 
+Dado que el algoritmo no encola nodos de los bordes del grafo, no existirá la posibilidad de generarse ningún ciclo llegando a un borde.
 
+Supongamos que se producen ciclos infinitos entre nodos ya visitados. 
 
+Sea N_1 el nodo visitado del que se parte, con una cierta cantidad de paredes rotas y C el ciclo de nodos visitados desde N_1 hasta N_k que se vuelven a actualizar con menor cantidad de paredes derribadas (dado que si esto no sucede, no hay circuito porque no se actualizan todos los nodos del ciclo mencionado). 
+La cantidad de paredes del camino desde N_1 hasta N_k es creciente en cantidad de paredes rotas. Al intentar ir de N_k a N_1, lo que sucede es que la cantidad de paredes rotas N_k + 1 o + 0 (si N_1 es pared o no) deberia ser menor a la cantidad de paredes rotas en N_1. Pero esto no es cierto dado que sabemos que cualquier camino es creciente en cantidad de paredes o se mantiene con la misma cantidad de paredes rotas. Por lo tanto la cantidad de paredes rotas en N_k es mayor que N_1 y el ciclo no podrá cerrarse. Absurdo!! que viene de suponer que se producen ciclos infinitos entre nodos visitados.
+
+Por lo tanto, no habrá ciclos infinitos entre nodos visitados.
