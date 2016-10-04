@@ -1,86 +1,98 @@
-\indent Acorde a lo solicitado, mostraremos los mejores y peores casos para nuestro algoritmo, y adem\'as, daremos el tiempo estimado 
+\indent Acorde a lo solicitado, mostraremos distintos tipos de familias de casos para nuestro algoritmo, y adem\'as, daremos el tiempo estimado 
 seg\'un la complejidad del algoritmo calculada anteriormente.\\
 
-Luego de chequear varios instancias, pudimos llegar a la conclusi\'on que uno de los tipos de casos que resulta m\'as beneficioso para nuestro algoritmo
-es en el cual se recibe $P$ con un valor exactamente igual a $3^i$ con 0 $\leq$ i $\leq$ n \\
-
-Para llegar a dicha conclusi\'on trabajamos con 30 instancias ya que $3^{30}$ es el ultimo valor dentro del valor que puede tomar $P$.\\
-
-Para una mayor observacion desarrollamos el siguiente grafico con las instancias:\\
+A continuaci\'on mostraremos un gr\'afico de tiempos comparativo entre distintas familias de casos:\\ 
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- %\includegraphics[scale=0.65]{./EJ2/mejorcaso.png}
+% \includegraphics[scale=0.65]{./EJ2/comparativo.png}
+ {$Gr$\'a$fico$ \ 2.1 - $Comparativo$}
+  \end{center}
+  \vspace*{0.3cm}
+  
+Se puede observar en el gr\'afico, cuatro funciones las cuales representan el tiempo de ejecuci\'on de las familias de casos:\\
+\begin{itemize}
+\item El grafo recibido como parametro es el AGM
+\item No hay arbol posible que conecte a todas las componentes conexas
+\item Existe un arbol de peso 0
+\item El grafo recibido como parametro presenta multiples ciclos con aristas de disversos pesos
+\end{itemize}
+
+Como se observa en el gr\'afico la funci\'on representativa de la flia n\'umero 1, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que nuestro algoritmo va chequeando los pesos de las aristas y observa que no se presenta ning\'un tipo de ciclo con posibilidad de bifuraci\'on de ramas del arbol, sino que hay un \'unico camino recorre dicho camino sumando los pesos y finaliza su ejecuci\'on.
+
+Luego de chequear dichas instancias, pudimos llegar a la conclusi\'on que la familia de casos que presenta una mejor performance para nuestro algoritmo
+es en el cual \textbf{el grafo que se obtiene de transformar el laberinto recibido como par\'ametro ya es el Arbol Generador M\'inimo}
+
+Un grafo representativo de lo dicho ser\'ia el siguiente:
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.5]{./EJ2/ej2grafocompleto.jpeg}
+ \\{$Grafo$ \ 2.1 - $Mejor$ $Caso$}
+  \end{center}
+  \vspace*{0.3cm}
+  
+Para llegar a dicha conclusi\'on trabajamos con 50 instancias.\\
+
+Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instancias:\\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+% \includegraphics[scale=0.65]{./EJ2/mejorcaso.png}
  {$Gr$\'a$fico$ \ 2.1 - $Mejor Caso$}
   \end{center}
   \vspace*{0.3cm}
   
-Y dividiendo por la complejidad de nuestro algoritmo llegamos a:\\
+Como es posible observar en el gr\'afico, la funci\'on resultante de la cota teorica crece mucho m\'as r\'apido que la de nuestro algoritmo la cual se tiende a ser constante, es por esto que a la hora de realizar el gr\'afico de mediciones se tomaron los primeros valores debido a que, cuando la funci\'on de  toma valores muy grandes la misma es imposible de graficar contra nuestro algoritmo, por lo cual realizamos un apartado con las instancias m\'as grandes (ver excel).
+
+Adem\'as, como se puede apreciar debido a lo comentado no es posible apreciar las diferencias entre nuestro algoritmo y la cota  es por esto que mostraremos un gr\'afico entre ambos:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 %\includegraphics[scale=0.65]{./EJ2/mejorcaso2.png}
-{$Gr$\'a$fico$ \ 2.2 - $Mejor Caso / Complejidad$}
+{$Gr$\'a$fico$ \ 2.3 - $Mejor Caso$}
   \end{center}
   \vspace*{0.3cm}
 
-Como se puede ver, en el gr\'afico 2.1 cuando el valor de entrada P crece el tiempo de la funci\'on de la complejidad tiende a crecer muy r\'apido por lo cual mostraremos estas instancias en los gr\'aficos y m\'as adelante mostraremos una tabla con los valores restantes.\\
+
+Luego, dividiendo por la complejidad teorica de nuestro algoritmo llegamos a:\\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+%\includegraphics[scale=0.65]{./EJ2/mejorcaso1.png}
+{$Gr$\'a$fico$ \ 2.4 - $Mejor Caso / Complejidad$ $O(\sqrt{P})$}
+  \end{center}
+  \vspace*{0.3cm}
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+%\includegraphics[scale=0.65]{./EJ2/mejorcaso3.png}
+{$Gr$\'a$fico$ \ 2.4 - $Mejor Caso / Complejidad$ $O(log(P))$}
+  \end{center}
+  \vspace*{0.3cm}
 
 Para realizar esta experimentaci\'on nos parecio prudente, realizar un promedio con el mismo input de aproximadamente 20 corridas
 tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para
 obtener resultados m\'as relevantes.\\ 
 
-Se puede observar, como luego de realizar la divisi\'on por la complejidad cuando el n aumenta el valor tiende a 0.\\
+Se puede observar en el gr\'afico 2.4, como luego de realizar la divisi\'on por la complejidad cuando el n aumenta el valor tiende a 0, tomando un valor m\'aximo en 0.93. Y, en el gr\'afico 2.4 se ve como la funci\'on resultante tiene picos en los cuales llega a un m\'aximo igual a 1 y cuando el valor de entrada aumenta la funci\'on tiende a 0.5. Por lo tanto, podemos concluir que para el mejor caso nuestro algoritmo se encuentra considerablemente por debajo de la cota teorica $O(\sqrt{P})$ y asintotizado por la cota $O(log(P))$\\
 
-A continuaci\'on mostraremos una tabla  con los 20 datos de medici\'on mas relevantes  y mostraremos un promedio de la totalidad de las instancias probadas.\\
+Luego, verificando el peor caso, llegamos a la conclusi\'on que la familia de casos en el que resulta menos beneficioso trabajar con nuestro algoritmo ser\'a cuando el grafo que se obtiene de transformar el laberinto de entrada es aquel que presenta un ciclo por cada habitaci\'on posible, dandonos el siguiente grafo una vez transformado:\\
 
-\begin{table}[H]
-
-    \begin{tabular}{ | l | l |l | l |}
-    \hline
-	Tamaño($n$) & Tiempo($t$) & \textbf{$\sqrt{P})$} & \textbf{$t/\sqrt{P})$}  \\ \hline
-3$^{10}$ & 3730,82 & 18626 	& 0,200 \\ \hline
-3$^{11}	$ & 4428,36 & 31370 &	0,141 \\ \hline
-3$^{12}$ & 4685,66 & 86265  &	 0,054 \\ \hline
-3$^{13}	$ & 4999,42 & 124006 &	0,040 \\ \hline
-3$^{14}$	 & 5460,14	& 188705 & 0,028 \\ \hline
-3$^{15}$ & 	5756,1 & 	356824 & 0,016 \\ \hline
-3$^{16}$	 & 5891,5 & 265657  & 0,022 \\ \hline
-3$^{17}	$ & 6026,9 &	400446 & 0,015 \\ \hline
-3$^{18}$	 & 6162,3 &	1617468 & 0,003 \\ \hline
-3$^{19}	$ & 6297,7 & 2542364 &	0,002 \\ \hline
-3$^{20}$	 & 6433,1 & 2608534 &	 0,002 \\ \hline
-3$^{21}$ & 	6568,5 & 3956914 &	0,001 \\ \hline
-3$^{22}$	 & 6703,9 & 7124699 & 	9 x 10$^{-4}$ \\ \hline
-3$^{23}	$ & 6839,3 & 11467843	 & 5 x 10$^{-4}$ \\ \hline
-3$^{24}$ & 	6974,7 & 19803192 & 	3 x 10$^{-4}$ \\ \hline
-3$^{25}	$ & 7110,1 & 35212754 & 	2 x 10$^{-4}$ \\ \hline
-3$^{26}$	 & 7245,5 & 59285080 & 1 x 10$^{-4}$ \\ \hline
-3$^{27}$ &	7380,9 & 103014535 & 7,1 x 10$^{-5}$ \\ \hline
-3$^{28}$	 & 7516,3 &	178188535 & 4,2 x 10$^{-5}$ \\ \hline
-3$^{29}$ &	7651,7 & 308181445	& 2,4 x 10$^{-5}$ \\ \hline
-3$^{30}$ &	7787,1 & 438174355 &	1,7 x 10$^{-5}$ \\ \hline
-
-    \textbf{Promedio} & & & 0,026  \\ \hline
-
-    \end{tabular}
-\end{table}
-
-    \textbf{Promedio total conseguido: 0,026}  \\
-
-Verificando el peor caso, llegamos a la conclusi\'on que el tipo de caso en el que resulta menos beneficioso trabajar con nuestro algoritmo ser\'a cuando el valor de entrada $P$ sea de la forma \[
-\sum_{i=1}^{n}3^{i}=P 
-\].
-\\
-
-Realizando experimentos con un total de 20 instancias donde \[
-\sum_{i=1}^{20}3^{i}=5230176601 
-\], desarrollamos una tabla comparativa con los valores m\'as relevantes y adem\'as dos gr\'aficos los cuales mostraremos a continuaci\'on: \\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-% \includegraphics[scale=0.65]{./EJ2/peorcaso.png}
- {$Gr$\'a$fico$ \ 2.3 - $Peor Caso$}
+ \includegraphics[scale=0.5]{./EJ2/ej2grafosinpared.jpeg}
+ \\{$Grafo$ \ 2.2 - $Peor$ $Caso$}
+  \end{center}
+  \vspace*{0.3cm}
+  
+Realizando experimentos con un total de 50 instancias, desarrollamos dos gr\'aficos los cuales mostraremos a continuaci\'on: \\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ %\includegraphics[scale=0.65]{./EJ2/peorcaso.png}
+ {$Gr$\'a$fico$ \ 2.5 - $Peor Caso$}
   \end{center}
   \vspace*{0.3cm}
 
@@ -89,8 +101,15 @@ Dividiendo por la complejidad propuesta llegamos a:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
+ %\includegraphics[scale=0.65]{./EJ2/peorcaso1.png}
+ {$Gr$\'a$fico$ \ 2.6 - $Peor Caso / Complejidad$ $O(\sqrt{P})$}
+  \end{center}
+  \vspace*{0.3cm}
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
  %\includegraphics[scale=0.65]{./EJ2/peorcaso2.png}
- {$Gr$\'a$fico$ \ 2.4 - $Peor Caso / Complejidad$}
+ {$Gr$\'a$fico$ \ 2.7 - $Peor Caso / Complejidad$ $O(log(P))$}
   \end{center}
   \vspace*{0.3cm}
 
@@ -98,46 +117,24 @@ Para realizar esta experimentaci\'on nos parecio acorde, realizar un promedio co
 tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para
 obtener resultados m\'as relevantes.\\ 
 
-Se puede observar que a pesar de tardar varios nanosegundos este tipo de caso, al dividir por la complejidad complejidad teorica
-la función resultante tiende a 0 quedando comparativamente por encima del mejor caso.\\
+Como se puede observar en el gr\'afico 2.5, la funci\'on resultante de nuestro algoritmo es considerablemente mejor que la de la cota teorica  y presenta un tiempo similar al de la funci\'on resultante de la cota . Al igual que en el mejor caso, se gr\'aficaron las primeras instancias para que el gr\'afico pueda ser m\'as legible, se podr\'an observar la totalidad de las instancias en el apartado (ver excel).
+Luego, en el gr\'afico 2.8 a pesar de tardar varios nanosegundos m\'as que en el mejor caso, al dividir por la complejidad teorica
+la función resultante tambi\'en tiende a 0 quedando comparativamente por encima del mejor caso.\\
 
-A continuaci\'on mostraremos una tabla de valores de las ultimas 20 instancias y
-mostraremos el promedio total conseguido .\\
+Por \'ultimo, mostraremos un gr\'afico comparativo entre el mejor y peor caso contra la complejidad que se solicito y la demostrada la cual es considerablemente inferior:\\
 
-
-\begin{table}[H]
-
-    \begin{tabular}{ | l | l |l |l |}
-    \hline
-	Tamaño($n$) & Tiempo($t$) & \textbf{$\sqrt{P})$} & \textbf{$t/\sqrt{P})$}  \\ \hline
-1 & 4650	 & 4355 &	1.067 \\ \hline
-5 &	4771	 & 5036	& 0.947\\ \hline
-18 &	4801	 & 5717	& 0.839\\ \hline
-58 &	4901	 & 6398	& 0.766\\ \hline
-179 &	5882	 & 7079	& 0.830\\ \hline
-543	& 6862	&7760 &	0.884\\ \hline
-1636	 & 6862 &	8441 &	0.812\\ \hline
-4916	 & 7842	 & 9122 & 	 0.859\\ \hline
-14757 &	8823	 & 9803 &	0.900\\ \hline
-44281 &	9312	 & 14704 &	0.633\\ \hline
-132854 &	 9803	 & 24017 &	0.408\\ \hline
-398574 &	 18625 & 	39702 &	0.469\\ \hline
-1195735 &	18625 &	67150 &	0.277\\ \hline
-3587219	& 19115	& 57837&	 0.330\\ \hline
-10761672 	& 26468 &	132339 & 	0.200\\ \hline
-32285032	 &26468& 	 203410	& 0.130\\ \hline
-96855113 & 	31860 &	307319 & 	0.103\\ \hline
-290565357 &	32839 &	548960 &	 0.059\\ \hline
-581130733 & 	39211 &	910195 &	 0.043\\ \hline
-1743392200 &	41535 &	1567476 &	0.026\\ \hline
-5230176601 &	53915 &	2659024	&0.020\\ \hline
-
-    \textbf{Promedio} & & & 0,530 \\ \hline
-    \end{tabular}
-\end{table}
-
-\textbf{Promedio total conseguido: 0,530}\\
-
-Se puede observar como el peor caso presenta un promedio mayor que el mejor caso, concluyendo lo que enunciamos inicialmente.\\
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ %\includegraphics[scale=0.65]{./EJ2/comparativo1.png}
+ {$Gr$\'a$fico$ \ 2.8 - $Comparativo$}
+  \end{center}
+  \vspace*{0.3cm}
+  
+  \vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ %\includegraphics[scale=0.65]{./EJ2/comparativo2.png}
+ {$Gr$\'a$fico$ \ 2.9 - $Comparativo$}
+  \end{center}
+  \vspace*{0.3cm}
 
 Luego de dichos experimentos y casos probados, se puede concluir que a pesar de utilizar todas las pesas como en el peor caso nos mantenemos dentro de la complejidad propuesta como hab\'iamos mostrado en nuestro desarrollo de la complejidad.\\
