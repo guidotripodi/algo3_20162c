@@ -88,7 +88,7 @@ int main(){
     
 	F = 5;
 	C = 9;
-	PMax = 3;
+	PMax = 1;
 	
     finalizar = false;
     

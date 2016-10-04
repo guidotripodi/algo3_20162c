@@ -1,3 +1,17 @@
-El algoritmo BFS permite saber el menor recorrido desde un nodo hasta todos los demas. Al alcanzar un nodo no visitado, asegura que es el camino más rápido al mismo. El algoritmo propuesto, siguiendo este invariante, visita por primera vez a cada nodo por el camino más directo, y al llegar a destino se interrumpe para devolver el tiempo mínimo.
+Para demostrar que nuestro algoritmo es v\'alido para solucionar el problema dado tendremos que probar las siguientes condiciones:\\
 
-Ya que no necesariamente el camino más corto es uno factible (como los vistos en la representación de la explicación) se permite que los otros caminos, que requieran utilizar los nodos ya visitados por aquellos más directos, puedan reutilizarlos si es que para llegar a cada nodo, se rompieron menos paredes: De haber roto más no tiene sentido seguir analizando la ruta, ya que llegará a menos nodos que aquel que recorrió al nodo previamente, y de haber roto igual cantidad de paredes quiere decir que el anterior camino llegó en menor tiempo al nodo analizado). De esta manera se pueden explorar todos los caminos posibles hasta encontrar el que nos lleve a la solución. Con estas condiciones, de llegar al nodo destino, será por el camino factible más corto.
+\begin{itemize}
+\item Si el grafo analizado tiene solución desde un nodo origen a un nodo destino dentro del limite de paredes a romper, el algoritmo siempre termina y si no posee solución solución tambien finaliza dado que no existen ciclos infinitos.
+\item El camino resultante es el m\'as corto dentro de los posibles
+\end{itemize}
+
+
+PARA EL PUNTO 1: Como nuestro algoritmo puede encolar nodos ya visitados queremos ver que no se van a producir ciclos infinitos por lo enunciado.
+Si existe un camino que llega a un nodo ya visitado, dicho camino es aquel que requiere una mayor cantidad de pasos para llegar a \'el. A partir de aqui podran suceder X cosas:\\
+Llamemos N\_l al ultimo nodo del camino que conecta con el nodo visitado. Y N\_v al nodo ya visitado.
+
+Si la cantidad de paredes rotas para llegar a N\_v (N\_l + 1 si N\_v es pared o N\_l) es mayor o igual a la de  N\_v, este nunca ser\'a actualizado ni encolado
+Si la cantidad de paredes rotas para llegar a N\_v (N\_l + 1 si N\_v es pared o N\_l) es menor a la cantidad de paredes rotas de N\_v, entonces, este ser\'a encolado y actualizado. Tomemos N\_v' como el nodo actualizado.
+N\_v' tendr\'a una cantidad de paredes rotas mayor o igual que N\_l por lo mencionado anteriormente. Ahora bien, cualquier nodo visitado de un camino que llegue a N\_v' tendrá cantidad de paredes rotas menor o igual a la cantidad de paredes rotas que habia en N\_v. 
+
+
