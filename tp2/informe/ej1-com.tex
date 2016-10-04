@@ -1,6 +1,6 @@
 Siendo la entrada una matriz de $F \times C = N$, en donde cada celda es un nodo en potencia (es decir si no hubiese paredes) entonces el grafo de mayor tamaño tiene N nodos. Cada baldosa puede recorrerse en 2 direciones y 4 sentidos distintos, con lo cual cada nodo es de grado 4. El algoritmo BFS original, por su parte, tiene una complejidad de O($|V|+|E|$), siendo V el conjunto de nodos y E el de aristas del grafo que se le pasa como parámetro, con lo cual, de aplicar BFS sobre el grafo de nuestro problema, la complejidad sería O($F \times C$).
 
-No obstante, al modificar el BFS permitiendo que se puedan visitar nodos ya visitados, la complejidad se ve afectada. El algoritmo propuesto permite volver a recorrer un nodo, siempre y cuando la cantidad de paredes derribadas para llegar a él, sea mejor a la anterior cantidad lograda, es decir, que en el peor caso, cada nodo se vuelve a recorrer.
+No obstante, al modificar el BFS permitiendo que se puedan "visitar nodos ya visitados", la complejidad se ve afectada. El algoritmo propuesto permite volver a recorrer un nodo, siempre y cuando la cantidad de paredes derribadas para llegar a él, sea mejor a la anterior cantidad lograda, es decir, que en el peor caso, cada nodo se vuelve a recorrer.
 
 Por lo tanto, se volver\'a a recorrer cada nodo si y solo si es posible llegar a él por un camino que rompe menos paredes. Dado que, solo se pueden romper hasta P paredes, cada camino a cada nodo se podr\'a mejorar a lo sumo P veces, donde P es la cantidad de paredes posibles a romper dadas por el enunciado.
 
