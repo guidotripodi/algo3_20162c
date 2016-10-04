@@ -10,6 +10,7 @@ using std::queue;
 int PMax;
 int F;
 int C;
+bool finalizar;
 
 struct Node {
 	int i;
@@ -41,20 +42,23 @@ int max(int a, int b){
 void proccessNode(int i, int j, Node *actual) {
     if (i > 0 && i < F-1 && j > 0 && j < C-1) {
         Node *node = Map[i][j];
-        if(!node->visited) { // no comparo contra un nivel anterior
-        	printf("actual + si es pared %d actual %d,%d hijo %d,%d \n", actual->wallsBroken+(int)node->iAmWall, actual->i, actual->j, node->i, node->j);
-            if (node->wallsBroken == -1 || actual->wallsBroken+(int)node->iAmWall < node->wallsBroken) { // realmente vale? consultar
-                if (actual->distMinToNode == -1) {
-                    //inicializo porque lo voy a usar
-                    actual->distMinToNode = 0;
-                }
-                node->distMinToNode = actual->distMinToNode+1;
-                node->wallsBroken = actual->wallsBroken+(int)node->iAmWall;
-                if(!node->marked && node->wallsBroken <= PMax) { // quiero encolar solo una vez
-                    node->marked = true;
-                    cola.push(node);
-                }
-            }	
+        //printf("actual + si es pared %d actual %d,%d hijo %d,%d \n", actual->wallsBroken+(int)node->iAmWall, actual->i, actual->j, node->i, node->j);
+        if (node->wallsBroken == -1 || actual->wallsBroken+(int)node->iAmWall < node->wallsBroken) { // realmente vale? consultar
+            if (actual->distMinToNode == -1) {
+                //inicializo porque lo voy a usar
+                actual->distMinToNode = 0;
+            }
+            node->distMinToNode = actual->distMinToNode+1;
+            node->wallsBroken = actual->wallsBroken+(int)node->iAmWall;
+            
+            if (node->i == nodeEnd->i && node->j == nodeEnd->j) {
+                finalizar = true;
+                return;
+            }
+            
+            if(node->wallsBroken <= PMax) {
+                cola.push(node);
+            }
         }
     }
 }
@@ -66,21 +70,17 @@ void mazeBfs () {
 		Node *actual = cola.front();
 		cola.pop();
 		
-		actual->visited = true;
 		int i = actual->i;
 		int j = actual->j;
-    
-		//PODA
-        if (i == nodeEnd->i && j == nodeEnd->j) {
-            //llegue al nodo final, por lo cual ya he finalizado
-            break;
-        }
-        //FIN PODA
-    
+
 		proccessNode(i-1, j, actual);
 		proccessNode(i+1, j, actual);
 		proccessNode(i, j-1, actual);
 		proccessNode(i, j+1, actual);
+        
+        if (finalizar) {
+            break;
+        }
 	}
 }
 
@@ -90,8 +90,10 @@ int main(){
 	C = 9;
 	PMax = 3;
 	
+    finalizar = false;
+    
 	char map[] = {'#','#','#','#','#','#','#','#','#',
-				  '#','o','#','#','#','#','#','x','#',
+				  '#','o','.','#','#','#','#','x','#',
 				  '#','.','.','#','.','#','#','#','#',
 				  '#','.','.','.','.','#','#','#','#',
                   '#','#','#','#','#','#','#','#','#'};
