@@ -2,7 +2,7 @@ void sinSolucion(){
 	int F = 100;
 	int C = 100;
 	
-	for (int l = 5; l < 100; ++l){
+	for (int l = 5; l < 50; ++l){
         F = l;
         C = l+4;
         char map[F*C];
@@ -13,23 +13,15 @@ void sinSolucion(){
                 for (int j = 0; j < x; ++j) {
                     if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
                         map[(i*x)+j] = '#';
-                    }else{ if (i == 1 && j == x-2){
-                            map[(i*x)+j] = '1';
-                         }else{ if (i == 1 && j == 1) {
-                                    map[(i*x)+j] = '1';
-                                }else{
-                                    if ((i == 1 && j == x-3 )||( i == 1 && j == x-4 )||( i == 2 && j == x-2 )||( i == 2 && j == x-3 ) ||( i == 3 && j == x-2 )||( i == 3 && j == x-3 ) ){
-                                        map[(i*x)+j] = '#';
-                                    }else{
-                                        map[(i*x)+j] = '.';
-                                    }
-
-                                }
+                    }
+                    if ((i == 1 && j == x-3 )||( i == 1 && j == x-4 )||( i == 2 && j == x-2 )||( i == 2 && j == x-3 ) ||( i == 3 && j == x-2 )||( i == 3 && j == x-3 ) ){
+                        map[(i*x)+j] = '#';
+                    }else{
+                        map[(i*x)+j] = '.';
+                        }
+                   }
                             }
-                        }                
-                }               
-            } 
-		funcionEj1(F, C, map);
+		funcionEj2(F, C, map);
 }
 
 }
@@ -39,7 +31,7 @@ void sinEsfuerzo(){
 	int F = 100;
 	int C = 100;
 	
-	for (int l = 5; l < 100; ++l){
+	for (int l = 5; l < 50; ++l){
         F = l;
         C = l+4;
         char map[F*C];
@@ -57,7 +49,89 @@ void sinEsfuerzo(){
                 }
         }
                  
-		funcionEj1(F, C, map);
+		funcionEj2(F, C, map);
 }
 
 }
+
+void grafoAGM(){
+	int F = 100;
+	int C = 100;
+	int cont;
+	
+	for (int l = 5; l < 50; ++l){
+        F = l;
+        C = l+4;
+        char map[F*C];
+        int h = F;
+        int x = C;
+        z = 1;
+        y = 2;
+        cont = 0;
+
+        for (int i = 0; i < h; ++i) {
+                for (int j = 0; j < x; ++j) {
+                    if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
+                        map[(i*x)+j] = '#';
+                    } 
+                   if (j % 2 == 0){
+                        map[(i*x)+j] = '#';
+                   }
+                   if (j % 2 == 1) {
+                   		map[(i*x)+j] = '.';
+                   }
+                   if (z < h-1 && y < x-1) {
+                   		z++;
+                   		y++;
+                   		map[(z*x)+y] = char(cont +48);
+                   }
+                    if (cont < 9){
+                       cont++;
+                   }else{
+                        cont = 1;
+                   }                           
+                }
+        }
+                 
+		funcionEj2(F, C, map);
+}
+
+}
+
+void grafoConMuchosCiclos(){
+	int F = 100;
+	int C = 100;
+	
+	  for (int l = 5; l < 50; ++l){
+        F = l;
+        C = l+4;
+        char map[F*C];
+        int h = F;
+        int x = C;
+        int cont = 0;
+        for (int i = 0; i < h; ++i) {
+                for (int j = 0; j < x; ++j) {
+                   if (j % 2 == 1 && j != 0 && j != x-1) {
+                        map[(i*x)+j] = '.';
+                   }
+                    if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
+                        map[(i*x)+j] = '#';
+                    } 
+                   if (j % 2 == 0){
+                        map[(i*x)+j] = '#';
+                   }
+                   if (j % 2 == 0 && i % 2 == 0 && j != 0 && i != 0 && j < x-1 && i < h-1){
+                       map[(i*x)+j] = char(cont +48);
+                   }
+                   if (cont < 9){
+                       cont++;
+                   }else{
+                        cont = 1;
+                   }
+                }
+        }
+		funcionEj2(F, C, map);
+        }
+                 
+}
+

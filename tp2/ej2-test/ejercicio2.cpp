@@ -45,7 +45,7 @@ struct Node {
     
     Node(): i(0),
     j(0),
-    value((int)'#'),
+    value(0),
     visited(false){}
 };
 
@@ -128,8 +128,8 @@ void real_pop () {
 
 int main() {
 	
-    F = 5;
-    C = 9;
+    F = 0;
+    C = 0;
     
     //Sirven para saber del grafo cuantos nodos y aristas tengo
     V = 0;
@@ -143,29 +143,53 @@ int main() {
                   '#','0','2','0','#','0','#','0','#',
                   '#','#','#','#','#','#','#','#','#'};
 */
-
-        char map[F*C];
-    for (int l = 5; l < 50; ++l){
+       
+        
+        for (int l = 5; l < 50; ++l){
         F = l;
         C = l+4;
         char map[F*C];
         int h = F;
         int x = C;
-
-         for (int i = 0; i < h; ++i) {
+        int cont = 0;
+        for (int i = 0; i < h; ++i) {
                 for (int j = 0; j < x; ++j) {
+                   if (j % 2 == 1 && j != 0 && j != x-1) {
+                        map[(i*x)+j] = '.';
+                   }
                     if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
                         map[(i*x)+j] = '#';
-                    }else{
-                          map[(i*x)+j] = '.';
-                    }
-
+                    } 
+                   if (j % 2 == 0){
+                        map[(i*x)+j] = '#';
+                   }
+                   if (j % 2 == 0 && i % 2 == 0 && j != 0 && i != 0 && j < x-1 && i < h-1){
+                       map[(i*x)+j] = char(cont +48);
+                   }
+                   if (cont < 9){
+                       cont++;
+                   }else{
+                        cont = 1;
+                   }
                 }
         }
-   
-    //printf("LLEGUE ACA");
+                
+                /* CON ESTO ES POSIBLE VER LA MATRIZ POR PANTALLA PARA VER RESULTADO 
+                DESCOMENTARLO AL FINAL Y COMENTAR LA MEDICION DEL CHRONO*/        
+   /*printf("FILAS: %d\n", F);
+   printf("COLUMNAS: %d\n", C);
+
+    for (int i = 0; i < F; ++i){
+            printf("\n");
+        for (int j = 0; j < C; ++j) {
+            printf("%c",map[(i*C)+j] );
+        }
+       
+    }*/
+
     
-    //init ();
+    
+    init ();
     auto start = ya();
     
     Map = new Node**[F];
@@ -174,7 +198,6 @@ int main() {
     for(int i = 0; i < F; i++){
         Map[i] = new Node*[C];
         for(int j = 0; j < C; j++){
-            
             Node *n = new Node();
             n->i = i;
             n->j = j;
@@ -183,7 +206,7 @@ int main() {
             char value = map[(i*C)+j];
             if (value == '#') {
                 n->value = 10; // los valores van de 0..9 por lo tanto 10 seria inf.
-            }else {
+            }else if (value != '.'){
                 n->value = value - '0';
             }
         }
@@ -217,10 +240,8 @@ int main() {
                 
                 a->costo = abajo->value;
                 
-                //pusheo monticulo
+                
                 aristas.push_back(a);
-                //ordeno monticulo
-                //push_heap(aristas.begin(), aristas.end(), comparePtrToArista);
                 
                 E++;
             }
@@ -240,10 +261,8 @@ int main() {
                 
                 a->costo = derecha->value;
                 
-                //pusheo monticulo
+                
                 aristas.push_back(a);
-                //ordeno monticulo
-                //push_heap(aristas.begin(), aristas.end(), comparePtrToArista);
                 
                 E++;
             }
@@ -252,15 +271,11 @@ int main() {
     
 	sort(aristas.begin(), aristas.end(), comparePtrToArista); // ordeno las aristas por peso de menor a mayor
     
-    //ciclo con monticulo
-	//while (aristas.size()) {
+   
     for (int i = 0; i < E; i++) {
         Arista *a = aristas[i];
         
-        //pila monticulo
-		//Arista *a = aristas.front();
-        //popeo la pila
-        //real_pop();
+        
         
 		if (find(a->inicio) != find(a->fin)) {
 			uni(a->inicio, a->fin, a->costo);
@@ -274,26 +289,13 @@ int main() {
 	}
 
     if (representanteFinal > 0) {
-    //    printf("%d \n", costCompLider[representanteFinal]);
+       // printf("%d \n", costCompLider[representanteFinal]);
     }else {
-    //    printf("-1 \n");
+       // printf("-1 \n");
     }
 
-    /*bool resuelto = false;
-    for (int i = 0; i < F*C; i++) {
-        if (cantAristas[i] == V-1) {
-            printf("%d \n", costCompLider[i]);
-            resuelto = true;
-            break;
-        }
-    }
-    
-    if (!resuelto) {
-        printf("-1 \n");
-    }*/
-
-        auto end = ya();
-            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+       auto end = ya();
+ cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
             printf("\n");
     }
     return 0;
