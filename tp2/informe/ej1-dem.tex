@@ -5,7 +5,6 @@ Para demostrar que nuestro algoritmo es v\'alido para solucionar el problema dad
 \item El camino resultante es el m\'as corto dentro de los posibles.
 \end{itemize}
 
-
 Como nuestro algoritmo puede encolar nodos ya visitados queremos ver que no se producen ciclos infinitos entre nodos visitados.
 
 Dado que el algoritmo no encola nodos de los bordes del grafo, no existirá la posibilidad de generarse ningún ciclo llegando a un borde.
@@ -16,3 +15,8 @@ Sea N_1 el nodo visitado del que se parte, con una cierta cantidad de paredes ro
 La cantidad de paredes del camino desde N_1 hasta N_k es creciente en cantidad de paredes rotas. Al intentar ir de N_k a N_1, lo que sucede es que la cantidad de paredes rotas N_k + 1 o + 0 (si N_1 es pared o no) deberia ser menor a la cantidad de paredes rotas en N_1. Pero esto no es cierto dado que sabemos que cualquier camino es creciente en cantidad de paredes o se mantiene con la misma cantidad de paredes rotas. Por lo tanto la cantidad de paredes rotas en N_k es mayor que N_1 y el ciclo no podrá cerrarse. Absurdo!! que viene de suponer que se producen ciclos infinitos entre nodos visitados.
 
 Por lo tanto, no habrá ciclos infinitos entre nodos visitados.
+
+Si hay solucion, no se excede la cantidad de paredes rotas para llegar al destino, por lo tanto el algoritmo encolará todos los nodos y en particular aquellos que estén conectados al mismo. Entonces,el destino será actualizado y el algoritmo finalizará su ejecucion
+
+
+
