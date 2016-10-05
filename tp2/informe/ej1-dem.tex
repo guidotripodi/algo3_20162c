@@ -1,11 +1,11 @@
 Para demostrar que nuestro algoritmo es válido para solucionar el problema en cuestion, tendremos que probar las siguientes condiciones:\\
 
 \begin{itemize}
-\item Si el grafo analizado tiene solución desde un nodo origen a un nodo destino dentro del limite de paredes a romper, el algoritmo siempre termina y si no posee solución tambien finaliza dado que no existen ciclos infinitos.
-\item El camino resultante es el m\'as corto dentro de los posibles, es decir, dentro de los que no exceden la cantidad de paredes rompibles.
+\item Si el grafo analizado tiene solución desde un nodo origen a un nodo destino dentro del limite de paredes a romper, el algoritmo siempre termina y, si no posee solución, tambien finaliza dado que no existen ciclos infinitos.
+\item El camino resultante es el m\'as corto dentro de los posibles que no exceden la cantidad de paredes rompibles.
 \end{itemize}
 
-Como nuestro algoritmo puede encolar nodos ya visitados queremos ver que no se producen ciclos infinitos entre nodos con la condicion mencionada.
+Como nuestro algoritmo puede encolar nodos ya visitados, queremos ver que no se producen ciclos infinitos entre nodos con la condicion mencionada.
 
 Dado que el algoritmo no encola nodos de los bordes del grafo, no existirá la posibilidad de generarse ningún ciclo llegando a un borde.
 
