@@ -166,7 +166,7 @@ for (int l = 5; l < 50; ++l){
                    }
                 }
         }
-/*
+
    printf("FILAS: %d\n", F);
    printf("COLUMNAS: %d\n", C);
 
@@ -176,9 +176,9 @@ for (int l = 5; l < 50; ++l){
             printf("%c",map[(i*C)+j] );
         }
        
-    }*/
+    }
 
-    auto start = ya();
+    //auto start = ya();
 
     init ();
     
@@ -307,13 +307,13 @@ for (int l = 5; l < 50; ++l){
         Arista *a = aristas[i];
         delete a;
     }
-
+     /*Descomentar esto para poder realizar medicion del caso*/
+/*
     auto end = ya();
             cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-            printf("\n");
+            printf("\n");*/
         }
     }
-     /*Descomentar esto para poder realizar medicion del caso*/
         return 0;
 }
                 

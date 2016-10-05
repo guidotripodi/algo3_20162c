@@ -4,6 +4,11 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <chrono>
+
+#define ya chrono::high_resolution_clock::now
+
+using namespace std;
 
 using std::queue;
 
@@ -88,15 +93,53 @@ int main(){
     
 	F = 5;
 	C = 9;
-	PMax = 1;
+	PMax = 3;
 	
-    finalizar = false;
-    
-	char map[] = {'#','#','#','#','#','#','#','#','#',
-				  '#','o','.','#','#','#','#','x','#',
-				  '#','.','.','#','.','#','#','#','#',
-				  '#','.','.','.','.','#','#','#','#',
+    /*
+    char map[] = {'#','#','#','#','#','#','#','#','#',
+                  '#','o','.','#','#','#','#','x','#',
+                  '#','.','.','#','.','#','#','#','#',
+                  '#','.','.','.','.','#','#','#','#',
                   '#','#','#','#','#','#','#','#','#'};
+*/
+
+
+for (int l = 5; l < 50; ++l){
+    finalizar = false;
+        F = l;
+        C = l+4;
+
+                  char map[F*C];
+
+                 int h = F;
+                 int x = C;
+
+            //armando matriz            
+                for (int i = 0; i < h; ++i) {
+                for (int j = 0; j < x; ++j) {
+                    if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
+                        map[(i*x)+j] = '#';
+                    }else{ if (i == 1 && j == x-2){
+                            map[(i*x)+j] = 'x';
+                         }else{ if (i == 1 && j == 1) {
+                                    map[(i*x)+j] = 'o';
+                                }else{
+                                    if ((j % 2 == 0)){
+                                        map[(i*x)+j] = '#';
+
+                                    }else{
+                                        map[(i*x)+j] = '.';
+                                    }
+
+                                }
+                            }
+                        }
+                    
+                }
+                
+        }
+        
+
 
                   printf("FILAS: %d\n", F);
    printf("COLUMNAS: %d\n", C);
@@ -108,7 +151,7 @@ int main(){
         }
        
     }
-	
+	//auto start = ya();
 	Map = new Node**[F];
 	
 	for(int i = 0; i < F; i++){
@@ -138,8 +181,13 @@ int main(){
 	}
 	
 	mazeBfs();
-	
-	printf("%d \n", nodeEnd->distMinToNode);
-  
+	printf("\n");
+	printf("Distancia minima obtenida: %d \n", nodeEnd->distMinToNode);
+    /*Descomentar esto para correr la medicion correspondiente*/
+  /*auto end = ya();
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");*/
+  PMax = x/2;
+}
 	return 0;
 }
