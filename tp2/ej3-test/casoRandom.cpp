@@ -2,7 +2,11 @@
 #include "grafo.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include <chrono>
 
+#define ya chrono::high_resolution_clock::now
+
+using namespace std;
 #define MAX_ESTACIONES 50
 
 void buscarCaminoMinimo(int cantidad, int vias, int* entrada);
@@ -27,7 +31,11 @@ int main(){
 	int indiceVias = 3;
 
 	for( ; cantidadEstaciones < MAX_ESTACIONES; cantidadEstaciones++){
+		auto start = ya();
 		buscarCaminoMinimo(cantidadEstaciones, cantidadVias, vias);
+		auto end = ya();
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");
 		//armar la siguiente iteracion
 		int i = 1;
 		while(i <= cantidadEstaciones){
@@ -94,7 +102,7 @@ void buscarCaminoMinimo(int cantidadEstaciones, int cantidadVias, int* vias){
 
 	//recorrer el arreglo prev y ahi tengo los vertices necesarios.
 	int j = salida;
-	printf("%d\n", distance[j]);
+	//printf("%d\n", distance[j]);
 	if(distance[j] != -1){
 		std::list<int> output;
 		std::list<int>::iterator itOut;
@@ -102,11 +110,11 @@ void buscarCaminoMinimo(int cantidadEstaciones, int cantidadVias, int* vias){
 			output.push_front(j);
 			j = prev[j]; //prev[0] esta en -1 entonces ahi corta el ciclo
 		}
-		printf( "%lu\n", output.size() );
+	//	printf( "%lu\n", output.size() );
 		for(itOut = output.begin(); itOut != output.end(); ++itOut){ 
-			printf("%d ", *itOut + 1); //imprimo estaciones
+	//		printf("%d ", *itOut + 1); //imprimo estaciones
 		}
-		printf("\n");
+	//	printf("\n");
 	}
 }
 

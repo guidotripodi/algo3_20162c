@@ -1,5 +1,5 @@
 CC=g++ 
-CFLAGS=-g -Wall
+CFLAGS=-g -Wall -std=c++11
 MAINOBJECTS=ejercicio3.o sinSolucion.o caminoSimple.o sinEjes.o casoRandom.o peorCaso.o
 OBJECTS=grafo.o
 
