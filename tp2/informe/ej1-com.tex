@@ -1,10 +1,10 @@
 Siendo la entrada una matriz de $F \times C = N$, en donde cada celda es transformada en un nodo, entonces el grafo de mayor tamaño tiene N nodos. Cada baldosa puede recorrerse a lo sumo en 2 direcciones y 4 sentidos distintos, con lo cual cada nodo tiene grado menor igual a 4. El algoritmo BFS original, por su parte, tiene una complejidad de O($|V|+|E|$), siendo V el conjunto de nodos y E el de aristas del grafo que se le pasa como parámetro. De aplicar este algoritmo sobre el grafo de nuestro problema, la complejidad sería O($F \times C$).
 
-No obstante, al modificar el BFS permitiendo que se puedan "visitar nodos ya visitados", la complejidad se ve afectada. El algoritmo propuesto permite volver a recorrer un nodo, siempre y cuando la cantidad de paredes derribadas para llegar a él, sea mejor que la anterior cantidad lograda, es decir, que en el peor caso, cada nodo se puede vuelve a visitar.
+No obstante, al modificar el BFS permitiendo que se puedan "visitar nodos ya visitados", la complejidad se ve afectada, ya que en la cola que guarda los nodos a evaluar permite reencolar cada uno varias veces (permitiendo su reevaluacion).
 
-Las condiciomes
+La cantidad de veces en la que es posible reencolar cada nodo, esta dada por la cantidad de caminos que pasen por él, donde estos mejoren la cantidad de paredes derribadas necesarias para alcanzarlo. Como ningún camino puede derribar más de "P" paredes, entonces la cantidad máxima de paredes derribadas para llegar a cada nodo será P. Bajo la logica impuesta, un camino podrá revisitar al nodo (por lo tanto reencolado) si lo alcanza con una menor cantidad de paredes derribadas, con lo cual solo P caminos podrán mejorar la condición de acceso al nodo. Por consiguiente la cantidad de 
 
-Por lo tanto, se volver\'a a visitar cada nodo si y solo si es posible llegar a él por un camino que rompa menos paredes. Dado que, solo se pueden romper hasta P paredes, cada camino a cada nodo se podr\'a mejorar a lo sumo P veces, donde P es la cantidad de paredes posibles a romper dadas por el enunciado.
+
 
 
 %Como existe la posibilidad de mejorar nuestro camino hasta cada uno de los nodos, rompiendo una cantidad puntual de paredes, podremos recorrer P veces cada nodo para chequear si existe un camino de menor tiempo. Se podr\'a recorrer hasta P veces ya que es la cantidad m\'axima de paredes posibles a romper, ya que chequearemos a cada nodo.
