@@ -8,8 +8,9 @@ A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algorit
  	para nodo.distancia asignar invalido\\
  	para nodo.visitado asignar falso\\
  	}
- 	\While{actual $\neq$ masCercano(visitados, distancia, cantidadNodos)}
+ 	\While{$\exists$ nodo alcanzable que no haya sido visitado}
  	{
+	para actual asignar masCercano(visitados, distancia, cantidadNodos)
 	para visitados[actual] asignar verdadero\\
 	para vecinos asignar vecinos(fortaleza,actual)\\
 	\For{arista $\in$ vecinos}{
@@ -27,4 +28,5 @@ A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algorit
 \begin{itemize}
 \item La funci\'on grafo, crea grafo uniendo las aristas con los respectivos nodos que son adyacentes.
 \item La funci\'on vecinos devuelve una lista de aristas correspondiente a los nodos adyacentens al v\'ertice consultado
+\iten La funci\`on masCercano devuelve el nodo con la menor distancia al origen, que no haya sido visitado. 
 \end{itemize}
