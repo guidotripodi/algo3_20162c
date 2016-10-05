@@ -1,9 +1,9 @@
 CC=g++ 
 CFLAGS=-g -Wall
-MAINOBJECTS=ejercicio3.o sinSolucion.o caminoSimple.o sinEjes.o
+MAINOBJECTS=ejercicio3.o sinSolucion.o caminoSimple.o sinEjes.o casoRandom.o peorCaso.o
 OBJECTS=grafo.o
 
-EXECUTABLES= ejercicio3 sinSolucion caminoSimple sinEjes
+EXECUTABLES= ejercicio3 sinSolucion peorCaso caminoSimple sinEjes casoRandom
 
 all: $(EXECUTABLES)
 
@@ -19,6 +19,11 @@ caminoSimple: $(OBJECTS) caminoSimple.o
 sinEjes: $(OBJECTS) sinEjes.o
 	$(CC) $(CFLAGS) $^ -o $@ 
 
+casoRandom: $(OBJECTS) casoRandom.o
+	$(CC) $(CFLAGS) $^ -o $@ 
+
+peorCaso: $(OBJECTS) peorCaso.o
+	$(CC) $(CFLAGS) $^ -o $@ 
 %.o: %.cpp
 	$(CC) $(CFLAGS) $< -c -o $@
 
