@@ -11,8 +11,8 @@ Dado que el algoritmo no encola nodos de los bordes del grafo, no existirá la p
 
 Supongamos que se producen ciclos infinitos entre nodos ya visitados. 
 
-Sea N_1 el nodo visitado del que se parte, con una cierta cantidad de paredes rotas y C el ciclo de nodos visitados desde N_1 hasta N_k que se vuelven a actualizar con menor cantidad de paredes derribadas (dado que si esto no sucede, no hay circuito porque no se actualizan todos los nodos del ciclo mencionado). 
-La cantidad de paredes del camino desde N_1 hasta N_k es creciente en cantidad de paredes rotas. Al intentar ir de N_k a N_1, lo que sucede es que la cantidad de paredes rotas N_k + 1 o + 0 (si N_1 es pared o no) deberia ser menor a la cantidad de paredes rotas en N_1. Pero esto no es cierto dado que sabemos que cualquier camino es creciente en cantidad de paredes o se mantiene con la misma cantidad de paredes rotas. Por lo tanto la cantidad de paredes rotas en N_k es mayor que N_1 y el ciclo no podrá cerrarse. Absurdo!! que viene de suponer que se producen ciclos infinitos entre nodos visitados.
+Sea N$\_$1 el nodo visitado del que se parte, con una cierta cantidad de paredes rotas y C el ciclo de nodos visitados desde N$\_$1 hasta N$\_$k que se vuelven a actualizar con menor cantidad de paredes derribadas (dado que si esto no sucede, no hay circuito porque no se actualizan todos los nodos del ciclo mencionado). 
+La cantidad de paredes del camino desde N$\_$1 hasta N$\_$k es creciente en cantidad de paredes rotas. Al intentar ir de N$\_$k a N$\_$1, lo que sucede es que la cantidad de paredes rotas N$\_$k + 1 o + 0 (si N$\_$1 es pared o no) deberia ser menor a la cantidad de paredes rotas en N$\_$1. Pero esto no es cierto dado que sabemos que cualquier camino es creciente en cantidad de paredes o se mantiene con la misma cantidad de paredes rotas. Por lo tanto la cantidad de paredes rotas en N$\_$k es mayor que N$\_$1 y el ciclo no podrá cerrarse. Absurdo!! que viene de suponer que se producen ciclos infinitos entre nodos visitados.
 
 Por lo tanto, no habrá ciclos infinitos entre nodos visitados.
 

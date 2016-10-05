@@ -4,8 +4,6 @@
 	encolo nodoInicial en una cola de nodos \\
 	    \While{$\neg$ vacia(cola)}{
 	    nodo actual $\gets$ tope(cola) \\
-	    desencolo(cola) \\
-	    para visitado(actual) asignar Verdadero \\
 	    procesarNodo(actual, posicion del nodo)\\
 	    }
 	    
@@ -15,19 +13,20 @@
 \begin{algorithm}[H] %or another one check
  \caption{procesarNodo}
  	nodo node $\gets$ Map[posicionDelNodoActual]\\
-	\If{$\neg$ visitado(node)}{
-       	   	 \If{$\neg$ esPared(node) $\wedge$ $\neg$EsPared(actual)}{
+	
        	   	 \If{cantidadParedes(actual) + esPared(node) < cantidadParedes(node)}{
        	   	 para distancia(node) asignar distanciaMinima(actual) + 1\\
        	   	 para cantidadParedes(node) asignar cantidadParedes(actual) + esPared(node) \\
-       	   	 \If{$\neg$ marcado(node)}{
-       	   	 para marcado(node) asignar verdadero\\
+			\If{node == ultimoNodo}	{
+				devolver distancia(node)
+			}
+	   	   	 \If{cantidadParedes(node) $\leq$ Pmax}{
        	   	 meter en cola a node\\
        	   	 }
        	   	 }
              
-			}
-			}
+			
+			
 \end{algorithm}
 
 

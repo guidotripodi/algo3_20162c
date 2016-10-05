@@ -10,8 +10,6 @@
 
 using namespace std;
 
-
-
 int F, C;
 int V, E;
 
@@ -56,67 +54,67 @@ bool comparePtrToArista(Arista* a, Arista* b) { return (*a < *b); }
 vector<Arista*> aristas;
 
 void init() {
-	// completar
+    // completar
     long n = F*C;
     altura = new int[n];
     padre = new int[n];
     costCompLider = new int[n];
     cantAristas = new int[n];
     
-	for(int i = 0; i < n; i++){
-		padre[i] = i;
-		altura[i] = 1;
+    for(int i = 0; i < n; i++){
+        padre[i] = i;
+        altura[i] = 1;
         costCompLider[i] = 0;
         cantAristas[i] = 0;
-	}
+    }
 }
 
 int find(int x) {
-	// completar
-	if (padre[x] == x) {
-		return x;
-	}else{
-		int p = find(padre[x]);
-		padre[x] = p;
-		return p;
-	}
+    // completar
+    if (padre[x] == x) {
+        return x;
+    }else{
+        int p = find(padre[x]);
+        padre[x] = p;
+        return p;
+    }
 }
 
 void uni(int x, int y, int costo) {
-	// union es una palabra reservada en C++, por eso usamos "uni"
-	// completar
+    // union es una palabra reservada en C++, por eso usamos "uni"
+    // completar
     
     //piso con los referentes
-	x = find(x); y = find(y);
+    x = find(x); y = find(y);
     
     //checkear vecinos
     
-	if(altura[x] == altura[y]) {
-		altura[x]++;
-		padre[x] = y;
+    if(altura[x] == altura[y]) {
+        altura[x]++;
+        padre[x] = y;
         cantAristas[y] = cantAristas[y]+cantAristas[x]+1;
         costCompLider[y] += costCompLider[x]+costo;
         
         if (cantAristas[y] == V-1) {
             representanteFinal = y;
         }
-	}else if(altura[x] < altura[y]) {
-		padre[x] = y;
+    }else if(altura[x] < altura[y]) {
+        padre[x] = y;
         cantAristas[y] = cantAristas[y]+cantAristas[x]+1;
         costCompLider[y] += costCompLider[x]+costo;
         
         if (cantAristas[y] == V-1) {
             representanteFinal = y;
         }
-	}else{
-		padre[y] = x;
+    }else{
+        padre[y] = x;
         cantAristas[x] = cantAristas[x]+cantAristas[y]+1;
         costCompLider[x] += costCompLider[y]+costo;
         
         if (cantAristas[x] == V-1) {
             representanteFinal = x;
         }
-	}
+    }
 }
 
 void real_pop () {
@@ -127,27 +125,23 @@ void real_pop () {
 }
 
 int main() {
-	
-    F = 0;
-    C = 0;
     
+    F = 7;
+    C = 11;
+    
+    int columna = 0;
+    int valido = 0;
+                  
+for (int l = 5; l < 50; ++l){
     //Sirven para saber del grafo cuantos nodos y aristas tengo
+    valido++;
     V = 0;
     E = 0;
-    
     representanteFinal = -1;
-    
-   /* char map[] = {'#','#','#','#','#','#','#','#','#',
-                  '#','0','1','0','#','0','#','0','#',
-                  '#','0','#','0','3','0','5','0','#',
-                  '#','0','2','0','#','0','#','0','#',
-                  '#','#','#','#','#','#','#','#','#'};
-*/
-       
-        
-        for (int l = 5; l < 50; ++l){
+    if (valido % 2 == 1){
         F = l;
         C = l+4;
+        columna = 0;
         char map[F*C];
         int h = F;
         int x = C;
@@ -163,8 +157,9 @@ int main() {
                    if (j % 2 == 0){
                         map[(i*x)+j] = '#';
                    }
-                   if (j % 2 == 0 && i % 2 == 0 && j != 0 && i != 0 && j < x-1 && i < h-1){
+                   if (j == columna*2 && j != 0 && i != 0 && j < x-1 && i < h-1){
                        map[(i*x)+j] = char(cont +48);
+                      
                    }
                    if (cont < 9){
                        cont++;
@@ -172,10 +167,11 @@ int main() {
                         cont = 1;
                    }
                 }
+                        columna++;
+                        
         }
                 
-                /* CON ESTO ES POSIBLE VER LA MATRIZ POR PANTALLA PARA VER RESULTADO 
-                DESCOMENTARLO AL FINAL Y COMENTAR LA MEDICION DEL CHRONO*/        
+                     
    printf("FILAS: %d\n", F);
    printf("COLUMNAS: %d\n", C);
 
@@ -186,11 +182,9 @@ int main() {
         }
        
     }
-
-    
-    
-    init ();
     //auto start = ya();
+
+    init ();
     
     Map = new Node**[F];
     
@@ -198,6 +192,7 @@ int main() {
     for(int i = 0; i < F; i++){
         Map[i] = new Node*[C];
         for(int j = 0; j < C; j++){
+            
             Node *n = new Node();
             n->i = i;
             n->j = j;
@@ -240,9 +235,8 @@ int main() {
                 
                 a->costo = abajo->value;
                 
-                
+                //pusheo monticulo
                 aristas.push_back(a);
-                
                 E++;
             }
             
@@ -261,42 +255,67 @@ int main() {
                 
                 a->costo = derecha->value;
                 
-                
+                //pusheo monticulo
                 aristas.push_back(a);
+        
                 
                 E++;
             }
         }
     }
     
-	sort(aristas.begin(), aristas.end(), comparePtrToArista); // ordeno las aristas por peso de menor a mayor
+    sort(aristas.begin(), aristas.end(), comparePtrToArista); // ordeno las aristas por peso de menor a mayor
     
-   
+  
     for (int i = 0; i < E; i++) {
         Arista *a = aristas[i];
         
-        
-        
-		if (find(a->inicio) != find(a->fin)) {
-			uni(a->inicio, a->fin, a->costo);
+               
+        if (find(a->inicio) != find(a->fin)) {
+            uni(a->inicio, a->fin, a->costo);
         }
-        
+
+                
         //PODA
         if (representanteFinal > 0) {
             break;
         }
         //FIN PODA
-	}
-            printf("\n");
+    }
+    printf("\nLa suma total es:");
     if (representanteFinal > 0) {
         printf("%d \n", costCompLider[representanteFinal]);
     }else {
         printf("-1 \n");
     }
 
-  //     auto end = ya();
-// cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-            printf("\n");
+    delete[] altura;
+    delete[] padre;
+    delete[] costCompLider;
+    delete[] cantAristas;
+
+    for(int i = 0; i < F; i++){
+        for(int j = 0; j < C; j++){    
+            Node *n = Map[i][j];
+            delete n;
+        }
+        delete[] Map[i];
     }
-    return 0;
+
+    delete[] Map;
+
+    aristas.clear();
+
+    for (int i = 0; i < E; i++) {
+        Arista *a = aristas[i];
+        delete a;
+    }
+    /*Descomentar esto para poder realizar medicion del caso*/
+    /*auto end = ya();
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");*/
 }
+    }
+        return 0;
+}
+                
