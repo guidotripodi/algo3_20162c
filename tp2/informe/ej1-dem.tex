@@ -1,49 +1,23 @@
 Para demostrar que nuestro algoritmo es válido para solucionar el problema en cuestion, tendremos que probar las siguientes condiciones:\\
 
 \begin{itemize}
-\item Si el grafo analizado tiene solución desde un nodo origen a un nodo destino dentro del limite de paredes a romper, el algoritmo siempre termina y, si no posee solución, tambien finaliza dado que no existen ciclos infinitos.
-\item El camino resultante es el m\'as corto dentro de los posibles que no exceden la cantidad de paredes rompibles.
+\item El algoritmo finaliza siempre.
+\item De haber solución, el algoritmo la encuentra.
+\item El camino resultante es el m\'as corto dentro de los posibles.
 \end{itemize}
 
-Como nuestro algoritmo puede encolar nodos ya visitados, queremos ver que no se producen ciclos infinitos entre nodos con la condicion mencionada.
+\subsubsection*{El algoritmo finaliza }
+Como nuestro algoritmo puede encolar nodos ya visitados, queremos ver que no se producen ciclos infinitos entre nodos con la condicion mencionada. Como se vio en la sección de complejidad, la máxima cantidad de veces que cada nodo puede ser recorrido es "P", con lo cual, necesariamente el algoritmo termina.
 
-Dado que el algoritmo no encola nodos de los bordes del grafo, no existirá la posibilidad de generarse ningún ciclo llegando a un borde.
+\subsubsection*{El algoritmo halla la solución}
 
-Supongamos que se producen ciclos infinitos entre nodos ya visitados. 
+Como cada nodo se puede recorrer siempre y cuando se posea la cantidad de paredes a romper necesarias para alcanzarlo, entonces particualrmente, el nodo destino será alcanzado solo si existe un camino que rompa una cantidad menor o igual a la parametrizada, es decir, si existe solución a la instanccia del problema. 
 
-Sea $N_1$ el nodo visitado del que se parte un recorrido, con una cierta cantidad de paredes rotas y $C$ el ciclo de nodos visitados desde $N_1$ hasta otro nodo  $N_k$  que pasa por $N_2$, $N_3$ ... $N_{k-1}$ y que se vuelven a actualizar con menor cantidad de paredes derribadas (dado que si esto no sucede, no hay circuito porque no se actualizan todos los nodos del mencionados).\\
- 
-La cantidad de paredes rotas del camino desde $N_1$ hasta $N_k$ es creciente porque hasta $N_k$ fueron actualizados todos los nodos del camino.\\
+\subsubsection*{La solucion encontrada es la mejor}
 
-Para poder actualizar $N_1$ pasando por $N_k$, la cantidad de paredes rotas de $N_k$ debería ser menor a la cantidad de paredes rotas en $N_1$. Es decir:
+Al igual que el algoritmo $BFS$, el grafo se recorre en anchura, por lo tanto en la cola todos los nodos a una distancia $d$ > 1 del origen estarán encolados de manera contigua, es decir, cuando se visita un nodo a distancia $d-1$ del origen, se encolan los vecinos, que son los que están a distancia $d$ del nodo inicial, siempre y cuando la cantidad de paredes rotas para llegar a los mismos no exceda el limite. Si interpretamos a cada nodo encolado como la cabeza de un camino que empieza en el nodo origen, puede verse que en cada paso del algoritmo se están evaluando todos los caminos posibles de longitud creciente: de alcanzar en algún momento el nodo destino, por consiguiente, será a travez del camino más corto.\\
 
-\begin{equation}
-paredesRotas(N_1) <
-\Bigg \{
-\begin{matrix} 
-paredesRotas(N_k) + 1 & \mathrm{si\ } N_1 \text{$\text{ es pared}$} \\
-paredesRotas(N_k)  & \mathrm{si no\ }
-\end{matrix}
-\end{equation}
+Como el procedimiento permite volver a recorrer nodos, es necesario que al alcanzar el nodo destino se finalice el algoritmo: de no suceder, puede existir otro camino que pueda volver a recorrer el destino con una menor cantidad de paredes rotas pero necesariamente con un mayor tiempo de recorrido, sobreescribiendo el tiempo logrado por el camino minimo y generando una solución que no es la mínima.
 
-Pero esto no es cierto dado que sabemos que cualquier camino es creciente mayor o igual en cantidad de paredes rotas. 
-Por lo tanto la cantidad de paredes rotas en $N_k$ es mayor o igual que $N_1$ y el ciclo no podrá cerrarse dado que el algoritmo no actualiza. Absurdo!! que viene de suponer que se producen ciclos infinitos entre nodos visitados.
 
-Por lo tanto, no habrá ciclos infinitos entre nodos visitados.\\
 
-Si hay solución, no se excede la cantidad de paredes rompibles para llegar al destino, por lo tanto el algoritmo encolará todos los nodos que lleven al destino y en particular aquellos que estén conectados al mismo. Entonces, el destino será actualizado y el algoritmo finalizará su ejecución.\\
-
-El tipo de grafo que el algoritmo está diseñado para resolver, tiene a lo sumo cuatro vecinos por nodo. Cuando un no está en un borde solo dispone de dos vecinos, arriba/derecha, arriba/izquierda, abajo/derecha, abajo/izquierda.\\
-
-Al igual que el algoritmo $BFS$, el grafo se recorre en anchura, por lo tanto en la cola todos los nodos a una distancia $d$ > 1 del origen estarán encolados de manera contigua, es decir, cuando se visita un nodo a distancia $d-1$ del origen, se encolan los vecinos, que son los que están a distancia $d$ del nodo inicial, siempre y cuando la cantidad de paredes rotas para llegar a los mismos no exceda el limite.\\
-
-Dado que la cola se recorre por niveles, los nodos a nivel $d$ no encolan a los nodos que los encolaron, los cuales estan en el nivel anterior, dado que los nodos a nivel $d$ tendrán cantidad de paredes mayor o igual al nivel anterior.\\
-
-A diferencia de $BFS$, en el algoritmo de este problema, un nodo que fue encolado, puede volver a encolarse si se mejora la cantidad de paredes rotas para llegar a ese nodo desde un vecino.\\
-
-Sea $N$ el nodo que habia sido encolado una vez, si se mejora la cantidad de paredes rotas para llegar a $N$ una segunda vez, quiere decir que el camino desde el origen hasta $N$ que mejora la cantidad de paredes rotas, es más largo que el inicial, dado que para llegar a $N$ nuevamente se tuvieron que recorrer más niveles en la cola.\\
-En cualquier caso, siempre que no se exceda el limite de paredes rompibles, la primera vez que se llegue a un nodo y se lo actualice, será de la forma más rapida desde el origen, dado que es el primer camino en visitar ese nodo. Por lo tanto puede darse por finalizado el algoritmo una vez que se llegue a un nodo deseado.\\
-
-Si suponemos que el nodo destino es alcanzable dentro del limite de paredes posibles a romper, una vez que se actualice el valor de la cantidad de paredes y distancia desde el origen puede finalizarse el algoritmo.\\
-
-La condición de fin es necesaria ya que un camino más largo, que mejora la cantidad de paredes rotas puede llegar hasta el destino actualizando su valor, ya que el algoritmo lo permite, pero no queremos perder la información obtenida y además ya sabemos que es la mejor solución la obtenida por primera vez.
