@@ -1,7 +1,7 @@
 \begin{algorithm}[H] %or another one check
  \caption{Algoritmo EJ2}
  %     \SetAlgoLined
-	representanteFinal = -1 //QUEDA MAL PONER -1
+	representanteFinal = -1 
 
 	\For{Arista ar $\exists$ aristas}{
 		\If{Buscar(ar.inicio) == Buscar(ar.fin)}{
@@ -31,44 +31,6 @@
  	}
 \end{algorithm}
 
-/ESTO ESTA MAS IMPLEMENTATIVO QUE ANTES HAY HASTA ; JAJA DEJO LO Q ESTABA ANTES
-    /LAS TRES LINEAS DEL IF Y EL EIF DICEN LO MISMO HACER UNO SOLO Q SOLO SUME LO DE LA ALTURA/ USAR ASIGNAR I/O FLECHITAS SACAR LOS ; 
-
-\begin{algorithm}[H] %or another one check
- \caption{Funcion Unir(enteros x, y, costo)}
- %     \SetAlgoLined
- 	x = Buscar(x); y = Buscar(y);\\
-
-	\If{altura[x] == altura[y]}{
-		altura[x]++;\\
-		padre[x] = y;\\
-        cantAristas[y] = cantAristas[y]+cantAristas[x]+1;\\
-        costCompLider[y] + = costCompLider[x]+costo;\\
-        
-        \If{cantAristas[y] == $\#$nodos-1} {
-            representanteFinal = y;\\
-        }
-	}\eIf{altura[x] < altura[y]}{
-		padre[x] = y;\\
-        cantAristas[y] = cantAristas[y]+cantAristas[x]+1;\\
-        costCompLider[y] + = costCompLider[x]+costo;\\
-        \If {cantAristas[y] == $\#$nodos-1} {
-            representanteFinal = y;\\
-        }
-	}{
-		padre[y] = x;\\
-        cantAristas[x] = cantAristas[x]+cantAristas[y]+1;\\
-        costCompLider[x] + = costCompLider[y]+costo;\\
-        
-        \If{cantAristas[x] == $\#$nodos-1} {
-            representanteFinal = x;\\
-        }
-	}
-
-\end{algorithm}
-
-//EL QUE ESTABA
-
 
 \begin{algorithm}[H] %or another one check
  \caption{Funcion Unir(enteros X, Y, COSTO)}
@@ -77,17 +39,17 @@
  	para entero y asignar Buscar(Y)\\
 	\eIf{altura[x] $\leq$ altura[y]} {
 	 	para padre[x] asignar y\\
- 	para cantidadAristas[y] asignar cantidadAristas[y] + cantidadAristas[x] +1\\
- 	para costo[y] asignar costo[y] + costo[x] + COSTO\\
+ 	para cantAristas[y] asignar cantAristas[y] + cantAristas[x] +1\\
+ 	para costCompLider[y] asignar costCompLider[y] + costCompLider[x] + COSTO\\
  	\If{altura[x] == altura[y]}{
  	 	para altura[x] incrementar 1 }
- 	 	\If {cantidadAristas[y] == $\#$nodos-1} {
+ 	 	\If {cantAristas[y] == $\#$nodos-1} {
             para representanteFinal asignar y\\
         }
 	}{ 	 	para padre[y] asignar x\\
- 	para cantidadAristas[x] asignar cantidadAristas[y] + cantidadAristas[x] +1\\
- 	para costo[x] asignar costo[x] + costo[y] + COSTO\\
- 	 \If{cantidadAristas[x] == $\#$nodos-1} {
+ 	para cantAristas[x] asignar cantAristas[y] + cantAristas[x] +1\\
+ 	para costCompLider[x] asignar costCompLider[x] + costCompLider[y] + COSTO\\
+ 	 \If{cantAristas[x] == $\#$nodos-1} {
            para representanteFinal asignar x\\
         }	}
  
@@ -100,5 +62,5 @@
 \item {\bf Arreglo cantAristas}: guarda la cantidad de aristas que tiene el representante de una componente conexa
 \item {\bf Arreglo costCompLider}: guarda el costo total de una componente conexa por representante 
 \item {\bf Arreglo padre}: para cada nodo, quien es su representante, es decir, en que componente conexa se encuentra
-\item {\bf Arreglo altura}: indica la cantidad de nodos de una componente conexa por representante
+\item {\bf Arreglo altura}: indica la altura de la componente conexa que se chequea
 \end{itemize}  
