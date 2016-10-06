@@ -1,1 +1,2 @@
-Realizar
+Siendo F la cantidad de filas y C la cantidad de columnas de la entrada, F $\ast$ C  es la cantidad de puntos caminables máximos que puede tener una instancia. Luego el grafo implicito tiene $V(G) = F \ast C $ nodos como máximo (dado que los valores $'\#'$ no se representan y los números son aristas).
+Como la implementación del algoritmo de Kruskal utiliza los métodos union/find con tiempo de union y búsqueda amortizados, el algoritmo posee una complejidad de $O(V(G)\times log(V(G))) = O(F \ast C \times log(F \ast C)) $. 

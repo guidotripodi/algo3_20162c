@@ -1,80 +1,98 @@
 \begin{algorithm}[H] %or another one check
  \caption{Algoritmo EJ2}
  %     \SetAlgoLined
-	    \For{casillero $\exists$ laberinto}{
-	    nodo n asignar casillero \\
-	    mapa[casillero] asignar n\\
-	    \eIf{valor(casillero) == \#}{
-	    para n.valor asignar invalido\\
-	    }{
-	    para n.valor asignar valor(casillero)}
-	    }
-	    \For{elemento $\exists$ mapa}{	para elemento.visitado asignar verdadero\\
-	    nodo abajo asignar mapa[elemento.i+1][elemento.j]\\
-	    incrementar cantidadNodos en 1 \\
-	    \If{valor(abajo) $\neq$ invalido}{
-	    arista a puntero\\
-	    para a.inicio asignar elemento.i $\ast$ C + elemento.j\\
-	    	    \eIf{valor(abajo) == invalido}{
-	    para a.fin asignar (elemento.i + 1)$\ast$ C + elemento.j\\
-	    }{
-	    para a.fin asignar (elemento.i + 2)$\ast$ C + elemento.j\\}
-	    para a.costo asignar valor(abajo)\\
-	    aristas.push(a)\\
-	    incrementar cantidadAristas en 1\\
-	    }
-	    nodo derecha asignar mapa[elemento.i][elemento.j+1]\\
-	    \If{valor(derecha) $\neq$ invalido}{
-	    arista a puntero\\
-	    para a.inicio asignar elemento.i $\ast$ C + elemento.j\\
-	    \eIf{valor(derecha) == 0}{
-	    para a.fin asignar (elemento.i $\ast$ C) + (elemento.j + 1)  }{
-	    para a.fin asignar (elemento.i $\ast$ C) + (elemento.j + 2)
-	    }
-	    para a.costo asignar valor(derecha)\\
-	    incrementar cantidadAristas en 1\\
-	    }
-	    }	   
-	    ordenar(aristas)\\
-	    \If{find(a.inicio) $\neq$ find(a.fin)}{
-	    unir(a.inicio, a.fin, a.costo)}
+	representanteFinal = -1 //QUEDA MAL PONER -1
+
+	\For{Arista ar $\exists$ aristas}{
+		\If{Buscar(ar.inicio) == Buscar(ar.fin)}{
+			Unir(ar.inicio, ar.fin, ar.costo);
+		}
+
+		\If{representanteFinal $\geq$ 0}{
+			finalizar ciclo
+		}
+	}
+
+	\If{representanteFinal $\geq$ 0}{
+		 devolver costCompLider[representanteFinal]
+	}\Else{
+         devolver sinSolucion
+    }
 \end{algorithm}
 
 
 \begin{algorithm}[H] %or another one check
- \caption{Funcion Find}
+ \caption{Funcion Buscar(entero x)}
  %     \SetAlgoLined
- 	\eIf{padre[entrada] == entrada}{devolver entrada}{
- 	para entero p asignar find(padre[entrada])\\
-	para padre[entrada] asignar p\\
+ 	\If{padre[x] == x}{devolver x}{
+ 	para entero p $\gets$ Buscar(padre[x])\\
+	para padre[x] asignar p\\
 	devolver p\\
  	}
 \end{algorithm}
 
+/ESTO ESTA MAS IMPLEMENTATIVO QUE ANTES HAY HASTA ; JAJA DEJO LO Q ESTABA ANTES
+
 
 \begin{algorithm}[H] %or another one check
- \caption{Funcion Unir}
+ \caption{Funcion Unir(enteros x, y, costo)}
  %     \SetAlgoLined
- 	para entero x asignar find(entrada1)\\
- 	para entero y asignar find(entrada2)\\
-	\eIf{altura[x] $\leq$ altura[y]} {
-	 	para padre[x] asignar y
- 	para cantidadAristas[y] asignar cantidadAristas[y] + cantidadAristas[x] +1\\
- 	para costo[y] asignar costo[y] + costo[x] + entrada3\\
- 	\If{altura[x] == altura[y]}{
- 	 	para altura[x] incrementar 1 }
-	}{ 	 	para padre[y] asignar x
- 	para cantidadAristas[x] asignar cantidadAristas[y] + cantidadAristas[x] +1\\
- 	para costo[x] asignar costo[x] + costo[y] + entrada3\\	}
- 
+ 	x = Buscar(x); y = Buscar(y);\\
+    
+	\If{altura[x] == altura[y]}{
+		altura[x]++;\\
+		padre[x] = y;\\
+        cantAristas[y] = cantAristas[y]+cantAristas[x]+1;\\
+        costCompLider[y] + = costCompLider[x]+costo;\\
+        
+        \If{cantAristas[y] == $\#$nodos-1} {
+            representanteFinal = y;\\
+        }
+	}\eIf{altura[x] < altura[y]}{
+		padre[x] = y;\\
+        cantAristas[y] = cantAristas[y]+cantAristas[x]+1;\\
+        costCompLider[y] + = costCompLider[x]+costo;\\
+        \If {cantAristas[y] == $\#$nodos-1} {
+            representanteFinal = y;\\
+        }
+	}{
+		padre[y] = x;\\
+        cantAristas[x] = cantAristas[x]+cantAristas[y]+1;\\
+        costCompLider[x] + = costCompLider[y]+costo;\\
+        
+        \If{cantAristas[x] == $\#$nodos-1} {
+            representanteFinal = x;\\
+        }
+	}
+
 \end{algorithm}
 
+//EL QUE ESTABA
+
+
+\begin{algorithm}[H] %or another one check
+ \caption{Funcion Unir(enteros X, Y, COSTO)}
+ %     \SetAlgoLined
+ 	para entero x asignar Buscar(X)\\
+ 	para entero y asignar Buscar(Y)\\
+	\eIf{altura[x] $\leq$ altura[y]} {
+	 	para padre[x] asignar y\\
+ 	para cantidadAristas[y] asignar cantidadAristas[y] + cantidadAristas[x] +1\\
+ 	para costo[y] asignar costo[y] + costo[x] + COSTO\\
+ 	\If{altura[x] == altura[y]}{
+ 	 	para altura[x] incrementar 1 }
+	}{ 	 	para padre[y] asignar x\\
+ 	para cantidadAristas[x] asignar cantidadAristas[y] + cantidadAristas[x] +1\\
+ 	para costo[x] asignar costo[x] + costo[y] + COSTO\\	}
+ 
+\end{algorithm}
 
 \textbf{Aclaraciones de variables y transformaci\'on de entrada}
 
 \begin{itemize}
 
-\item {\bf Tipo nodo}: Dicho tipo, presenta su indice i,j en el mapa, el valor y si el mismo fue o no visitado.
-\item {\bf Tipo arista}: Dicho tipo, contiene el valor de inicio y fin de la misma como tambi\'en el costo de atravesarla
-\item {\bf Variable map}: Dicha variable es una matriz de nodos
+\item {\bf Arreglo cantAristas}: guarda la cantidad de aristas que tiene el representante de una componente conexa
+\item {\bf Arreglo costCompLider}: guarda el costo total de una componente conexa por representante 
+\item {\bf Arreglo padre}: para cada nodo, quien es su representante, es decir, en que componente conexa se encuentra
+\item {\bf Arreglo altura}: indica la cantidad de nodos de una componente conexa por representante
 \end{itemize}  

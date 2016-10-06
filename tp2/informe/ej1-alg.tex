@@ -1,30 +1,29 @@
 \begin{algorithm}[H] %or another one check
  \caption{Algoritmo EJ1}
  %     \SetAlgoLined
-	encolo nodoInicial en una cola de nodos \\
-	    \While{$\neg$ vacia(cola)}{
-	    nodo actual $\gets$ tope(cola) \\
-	    procesarNodo(actual, posicion del nodo)\\
+	encolo nodo origen en una cola de nodos \\
+	    \While{$\neg$ cola vacia)}{
+	    Nodo actual $\gets$ tope cola \\
+	    procesar vecinos\\
 	    }
 	    
 \end{algorithm}
 
 
 \begin{algorithm}[H] %or another one check
- \caption{procesarNodo}
- 	nodo node $\gets$ Map[posicionDelNodoActual]\\
+ \caption{procesarNodo(Nodo nod)}
+ 	Nodo nod es un vecino de actual en el Mapa\\
 	
-       	   	 \If{cantidadParedes(actual) + esPared(node) < cantidadParedes(node)}{
-       	   	 para distancia(node) asignar distanciaMinima(actual) + 1\\
-       	   	 para cantidadParedes(node) asignar cantidadParedes(actual) + esPared(node) \\
-			\If{node == ultimoNodo}	{
-				devolver distancia(node)
+       	   	 \If{$\#$ paredes rotas hasta actual + esPared(nod) < $\#$ paredes rotas hasta actual nod}{
+       	   	 para distancia hasta nod $\gets$ distancia hasta actual + 1\\
+       	   	 para $\#$ paredes rotas hasta nod $\gets$ $\#$ paredes rotas hasta actual + esPared(nod) 
+			\If{nod = nodo destino}	{
+				devolver distancia hasta nodo destino y terminar
 			}
-	   	   	 \If{cantidadParedes(node) $\leq$ Pmax}{
-       	   	 meter en cola a node\\
-       	   	 }
-       	   	 }
-             
+	   	   	 \If{$\#$ paredes rotas hasta nod $\leq$ Pmax}{
+       	   		 encolar nod 
+       	   		 }
+       	   } 
 			
 			
 \end{algorithm}
@@ -33,9 +32,10 @@
 \textbf{Aclaraciones de variables y transformaci\'on de entrada}
 
 \begin{itemize}
-\item {\bf Tipo Nodo}: Dicho tipo, fue creado para contener m\'as informaci\'on de cada nodo, el mismo esta compuesto por posici\'on i, j del nodo en la matriz, si es pared o no, y si esta marcado o visitado y por \'ultimo la cantidad de paredes destruidas y la distancia recorrida hasta dicho nodo.
-\item {\bf Variable Map}: Dicha variable, es creada global como una matriz $(N \ast M)$ de nodos.
-\item {\bf Variable cola}: Como la palabra lo indica, en esta cola se ir\'an encolando los nodos.
+\item {\bf Variable Mapa}: la matriz $(N \ast M)$ de nodos.
+\item {\bf Tipo Nodo}: Dicho tipo, fue creado para contener m\'as informaci\'on de cada nodo, el mismo esta compuesto por posici\'on i, j del nodo en el Mapa, si es pared o no y por \'ultimo la cantidad de paredes destruidas y la distancia recorrida hasta dicho nodo.
+\item {\bf cola}: Como la palabra lo indica, en esta cola se ir\'an encolando los nodos.
 \end{itemize}  
+
 
 
