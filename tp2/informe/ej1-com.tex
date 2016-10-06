@@ -4,7 +4,7 @@ Siendo la entrada una matriz de $F \times C = N$, en donde cada celda es transfo
 
 No obstante, al modificar el BFS permitiendo que se puedan "visitar nodos ya visitados", la complejidad se ve afectada, ya que en la cola que guarda los nodos a evaluar permite reencolar a cada uno varias veces (permitiendo su reevaluacion).
 
-La cantidad de veces en la que es posible reencolar cada nodo, esta dada por la cantidad de caminos que pasen por él, donde estos mejoren la cantidad de paredes derribadas necesarias para alcanzarlo. Como ningún camino puede derribar más de "P" paredes, entonces la cantidad máxima de paredes derribadas para llegar a cada nodo será P. Bajo la logica impuesta, un camino podrá revisitar a un nodo (por lo tanto reencolarlo) si lo alcanza con una menor cantidad de paredes derribadas, con lo cual solo P caminos podrán mejorar la condición de acceso al nodo. Por consiguiente la cantidad de veces que se encolarán nodos sera O($N\timesP$) determinando ,de esta forma, la compliejidad del algoritmo propuesto.
+La cantidad de veces en la que es posible reencolar cada nodo, esta dada por la cantidad de caminos que pasen por él, donde estos mejoren la cantidad de paredes derribadas necesarias para alcanzarlo. Como ningún camino puede derribar más de "P" paredes, entonces la cantidad máxima de paredes derribadas para llegar a cada nodo será P. Bajo la logica impuesta, un camino podrá revisitar a un nodo (por lo tanto reencolarlo) si lo alcanza con una menor cantidad de paredes derribadas, con lo cual solo P caminos podrán mejorar la condición de acceso al nodo. Por consiguiente la cantidad de veces que se encolarán nodos sera O($N \times P$) determinando ,de esta forma, la compliejidad del algoritmo propuesto.
 
 
 

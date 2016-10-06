@@ -1,68 +1,119 @@
-\indent En esta secci\'on, mostraremos buenos y malos casos para nuestro algoritmo, y a su vez, daremos el tiempo estimado 
-seg\'un la complejidad del algoritmo calculada anteriormente.
+\indent Acorde a lo solicitado, mostraremos distintos tipos de familias de casos para nuestro algoritmo, y adem\'as, daremos el tiempo estimado 
+seg\'un la complejidad del algoritmo calculada anteriormente.\\
 
-Como la complejidad presenta dos variables marcadas, como son las capacidades de las mochilas y la cantidad de objetos, decidimos, para obtener datos m\'as concisos, realizar los testeos dejando constante la cantidad de objetos y/o las capacidades.\\
-
-Luego de realizar varios experimentos, llegamos a la conclusi\'on que, dejando constante la cantidad de objetos y trabajando con las capacidades, el mejor caso para nuestro algoritmo es en el cual \textbf{todas las mochilas presentan las mismas capacidades} ya que de esta forma nuestro algoritmo realiza la misma ejecuci\'on para cada una de las mochilas sin repetidos.\\
-A continuaci\'on mostraremos un gr\'afico que representa lo enunciado:
+A continuaci\'on mostraremos un gr\'afico de tiempos comparativo entre distintas familias de casos:\\ 
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- %\includegraphics[scale=0.65]{./EJ3/mejorcaso.png}
- {$Gr$\'a$fico$ \ 3.1 - $Mejor$ $caso$ $del$ $algoritmo$}
-  \end{center}
-  \vspace*{0.3cm}
-
-Dividiendo por la complejidad calculada se obtuvo lo siguiente:\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- %\includegraphics[scale=0.65]{./EJ3/mejorcaso1.png}
- {$Gr$\'a$fico$ \ 3.2 - $Mejor$ $caso$ $del$ $algoritmo$ $sobre$ $complejidad$}
+ \includegraphics[scale=0.65]{./EJ3/comparativo.png}
+ {$Gr$\'a$fico$ \ 3.1 - $Comparativo$}
   \end{center}
   \vspace*{0.3cm}
   
-Se puede ver en el gr\'afico 3.1 que, dado nuestro algoritmo, al tener las capacidades iguales, el mismo realizar\'a la optimizaci\'on de 3 matrices que simbolizan a cada mochila por separado, lo que nos dar\'a una complejidad acotada por la capacidad de las mochilas por la cantidad de elementos que en esta evaluaci\'on es constante, simplificando lo dicho nos quedar\'ia O($K_{1}\ast N$) + O($K_{2}\ast N$) + O($K_{3}\ast N$) y como $K_{1} = K_{2} = K_{3}$ nos queda que la complejidad para el mejor caso esta acotada por O($K \ast N$) con N constante.\\
-Luego, en el gr\'afico 3.2, en el cual dividimos el tiempo de ejecuci\'on de dicho caso con el tiempo de realizar O(N $\ast$ k) operaciones nos da una funci\'on resultante la cual se encuentra por debajo de 1 y tiende a 0 cuando la entrada aumenta corroborando lo que acabamos de decir.\\
+Se puede observar en el gr\'afico, cuatro funciones las cuales representan el tiempo de ejecuci\'on de las familias de casos:\\
+\begin{itemize}
+\item No hay ejes, todos los nodos desconectados
+\item El grafo recibido como parametro es el camino simple
+\item Sin solucion, todos los nodos conectados salvo el ultimo
+\item Random
+\item Multiples caminos llegan a destino con el mismo valor
+\end{itemize}
 
-Manteniendo el mismo razonamiento, el peor caso para nuestro algoritmo se da cuando hay \textbf{mochilas con capacidades distintas} ya que el algoritmo deber\'a decidir en que mochila colocar el objeto para que el resultado sea \'optimo. Por consiguiente, mostraremos un gr\'afico que representa lo hablado:\\
+Como se observa en el gr\'afico la funci\'on representativa de la flia n\'umero 1, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que nuestro algoritmo intenta chequear las aristas para armar los caminos y como encuentra que no hay ningun camino de ningun nodo hacia otro finaliza su ejecuci\'on demandando unicamente la creaci\'on del grafo.
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- %\includegraphics[scale=0.65]{./EJ3/peorcaso.png}
- {$Gr$\'a$fico$ \ 3.3 - $Peor$ $caso$ $del$ $algoritmo$}
-  \end{center}
-  \vspace*{0.3cm}
+Luego de chequear dichas instancias, pudimos llegar a la conclusi\'on que la familia de casos que presenta una mejor performance para nuestro algoritmo
+es en el cual \textbf{No hay ejes, todos los nodos desconectados}
 
-Dividiendo por la complejidad calculada se obtuvo lo siguiente:\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- %\includegraphics[scale=0.65]{./EJ3/peorcaso1.png}
- {$Gr$\'a$fico$ \ 3.4 - $Peor$ $caso$ $del$ $algoritmo$ $sobre$ $complejidad$}
-  \end{center}
-  \vspace*{0.3cm}
-  
-  
-Es posible observar en el gr\'afico 3.3 que, dado nuestro algoritmo, al tener las capacidades distintas, el mismo realizar\'a la optimizaci\'on de 3 matrices que simbolizan a cada mochila anidadas, lo que nos dar\'a una complejidad acotada por la capacidad de las mochilas al cubo por la cantidad de elementos que en esta evaluaci\'on es constante, simplificando lo dicho nos quedar\'ia O($(K_{1}\ast K_{2} \ast K_{3}) \ast N$) nos termina quedando que la complejidad para el peor caso esta acotada por O($K^{3} \ast N$) con N constante.\\
-Luego, en el gr\'afico 3.4, en el cual dividimos el tiempo de ejecuci\'on de dicho caso con el tiempo de realizar O($K^{3} \ast N$) operaciones nos devuelve una funci\'on resultante la cual se encuentra por debajo de 1 y tiende a 0 cuando la entrada aumenta corroborando lo que acabamos de decir.\\
-
-Por finalizado, es notorio que, tanto en el gr\'afico 3.2 como 3.4 la funciones resultantes siempre se mantienen por debajo de 1, con lo cual se ve que tanto en el mejor como en el peor caso nuestro algoritmo sigue estando acotado por la complejidad calculada.\\
-
-Luego, como nuestro algoritmo calcula lo mismo para cualquier tipo de objeto, ya sean todos iguales o no, todos ser\'an casos promedios, salvo el caso en el cual no haya ning\'un tipo de objeto que entre en alguna mochila, este caso podr\'iamos tomarlo como \'el mejor ya que nuestro algoritmo corta al ver que no puede colocar ning\'un objeto dentro de alguna mochila.\\
-Dejando de lado este caso, el resto de los mismos tendr\'an un tiempo de ejecuci\'on similar.\\
-
-Mostraremos en el siguiente gr\'afico de ejemplo lo hablado recientemente:\\
+Un grafo representativo de lo dicho ser\'ia el siguiente:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- %\includegraphics[scale=0.65]{./EJ3/objetos.png}
-  {$Gr$\'a$fico$ \ 3.5 - $Objetos$ $Variables$ $y$ $Capacidades$ $Constantes$}
+\includegraphics[scale=0.5]{./EJ2/ej2grafocompleto.jpeg}
+\\{$Grafo$ \ 3.1 - $Mejor$ $Caso$} ME FALTA HACER EL GRAFO
   \end{center}
   \vspace*{0.3cm}
   
-Se puede ver en el gr\'afico 3.5 como las 3 funciones, las cuales simbolizan el tiempo de ejecuci\'on del algoritmo con todos los objetos iguales, todos distintos y random, presentan un tiempo de ejecuci\'on similar, como hab\'iamos comentado anteriormente esto se da ya que nuestro algoritmo realiza las mismas operaciones para cualquier tipo de objeto en las que chequea si es \'optimo o no agregar un elemento a alguna mochila.\\
+Para llegar a dicha conclusi\'on trabajamos con 50 instancias.\\
 
-Trabajando con los objetos variables y habiendo dejado constante la capacidad de las mochilas se llega a que la complejidad esta acotada por la cantidad de elementos multiplicada por la capacidad de las mochilas, en este caso constante para las 3 e igual a 20 en todas las corridas y entradas.\\
+Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instancias:\\
 
-Luego, podemos concluir que por lo visto en los gr\'aficos se puede afirmar que nuestro algoritmo esta acotado por la complejidad solicitada anteriormente.\\
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.65]{./EJ3/mejorcaso.png}
+ {$Gr$\'a$fico$ \ 3.2 - $Mejor Caso$}
+  \end{center}
+  \vspace*{0.3cm}
+  
+Como es posible observar en el gr\'afico, la funci\'on resultante de la cota teorica crece mucho m\'as r\'apido que la de nuestro algoritmo la cual queda considerablemente por debajo . Es por esto que graficamos el mismo contra la funcion de $O(N*k) con k < N$
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.65]{./EJ3/mejorcaso1.png}
+ {$Gr$\'a$fico$ \ 3.3 - $Mejor Caso$}
+  \end{center}
+  \vspace*{0.3cm}
+
+
+Se puede observar como la funcion resultante de realizar O(N*k) operaciones es similar a la de nuestro algoritmo mostrando que en el mejor caso nuestro algoritmo trabaja en el orden de O(N).
+
+Luego, dividiendo por la complejidad teorica de nuestro algoritmo llegamos a:\\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.65]{./EJ3/mejorcaso1.png}
+{$Gr$\'a$fico$ \ 3.4 - $Mejor Caso / Complejidad$ $O(N^2 log^2(N))$}
+  \end{center}
+  \vspace*{0.3cm}
+
+Para realizar esta experimentaci\'on nos parecio prudente, realizar un promedio con el mismo input de aproximadamente 20 corridas
+tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para
+obtener resultados m\'as relevantes.\\ 
+
+Se puede observar en el gr\'afico 3.4, como luego de realizar la divisi\'on por la complejidad se ve que la funci\'on resultante tiende a 0 ya que nuestro algoritmo en este tipo de casa trabaja en el orden de O(N) lo cual es mucho menos que la complejidad te\'orica. Por lo tanto, podemos concluir que para el mejor caso nuestro algoritmo se encuentra considerablemente por debajo de la cota teorica $O(N^2 log^2(N))$.\\
+
+Luego, verificando el peor caso, llegamos a la conclusi\'on que la familia de casos en el que resulta menos beneficioso trabajar con nuestro algoritmo ser\'a cuando \textbf{el grafo que se obtiene de transformar el circuito de estaciones de entrada es aquel que presenta multiples caminos para llegar a destino donde la suma de estos caminos presentan el mismo valor}, dandonos el siguiente grafo una vez transformado:\\
+
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.5]{./EJ2/ej2grafosinpared.jpeg}
+ \\{$Grafo$ \ 3.2 - $Peor$ $Caso$} ME FALTA HACER EL GRAFO
+  \end{center}
+  \vspace*{0.3cm}
+  
+Realizando experimentos con un total de 50 instancias, desarrollamos dos gr\'aficos los cuales mostraremos a continuaci\'on: \\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.65]{./EJ3/peorcaso.png}
+ {$Gr$\'a$fico$ \ 3.5 - $Peor Caso$}
+  \end{center}
+  \vspace*{0.3cm}
+
+
+Dividiendo por la complejidad propuesta llegamos a:\\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.65]{./EJ3/peorcaso1.png}
+ {$Gr$\'a$fico$ \ 3.6 - $Peor Caso / Complejidad$ $O(N^2 log^2(N))$}
+  \end{center}
+  \vspace*{0.3cm}
+
+Para realizar esta experimentaci\'on nos parecio acorde, realizar un promedio con el mismo input de aproximadamente 20 corridas
+tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para
+obtener resultados m\'as relevantes.\\ 
+
+Como se puede observar en el gr\'afico 3.5, la funci\'on resultante de nuestro algoritmo es considerablemente mejor que la de la cota teorica  y presenta un tiempo similar al de la funci\'on resultante de la cota.
+Luego, en el gr\'afico 3.6 se ve como la función resultante presenta un m\'aximo muy cerca de 1 y cuando el N aumenta la misma tiende a 0.\\
+
+Por \'ultimo, mostraremos un gr\'afico comparativo entre el mejor y peor caso contra la complejidad que se solicito:\\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.65]{./EJ3/comparativo1.png}
+ {$Gr$\'a$fico$ \ 3.7 - $Comparativo$}
+  \end{center}
+  \vspace*{0.3cm}
+  
+Luego de dichos experimentos y casos probados, se puede concluir que a pesar de tener ciclos en todas las salas y donde dichos ciclos presenten aristas con pesos iguales lo que generara al algoritmo la posibilidad de crear varias ramas posibles de soluci\'on nos mantenemos dentro de la complejidad propuesta como hab\'iamos mostrado en nuestro desarrollo de la complejidad.\\
