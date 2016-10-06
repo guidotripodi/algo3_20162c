@@ -32,13 +32,13 @@
 \end{algorithm}
 
 /ESTO ESTA MAS IMPLEMENTATIVO QUE ANTES HAY HASTA ; JAJA DEJO LO Q ESTABA ANTES
-
+    /LAS TRES LINEAS DEL IF Y EL EIF DICEN LO MISMO HACER UNO SOLO Q SOLO SUME LO DE LA ALTURA/ USAR ASIGNAR I/O FLECHITAS SACAR LOS ; 
 
 \begin{algorithm}[H] %or another one check
  \caption{Funcion Unir(enteros x, y, costo)}
  %     \SetAlgoLined
  	x = Buscar(x); y = Buscar(y);\\
-    
+
 	\If{altura[x] == altura[y]}{
 		altura[x]++;\\
 		padre[x] = y;\\
@@ -81,9 +81,15 @@
  	para costo[y] asignar costo[y] + costo[x] + COSTO\\
  	\If{altura[x] == altura[y]}{
  	 	para altura[x] incrementar 1 }
+ 	 	\If {cantidadAristas[y] == $\#$nodos-1} {
+            para representanteFinal asignar y\\
+        }
 	}{ 	 	para padre[y] asignar x\\
  	para cantidadAristas[x] asignar cantidadAristas[y] + cantidadAristas[x] +1\\
- 	para costo[x] asignar costo[x] + costo[y] + COSTO\\	}
+ 	para costo[x] asignar costo[x] + costo[y] + COSTO\\
+ 	 \If{cantidadAristas[x] == $\#$nodos-1} {
+           para representanteFinal asignar x\\
+        }	}
  
 \end{algorithm}
 
