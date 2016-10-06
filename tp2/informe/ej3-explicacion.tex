@@ -1,17 +1,15 @@
 Dado el mapa con las estaciones y el tiempo que toma viajar entre dos de ellas, debemos encontrar la forma más rapida de viajar entre la primera estación y la salida. Para ello decidimos representar el mapa como un grafo orientado con pesos en sus aristas. Dado este grafo (al cual decidimos implementar mediante listas de adyacencia) el problema se reduce a encontrar el camino mínimo sobre él.
 
 Para eso aplicamos el algoritmo de Dijkstra sobre nuestra representación del grafo. 
+%---
+%OPCION 1
+%El algoritmo recorre los nodos del grafo teniendo en cuenta primero los más cercanos al origen. Cada vez que visita un nodo, actualiza la distancia de sus vecinos. Cuando visitamos el nodo destino es porque se encontro el camino más corto a él.
+%OPCION 2 %yo me quedaria con este
+El mismo recorre los nodos del grafo teniendo en cuenta primero los más cercanos al origen, comenzando por el origen mismo. Un invariante de este algoritmo es que para el conjunto de nodos ya visitados se conoce definitivamente el camino mínimo desde el origen.\\
+Cuando se visita un nodo se comprueba si se puede desde este nodo llegar más rapido a sus vecinos que lo calculado anteriormente. De ser así, se actualiza la distancia de ese vecino al origen y se guarda para él desde que nodo se pudo conseguir esa distancia. Cuando visitamos el nodo destino es porque se encontro el camino más corto a él.
 
----
-OPCION 1
-El algoritmo recorre los nodos del grafo teniendo en cuenta primero los más cercanos al origen. Cada vez que visita un nodo, actualiza la distancia de sus vecinos. Cuando visitamos el nodo destino es porque se encontro el camino más corto a él.
-
-OPCION 2
-El algoritmo recorre los nodos del grafo teniendo en cuenta primero los más cercanos al origen comenzando por el origen mismo. Cuando se visita un nodo se comprueba si se puede desde este nodo llegar más rapido a sus vecinos que lo calculado anteriormente. De ser así, se actualiza la distancia de ese vecino al origen y se guarda para él desde que nodo se pudo conseguir esa distancia. Cuando visitamos el nodo destino es porque se encontro el camino más corto a él.
-
-OPCION 3 (con frontera)
-
-El algoritmo mantiene un conjunto de nodos para los cuales se conoce definitivamente el camino mínimo y este al principio es vacío. Para recorrer los nodos del grafo se toma el nodo con menor distancia parcial (siendo el primero que tomamos el origen) y se lo agrega al conjunto. Luego, se comprueba si se puede desde este nodo llegar más rapido a sus vecinos que lo calculado anteriormente. De ser así, se actualiza la distancia parcial de ese vecino al origen y se guarda para él desde que nodo se pudo conseguir esa distancia. Esta distancia parcial se calcula sumando la distancia del origen al nodo con el peso de la arista entre el nodo y su vecino. Cuando se agrega el nodo destino al conjunto de nodos para los cuales se conoce su distancia definitiva, encontramos el camino mínimo.
----
+%OPCION 3 (con frontera)
+%El algoritmo mantiene un conjunto de nodos para los cuales se conoce definitivamente el camino mínimo y este al principio es vacío. Para recorrer los nodos del grafo se toma el nodo con menor distancia parcial (siendo el primero que tomamos el origen) y se lo agrega al conjunto. Luego, se comprueba si se puede desde este nodo llegar más rapido a sus vecinos que lo calculado anteriormente. De ser así, se actualiza la distancia parcial de ese vecino al origen y se guarda para él desde que nodo se pudo conseguir esa distancia. Esta distancia parcial se calcula sumando la distancia del origen al nodo con el peso de la arista entre el nodo y su vecino. Cuando se agrega el nodo destino al conjunto de nodos para los cuales se conoce su distancia definitiva, encontramos el camino mínimo.
+%---
 
 Luego solo resta recorrer desde el nodo salida y armar el camino mínimo a partir de los nodos previos que guardabamos cuando actualizabamos distancias parciales.
