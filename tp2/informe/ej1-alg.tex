@@ -1,22 +1,23 @@
 \begin{algorithm}[H] %or another one check
- \caption{Algoritmo EJ1}
+ \Fn{main()}{
  %     \SetAlgoLined
 	encolo nodo origen en una cola de nodos \\
-	    \While{$\neg$ cola vacia)}{
+	    \While{$\neg$ cola vacia}{
 	    Nodo actual $\gets$ tope cola \\
 	    procesar vecinos\\
 	    }
-	    
+}
 \end{algorithm}
 
 
 \begin{algorithm}[H] %or another one check
- \caption{procesarNodo(Nodo nod)}
+
+\Fn{procesarNodo(Nodo nod)}{
  	Nodo nod es un vecino de actual en el Mapa\\
 	
        	   	 \If{$\#$ paredes rotas hasta actual + esPared(nod) < $\#$ paredes rotas hasta actual nod}{
        	   	 para distancia hasta nod $\gets$ distancia hasta actual + 1\\
-       	   	 para $\#$ paredes rotas hasta nod $\gets$ $\#$ paredes rotas hasta actual + esPared(nod) 
+       	   	 para $\#$ paredes rotas hasta nod $\gets$ $\#$ paredes rotas hasta actual + esPared(nod)\\ 
 			\If{nod = nodo destino}	{
 				devolver distancia hasta nodo destino y terminar
 			}
@@ -25,14 +26,14 @@
        	   		 }
        	   } 
 			
-			
+}
 \end{algorithm}
 
 
 \textbf{Aclaraciones de variables y transformaci\'on de entrada}
 
 \begin{itemize}
-\item {\bf Variable Mapa}: la matriz $(N \ast M)$ de nodos.
+\item {\bf Variable Mapa}: la matriz $(F \ast C)$ de nodos.
 \item {\bf Tipo Nodo}: Dicho tipo, fue creado para contener m\'as informaci\'on de cada nodo, el mismo esta compuesto por posici\'on i, j del nodo en el Mapa, si es pared o no y por \'ultimo la cantidad de paredes destruidas y la distancia recorrida hasta dicho nodo.
 \item {\bf cola}: Como la palabra lo indica, en esta cola se ir\'an encolando los nodos.
 \end{itemize}  
