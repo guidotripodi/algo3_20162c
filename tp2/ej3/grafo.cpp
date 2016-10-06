@@ -1,8 +1,8 @@
 #include "grafo.h"
-Grafo::Grafo(int* aristas, int cantNodos, int cantAristas){ 
+Grafo::Grafo(long* aristas, long cantNodos, long cantAristas){ 
 	adyacencia = new std::list<Arista>[cantNodos];
-	int origen, destino, peso;
-	int i = 0;
+	long origen, destino, peso;
+	long i = 0;
 	while(i < 3*cantAristas){
 		origen = aristas[i] -1;
 		destino = aristas[i + 1] - 1;
@@ -16,7 +16,7 @@ Grafo::~Grafo(){
 	delete[] adyacencia;
 }
 
-std::list<Arista>* Grafo::vecinos(int vertice){
+std::list<Arista>* Grafo::vecinos(long vertice){
 	return &adyacencia[vertice];
 }
 

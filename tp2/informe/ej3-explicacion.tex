@@ -6,8 +6,8 @@ Para eso aplicamos el algoritmo de Dijkstra sobre nuestra representación del gr
 OPCION 1
 El algoritmo recorre los nodos del grafo teniendo en cuenta primero los más cercanos al origen. Cada vez que visita un nodo, actualiza la distancia de sus vecinos. Cuando visitamos el nodo destino es porque se encontro el camino más corto a él.
 
-OPCION 2
-El algoritmo recorre los nodos del grafo teniendo en cuenta primero los más cercanos al origen comenzando por el origen mismo. Cuando se visita un nodo se comprueba si se puede desde este nodo llegar más rapido a sus vecinos que lo calculado anteriormente. De ser así, se actualiza la distancia de ese vecino al origen y se guarda para él desde que nodo se pudo conseguir esa distancia. Cuando visitamos el nodo destino es porque se encontro el camino más corto a él.
+OPCION 2 %yo me quedaria con este
+El algoritmo recorre los nodos del grafo teniendo en cuenta primero los más cercanos al origen, comenzando por el origen mismo. Un invariante de este algoritmo es que para el conjunto de nodos ya visitados se conoce definitivamente el camino mínimo desde el origen. Cuando se visita un nodo se comprueba si se puede desde este nodo llegar más rapido a sus vecinos que lo calculado anteriormente. De ser así, se actualiza la distancia de ese vecino al origen y se guarda para él desde que nodo se pudo conseguir esa distancia. Cuando visitamos el nodo destino es porque se encontro el camino más corto a él.
 
 OPCION 3 (con frontera)
 
