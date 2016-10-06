@@ -1419,6 +1419,27 @@
 \expandafter\algocf@mkcmd\csname algocf@l#1\endcsname[2]{% \lFor{}{}
   \KwSty{#2} \ArgSty{##1} \KwSty{#3} ##2}%
 }
+
+\newcommand{\SetKwProg}[4]{%
+\@ifundefined{algocf@#1}{\let\algocf@mkcmd=\newcommand}{\let\algocf@mkcmd=\renewcommand}%
+% side text or not? 
+\expandafter\def\csname#1\endcsname{ %For
+  \@ifnextchar({\csname algocf@#1opt\endcsname}{\csname algocf@#1\endcsname}}
+\expandafter\def\csname l#1\endcsname{ %For
+  \@ifnextchar({\csname algocf@l#1opt\endcsname}{\csname algocf@l#1\endcsname}}
+% with side text
+\expandafter\def\csname algocf@#1opt\endcsname(##1)##2##3{% \For(){}{}
+  \KwSty{#2} \ArgSty{##2} \KwSty{#3} ##1\a@block{##3}{#4}}%
+\expandafter\def\csname algocf@l#1opt\endcsname(##1)##2##3{% \lFor(){}{}
+  \KwSty{#2} \ArgSty{##2} \KwSty{#3} ##3\algocf@endline\ ##1\par}
+% without side text
+\expandafter\algocf@mkcmd\csname algocf@#1\endcsname[2]{% \For{}{}
+  \KwSty{#2} \ArgSty{##1} \KwSty{#3}\a@block{##2}{#4}}%
+\expandafter\algocf@mkcmd\csname algocf@l#1\endcsname[2]{% \lFor{}{}
+  \KwSty{#2} \ArgSty{##1} \KwSty{#3} ##2}%
+}
+
+
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %

@@ -9,7 +9,7 @@ A partir de este grafo, sacar el camino mínimo del nodo origen al destino se pu
 
 Como no hay ninguna otra restriccion para encolar un nodo (y asi descubrir un camino), de aplicar el BFS sin modificaciones se perdería la restriccion de paredes para romper: por esto se debe agregar una validación al introducir un nodo a la cola del algoritmo, que impida pushear un nodo que demande romper más paredes de las parametrizadas.
 
-Dado que al marcar un nodo como visitado se lo esta excluyendo de ser incluido en la cola nuevamente, de haber otro camino que lo necesite utilizar, el mismo no podrá contar con él. De suceder se podria estar desestimando caminos que lleguen a la solucion: Si llamamos $C_0$ al primer camino que paso por el nodo $v_0$ con tiempo 5 y paredes rotas 4, siendo el maximo 4 y $C_1$ a un camino más lento, con tiempo 10 pero con 0 paredes rotas, que está pasando por $v_0$, enotnces en la evaluación de agregar o no al nodo se optara por no, ya que fue visitado. No obstante, si para llegar al destino final se debe romper 1 pared más, $C_0$ nunca podrá llegar, y $C_1$ que hubiese llegado, fue desestimado anteiormente, perdiendo de esta forma la solución factible.
+Dado que al marcar un nodo como visitado se lo esta excluyendo de ser incluido en la cola nuevamente, de haber otro camino que lo necesite utilizar, el mismo no podrá contar con él. De suceder, se podria estar desestimando caminos que lleguen a la solucion: Si llamamos $C_0$ al primer camino que paso por el nodo $v_0$ con tiempo 5 y paredes rotas 4, siendo el maximo 4 y $C_1$ a un camino más lento, con tiempo 10 pero con 0 paredes rotas, que está pasando por $v_0$, entonces en la evaluación de agregar o no al nodo se optará por no, ya que fue visitado. No obstante, si para llegar al destino final se debe romper 1 pared más, $C_0$ nunca podrá llegar, y $C_1$ que hubiese llegado, fue desestimado anteiormente, perdiendo de esta forma la solución factible.
 
 Para solucionar este problema se redefine la condición de visitado que utiliza el BFS:
 
@@ -24,9 +24,9 @@ Se considerará que la condición de visitado dependa de cada camino, es decir:
 \begin{itemize}
 	\item Los nodos guardarán como datos propios el tiempo en el que fueron alcanzados y la cantidad de paredes que fueron destruidas para llegar a él en ese tiempo (es decir, los datos del camino que paso por él). Al inicio, ambos parametros serán marcados como no determinados.
 	\item Al ser chequeados por primera vez, al detectarse de que no tienen datos, entonces se les asignará el tiempo en el que fueron alcanzados (como en el algoritmo BFS original) y la cantidad de paredes derribadas para alcanzarlos.
-	\item Si al chequearlos nuevamente se ve que ya fueron recorridos (es decir que el tiempo y paredes se encuentran determinados) entonces se evaluará si ppor el camino actual {\bf se mejora la condición del alcance del nodo} , de ser asi, se encola.
-	\item En todos los casos, si al chequearlo se detecta que hay que romper una pared, y el camino actual (caracterizado por el nodo del cual se obtubo como adyacente al que se esta chequeando) no posee más derribos posibles, entonces se considera al nodo chequeado como "visitado" y no se lo pushea a la cola.
-	\item Si al checkearlo y poder pushearlo a la cola se ve que el nodo es el destino buscado, se lo marca con el tiempo y paredes logradas y se {\bf finaliza el algoritmo}.
+	\item Si al chequearlos nuevamente se ve que ya fueron recorridos (es decir que el tiempo y paredes se encuentran determinados) entonces se evaluará si por el camino actual {\bf se mejora la condición del alcance del nodo} , de ser asi, se encola.
+	\item En todos los casos, si al chequear un nodo, se detecta que hay que romper una pared, y el camino actual no posee más derribos posibles, entonces no se lo pushea a la cola.
+	\item Si el nodo es el destino buscado, se lo marca con el tiempo y paredes logradas y se {\bf finaliza el algoritmo}.
 	
 \end{itemize}
 
@@ -34,6 +34,6 @@ Se considerará que la condición de visitado dependa de cada camino, es decir:
 Se considera una mejor condición de alcance para un nodo si se cumple lo siguiente:
 \begin{itemize}
 	\item El nodo no tiene datos determinados, es decir nunca fue pusheado a la cola.
-	\item La cantidad de paredes para llegar a él es menor estricto que lo logrado anteriormente para llegar al nodo.
+	\item La cantidad de paredes para llegar a él es menor estricta que la lograda anteriormente para llegar al nodo.
 
 \end{itemize}
