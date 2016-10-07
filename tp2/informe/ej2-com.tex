@@ -1,1 +1,5 @@
-Siendo la cantidad de filas de la entrada F por la cantidad de columnas C de la entrada iguales a la cantidad de puntos caminables máximos que puede tener una instancia, el grafo implicito tiene |$V(G)| = FC $. Dado que la implementación del algoritmo de Kruskal utiliza la estructura union find con tiempo de union y busqueda amortizados, el algoritmo posee una complejidad de $O(V(G)\times log(V(G))) = O(FC \times log(FC)) $. 
+Siendo $F$ la cantidad de filas y $C$ la cantidad de columnas de la entrada, $F \ast C$ es la cantidad de puntos caminables máximos que puede tener una instancia. El grafo implicito tiene entonces $V(G) = F \ast C $ nodos.
+
+Dado que la implementación del algoritmo de Kruskal utiliza la técnica de union-find con tiempo de union y busqueda amortizados $E \ast log(E)$ siendo $E$ la cantidad de aristas del grafo y  ordenamiento inicial de las aristas que se logra tambien en $E \ast log(E)$ la complejidad total será de $O(E \ast log(E))$.
+
+Dado que el grafo más completo que puede ofrecer este problema es cuando se tiene una sola sala sin paredes, la cantidad de aristas total será 4$\ast  V(G)$ = 4$\ast  F \ast C$ dando como resultado un orden de complejidad 4 $\ast F \ast C \ast log(F \ast C)$ $\subseteq$ $O(F \ast C \ast log(F \ast C))$.
