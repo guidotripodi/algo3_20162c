@@ -1,10 +1,10 @@
 \begin{algorithm}[H] %or another one check
- \caption{Algoritmo EJ2}
+ \Fn{Kruskal}{
  %     \SetAlgoLined
 	representanteFinal = -1 
-
-	\For{Arista ar $\exists$ aristas}{
-		\If{Buscar(ar.inicio) == Buscar(ar.fin)}{
+	
+	\For{Arista ar $\in$ aristas}{
+		\If{Buscar(ar.inicio) = Buscar(ar.fin)}{
 			Unir(ar.inicio, ar.fin, ar.costo);
 		}
 
@@ -18,22 +18,24 @@
 	}\Else{
          devolver sinSolucion
     }
+  }
 \end{algorithm}
 
 
 \begin{algorithm}[H] %or another one check
- \caption{Funcion Buscar(entero x)}
+ \Fn{Buscar(entero x)}{
  %     \SetAlgoLined
- 	\If{padre[x] == x}{devolver x}{
+ 	\If{padre[x] = x}{devolver x}{
  	para entero p $\gets$ Buscar(padre[x])\\
 	para padre[x] asignar p\\
 	devolver p\\
+ 	}
  	}
 \end{algorithm}
 
 
 \begin{algorithm}[H] %or another one check
- \caption{Funcion Unir(enteros X, Y, COSTO)}
+ \Fn{Unir(enteros x, y, costo)}{
  %     \SetAlgoLined
  	para entero x asignar Buscar(X)\\
  	para entero y asignar Buscar(Y)\\
@@ -41,26 +43,26 @@
 	 	para padre[x] asignar y\\
  	para cantAristas[y] asignar cantAristas[y] + cantAristas[x] +1\\
  	para costCompLider[y] asignar costCompLider[y] + costCompLider[x] + COSTO\\
- 	\If{altura[x] == altura[y]}{
+ 	\If{altura[x] = altura[y]}{
  	 	para altura[x] incrementar 1 }
- 	 	\If {cantAristas[y] == $\#$nodos-1} {
+ 	 	\If {cantAristas[y] = $\#$nodos-1} {
             para representanteFinal asignar y\\
         }
 	}{ 	 	para padre[y] asignar x\\
  	para cantAristas[x] asignar cantAristas[y] + cantAristas[x] +1\\
  	para costCompLider[x] asignar costCompLider[x] + costCompLider[y] + COSTO\\
- 	 \If{cantAristas[x] == $\#$nodos-1} {
+ 	 \If{cantAristas[x] = $\#$nodos-1} {
            para representanteFinal asignar x\\
         }	}
- 
+ }
 \end{algorithm}
 
 \textbf{Aclaraciones de variables y transformaci\'on de entrada}
 
 \begin{itemize}
 
-\item {\bf Arreglo cantAristas}: guarda la cantidad de aristas que tiene el representante de una componente conexa
-\item {\bf Arreglo costCompLider}: guarda el costo total de una componente conexa por representante 
-\item {\bf Arreglo padre}: para cada nodo, quien es su representante, es decir, en que componente conexa se encuentra
-\item {\bf Arreglo altura}: indica la altura de la componente conexa que se chequea
+\item {\bf Arreglo cantAristas}: guarda la cantidad de aristas que tiene el representante de una componente conexa.
+\item {\bf Arreglo costCompLider}: guarda el costo total de una componente conexa por representante. 
+\item {\bf Arreglo padre}: para cada nodo, quien es su representante, es decir, en que componente conexa se encuentra.
+\item {\bf Arreglo altura}: indica la altura de cada componente conexa.
 \end{itemize}  

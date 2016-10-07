@@ -1,8 +1,33 @@
-En esta ocasión se debe encontrar, dada una serie de habitaciones, la forma menos costosa de unirlas, teniendo que derribar determinadas paredes para lograrlo. Dada 2 habitaciones: el muro menos costoso a derribar que une a las mismas será la elección a tomar para formar la solución, es decir, se deben elegir todos los muros menos costosos que unen las distintas habitaciones para obtener la soluci\'on buscada.
+En esta ocasión se debe encontrar, dada una serie de habitaciones, la forma menos costosa de unirlas, teniendo que derribar determinadas paredes para lograrlo. Las mismas poseen un costo en energía que va del cero al nueve.\\
 
-Un planteo de modelo sobre grafo caracteriza a cada habitación como un conjunto de puntos caminables y cada uno de estos como un nodo adyacente a los puntos de la misma habitaci\'on el cual posee, siendo H la cantidad total de habitaciones en el mapa, H componentes conexas. Lo que se busca entonces es una forma de unir estas componentes de la forma menos costosa. Para esto unimos a 2 habitaciones separadas por una pared con un eje de peso igual al esfuerzo de derribarla. A las aristas dentro de cada componente les asignamos el peso nulo.
+Dada 2 habitaciones: el muro menos costoso a derribar que une a las mismas será la elección a tomar para formar la solución.
 
-Para obtener la soluci\'on, se busca el AGM del grafo planteado mediante el algoritmo de Kruskal. A dicho grafo resultante del algoritmo se le calcula el peso, el cual representa la respuesta al problema.
+Tenemos que tener en cuenta que hay muros que no son derribables. Estos se representan con un numeral ('\#').
 
-Para desarrollar el algoritmo de b\'usqueda del AGM del grafo, implementamos las funciones find y union, las cuales se encargan de buscar al padre del nodo consultado en el arbol y unir al nodo y/o arbol que presente menor altura al mayor, de esta forma se ir\'a confeccionando el arbol final, modificando a los padres de los nodos y la respectiva altura del mismo como asi tambi\'en la cantidad de aristas y costos de estas que ir\'a teniendo dicho arbol a medida que se le ir\'an uniendo nuevos arboles.
+Para resolver este problema, caracterizaremos el mismo sobre un grafo que representa cada habitación como un conjunto de puntos caminables adyacentes entre si. Y a las paredes rompibles, es decir, las paredes numeradas como aristas entre los puntos caminables.\\
+Las paredes irrompibles no conectarán habitaciones.\\
 
+Lo que se busca entonces, es una forma de unir todas las habitaciones de la forma menos costosa. 
+
+Para que exista solución, tiene que haber una forma de cruzar de una habitación a otra. Por lo tanto, tiene que existir una pared rompible que las una. La misma conectará dos puntos caminables, uno en cada habitación. 
+
+Dentro de cada habitación, los  puntos caminables estarán unidos por aristas de valor nulo.
+
+Una pared numerada tiene que unir exactamente dos puntos de izquierda a derecha o de arriba hacia abajo. Por lo tanto, las direcciones no utilizadas tienen que estar ocupadas por paredes, ya que si no, existe ambig{\"u}edad para determinar que puntos conecta.
+
+Como en este problema no existen movimientos en diagonal sobre el mapa, los únicos casos válidos serán:
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.2]{./EJ2/casosValidos.jpg}
+{}
+  \end{center}
+  \vspace*{0.3cm}
+
+Y el simétrico.
+
+Para obtener la soluci\'on, se busca el arbol generador mínimo (AGM) del grafo planteado mediante el algoritmo de Kruskal. 
+
+A dicho AGM resultante del algoritmo se le calcula el esfuerzo total, que será la suma de todas las paredes destruidas para unir las habitaciones, es decir, la solución al problema planteado.\\
+
+Para desarrollar el algoritmo de b\'usqueda del AGM del grafo, implementamos las funciones find y union, las cuales se encargan ir armando el arbol avanzando dentro de una habitación o cruzando a otra habitación rompiendo una pared.
