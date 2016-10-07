@@ -85,7 +85,7 @@ void mazeBfs () {
 }
 
 int main(){
-    
+/*   
 	F = 5;
 	C = 9;
 	PMax = 1;
@@ -97,7 +97,18 @@ int main(){
 				  '#','.','.','#','.','#','#','#','#',
 				  '#','.','.','.','.','#','#','#','#',
                   '#','#','#','#','#','#','#','#','#'};
-	
+*/
+	std::cin >> F;
+	std::cin >> C;
+	std::cin >> PMax;
+
+	char map[F*C];
+
+	for(int i = 0; i < F*C; i++){
+		std::cin >> map[i];
+	}
+
+    finalizar = false;
 	Map = new Node**[F];
 	
 	for(int i = 0; i < F; i++){
