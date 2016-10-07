@@ -49,7 +49,7 @@
 	\eIf{altura[x] $\leq$ altura[y]} {
 	 	para padre[x] asignar y \hfill O(1)\\
  	para cantAristas[y] asignar cantAristas[y] + cantAristas[x] +1\hfill O(1)\\
- 	para costCompLider[y] asignar costCompLider[y] + costCompLider[x] + COSTO\hfill O(1)\\
+ 	para costCompLider[y] asignar costCompLider[y] + costCompLider[x] + costo\hfill O(1)\\
  	\If{altura[x] = altura[y]}{
  	 	para altura[x] incrementar 1 \hfill O(1)}
  	 	\If {cantAristas[y] = $\#$nodos-1} {
@@ -57,14 +57,13 @@
         }
 	}{ 	 	para padre[y] asignar x\hfill O(1)\\
  	para cantAristas[x] asignar cantAristas[y] + cantAristas[x] +1\hfill O(1)\\
- 	para costCompLider[x] asignar costCompLider[x] + costCompLider[y] + COSTO\hfill O(1)\\
+ 	para costCompLider[x] asignar costCompLider[x] + costCompLider[y] + costo\hfill O(1)\\
  	 \If{cantAristas[x] = $\#$nodos-1} {
            para representanteFinal asignar x\hfill O(1)\\
         }	}
  }
+  	\textbf{\hfill total: O(1)}\\
 \end{algorithm}
-
-\textbf{Complejidad total del algoritmo: O(F $\times$ C $\times$ log(F $\times$ C))}
 
 \textbf{Aclaraciones de variables y transformaci\'on de entrada}
 
