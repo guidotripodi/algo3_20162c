@@ -1,22 +1,23 @@
 \begin{algorithm}[H] %or another one check
  \Fn{Kruskal}{
  %     \SetAlgoLined
-	representanteFinal = -1 
+	representanteFinal $\gets$ -1  \hfill O(1)
 	
-	\For{Arista ar $\in$ aristas}{
+	\For{Arista ar $\in$ aristas}{ 
+					\hfill  Ciclo: O(aristas)\\
 		\If{Buscar(ar.inicio) = Buscar(ar.fin)}{
-			Unir(ar.inicio, ar.fin, ar.costo);
+			Unir(ar.inicio, ar.fin, ar.costo) \hfill O(??)
 		}
 
 		\If{representanteFinal $\geq$ 0}{
-			finalizar ciclo
+			finalizar ciclo \hfill O(1)
 		}
 	}
 
 	\If{representanteFinal $\geq$ 0}{
-		 devolver costCompLider[representanteFinal]
+		 devolver costCompLider[representanteFinal] \hfill O(??)
 	}\Else{
-         devolver sinSolucion
+         devolver sinSolucion \hfill O(1)
     }
   }
 \end{algorithm}
@@ -25,10 +26,10 @@
 \begin{algorithm}[H] %or another one check
  \Fn{Buscar(entero x)}{
  %     \SetAlgoLined
- 	\If{padre[x] = x}{devolver x}{
- 	para entero p $\gets$ Buscar(padre[x])\\
-	para padre[x] asignar p\\
-	devolver p\\
+ 	\If{padre[x] = x}{devolver x \hfill O(1)}{
+ 	para entero p $\gets$ Buscar(padre[x]) \hfill O(??)\\
+	para padre[x] asignar p \hfill O(1)\\
+	devolver p\hfill O(1)\\
  	}
  	}
 \end{algorithm}
@@ -37,25 +38,27 @@
 \begin{algorithm}[H] %or another one check
  \Fn{Unir(enteros x, y, costo)}{
  %     \SetAlgoLined
- 	para entero x asignar Buscar(X)\\
- 	para entero y asignar Buscar(Y)\\
+ 	para entero x asignar Buscar(X)\hfill O(??)\\
+ 	para entero y asignar Buscar(Y)\hfill O(??)\\
 	\eIf{altura[x] $\leq$ altura[y]} {
-	 	para padre[x] asignar y\\
- 	para cantAristas[y] asignar cantAristas[y] + cantAristas[x] +1\\
- 	para costCompLider[y] asignar costCompLider[y] + costCompLider[x] + COSTO\\
+	 	para padre[x] asignar y \hfill O(1)\\
+ 	para cantAristas[y] asignar cantAristas[y] + cantAristas[x] +1\hfill O(1)\\
+ 	para costCompLider[y] asignar costCompLider[y] + costCompLider[x] + COSTO\hfill O(1)\\
  	\If{altura[x] = altura[y]}{
- 	 	para altura[x] incrementar 1 }
+ 	 	para altura[x] incrementar 1 \hfill O(1)}
  	 	\If {cantAristas[y] = $\#$nodos-1} {
-            para representanteFinal asignar y\\
+            para representanteFinal asignar y\hfill O(1)\\
         }
-	}{ 	 	para padre[y] asignar x\\
- 	para cantAristas[x] asignar cantAristas[y] + cantAristas[x] +1\\
- 	para costCompLider[x] asignar costCompLider[x] + costCompLider[y] + COSTO\\
+	}{ 	 	para padre[y] asignar x\hfill O(1)\\
+ 	para cantAristas[x] asignar cantAristas[y] + cantAristas[x] +1\hfill O(1)\\
+ 	para costCompLider[x] asignar costCompLider[x] + costCompLider[y] + COSTO\hfill O(1)\\
  	 \If{cantAristas[x] = $\#$nodos-1} {
-           para representanteFinal asignar x\\
+           para representanteFinal asignar x\hfill O(1)\\
         }	}
  }
 \end{algorithm}
+
+\textbf{Complejidad total del algoritmo: O(F $\times$ C $\times$ log(F $\times$ C))}
 
 \textbf{Aclaraciones de variables y transformaci\'on de entrada}
 

@@ -1,29 +1,32 @@
 A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algoritmo:
 
 \begin{algorithm}[H] %or another one check
- \Fn{Dijsktra}{
+ \Fn{Dijsktra(estaciones, vias)}{
  %     \SetAlgoLined
- 	para Grafo fortaleza asignar grafo(entrada, entrada1,entrada2)\\
+ 	para Grafo fortaleza asignar grafo(estaciones,vias)\hfill O(N)\\
  	\For{nodo $\in$ fortaleza}{
- 	para nodo.distancia asignar invalido\\
- 	para nodo.visitado asignar falso\\
+ 	\hfill  Ciclo: O(N??)\\
+ 	para nodo.distancia asignar invalido\hfill O(1)\\
+ 	para nodo.visitado asignar falso\hfill O(1)\\
  	}
  	\While{$\exists$ nodo alcanzable que no haya sido visitado}
- 	{
+ 	{\hfill  Ciclo: O(N??)\\
 	para actual asignar masCercano(visitados, distancia, cantidadNodos)
-	para visitados[actual] asignar verdadero\\
-	para vecinos asignar vecinos(fortaleza,actual)\\
+	para visitados[actual] asignar verdadero\hfill O(1)\\
+	para vecinos asignar vecinos(fortaleza,actual)\hfill  O(??)\\
 	\For{arista $\in$ vecinos}{
-	para dist asignar distancia(actual) + peso(arista)\\
+	\hfill  Ciclo: O(N??)\\
+	para dist asignar distancia(actual) + peso(arista)\hfill O(1)\\
 	\If{ dist < distancia(arista.destino) || distancia(arista.destino) == invalido}{
-	para distancia[v.destino] asignar dist\\
-	para previos[v.destino] asignar actual\\
+	para distancia[v.destino] asignar dist\hfill O(1)\\
+	para previos[v.destino] asignar actual\hfill O(1)\\
 	}
 	}
  	}
  	}
 \end{algorithm}
 
+\textbf{Complejidad total del algoritmo: O($N^2$ $\times$ $log^2(N)$} con N = cantidad de estaciones.
 
 \textbf{Aclaraciones de variables y funciones}
 \begin{itemize}

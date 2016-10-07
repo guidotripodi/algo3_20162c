@@ -1,10 +1,10 @@
 \begin{algorithm}[H] %or another one check
  \Fn{main()}{
  %     \SetAlgoLined
-	encolo nodo origen en una cola de nodos \\
-	    \While{$\neg$ cola vacia}{
-	    Nodo actual $\gets$ tope cola \\
-	    procesar vecinos\\
+	encolo nodo origen en una cola de nodos \hfill O(log (F $\ast$ C))\\
+	    \While{$\neg$ cola vacia}{ \hfill Ciclo: O(F $\ast$ C $\ast$ P)\\
+	    Nodo actual $\gets$ tope cola \hfill O(1)\\
+	    procesar vecinos\hfill O(??)\\
 	    }
 }
 \end{algorithm}
@@ -16,19 +16,20 @@
  	Nodo nod es un vecino de actual en el Mapa\\
 	
        	   	 \If{$\#$ paredes rotas hasta actual + esPared(nod) < $\#$ paredes rotas hasta actual nod}{
-       	   	 para distancia hasta nod $\gets$ distancia hasta actual + 1\\
-       	   	 para $\#$ paredes rotas hasta nod $\gets$ $\#$ paredes rotas hasta actual + esPared(nod)\\ 
+       	   	 para distancia hasta nod $\gets$ distancia hasta actual + 1 \hfill O(1)\\
+       	   	 para $\#$ paredes rotas hasta nod $\gets$ $\#$ paredes rotas hasta actual + esPared(nod)\hfill O(1)\\ 
 			\If{nod = nodo destino}	{
-				devolver distancia hasta nodo destino y terminar
+				devolver distancia hasta nodo destino y terminar \hfill O(1)
 			}
 	   	   	 \If{$\#$ paredes rotas hasta nod $\leq$ Pmax}{
-       	   		 encolar nod 
+       	   		 encolar nod \hfill O(log (F $\ast$ C)??)
        	   		 }
        	   } 
 			
 }
 \end{algorithm}
 
+\textbf{Complejidad total del algoritmo: O(F $\times$ C $\times$ P)}
 
 \textbf{Aclaraciones de variables y transformaci\'on de entrada}
 

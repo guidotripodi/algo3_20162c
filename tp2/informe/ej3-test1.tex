@@ -44,7 +44,7 @@ Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instan
   \end{center}
   \vspace*{0.3cm}
   
-Como es posible observar en el gr\'afico, la funci\'on resultante de la cota teorica crece mucho m\'as r\'apido que la de nuestro algoritmo la cual queda considerablemente por debajo . Es por esto que graficamos el mismo contra la funcion de $O(N*k) con k < N$
+Como es posible observar en el gr\'afico, la funci\'on resultante de la cota teorica crece mucho m\'as r\'apido que la de nuestro algoritmo la cual queda considerablemente por debajo . Es por esto que graficamos el mismo contra la funci\'on de $O(N*k) con k < N$
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -54,14 +54,14 @@ Como es posible observar en el gr\'afico, la funci\'on resultante de la cota teo
   \vspace*{0.3cm}
 
 
-Se puede observar como la funcion resultante de realizar O(N*k) operaciones es similar a la de nuestro algoritmo mostrando que en el mejor caso nuestro algoritmo trabaja en el orden de O(N).
+Se puede observar como la funci\'on resultante de realizar O(N*k) operaciones es similar a la de nuestro algoritmo mostrando que en el mejor caso nuestro algoritmo trabaja en el orden de O(N).
 
 Luego, dividiendo por la complejidad teorica de nuestro algoritmo llegamos a:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 \includegraphics[scale=0.65]{./EJ3/mejorcaso2.png}
-{$Gr$\'a$fico$ \ 3.4 - $Mejor$ $Caso$ / $Complejidad$ $O(N^2 log^2(N))$}
+{$Gr$\'a$fico$ \ 3.4 - $Mejor$ $Caso$ / $Complejidad$ $O(N^2)$}
   \end{center}
   \vspace*{0.3cm}
 
@@ -69,7 +69,7 @@ Para realizar esta experimentaci\'on nos parecio prudente, realizar un promedio 
 tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para
 obtener resultados m\'as relevantes.\\ 
 
-Se puede observar en el gr\'afico 3.4, como luego de realizar la divisi\'on por la complejidad se ve que la funci\'on resultante tiende a 0 ya que nuestro algoritmo en este tipo de casa trabaja en el orden de O(N) lo cual es mucho menos que la complejidad te\'orica. Por lo tanto, podemos concluir que para el mejor caso nuestro algoritmo se encuentra considerablemente por debajo de la cota teorica $O(N^2 log^2(N))$.\\
+Se puede observar en el gr\'afico 3.4, como luego de realizar la divisi\'on por la complejidad se ve que la funci\'on resultante tiende a 0 ya que nuestro algoritmo en este tipo de casa trabaja en el orden de O(N) lo cual es mucho menos que la complejidad te\'orica. Por lo tanto, podemos concluir que para el mejor caso nuestro algoritmo se encuentra considerablemente por debajo de la cota teorica $O(N^2)$.\\
 
 Luego, verificando el peor caso, llegamos a la conclusi\'on que la familia de casos en el que resulta menos beneficioso trabajar con nuestro algoritmo ser\'a cuando \textbf{el grafo que se obtiene de transformar el circuito de estaciones de entrada es aquel que presenta multiples caminos para llegar a destino donde la suma de estos caminos presentan el mismo valor}, dandonos el siguiente grafo una vez transformado:\\
 
@@ -96,7 +96,7 @@ Dividiendo por la complejidad propuesta llegamos a:\\
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.65]{./EJ3/peorcaso1.png}
- {$Gr$\'a$fico$ \ 3.6 - $Peor$ $Caso$ / $Complejidad$ $O(N^2 log^2(N))$}
+ {$Gr$\'a$fico$ \ 3.6 - $Peor$ $Caso$ / $Complejidad$ $O(N^2)$}
   \end{center}
   \vspace*{0.3cm}
 

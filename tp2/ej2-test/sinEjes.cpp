@@ -162,7 +162,7 @@ for (int l = 5; l < 50; ++l){
                             }
                    }
                 
-           /*    
+             
    printf("FILAS: %d\n", F);
    printf("COLUMNAS: %d\n", C);
 
@@ -174,7 +174,7 @@ for (int l = 5; l < 50; ++l){
        
     }
         /*Descomentar esto para poder realizar medicion del caso*/
-    auto start = ya();
+    //auto start = ya();
 
     init ();
     
@@ -275,11 +275,11 @@ for (int l = 5; l < 50; ++l){
         }
         //FIN PODA
     }
-  //  printf("\nLa suma total es:");
+    printf("\nLa suma total es:");
     if (representanteFinal > 0) {
-    //    printf("%d \n", costCompLider[representanteFinal]);
+        printf("%d \n", costCompLider[representanteFinal]);
     }else {
-      //  printf("-1 \n");
+        printf("-1 \n");
     }
 
     delete[] altura;
@@ -304,9 +304,9 @@ for (int l = 5; l < 50; ++l){
         delete a;
     }
     /*Descomentar esto para poder realizar medicion del caso*/
-    auto end = ya();
+    /*auto end = ya();
             cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-            printf("\n");
+            printf("\n");*/
     }
         return 0;
 }
