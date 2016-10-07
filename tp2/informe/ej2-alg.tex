@@ -1,12 +1,14 @@
 \begin{algorithm}[H] %or another one check
  \Fn{Kruskal}{
  %     \SetAlgoLined
+     ordenar aristas \hfill O(4 $\ast$ F $\ast$ C $\ast$ log(4 $\ast$ F $\ast$ C))\\
 	representanteFinal $\gets$ -1  \hfill O(1)
 	
 	\For{Arista ar $\in$ aristas}{ 
-					\hfill  Ciclo: O(aristas)\\
+					\hfill  ciclo: O(4 $\ast$ F $\ast$ C)\\
 		\If{Buscar(ar.inicio) = Buscar(ar.fin)}{
-			Unir(ar.inicio, ar.fin, ar.costo) \hfill O(??)
+									 \hfill guarda: O(2 $\ast$ log(4 $\ast$ F $\ast$ C))\\
+			Unir(ar.inicio, ar.fin, ar.costo) \hfill O(1)
 		}
 
 		\If{representanteFinal $\geq$ 0}{
@@ -15,11 +17,13 @@
 	}
 
 	\If{representanteFinal $\geq$ 0}{
-		 devolver costCompLider[representanteFinal] \hfill O(??)
+		 devolver costCompLider[representanteFinal] \hfill O(1)
 	}\Else{
          devolver sinSolucion \hfill O(1)
     }
   }
+ 
+  \textbf{\hfill total: O(2 $\ast$ 4 $\ast$ F $\ast$ C $\ast$ log(4 $\ast$ F $\ast$ C))}\\
 \end{algorithm}
 
 
@@ -27,19 +31,21 @@
  \Fn{Buscar(entero x)}{
  %     \SetAlgoLined
  	\If{padre[x] = x}{devolver x \hfill O(1)}{
- 	para entero p $\gets$ Buscar(padre[x]) \hfill O(??)\\
+ 	para entero p $\gets$ Buscar(padre[x]) \hfill guarda: O(log(4 $\ast$ F $\ast$ C))\\
 	para padre[x] asignar p \hfill O(1)\\
 	devolver p\hfill O(1)\\
  	}
  	}
+ 	
+ 	\textbf{\hfill total: O(log(4 $\ast$ F $\ast$ C))}\\
 \end{algorithm}
 
 
 \begin{algorithm}[H] %or another one check
  \Fn{Unir(enteros x, y, costo)}{
  %     \SetAlgoLined
- 	para entero x asignar Buscar(X)\hfill O(??)\\
- 	para entero y asignar Buscar(Y)\hfill O(??)\\
+ 	para entero x asignar Buscar(X)\hfill O(1)\\
+ 	para entero y asignar Buscar(Y)\hfill O(1)\\
 	\eIf{altura[x] $\leq$ altura[y]} {
 	 	para padre[x] asignar y \hfill O(1)\\
  	para cantAristas[y] asignar cantAristas[y] + cantAristas[x] +1\hfill O(1)\\
