@@ -12,23 +12,23 @@ A continuaci\'on mostraremos un gr\'afico de tiempos comparativo entre distintas
   
 Se puede observar en el gr\'afico, cuatro funciones las cuales representan el tiempo de ejecuci\'on de las familias de casos:\\
 \begin{itemize}
-\item El grafo recibido como parametro es el AGM
+\item No hay conexi\'on posible entre las salas
+\item El grafo recibido como par\'ametro es el AGM
 \item No hay arbol posible que conecte a todas las componentes conexas
 \item Existe un arbol de peso 0
 \item El grafo recibido como parametro presenta multiples ciclos con aristas de disversos pesos
 \end{itemize}
 
-Como se observa en el gr\'afico la funci\'on representativa de la flia n\'umero 1, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que nuestro algoritmo al chequear las aristas, observa que no se presenta ning\'un tipo de ciclo, sino que hay un \'unico camino recorre dicho camino sumando los pesos y finaliza su ejecuci\'on.
+Como se observa en el gr\'afico la funci\'on representativa de la flia n\'umero 1, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que nuestro algoritmo al intentar chequear las aristas, observa que no hay ninguna por lo tanto finaliza su ejecuci\'on insumiendo unicamente la creaci\'on del grafo (nodos aislados)
 
-
-Luego de chequear dichas instancias, pudimos llegar a la conclusi\'on que la familia de casos que presenta una mejor performance para nuestro algoritmo
-es en el cual \textbf{el grafo que se obtiene de transformar el laberinto recibido como par\'ametro ya es el Arbol Generador M\'inimo}
+Habiendo chequeado dichas instancias, llegamos a la conclusi\'on que la familia de casos que presenta una mejor performance para nuestro algoritmo
+es en el cual \textbf{el grafo que se obtiene de transformar el laberinto recibido como par\'ametro no presenta ninguna arista}
 
 Un grafo representativo de lo dicho ser\'ia el siguiente:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- \includegraphics[scale=0.5]{./EJ2/ej2grafocompleto.jpeg}
+ \includegraphics[scale=0.5]{./EJ2/grafoSinEjes.jpeg}
  \\{$Grafo$ \ 2.1 - $Mejor$ $Caso$}
   \end{center}
   \vspace*{0.3cm}
@@ -39,7 +39,7 @@ Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instan
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-% \includegraphics[scale=0.65]{./EJ2/mejorcaso.png}
+ \includegraphics[scale=0.65]{./EJ2/mejorcaso.png}
  {$Gr$\'a$fico$ \ 2.1 - $Mejor Caso$}
   \end{center}
   \vspace*{0.3cm}
@@ -50,7 +50,7 @@ Luego, dividiendo por la complejidad teorica de nuestro algoritmo llegamos a:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-%\includegraphics[scale=0.65]{./EJ2/mejorcaso1.png}
+\includegraphics[scale=0.65]{./EJ2/mejorcaso1.png}
 {$Gr$\'a$fico$ \ 2.2 - $Mejor Caso / Complejidad$ $O(F*C* log(F*C))$}
   \end{center}
   \vspace*{0.3cm}
@@ -59,9 +59,9 @@ Para realizar esta experimentaci\'on nos parecio prudente, realizar un promedio 
 tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para
 obtener resultados m\'as relevantes.\\ 
 
-Se puede observar en el gr\'afico 2.2, como luego de realizar la divisi\'on por la complejidad se ve que la funci\'on resultante tiene picos en los cuales llega a un m\'aximo igual a 0.65 y cuando el valor de entrada aumenta la funci\'on se asintotiza en 0.5. Por lo tanto, podemos concluir que para el mejor caso nuestro algoritmo se encuentra considerablemente por debajo de la cota teorica $O(F*C* log(F*C))$.\\
+Se puede observar en el gr\'afico 2.2, como luego de realizar la divisi\'on por la complejidad se ve que la funci\'on resultante llega a un m\'aximo igual a 0.2 y cuando el valor de entrada aumenta la funci\'on tiende a 0. Por lo tanto, podemos concluir que para el mejor caso nuestro algoritmo se encuentra considerablemente por debajo de la cota teorica $O(F*C* log(F*C))$.\\
 
-Luego, verificando el peor caso, llegamos a la conclusi\'on que la familia de casos en el que resulta menos beneficioso trabajar con nuestro algoritmo ser\'a cuando el grafo que se obtiene de transformar el laberinto de entrada es aquel que presenta un ciclo por cada habitaci\'on posible, dandonos el siguiente grafo una vez transformado:\\
+Luego, verificando el peor caso, llegamos a la conclusi\'on que la familia de casos en el que resulta menos beneficioso trabajar con nuestro algoritmo ser\'a cuando \textbf{el grafo que se obtiene de transformar el laberinto de entrada es aquel que presenta un ciclo por cada habitaci\'on posible}, dandonos el siguiente grafo una vez transformado:\\
 
 
 \vspace*{0.3cm} \vspace*{0.3cm}

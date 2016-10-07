@@ -6,8 +6,8 @@ A continuaci\'on mostraremos un gr\'afico de tiempos comparativo entre distintas
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- \includegraphics[scale=0.65]{./EJ1/comparativo.png}
- {$Gr$\'a$fico$ \ 1.1 - $Comparativo$}
+ \includegraphics[scale=0.4]{./EJ1/comparativo.png}
+ {            $Gr$\'a$fico$ \ 1.1 - $Comparativo$}
   \end{center}
   \vspace*{0.3cm}
   
@@ -21,6 +21,7 @@ Se puede observar en el gr\'afico, cuatro funciones las cuales representan el ti
 
 Como se observa en el gr\'afico la funci\'on representativa de la flia n\'umero 1, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que en el primer paso no puede salir por ningun camino posible, o su adyacente es el nodo destino por lo tanto chequea solo los nodos adyacentes del origen y finaliza su ejecuci\'on.
 
+Por lo cual, el mejor caso teniendo a nivel performance de nuestro algoritmo ser\'a cuando se presente un problema \textbf{Sin soluci\'on o con camino m\'inimo inmediato}
 
 El grafo que representa lo dicho ser\'ia el siguiente:\\
 
@@ -36,17 +37,19 @@ Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instan
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- \includegraphics[scale=0.65]{./EJ1/mejorcaso.png}
+ \includegraphics[scale=0.4]{./EJ1/mejorcaso.png}
  {$Gr$\'a$fico$ \ 1.1 - $Mejor$ $Caso$}
   \end{center}
   \vspace*{0.3cm}
 
-Como la complejidad que calculamos se basa en la cantidad de nodos posibles que puede haber multiplicado por las paredes contrastaremos nuestras mediciones con los valores de N (F * C) $\ast$ P .\\
+Como la complejidad que calculamos se basa en la cantidad de nodos posibles que puede haber multiplicado por las paredes contrastaremos nuestras mediciones con los valores de O(F $\times$ C $\times$ P) trabajando con P constante.\\
+
+Luego, dividiendo la funci\'on resultante de nuestro algoritmo sobre el tiempo que demanda realizar O(F $\times$ C $\times$ P) nos da lo siguiente:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- \includegraphics[scale=0.65]{./EJ1/mejorcaso1.png}
- {$Gr$\'a$fico$ \ 1.3 - $Mejor$ $Caso$}
+ \includegraphics[scale=0.5]{./EJ1/mejorcaso1.png}
+ {$Gr$\'a$fico$ \ 1.2 - $Mejor$ $Caso$}
   \end{center}
   \vspace*{0.3cm}
 
@@ -68,32 +71,43 @@ Para este grafo realizamos las respectivas mediciones las cuales arrojaron los s
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.65]{./EJ1/peorcaso.png}
-{$Gr$\'a$fico$ \ 1.7 - $Peor$ $Caso$}
+\includegraphics[scale=0.4]{./EJ1/peorcaso.png}
+{$Gr$\'a$fico$ \ 1.3 - $Peor$ $Caso$}
   \end{center}
   \vspace*{0.3cm}
 
+Dividiendo por la complejidad se llego a lo siguiente:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.65]{./EJ1/peorcaso1.png}
-{$Gr$\'a$fico$ \ 1.7 - $Peor$ $Caso$}
+\includegraphics[scale=0.5]{./EJ1/peorcaso1.png}
+{$Gr$\'a$fico$ \ 1.4 - $Peor$ $Caso$}
   \end{center}
   \vspace*{0.3cm}
 
  Para obtener dichas instancias nos resulto prudente realizar aproximadamente unas 20 corridas con el mismo input y sacar el promedio de estas 20 corridas para cada instancia para obtener resultados m\'as consisos.\\ 
 
-Podemos observar en la figura 1.5 como la funci\'on resultante de nuestro algoritmo en el peor caso se mantiene por debajo de la funci\'on final del tiempo de realizar O(N * k) operaciones lo cual fue la complejidad precalculada.\\
+Podemos observar en la figura 1.4 como la funci\'on resultante de nuestro algoritmo en el peor caso se mantiene por debajo de la funci\'on final del tiempo de realizar O(F $\times$ C $\times$ P) operaciones lo cual fue la complejidad precalculada.\\
 
 Por \'ultimo mostraremos un gr\'afico comparativo con el mejor, el peor y el caso promedio contra la complejidad precalculada .\\
 
   
   \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.65]{./EJ1/comparativo1.png}
-{$Gr$\'a$fico$ \ 1.10 - $Comparativo$}
+\includegraphics[scale=0.4]{./EJ1/comparativo1.png}
+{$Gr$\'a$fico$ \ 1.5 - $Comparativo$}
   \end{center}
   \vspace*{0.3cm}
 
+Mostraremos a continuaci\'on un caso en el cual se dejaron fijas las variables F y C, ambas en 50 y se trabajo con P movil para ver como se comporta nuestro algoritmo en esta situaci\'on.
 
-Luego de lo mostrado, podemos ver que ya sea en el peor caso nuestro algoritmo en funci\'on al tiempo de ejecuci\'on queda asintotizado por debajo de la funci\'on del tiempo de la complejidad .
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.4]{./EJ1/pMovil.png}
+{$Gr$\'a$fico$ \ 1.6 - $P$ $movil$ $y$ $F,C$ $Fijos$}
+  \end{center}
+  \vspace*{0.3cm}
+
+Se puede observar en el gr\'afico 1.6 como al trabajar con este caso en el cual a medida que P aumenta es necesario romper P paredes para llegar a destino, la funci\'on resultante se comporta de la misma manera que O(P), chequeando de esta forma que trabajando con una cantidad fija de nodos nuestro algoritmo realiza O(P) operaciones por cada elemento del grafo.
+
+Luego de lo mostrado, se pudo observar que, tanto en el mejor como en el peor caso nuestro algoritmo se encuentra en el orden de la complejidad calculada.

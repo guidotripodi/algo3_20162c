@@ -1,9 +1,9 @@
 CC=g++ 
 CFLAGS=-g -Wall -std=c++11
-MAINOBJECTS=ejercicio3.o sinSolucion.o caminoSimple.o sinEjes.o casoRandom.o peorCaso.o
+MAINOBJECTS=ejercicio3.o sinSolucion.o caminoSimple.o sinEjes.o casoRandom.o peorCaso.o complejidad.o
 OBJECTS=grafo.o
 
-EXECUTABLES= ejercicio3 sinSolucion peorCaso caminoSimple sinEjes casoRandom
+EXECUTABLES= ejercicio3 sinSolucion peorCaso caminoSimple sinEjes casoRandom complejidad
 
 all: $(EXECUTABLES)
 
@@ -24,6 +24,10 @@ casoRandom: $(OBJECTS) casoRandom.o
 
 peorCaso: $(OBJECTS) peorCaso.o
 	$(CC) $(CFLAGS) $^ -o $@ 
+
+complejidad: $(OBJECTS) complejidad.o
+	$(CC) $(CFLAGS) $^ -o $@ 
+
 %.o: %.cpp
 	$(CC) $(CFLAGS) $< -c -o $@
 
