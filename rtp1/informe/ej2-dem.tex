@@ -1,43 +1,47 @@
-En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on del mismo, la etapa m\'as importante es a la hora de obtener las pesas que equilibran la balanza, en donde se realiza un ciclo que va disminuyendo el valor $equilibrioActual$ (incialmente $P$) hasta llegar a 0 recorriendo el arreglo de $sumasParciales$ de sumas de potencias de tres.\\
+En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on del mismo, la etapa m\'as importante es a la hora de obtener las pesas que equilibran la balanza, en donde se realiza un ciclo que va disminuyendo el valor $equilibrioActual$ (inicialmente $P$) hasta llegar a 0 recorriendo el arreglo de $sumasParciales$ de sumas de potencias de tres.\\
 Una vez alcanzado ese valor se puede dar por finalizado el algoritmo, dado que hemos encontrado una manera de sumar y restar potencias de tres tales que como resultado se obtiene $P$.\\
 
-Por lo tanto para probar que el algoritmo es correcto deberemos probar primero que el algoritmo termina, es decir, que $equilibrioActual$ alcanza el valor cero luego de iterar el arreglo $sumasParciales$ una sola vez.\\
+Por lo tanto para probar que el algoritmo es correcto deberemos probar primero que el algoritmo termina, es decir, que $equilibrioActual$ alcanza el valor cero luego de iterar el arreglo $sumasParciales$ una sola vez y luego que utilizamos siempre potencias de tres diferentes.\\
 
-En esta parte de la demostración no nos interesa mantener el signo del resto, dado que saber luego si la pesa tomada resta o suma es una consecuencia de tener que alcanzar el valor cero checkeando en cada paso si el equilibrio conseguido es mayor o menor que cero respectivamente y por lo tanto tomaremos el modulo de cada resto\\
+En esta parte de la demostración no nos interesa mantener el signo del resto, dado que saber luego si la pesa tomada resta o suma es una consecuencia de tener que alcanzar el valor cero chequeando en cada paso si el equilibrio conseguido es mayor o menor que cero respectivamente y por lo tanto tomaremos el modulo de cada resto.\\
 
-Por lo tanto propondremos el siguiente invariante y veremos que es válido.\\
-
-Sea el $i-esimo$ paso del algoritmo donde se cumple que:
+Queremos probar entones que nuestro algoritmo encuentra las pesas necesarias:
 
 \begin{equation}
-\sum_{k=0}^{i-1}(3^k) < equilibrioActual \leq  \sum_{k=0}^{i}(3^k) 
+\forall P \leq \sum_{i=0}^{k}(3^i) \textit{con k $\geq$ 0}
 \end{equation}
 
-y se realiza el siguiente operación:
+Podemos utilizar inducción.\\
+
+Para $k$ = 0, tenemos que tener un $P$ menor o igual a uno. Si es cero ya hemos finalizado y si es uno podemos restar uno y esa será la pesa que debemos agregar. Como el resto es cero, ya hemos finalizado.\\
+
+Para el paso inductivo $k = n$ sabemos que nustro algoritmo encuentra la repuesta:
 
 \begin{equation}
-equilibrioActual = | 3^i - equilibrioActual |
+\forall P \leq \sum_{i=0}^{n}(3^i) \textit{con n > 0}
+\end{equation}
+
+Sea $P^{'}$  tal que: 
+
+\begin{equation}
+\sum_{i=0}^{n}(3^i) <  P^{'} \leq \sum_{i=0}^{n+1}(3^i) 
+\end{equation}
+
+el algoritmo realiza el siguiente operación:
+
+\begin{equation}
+P^{''} = | 3^{n+1} - P^{'} |
 \end{equation} 
 
-El nuevo valor de $equilibrioActual$ es menor que $\sum_{k=0}^{i-1}(3^k)$\\
-
-Si lo anterior se cumple para todo $i-esimo$ paso podremos asegurar que en algún paso $equilibrioActual$ será cero.\\
-
-Si $P$ es suma de potencias se recorrerá el arreglo completo tomando cada potencia y es claro que $equilibrioActual$ será cero cuando se llegue a la posicion uno del arreglo que tiene el valor uno. (recordemos que la posición cero tiene el valor cero para poder realizar la resta en el último paso sin tener que hacer checkeos extra) \\
-
-Si $P$ es potencia de tres, el algoritmo finalizará en un solo paso, pues si $P$ es $3^i$ el arreglo tiene en la última posición el valor  $\sum_{k=0}^{i}(3^k)$ pues $\sum_{k=0}^{i-1}(3^k)$ $<$ $3^i$\\
-
-Si no sucede ninguno de los casos anteriores, veamos que al restar $equilibrioActual$ por $3^{i}$, el nuevo valor de $equilibrioActual$ es menor a $\sum_{k=0}^{i-1}(3^k)$ en módulo, pues (el caso negativo es simétrico)
+Veamos que al restar $P^{'}$ por $3^{n+1}$, el nuevo valor $P^{''}$ es menor a $\sum_{i=0}^{n}(3^i)$.
 
 \begin{equation}
-equilibrioActual < \sum_{k=0}^{i}(3^k) \iff
-ea < \sum_{k=0}^{i-1}(3^k) + 3^{i} \iff
-ea - 3^{i} < \sum_{k=0}^{i-1}(3^k) 
+P^{'} < \sum_{i=0}^{n+1}(3^i) \iff
+P^{'} < \sum_{i=0}^{n}(3^i) + 3^{n+1} \iff
+P^{'} - 3^{n+1} < \sum_{i=0}^{n}(3^i) \iff
+P^{''}  < \sum_{i=0}^{n}(3^i)
 \end{equation}
 
-Por lo cual, siempre el valor de $equilibrioActual$ decrece en modulo con respecto al valor antes de realizar la resta. Y además se puede ver que en cada paso elegimos pesas diferentes.
+Por lo cual, el valor de $P^{''}$ no se encuentra en el mismo intervalo que $P^{'}$ y como $3^{n+1}$ ya no se encuentra en intervalos más pequeños, el intervalo que contenga a $P^{'}$ utilizará potencias diferentes. Como por hipótesis inductiva podemos generar cualquier $P$ mayor que cero, podremos en particular generar a $P^{''}$.
 
-Con esto podemos asegurar que al llegar a los indices 0 o 1 del arreglo, $equlibrioActual$ valdrá o bien cero, en cuyo caso hemos finalizado o bien uno en cuyo caso deberemos realizar un paso mas, restando uno para finalizar.\\
-
-Dado que además en el algoritmo se decide según el signo de $equilibrioActual$ si sumar o restar el valor de la pesa encontrada, podemos determinar que pesas suman y que pesas restan en la solución final. Es decir, que pesas poner en un plato y que pesas poner en el otro plato para lograr el equilibrio final que es cero.
-
+Luego el algoritmo finaliza y además obtiene todas las pesas adecuadas.\\
