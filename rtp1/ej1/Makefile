@@ -8,13 +8,13 @@ CFLAGS=-g -Wall -std=c++11
 LDFLAGS=
 
 # Agregar acá los archivos .cpp a compilar
-SOURCES=test.cpp Escenario2.cpp trie.cpp
+SOURCES=ej1.cpp Escenario2.cpp trie.cpp
 
 # Objetos que serán generados
-OBJECTS=test.o Escenario2.o
+OBJECTS=ej1.o Escenario2.o
 
 # Nombre del ejecutable a generar
-EXECUTABLE=test
+EXECUTABLE=ej1
 
 all: $(EXECUTABLE)
 

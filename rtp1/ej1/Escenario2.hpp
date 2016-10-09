@@ -109,6 +109,7 @@ public:
 
 			//Es posible si el id representa a una combinacion de personas (combinatorio de personas)
 			posible = id < (escenario->personas_totales * escenario->personas_totales);
+			tiempo = max(primero.tiempo,segundo.tiempo);
 
 		}
 
@@ -117,6 +118,7 @@ public:
 
 	struct HistoricoEstados {
 		Escenario2* escenario;
+		int cantHechos = 0;
 
 		//Voy a guardar un trie en donde el alfabeto es 0 , 1: de esta forma puedo verificar si existioç
 		//la combinacion en O(n)
@@ -130,13 +132,14 @@ public:
 		}
 
 		void marcarHistoria(){
+			this->cantHechos++;
+			char estado[this->escenario->personas_totales + 1];
+			estado[this->escenario->personas_totales] = NULL;
 
-			char estado[this->escenario->personas_totales];
-	
 			for (int i = 0; i < this->escenario->personas_totales; i++)
 			{
-				//Agregar la clausula para computar la eleccion como tomada
-				if (escenario->personas_ladoA[i]){
+
+				if (this->escenario->personas_ladoA[i]){
 
 					estado[i] = 's';
 				}else{
@@ -150,8 +153,15 @@ public:
 		}
 
 		bool ocurrioEstado(Eleccion eleccion, int islaAEnviar){
+			if (this->cantHechos==0)
+			{
+				return false;
+			}
+			char estado[this->escenario->personas_totales + 1];
+			estado[this->escenario->personas_totales] = NULL;
 
-			char estado[this->escenario->personas_totales];
+			int idP1 = eleccion.primero.id;
+			int idP2 = eleccion.segundo.id;
 			
 			for (int i = 0; i < this->escenario->personas_totales; i++)
 			{
@@ -161,13 +171,41 @@ public:
 				}else{
 					estado[i] = 'n';
 				}
-				
+
+				if (i==idP1 || i==idP2){
+						/* code */
+					if (islaAEnviar == escenario->LADO_A)
+					{
+						estado[i] = 's';
+					}else{
+						estado[i] = 'n';
+					}
+
+				}
+
 			}
 
 			return NULL!=this->historia.searchWord(this->historia.root, estado);
 		}
 
 		void borrarHistoria(Eleccion eleccion){
+			this->cantHechos--;
+			char estado[this->escenario->personas_totales + 1];
+			estado[this->escenario->personas_totales] = NULL;
+
+			for (int i = 0; i < this->escenario->personas_totales; i++)
+			{
+
+				if (escenario->personas_ladoA[i]){
+
+					estado[i] = 's';
+				}else{
+					estado[i] = 'n';
+				}
+				
+			}
+
+			this->historia.removeWord(this->historia.root, estado);
 
 		}
 

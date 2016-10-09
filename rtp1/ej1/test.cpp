@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 {
 	//ifstream input( "ej1.in" );
 	//ifstream input = stdin;
-	/*int cant_arqueologos, cant_canibales;
+	int cant_arqueologos, cant_canibales;
 	cin >> cant_arqueologos >> cant_canibales;
 
 
@@ -34,18 +34,9 @@ int main(int argc, char* argv[])
 	int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
 	
 	//cout <<t<<"\n";
-	*/
-	char* palabra = "hola";
-	char* palabra2 = "holas";
-	 TrieTree trie;
-	 //trie.insert(palabra, 1);
-	 trie.insert(palabra2, 1);
-	 vector<char> util;
-	bool a =  trie.searchWord(trie.root, palabra2)!=NULL;
-	cout <<a<<"\n";
-	 //trie.insert("horacio");
-	 //trie.insert("holocausto");
-	 //trie.insert("horacito");
+	
+
+
 	return 1;
 }
 struct Nodo{
@@ -62,14 +53,35 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 	escenario.printStatus();
 //	cout<<"Escenario listo\n";
 	
-
-	cout<<"Enviando\n";
+/*
+	cout<<"1 - Calculando envio...\n";
 	Escenario2::Eleccion eleccion = escenario.envioPosible();
+	escenario.printEleccion(eleccion);
+	cout<<"Enviando... \n";
 	escenario.enviarEleccion(eleccion);
-	escenario.historial->marcarHistoria();
-	escenario.historial->ocurrioEstado(eleccion, 1);
-	cout<<"\n Ocurrio:"<<escenario.historial->ocurrioEstado(eleccion, 1);
+	cout<<"Revisando historia...\n";
+	cout<<"Ocurrio:"<<escenario.historial->ocurrioEstado(eleccion, 1)<<'\n';
+
+	cout<<"2 - Calculando envio...\n";
+	Escenario2::Eleccion eleccion2 = escenario.retornoPosible();
+	escenario.printEleccion(eleccion2);
+	cout<<"Retornando... \n";
+	escenario.retornarEleccion(eleccion2);
+	cout<<"Revisando historia...\n";
+	cout<<"Ocurrio:"<<escenario.historial->ocurrioEstado(eleccion2, 1)<<'\n';
 	escenario.printStatus();
+
+	cout<<"3 - Calculando envio...\n";
+	Escenario2::Eleccion eleccion3 = escenario.envioPosible();
+	escenario.printEleccion(eleccion3);
+	cout<<"Enviando... \n";
+	escenario.enviarEleccion(eleccion3);
+	cout<<"Revisando historia...\n";
+	cout<<"Ocurrio:"<<escenario.historial->ocurrioEstado(eleccion3, 1)<<'\n';
+	escenario.printStatus();*/
+
+	
+
 	/*
 	cout<<"Retornando\n";
 	eleccion = escenario.retornoPosible();

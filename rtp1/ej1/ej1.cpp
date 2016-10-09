@@ -3,7 +3,7 @@
 // A los pares los identifico por el numero de fila y columna que representan en una matriz donde las filas son los arqueologos seguidos por los canibales
 #include <iostream>
 #include <fstream>
-#include "Escenario.hpp"
+#include "Escenario2.hpp"
 using namespace std;
 
 
@@ -44,9 +44,9 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 	int sol = 0;
 	int minimo = -1; 
 //	cout<<"Inicializando escenario...\n";
-	Escenario escenario = Escenario(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
+	Escenario2 escenario = Escenario2(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
 //	cout<<"Escenario listo\n";
-	int i = 0;
+	//int i = 0;
 	while(exitoBackLampara && exitoBackPar){
 //		cout<<"----------------------------------------------\nNuevo paso:\n";
 		escenario.printStatus();
@@ -59,43 +59,43 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 				minimo = escenario.tiempo;
 			}
 			sol++;
-			cout<<" < Fin de rama: minimo logrado = "<<escenario.tiempo<<" > \n";
+			cout<<"||Fin de rama: minimo logrado = "<<escenario.tiempo<<" || \n";
 		}
 
 		exitoBackPar = true;
 		exitoBackLampara = true;
 		if (escenario.tienenLampara)
 		{
-			int par = escenario.parPosible();
+			Escenario2::Eleccion eleccion = escenario.envioPosible();
 			//Si hay un par posible y si la rama que estoy evaluando
 			//me sigue dando una mejor solucion a la ya encontrada
-			if (par>-1 && (minimo == -1 || escenario.tiempo<minimo))
+			if (eleccion.posible==1 && (minimo == -1 || escenario.tiempo<minimo))
 			{
-				cout<<"-Enviando ";
-				escenario.printPar(par);
+				cout<<"> Enviando ";
+				escenario.printEleccion(eleccion);
 				cout<<"\n";
 
-				escenario.enviarPar(par);
+				escenario.enviarEleccion(eleccion);
 			}else{
 				//vuelve al paso anterior
-//				cout<<"-Backtracking a farolero\n";
-				exitoBackLampara = escenario.backtrackFarolero();
+				cout<<"> Backtracking a retorno\n";
+				exitoBackLampara = escenario.deshacerRetorno();
 
 			}
 		}else{
-			int farolero = escenario.faroleroPosible();
+			Escenario2::Eleccion eleccion = escenario.retornoPosible();
 
 			//Si hay un farolero que pueda hacer que retorne y que me mantenga el tiempo menor al ya encontrado
-			if (farolero>-1 && (minimo == -1 || escenario.tiempo < minimo))
+			if (eleccion.posible==1 && (minimo == -1 || escenario.tiempo < minimo))
 			{
-				cout<<"-Enviando como farolero a ";
-				escenario.printPersona(farolero);
+				cout<<"< Retornando eleccion ";
+				escenario.printEleccion(eleccion);
 				cout<<"\n";
-				escenario.enviarFarolero(farolero);
+				escenario.retornarEleccion(eleccion);
 
 			}else{
-//				cout<<"-Backtracking a par\n";
-				exitoBackPar = escenario.backtrackPar();
+				cout<<"< Backtracking a envio\n";
+				exitoBackPar = escenario.deshacerEnvio();
 
 			}
 		}

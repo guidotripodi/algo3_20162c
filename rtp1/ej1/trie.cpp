@@ -35,7 +35,6 @@ class TrieTree
             TrieTreeNode * temp = root;
              
             int i = 0;
-             
             while (i < word.size()) {      // Until there is something to process
                 if (temp->children[word[i] - 'a'] == NULL) {
                     // There is no node in 'trie_tree' corresponding to this alphabet
