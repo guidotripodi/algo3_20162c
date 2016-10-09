@@ -3,43 +3,66 @@ Una vez alcanzado ese valor se puede dar por finalizado el algoritmo, dado que h
 
 Por lo tanto para probar que el algoritmo es correcto deberemos probar primero que el algoritmo termina, es decir, que $equilibrioActual$ alcanza el valor cero luego de iterar el arreglo $sumasParciales$ una sola vez y luego que utilizamos siempre potencias de tres diferentes.\\
 
-En esta parte de la demostración no nos interesa mantener el signo del resto, dado que saber luego si la pesa tomada resta o suma es una consecuencia de tener que alcanzar el valor cero chequeando en cada paso si el equilibrio conseguido es mayor o menor que cero respectivamente y por lo tanto tomaremos el modulo de cada resto.\\
-
-Queremos probar entones que nuestro algoritmo encuentra las pesas necesarias:
+Queremos probar entones que nuestro algoritmo encuentra las pesas necesarias para todo $P$ menor que alguna suma de potencias en modulo, es decir:
 
 \begin{equation}
-\forall P \leq \sum_{i=0}^{k}(3^i) \textit{con k $\geq$ 0}
+(\forall P \in \mathbb{Z}), |P| \leq \sum_{i=0}^{k}(3^i) \textit{ con k $\geq$ 0}
 \end{equation}
 
-Podemos utilizar inducción.\\
+El algoritmo encuentra una combinación de sumas y restas de potencias de tres que es igual a $P$. Podemos utilizar inducción.\\
 
-Para $k$ = 0, tenemos que tener un $P$ menor o igual a uno. Si es cero ya hemos finalizado y si es uno podemos restar uno y esa será la pesa que debemos agregar. Como el resto es cero, ya hemos finalizado.\\
+Para $k$ = 0, $P$ tiene que ser igual a uno en modulo. Por lo cual, luego de realizar la resta el algoritmo ha finalizado.\\
 
 Para el paso inductivo $k = n$ sabemos que nustro algoritmo encuentra la repuesta:
 
 \begin{equation}
-\forall P \leq \sum_{i=0}^{n}(3^i) \textit{con n > 0}
+(\forall P \in \mathbb{Z}), |P| \leq \sum_{i=0}^{n}(3^i) \textit{ con n > 0}
 \end{equation}
 
 Sea $P^{'}$  tal que: 
 
 \begin{equation}
-\sum_{i=0}^{n}(3^i) <  P^{'} \leq \sum_{i=0}^{n+1}(3^i) 
+\sum_{i=0}^{n}(3^i) <  |P^{'}| \leq \sum_{i=0}^{n+1}(3^i) 
 \end{equation}
 
 el algoritmo realiza el siguiente operación:
 
 \begin{equation}
-P^{''} = | 3^{n+1} - P^{'} |
+P^{''} = \left\{ \begin{array}{lcc}
+             3^{n+1} + P^{'} & \textit{con $P^{'} <$ 0} \\
+              P^{'} - 3^{n+1} & \textit{con $P^{'} >$ 0} 
+             \end{array}
+             \right.
 \end{equation} 
 
-Veamos que al restar $P^{'}$ por $3^{n+1}$, el nuevo valor $P^{''}$ es menor a $\sum_{i=0}^{n}(3^i)$.
+Veamos que en cualquier caso, el nuevo valor $P^{''}$ es menor a $\sum_{i=0}^{n}(3^i)$.
+
+En el caso $P^{'} <$ 0:
 
 \begin{equation}
-P^{'} < \sum_{i=0}^{n+1}(3^i) \iff
-P^{'} < \sum_{i=0}^{n}(3^i) + 3^{n+1} \iff
+3^{n+1} - |P^{'}| < \sum_{i=0}^{n}(3^i) \iff
+|P^{'}| > - \sum_{i=0}^{n}(3^i) + 3^{n+1}
+\end{equation}
+
+Lo cual es cierto ya que:
+
+\begin{equation}
+- \sum_{i=0}^{n}(3^i) + 3^{n+1} >  \sum_{i=0}^{n}(3^i) \iff
+3^{n+1} > 2 \ast \sum_{i=0}^{n}(3^i) \iff
+\end{equation}
+
+\begin{equation}
+3^{n+1} > 2 \ast \frac{1-3^{n+1}}{1-3} \iff
+3^{n+1} > -1+3^{n+1} \iff
+0 > 1
+\end{equation}
+
+El caso con $P^{'} >$ 0 se puede ver directamente pasando $3^{n+1}$ sumando.
+
+\begin{equation}
 P^{'} - 3^{n+1} < \sum_{i=0}^{n}(3^i) \iff
-P^{''}  < \sum_{i=0}^{n}(3^i)
+P^{'} < \sum_{i=0}^{n}(3^i) + 3^{n+1} \iff
+P^{'} < \sum_{i=0}^{n+1}(3^i)
 \end{equation}
 
 Por lo cual, el valor de $P^{''}$ no se encuentra en el mismo intervalo que $P^{'}$ y como $3^{n+1}$ ya no se encuentra en intervalos más pequeños, el intervalo que contenga a $P^{'}$ utilizará potencias diferentes. Como por hipótesis inductiva podemos generar cualquier $P$ mayor que cero, podremos en particular generar a $P^{''}$.
