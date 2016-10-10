@@ -50,8 +50,8 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 	while(exitoBackLampara && exitoBackPar){
 //		cout<<"----------------------------------------------\nNuevo paso:\n";
 		escenario.printStatus();
-
 		//De haber encontrado una solucion, obtengo el tiempo logrado
+		//cout<<"tiempo: "<<escenario.tiempo<<"\n";
 		if (escenario.pasaronTodos())
 		{
 			if (escenario.tiempo < minimo || minimo == -1)
@@ -59,11 +59,10 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 				minimo = escenario.tiempo;
 			}
 			sol++;
-			cout<<"||Fin de rama: minimo logrado = "<<escenario.tiempo<<" || \n";
+			cout<<"||Fin de rama: logrado = "<<escenario.tiempo<<" minimo: "<<minimo<<" || \n";
 		}
 
-		exitoBackPar = true;
-		exitoBackLampara = true;
+		
 		if (escenario.tienenLampara)
 		{
 			Escenario2::Eleccion eleccion = escenario.envioPosible();
@@ -71,9 +70,9 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 			//me sigue dando una mejor solucion a la ya encontrada
 			if (eleccion.posible==1 && (minimo == -1 || escenario.tiempo<minimo))
 			{
-				cout<<"> Enviando ";
+				//cout<<"> Enviando ";
 				escenario.printEleccion(eleccion);
-				cout<<"\n";
+				//cout<<"\n";
 
 				escenario.enviarEleccion(eleccion);
 			}else{
@@ -88,9 +87,9 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 			//Si hay un farolero que pueda hacer que retorne y que me mantenga el tiempo menor al ya encontrado
 			if (eleccion.posible==1 && (minimo == -1 || escenario.tiempo < minimo))
 			{
-				cout<<"< Retornando eleccion ";
+				//cout<<"< Retornando eleccion ";
 				escenario.printEleccion(eleccion);
-				cout<<"\n";
+				//cout<<"\n";
 				escenario.retornarEleccion(eleccion);
 
 			}else{

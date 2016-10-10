@@ -6,7 +6,7 @@ bool Escenario2::envioValido(Eleccion eleccion) const
 {
 	
 	//Me fijo que ambos esten presentes en el lado A
-	//this->printEleccion(eleccion);
+	
 	if (eleccion.primero.lado == LADO_B || eleccion.segundo.lado == LADO_B){
 		//cout<<"\t\t- error: alguna de las 2 personas no se encuentran en la isla A: "<<eleccion.primero.lado<<" "<<eleccion.segundo.lado<<"\n";
 		
@@ -15,24 +15,28 @@ bool Escenario2::envioValido(Eleccion eleccion) const
 
 	if (this->historial->ocurrioEstado(eleccion, LADO_B))
 	{
-		//cout<<"\t\t- error: Se detectó un ciclo\n";
+		
+		//cout<<"\t\t- error: Se detectó un ciclo ";
+		//this->printEleccion(eleccion);
+		//cout<<"\n";
 		
 		return false;
 	}
 
 	//Calculo cuantos quedarian de cada lado
-	if (this->estaBalanceadoEnviandoEleccion(eleccion))
+	if (!this->estaBalanceadoEnviandoEleccion(eleccion))
 	{
-		return true;
+		return false;
 	}
 	//this->printEleccion(eleccion);
 	//cout<<"\t\t- error: DESBALANCE "<<"\n";
 		
-	return false;
+	return true;
 }
 bool Escenario2::retornoValido(Eleccion eleccion) const
 {
 	//Me fijo que este del lado B
+
 	if(eleccion.primero.lado == LADO_A || eleccion.segundo.lado == LADO_A)
 	{
 		//cout<<"\t\t- error: alguna de las 2 personas no se encuentran en la isla B: "<<eleccion.primero.lado<<" "<<eleccion.segundo.lado<<"\n";
@@ -41,13 +45,23 @@ bool Escenario2::retornoValido(Eleccion eleccion) const
 	}
 
 	//Calculo cuantos quedarian de cada lado
-	if (this->estaBalanceadoRetornandoEleccion(eleccion))
+	if (!this->estaBalanceadoRetornandoEleccion(eleccion))
 	{
-		return true;
+
+		//cout<<"\t\t- error: Desbalance";
+		return false;
+	}
+
+	if (this->historial->ocurrioEstado(eleccion, LADO_A))
+	{
+		
+		
+		//cout<<"\t\t- error: Se detectó un ciclo ";
+		return false;
 	}
 	//this->printEleccion(eleccion);
 	//cout<<"\t\t- error: DESBALANCE "<<"\n";
-	return false;
+	return true;
 }
 
 void Escenario2::printEleccion(Eleccion eleccion) const
@@ -59,7 +73,8 @@ void Escenario2::printEleccion(Eleccion eleccion) const
 void Escenario2::printStatus() const
 {
 	cout<<"Escenario   paso:"<<this->decisiones->size()<<"\n\t Islas       |\tA \tB\n\t canibales   |\t"<<this->cant_canibales_ladoA <<"\t"<<this->cant_canibales_ladoB<<"\n\t arqueologos |\t"<<this->cant_arqueologos_ladoA<<"\t"<<this->cant_arqueologos_ladoB<<"\n Con tiempo: "<<this->tiempo<<"\n";
-
+	vector<char> v;
+	this->historial->historia.lexicographPrint(this->historial->historia.root, v);
 }
 
 bool Escenario2::estaBalanceadoEnviandoEleccion(Eleccion eleccion) const
@@ -121,6 +136,7 @@ Escenario2::Escenario2(const int cantA, const int cantC, const int * tiempos_arq
 	this->eleccionActual = Eleccion(this);
 
 	this->historial = new HistoricoEstados(this);
+	historial->marcarHistoria();
 	
 
 }
@@ -138,6 +154,8 @@ Escenario2::Eleccion Escenario2::envioPosible()
 		 this->eleccionActual.recalcular();
 	}
 
+	this->eleccionActual.posible = this->eleccionActual.posible && this->envioValido(this->eleccionActual);
+
 	return eleccionActual;
 }
 
@@ -149,6 +167,8 @@ Escenario2::Eleccion Escenario2::retornoPosible()
 		 //this->printEleccion(this->eleccionActual);
 		 this->eleccionActual.recalcular();
 	}
+
+	this->eleccionActual.posible = this->eleccionActual.posible && this->retornoValido(this->eleccionActual) ;
 
 	return this->eleccionActual;
 
@@ -201,7 +221,6 @@ void Escenario2::retornarEleccion(const Eleccion eleccion)
 	//El par se lleva la lampara al lado B
 	this->tienenLampara = 1;
 
-	//El tiempo que se insume es el del mas lento
 	this->tiempo = this->tiempo + eleccion.tiempo;
 
 	this->eleccionActual = Eleccion(this);
@@ -236,7 +255,7 @@ bool Escenario2::deshacerEnvio()
 	this->tiempo = this->tiempo - eleccionADeshacer.tiempo;
 
 	//this->decisiones->pop_back(); //recalculo el paso previo
-	this->historial->borrarHistoria(eleccionADeshacer);
+	this->historial->borrarHistoria(eleccionADeshacer, LADO_B);
 	this->eleccionActual = eleccionADeshacer;
 	this->eleccionActual.recalcular();
 
@@ -268,7 +287,7 @@ bool Escenario2::deshacerRetorno()
 	this->tiempo = this->tiempo - eleccionADeshacer.tiempo;
 
 	//this->decisiones->pop_back();
-	this->historial->borrarHistoria(eleccionADeshacer);
+	this->historial->borrarHistoria(eleccionADeshacer, LADO_A);
 	this->eleccionActual = eleccionADeshacer;
 	this->eleccionActual.recalcular();
 

@@ -170,7 +170,7 @@ class TrieTree
           
             TrieTreeNode * traverse;     // variable to assist in traversal
           
-            while (temp->occurrences.size() == 0 && temp->parent != NULL && childCount < 2) {
+            while (temp->occurrences.size() == 0 && temp->parent != NULL && childCount < 1) {
                 // temp->occurrences.size() -> tells if the node is associated with another
             // word
                 //

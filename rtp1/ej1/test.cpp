@@ -3,7 +3,7 @@
 // A los pares los identifico por el numero de fila y columna que representan en una matriz donde las filas son los arqueologos seguidos por los canibales
 #include <iostream>
 #include <fstream>
-#include "Escenario2.hpp"
+#include "trie.cpp"
 #include <string> 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 {
 	//ifstream input( "ej1.in" );
 	//ifstream input = stdin;
-	int cant_arqueologos, cant_canibales;
+/*	int cant_arqueologos, cant_canibales;
 	cin >> cant_arqueologos >> cant_canibales;
 
 
@@ -31,26 +31,29 @@ int main(int argc, char* argv[])
 		cin >> tiempos_canibales[i];
 	}
 //	cout<<"Entrada inicializada: comenzando algoritmo...\n";
-	int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
+	int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);*/
 	
 	//cout <<t<<"\n";
 	
+	TrieTree t;
 
-
+	char a[] = "hola";
+	t.insert(a,0);
+	vector<char> v;
+	t.lexicographPrint(t.root,v);
+	t.removeWord(t.root,a);
+	t.lexicographPrint(t.root,v);
+	t.insert(a,0);
+	t.lexicographPrint(t.root,v);
 	return 1;
 }
-struct Nodo{
-	Nodo* nodo1;
-	Nodo* nodo2;
 
-	Nodo(int a):nodo1(NULL),nodo2(NULL){};
-};
 int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_arqueologos, int * tiempos_canibales)
 {
 
 //	cout<<"Inicializando escenario...\n";
-	Escenario2 escenario = Escenario2(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
-	escenario.printStatus();
+	//Escenario2 escenario = Escenario2(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
+	//escenario.printStatus();
 //	cout<<"Escenario listo\n";
 	
 /*
@@ -78,7 +81,7 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 	escenario.enviarEleccion(eleccion3);
 	cout<<"Revisando historia...\n";
 	cout<<"Ocurrio:"<<escenario.historial->ocurrioEstado(eleccion3, 1)<<'\n';
-	escenario.printStatus();*/
+	escenario.printStatus();
 
 	
 
@@ -94,6 +97,8 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 	//escenario.printEleccion(eleccion);
 	escenario.enviarEleccion(eleccion);
 	escenario.printStatus();*/
+
+
 
 	return 1;
 }

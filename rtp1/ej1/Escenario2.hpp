@@ -129,6 +129,7 @@ public:
 
 		HistoricoEstados(Escenario2* esc){
 			escenario = esc;
+			//marcarHistoria(); (ver problema caso base que esta jodiendo, fijate que no vuelve a analizar el cb)
 		}
 
 		void marcarHistoria(){
@@ -188,10 +189,14 @@ public:
 			return NULL!=this->historia.searchWord(this->historia.root, estado);
 		}
 
-		void borrarHistoria(Eleccion eleccion){
+		void borrarHistoria(Eleccion eleccion, int islaAEnviar){
 			this->cantHechos--;
 			char estado[this->escenario->personas_totales + 1];
 			estado[this->escenario->personas_totales] = NULL;
+
+			int idP1 = eleccion.primero.id;
+			int idP2 = eleccion.segundo.id;
+
 
 			for (int i = 0; i < this->escenario->personas_totales; i++)
 			{
@@ -202,10 +207,23 @@ public:
 				}else{
 					estado[i] = 'n';
 				}
+
+				if (i==idP1 || i==idP2){
+						/* code */
+					if (islaAEnviar == escenario->LADO_A)
+					{
+						estado[i] = 's';
+					}else{
+						estado[i] = 'n';
+					}
+
+				}
 				
 			}
 
+
 			this->historia.removeWord(this->historia.root, estado);
+
 
 		}
 
