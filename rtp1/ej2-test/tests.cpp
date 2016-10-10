@@ -1,6 +1,10 @@
-//#include <chrono>
+#include <chrono>
+#include <iostream>
+#include <string.h>
+#define ya chrono::high_resolution_clock::now
 
-//#define ya chrono::high_resolution_clock::now
+using namespace std;
+
 void test3i(){
 	/*Caso P = 3^i*/
 	FILE* archivo = fopen("./test3i.txt", "a");
@@ -9,7 +13,13 @@ void test3i(){
 	int i = 0;
 	while(i < 30){
 		peso = pow(3,i);
+		/*PARA TOMAR MEDICION DESCOMENTAR ESTO*/
+		//printf("Numero de medicion: %d, para test3i", i);
+		// auto start = ya();
 		Balanza b1(peso);
+		/*auto end = ya();
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");*/
 		b1.imprimir(archivo);
 		i++;
 	}
@@ -29,7 +39,13 @@ void testPSumaDePotencias(){
 			peso = peso + pow(3,x);
 			x++;
 		}
+		/*PARA TOMAR MEDICION DESCOMENTAR ESTO*/
+		//printf("Numero de medicion: %d, para testPSumaDePotencias", i);
+			 //auto start = ya();
 		Balanza b1(peso);
+		/*auto end = ya();
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");*/
 		b1.imprimir(archivo);
 		i++;
 	}
@@ -46,7 +62,14 @@ void testPnumerosMultiplosDe3(){
 			peso = i;
 		if(peso % 3 == 0){
 			peso = i;
-			Balanza b1(peso);
+
+			/*PARA TOMAR MEDICION DESCOMENTAR ESTO*/
+		//printf("Numero de medicion: %d, para testPnumerosMultiplosDe3", i);
+		/*		 auto start = ya();*/
+		Balanza b1(peso);
+		/*auto end = ya();
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");*/
 			b1.imprimir(archivo);
 		}
 		i++;
@@ -65,7 +88,12 @@ void testPnumerosNoMultiplosDe3(){
 			peso = i;
 		if(peso % 3 == 1 || peso % 3 == 2){
 			peso = i;
-			Balanza b1(peso);
+			//printf("Numero de medicion: %d, para testPnumerosNoMultiplosDe3", i);
+		//		 auto start = ya();
+		Balanza b1(peso);
+		/*auto end = ya();
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");*/
 			b1.imprimir(archivo);
 		}
 		i++;
@@ -82,7 +110,12 @@ void test_random(){
 	int i = 0;
 	while(i < 500){
 		peso = i;	
+		/*PARA TOMAR MEDICION DESCOMENTAR ESTO*/
+		//	 auto start = ya();
 		Balanza b1(peso);
+		/*auto end = ya();
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");*/
 		b1.imprimir(archivo);
 		i++;
 	}
