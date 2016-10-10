@@ -565,7 +565,7 @@
 \renewcommand{\listalgorithmcfname}{Liste des Algorithmes}%
 \renewcommand{\algorithmcfname}{Algorithme}%
 \renewcommand{\algocf@typo}{\ }%
-\renewcommand{\@algocf@procname}{Procédure}
+\renewcommand{\@algocf@procname}{ProcÃ©dure}
 \renewcommand{\@algocf@funcname}{Fonction}
 }
 %
@@ -1419,6 +1419,27 @@
 \expandafter\algocf@mkcmd\csname algocf@l#1\endcsname[2]{% \lFor{}{}
   \KwSty{#2} \ArgSty{##1} \KwSty{#3} ##2}%
 }
+
+\newcommand{\SetKwProg}[4]{%
+\@ifundefined{algocf@#1}{\let\algocf@mkcmd=\newcommand}{\let\algocf@mkcmd=\renewcommand}%
+% side text or not? 
+\expandafter\def\csname#1\endcsname{ %For
+  \@ifnextchar({\csname algocf@#1opt\endcsname}{\csname algocf@#1\endcsname}}
+\expandafter\def\csname l#1\endcsname{ %For
+  \@ifnextchar({\csname algocf@l#1opt\endcsname}{\csname algocf@l#1\endcsname}}
+% with side text
+\expandafter\def\csname algocf@#1opt\endcsname(##1)##2##3{% \For(){}{}
+  \KwSty{#2} \ArgSty{##2} \KwSty{#3} ##1\a@block{##3}{#4}}%
+\expandafter\def\csname algocf@l#1opt\endcsname(##1)##2##3{% \lFor(){}{}
+  \KwSty{#2} \ArgSty{##2} \KwSty{#3} ##3\algocf@endline\ ##1\par}
+% without side text
+\expandafter\algocf@mkcmd\csname algocf@#1\endcsname[2]{% \For{}{}
+  \KwSty{#2} \ArgSty{##1} \KwSty{#3}\a@block{##2}{#4}}%
+\expandafter\algocf@mkcmd\csname algocf@l#1\endcsname[2]{% \lFor{}{}
+  \KwSty{#2} \ArgSty{##1} \KwSty{#3} ##2}%
+}
+
+
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -1984,7 +2005,7 @@
 \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi}%
 \SetKwSwitch{Suivant}{Cas}{Autre}{suivant}{faire}{cas o\`u}{autres cas}{fin d'alternative}%
 \SetKwFor{Pour}{pour}{faire}{finpour}%
-\SetKwFor{PourPar}{pour}{faire en parallèle}{finpour}%
+\SetKwFor{PourPar}{pour}{faire en parallÃ¨le}{finpour}%
 \SetKwFor{PourCh}{pour chaque}{faire}{finprch}%
 \SetKwFor{PourTous}{pour tous les}{faire}{finprts}%
 \SetKwFor{Tq}{tant que}{faire}{fintq}%
@@ -2028,7 +2049,7 @@
 \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{fin}%
 \SetKwSwitch{Suivant}{Cas}{Autre}{suivant}{faire}{cas o\`u}{autres cas}{fin}%
 \SetKwFor{Pour}{pour}{faire}{fin}%
-\SetKwFor{PourPar}{pour}{faire en parallèle}{fin}%
+\SetKwFor{PourPar}{pour}{faire en parallÃ¨le}{fin}%
 \SetKwFor{PourCh}{pour chaque}{faire}{fin}%
 \SetKwFor{PourTous}{pour tous les}{faire}{fin}%
 \SetKwFor{Tq}{tant que}{faire}{fin}%
@@ -2072,9 +2093,9 @@
 \algocf@defaults@common
 \SetKwIF{gSi}{gSinonSi}{gSinon}{si}{alors}{sinon si}{sinon}{}%
 \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{}%
-\SetKwSwitch{Suivant}{Cas}{Autre}{suivant}{faire}{cas où}{autres cas}{}%
+\SetKwSwitch{Suivant}{Cas}{Autre}{suivant}{faire}{cas oÃ¹}{autres cas}{}%
 \SetKwFor{Pour}{pour}{faire}{}%
-\SetKwFor{PourPar}{pour}{faire en parallèle}{}%
+\SetKwFor{PourPar}{pour}{faire en parallÃ¨le}{}%
 \SetKwFor{PourCh}{pour chaque}{faire}{}%
 \SetKwFor{PourTous}{pour tous les}{faire}{}%
 \SetKwFor{Tq}{tant que}{faire}{}%
