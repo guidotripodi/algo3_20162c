@@ -1,9 +1,7 @@
 A continuaci\'on se detalla el pseudo-c\'odigo de los algoritmos que resuelven el problema:
 
 \begin{algorithm}[H] %or another one check
- \caption{BuscarMaximo}
-%     \SetAlgoLined
-
+ \Fn{BuscarMaximo()}{
 	\For{matriz $\in$ matrices}{
     objetoActual es último objeto que no fue optimizado\\
     copiar matriz de la iteración previa a matriz\\
@@ -41,15 +39,14 @@ decrementar x \\
 
 }
 
-devolver obtenerMaximo
-
+devolver obtenerMaximo()
+}
 \end{algorithm}
 
 \newpage
 
 \begin{algorithm}[H] %or another one check
- \caption{obtenerMaximo}
-%     \SetAlgoLined
+ \Fn{obtenerMaximo()}{
 
 \For{matrizActual $\in$ matrices}{
 objetoActual es último objeto que optimizó matrizActual\\
@@ -63,7 +60,6 @@ objetoActual es último objeto que optimizó matrizActual\\
 }
 }
 }
-
-
 devolver max\\
+}
 \end{algorithm}
