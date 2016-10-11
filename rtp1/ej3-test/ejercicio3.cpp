@@ -240,7 +240,6 @@ void tridimentionalKnapSackProblem() {
                         K[k1][k2][k3] = m3 + value;
                         
                     }
-                    
                     if(K[k1][k2][k3] > max) {
                         max = K[k1][k2][k3];
                         k1Max = k1;
@@ -406,18 +405,20 @@ void initArrOfObjectsUsed() {
 }
 
 int main(){
-    int x = 10;
+    int x = 5;
     while(x < 50){
         objectsWeights = NULL;
         objectsValues = NULL;
+        knapSacksCapacities = NULL;
     int i = 0;
     int cantidad = x; 
     M = 3;
+    N = 0;
     
     int knapSacks[M];
     
     while(i < M){
-        knapSacks[i] = 25;
+        knapSacks[i] = x/2;
         i++;
     }
 
@@ -430,13 +431,8 @@ int main(){
     
     while(i < cantidad){ //cantidad de tipos de objeto
         int cant = 1;
-        int weight = 0;
-        if (i < 4){
-            weight = 25;
-        }else{
-            weight = 50;
-        }
-        int value = 5;
+        int weight = 3;
+        int value = i*5;
         N = N + cant; // N es la cantidad total de objetos para el algoritmo
         weights[i] = weight;
         values[i] = value;
