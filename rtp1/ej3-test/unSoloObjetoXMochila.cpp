@@ -443,7 +443,7 @@ int main(){
         }else{
             weight = 50;
         }
-        int value = 5;
+        int value = (i+1)*5;
         N = N + cant; // N es la cantidad total de objetos para el algoritmo
         weights[i] = weight;
         values[i] = value;
