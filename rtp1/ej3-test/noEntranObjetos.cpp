@@ -3,6 +3,13 @@
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
+#include <chrono>
+
+#define ya chrono::high_resolution_clock::now
+
+using namespace std;
+
+
 
 #define M1 1
 #define M2 2
@@ -406,37 +413,30 @@ void initArrOfObjectsUsed() {
 }
 
 int main(){
-    int x = 10;
-    while(x < 50){
-        objectsWeights = NULL;
-        objectsValues = NULL;
+    
     int i = 0;
-    int cantidad = x; 
-    M = 3;
+    int cantidad; 
+    //std::cin >> M;
+    //std::cin >> cantidad;
     
     int knapSacks[M];
     
-    while(i < M){
-        knapSacks[i] = 25;
+    /*while(i < M){
+        std::cin >> knapSacks[i];
         i++;
     }
-
     i = 0;
-
     int* values = new int[cantidad];
     int* weights = new int[cantidad];
     int* amounts = new int[cantidad];
-
     
     while(i < cantidad){ //cantidad de tipos de objeto
-        int cant = 1;
-        int weight = 0;
-        if (i < 4){
-            weight = 25;
-        }else{
-            weight = 50;
-        }
-        int value = 5;
+        int cant;
+        int weight;
+        int value;
+        std::cin >> cant;
+        std::cin >> weight;
+        std::cin >> value;
         N = N + cant; // N es la cantidad total de objetos para el algoritmo
         weights[i] = weight;
         values[i] = value;
@@ -468,27 +468,58 @@ int main(){
     
     delete[](values);
     delete[](weights);
+*//*MISMAS MOCHILAS*/
+    M = 3;
+    i = 0;
+    int h = 0;
+    int capacidad = 25;
+    
+    int cantidad_objetos = 100;
+    int x = 5;
 
-    values = auxval;
-    weights = auxweight;
-    
-    
-    objectsWeights = weights;
-    objectsValues = values;
+    while(x < cantidad_objetos){
+    int pesos[x];
+    int valor[x];
+        N = x;
+        while(h < N){
+            if (h == 1) {
+            pesos[h] = capacidad * 2;            
+            }else{
+                pesos[h] = capacidad * 3;            
+            }
+            h++;
+
+        }
+        h=0;
+        while(h < N){
+            valor[h] = h *5;
+            h++;
+        }
+        while(i < M){
+            knapSacks[i] = capacidad;    
+            i++;
+        }
+    h= 0;
+    i = 0;
+    objectsWeights = pesos;
+    objectsValues = valor;
     knapSacksCapacities = knapSacks;
-    printf("cantidad de objetos: %d\n",x);
+    printf("Cantidad de objetos: %d\n", x );
+    //auto start = ya();
     
     initArrOfObjectsUsed();
-    
     if (M == 1) {
         int max = simpleKnapSackProblem(0);
         printf("%d\n", max);
     }else if (M == 2) {
+        //initArrOfObjectsUsed();
         objects2dMatrices = new int**[N];
         bidimentionalKnapSackProblem(); //imprime el maximo
     }else {
+        //initArrOfObjectsUsed();
         objects3dMatrices = new int***[N];
         tridimentionalKnapSackProblem();//imprime el maximo 
+
     }
 
     
@@ -504,20 +535,19 @@ int main(){
     int pesoActual = 0;
     int valorActual = 0;
 
-    for(int j = 0; j < cantidad; j++){
+    for(int j = 0; j < N; j++){
         claseM1[j] = 0;
         claseM2[j] = 0;
         claseM3[j] = 0;
+
     }
-    
     for(int i = 0; i < N; i++){
         if(objectsValues[i] != valorActual || objectsWeights[i] != pesoActual){
             //la primera vez entra si o si
             claseActual++;
             valorActual = objectsValues[i];
             pesoActual = objectsWeights[i];
-        }
-
+         }
         switch(objectsUsed[i]){
             case 1:
                 claseM1[cantM1] = claseActual;
@@ -536,6 +566,7 @@ int main(){
                 break;
         }
     }
+   
     
     //Imprimir resultado
     printf("%d ", cantM1);  
@@ -561,15 +592,16 @@ int main(){
     }
     
     //Limpiar memoria
-
+//Limpiar memoria
+/*
     delete[](values);
     delete[](weights);
     delete[](amounts);
     delete[](objectsUsed);
     if( objects2dMatrices != NULL ) delete2d();
     if( objects3dMatrices != NULL ) delete3d();
-
-    x = x +5;
-}
+*/
+            x = x +5;
+        }
     return 0;
 }

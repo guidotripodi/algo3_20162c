@@ -406,10 +406,8 @@ void initArrOfObjectsUsed() {
 }
 
 int main(){
-    int x = 10;
-    while(x < 50){
-        objectsWeights = NULL;
-        objectsValues = NULL;
+    for (int x = 5; x < 50; x++) {
+        
     int i = 0;
     int cantidad = x; 
     M = 3;
@@ -430,13 +428,8 @@ int main(){
     
     while(i < cantidad){ //cantidad de tipos de objeto
         int cant = 1;
-        int weight = 0;
-        if (i < 4){
-            weight = 25;
-        }else{
-            weight = 50;
-        }
-        int value = 5;
+        int weight = 5*i;
+        int value = 5*i;
         N = N + cant; // N es la cantidad total de objetos para el algoritmo
         weights[i] = weight;
         values[i] = value;
@@ -476,7 +469,6 @@ int main(){
     objectsWeights = weights;
     objectsValues = values;
     knapSacksCapacities = knapSacks;
-    printf("cantidad de objetos: %d\n",x);
     
     initArrOfObjectsUsed();
     
@@ -538,6 +530,7 @@ int main(){
     }
     
     //Imprimir resultado
+  
     printf("%d ", cantM1);  
     for(int k = 0; k < cantM1; k++){
         printf("%d ", claseM1[k]);
@@ -568,8 +561,6 @@ int main(){
     delete[](objectsUsed);
     if( objects2dMatrices != NULL ) delete2d();
     if( objects3dMatrices != NULL ) delete3d();
-
-    x = x +5;
 }
     return 0;
 }
