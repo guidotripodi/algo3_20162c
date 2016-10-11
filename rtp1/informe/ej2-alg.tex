@@ -1,35 +1,38 @@
 \begin{algorithm}[H] %or another one check
- \caption{Algoritmo EJ1}
-%     \SetAlgoLined
-
-	entero sumaParcial $\gets$ 0 \\
-	arreglo sumasParciales \\
-    \While{sumaParcial $\leq$ P}{
-      sumasParciales $\cup$ sumaParcial\\
-	para sumaParcial asignar sumaParcial + 3$^{i}$\\
-     	incrementar i \\
+\Fn{Balancear()}{
+	entero sumaParcial $\gets$ 0 \hfill O(1)\\ 
+	arreglo sumasParciales \hfill O(1)\\ 
+    \While{sumaParcial $\leq$ P}{ 
+    \hfill ciclo: O(log(P))\\
+      sumasParciales $\cup$ sumaParcial \hfill O(1)\\
+	para sumaParcial asignar sumaParcial + 3$^{i}$ \hfill O(1)\\
+     	incrementar i \hfill O(1)\\
      }
-	entero indice $\gets$ size(sumasParciales)-1   \\
-	entero equilibrioActual $\gets$ P \\
-	entero potenciaActual $\gets$ 0 \\
+	entero indice $\gets$ size(sumasParciales)-1  \hfill O(1) \\
+	entero equilibrioActual $\gets$ P \hfill O(1)\\
+	entero potenciaActual $\gets$ 0 \hfill O(1)\\ 
 	    \While{|equilibrioActual| $>$ 0}{
-	          \eIf{sumasParciales[indice-1] $<$ |equilibrioActual| $\leq$ sumasParciales[indice]}{
-       para potenciaActual asignar sumasParciales[indice] -  sumasParciales[indice-1]\\
-       	\eIf{equilibrioActual $<$ 0}{
+	    		\hfill ciclo: O(log(P))\\ 
+	          \If{sumasParciales[indice-1] $<$ |equilibrioActual| $\leq$ sumasParciales[indice]}{
+	          	\hfill guarda: O(1)\\ 
+	          
+       para potenciaActual asignar sumasParciales[indice] -  sumasParciales[indice-1] \hfill O(1)\\ 
+       
+       	\eIf{equilibrioActual $<$ 0}{ 
        	   	para equilibrioActual asignar potenciaActual + equilibrioActual \\
-                platoDerecho $\cup$ potenciaActual \\
-			}{
+                platoDerecho $\cup$ potenciaActual \hfill O(1)\\ 
+		}{
 			para equilibrioActual asignar equilibrioActual - potenciaActual \\
-                platoIzquierdo $\cup$ potenciaActual \\
-      }
+                platoIzquierdo $\cup$ potenciaActual \hfill O(1)\\ 
+      	}
      }
-     indice--	
+     indice--	\hfill O(1)\\ 
 	}
-	devolver size(platoDerecho) \\      
-		devolver size(platoIzquierdo) \\      
-			devolver invertir(platoDerecho) \\      
-				devolver invertir(platoIzquierdo) \\      
-     
+	devolver size(platoDerecho) \hfill O(1)\\   
+		devolver size(platoIzquierdo) \hfill O(1)\\     
+			devolver invertir(platoDerecho) \hfill O(1)\\      
+				devolver invertir(platoIzquierdo) \hfill O(1)\\ 
+   } 
 
-
+\textbf{\hfill total: O(log(P))}\\ 
 \end{algorithm}
