@@ -1,10 +1,10 @@
-//Recibir los parametros como esta en el enunciado
-//Generar todas las tuplas posibles
-// A los pares los identifico por el numero de fila y columna que representan en una matriz donde las filas son los arqueologos seguidos por los canibales
 #include <iostream>
 #include <fstream>
 #include "Escenario2.hpp"
-#define CANT_MAX 10
+#include <chrono>
+
+#define ya chrono::high_resolution_clock::now
+#define CANT_MAX 6
 
 using namespace std;
 
@@ -13,73 +13,28 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 
 int main(int argc, char* argv[])
 {
-	//ifstream input( "ej1.in" );
-	//ifstream input = stdin;
 	int cant_arqueologos, cant_canibales;
-	//cin >> cant_arqueologos >> cant_canibales;
-
-
-	//int tiempos_arqueologos[cant_arqueologos];
-	//int tiempos_canibales[cant_canibales];
-
-	int h,x;
 	int tiempos_arqueologos[CANT_MAX];
 	int tiempos_canibales[CANT_MAX];
 
-	for(int i = 0; i < CANT_MAX; i++){
-		for(int j = 0; j < CANT_MAX; j++){
-			tiempos_arqueologos[i] = i + 1;//no cuento el cero
-			tiempos_canibales[j] = j + 1;
-			cant_arqueologos = i + 1;
-			cant_canibales = j + 1;
+	for(int i = 1; i <= CANT_MAX; i++){
+		for(int j = 0; (i + j) <= CANT_MAX; j++){
+			if(i != 0) tiempos_arqueologos[i - 1] = i;
+			if(j != 0) tiempos_canibales[j - 1] = j;
+			cant_arqueologos = i;
+			cant_canibales = j;
 			printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
+			auto start = ya();
 			int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
+			auto end = ya();
 			cout <<t<<"\n";
-
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+			cout << "\n";
 		}
 	}
-/*
-	while( (i + j) < (2*CANT_MAX) - 2){
-		j = 0;
-		while(j < i){
-			j++;
-			x = 1;
-			while(x < 2){
-				cant_arqueologos = 3;
-				cant_canibales = 3;
-				h = 0;
-				while(h < i){
-					tiempos_arqueologos[h] = 1;
-					h++;
-				}
-				h = 0;
-				while(h < j){
-					tiempos_canibales[h] = 1;
-					h++;
-				}
-				printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
-				int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
-				cout <<t<<"\n";
-				x++;
-		}
-				if (j+1 == i || j+1 + i == 7){
-					break;
-				}
-	}
-	if (j == 3){
-		j = 0;
-	}
-	i++;
-	}
-
-*/
-
-//	cout<<"Entrada inicializada: comenzando algoritmo...\n";
-	//int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
-	//cout <<t<<"\n";
 	
 
-	return 1;
+	return 0;
 }
 
 int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_arqueologos, int * tiempos_canibales)
