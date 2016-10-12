@@ -66,13 +66,13 @@ bool Escenario2::retornoValido(Eleccion eleccion) const
 
 void Escenario2::printEleccion(Eleccion eleccion) const
 {
-	cout << "Eleccion id: "<<std::to_string(eleccion.id)<<": #arq = "<<eleccion.cantArqueologos<<" #can = "<<eleccion.cantCanibales<<" t: "<<eleccion.tiempo<<"\n";
+	//cout << "Eleccion id: "<<std::to_string(eleccion.id)<<": #arq = "<<eleccion.cantArqueologos<<" #can = "<<eleccion.cantCanibales<<" t: "<<eleccion.tiempo<<"\n";
 }
 
 
 void Escenario2::printStatus() const
 {
-	cout<<"Escenario   paso:"<<this->decisiones->size()<<"\n\t Islas       |\tA \tB\n\t canibales   |\t"<<this->cant_canibales_ladoA <<"\t"<<this->cant_canibales_ladoB<<"\n\t arqueologos |\t"<<this->cant_arqueologos_ladoA<<"\t"<<this->cant_arqueologos_ladoB<<"\n Con tiempo: "<<this->tiempo<<"\n";
+	//cout<<"Escenario   paso:"<<this->decisiones->size()<<"\n\t Islas       |\tA \tB\n\t canibales   |\t"<<this->cant_canibales_ladoA <<"\t"<<this->cant_canibales_ladoB<<"\n\t arqueologos |\t"<<this->cant_arqueologos_ladoA<<"\t"<<this->cant_arqueologos_ladoB<<"\n Con tiempo: "<<this->tiempo<<"\n";
 }
 
 bool Escenario2::estaBalanceadoEnviandoEleccion(Eleccion eleccion) const

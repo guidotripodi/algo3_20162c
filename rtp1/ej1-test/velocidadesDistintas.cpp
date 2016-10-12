@@ -20,16 +20,19 @@ int main(int argc, char* argv[])
 	for(int i = 1; i <= CANT_MAX; i++){
 		for(int j = 0; (i + j) <= CANT_MAX; j++){
 			if(i != 0) tiempos_arqueologos[i - 1] = i;
-			if(j != 0) tiempos_canibales[j - 1] = j;
+			
 			cant_arqueologos = i;
+			if( j <= i){
 			cant_canibales = j;
+			if(j != 0) tiempos_canibales[j - 1] = j;
 			printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
 			auto start = ya();
 			int f = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
 			auto end = ya();
-			cout <<f<<"\n";
+			//cout <<f<<"\n";
             cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
 			cout << "\n";
+		}
 		}
 	}
 	

@@ -84,20 +84,20 @@ class TrieTree
                 vector<char>::iterator itr = printUtilVector.begin();
           
                 while (itr != printUtilVector.end()) {
-                    printf("%c", *itr);
+                //    printf("%c", *itr);
                     ++itr;
                 }
-                printf(" -> @ index -> ");
+                //printf(" -> @ index -> ");
           
                 vector<int>::iterator counter = trie_tree->occurrences.begin();
                 // This is to print the occurences of the word
           
                 while (counter != trie_tree->occurrences.end()) {
-                    printf("%d, ", *counter);
+                    //printf("%d, ", *counter);
                     ++counter;
                 }
           
-                printf("\n");
+                //printf("\n");
             }
           
             printUtilVector.pop_back();

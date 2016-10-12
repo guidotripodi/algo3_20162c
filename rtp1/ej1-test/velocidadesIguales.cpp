@@ -15,41 +15,31 @@ int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_
 
 int main(int argc, char* argv[])
 {
-	//ifstream input( "ej1.in" );
-	//ifstream input = stdin;
 	int cant_arqueologos, cant_canibales;
-	//cin >> cant_arqueologos >> cant_canibales;
-
-
-	//int tiempos_arqueologos[cant_arqueologos];
-	//int tiempos_canibales[cant_canibales];
-	cant_canibales = 0;
-	cant_arqueologos = 0;
-	int h,x;
 	int tiempos_arqueologos[CANT_MAX];
 	int tiempos_canibales[CANT_MAX];
 
-	for(int i = 0; i < CANT_MAX; i++){
-		for(int j = 0; j < CANT_MAX; j++){
-			tiempos_arqueologos[i] = 3;//no cuento el cero
-			tiempos_canibales[j] = 3;
-			cant_arqueologos = i + 1;
-			if (j + 1 <= i + 1 && cant_arqueologos + j + 1 < 7)	{
-				cant_canibales = j + 1;
-				//printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
-				auto start = ya();
-				int f = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
-				auto end = ya();
-			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-				cout << "\n";
-				//cout <<f<<"\n";
-			}
-
+	for(int i = 1; i <= CANT_MAX; i++){
+		for(int j = 0; (i + j) <= CANT_MAX; j++){
+			if(i != 0) tiempos_arqueologos[i - 1] = 3;
+			
+			cant_arqueologos = i;
+			if( j <= i){
+			cant_canibales = j;
+			if(j != 0) tiempos_canibales[j - 1] = 3;
+			//printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
+			auto start = ya();
+			int f = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
+			auto end = ya();
+			//cout <<f<<"\n";
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+			cout << "\n";
+		}
 		}
 	}
+	
 
-
-	return 1;
+	return 0;
 }
 
 int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_arqueologos, int * tiempos_canibales)
