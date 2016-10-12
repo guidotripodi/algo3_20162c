@@ -25,9 +25,9 @@ int main(int argc, char* argv[])
 			cant_canibales = j;
 			printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
 			auto start = ya();
-			int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
+			int f = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
 			auto end = ya();
-			cout <<t<<"\n";
+			cout <<f<<"\n";
             cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
 			cout << "\n";
 		}

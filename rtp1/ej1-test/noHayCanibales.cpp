@@ -4,6 +4,10 @@
 #include <iostream>
 #include <fstream>
 #include "Escenario2.hpp"
+#include <chrono>
+
+#define ya chrono::high_resolution_clock::now
+
 #define CANT_MAX 6
 
 using namespace std;
@@ -23,9 +27,13 @@ int main(int argc, char* argv[])
 		tiempos_arqueologos[i] = i + 1;//no cuento el cero
 		cant_arqueologos = i + 1;
 		cant_canibales = 0;
-		printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
-		int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
-		cout <<t<<"\n";
+		//printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
+				auto start = ya();
+				int f = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
+				auto end = ya();
+			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+				cout << "\n";
+				//cout <<f<<"\n";
 	}
 
 	return 0;

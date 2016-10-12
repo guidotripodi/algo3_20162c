@@ -4,6 +4,9 @@
 #include <iostream>
 #include <fstream>
 #include "Escenario2.hpp"
+#include <chrono>
+
+#define ya chrono::high_resolution_clock::now
 #define CANT_MAX 10
 
 using namespace std;
@@ -35,8 +38,12 @@ int main(int argc, char* argv[])
 			if (j + 1 < i + 1 && cant_arqueologos + j + 1 < 7)	{
 				cant_canibales = j + 1;
 				printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
-				int t = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
-				cout <<t<<"\n";
+				auto start = ya();
+				int f = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
+				auto end = ya();
+			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+				cout << "\n";
+				//cout <<f<<"\n";
 			}
 
 		}
