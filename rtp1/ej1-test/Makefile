@@ -13,12 +13,12 @@ LDFLAGS=
 SOURCES=ej1.cpp Escenario2.cpp trie.cpp
 
 # Objetos que serán generados
-MAINOBJECTS=ej1.o velocidadesDistintas.o
+MAINOBJECTS=ej1.o velocidadesDistintas.o noHayCanibales.o velocidadesIguales.o 1Arq2can.o 2Arq1can.o masArq.o sinSolucion.o
 
 OBJECTS=Escenario2.o trie.o
 
 # Nombre del ejecutable a generar
-EXECUTABLES=ej1.test velocidadesDistintas.test
+EXECUTABLES=ej1.test velocidadesDistintas.test noHayCanibales.test velocidadesIguales.test 1Arq2can.test 2Arq1can.test masArq.test sinSolucion.test
 
 all: $(EXECUTABLES)
 
