@@ -1,3 +1,5 @@
+#Para agregar ejecutables. Agregar a EXECUTABLES y MAINOBJECTS
+
 # Compilador que será utilizado
 CC=g++
 
@@ -11,21 +13,20 @@ LDFLAGS=
 SOURCES=ej1.cpp Escenario2.cpp trie.cpp
 
 # Objetos que serán generados
-MAINOBJECTS=ej1.o
+MAINOBJECTS=ej1.o velocidadesDistintas.o
 
 OBJECTS=Escenario2.o trie.o
 
 # Nombre del ejecutable a generar
-EXECUTABLES=ej1
+EXECUTABLES=ej1.test velocidadesDistintas.test
 
 all: $(EXECUTABLES)
 
-#Para agregar ejecutables. Agregar a EXECUTABLES y MAINOBJECTS
-ej1: $(OBJECTS) ej1.o  
+%.test: $(OBJECTS) %.o  
 	$(CC) $(CFLAGS) $^ -o $@
-
-clean:
-	rm -rf $(EXECUTABLES) $(MAINOBJECTS) $(OBJECTS)
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) $< -c -o $@
+
+clean:
+	rm -rf $(EXECUTABLES) $(MAINOBJECTS) $(OBJECTS)

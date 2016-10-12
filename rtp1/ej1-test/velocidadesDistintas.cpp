@@ -25,10 +25,9 @@ int main(int argc, char* argv[])
 	int h,x;
 	int tiempos_arqueologos[CANT_MAX];
 	int tiempos_canibales[CANT_MAX];
-	i = 0; j = 0;
 
 	for(int i = 0; i < CANT_MAX; i++){
-		for(int j = 0; j < CANT_MAX; J++){
+		for(int j = 0; j < CANT_MAX; j++){
 			tiempos_arqueologos[i] = i + 1;//no cuento el cero
 			tiempos_canibales[j] = j + 1;
 			cant_arqueologos = i + 1;
