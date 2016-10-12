@@ -262,7 +262,7 @@ void tridimentionalKnapSackProblem() {
     
     
     int i = objectMax;
-    
+    int maxAux = max;
     while (i > 0) {
         int weight = objectsWeights[i];
         int value = objectsValues[i];
@@ -284,12 +284,13 @@ void tridimentionalKnapSackProblem() {
                 objectsUsed[i] = 3;
                 // deberia ser obligatorio...por alguna vino
             }
+            maxAux -= value;
         }
         
         i--;
     }
     
-    if (i == 0 && max) {
+    if (i == 0 && maxAux) {
         int weight = objectsWeights[0];
         
         if (k1Max >= weight) {
