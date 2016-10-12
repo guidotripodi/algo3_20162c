@@ -73,8 +73,6 @@ void Escenario2::printEleccion(Eleccion eleccion) const
 void Escenario2::printStatus() const
 {
 	cout<<"Escenario   paso:"<<this->decisiones->size()<<"\n\t Islas       |\tA \tB\n\t canibales   |\t"<<this->cant_canibales_ladoA <<"\t"<<this->cant_canibales_ladoB<<"\n\t arqueologos |\t"<<this->cant_arqueologos_ladoA<<"\t"<<this->cant_arqueologos_ladoB<<"\n Con tiempo: "<<this->tiempo<<"\n";
-	vector<char> v;
-	this->historial->historia.lexicographPrint(this->historial->historia.root, v);
 }
 
 bool Escenario2::estaBalanceadoEnviandoEleccion(Eleccion eleccion) const
