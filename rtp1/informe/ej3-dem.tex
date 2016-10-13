@@ -38,7 +38,7 @@ Para simplificar la notación, utilizaremos el caso de dos mochilas, aunque lo q
 Como mencionamos el subproblema que analizamos es:
 
 \begin{center}
-$S(i, k_1, k_2)$ = máximo beneficio obtenido con $i$ objetos dado que dispongo de dos capacidades $k_1$ y $k_2$ disponibles
+$S(i, k_1, k_2)$ = máximo beneficio obtenido con $i$ objetos dado que dispongo de dos capacidades $k_1$ y $k_2$
 \end{center}
 
 Si se ingresa el objeto $i-esimo$ en la mochila $j-esima$, entonces tendremos que tomar lo mejor realizado con $i-1$ objetos y capacidad $k_j-peso(e_i)$ y las capacidades restantes sin modificar siempre y cuando $k_j \geq peso(e_i)$.
