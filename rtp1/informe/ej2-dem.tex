@@ -3,29 +3,23 @@ Una vez alcanzado ese valor se puede dar por finalizado el algoritmo, dado que h
 
 Por lo tanto para probar que el algoritmo es correcto deberemos probar primero que el algoritmo termina, es decir, que $equilibrioActual$ alcanza el valor cero luego de iterar el arreglo $sumasParciales$ una sola vez y luego que utilizamos siempre potencias de tres diferentes.\\
 
-Queremos probar entones que nuestro algoritmo encuentra las pesas necesarias para todo $P$ menor que alguna suma de potencias en modulo, es decir:
+Queremos probar entonces que nuestro algoritmo encuentra las pesas necesarias para todo $P$ $ \in \mathbb{Z}$ utilizando a lo sumo $k$ potencias de tres diferentes, con $k$ el primer valor tal que la suma de las primeras $k$ potencias es mayor o igual a $P$. Es decir:
 
 \begin{equation}
 (\forall P \in \mathbb{Z}), |P| \leq \sum_{i=0}^{k}(3^i) \textit{ con k $\geq$ 0}
 \end{equation}
 
-El algoritmo encuentra una combinación de sumas y restas de potencias de tres que es igual a $P$. Podemos utilizar inducción.\\
-
 Para $k$ = 0, $P$ tiene que ser igual a uno en modulo. Por lo cual, luego de realizar la resta el algoritmo ha finalizado.\\
 
-Para el paso inductivo $k = n$ sabemos que nustro algoritmo encuentra la repuesta:
+Para el paso inductivo $k = n > 0$ sabemos que nuestro algoritmo encuentra la repuesta a cualquier $P$ con a lo sumo $n$ potencias de tres diferentes tal que $n$ es el primer valor que cumple que la suma de las primeras $n$ potencias es mayor o igual a $P$.
 
-\begin{equation}
-(\forall P \in \mathbb{Z}), |P| \leq \sum_{i=0}^{n}(3^i) \textit{ con n > 0}
-\end{equation}
-
-Sea $P^{'}$  tal que: 
+Sea $P^{'}$ tal que $n+1$ es el primer valor que cumple que la suma de las primeras $n+1$ potencias es mayor o igual a $P^{'}$, entonces:
 
 \begin{equation}
 \sum_{i=0}^{n}(3^i) <  |P^{'}| \leq \sum_{i=0}^{n+1}(3^i) 
 \end{equation}
 
-el algoritmo realiza el siguiente operación:
+El algoritmo realiza la siguiente operación:
 
 \begin{equation}
 P^{''} = \left\{ \begin{array}{lcc}
@@ -35,13 +29,13 @@ P^{''} = \left\{ \begin{array}{lcc}
              \right.
 \end{equation} 
 
-Veamos que en cualquier caso, el nuevo valor $P^{''}$ es menor a $\sum_{i=0}^{n}(3^i)$.
+Veamos que en cualquier caso, el nuevo valor $P^{''}$ es menor o igual a $\sum_{i=0}^{n}(3^i)$.
 
 En el caso $P^{'} <$ 0:
 
 \begin{equation}
-3^{n+1} - |P^{'}| < \sum_{i=0}^{n}(3^i) \iff
-|P^{'}| > - \sum_{i=0}^{n}(3^i) + 3^{n+1}
+3^{n+1} - |P^{'}| \leq \sum_{i=0}^{n}(3^i) \iff
+|P^{'}| \geq - \sum_{i=0}^{n}(3^i) + 3^{n+1}
 \end{equation}
 
 Lo cual es cierto ya que:
@@ -57,14 +51,28 @@ Lo cual es cierto ya que:
 0 > -1
 \end{equation}
 
+Además veamos que $- \sum_{i=0}^{n}(3^i) + 3^{n+1}$ $>$ $|P^{'}|$ no puede suceder dado que el 
+
+modulo del intervalo es:
+
+ \begin{equation}
+- \sum_{i=0}^{n}(3^i) + 3^{n+1} - \sum_{i=0}^{n}(3^i) = 
+ 3^{n+1} - 2 \ast \sum_{i=0}^{n}(3^i) =
+ 3^{n+1} - (-1 + 3^{n+1}) = 
+1 
+\end{equation}
+
+Y $P$ es entero, por lo cual nunca tomará valores decimales.\\
+
+
 El caso con $P^{'} >$ 0 se puede ver directamente pasando $3^{n+1}$ sumando.
 
 \begin{equation}
-P^{'} - 3^{n+1} < \sum_{i=0}^{n}(3^i) \iff
-P^{'} < \sum_{i=0}^{n}(3^i) + 3^{n+1} \iff
-P^{'} < \sum_{i=0}^{n+1}(3^i)
+P^{'} - 3^{n+1} \leq \sum_{i=0}^{n}(3^i) \iff
+P^{'} \leq \sum_{i=0}^{n}(3^i) + 3^{n+1} \iff
+P^{'} \leq \sum_{i=0}^{n+1}(3^i)
 \end{equation}
 
-Por lo cual, el valor de $P^{''}$ no se encuentra en el mismo intervalo que $P^{'}$ y como $3^{n+1}$ ya no se encuentra en intervalos más pequeños, el intervalo que contenga a $P^{'}$ utilizará potencias diferentes. Como por hipótesis inductiva podemos generar cualquier $P$ mayor que cero, podremos en particular generar a $P^{''}$.
-
-Luego el algoritmo finaliza y además obtiene todas las pesas adecuadas.\\
+Por lo cual, el valor de $P^{''}$ se encuentra en un intervalo mas pequeño que $P^{'}$. Por hipótesis inductiva, podemos generar a $P^{'}$ con a lo sumo $n$ potencias de tres diferentes, y como la pesa más grande será $3^{n}$, se garantiza que no se repita $3^{n+1}$.
+Por lo tanto, hemos probado inductivamente que vale (5). Es decir, podemos generar cualquier numero entero, con a lo sumo $n$ potencias de tres diferentes, con $n$ el primero que cumple la propiedad enunciada en (5).
+Como en a lo sumo $k$ iteraciones se llega al valor cero, el algoritmo finaliza y se obtiene la solución al problema.
