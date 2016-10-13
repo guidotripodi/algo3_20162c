@@ -3,6 +3,14 @@
 
 using namespace std;
 
+long long potenciar(long long base, long long exponente){
+	long long resultado = base;
+	for(int i = 1; i <= exponente; i++){
+		resultado = resultado*resultado;
+	}
+	return resultado;
+}
+
 Balanza::Balanza(long long peso){
 	p = peso;
 	cant_pesas = (int) sqrt(p) + 1; // valor tentativo
@@ -67,7 +75,7 @@ void Balanza::balancear(){
     while (sumaParcial < p) {
         sumasParcialesList.push_back(sumaParcial);
 		// -1 porque el exponente termina en +1 en el while anterior
-        sumaParcial=(sumaParcial+pow(3,i));
+        sumaParcial=(sumaParcial+potenciar(3,i));
         i++;
     }
 
