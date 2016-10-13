@@ -26,4 +26,36 @@ Para analizar la complejidad temporal consideraremos un árbol de opciones que e
 
 Al ver las distintas podas efectuadas en el algoritmo podemos ver que la referida al tiempo no caracteriza ola complejidad del mismo: pude darse el caso en que la mejor solución se encuentre en la primer rama evaluada, con lo cual todas las demas serán analizadas de forma acotada gracias a la poda; o bien puede darse el caso en que el orden de las ramas evaluadas sea de mayor a menor en tiempo de solucion, con lo que se busca obligatoriamente sin aplicar la poda en ningún momento.
 
-La poda referida a la cantidad de opciones a tener en cuenta por viaje a travez del puente, de las $N \times N$ combinaiones existentes solo toma $\binom {n}{2}$ tuplas de personas y $n$ personas solas para evaluar, es decir $O(\binom {n}{2} + n) \subseteq O(\binom {n}{2})$ posibilidades....To be continued
+La poda referida a la cantidad de opciones a tener en cuenta por viaje a travez del puente, de las $N \times N$ combinaiones existentes solo toma $\binom {n}{2}$ tuplas de personas y $n$ personas solas para evaluar, es decir $O(\binom {n}{2} + n) \subseteq O(\binom {n}{2})$ posibilidades para cada cruce: si caracterizamos a cada nodo del árbol como un estado de los lados (una distribucion de las personas entre ambos lados) entonces para hacer cada transición debemos realizar $O(\binom {n}{2})$ evaluaciones de posibles caminos. Bajo este conteo de casos tendremos que en el primer nivel del árbol se tienen $O(\binom {n}{2})$ estados, en el segundo $O(\binom {n}{2})^2$, en el tercero $O(\binom {n}{2})^3$ y así por cada nivel que haya en él.\\
+
+La cantidad de niveles presentes en el árbol está dada por la cantidad de estados que hay en cada rama, osea en cada solución. Como en cada solución no se repiten los estados por la poda efectuada, entonces se pueden contabilizar los casos de la siguiente forma:\\
+
+Dado un estado, la cantidad de arqueologos de cada lado debe ser mayor o igual a la cantidad total de canibales, y que las cantidades de ambos en un lado estan enfuncion a las del otro: llamamos a  $a$ a la cantidad de arqueologos y $c$ a la de canibales del lado A. Siendo $\sum_{i=1}^{a}\binom {a}{i}$ la cantidad de combinaciones posibles de arqueologos que se pueden tener, y dado que hay siempre menos o igual cantidad de canibales, entonces para la cantidad  $i-esima$ de arqueologos se tienen $\sum_{j=1}^{i}\binom {c}{j}$ combinaciones de canibales. Resumiendo se tienen la siguiente cantidad de estados validos:
+
+\[
+\sum_{i=1}^{a}\binom{a}{i}\bigg[\sum_{j=1}^{i}\binom{c}{j}\bigg]=k
+\]  
+
+Con lo cual, en adición a lo anteriormente calculado, la cantidad de operaciones totales será:
+
+ \[
+ \sum_{i=1}^{k}\binom{n}{2}^i
+ \]
+
+Para acotar este valor utilizaremos que:
+
+\[
+\sum_{i=1}^{a}\binom{a}{i}\bigg[\sum_{j=1}^{i}\binom{c}{j}\bigg]\leq 2^{n}
+\]
+
+Considerando $\binom{n}{2 \leq n^2}$, la complejidad que da acotada de la siguiente forma:
+
+ \[
+ \sum_{i=1}^{k}\binom{n}{2}^i \leq \sum_{i=1}^{2^{n+1}}n^{2i} \in O(n^{2^{n+1}})
+ \]
+
+
+
+\newpage
+
+
