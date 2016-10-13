@@ -1,20 +1,22 @@
 El problema de la mochila, en cualquier dimensi\'on, se basa en maximizar un valor total teniendo en cuenta una o varias capacidades de las cuales no podemos excedernos. Como queden completadas las mochilas involucradas en cuanto a peso se refiere no dice nada, a priori, del valor total.\\
 
-La idea de aplicar una tecnica de programación dinámica en un problema de optimización (con lo cual utilizamos el principio de optimalidad de Bellman) es que podemos maximizar este valor total teniendo en cuenta lo mejor que pudimos hacer para subproblemas m\'as pequeños.\\
+La idea de aplicar una tecnica de programación dinámica en un problema de optimización es que podemos maximizar este valor total teniendo en cuenta lo mejor que pudimos hacer para subproblemas m\'as pequeños.\\
 
-En el caso de una dimensi\'on, estos subproblemas serán más facil de ver, y por lo tanto abordaremos esta pseudo-demostración desde la perspectiva de una mochila en primera instancia.\\
+En el caso de una dimensi\'on, estos subproblemas serán más facil de ver, y por lo tanto abordaremos esta demostración desde la perspectiva de una mochila en primera instancia.\\
 
-Nuestro subproblema en este caso es: que es lo mejor que se pudo lograr con $i$ objetos y 0 $\leq k \leq K$ capacidades, siendo $K$ la capacidadad total de la mochila.
+Nuestro subproblema en este caso es: que es lo mejor que se pudo lograr con $i$ objetos y capacidad $k$ con 0 $\leq k \leq K$, siendo $K$ la capacidadad total de la mochila.
 Puede describirse de la siguiente manera:
 
 \begin{center}
-$S(i, k)$ = máximo valor en el paso $i$ para una capacidad disponible $k$
+$S(i, k)$ = máximo beneficio obtenido con $i$ objetos para una capacidad disponible $k$
 \end{center}
 
-A cada paso asociamos un objeto con el cual haremos un análisis exhaustivo de las posibilidades, las cuales serán, sea un objeto $e_i$, si utilizo o no utilizo el mismo dado que tengo $k$ de capacidad disponible.
-Esta noción, junto con la idea de maximizar el valor total para la capacidad disponible nos da una idea de que es lo que tenemos que hacer en cada paso. \\
+A cada subproblema asociamos un objeto con el cual haremos un análisis exhaustivo de las posibilidades, las cuales serán, sea un objeto $e_i$, si utilizo o no utilizo el mismo dado que tengo $k$ de capacidad disponible.
+Esta noción, junto con la idea de maximizar el valor total para la capacidad disponible nos da una idea de que es lo que tenemos que resolver en cada subproblema. \\
 
 Si no ponemos el objeto, entonces deberemos ver que es lo mejor que se hizo con los objetos anteriores para esa misma capacidad, si no, al utilizar el objeto, tenemos que ver que es lo mejor que se logró sumando el valor del objeto actual $valor(e_i)$ al valor dado por el resultado de lo mejor que se pudo lograr con los objetos anteriores para una capacidad de mochila disponible menor, la cual será $k$ - $peso(e_i)$ siempre que el peso del objeto sea menor que la capacidad disponible, dado que si no, estamos obligados a quedarnos con lo mejor que se pudo realizar con los anteriores $i-1$ objetos y la misma capacidad.
+
+Luego, como los resultados a los subproblemas están bien definidos y son óptimos, el resultado para $S(i, k)$ será quedarse con el mejor de los dos.
 
 Lo que nos queda es un máximo que se calcula de la siguiente manera:
 
@@ -22,15 +24,7 @@ Lo que nos queda es un máximo que se calcula de la siguiente manera:
 S(i, k) = max(S(i-1, k-peso(e_i))+valor(e_i), S(i-1, k))
 \end{equation}
 
-Como puede verse, cada subproblema es recursivo y ofrece una solución \'optima para casos m\'as pequeños. Es decir, con menos objetos.
-
 La solución a nuestro problema será el resultado de resolver $S(n, K)$, siendo $n$ la cantidad de objetos total, la cual será óptima para $n$ objetos.\\
-
-Supongamos que el subproblema $S(i, k)$ con $i \leq n$ forma parte de la solución final y no es óptimo. Esto quiere decir que se lo agregó cuando lo mejor era quedarse con el beneficio logrado con $i-1$ objetos o exactamente lo contrario. 
-
-Por lo que podriamos cambiar este resultado por el que da el máximo beneficio de no agregarlo y quedarse con el beneficio logrado con $i-1$ objetos o agregarlo a la mochila y se obtendría un resultado mejor. Absurdo!! Ya que supusimos que $S(n, K)$ es óptimo.
-
-Se puede concluir que $S(i, k)$ es óptimo para todo objeto $i$ y peso $k$ que forme parte de la solución final.\\
 
 Como puede verse, en cada paso, para un objeto se puede determinar que acción realizar, con esta misma idea y con la ayuda de una matriz que nos permite hacer uso de memorizaci\'on de cada paso, podemos obtener que objetos estuvieron involucrados en el \'optimo final.\\
 
@@ -38,16 +32,19 @@ Para el caso de dos o tres mochilas estamos ante un problema de similar resoluci
 
 Aquí la idea es obtener un máximo general sin importar si las mochilas maximizan o no por su parte.
 
-Por cada objeto tendremos que decidir si no lo usamos, o en cuales de las mochilas disponibles nos conviene ingresarlo.\\
+Por cada objeto tendremos que decidir si no lo usamos, o en cual de las mochilas disponibles nos conviene ingresarlo y esas son todas las opciones disponibles para un objeto.\\
 Para simplificar la notación, utilizaremos el caso de dos mochilas, aunque lo que sigue es facilmente adaptable a tres.
 
 Como mencionamos el subproblema que analizamos es:
 
 \begin{center}
-$S(i, k_1, k_2)$ = máximo valor en el paso $i$ dado que dispongo de dos capacidades $k_1$ y $k_2$
+$S(i, k_1, k_2)$ = máximo beneficio obtenido con $i$ objetos dado que dispongo de dos capacidades $k_1$ y $k_2$ disponibles
 \end{center}
 
-Lo que haremos como se mencionó, es decidir que haremos con cada objeto. Y esto se define como:
+Si se ingresa el objeto $i-esimo$ en la mochila $j-esima$, entonces tendremos que tomar lo mejor realizado con $i-1$ objetos y capacidad $k_j-peso(e_i)$ y las capacidades restantes sin modificar siempre y cuando $k_j \geq peso(e_i)$.
+Si no se ingresa el objeto, se toma lo mejor realizado con $i-1$ objetos y todas las capacidades disponibles.\\
+
+Como cada subproblema está bien definido y es óptimo, solo se tiene que elegir el mejor de todos ellos mediante un máximo. 
 
 \begin{equation}
 S(i, k_1, k_2) = 
@@ -58,14 +55,7 @@ max(S(i-1, k_1-peso(e_i), k_2)+valor(e_i),
         S(i-1, k_1, k_2))
 \end{equation}
 
-Como puede verse, para dos mochilas (y tambien tres) podemos obtener el resultado del máximo general, haciendo un análisis exhaustivo de las posibilidades de manera similar a como se resuelve para una mochila, solo que viendo en dos (o tres) dimensiones, todas las posiblidades para menos objetos.\\
 Por lo cual, la respuesta a este problema será $S(n, K_1, K_2)$ siendo $n$ la cantidad de objetos total y $K_1$ y $K_2$ las capacidades de las mochilas.\\
-
-Supongamos que $S(i, k_1, k_2)$ con $i \leq n$ forma parte de la solución final y no es óptimo. Entonces sucede que se agregó el objeto $i$ en la mochila equivocada o había que tomar el beneficio obtenido con $i-1$ objetos como la solución más óptima. 
-
-Por lo que podriamos cambiar este resultado por el que nos da máximo beneficio de agregarlo en alguna mochila o no hacerlo y obtener un resultado mejor. Absurdo!! Ya que supusimos que $S(n, K_1, K_2)$ es óptimo.
-
-Se puede concluir que para todo objeto $i$ y pesos $k_1$ y $k_2$ que formen parte de la solución final, serán óptimos.\\
 
 Además por lo explicado en la resolución del problema, tambi\'en se hace uso de matrices para resolver los casos con dos y tres mochilas, pero cabe destacar el plural. \\
 
@@ -76,4 +66,4 @@ De esta manera, el máximo logrado para $i$ objetos estará alojado en la matriz
 
 De aquí en más, lo visto en la explicación ayuda a obtener los objetos en los casos para una y dos o tres dimensiones, teniendo en cuenta que es lo que sucede o no al tomar un objeto. \\
 
-Por lo tanto, por el principio de optimalidad y debido al análisis exhaustivo, podemos asegurar que el máximo logrado es el \'optimo y que los objetos pueden obtenerse como una consecuencia de las elecciones realizadas y la información correctamente almacenada.
+Por lo tanto,  podemos asegurar que el máximo logrado es el \'optimo y que los objetos pueden obtenerse como una consecuencia de las elecciones realizadas y la información correctamente almacenada.
