@@ -11,9 +11,15 @@ using namespace std;
 class TrieTreeNode
 {
     public:
-        TrieTreeNode * parent;
-        TrieTreeNode * children[ALPHABETS];
+        TrieTreeNode* parent;
+        TrieTreeNode* children[ALPHABETS];
         vector<int> occurrences;
+
+		TrieTreeNode(){
+			for(int i = 0; i<ALPHABETS; i++){
+				children[i] = NULL;
+			}
+		}
 };
  
 class TrieTree
@@ -22,9 +28,29 @@ class TrieTree
         TrieTreeNode * root;
          
         TrieTree() {
-            root = (TrieTreeNode *) calloc(1, sizeof(TrieTreeNode));
+            //root = (TrieTreeNode *) calloc(1, sizeof(TrieTreeNode));
+            root = new TrieTreeNode;
         }
-         
+        
+
+		void borrarNodo(TrieTreeNode* nodo) {
+			if(nodo != NULL){
+				if(nodo->children != NULL){
+					for(int i = 0; i < ALPHABETS; i++){
+						if(nodo->children[i] != NULL){
+							borrarNodo(nodo->children[i]);
+						}
+					}
+				}
+				delete nodo;
+			}
+		}
+		
+		~TrieTree(){
+			TrieTreeNode* nodoActual = root;
+			borrarNodo(root);
+		}	
+
         // Inserts a word 'text' into the Trie Tree
         // 'trie_tree' and marks it's occurence as 'index'.
         void insert(char text[], int index)
@@ -41,7 +67,8 @@ class TrieTree
           
                     // Allocate using calloc(), so that components are initialised
                     temp->children[word[i] - 'a'] =
-                            (TrieTreeNode *) calloc(1, sizeof(TrieTreeNode));
+                   //         (TrieTreeNode *) calloc(1, sizeof(TrieTreeNode));
+                            new TrieTreeNode;
                     temp->children[word[i] - 'a']->parent = temp; // Assigning parent
                 }
           
@@ -84,20 +111,20 @@ class TrieTree
                 vector<char>::iterator itr = printUtilVector.begin();
           
                 while (itr != printUtilVector.end()) {
-                   // printf("%c", *itr);
+                //    printf("%c", *itr);
                     ++itr;
                 }
-          //      printf(" -> @ index -> ");
+                //printf(" -> @ index -> ");
           
                 vector<int>::iterator counter = trie_tree->occurrences.begin();
                 // This is to print the occurences of the word
           
                 while (counter != trie_tree->occurrences.end()) {
-            //        printf("%d, ", *counter);
+                    //printf("%d, ", *counter);
                     ++counter;
                 }
           
-              //  printf("\n");
+                //printf("\n");
             }
           
             printUtilVector.pop_back();
@@ -189,7 +216,7 @@ class TrieTree
                     }
                 }
           
-                free(temp);
+                delete temp;
                 temp = traverse;
           
                 for (i = 0; i < ALPHABETS; ++i) {
