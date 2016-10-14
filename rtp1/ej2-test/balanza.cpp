@@ -4,9 +4,9 @@
 using namespace std;
 
 long long potenciar(long long base, long long exponente){
-	long long resultado = base;
-	for(int i = 1; i <= exponente; i++){
-		resultado = resultado*resultado;
+	long long resultado = 1;
+	for(long long i = 0; i < exponente; i++){
+		resultado = resultado*base;
 	}
 	return resultado;
 }
