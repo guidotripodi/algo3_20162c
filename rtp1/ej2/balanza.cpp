@@ -26,7 +26,6 @@ Balanza::~Balanza(){
 	delete[] platoIzquierdo;
 }
 
-//void Balanza::imprimir(long long* derecho, long long* izquierdo, int sizeDer, int sizeIzq){
 
 void Balanza::imprimir(FILE* doc){
 	fprintf(doc, "%lld %lld \n",sizeIzq, sizeDer);
@@ -104,12 +103,10 @@ void Balanza::balancear(){
                 equilibrioActual = potencia + equilibrioActual;
                 platoDerecho[j] = potencia;
 				j++;
-				//printf("plato derecho %lld \n", potencia);
             }else {
                 equilibrioActual = equilibrioActual - potencia;
 				platoIzquierdo[k] = potencia;
 				k++;
-                //printf("plato izquierdo %lld \n", potencia);
             }
         }
         

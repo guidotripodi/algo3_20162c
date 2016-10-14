@@ -4,7 +4,6 @@
 
 class Balanza{
 	public:
-		//inicializacion es O(sqrt(p)) si no es todo una mentira
 		Balanza(long long p); 
 		~Balanza();
 		void imprimir(FILE*);
@@ -12,7 +11,6 @@ class Balanza{
 		//puedo imprimir por consola o a un archivo
 	
 	private:
-		//void armadoBalanza();
 		void balancear();
 		long long p;
 		

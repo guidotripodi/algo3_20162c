@@ -80,7 +80,6 @@ public:
 
 		void recalcular(){
 			id = id + 1;
-		//std::cout << "id 0: "<<id;
 			//Obtengo idPersona
 			int a = id / escenario->personas_totales;
 			int b = id % escenario->personas_totales;
@@ -93,7 +92,6 @@ public:
 				b = id % escenario->personas_totales;
 			}
 
-			//std::cout << "--> id 1: "<<id<<"\n";
 			
 			primero.setId(a);
 			segundo.setId(b);
@@ -120,16 +118,14 @@ public:
 		Escenario2* escenario;
 		int cantHechos = 0;
 
-		//Voy a guardar un trie en donde el alfabeto es 0 , 1: de esta forma puedo verificar si existioç
+		//Voy a guardar un trie en donde el alfabeto es 0 , 1: de esta forma puedo verificar si existio
 		//la combinacion en O(n)
 
 		//Para implementarlo, al saber que va a ser un arbol con nodos de 2 posiciones y 2 aristas, lo mando a un array :)
-		//
 		TrieTree historia;
 
 		HistoricoEstados(Escenario2* esc){
 			escenario = esc;
-			//marcarHistoria(); (ver problema caso base que esta jodiendo, fijate que no vuelve a analizar el cb)
 		}
 
 		void marcarHistoria(){
@@ -174,7 +170,6 @@ public:
 				}
 
 				if (i==idP1 || i==idP2){
-						/* code */
 					if (islaAEnviar == escenario->LADO_A)
 					{
 						estado[i] = 's';
@@ -209,7 +204,6 @@ public:
 				}
 
 				if (i==idP1 || i==idP2){
-						/* code */
 					if (islaAEnviar == escenario->LADO_A)
 					{
 						estado[i] = 's';

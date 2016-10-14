@@ -8,17 +8,12 @@ bool Escenario2::envioValido(Eleccion eleccion) const
 	//Me fijo que ambos esten presentes en el lado A
 	
 	if (eleccion.primero.lado == LADO_B || eleccion.segundo.lado == LADO_B){
-		//cout<<"\t\t- error: alguna de las 2 personas no se encuentran en la isla A: "<<eleccion.primero.lado<<" "<<eleccion.segundo.lado<<"\n";
 		
 		return false;
 	}
 
 	if (this->historial->ocurrioEstado(eleccion, LADO_B))
 	{
-		
-		//cout<<"\t\t- error: Se detectó un ciclo ";
-		//this->printEleccion(eleccion);
-		//cout<<"\n";
 		
 		return false;
 	}
@@ -28,8 +23,6 @@ bool Escenario2::envioValido(Eleccion eleccion) const
 	{
 		return false;
 	}
-	//this->printEleccion(eleccion);
-	//cout<<"\t\t- error: DESBALANCE "<<"\n";
 		
 	return true;
 }
@@ -39,7 +32,6 @@ bool Escenario2::retornoValido(Eleccion eleccion) const
 
 	if(eleccion.primero.lado == LADO_A || eleccion.segundo.lado == LADO_A)
 	{
-		//cout<<"\t\t- error: alguna de las 2 personas no se encuentran en la isla B: "<<eleccion.primero.lado<<" "<<eleccion.segundo.lado<<"\n";
 		
 		return false;
 	}
@@ -48,7 +40,6 @@ bool Escenario2::retornoValido(Eleccion eleccion) const
 	if (!this->estaBalanceadoRetornandoEleccion(eleccion))
 	{
 
-		//cout<<"\t\t- error: Desbalance";
 		return false;
 	}
 
@@ -56,11 +47,8 @@ bool Escenario2::retornoValido(Eleccion eleccion) const
 	{
 		
 		
-		//cout<<"\t\t- error: Se detectó un ciclo ";
 		return false;
 	}
-	//this->printEleccion(eleccion);
-	//cout<<"\t\t- error: DESBALANCE "<<"\n";
 	return true;
 }
 
@@ -73,8 +61,6 @@ void Escenario2::printEleccion(Eleccion eleccion) const
 void Escenario2::printStatus() const
 {
 	//cout<<"Escenario   paso:"<<this->decisiones->size()<<"\n\t Islas       |\tA \tB\n\t canibales   |\t"<<this->cant_canibales_ladoA <<"\t"<<this->cant_canibales_ladoB<<"\n\t arqueologos |\t"<<this->cant_arqueologos_ladoA<<"\t"<<this->cant_arqueologos_ladoB<<"\n Con tiempo: "<<this->tiempo<<"\n";
-	vector<char> v;
-	this->historial->historia.lexicographPrint(this->historial->historia.root, v);
 }
 
 bool Escenario2::estaBalanceadoEnviandoEleccion(Eleccion eleccion) const
@@ -142,8 +128,9 @@ Escenario2::Escenario2(const int cantA, const int cantC, const int * tiempos_arq
 }
 
 Escenario2::~Escenario2(){
-/*	delete[] this->eleccion_x_paso;
-	delete[] this->personas_ladoA;*/
+	delete historial;
+	delete decisiones;
+	delete[] personas_ladoA;
 }
 
 Escenario2::Eleccion Escenario2::envioPosible()
