@@ -1,48 +1,126 @@
 \begin{algorithm}[H]
 \Fn{EJ1()}{
-se crean booleanos sePudoDeshacerEnvio y sePudoDeshaceRetorno con valor verdadero \hfill //O(1) \\
-se crea un entero minimo con valor -1 \\
-\While{sePudoDeshacerEnvio $\wedge$ sePudoDeshaceRetorno}{  \hfill //O()\\
+crear cola desiciones para guardar elecciones\\
+eleccion es un par valido posible con información de las personas (canibal y/o arqueologo)\\
+se crean booleanos sePudoDeshacerEnvio y sePudoDeshaceRetorno con valor verdadero \hfill O(1) \\
+se crea un entero minimo con valor -1 \hfill O(1)\\ 
+\While{sePudoDeshacerEnvio $\wedge$ sePudoDeshaceRetorno}{  
 	\If{pasaronTodos(escenario) $\wedge$ (tiempo(escenario) < minimo)}{
-			para minimo asignar tiempo(escenario) \hfill //O(1)\\	
+	 \hfill  guarda: O(1)\\
+			para minimo asignar tiempo(escenario) \hfill O(1)\\	
 	}
 	\If{tieneLampara(escenario)} {
-		
+			 \hfill guarda: O(1)\\
  		
 		\If{(tiempo(escenario) < minimo)}{
-			eleccion asignar eleccionEnvioPosible(escenario) \hfill //O(1)\\			
-			aplicarEleccionEnvio(eleccion, escenario)\\		
+			 \hfill guarda: O(1)\\ 
+			eleccion asignar eleccionEnvioPosible(escenario) \hfill O($\binom{n}{2} \times n$)\\			
+			aplicarEleccionEnvio(eleccion, escenario)\hfill O(n)\\
 		\Else{
-			sePudoDeshacerEnvio asignar deshacerUltimaEleccionEnvio(escenario)
+			sePudoDeshacerEnvio asginar deshacerUltimaEleccionEnvio(escenario) \hfill O(n)\\
 		}} 		
 \Else{
-		 para eleccion asignar eleccionRetornoPosible(escenario) \hfill //O(1)\\
+		 para eleccion asignar eleccionRetornoPosible(escenario) \hfill O($\binom{n}{2} \times n$)\\
 		\If{(tiempo(escenario) < minimo)}{
-			aplicarRetornoEnvio(eleccion, escenario)		\\
+			 \hfill guarda: O(1)\\
+			aplicarRetornoEnvio(eleccion, escenario)	\hfill O(n)\\
 		\Else{
-			sePudoRetornar asignar deshacerUltimoRetorno(escenario)
+			sePudoRetornar asignar deshacerUltimoRetorno(escenario) \hfill O(n)\\
 		}}
+		
+		\textbf{\hfill total: $O(n^{2^{n}})$}\\
 }		
 }
 }
+} 
+\end{algorithm}
+
+\begin{algorithm}[H]
+\Fn{aplicarEleccionEnvio(eleccion, escenario)}{
+	encolar en decisiones la eleccion tomada  \hfill O(1) \\
+	actualizar estado del sistema en base a la decision tomada \hfill 0(1) \\
+	sumar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
+	guardar estado isla A y estado isla B como efectuado\hfill O(n) \\
+	marcar escenario.lampara falso \hfill O(1) \\
+
 }
+\textbf{\hfill Complejidad total: $O(n)$}\\ 
+\end{algorithm}
+
+\begin{algorithm}[H]
+\Fn{aplicarRetornoEnvio(eleccion, escenario)}{
+	encolar en decisiones la eleccion tomada  \hfill O(1) \\
+	actualizar estado del sistema en base a la decision tomada \hfill 0(1) \\
+	sumar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
+	guardar estado isla A y estado isla B como efectuado \hfill O(n) \\
+	marcar escenario.lampara verdadero \hfill O(1) \\
+}
+\textbf{\hfill Complejidad total: $O(n)$}\\ 
+\end{algorithm}
+
+\begin{algorithm}[H]
+\Fn{deshacerUltimaEleccionEnvio(escenario)}{
+	\If{hay decisiones para desencolar}{
+	desencolar de decisiones una eleccion\hfill O(1) \\
+	actualizar estado del sistema en base a la decision desencolada \hfill 0(1) \\
+	restar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
+	borrar estado isla A y estado isla B como efectuado \hfill O(n) \\
+	marcar escenario.lampara verdadero \hfill O(1) \\	
+	devolver verdadero \hfill O(1) \\	
+	}\Else{ 
+		devolver falso \hfill O(1) \\	
+	}
+}
+\textbf{\hfill Complejidad total: $O(n)$}\\ 
 \end{algorithm}
 
 
-La estructura escenario contiene la informacion del estado de una rama en cada 
+\begin{algorithm}[H]
+\Fn{deshacerUltimoRetorno(escenario)}{
+	\If{hay decisiones para desencolar}{
+	desencolar de decisiones una eleccion\hfill O(1) \\
+	actualizar estado del sistema en base a la decision desencolada \hfill 0(1) \\
+	restar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
+	borrar estado isla A y estado isla B como efectuado \hfill O(n) \\
+	marcar escenario.lampara falso \hfill O(1) \\	
+	devolver verdadero \hfill O(1) \\	
+	}\Else{ 
+		devolver falso \hfill O(1) \\	
+	}
+}
+\textbf{\hfill Complejidad total: $O(n)$}\\ 
+\end{algorithm}
+
+\begin{algorithm}[H]
+\Fn{eleccionEnvioPosible(escenario)}{
+	\While{Hay elecciones disponibles}{
+	\hfill Ciclo: O($\binom{n}{2}$)\\
+	
+	\If{ambas personas estan en isla A $\wedge$ no ocurri\'o elecci\'on $\wedge$ cantidades balanceadas}{
+	 \hfill Guarda: O(n) \\	
+	devolver elecci\'on \hfill O(1) \\	
+	}
+	}
+}
+\textbf{\hfill Complejidad total: $O\binom{n}{2} \times n$}\\ 
+\end{algorithm}
+
+\begin{algorithm}[H]
+\Fn{eleccionRetornoPosible(escenario)}{
+	\While{Hay elecciones disponibles}{
+	\hfill Ciclo: O($\binom{n}{2}$)\\
+	
+	\If{ambas personas estan en isla B $\wedge$ no ocurri\'o elecci\'on $\wedge$ cantidades balanceadas}{
+	 \hfill Guarda: O(n) \\	
+	devolver elecci\'on \hfill O(1) \\	
+	}
+	}
+}
+\textbf{\hfill Complejidad total: $O\binom{n}{2} \times n$}\\ 
+\end{algorithm}
 
 
+\subsubsection{Estructura interna para chequear elecciones y estados ocurridos}
 
+Siendo que la disposicion de las personas en las dos islas,pueden representarse por un arreglo en donde cada elemento representa la presencia de una persona en la isla A con un booleano (Esta o no esta) entonces, si guardamos dichas secuencias en una estructura de trie, podemos chequear la ocurrencia de un estado en $O(n)$, al igual que el insertado de un estado nuevo.\\
 
-\begin{itemize}
-\item {\bf parPosible}: Se busca un par de personas que est\'en en el lado A y que al pasarlos al lado B no generen un desbalance entre canibales y arqueologos. El tiempo de ejecución de esta función es lineal en la cantidad de pares validos existentes (es decir $\binom {n-i}{2}$ pares). Vale notar que cuanto más personas pasen para el lado B, la cantidad de pares disminuye.
-\item {\bf dameParPosible}: Habiendolo calculado con "parPosible" solo se lo debe devolver
-\item {\bf tiempoMinimo}: Devuelve verdadero si el tiempo de construcci\'on de la soluci\'on es menor al ya encontrado, de no serlo, fuerza al algoritmo a retroceder en la rama. Al registrar por cada paso efectuado el tiempo empleado, esta función solo compara el tiempo con el m\'inimo logrado en tiempo constante.
-\item {\bf enviarPar}: Si se tiene un arreglo de cada estado del Escenario, entonces este paso implica marcar la decisión tomada en el paso actual y avanzar 1 paso, todo esto pudiendose efectuar en tiempo constante.
-\item {\bf backtracRetorno}: Devuelve a la instancia Escenario a un paso anterior, y devuelve FALSO si no fue posible realizar la acción (si no hay más ramas para seguir el backtracking). Retornar la instancia a un paso anterior, de tener guardado el estado anterior en un arreglo, es simplemente retroceder el arreglo 1 posición, osea tiempo constante.
-\item {\bf faroleroPosible}: Similar a "parPosible", busca entre las personas que se encuentran en el lado B, aquellas que no hayan sido evaluadas para el cruce y que el cruce no genere un desbalance entre personajes. La búsqueda de esta persona es en tiempo lineal a la  cantidad de personas totales; vale notar que la única vez que se ejecuta n-1 va ser cuando en el lado B estén todas las personas, la cantidad de faroleros a evaluar, comienza en el paso 1 con 1 farolero y aumenta hasta n-1 (de a 1 por paso).
-\item {\bf retornarLampara}: De forma similar a "enviarPar", se marca la persona elegida de farolero en el estado del sistema y se avanza al siguiente estado, todo esto en tiempo constante.
-\item {\bf backtrackPar}: Efectua las mismas operaciones que el "backtrackFarolero" en O(1)
-\item {\bf pasaronTodos}: Chequea en tiempo constante si la cantidad de personas en el lado B es igual a la cantidad total de personas. Esto se puede lograr facilmente si se tiene un arreglo con la cantidad de personas en cada lado.
-\item {\bf guardarTiempo}: Si el tiempo tomado en alcanzar la soluci\'on en la rama fue menor a todos los ya obtenidos por analizar cada rama, guarda el valor. Dado que se guarda por cada paso tomado el tiempo que se toma en realizarlo, esta operaci\'on solo compara el valor tomado contra el m\'inimo obtenido, en O(1)
-\end{itemize}  

@@ -31,13 +31,13 @@ int main(int argc, char* argv[])
 	{
 		cin >> tiempos_canibales[i];
 	}
-			//printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
-			auto start = ya();
+			printf("Cantidad de arqueologos: %d, cantidad de canibales: %d \n",cant_arqueologos, cant_canibales );
+			//auto start = ya();
 			int f = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
-			auto end = ya();
-			//cout <<f<<"\n";
-            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-			cout << "\n";
+			//auto end = ya();
+			cout <<f<<"\n";
+            //cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+			//cout << "\n";
 
 	return 1;
 }
