@@ -4,7 +4,7 @@ Nuestro algoritmo como mencionamos anteriormente presenta dos ciclos predominant
 El primero ciclo consta en armar un arreglo de sumas de potencias de tres $sumasParciales$, donde la $i-esima$ posición es la suma desde $3^0$ hasta $3^i$ y la $n-esima$ será la suma desde $3^0$ hasta $3^n$  tal que es igual a $P$ (el valor de nuestra llave) o en su defecto el inmediato mayor. 
 
 Podemos notar que para representar un número en base tres necesitamos $\ceil[\big]{log_3(P)}$ divisiones con lo que obtendremos un total de $\ceil[\big]{log_3(P)}$  potencias de tres. 
-En nuestro algoritmo, puede ser necesario tomar la potencia inmediatamente mayor a $P$ por lo cual tendriamos $\ceil[\big]{log_3(P)}$ + 1 potencias de tres en el peor caso, aunque en terminos de complejidad sigue siendo orden logaritmico. 
+En nuestro algoritmo, puede ser necesario tomar la potencia inmediatamente mayor a $P$ por lo cual tendr\'iamos $\ceil[\big]{log_3(P)}$ + 1 potencias de tres en el peor caso, aunque en terminos de complejidad sigue siendo orden logar\'itmico. 
 
 Queremos ver entonces que  $\ceil[\big]{log_3(P)}$ es una buena cota para la cantidad de iteraciones que realizamos para obtener el arreglo $sumasParciales$ y en consecuencia, para realizar el ciclo que encuentra las pesas adecuadas. Es decir, que seguro será suficiente sumar a lo sumo $\ceil[\big]{log_3(P)}$ potencias de tres para obtener una suma que sea mayor que $P$. Por lo tanto:
 

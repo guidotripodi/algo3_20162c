@@ -1,12 +1,12 @@
 \indent En esta secci\'on, mostraremos buenos y malos casos para nuestro algoritmo, y a su vez, daremos el tiempo estimado 
-seg\'un la complejidad del algoritmo calculada anteriormente.
+seg\'un la complejidad calculada anteriormente.
 
 Como la complejidad presenta dos variables marcadas, como son las capacidades de las mochilas y la cantidad de objetos, hemos trabajado con las mismas en simultaneo y tambi\'en fijando alguna de las dos variables.\\
 
 
 Chequeando la familia de casos que enunciamos en el anterior inciso pudimos llegar a la conclusion que teniendo capacidades identicas en las mochilas o distintas nuestro algoritmo se comporta a nivel tiempo de ejecuci\'on de una manera similar, por lo tanto trabajaremos a continuaci\'on con capacidades distintas.\\
 
-A continuaci\'on mostraremos dos graficos que simbolizan el tiempo de ejecuci\'on de cada una de las familias de casos:\\
+A continuaci\'on mostraremos dos gr\'aficos que simbolizan el tiempo de ejecuci\'on de cada una de las familias de casos:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -38,7 +38,7 @@ Se puede observar entre el gr\'afico 3.1 y 3.2 en los cuales la familia \textbf{
 
 Luego, en el gr\'afico 3.2 se puede observar como tanto la familia de casos en las que no entra ning\'un objeto o entra unicamente uno se ven m\'as beneficiadas por la implentaci\'on de nuestro algoritmo el cual verificar\'a si es posible o no meter al objeto en cuesti\'on dentro de alguna de las mochilas, y como el peso del mismo es superior a la capacidad de las 3 mochilas directamente lo descarta sin tener que realizar el chequeo de maximizaci\'on.
 
-Podemos concluir entonces que, el mejor caso para nuestro algoritmo es en el cual \textbf{No entra ning\'un objeto en las mochilas} ya que como mencionamos, nuestro algoritmo solo verificara su peso y al ser mayor descartara al objeto y no tendra que realizar los chequeos de maximizaci\'on.\\
+Podemos concluir entonces que, el mejor caso para nuestro algoritmo es en el cual \textbf{No entra ning\'un objeto en las mochilas} ya que como mencionamos, solo se verificar\'a su peso y al ser mayor descartar\'a al objeto y no tendr\'a que realizar los chequeos de maximizaci\'on.\\
 
 A continuaci\'on mostraremos un gr\'afico que representa lo enunciado:
 
@@ -64,7 +64,7 @@ Luego, en el gr\'afico 3.4, en el cual dividimos el tiempo de ejecuci\'on de dic
 \sum_{i=1}^{3}K_{i} 
 \] $\ast CantObjetos$) operaciones nos da una funci\'on resultante la cual se encuentra por debajo de 1 y tiende a 0 cuando la entrada aumenta corroborando lo que enunciamos.\\
 
-Manteniendo el mismo razonamiento, el peor caso para nuestro algoritmo se da cuando \textbf{Entran todos los objetos en las mochilas} ya que el algoritmo deber\'a decidir en que mochila colocar el objeto para que el resultado sea \'optimo. Por consiguiente, mostraremos un gr\'afico que representa lo hablado:\\
+Manteniendo el mismo razonamiento, el peor caso se da cuando \textbf{Entran todos los objetos en las mochilas} ya que se deber\'a decidir en que mochila colocar el objeto para que el resultado sea \'optimo. Por consiguiente, mostraremos un gr\'afico que representa lo hablado:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -83,7 +83,7 @@ Dividiendo por la complejidad calculada se obtuvo lo siguiente:\\
   \vspace*{0.3cm}
   
   
-Es posible observar en el gr\'afico 3.4 que, dado nuestro algoritmo, al tener las pobilidad de ir metiendo cada uno de los objetos en las mochilas, el mismo realizar\'a la optimizaci\'on de 3 matrices que simbolizan a cada mochila anidadas, lo que nos dar\'a una complejidad acotada por la capacidad de las mochilas por la cantidad de elementos que en esta evaluaci\'on es constante, simplificando lo dicho nos quedar\'ia O(\[
+Es posible observar en el gr\'afico 3.4 que, al tener las pobilidad de ir metiendo cada uno de los objetos en las mochilas, el mismo realizar\'a la optimizaci\'on de 3 matrices que simbolizan a cada mochila anidadas, lo que nos dar\'a una complejidad acotada por la capacidad de las mochilas por la cantidad de elementos que en esta evaluaci\'on es constante, simplificando lo dicho nos quedar\'ia O(\[
 \sum_{i=1}^{3}K_{i} 
 \] $\ast CantObjetos$) .\\
 Luego, en el gr\'afico 3.4, en el cual dividimos el tiempo de ejecuci\'on de dicho caso con el tiempo de realizar O(\[

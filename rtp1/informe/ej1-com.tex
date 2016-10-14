@@ -1,7 +1,7 @@
 
-Para analizar la complejidad temporal consideraremos un árbol de opciones que el algoritmo recorre. Cada caso copleto evaluado sea solución o no, está caracterizado por una hoja, y la rama que va desde la raíz a cada una de ellas es la secuencia de pasos necesarios para alcanzar cada caso.
+Para analizar la complejidad temporal consideraremos un árbol de opciones que el algoritmo recorre. Cada caso completo evaluado sea solución o no, está caracterizado por una hoja, y la rama que va desde la raíz a cada una de ellas es la secuencia de pasos necesarios para alcanzar cada caso.
 
-Al ver las distintas podas efectuadas en el algoritmo podemos ver que la referida al tiempo no caracteriza la complejidad del mismo: puede darse el caso en que la mejor solución se encuentre en la primer rama evaluada, con lo cual todas las demas serán analizadas de forma acotada gracias a la poda; o bien puede darse el caso en que el orden de las ramas evaluadas sea de mayor a menor en tiempo de solucion encontrada,con lo que no se aplica la poda en ningún momento.
+Al ver las distintas podas efectuadas en el algoritmo podemos ver que, la referida al tiempo no caracteriza la complejidad del mismo: puede darse el caso en que la mejor solución se encuentre en la primer rama evaluada, con lo cual todas las demas serán analizadas de forma acotada gracias a la poda; o bien puede darse el caso en que el orden de las ramas evaluadas sea de mayor a menor en tiempo de soluci\'on encontrada,con lo que no se aplica la poda en ningún momento.
 
 Siendo $n$ la cantidad total de arqueologos y canibales, la poda referida a la cantidad de opciones a tener en cuenta por viaje a travez del puente, de las $n \times n$ combinaciones existentes, solo toma $\binom {n}{2}$ tuplas de personas si enviamos dos personas o $n$ posibilidades si enviamos una; es decir $O(\binom {n}{2} + n) \subseteq O(\binom {n}{2})$ posibilidades para cada cruce.
 
@@ -13,7 +13,8 @@ Bajo este conteo de casos tendremos que en el primer nivel del árbol se tienen 
 
 La cantidad de niveles presentes en el árbol está dada por la cantidad de estados que hay en cada rama, osea en cada solución. Como en cada solución no se repiten los estados por la poda efectuada, entonces se pueden contabilizar los casos de la siguiente forma:\\
 
-Dado un estado, la cantidad de arqueologos de cada lado debe ser mayor o igual a la cantidad total de canibales, y que las cantidades de ambos en un lado estan en función a las del otro: llamamos $a$ a la cantidad de arqueologos y $c$ a la de canibales del lado A. Siendo $\sum_{i=1}^{a}\binom {a}{i}$ la cantidad de combinaciones posibles de arqueologos que se pueden tener, y dado que siempre hay menor o igual cantidad de canibales, entonces para la cantidad  $i-esima$ de arqueologos se tienen $\sum_{j=1}^{i}\binom {c}{j}$ combinaciones de canibales. Resumiendo se tiene la siguiente cantidad de estados validos:
+Dado un estado, la cantidad de arqueologos de cada lado debe ser mayor o igual a la cantidad total de canibales, y que las cantidades de ambos en un lado est\'an en función a las del otro: llamamos $a$ a la cantidad de arqueologos y $c$ a la de canibales del lado A. Siendo $\sum_{i=1}^{a}\binom {a}{i}$ la cantidad de combinaciones posibles de arqueologos que se pueden tener, y dado que siempre hay menor o igual cantidad de canibales, entonces para la cantidad  $i-esima$ de arqueologos se tienen $\sum_{j=1}^{i}\binom {c}{j}$ combinaciones de canibales. 
+Resumiendo se tiene la siguiente cantidad de estados v\'alidos:
 
 \[
 \sum_{i=1}^{a}\binom{a}{i}\bigg[\sum_{j=1}^{min(i,c)}\binom{c}{j}\bigg]=k

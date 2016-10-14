@@ -1,4 +1,4 @@
-En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on del mismo, la etapa m\'as importante es a la hora de obtener las pesas que equilibran la balanza, en donde se realiza un ciclo que va disminuyendo el valor $equilibrioActual$ (inicialmente $P$) hasta llegar a 0 recorriendo el arreglo de $sumasParciales$ de sumas de potencias de tres.\\
+En nuestro algoritmo como hemos mencionado anteriormente en la explicaci\'on del mismo, la etapa m\'as importante es, a la hora de obtener las pesas que equilibran la balanza, donde se realiza un ciclo que va disminuyendo el valor $equilibrioActual$ (inicialmente $P$) hasta llegar a 0 recorriendo el arreglo de $sumasParciales$ de sumas de potencias de tres.\\
 Una vez alcanzado ese valor se puede dar por finalizado el algoritmo, dado que hemos encontrado una manera de sumar y restar potencias de tres tales que como resultado se obtiene $P$.\\
 
 Por lo tanto para probar que el algoritmo es correcto deberemos probar primero que el algoritmo termina, es decir, que $equilibrioActual$ alcanza el valor cero luego de iterar el arreglo $sumasParciales$ una sola vez y luego que utilizamos siempre potencias de tres diferentes.\\
@@ -53,7 +53,7 @@ Lo cual es cierto ya que:
 
 Además veamos que $- \sum_{i=0}^{n}(3^i) + 3^{n+1}$ $>$ $|P^{'}|$ no puede suceder dado que el 
 
-modulo del intervalo es:
+m\'odulo del intervalo es:
 
  \begin{equation}
 - \sum_{i=0}^{n}(3^i) + 3^{n+1} - \sum_{i=0}^{n}(3^i) = 
@@ -73,6 +73,6 @@ P^{'} \leq \sum_{i=0}^{n}(3^i) + 3^{n+1} \iff
 P^{'} \leq \sum_{i=0}^{n+1}(3^i)
 \end{equation}
 
-Por lo cual, el valor de $P^{''}$ se encuentra en un intervalo mas pequeño que $P^{'}$. Por hipótesis inductiva, podemos generar a $P^{'}$ con a lo sumo $n$ potencias de tres diferentes, y como la pesa más grande será $3^{n}$, se garantiza que no se repita $3^{n+1}$.
+Por lo cual, el valor de $P^{''}$ se encuentra en un intervalo m\'as pequeño que $P^{'}$. Por hipótesis inductiva, podemos generar a $P^{'}$ con a lo sumo $n$ potencias de tres diferentes, y como la pesa más grande será $3^{n}$, se garantiza que no se repita $3^{n+1}$.
 Por lo tanto, hemos probado inductivamente que vale (5). Es decir, podemos generar cualquier numero entero, con a lo sumo $n$ potencias de tres diferentes, con $n$ el primero que cumple la propiedad enunciada en (5).
 Como en a lo sumo $k$ iteraciones se llega al valor cero, el algoritmo finaliza y se obtiene la solución al problema.

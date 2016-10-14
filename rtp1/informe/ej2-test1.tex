@@ -1,5 +1,5 @@
 \indent Acorde a lo solicitado, mostraremos distintos tipos de familias de casos para nuestro algoritmo, y adem\'as, daremos el tiempo estimado 
-seg\'un la complejidad del algoritmo calculada anteriormente.\\
+seg\'un la complejidad calculada anteriormente.\\
 
 A continuaci\'on mostraremos un gr\'afico de tiempos comparativo entre distintas familias de casos:\\ 
 
@@ -19,10 +19,9 @@ Se puede observar en el gr\'afico, tres funciones las cuales representan el tiem
 \item P no es multiplo de 3
 \end{itemize}
 
-Como se observa en el gr\'afico la funci\'on representativa de la flia n\'umero 1, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que nuestro algoritmo como va realizando sumas parciales y chequeando las potencias ve que la entrada es exactamente una \'unica potencia por lo cual toma el valor final de la suma y finaliza su ejecuci\'on, mientras que para el segundo y tercer caso, como las entradas estan dadas por varias combinaciones de potencias indudablemente nuestro algoritmo necesitar\'a para obtener dicha combinaci\'on recorrer todo el arreglo de sumas parciales m\'as de una vez.
+Como se observa en el gr\'afico la funci\'on representativa de la flia n\'umero 1, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que nuestro algoritmo como va realizando sumas parciales y chequeando las potencias ve que la entrada es exactamente una \'unica potencia por lo cual toma el valor final de la suma y finaliza su ejecuci\'on, mientras que para el segundo y tercer caso, como las entradas estan dadas por varias combinaciones de potencias indudablemente se necesitar\'a para obtener dicha combinaci\'on recorrer todo el arreglo de sumas parciales m\'as de una vez.
 
-Luego de chequear dichas instancias, pudimos llegar a la conclusi\'on que la familia de casos que presenta una mejor performance para nuestro algoritmo
-es en el cual se recibe $P$ con un valor exactamente igual a $3^i$ con 0 $\leq$ i $\leq$ n \\
+Luego de chequear dichas instancias, pudimos llegar a la conclusi\'on que la familia de casos que presenta una mejor performance es en la cual se recibe $P$ con un valor exactamente igual a $3^i$ con 0 $\leq$ i $\leq$ n \\
 
 Para llegar a dicha conclusi\'on trabajamos con 30 instancias ya que $3^{30}$ es el ultimo valor dentro del valor que puede tomar $P$.\\
 
@@ -35,7 +34,7 @@ Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instan
   \end{center}
   \vspace*{0.3cm}
   
-Como es posible observar en el gr\'afico, la funci\'on resultante de la cota teorica crece mucho m\'as r\'apido que la de nuestro algoritmo la cual se tiende a ser constante, es por esto que a la hora de realizar el gr\'afico de mediciones se tomaron los primeros valores debido a que, cuando la funci\'on de $\sqrt{P}$ toma valores muy grandes la misma es imposible de graficar contra nuestro algoritmo, por lo cual realizamos un apartado con las instancias m\'as grandes (ver excel).
+Como es posible observar en el gr\'afico, la funci\'on resultante de la cota teorica crece mucho m\'as r\'apido que la de nuestro algoritmo la cual se tiende a ser constante, es por esto que a la hora de realizar el gr\'afico de mediciones se tomaron los primeros valores debido a que, cuando la funci\'on de $\sqrt{P}$ toma valores muy grandes la misma es imposible de graficar contra nuestro algoritmo.
 
 Adem\'as, como se puede apreciar debido a lo comentado no es posible apreciar las diferencias entre nuestro algoritmo y la cota O(Log(P)) es por esto que mostraremos un gr\'afico entre ambos:\\
 
@@ -69,7 +68,7 @@ obtener resultados m\'as relevantes.\\
 
 Se puede observar en el gr\'afico 2.4, como luego de realizar la divisi\'on por la complejidad cuando el n aumenta el valor tiende a 0, tomando un valor m\'aximo en 0.93. Y, en el gr\'afico 2.4 se ve como la funci\'on resultante tiene picos en los cuales llega a un m\'aximo igual a 1 y cuando el valor de entrada aumenta la funci\'on tiende a 0.5. Por lo tanto, podemos concluir que para el mejor caso nuestro algoritmo se encuentra considerablemente por debajo de la cota teorica $O(\sqrt{P})$ y asintotizado por la cota $O(log(P))$\\
 
-Luego, verificando el peor caso, llegamos a la conclusi\'on que la familia de casos en el que resulta menos beneficioso trabajar con nuestro algoritmo ser\'a cuando el valor de entrada $P$ sea de la forma \[
+Luego, verificando el peor caso, llegamos a la conclusi\'on que la familia de casos con las que resulta menos beneficioso trabajar ser\'a cuando el valor de entrada $P$ sea de la forma \[
 \sum_{i=1}^{n}3^{i}=P 
 \].
 \\

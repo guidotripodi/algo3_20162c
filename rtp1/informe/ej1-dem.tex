@@ -7,11 +7,11 @@ En cada viaje a travez del puente, a priori se puede mandar cualquier persona, o
 Como las personas solo pueden encontrarse en 1 isla en todo momento, entonces de todas las opciones se consideran aquellas que posean a todos los integrantes en el lado de partida.
 
 \subsubsection*{Desbalance}
-Al no poder haber más caníbales que arqueologos en ningun lado en ningún momento, la Elección tomada deberá mantener este invariante al enviar para el otro lado las personas elegidas.
+No puede haber más caníbales que arqueologos en ning\'un lado en ningún momento, la Elección tomada deberá mantener este invariante al enviar para el otro lado las personas elegidas.
 
 \subsubsection*{Ciclos}
 En el caso en que se envíe la opcion $(i; j)$ al lado A, bajo las restricciones anteriores nada impide que en el paso siguiente se decida mandar de regreso al mismo par, generandonos un ciclo. Esta elección claramente carece de sentido ya que nos regresa a un estado previo y con más tiempo acumulado. Podemos generalizar el ejemplo anterior a decir que no tiene sentido, dentro de una rama de solución, repetir un estado previo. Para evitarlo se debe guardar los estados previos por los cuales se pasó y desestimar cualquier opción que nos retorne a ellos.
 
 \subsubsection*{Tiempo}
-De haber encontrado una solución, no tendrá sentido ,al estar buscando una nueva, seguir por una rama si se supera el tiempo de la misma, ya que de alcanzar una solución, la misma no será optima. Con lo cual, se desestima la busqueda por una rama si la misma supera en tiempo alguna solución ya encontrada. De esta forma, al finalizar el algoritmo y haber encontrado solución, podemos recuperar el tiempo logrado por la solución más rápida. Esta poda ahorra la necesidad de una vez finalizado el algoritmo, tener que hallar la solucion de menor tiempo, dentro de todas las soluciones válidas encontradas.
+De haber encontrado una solución, no tendrá sentido, al estar buscando una nueva, seguir por una rama si se supera el tiempo de la misma, ya que de alcanzar una solución, la misma no será optima. Con lo cual, se desestima la busqueda por una rama si la misma supera en tiempo alguna solución ya encontrada. De esta forma, al finalizar el algoritmo y haber encontrado solución, podemos recuperar el tiempo logrado por la solución más rápida. Esta poda ahorra la necesidad de una vez finalizado el algoritmo, tener que hallar la soluci\'on de menor tiempo, dentro de todas las soluciones válidas encontradas.
 
