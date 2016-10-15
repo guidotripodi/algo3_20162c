@@ -61,7 +61,10 @@ vector<int> generarSolucion(vector<vector<double>> &mat){
 	  elegido[ib][jb] = true;
 	  elegido[jb][ib] = true;
   }
-    
+   
+  // ciclo para armar ans, se recorre hasta que se llega al nodo inicial, que puede ser el ultimo ib o jb (declarar afuera del for)
+  // cada vez que se agrega una arista se agrega un nodo que es el actual en el ciclo
+   
   for(int i=0;i<n;i++) ans.push_back(i);
   random_shuffle(ans.begin(),ans.end());
   
