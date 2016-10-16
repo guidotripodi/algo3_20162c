@@ -30,23 +30,24 @@
 
 using namespace std;
 
+bool nodosValidos(int i, int j, vector<vector<double>> &mat, vector<vector<bool>> &elegido);
+
 double calcularCosto(vector<vector<double>> &mat, vector<int> &camino);
 
 vector<int> generarSolucion(vector<vector<double>> &mat){
     int n = mat.size();
-    vector<int> ans;
+    vector<int> ans = vector<int>(n, 0);
     
     int ib = 0;
     int jb = 0;
     
-    // Escribir una solucion greedy
     vector<vector<bool>> elegido;
     elegido = vector<vector<bool>>(n, vector<bool>(n, false));
     for (int x = 0; x < n; x++)
     {
         int aristaMasBarata = -1;
         
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n-1; i++)
         {
             for (int j = i+1; j < n; j++)
             {
@@ -84,8 +85,9 @@ vector<int> generarSolucion(vector<vector<double>> &mat){
         }
     }
     
-    //for(int i=0;i<n;i++) ans.push_back(i);
-    //random_shuffle(ans.begin(),ans.end());
+    /*vector<int> ans;
+    for(int i=0;i<n;i++) ans.push_back(i);
+    random_shuffle(ans.begin(),ans.end());*/
     
     // ****************
     
@@ -101,7 +103,7 @@ bool nodosValidos(int i, int j, vector<vector<double>> &mat, vector<vector<bool>
     int cantA = 0;
     for (int j = 0; j < n; j++)
     {
-        if (visitado[a][j])
+        if (elegido[a][j])
         {
             cantA++;
         }
@@ -115,7 +117,7 @@ bool nodosValidos(int i, int j, vector<vector<double>> &mat, vector<vector<bool>
     int cantB = 0;
     for (int j = 0; j < n; j++)
     {
-        if (visitado[b][j])
+        if (elegido[b][j])
         {
             cantB++;
         }
@@ -126,14 +128,14 @@ bool nodosValidos(int i, int j, vector<vector<double>> &mat, vector<vector<bool>
         return false;
     }
     
-    cantAristasRecorridas = 0;
+    int cantAristasRecorridas = 0;
     int iact = a;
+    int iant = a;
     int jact = 0;
-    int iant = -1;
     
     while (cantAristasRecorridas < n-2 && jact < n)
     {
-        if (elegido[iact][jact] && (iant > 0 || iant != jact))
+        if (elegido[iact][jact] && iant != jact)
         {
             iant = iact;
             iact = jact;
@@ -157,12 +159,59 @@ vector<int> mejorarSolucion(vector<vector<double>> &mat, vector<int> camino){
     double costoAns = calcularCosto(mat,ans);
     int n = mat.size();
     
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i+1; j < n; j++) {
+            
+            swap(camino[j], camino[(j+1)%n]);
+            
+            swap(camino[i], camino[i+1]);
+            
+            double costoActual = calcularCosto(mat, camino);
+            
+            cout << "Cambiando 3 aristas: " << calcularCosto(mat,camino) << endl;
+            for(int i=0;i<n;i++) cout << camino[i] << ' ';
+            cout << endl;
+            
+            if (costoActual < costoAns) {
+                costoAns = costoActual;
+                ans = camino;
+            }
+            
+            swap(camino[i], camino[i+1]);
+            
+            swap(camino[j], camino[(j+1)%n]);
+        }
+    }
     
-    // Escribir una busqueda local
-    
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i+1; j < n; j++) {
+            swap(camino[i], camino[j]);
+            
+            double costoActual = calcularCosto(mat, camino);
+            
+            cout << "Cambiando 2? aristas: " << calcularCosto(mat,camino) << endl;
+            for(int i=0;i<n;i++) cout << camino[i] << ' ';
+            cout << endl;
+            
+            if (costoActual < costoAns) {
+                printf("mejora %f \n", costoActual);
+                costoAns = costoActual;
+                ans = camino;
+            }
+            
+            swap(camino[i], camino[j]);
+        }
+    }
+
     for(int i=1;i<n;i++){
         swap(camino[0],camino[i]);
+
         double costoActual = calcularCosto(mat,camino);
+        
+        cout << "Cambiando 2? aristas (profe version): " << calcularCosto(mat,camino) << endl;
+        for(int i=0;i<n;i++) cout << camino[i] << ' ';
+        cout << endl;
+
         if(costoActual < costoAns){
             costoAns = costoActual;
             ans = camino;
@@ -175,18 +224,12 @@ vector<int> mejorarSolucion(vector<vector<double>> &mat, vector<int> camino){
     return ans;
 }
 
-
-
-
-
 double calcularCosto(vector<vector<double>> &mat, vector<int> &camino){
     double ans = 0;
     int n = mat.size();
     for(int i=0;i<n;i++) ans += mat[camino[i]][camino[(i+1)%n]];
     return ans;
 }
-
-
 
 int main(){
     
