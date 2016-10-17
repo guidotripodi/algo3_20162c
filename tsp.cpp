@@ -194,7 +194,6 @@ vector<int> mejorarSolucion(vector<vector<double>> &mat, vector<int> camino){
             cout << endl;
             
             if (costoActual < costoAns) {
-                printf("mejora %f \n", costoActual);
                 costoAns = costoActual;
                 ans = camino;
             }
@@ -203,7 +202,7 @@ vector<int> mejorarSolucion(vector<vector<double>> &mat, vector<int> camino){
         }
     }
 
-    for(int i=1;i<n;i++){
+    /*for(int i=1;i<n;i++){
         swap(camino[0],camino[i]);
 
         double costoActual = calcularCosto(mat,camino);
@@ -217,7 +216,11 @@ vector<int> mejorarSolucion(vector<vector<double>> &mat, vector<int> camino){
             ans = camino;
         }
         swap(camino[0],camino[i]);
-    }
+    }*/
+   
+   	cout << "solucion: " << calcularCosto(mat,ans) << endl;
+    for(int i=0;i<n;i++) cout << ans[i] << ' ';
+    cout << endl;
     
     // ****************
     
