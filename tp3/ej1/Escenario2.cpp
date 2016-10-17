@@ -7,24 +7,14 @@ bool Escenario2::envioValido(Eleccion eleccion) const
 	
 	//Me fijo que ambos esten presentes en el lado A
 	
-	if (eleccion.primero.lado == LADO_B || eleccion.segundo.lado == LADO_B){
+	if (eleccion.cant_pokebolas < tamañoGym){
 		
+		return true;
+	}else{
 		return false;
 	}
 
-	if (this->historial->ocurrioEstado(eleccion, LADO_B))
-	{
-		
-		return false;
-	}
-
-	//Calculo cuantos quedarian de cada lado
-	if (!this->estaBalanceadoEnviandoEleccion(eleccion))
-	{
-		return false;
-	}
-		
-	return true;
+	
 }
 bool Escenario2::retornoValido(Eleccion eleccion) const
 {

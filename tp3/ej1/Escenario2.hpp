@@ -12,22 +12,11 @@ class Escenario2 {
 
 private:
 	//Guardo la eleccion que se tomo en cada paso
-	const int LADO_A = 0;
-	const int LADO_B = 1;
+	
+	int pokebolas_totales;
 
-
-
-	int personas_totales;
-
-	int * personas_ladoA;
-	int cant_canibales_ladoA;
-	int cant_arqueologos_ladoA;
-
-	int cant_canibales_ladoB;
-	int cant_arqueologos_ladoB;
-
-	const int * tiempos_arqueologos;
-	const int * tiempos_canibales; 
+	const int cant_gimnasio_ganado;
+	const int cant_pokebolas;
 
 
 public:
