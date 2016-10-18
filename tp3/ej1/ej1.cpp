@@ -3,85 +3,81 @@
 // A los pares los identifico por el numero de fila y columna que representan en una matriz donde las filas son los arqueologos seguidos por los canibales
 #include <iostream>
 #include <fstream>
-#include "Escenario2.hpp"
+#include <utility>
+#include "MaestroPokemon.hpp"
 #include <chrono>
 #define ya chrono::high_resolution_clock::now
 using namespace std;
 
 
-int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_arqueologos, int * tiempos_canibales);
+int algoritmoResolucion(int cant_arqueologos, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> * posiciones_gym,  pair<int,int> * posiciones_pp);
 
 int main(int argc, char* argv[])
 {
-	int cant_arqueologos, cant_canibales;
-	cin >> cant_arqueologos >> cant_canibales;
+	int cant_gimnasios, cant_pokeParadas, cap_mochila;
+	cin >> cant_gimnasios >> cant_pokeParadas >> cap_mochila;
 
 
-	int tiempos_arqueologos[cant_arqueologos];
-	int tiempos_canibales[cant_canibales];
+	int posiciones_gym[cant_gimnasios];
+	int posiciones_pp[cant_pokeParadas];
 
 	int i = 0;
-	for (i = 0; i < cant_arqueologos; i++)
-	{
-		cin >> tiempos_arqueologos[i];
+	for (i = 0; i < cant_gimnasios * 3; i++){
+		pair <pair<int,int>, int> gymPuebloPaleta;
+		if (i % 3 == 0){
+			cin >> gymPuebloPaleta.first.first;
+		}else{if (i % 3 == 2){
+			cin >> gymPuebloPaleta.first.second;
+		}else{
+			cin >> gymPuebloPaleta.second;
+		}
 	}
-	for (i = 0; i < cant_canibales; i++)
-	{
-		cin >> tiempos_canibales[i];
+		cin >> posiciones_gym[i];
+	}
+	for (i = 0; i < cant_pokeParadas * 2; i++)	{
+		pair <int, int> posicion;
+		if (i % 2 == 0)	{
+			cin >> posicion.first;
+		}else{
+			cin >> posicion.second;
+		}
+		posiciones_pp[i] = posicion;
 	}
 
-	int f = algoritmoResolucion(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
+	int f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 	cout <<f<<"\n";
 	
 	return 0;
 }
 
-int algoritmoResolucion(int cant_arqueologos, int cant_canibales, int * tiempos_arqueologos, int * tiempos_canibales)
+int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> * posiciones_gym,  pair<int,int> * posiciones_pp)
 {
-	bool exitoBackPar = true;
-	bool exitoBackLampara = true;
-	int sol = 0;
+
+	//AGREGAR PODA DE SIN SOLUCION (LO MATAMOS ANTES DE QUE NAZCA)
+	bool exitoBack = true;
+	
 	int minimo = -1; 
-	Escenario2 escenario = Escenario2(cant_arqueologos, cant_canibales, tiempos_arqueologos, tiempos_canibales);
-	while(exitoBackLampara && exitoBackPar){
-		if (escenario.pasaronTodos())
+	MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
+	while(exitoBack){
+		if (ash.gane())
 		{
-			if (escenario.tiempo < minimo || minimo == -1)
+			if (ash.distancia < minimo || minimo == -1)
 			{
-				minimo = escenario.tiempo;
+				minimo = ash.distancia;
 			}
-			sol++;
+			
 		}
 
-		
-		if (escenario.tienenLampara)
-		{
-			Escenario2::Eleccion eleccion = escenario.envioPosible();
+		MaestroPokemon::Eleccion eleccion = ash.eleccionPosible();
 			//Si hay un par posible y si la rama que estoy evaluando
 			//me sigue dando una mejor solucion a la ya encontrada
-			if (eleccion.posible==1 && (minimo == -1 || escenario.tiempo<minimo))
-			{
-				escenario.enviarEleccion(eleccion);
-			}else{
-				//vuelve al paso anterior
-				exitoBackLampara = escenario.deshacerRetorno();
-
-			}
+		if (eleccion.posible==1 && (minimo == -1 || ash.distancia<minimo))
+		{
+			ash.elegir(eleccion);
 		}else{
-			Escenario2::Eleccion eleccion = escenario.retornoPosible();
-
-			//Si hay un farolero que pueda hacer que retorne y que me mantenga el tiempo menor al ya encontrado
-			if (eleccion.posible==1 && (minimo == -1 || escenario.tiempo < minimo))
-			{
-				escenario.retornarEleccion(eleccion);
-
-			}else{
-				exitoBackPar = escenario.deshacerEnvio();
-
-			}
+				//vuelve al paso anterior
+			exitoBack = ash.deshacerEleccion();
 		}
-
-		
 	}
 
 	return minimo;
