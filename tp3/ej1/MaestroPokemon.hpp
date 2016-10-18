@@ -23,7 +23,7 @@ private:
 
 
 public:
-	int tiempo;
+	int distancia;
 	int paso;
 
 	struct destino
@@ -65,19 +65,19 @@ public:
 				{
 					//Si es una poke parada
 					tipo = PP;
-					int id2 = id - cant_gimnasios;
+					int id2 = id - MP->cant_gimnasios;
 					posicion = MP->posiciones_pp[id2];
 					
-					x = pow(posicion.first - ash->eleccionActual.first, 2);
-					y = pow(posicion.second - ash->eleccionActual.second, 2);
+					x = pow(posicion.first - MP->eleccionActual.posicion.first, 2);
+					y = pow(posicion.second - MP->eleccionActual.posicion.second, 2);
 					pocionesNecesarias = 0;
 				}else{
 					//Si es un gym
 					tipo = GIMNASIO;
-					gym = MP->gyms[id];
+					pair <pair <int,int>, int> gym = MP->gyms[id];
 					pair<int, int> posDestino = gym.first;
-					x = pow(posDestino.first - ash->eleccionActual.first, 2);
-					y = pow(posDestino.second - ash->eleccionActual.second, 2);
+					x = pow(posDestino.first - MP->eleccionActual.posicion.first, 2);
+					y = pow(posDestino.second - MP->eleccionActual.posicion.second, 2);
 					pocionesNecesarias = gym.second;
 				}
 				distancia = x + y;
@@ -85,115 +85,6 @@ public:
 			}
 		}
 	};
-
-	/*struct HistoricoEstados {
-		MaestroPokemon* escenario;
-		int cantHechos = 0;
-
-		//Voy a guardar un trie en donde el alfabeto es 0 , 1: de esta forma puedo verificar si existio
-		//la combinacion en O(n)
-
-		//Para implementarlo, al saber que va a ser un arbol con nodos de 2 posiciones y 2 aristas, lo mando a un array :)
-		TrieTree historia;
-
-		HistoricoEstados(MaestroPokemon* esc){
-			escenario = esc;
-		}
-
-		void marcarHistoria(){
-			this->cantHechos++;
-			char estado[this->escenario->personas_totales + 1];
-			estado[this->escenario->personas_totales] = NULL;
-
-			for (int i = 0; i < this->escenario->personas_totales; i++)
-			{
-
-				if (this->escenario->personas_ladoA[i]){
-
-					estado[i] = 's';
-				}else{
-					estado[i] = 'n';
-				}
-				
-			}
-
-			this->historia.insert(estado, 0);
-			
-		}
-
-		bool ocurrioEstado(Eleccion eleccion, int islaAEnviar){
-			if (this->cantHechos==0)
-			{
-				return false;
-			}
-			char estado[this->escenario->personas_totales + 1];
-			estado[this->escenario->personas_totales] = NULL;
-
-			int idP1 = eleccion.primero.id;
-			int idP2 = eleccion.segundo.id;
-			
-			for (int i = 0; i < this->escenario->personas_totales; i++)
-			{
-				if (escenario->personas_ladoA[i]){
-
-					estado[i] = 's';
-				}else{
-					estado[i] = 'n';
-				}
-
-				if (i==idP1 || i==idP2){
-					if (islaAEnviar == escenario->LADO_A)
-					{
-						estado[i] = 's';
-					}else{
-						estado[i] = 'n';
-					}
-
-				}
-
-			}
-
-			return NULL!=this->historia.searchWord(this->historia.root, estado);
-		}
-
-		void borrarHistoria(Eleccion eleccion, int islaAEnviar){
-			this->cantHechos--;
-			char estado[this->escenario->personas_totales + 1];
-			estado[this->escenario->personas_totales] = NULL;
-
-			int idP1 = eleccion.primero.id;
-			int idP2 = eleccion.segundo.id;
-
-
-			for (int i = 0; i < this->escenario->personas_totales; i++)
-			{
-
-				if (escenario->personas_ladoA[i]){
-
-					estado[i] = 's';
-				}else{
-					estado[i] = 'n';
-				}
-
-				if (i==idP1 || i==idP2){
-					if (islaAEnviar == escenario->LADO_A)
-					{
-						estado[i] = 's';
-					}else{
-						estado[i] = 'n';
-					}
-
-				}
-				
-			}
-
-
-			this->historia.removeWord(this->historia.root, estado);
-
-
-		}
-
-	};*/
 
 
 		MaestroPokemon(const int cant_gimnasios, const int cant_pokeParadas, const int * cap_mochila, const pair <pair <int,int>, int>* gyms, pair <int,int> posiciones_pp);
@@ -214,7 +105,7 @@ public:
 		int cant_pokeParadas;
 		int capacidad_mochila, cantidad_pociones;
 		pair <pair <int,int>, int>* gyms;
-		pair <int,int> posiciones_pp;
+		pair <int,int>* posiciones_pp;
 		int cant_gimnasios;
 		int cant_gimnasios_por_ganar;
 		std::list<Eleccion> * decisiones;
