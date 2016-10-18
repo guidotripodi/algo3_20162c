@@ -22,27 +22,20 @@ int main(int argc, char* argv[])
 	pair <int, int>  posiciones_pp[cant_pokeParadas];
 
 	int i = 0;
-	for (i = 0; i < cant_gimnasios * 3; i++){
+	for (i = 0; i < cant_gimnasios; i++){
 		pair <pair<int,int>, int> gymPuebloPaleta;
-		if (i % 3 == 0){
-			cin >> gymPuebloPaleta.first.first;
-		}else{if (i % 3 == 2){
-			cin >> gymPuebloPaleta.first.second;
-		}else{
-			cin >> gymPuebloPaleta.second;
-		}
-	}	
-
+		
+		cin >> gymPuebloPaleta.first.first >> gymPuebloPaleta.first.second >> gymPuebloPaleta.second;
 		posiciones_gym[i] = gymPuebloPaleta;
+		
 	}
-	for (i = 0; i < cant_pokeParadas * 2; i++)	{
+	for (i = 0; i < cant_pokeParadas; i++)	{
 		pair <int, int> posicion;
-		if (i % 2 == 0)	{
-			cin >> posicion.first;
-		}else{
-			cin >> posicion.second;
-		}
+		
+		cin >> posicion.first >> posicion.second;
+		
 		posiciones_pp[i] = posicion;
+		
 	}
 
 	int f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
@@ -78,15 +71,15 @@ int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochil
 		MaestroPokemon::Eleccion eleccion = ash.eleccionPosible();
 			//Si hay un par posible y si la rama que estoy evaluando
 			//me sigue dando una mejor solucion a la ya encontrada
-			ash.printEleccion(eleccion);
+
 		if (eleccion.posible==1 && (minimo == -1 || ash.distancia<minimo))
 		{
-			
+			printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
 			ash.elegir(eleccion);
 		}else{
 				//vuelve al paso anterior
 				cout << "Backtrack \n" ;
-			exitoBack = ash.deshacerEleccion();
+				exitoBack = ash.deshacerEleccion();
 		}
 	}
 

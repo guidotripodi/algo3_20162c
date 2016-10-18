@@ -55,18 +55,22 @@ public:
 		
 
 		void recalcular(){
+			
 			id = id + 1;
 
 			posible = MP->cant_pokeParadas + MP->cant_gimnasios>id && MP->destinos_visitados[id]==0;
 			if (posible)
 			{
 				double x, y;
-				if (id > MP->cant_gimnasios)
+				if (id >= MP->cant_gimnasios)
 				{
 					//Si es una poke parada
 					tipo = PP;
 					int id2 = id - MP->cant_gimnasios;
-					posicion = MP->posiciones_pp[id2];
+					
+					posicion.first = MP->posiciones_pp[id2].first;
+					//printf("QUE TIENE Y: %d \n", MP->posiciones_pp[id2].second);
+					posicion.second = MP->posiciones_pp[id2].second;
 					
 					x = pow(posicion.first - MP->eleccionActual.posicion.first, 2);
 					y = pow(posicion.second - MP->eleccionActual.posicion.second, 2);
@@ -74,14 +78,16 @@ public:
 				}else{
 					//Si es un gym
 					tipo = GIMNASIO;
-					pair <pair <int,int>, int> gym = MP->gyms[id];
-					posicion = MP->gym.first;
+					posicion.first = MP->gyms[id].first.first;
+					//printf("QUE TIENE Y: %d \n", MP->gyms[id].second);
+					posicion.second = MP->gyms[id].first.second;
+					pair<int, int> posDestino = MP->gyms[id].first;
 					x = pow(posDestino.first - MP->eleccionActual.posicion.first, 2);
 					y = pow(posDestino.second - MP->eleccionActual.posicion.second, 2);
-					pocionesNecesarias = gym.second;
+					pocionesNecesarias = MP->gyms[id].second;
 				}
 				distancia = x + y;
-				
+
 			}
 		}
 	};
