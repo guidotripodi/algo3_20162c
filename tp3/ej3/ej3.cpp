@@ -1,13 +1,14 @@
 #include <iostream>
 #include <vector>
-#include <algorithm> //debe ser para el swap esto no?
+#include <algorithm>
 #include <fstream>
 #include <utility>
 //#include "MaestroPokemon.hpp"
 #include <chrono>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-
+#include <math.h>
+#include <cstdlib>
 #define ya chrono::high_resolution_clock::now
 #define SEED 39
 #define MAX_PODER 25
@@ -23,10 +24,10 @@ vector<int> mejorar3opt(vector<int> solucionParcial);
 
 long long calcularCosto(vector<int> &camino);
 
-int cant_gimnasios, cant_pokeParadas, cap_mochila;
+int cantGyms, cantPokeParadas, capMochila;
 
-Gimnasio *posiciones_gym_ptr;
-Pokeparada *posiciones_pp_ptr;
+Gimnasio *gimnasiosArrPtr;
+Pokeparada *pokeParadasArrPtr;
 //nuestros costos son enteros, suma de distancias euclidianas sin tomar raiz cuadrada
 
 int main(){
@@ -34,8 +35,6 @@ int main(){
 	//srand (time(NULL));
 	srand(SEED);
 	
-	
-	Gimnasio posiciones_gym[cant_gimnasios];
 	
 	bool utilizado[RADIO][RADIO];
 	
@@ -45,8 +44,35 @@ int main(){
 		}
 	}
 	
+	cantGyms = 2;
+	Gimnasio gimnasiosArr[cantGyms];
 	
-	for(int i = 0; i < cant_gimnasios; i++){
+	gimnasiosArr[0].first.first = 2;
+	gimnasiosArr[0].first.second = 3;
+	gimnasiosArr[0].second = 2;
+	
+	gimnasiosArr[1].first.first = 3;
+	gimnasiosArr[1].first.second = 2;
+	gimnasiosArr[1].second = 3;
+	
+	cantPokeParadas = 5;
+	Pokeparada pokeParadasArr[cantPokeParadas];
+	
+	pokeParadasArr[0].first = 0;
+	pokeParadasArr[0].second = 0;
+	pokeParadasArr[1].first = 0;
+	pokeParadasArr[1].second = 1;
+	pokeParadasArr[2].first = 1;
+	pokeParadasArr[2].second = 1;
+	pokeParadasArr[3].first = 2;
+	pokeParadasArr[3].second = 2;
+	pokeParadasArr[4].first = 1;
+	pokeParadasArr[4].second = 3;
+	
+	capMochila = 8;
+	/*
+	Gimnasio gimnasiosArr[cantGyms];
+	for(int i = 0; i < cantGyms; i++){
 		Gimnasio gymPuebloPaleta;//gimnasio (uno solo)
 		bool usado = true;
 		int x, y;
@@ -59,14 +85,15 @@ int main(){
 		gymPuebloPaleta.first.first = x;
 		gymPuebloPaleta.first.second = y;
 		gymPuebloPaleta.second = rand() % MAX_PODER;
-		posiciones_gym[i] = gymPuebloPaleta;
+		gimnasiosArr[i] = gymPuebloPaleta;
 		utilizado[x][y] = true;
 	}
 	
-	cant_pokeParadas = ((MAX_PODER * cant_gimnasios)/3)*2;
-	Pokeparada posiciones_pp[cant_pokeParadas];
 	
-	for(int j = 0; j < cant_pokeParadas; j++){
+	cantPokeParadas = ((MAX_PODER * cantGyms)/3)*2;
+	Pokeparada pokeParadasArr[cantPokeParadas];
+	
+	for(int j = 0; j < cantPokeParadas; j++){
 		Pokeparada posicion;
 		bool usado = true;
 		int x, y;
@@ -78,17 +105,34 @@ int main(){
 		}
 		posicion.first = x;
 		posicion.second = y;
-		posiciones_pp[j] = posicion;
+		pokeParadasArr[j] = posicion;
 		utilizado[x][y] = true;
 	}
+	*/
 	
-	posiciones_gym_ptr = posiciones_gym;
-	posiciones_pp_ptr = posiciones_pp;
-		
+	gimnasiosArrPtr = gimnasiosArr;
+	pokeParadasArrPtr = pokeParadasArr;
+	
+	vector<int> solucionParcial;
+	
+	solucionParcial.push_back(2);
+	solucionParcial.push_back(3);
+	solucionParcial.push_back(5);
+	solucionParcial.push_back(0);
+	solucionParcial.push_back(6);
+	solucionParcial.push_back(1);
+	
+	long long costo = calcularCosto(solucionParcial);
+	
+	printf("Costo inicial: %d\n", costo);
 	//mejorar solucion
-	if(solucionParcial != NULL){
-		vector <int> solucionMejorada = mejorar2opt(solucionParcial);
+	if( solucionParcial.size()){
+		vector <int> solucion2opt= mejorar3opt(solucionParcial);
 		//imprimir solucion mejorada
+		for(int i = 0; i < (int) solucion2opt.size(); i++){
+			printf("%d ", solucion2opt[i]);
+		}
+		printf("\n");
 	}else{
 		printf("%d", -1);
 		//no hubo solucion parcial a partir de la cual trabajar
@@ -102,7 +146,7 @@ int main(){
 vector<int> mejorar2opt(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
 	long long costoAnterior = calcularCosto(solucionParcial);
-	int cantNodos = cant_gimnasios + cant_pokeParadas;//gusanito
+	int cantNodos = cantGyms + cantPokeParadas;//gusanito
 
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
@@ -113,6 +157,7 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 			if (costoActual != -1 && costoActual < costoAnterior) {
 				costoAnterior = costoActual;
 				solucion = solucionParcial;
+				printf("Costo mejorado: %lld\n", costoActual);
 			}
 
 			swap(solucionParcial[i], solucionParcial[j]);//volver al original
@@ -125,23 +170,24 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 vector<int> mejorar3opt(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
 	long long costoAnterior = calcularCosto(solucionParcial);
-	int cantNodos = cant_gimnasios + cant_pokeParadas;//gusanito
+	int cantNodos = cantGyms + cantPokeParadas;//gusanito
 
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
 
-            swap(solucionParcial[j], solucionParcial[j+1]%n);
+            swap(solucionParcial[j], solucionParcial[(j+1)% cantNodos] );
 			swap(solucionParcial[i], solucionParcial[i+1]);
 
-			long long costoActual = calcularCosto(&solucionParcial);
+			long long costoActual = calcularCosto(solucionParcial);
 
 			if (costoActual != -1 && costoActual < costoAnterior) {
 				costoAnterior = costoActual;
 				solucion = solucionParcial;
+				printf("Costo mejorado: %lld\n", costoActual);
 			}
 
 			swap(solucionParcial[i], solucionParcial[i+1]);//volver al original
-			swap(solucionParcial[j], solucionParcial[j+1]%n);//volver al original
+			swap(solucionParcial[j], solucionParcial[(j+1)% cantNodos] );//volver al original
 		}
 	}
 	return solucion;
@@ -153,12 +199,12 @@ bool pasoPosible(int destino, int capacidadParcial){
 
 	int poderGym = 0;
 
-	if (destino < cant_gimnasios)
+	if (destino < cantGyms)
 	{
-		poderGym = posiciones_gym_ptr[destino].second;
+		poderGym = gimnasiosArrPtr[destino].second;
 	}
 	
-	if (poderGym == 0 || capacidadParcial < poderGym)
+	if (poderGym == 0 || capacidadParcial > poderGym)
 	{
 		return true;
 	}
@@ -170,12 +216,13 @@ long long distancia(pair<int, int> origen, pair<int, int> destino){
 	return pow(origen.first - destino.first, 2) + pow(origen.second - destino.second, 2);//gusanito
 }
 
-long long calcularCosto(vector<int> &camino, int capacidadMochila){
+long long calcularCosto(vector<int> &camino){
 	//toda la complejidad del ejercicio es esto en realidad
 	long long costo = 0;
 	int capacidadParcial = 0;
-	for(int i = 1; i < camino->size(); i++){
-		if(pasoPosible(camino[i-1], camino[i])){
+	
+	for(int i = 1; i < (int) camino.size(); i++){
+		if(pasoPosible(camino[i], capacidadParcial)){
 			
 			pair<int, int> pOrigen;
 			pair<int, int> pDestino;
@@ -185,26 +232,29 @@ long long calcularCosto(vector<int> &camino, int capacidadMochila){
 			
 			bool destinoEsPP = false;
 			
-			if (origen < cant_gimnasios)
+			if (origen < cantGyms)
 			{
-				pOrigen = posiciones_gym_ptr[origen].first;
+				pOrigen = gimnasiosArrPtr[origen].first;
 			}else {
-				pOrigen = posiciones_pp_ptr[origen-cant_gimnasios];
+				pOrigen = pokeParadasArrPtr[origen-cantGyms];
 			}
 			
-			if (destino < cant_gimnasios)
+			if (destino < cantGyms)
 			{
-				pDestino = posiciones_gym_ptr[destino].first;
+				pDestino = gimnasiosArrPtr[destino].first;
 			}else {
-				pDestino = posiciones_pp_ptr[destino-cant_gimnasios];
+				pDestino = pokeParadasArrPtr[destino-cantGyms];
 				destinoEsPP = true;
 			}			
 			
 			costo = costo + distancia(pOrigen, pDestino);
+			
+		//	printf("Distancia de (%d,%d) a (%d,%d) = %lld \n", pOrigen.first, pOrigen.second, pDestino.first, pDestino.second, distancia(pOrigen, pDestino));
+			
 			if(destinoEsPP){
 				capacidadParcial += 3;
-				if(capacidadParcial > cap_mochila){
-					capacidadParcial = cap_mochila;
+				if(capacidadParcial > capMochila){
+					capacidadParcial = capMochila;
 				}
 			}
 		} else{

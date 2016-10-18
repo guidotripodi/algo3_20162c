@@ -1,0 +1,8 @@
+ej3.cpp: In function ‘long long int calcularCosto(std::vector<int>&, int)’:
+ej3.cpp:182:33: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+  for(int i = 1; i < camino.size(); i++){
+                                 ^
+g++: error: ejercicio3.o: No existe el archivo o el directorio
+g++: fatal error: no input files
+compilation terminated.
+make: *** [ej3] Error 4
