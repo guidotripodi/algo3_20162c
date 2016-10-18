@@ -31,18 +31,18 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 
 void MaestroPokemon::printEleccion(Eleccion eleccion) const
 {
-	//cout << "Eleccion id: "<<std::to_string(eleccion.id)<<": #arq = "<<eleccion.cantArqueologos<<" #can = "<<eleccion.cantCanibales<<" t: "<<eleccion.tiempo<<"\n";
+	cout << "Eleccion id: "<<std::to_string(eleccion.id)<<": #TIPO = "<<eleccion.tipo<<" (X,Y) = "<<eleccion.posicion.first<<" "<<eleccion.posicion.second<<" pocionesNecesarias: "<<eleccion.pocionesNecesarias<<"\n";
 }
 
 
 void MaestroPokemon::printStatus() const
 {
-	//cout<<"Escenario   paso:"<<this->decisiones->size()<<"\n\t Islas       |\tA \tB\n\t canibales   |\t"<<this->cant_canibales_ladoA <<"\t"<<this->cant_canibales_ladoB<<"\n\t arqueologos |\t"<<this->cant_arqueologos_ladoA<<"\t"<<this->cant_arqueologos_ladoB<<"\n Con tiempo: "<<this->tiempo<<"\n";
+	cout<<"Maestro Pokemon   paso:"<<this->decisiones->size()<<"";
 }
 
 
-MaestroPokemon::MaestroPokemon(const int cant_gimnasios, const int cant_pokeParadas, const int * cap_mochila, const pair <pair <int,int>, int>* gyms, pair <int,int> posiciones_pp){
-	
+MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[]){
+	cout << "INICIALIZANDO\n";
 	this->cant_gimnasios = cant_gimnasios;
 	this->cant_gimnasios_por_ganar = cant_gimnasios;
 	this->cant_pokeParadas = cant_pokeParadas;
@@ -61,16 +61,15 @@ MaestroPokemon::MaestroPokemon(const int cant_gimnasios, const int cant_pokePara
 	{
 		this->destinos_visitados[i]=0;
 	}
-
+	
 	this->eleccionActual = Eleccion(this);
-
+	this->printEleccion(Eleccion(this));
 	
 
 }
 
 MaestroPokemon::~MaestroPokemon(){
-	delete decisiones;
-	delete[] destinos_visitados;
+
 }
 
 MaestroPokemon::Eleccion MaestroPokemon::eleccionPosible()
@@ -111,7 +110,7 @@ void MaestroPokemon::elegir(Eleccion eleccion){
 
 }
 
-bool MaestroPokemon::deshacerEnvio()
+bool MaestroPokemon::deshacerEleccion()
 {
 	if(this->decisiones->empty()){
 		return false;
@@ -140,7 +139,7 @@ bool MaestroPokemon::deshacerEnvio()
 }  	
 
 
-int MaestroPokemon::gane()
+bool MaestroPokemon::gane()
 {
 	return this->cant_gimnasios_por_ganar == 0;
 }
