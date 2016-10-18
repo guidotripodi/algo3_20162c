@@ -18,8 +18,6 @@ private:
 	
 	int* destinos_visitados;
 
-	const int cant_destinos;
-	const int cant_pociones;
 
 
 public:
@@ -39,25 +37,27 @@ public:
 	};
 	struct Eleccion
 	{
-		int distancia, id; // El id da ordinalidad a todas las elecciones posibles, dentro de la matriz #personas x #personas
+		int distancia;
+		int id = -1; // El id da ordinalidad a todas las elecciones posibles, dentro de la matriz #personas x #personas
 		bool posible;
 
-		int tipo;
-		int pocionesNecesarias;
+		int tipo =-1;
+		int pocionesNecesarias = -1;
 		pair <int, int> posicion;
 		const MaestroPokemon* MP;
-		Eleccion(const MaestroPokemon* ash): 
-		MP(ash),
+		Eleccion(){};
+		Eleccion(const MaestroPokemon* MP):
+		MP(MP),
 		id(-1){
 			recalcular();
 		};
 
-		Eleccion(){};
+		
 
 		void recalcular(){
 			id = id + 1;
 
-			posible = MP->cant_destinos<id && MP->destinos_visitados[id]==0;
+			posible = MP->cant_pokeParadas + MP->cant_gimnasios>id && MP->destinos_visitados[id]==0;
 			if (posible)
 			{
 				double x, y;
@@ -75,7 +75,7 @@ public:
 					//Si es un gym
 					tipo = GIMNASIO;
 					pair <pair <int,int>, int> gym = MP->gyms[id];
-					pair<int, int> posDestino = gym.first;
+					posicion = MP->gym.first;
 					x = pow(posDestino.first - MP->eleccionActual.posicion.first, 2);
 					y = pow(posDestino.second - MP->eleccionActual.posicion.second, 2);
 					pocionesNecesarias = gym.second;
@@ -87,7 +87,7 @@ public:
 	};
 
 
-		MaestroPokemon(const int cant_gimnasios, const int cant_pokeParadas, const int * cap_mochila, const pair <pair <int,int>, int>* gyms, pair <int,int> posiciones_pp);
+		MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[]);
 		~MaestroPokemon();
 	//Devuelve el identificador de la eleccion
 		Eleccion eleccionPosible();
@@ -99,13 +99,14 @@ public:
 	//Para ver el estado del sistema
 		void printEleccion(Eleccion par) const;
 		void printStatus()const;
-
+	
 
 	private:
 		int cant_pokeParadas;
-		int capacidad_mochila, cantidad_pociones;
-		pair <pair <int,int>, int>* gyms;
-		pair <int,int>* posiciones_pp;
+		 int capacidad_mochila;
+		int cantidad_pociones;
+		const pair <pair <int,int>, int>* gyms;
+		const pair <int,int>* posiciones_pp;
 		int cant_gimnasios;
 		int cant_gimnasios_por_ganar;
 		std::list<Eleccion> * decisiones;

@@ -10,7 +10,7 @@
 using namespace std;
 
 
-int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> * posiciones_gym,  pair<int,int> * posiciones_pp);
+int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[]);
 
 int main(int argc, char* argv[])
 {
@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> * posiciones_gym,  pair<int,int> *  posiciones_pp)
+int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
 {
 
 	for (int i = 0; i < cant_gimnasios; ++i){
@@ -64,7 +64,7 @@ int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochil
 	bool exitoBack = true;
 	
 	int minimo = -1; 
-	MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila*, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
+	MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
 	while(exitoBack){
 		if (ash.gane())
 		{
@@ -78,11 +78,14 @@ int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochil
 		MaestroPokemon::Eleccion eleccion = ash.eleccionPosible();
 			//Si hay un par posible y si la rama que estoy evaluando
 			//me sigue dando una mejor solucion a la ya encontrada
+			ash.printEleccion(eleccion);
 		if (eleccion.posible==1 && (minimo == -1 || ash.distancia<minimo))
 		{
+			
 			ash.elegir(eleccion);
 		}else{
 				//vuelve al paso anterior
+				cout << "Backtrack \n" ;
 			exitoBack = ash.deshacerEleccion();
 		}
 	}
