@@ -85,7 +85,7 @@ MaestroPokemon::Eleccion MaestroPokemon::eleccionPosible()
 
 	while (this->eleccionActual.posible && !esValida)
 	{
-		cout << "Fallo validacion...recalculando\n";
+		cout << "\tFallo validacion...recalculando\n";
 		this->eleccionActual.recalcular();
 		if (this->eleccionActual.posible)
 		{

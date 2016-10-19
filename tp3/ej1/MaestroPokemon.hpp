@@ -61,42 +61,38 @@ public:
 			posible = MP->cant_pokeParadas + MP->cant_gimnasios > id;
 			if (posible)
 			{
-				int x, y;
-				x = 0; y= 0;
+				int x, y, xM, yM;
+				xM = MP->eleccionActual.posicion.first;
+				yM = MP->eleccionActual.posicion.second;
+
 				if (id >= MP->cant_gimnasios)
 				{
-					//Si es una poke parada
+					//Si es una pp
 					tipo = PP;
-					int id2 = id - MP->cant_gimnasios;
-					
-					posicion.first = MP->posiciones_pp[id2].first;
-					//printf("QUE TIENE Y: %d \n", MP->posiciones_pp[id2].second);
-					posicion.second = MP->posiciones_pp[id2].second;
-					
-					x = pow(posicion.first - MP->eleccionActual.posicion.first, 2);
-					y = pow(posicion.second - MP->eleccionActual.posicion.second, 2);
+					int id2 = id - MP->cant_gimnasios;				
+					x = MP->posiciones_pp[id2].first;
+					y = MP->posiciones_pp[id2].second;
 					pocionesNecesarias = 0;
 				}else{
 					//Si es un gym
 					tipo = GIMNASIO;
-					posicion.first = MP->gyms[id].first.first;
-					//printf("QUE TIENE Y: %d \n", MP->gyms[id].second);
-					posicion.second = MP->gyms[id].first.second;
-					
-					x = pow(posicion.first - MP->eleccionActual.posicion.first, 2);
-					y = pow(posicion.second - MP->eleccionActual.posicion.second, 2);
+					x = MP->gyms[id].first.first;
+					y = MP->gyms[id].first.second;
 					pocionesNecesarias = MP->gyms[id].second;
 				}
-				/* ESTO ANDA BIEN, LA DISTANCIA LA DA CORRECTA*/
 
-			
-				distancia = x + y;
+				//Actualizo posicion
+				posicion.first = x;
+				posicion.second = y;
+				distancia = pow(x - xM, 2) + pow(y - yM, 2);
+				//printf("[recalcular]  |(%d,%d) - (%d,%d)| = %d\n",xM, yM, x, y, distancia);
 				//printf("- - -DR: %d\n",distancia );
 
 			}else{
 				pocionesNecesarias = -1;
 				posicion.first= -888;
 				posicion.second= -888;
+				distancia = -1;
 
 			}
 		}
