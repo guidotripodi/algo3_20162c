@@ -59,10 +59,12 @@ int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochil
 	int minimo = -1; 
 	MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
 	while(exitoBack){
+		ash.printStatus();
 		if (ash.gane())
 		{
 			if (ash.distancia < minimo || minimo == -1)
 			{
+				cout<<"fin de rama\n";
 				minimo = ash.distancia;
 			}
 			
@@ -74,7 +76,9 @@ int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochil
 
 		if (eleccion.posible==1 && (minimo == -1 || ash.distancia<minimo))
 		{
-			printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
+			//printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
+
+			//ash.printEleccion(eleccion);
 			ash.elegir(eleccion);
 		}else{
 				//vuelve al paso anterior
