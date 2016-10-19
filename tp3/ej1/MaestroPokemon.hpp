@@ -22,7 +22,7 @@ private:
 
 public:
 	int distancia;
-	int paso;
+	int paso = 0;
 
 	struct destino
 	{
@@ -62,8 +62,16 @@ public:
 			if (posible)
 			{
 				int x, y, xM, yM;
-				xM = MP->eleccionActual.posicion.first;
-				yM = MP->eleccionActual.posicion.second;
+				if (MP->decisiones->size()==0)
+				{
+					
+					xM = MP->eleccionActual.posicion.first;
+					yM = MP->eleccionActual.posicion.second;
+				}else{
+					xM = MP->decisiones->back().posicion.first;
+					yM = MP->decisiones->back().posicion.second;
+					
+				}
 
 				if (id >= MP->cant_gimnasios)
 				{
@@ -84,8 +92,14 @@ public:
 				//Actualizo posicion
 				posicion.first = x;
 				posicion.second = y;
-				distancia = pow(x - xM, 2) + pow(y - yM, 2);
-				//printf("[recalcular]  |(%d,%d) - (%d,%d)| = %d\n",xM, yM, x, y, distancia);
+				if (MP->paso == 0)
+				{
+					distancia = 0;
+				}else{
+					distancia = pow(x - xM, 2) + pow(y - yM, 2);
+				}
+
+				//printf("[recalcular]  |(%d ,%d) , (%d,%d)| = %d MP->paso: %d  \n",xM, yM, x, y, distancia,MP->paso );
 				//printf("- - -DR: %d\n",distancia );
 
 			}else{
@@ -99,32 +113,32 @@ public:
 	};
 
 
-		MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[]);
-		~MaestroPokemon();
+	MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[]);
+	~MaestroPokemon();
 	//Devuelve el identificador de la eleccion
-		Eleccion eleccionPosible();
+	Eleccion eleccionPosible();
 
-		void elegir(const Eleccion eleccion);
-		bool deshacerEleccion();
-		bool gane();
+	void elegir(const Eleccion eleccion);
+	bool deshacerEleccion();
+	bool gane();
+	std::list<int> * caminoRecorrido();
 
 	//Para ver el estado del sistema
-		void printEleccion(Eleccion par) const;
-		void printStatus()const;
-	
+	void printEleccion(Eleccion par) const;
+	void printStatus()const;
 
-	private:
-		int cant_pokeParadas;
-		 int capacidad_mochila;
-		int cantidad_pociones;
-		const pair <pair <int,int>, int>* gyms;
-		const pair <int,int>* posiciones_pp;
-		int cant_gimnasios;
-		int cant_gimnasios_por_ganar;
-		std::list<Eleccion> * decisiones;
-		Eleccion eleccionActual;
-		bool eleccionValida(Eleccion eleccion) const;
-
+private:
+	int cant_pokeParadas;
+	int capacidad_mochila;
+	int cantidad_pociones;
+	const pair <pair <int,int>, int>* gyms;
+	const pair <int,int>* posiciones_pp;
+	int cant_gimnasios;
+	int cant_gimnasios_por_ganar;
+	std::list<Eleccion> * decisiones;
+	Eleccion eleccionActual;
+	bool eleccionValida(Eleccion eleccion) const;
 
 
-	};
+
+};

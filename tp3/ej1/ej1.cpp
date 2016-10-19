@@ -10,7 +10,7 @@
 using namespace std;
 
 
-int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[]);
+pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[]);
 
 int main(int argc, char* argv[])
 {
@@ -38,34 +38,45 @@ int main(int argc, char* argv[])
 		
 	}
 
-	int f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
+	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 	
-	cout <<f<<"\n";
-	
+	if ( f == NULL)	{
+		return -1; 
+	}
+	cout << f->first <<" "<< f->second->size();
+	for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
+		cout << " " << *it;
+
+	}
+	cout << "\n";
 	return 0;
 }
 
-int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
+ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
 {
 
 	for (int i = 0; i < cant_gimnasios; ++i){
 		if (posiciones_gym[i].second > cap_mochila){
 			//Sin solucion!
-			return -1;
+			
+			return NULL;
 		}
 	}
 	bool exitoBack = true;
 	
 	int minimo = -1; 
 	MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
+	std::list<int> * camino;
 	while(exitoBack){
-		ash.printStatus();
+		//ash.printStatus();
 		if (ash.gane())
 		{
 			if (ash.distancia < minimo || minimo == -1)
 			{
-				cout<<"fin de rama\n";
+			//	cout<<"fin de rama\n";
 				minimo = ash.distancia;
+				camino = ash.caminoRecorrido();
+
 			}
 			
 		}
@@ -82,10 +93,13 @@ int algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochil
 			ash.elegir(eleccion);
 		}else{
 				//vuelve al paso anterior
-				cout << "Backtrack \n" ;
-				exitoBack = ash.deshacerEleccion();
+			//cout << "Backtrack \n" ;
+			exitoBack = ash.deshacerEleccion();
 		}
 	}
 
-	return minimo;
+	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
+	final->first = minimo;
+	final->second = camino;
+	return final;
 }

@@ -5,11 +5,11 @@ using namespace std;
 bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 {
 	//XD
-	printf("\tPruebo: ");
-	this->printEleccion(eleccion);
+	//printf("\tPruebo: ");
+	//this->printEleccion(eleccion);
 	if (this->destinos_visitados[eleccion.id])
 	{
-		cout<<"\t\terror: ya visitado\n";
+		//cout<<"\t\terror: ya visitado\n";
 		return false;
 	}
 
@@ -18,7 +18,7 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 		//es menor.
 		if (this->cantidad_pociones == this->capacidad_mochila)
 		{
-			cout<<"\t\terror: cantidades iguales\n";
+		//	cout<<"\t\terror: cantidades iguales\n";
 			return false;
 		}
 	}else{
@@ -26,7 +26,7 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 		//Si la cantidad de pociones disponibles no es suficiente entonces no puedo ir
 		if (this->cantidad_pociones <= eleccion.pocionesNecesarias)
 		{
-			cout<<"\t\terror: falta de pociones\n";
+		//	cout<<"\t\terror: falta de pociones\n";
 			return false;
 		}
 	}
@@ -43,14 +43,14 @@ void MaestroPokemon::printEleccion(Eleccion eleccion) const
 
 void MaestroPokemon::printStatus() const
 {
-	cout<<"\n---------------------------------------------------\nMaestro Pokemon:   paso = "<<this->decisiones->size()<<" pociones = "<<this->cantidad_pociones<<" recorri = "<<this->distancia<<"\n\n";
+	cout<<"\n---------------------------------------------------\nMaestro Pokemon:   paso = "<<this->paso<<" pociones = "<<this->cantidad_pociones<<" recorri = "<<this->distancia<<"\n\n";
 }
 
 
 MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[]){
-	cout << "INICIALIZANDO:\n";
-	cout << "\t- #gim "<<cant_gimnasios<<"\n";
-	cout << "\t- #pp "<<cant_pokeParadas<<"\n";
+	//cout << "INICIALIZANDO:\n";
+	//cout << "\t- #gim "<<cant_gimnasios<<"\n";
+	//cout << "\t- #pp "<<cant_pokeParadas<<"\n";
 	this->cant_gimnasios = cant_gimnasios;
 	this->cant_gimnasios_por_ganar = cant_gimnasios;
 	this->cant_pokeParadas = cant_pokeParadas;
@@ -58,6 +58,7 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 	this->cantidad_pociones = 0; 
 	this->gyms = gyms;
 	this->posiciones_pp = posiciones_pp; 
+	this->paso=0;
 	
 
 	this->decisiones = new list<MaestroPokemon::Eleccion>();
@@ -81,23 +82,23 @@ MaestroPokemon::~MaestroPokemon(){
 
 MaestroPokemon::Eleccion MaestroPokemon::eleccionPosible()
 {
-	bool esValida = this->eleccionValida(this->eleccionActual);
-
-	while (this->eleccionActual.posible && !esValida)
+ 	Eleccion eleccion = this->eleccionActual; 
+	bool esValida = this->eleccionValida(eleccion);
+	while (eleccion.posible && !esValida)
 	{
-		cout << "\tFallo validacion...recalculando\n";
-		this->eleccionActual.recalcular();
-		if (this->eleccionActual.posible)
+		//cout << "\tFallo validacion...recalculando\n";
+		eleccion.recalcular();
+		if (eleccion.posible)
 		{
-			esValida = this->eleccionValida(this->eleccionActual); 
+			esValida = this->eleccionValida(eleccion); 
 		}
 	}
 	
-	this->eleccionActual.posible = this->eleccionActual.posible && esValida;
+	eleccion.posible = eleccion.posible && esValida;
 
 	/*EL PROBLEMA ESTA ACA, NO PASA LA DISTANCIA NUEVA YA QUE NO RECALCULA*/
 	//printf("Eleccion tipo %d, eleccion pocionesNecesarias: %d, eleccion distancia %d\n", eleccionActual.tipo, eleccionActual.pocionesNecesarias, eleccionActual.distancia );
-	return eleccionActual;
+	return eleccion;
 }
 
 
@@ -121,8 +122,9 @@ void MaestroPokemon::elegir(Eleccion eleccion){
 	}
 	//this->printEleccion(eleccion);
 	this->eleccionActual = Eleccion(this);
-	cout << "ELEGI:   ";
-	this->printEleccion(eleccion);
+	//cout << "ELEGI:   ";
+	//this->printEleccion(eleccion);
+	this->paso = decisiones->size();
 	
 
 }
@@ -135,11 +137,12 @@ bool MaestroPokemon::deshacerEleccion()
 
 	Eleccion eleccionADeshacer = this->decisiones->back();
 	this->decisiones->pop_back();
+	this->paso = decisiones->size();
 
 	this->destinos_visitados[eleccionADeshacer.id] = 0;
 
 	this->distancia = this->distancia - eleccionADeshacer.distancia;
-	printf("\tDistancia sin Eleccion tomada:%d\n",this->distancia  );
+	//printf("\tDistancia sin Eleccion tomada:%d\n",this->distancia  );
 	if (eleccionADeshacer.tipo == GIMNASIO)
 	{
 		this->cant_gimnasios_por_ganar++;
@@ -151,7 +154,6 @@ bool MaestroPokemon::deshacerEleccion()
 
 	this->eleccionActual = eleccionADeshacer;
 	this->eleccionActual.recalcular();
-
 	return true;
 }  	
 
@@ -162,3 +164,14 @@ bool MaestroPokemon::gane()
 }
 
 
+std::list<int> * MaestroPokemon::caminoRecorrido(){
+	std::list<int> * camino = new list<int>();
+	for (std::list<Eleccion>::iterator it=this->decisiones->begin(); it != this->decisiones->end(); ++it){
+		camino->push_back((*it).id+1);
+
+	}
+	return camino;
+
+
+
+}
