@@ -87,9 +87,11 @@ public:
 					y = pow(posicion.second - MP->eleccionActual.posicion.second, 2);
 					pocionesNecesarias = MP->gyms[id].second;
 				}
+				/* ESTO ANDA BIEN, LA DISTANCIA LA DA CORRECTA
+
 				printf("MP->eleccionActual->x %d ,MP->eleccionActual->y %d \n", MP->eleccionActual.posicion.first, MP->eleccionActual.posicion.second);
 				printf("Pos nuevo destino %d ,Pos nuevo destino %d \n", posicion.first, posicion.second);
-				printf("x %d ,y %d \n", x, y);
+				printf("x %d ,y %d \n", x, y);*/
 				distancia = x + y;
 
 			}

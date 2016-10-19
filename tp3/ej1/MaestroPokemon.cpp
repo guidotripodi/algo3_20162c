@@ -88,7 +88,7 @@ MaestroPokemon::Eleccion MaestroPokemon::eleccionPosible()
 
 	this->eleccionActual.posible = this->eleccionActual.posible && this->eleccionValida(this->eleccionActual);
 	/*EL PROBLEMA ESTA ACA, NO PASA LA DISTANCIA NUEVA YA QUE NO RECALCULA*/
-
+	printf("Eleccion tipo %d, eleccion pocionesNecesarias: %d, eleccion distancia %d\n", eleccionActual.tipo, eleccionActual.pocionesNecesarias, eleccionActual.distancia );
 	return eleccionActual;
 }
 
