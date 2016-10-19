@@ -24,7 +24,7 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 	}else{
 		//Si es un gimnasio entonces:
 		//Si la cantidad de pociones disponibles no es suficiente entonces no puedo ir
-		if (this->cantidad_pociones <= eleccion.pocionesNecesarias)
+		if (this->cantidad_pociones < eleccion.pocionesNecesarias)
 		{
 			cout<<"\terror: falta de pociones\n";
 			return false;
@@ -96,8 +96,6 @@ MaestroPokemon::Eleccion MaestroPokemon::eleccionPosible()
 void MaestroPokemon::elegir(Eleccion eleccion){
 
 	//Guardo la decision en la rama que estoy explorando
-	this->eleccionActual = Eleccion(this);
-	
 	this->decisiones->push_back(eleccion);
 	
 	//Marco al destino como visitado
@@ -114,10 +112,11 @@ void MaestroPokemon::elegir(Eleccion eleccion){
 		this->cantidad_pociones = cantidad_pociones+3;//HARDCODE!!!
 	}
 	//this->printEleccion(eleccion);
+	this->eleccionActual = Eleccion(this);
 	cout << "ELEGI:   ";
 	this->printEleccion(eleccion);
 	printf("Termine Eleccion, continuo. Me quedaron %d pociones y camine ya %d \n", this->cantidad_pociones, this->distancia);
-	
+	printf("La eleccion tiene distancia: %d\n",this->eleccionActual.distancia );
 
 }
 

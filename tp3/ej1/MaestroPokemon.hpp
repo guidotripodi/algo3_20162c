@@ -61,7 +61,7 @@ public:
 			posible = MP->cant_pokeParadas + MP->cant_gimnasios>id && MP->destinos_visitados[id]==0;
 			if (posible)
 			{
-				double x, y;
+				int x, y;
 				x = 0; y= 0;
 				if (id >= MP->cant_gimnasios)
 				{
