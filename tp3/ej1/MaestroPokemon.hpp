@@ -62,6 +62,7 @@ public:
 			if (posible)
 			{
 				double x, y;
+				x = 0; y= 0;
 				if (id >= MP->cant_gimnasios)
 				{
 					//Si es una poke parada
@@ -81,11 +82,14 @@ public:
 					posicion.first = MP->gyms[id].first.first;
 					//printf("QUE TIENE Y: %d \n", MP->gyms[id].second);
 					posicion.second = MP->gyms[id].first.second;
-					pair<int, int> posDestino = MP->gyms[id].first;
-					x = pow(posDestino.first - MP->eleccionActual.posicion.first, 2);
-					y = pow(posDestino.second - MP->eleccionActual.posicion.second, 2);
+					
+					x = pow(posicion.first - MP->eleccionActual.posicion.first, 2);
+					y = pow(posicion.second - MP->eleccionActual.posicion.second, 2);
 					pocionesNecesarias = MP->gyms[id].second;
 				}
+				printf("MP->eleccionActual->x %d ,MP->eleccionActual->y %d \n", MP->eleccionActual.posicion.first, MP->eleccionActual.posicion.second);
+				printf("Pos nuevo destino %d ,Pos nuevo destino %d \n", posicion.first, posicion.second);
+				printf("x %d ,y %d \n", x, y);
 				distancia = x + y;
 
 			}
