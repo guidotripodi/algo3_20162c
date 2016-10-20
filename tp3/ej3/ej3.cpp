@@ -126,7 +126,7 @@ int main(){
 	printf("Costo inicial: %lld\n", costo);
 	//mejorar solucion
 	if( solucionParcial.size()){
-		vector <int> solucion2opt= mejorar3opt(solucionParcial);
+		vector <int> solucion2opt= mejorar2opt(solucionParcial);
 		//imprimir solucion mejorada
 		for(int i = 0; i < (int) solucion2opt.size(); i++){
 			printf("%d ", solucion2opt[i]);
