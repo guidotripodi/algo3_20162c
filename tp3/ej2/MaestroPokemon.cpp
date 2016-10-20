@@ -34,6 +34,31 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 
 }
 
+bool MaestroPokemon::eleccionMinimaPosible(Eleccion eleccion) const{
+	/*Llegue a este chequeo eso significa que la eleccion es valida hasta el momento,
+	 *  deseo chequear que tambien es la minina*/
+	int minimo = eleccion.distancia;
+	int xM = 0;
+	int yM = 0;
+	if (this->decisiones->size()==0){
+		xM = this->eleccionActual.posicion.first;
+		yM = this->eleccionActual.posicion.second;
+	}else{
+		xM = this->decisiones->back().posicion.first;
+		yM = this->decisiones->back().posicion.second;
+	}
+	if{eleccion.id < this->cant_gimnasios}{
+		/*La eleccion es un gym por lo tanto chequeo si es el minimo gym no me interesan las pokeparadas*/
+		
+		
+	
+	}else{
+		/*La eleccion es una pokeparada por lo tanto chequeo si es la minima pokeparada no me interesan los gym*/
+	
+	
+	}
+}
+
 
 void MaestroPokemon::printEleccion(Eleccion eleccion) const
 {
