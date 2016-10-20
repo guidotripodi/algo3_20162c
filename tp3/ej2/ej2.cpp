@@ -70,13 +70,15 @@ int main(int argc, char* argv[])
 			
 			return NULL;
 		}
+		
+		printf("HOLA");
 	bool exitoBack = true;
 	
 	int minimo = -1; 
 	MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
 	std::list<int> * camino;
 	while(exitoBack){
-		//ash.printStatus();
+		ash.printStatus();
 		if (ash.gane())
 		{
 			if (ash.distancia < minimo || minimo == -1)
@@ -97,8 +99,9 @@ int main(int argc, char* argv[])
 		{
 			//printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
 
-			//ash.printEleccion(eleccion);
+			ash.printEleccion(eleccion);
 			if(ash.eleccionMinimaPosible(eleccion)){
+				ash.printEleccion(eleccion);
 				ash.elegir(eleccion);
 				
 			}
