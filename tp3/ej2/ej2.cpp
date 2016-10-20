@@ -41,6 +41,7 @@ int main(int argc, char* argv[])
 	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 	
 	if ( f == NULL)	{
+		cout << "-1" << "\n";
 		return -1; 
 	}
 	cout << f->first <<" "<< f->second->size();
@@ -54,21 +55,30 @@ int main(int argc, char* argv[])
 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
 {
-
+		int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
+	int pocionesANecesitar = 0;
 	for (int i = 0; i < cant_gimnasios; ++i){
-		if (posiciones_gym[i].second > cap_mochila){
+		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
+		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
 			
 			return NULL;
 		}
 	}
+	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
+			//Sin solucion!
+			
+			return NULL;
+		}
+		
+		printf("HOLA");
 	bool exitoBack = true;
 	
 	int minimo = -1; 
 	MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
 	std::list<int> * camino;
 	while(exitoBack){
-		//ash.printStatus();
+		ash.printStatus();
 		if (ash.gane())
 		{
 			if (ash.distancia < minimo || minimo == -1)
@@ -89,20 +99,13 @@ int main(int argc, char* argv[])
 		{
 			//printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
 
-			//ash.printEleccion(eleccion);
+			ash.printEleccion(eleccion);
 			if(ash.eleccionMinimaPosible(eleccion)){
+				ash.printEleccion(eleccion);
 				ash.elegir(eleccion);
 				
-			}else{
-				//vuelve al paso anterior
-			//cout << "Backtrack \n" ;
-				exitoBack = ash.deshacerEleccion();
-				}
+			}
 			
-		}else{
-				//vuelve al paso anterior
-			//cout << "Backtrack \n" ;
-			exitoBack = ash.deshacerEleccion();
 		}
 	}
 

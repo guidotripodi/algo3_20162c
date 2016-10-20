@@ -5,7 +5,7 @@ eleccion contiene un id, posicion de la misma y distancia desde el punto anterio
 se crean booleanos sePudoDeshacerEleccion con valor verdadero \hfill O(1) \\
 se crea un entero minimo con valor -1 \hfill O(1)\\ 
 \While{sePudoDeshacerEleccion}{  
-	\If{soyElMejor(MaestroPokemon) $\wedge$ tiempo(MaestroPokemon) < minimo}{
+	\If{lesGaneATodos(MaestroPokemon) $\wedge$ tiempo(MaestroPokemon) < minimo}{
 	 \hfill  guarda: O(1)\\
 			para minimo asignar tiempo(MaestroPokemon) \hfill O(1)\\	
 			para caminoRecorrido asignar caminoRecorrido(MaestroPokemon) \hfill O(1)\\	
@@ -22,91 +22,86 @@ se crea un entero minimo con valor -1 \hfill O(1)\\
 \end{algorithm}
 
 \begin{algorithm}[H]
-\Fn{aplicarEleccionEnvio(eleccion, escenario)}{
+\Fn{aplicarEleccionEnvio(eleccion, maestroPokemon)}{
 	encolar en decisiones la eleccion tomada  \hfill O(1) \\
-	actualizar estado del sistema en base a la decision tomada \hfill 0(1) \\
-	sumar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
-	guardar estado isla A y estado isla B como efectuado\hfill O(n) \\
-	marcar escenario.lampara falso \hfill O(1) \\
+	actualizar estado del sistema en base a la decision tomada: \hfill 0(1) \\
+	\If{tipo(eleccion) == GIMNASIO}{
+	\hfill  guarda: O(1)\\
+	 	decrementar	maestroPokemon.cantidadGymFaltantes 1 \hfill O(1) \\
+		para maestroPokemon.cantidadPociones  asignar pociones(maestroPokemon) - pocionesNecesarias(eleccion) \hfill O(1) \\
+	}\Else{
+		para maestroPokemon.cantidadPociones  asignar pociones(maestroPokemon) + 3\hfill O(1) \\
+	
+	}
+	sumar a maestroPokemon.tiempo tiempo(eleccion) \hfill O(1) \\
+	guardar estado como efectuado\hfill O(n) \\
+	actualizar eleccionActual con la nueva eleccion\hfill O(1) \\
 
 }
-\textbf{\hfill Complejidad total: $O(n)$}\\ 
+\textbf{\hfill Complejidad total: $O(n+m)$}\\ 
 \end{algorithm}
 
-\begin{algorithm}[H]
-\Fn{aplicarRetornoEnvio(eleccion, escenario)}{
-	encolar en decisiones la eleccion tomada  \hfill O(1) \\
-	actualizar estado del sistema en base a la decision tomada \hfill 0(1) \\
-	sumar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
-	guardar estado isla A y estado isla B como efectuado \hfill O(n) \\
-	marcar escenario.lampara verdadero \hfill O(1) \\
-}
-\textbf{\hfill Complejidad total: $O(n)$}\\ 
-\end{algorithm}
 
 \begin{algorithm}[H]
-\Fn{deshacerUltimaEleccionEnvio(escenario)}{
+\Fn{deshacerUltimaEleccion(maestroPokemon)}{
 	\If{hay decisiones para desencolar}{
 	desencolar de decisiones una eleccion\hfill O(1) \\
-	actualizar estado del sistema en base a la decision desencolada \hfill 0(1) \\
-	restar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
-	borrar estado isla A y estado isla B como efectuado \hfill O(n) \\
-	marcar escenario.lampara verdadero \hfill O(1) \\	
+	actualizar estado del sistema en base a la decision desencolada: \hfill 0(1) \\
+	\If{tipo(eleccion) == GIMNASIO}{
+	\hfill  guarda: O(1)\\
+	 	incrementar	maestroPokemon.cantidadGymFaltantes 1 \hfill O(1) \\
+		para maestroPokemon.cantidadPociones  asignar pociones(maestroPokemon) + pocionesNecesarias(eleccion) \hfill O(1) \\
+	}\Else{
+		para maestroPokemon.cantidadPociones  asignar pociones(maestroPokemon) - 3\hfill O(1) \\
+	
+	}
+	restar a maestroPokemon.tiempo tiempo(eleccion) \hfill O(1) \\
+	actualizar eleccionActual con la eleccion anterior a la que acabamos de sacar \hfill O(1) \\
+
 	devolver verdadero \hfill O(1) \\	
 	}\Else{ 
 		devolver falso \hfill O(1) \\	
 	}
 }
-\textbf{\hfill Complejidad total: $O(n)$}\\ 
+\textbf{\hfill Complejidad total: $O(n+m)$}\\ 
 \end{algorithm}
 
 
 \begin{algorithm}[H]
-\Fn{deshacerUltimoRetorno(escenario)}{
-	\If{hay decisiones para desencolar}{
-	desencolar de decisiones una eleccion\hfill O(1) \\
-	actualizar estado del sistema en base a la decision desencolada \hfill 0(1) \\
-	restar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
-	borrar estado isla A y estado isla B como efectuado \hfill O(n) \\
-	marcar escenario.lampara falso \hfill O(1) \\	
-	devolver verdadero \hfill O(1) \\	
-	}\Else{ 
-		devolver falso \hfill O(1) \\	
-	}
-}
-\textbf{\hfill Complejidad total: $O(n)$}\\ 
-\end{algorithm}
-
-\begin{algorithm}[H]
-\Fn{eleccionEnvioPosible(escenario)}{
+\Fn{eleccionPosible(maestroPokemon)}{
 	\While{Hay elecciones disponibles}{
-	\hfill Ciclo: O($\binom{n}{2}$)\\
+	\hfill Ciclo: O($\binom{n+m}{1}$)\\
+		\If{eleccion.tipo == POKEPARADA}{
+		\hfill  guarda: O(1)\\
+			\If{maestroPokemon.pociones == maestroPokemon.capacidadMochila}{
+			\hfill  guarda: O(1)\\
+				 recalcularEleccion en base a ultima posicion correcta \hfill O(n+m) \\	
+				}\Else{
+					devolver eleccion \hfill O(1) \\
+				}			
+			}\Else{
+			\If{maestroPokemon.pociones < pocionesNecesarias(eleccion)}{
+				\hfill  guarda: O(1)\\
+				recalcularEleccion en base a ultima posicion correcta \hfill O(n+m) \\	
+				}\Else{
+					devolver eleccion \hfill O(1) \\
+				}
+			
+			
+			}	
 	
-	\If{ambas personas estan en isla A $\wedge$ no ocurri\'o elecci\'on $\wedge$ cantidades balanceadas}{
-	 \hfill Guarda: O(n) \\	
-	devolver elecci\'on \hfill O(1) \\	
-	}
+	
+
 	}
 }
-\textbf{\hfill Complejidad total: $O\binom{n}{2} \times n$}\\ 
+\textbf{\hfill Complejidad total: $O\binom{n+m}{1} \times n+m$}\\ 
 \end{algorithm}
 
-\begin{algorithm}[H]
-\Fn{eleccionRetornoPosible(escenario)}{
-	\While{Hay elecciones disponibles}{
-	\hfill Ciclo: O($\binom{n}{2}$)\\
-	
-	\If{ambas personas estan en isla B $\wedge$ no ocurri\'o elecci\'on $\wedge$ cantidades balanceadas}{
-	 \hfill Guarda: O(n) \\	
-	devolver elecci\'on \hfill O(1) \\	
-	}
-	}
-}
-\textbf{\hfill Complejidad total: $O\binom{n}{2} \times n$}\\ 
-\end{algorithm}
+
 
 
 \subsubsection{Estructura interna para chequear elecciones y estados ocurridos}
 
-Siendo que la disposici\'on de las personas en las dos islas,pueden representarse por un arreglo en donde cada elemento representa la presencia de una persona en la isla A con un booleano (Esta o no esta) entonces, si guardamos dichas secuencias en una estructura de trie, podemos chequear la ocurrencia de un estado en $O(n)$, al igual que el insertado de un estado nuevo.\\
+Se trabajo con dos estructuras internas denominadas MaestroPokemon y Eleccion, donde la primera tiene la informaci\'on sobre la cantidad de gimnasios y pokeparadas, la cantidad de gimnasios ya derrotados, la posici\'on actual, la cantidad de posiciones que posee en cada momento como tambi\'en la capacidad m\'axima de la mochila, y dos listas las cuales poseen todos los destinos posibles visitados o no y otra con solo los visitados.
+Mientras que nuestra segunda estructura, como el nombre lo indica, nos otorga toda la informaci\'on necesaria para poder realizar la elecci\'on, como es el id de la misma para no ser repetida, la posici\'on en donde se encuentra, la cantidad de pociones necesarias en caso de ser un gimnasio y la distancia para llegar a dicha posici\'on desde cierto punto.
 
