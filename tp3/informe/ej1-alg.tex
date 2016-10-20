@@ -1,8 +1,112 @@
-\begin{algorithm}[H] %or another one check
- \Fn{main()}{
- %     \SetAlgoLined
-	
-}
+\begin{algorithm}[H]
+\Fn{EJ1()}{
+crear cola desiciones para guardar elecciones\\
+eleccion contiene un id, posicion de la misma y distancia desde el punto anterior hasta el como tambien la cantidad de pociones hasta el momento\\
+se crean booleanos sePudoDeshacerEleccion con valor verdadero \hfill O(1) \\
+se crea un entero minimo con valor -1 \hfill O(1)\\ 
+\While{sePudoDeshacerEleccion}{  
+	\If{soyElMejor(MaestroPokemon) $\wedge$ tiempo(MaestroPokemon) < minimo}{
+	 \hfill  guarda: O(1)\\
+			para minimo asignar tiempo(MaestroPokemon) \hfill O(1)\\	
+			para caminoRecorrido asignar caminoRecorrido(MaestroPokemon) \hfill O(1)\\	
+	}
+			eleccion asignar eleccionPosible(MaestroPokemon) \hfill O($\binom{n+m}{1} \times (n + m)$)\\			
+			aplicarEleccion(eleccion, MaestroPokemon)\hfill O(n + m)\\
+		\Else{
+			sePudoDeshacerEleccion asginar deshacerEleccion(MaestroPokemon) \hfill O(n)\\
+		}}
+		devolver minimo, tamaño(caminoRecorrido) y caminoRecorrido 	\hfill O(n + m)\\
+		}
+		
+		\textbf{\hfill total: $O((n+m)^{2^{n+m}})$}\\
 \end{algorithm}
 
+\begin{algorithm}[H]
+\Fn{aplicarEleccionEnvio(eleccion, escenario)}{
+	encolar en decisiones la eleccion tomada  \hfill O(1) \\
+	actualizar estado del sistema en base a la decision tomada \hfill 0(1) \\
+	sumar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
+	guardar estado isla A y estado isla B como efectuado\hfill O(n) \\
+	marcar escenario.lampara falso \hfill O(1) \\
+
+}
+\textbf{\hfill Complejidad total: $O(n)$}\\ 
+\end{algorithm}
+
+\begin{algorithm}[H]
+\Fn{aplicarRetornoEnvio(eleccion, escenario)}{
+	encolar en decisiones la eleccion tomada  \hfill O(1) \\
+	actualizar estado del sistema en base a la decision tomada \hfill 0(1) \\
+	sumar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
+	guardar estado isla A y estado isla B como efectuado \hfill O(n) \\
+	marcar escenario.lampara verdadero \hfill O(1) \\
+}
+\textbf{\hfill Complejidad total: $O(n)$}\\ 
+\end{algorithm}
+
+\begin{algorithm}[H]
+\Fn{deshacerUltimaEleccionEnvio(escenario)}{
+	\If{hay decisiones para desencolar}{
+	desencolar de decisiones una eleccion\hfill O(1) \\
+	actualizar estado del sistema en base a la decision desencolada \hfill 0(1) \\
+	restar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
+	borrar estado isla A y estado isla B como efectuado \hfill O(n) \\
+	marcar escenario.lampara verdadero \hfill O(1) \\	
+	devolver verdadero \hfill O(1) \\	
+	}\Else{ 
+		devolver falso \hfill O(1) \\	
+	}
+}
+\textbf{\hfill Complejidad total: $O(n)$}\\ 
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+\Fn{deshacerUltimoRetorno(escenario)}{
+	\If{hay decisiones para desencolar}{
+	desencolar de decisiones una eleccion\hfill O(1) \\
+	actualizar estado del sistema en base a la decision desencolada \hfill 0(1) \\
+	restar a escenario.tiempo tiempo(eleccion) \hfill O(1) \\
+	borrar estado isla A y estado isla B como efectuado \hfill O(n) \\
+	marcar escenario.lampara falso \hfill O(1) \\	
+	devolver verdadero \hfill O(1) \\	
+	}\Else{ 
+		devolver falso \hfill O(1) \\	
+	}
+}
+\textbf{\hfill Complejidad total: $O(n)$}\\ 
+\end{algorithm}
+
+\begin{algorithm}[H]
+\Fn{eleccionEnvioPosible(escenario)}{
+	\While{Hay elecciones disponibles}{
+	\hfill Ciclo: O($\binom{n}{2}$)\\
+	
+	\If{ambas personas estan en isla A $\wedge$ no ocurri\'o elecci\'on $\wedge$ cantidades balanceadas}{
+	 \hfill Guarda: O(n) \\	
+	devolver elecci\'on \hfill O(1) \\	
+	}
+	}
+}
+\textbf{\hfill Complejidad total: $O\binom{n}{2} \times n$}\\ 
+\end{algorithm}
+
+\begin{algorithm}[H]
+\Fn{eleccionRetornoPosible(escenario)}{
+	\While{Hay elecciones disponibles}{
+	\hfill Ciclo: O($\binom{n}{2}$)\\
+	
+	\If{ambas personas estan en isla B $\wedge$ no ocurri\'o elecci\'on $\wedge$ cantidades balanceadas}{
+	 \hfill Guarda: O(n) \\	
+	devolver elecci\'on \hfill O(1) \\	
+	}
+	}
+}
+\textbf{\hfill Complejidad total: $O\binom{n}{2} \times n$}\\ 
+\end{algorithm}
+
+
+\subsubsection{Estructura interna para chequear elecciones y estados ocurridos}
+
+Siendo que la disposici\'on de las personas en las dos islas,pueden representarse por un arreglo en donde cada elemento representa la presencia de una persona en la isla A con un booleano (Esta o no esta) entonces, si guardamos dichas secuencias en una estructura de trie, podemos chequear la ocurrencia de un estado en $O(n)$, al igual que el insertado de un estado nuevo.\\
 
