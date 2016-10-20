@@ -55,14 +55,21 @@ int main(int argc, char* argv[])
 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
 {
-	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
+		int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
+	int pocionesANecesitar = 0;
 	for (int i = 0; i < cant_gimnasios; ++i){
+		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
 		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
 			
 			return NULL;
 		}
 	}
+	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
+			//Sin solucion!
+			
+			return NULL;
+		}
 	bool exitoBack = true;
 	
 	int minimo = -1; 
@@ -94,16 +101,8 @@ int main(int argc, char* argv[])
 			if(ash.eleccionMinimaPosible(eleccion)){
 				ash.elegir(eleccion);
 				
-			}else{
-				//vuelve al paso anterior
-			//cout << "Backtrack \n" ;
-				exitoBack = ash.deshacerEleccion();
-				}
+			}
 			
-		}else{
-				//vuelve al paso anterior
-			//cout << "Backtrack \n" ;
-			exitoBack = ash.deshacerEleccion();
 		}
 	}
 
