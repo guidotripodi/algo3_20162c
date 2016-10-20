@@ -24,7 +24,7 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 	}else{
 		//Si es un gimnasio entonces:
 		//Si la cantidad de pociones disponibles no es suficiente entonces no puedo ir
-		if (this->cantidad_pociones <= eleccion.pocionesNecesarias)
+		if (this->cantidad_pociones < eleccion.pocionesNecesarias)
 		{
 		//	cout<<"\t\terror: falta de pociones\n";
 			return false;
