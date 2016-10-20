@@ -57,13 +57,20 @@ int main(int argc, char* argv[])
 {
 
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
+	int pocionesANecesitar = 0;
 	for (int i = 0; i < cant_gimnasios; ++i){
+		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
 		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
 			
 			return NULL;
 		}
 	}
+	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
+			//Sin solucion!
+			
+			return NULL;
+		}
 	bool exitoBack = true;
 	
 	int minimo = -1; 
