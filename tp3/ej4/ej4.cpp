@@ -9,19 +9,23 @@
 #include <math.h>	/* pow */
 #include <cstdlib> /* swap */
 #include <list>
+
 #define ya chrono::high_resolution_clock::now
 #define SEED 39
 #define MAX_PODER 25
 #define RADIO 100
 #define TENOR 5 //tenor tabu
-
+#define ITERMAX 10
 using namespace std;
 
 typedef pair <pair<int,int>, int> Gimnasio;
 typedef pair<int,int> Pokeparada;
 
-vector<int> mejorar2opt(vector<int> solucionParcial);
-vector<int> mejorar3opt(vector<int> solucionParcial);
+list< vector<int> > vecindad2opt(vector<int> solucionParcial);
+list< vector<int> > vecindad3opt(vector<int> solucionParcial);
+
+//probaclemente haya una funcion en la std para esto pero fue
+bool contains(list< vector<int> > lista, vector<int> solucion);
 
 long long calcularCosto(vector<int> &camino);
 
@@ -125,7 +129,7 @@ int main(){
 	
 	long long costo = calcularCosto(solucionParcial);
 	
-	printf("Costo inicial: %d\n", costo);
+	printf("Costo inicial: %lld\n", costo);
 	//mejorar solucion
 	if( solucionParcial.size()){
 		vector <int> solucion2opt= mejorar3opt(solucionParcial);
@@ -144,21 +148,23 @@ int main(){
 
 vector<int> tabuSearch(vector<int> solucionParcial){
 	vector<int> solucionActual = solucionParcial;
-	vector<int> solucionMejor = solucionParcial;
+	vector<int> mejorSolucion= solucionParcial;
 	list< vector<int> > listaTabu;
-			
-	while(!condicion de parada){ //TODO
-		vector< vector<int> > candidatos;//queda medio feo, lista enlazada?
+	int iteraciones = 0;			
+	while(iteraciones < ITERMAX){
+		//vector< vector<int> > candidatos; 
+		//esta linea aparece en wikipedia pero no se usa. 
+		//Supongo que representa la lista de vecinos?
 		vector<int> mejorCandidato;
-		//TODO inicializar vecindad!!!
-		//de la solucionActual 
+		list< vector<int> > vecindad = vecindad2opt(solucionActual);
+		
 		while(vecindad.size() > 0){
-			if( !contains(tabuList, candidatoActual) && 
-				calcularCosto(candidatoActual) > calcularCosto(mejorCandidato){
+			vector<int> candidatoActual = vecindad.front();
+			if( !contains(listaTabu, candidatoActual) && 
+				calcularCosto(candidatoActual) > calcularCosto(mejorCandidato)){
 				mejorCandidato = candidatoActual;
 			}
 
-			candidatoActual = vecindad.front();
 			vecindad.pop_front();
 		}
 		solucionActual = mejorCandidato;
@@ -166,10 +172,9 @@ vector<int> tabuSearch(vector<int> solucionParcial){
 			mejorSolucion = mejorCandidato;
 		}
 		listaTabu.push_back(mejorCandidato);
-		if(tabuList.size() > TENOR) listaTabu.pop_front();
-
+		if(listaTabu.size() > TENOR) listaTabu.pop_front();
 	}
-	return solucionMejor;
+	return mejorSolucion;
 }
 
 
@@ -226,7 +231,6 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 }
 
 bool pasoPosible(int destino, int capacidadParcial){
-	//TODO
 	Gimnasio gym;
 
 	int poderGym = 0;
@@ -295,5 +299,13 @@ long long calcularCosto(vector<int> &camino){
 	}
 	
 	return costo;
+}
+
+bool contains(list< vector<int> > lista, vector<int> solucion){
+	list< vector<int> >::iterator it;
+	for(it = lista.begin(); it != lista.end(); it++){
+		if(*it == solucion) return true;//gusanito
+	}
+	return false;
 }
 

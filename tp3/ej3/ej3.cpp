@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <fstream>
 #include <utility>
-//#include "MaestroPokemon.hpp"
 #include <chrono>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
@@ -124,7 +123,7 @@ int main(){
 	
 	long long costo = calcularCosto(solucionParcial);
 	
-	printf("Costo inicial: %d\n", costo);
+	printf("Costo inicial: %lld\n", costo);
 	//mejorar solucion
 	if( solucionParcial.size()){
 		vector <int> solucion2opt= mejorar3opt(solucionParcial);
@@ -194,7 +193,6 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 }
 
 bool pasoPosible(int destino, int capacidadParcial){
-	//TODO
 	Gimnasio gym;
 
 	int poderGym = 0;
@@ -217,7 +215,6 @@ long long distancia(pair<int, int> origen, pair<int, int> destino){
 }
 
 long long calcularCosto(vector<int> &camino){
-	//toda la complejidad del ejercicio es esto en realidad
 	long long costo = 0;
 	int capacidadParcial = 0;
 	
