@@ -90,7 +90,15 @@ int main(int argc, char* argv[])
 			//printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
 
 			//ash.printEleccion(eleccion);
-			ash.elegir(eleccion);
+			if(ash.eleccionMinimaPosible(eleccion)){
+				ash.elegir(eleccion);
+				
+			}else{
+				//vuelve al paso anterior
+			//cout << "Backtrack \n" ;
+				exitoBack = ash.deshacerEleccion();
+				}
+			
 		}else{
 				//vuelve al paso anterior
 			//cout << "Backtrack \n" ;

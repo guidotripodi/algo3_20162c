@@ -126,6 +126,7 @@ public:
 	//Para ver el estado del sistema
 	void printEleccion(Eleccion par) const;
 	void printStatus()const;
+	bool eleccionMinimaPosible(Eleccion eleccion) const;
 
 private:
 	int cant_pokeParadas;

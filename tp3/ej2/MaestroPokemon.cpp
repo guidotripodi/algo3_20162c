@@ -38,8 +38,12 @@ bool MaestroPokemon::eleccionMinimaPosible(Eleccion eleccion) const{
 	/*Llegue a este chequeo eso significa que la eleccion es valida hasta el momento,
 	 *  deseo chequear que tambien es la minina*/
 	int minimo = eleccion.distancia;
+	int id = eleccion.id;
 	int xM = 0;
 	int yM = 0;
+	int x = 0;
+	int y = 0;
+	int distancia = 0;
 	if (this->decisiones->size()==0){
 		xM = this->eleccionActual.posicion.first;
 		yM = this->eleccionActual.posicion.second;
@@ -47,16 +51,40 @@ bool MaestroPokemon::eleccionMinimaPosible(Eleccion eleccion) const{
 		xM = this->decisiones->back().posicion.first;
 		yM = this->decisiones->back().posicion.second;
 	}
-	if{eleccion.id < this->cant_gimnasios}{
+	if(id < this->cant_gimnasios){
 		/*La eleccion es un gym por lo tanto chequeo si es el minimo gym no me interesan las pokeparadas*/
-		
-		
-	
+		for(int i = 0; i < this->cant_gimnasios; i++){
+			if(this->destinos_visitados[i] == 0){
+				/*chequeo solo con los que no fueron visitados y sean posibles*/
+				x = this->gyms[id].first.first;
+				y = this->gyms[id].first.second;
+				int pocionesNecesarias = this->gyms[id].second;
+				distancia = pow(x - xM, 2) + pow(y - yM, 2);
+				if (this->cantidad_pociones <= pocionesNecesarias && distancia < minimo){
+					/*Si es posible esta eleccion que no fue visitada, osea que las pociones que tenemos hasta el momento
+					 * sirven para ganar y la distancia de este es menor al inicial return false*/
+					return false;
+					}
+				}
+			}
 	}else{
 		/*La eleccion es una pokeparada por lo tanto chequeo si es la minima pokeparada no me interesan los gym*/
-	
-	
+		int id2 = id - cant_gimnasios;
+		for(int i = this->cant_gimnasios; i < this->cant_pokeParadas; i++){
+			/*chequeo solo lo que no fueron visitados, aca toda pokeparada va a ser posible ya que esta funcion se ejecuta dsp del 
+			 * es posible inicial que ya chequea nuestras podas de mochila y cantidades*/
+			if(this->destinos_visitados[i] == 0){
+				x = this->posiciones_pp[id2].first;
+				y = this->posiciones_pp[id2].second;
+				distancia = pow(x - xM, 2) + pow(y - yM, 2);
+				if(distancia < minimo){
+					return false;
+					}
+				}
+			}
 	}
+	/*Si pase todo significa que soy el minimo devuelvo true*/
+	return true;
 }
 
 
