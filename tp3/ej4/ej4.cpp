@@ -161,7 +161,8 @@ vector<int> tabuSearch(vector<int> solucionParcial){
 		while(vecindad.size() > 0){
 			vector<int> candidatoActual = vecindad.front();
 			if( !contains(listaTabu, candidatoActual) && 
-				calcularCosto(candidatoActual) > calcularCosto(mejorCandidato)){
+				//mejorCandidato sin inicializar!!
+				calcularCosto(candidatoActual) < calcularCosto(mejorCandidato)){
 				mejorCandidato = candidatoActual;
 			}
 
@@ -180,23 +181,25 @@ vector<int> tabuSearch(vector<int> solucionParcial){
 
 
 //version 2opt
-vector<int> mejorar2opt(vector<int> solucionParcial){
-	vector<int> solucion = solucionParcial;
-	long long costoAnterior = calcularCosto(solucionParcial);
-	int cantNodos = cantGyms + cantPokeParadas;//gusanito
+list< vector<int> > vecindad2opt(vector<int> solucionParcial){
+	list< vector<int> > solucion;
+	int cantNodos = cantGyms + cantPokeParadas;
 
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
             swap(solucionParcial[i], solucionParcial[j]);
 
 			long long costoActual = calcularCosto(solucionParcial);
-
+/*
 			if (costoActual != -1 && costoActual < costoAnterior) {
 				costoAnterior = costoActual;
 				solucion = solucionParcial;
 				printf("Costo mejorado: %lld\n", costoActual);
 			}
-
+*/
+			if (costoActual != -1) {
+				solucion.push_back(solucionParcial);
+			}
 			swap(solucionParcial[i], solucionParcial[j]);//volver al original
 		}
 	}
@@ -204,7 +207,7 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 }
 
 //version 3opt
-vector<int> mejorar3opt(vector<int> solucionParcial){
+list< vector<int> > vecindad3opt(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
 	long long costoAnterior = calcularCosto(solucionParcial);
 	int cantNodos = cantGyms + cantPokeParadas;//gusanito
