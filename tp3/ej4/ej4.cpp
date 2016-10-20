@@ -21,6 +21,7 @@ using namespace std;
 typedef pair <pair<int,int>, int> Gimnasio;
 typedef pair<int,int> Pokeparada;
 
+vector<int> tabuSearch(vector<int> solucionParcial);
 list< vector<int> > vecindad2opt(vector<int> solucionParcial);
 list< vector<int> > vecindad3opt(vector<int> solucionParcial);
 
@@ -33,7 +34,6 @@ int cantGyms, cantPokeParadas, capMochila;
 
 Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
-//nuestros costos son enteros, suma de distancias euclidianas sin tomar raiz cuadrada
 
 int main(){
 	//generar entradas
@@ -131,13 +131,15 @@ int main(){
 	
 	printf("Costo inicial: %lld\n", costo);
 	//mejorar solucion
-	if( solucionParcial.size()){
-		vector <int> solucion2opt= mejorar3opt(solucionParcial);
+	if(solucionParcial.size()){
+		vector <int> mejorada = tabuSearch(solucionParcial);
 		//imprimir solucion mejorada
-		for(int i = 0; i < (int) solucion2opt.size(); i++){
-			printf("%d ", solucion2opt[i]);
+		costo = calcularCosto(mejorada);
+		for(int i = 0; i < (int) mejorada.size(); i++){
+			printf("%d ", mejorada[i]);
 		}
 		printf("\n");
+		printf("Costo final: %lld\n", costo);
 	}else{
 		printf("%d", -1);
 		//no hubo solucion parcial a partir de la cual trabajar
@@ -156,24 +158,31 @@ vector<int> tabuSearch(vector<int> solucionParcial){
 		//esta linea aparece en wikipedia pero no se usa. 
 		//Supongo que representa la lista de vecinos?
 		vector<int> mejorCandidato;
-		list< vector<int> > vecindad = vecindad2opt(solucionActual);
+		list< vector<int> > vecindad = vecindad2opt(solucionActual); 
+		// podemos hacer union entre 2opt y 3opt
 		
 		while(vecindad.size() > 0){
 			vector<int> candidatoActual = vecindad.front();
-			if( !contains(listaTabu, candidatoActual) && 
-				//mejorCandidato sin inicializar!!
-				calcularCosto(candidatoActual) < calcularCosto(mejorCandidato)){
+			long long costoActual = calcularCosto(candidatoActual);
+			long long costoMejor = calcularCosto(mejorCandidato);
+
+			if(!contains(listaTabu, candidatoActual) && 
+				(costoActual < costoMejor || costoMejor == -1)){
+				// funcion de aspiracion A(listaTabu, candidatoActual) = 
+				// el menos tabu de los tabu o 
 				mejorCandidato = candidatoActual;
 			}
 
 			vecindad.pop_front();
 		}
 		solucionActual = mejorCandidato;
-		if(calcularCosto(mejorCandidato) > calcularCosto(mejorSolucion)){
+		if(calcularCosto(mejorCandidato) < calcularCosto(mejorSolucion)){
 			mejorSolucion = mejorCandidato;
 		}
 		listaTabu.push_back(mejorCandidato);
 		if(listaTabu.size() > TENOR) listaTabu.pop_front();
+
+		iteraciones++;
 	}
 	return mejorSolucion;
 }
@@ -182,34 +191,26 @@ vector<int> tabuSearch(vector<int> solucionParcial){
 
 //version 2opt
 list< vector<int> > vecindad2opt(vector<int> solucionParcial){
-	list< vector<int> > solucion;
-	int cantNodos = cantGyms + cantPokeParadas;
-
+	list< vector<int> > soluciones;
+	//int cantNodos = cantGyms + cantPokeParadas;//al final era gusanito!!
+	int cantNodos = solucionParcial.size();
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
             swap(solucionParcial[i], solucionParcial[j]);
 
 			long long costoActual = calcularCosto(solucionParcial);
-/*
-			if (costoActual != -1 && costoActual < costoAnterior) {
-				costoAnterior = costoActual;
-				solucion = solucionParcial;
-				printf("Costo mejorado: %lld\n", costoActual);
-			}
-*/
 			if (costoActual != -1) {
-				solucion.push_back(solucionParcial);
+				soluciones.push_back(solucionParcial);
 			}
 			swap(solucionParcial[i], solucionParcial[j]);//volver al original
 		}
 	}
-	return solucion;
+	return soluciones;
 }
 
 //version 3opt
 list< vector<int> > vecindad3opt(vector<int> solucionParcial){
-	vector<int> solucion = solucionParcial;
-	long long costoAnterior = calcularCosto(solucionParcial);
+	list< vector<int> > soluciones;
 	int cantNodos = cantGyms + cantPokeParadas;//gusanito
 
     for (int i = 0; i < cantNodos-1; i++) {
@@ -220,17 +221,15 @@ list< vector<int> > vecindad3opt(vector<int> solucionParcial){
 
 			long long costoActual = calcularCosto(solucionParcial);
 
-			if (costoActual != -1 && costoActual < costoAnterior) {
-				costoAnterior = costoActual;
-				solucion = solucionParcial;
-				printf("Costo mejorado: %lld\n", costoActual);
+			if ( costoActual != -1 ){
+				soluciones.push_back(solucionParcial);
 			}
 
 			swap(solucionParcial[i], solucionParcial[i+1]);//volver al original
 			swap(solucionParcial[j], solucionParcial[(j+1)% cantNodos] );//volver al original
 		}
 	}
-	return solucion;
+	return soluciones;
 }
 
 bool pasoPosible(int destino, int capacidadParcial){
@@ -260,6 +259,8 @@ long long calcularCosto(vector<int> &camino){
 	long long costo = 0;
 	int capacidadParcial = 0;
 	
+	if(camino.size() == 0 ) return -1;//vector vacio
+
 	for(int i = 1; i < (int) camino.size(); i++){
 		if(pasoPosible(camino[i], capacidadParcial)){
 			
