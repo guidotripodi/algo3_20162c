@@ -148,6 +148,8 @@ int main(){
 	return 0;
 }
 
+//http://crema.di.unimi.it/~righini/Didattica/Algoritmi%20Euristici/MaterialeAE/Taratura%20parametri%20TS.pdf
+//http://www.uv.es/rmarti/paper/docs/ts1.pdf
 vector<int> tabuSearch(vector<int> solucionParcial){
 	vector<int> solucionActual = solucionParcial;
 	vector<int> mejorSolucion= solucionParcial;
@@ -166,6 +168,18 @@ vector<int> tabuSearch(vector<int> solucionParcial){
 			long long costoActual = calcularCosto(candidatoActual);
 			long long costoMejor = calcularCosto(mejorCandidato);
 
+			// contains deberia determinar si una solucion es tabu observando
+			// atributos (por recencia o frecuencia) como por ejemplo 
+			// ejes no deseables o algo por el estilo
+			// y ademas determinar que atributos son tabu activos
+			// luego una solucion no visitada puede ser tabu segun los atributos tabu activos
+			// hay que determinar que atributos sirven para clasificar
+			// utilizamos long term memory 
+			// porque no nos concentramos solamente en un subconjunto de una vecindad, 
+			// si no en sucesivas vecindades.
+			// Cuando todas las soluciones disponibles en la vecindad analizada son tabu active:
+			// hay que elegir la menos tabu de todas o la que aun siendo tabu mejore la funcion objetivo
+			// 
 			if(!contains(listaTabu, candidatoActual) && 
 				(costoActual < costoMejor || costoMejor == -1)){
 				// funcion de aspiracion A(listaTabu, candidatoActual) = 
