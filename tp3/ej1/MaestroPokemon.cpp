@@ -24,7 +24,7 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 	}else{
 		//Si es un gimnasio entonces:
 		//Si la cantidad de pociones disponibles no es suficiente entonces no puedo ir
-		if (this->cantidad_pociones < eleccion.pocionesNecesarias)
+		if (this->cantidad_pociones <= eleccion.pocionesNecesarias)
 		{
 		//	cout<<"\t\terror: falta de pociones\n";
 			return false;
@@ -106,6 +106,7 @@ void MaestroPokemon::elegir(Eleccion eleccion){
 
 	//Guardo la decision en la rama que estoy explorando
 	this->decisiones->push_back(eleccion);
+	this->paso = decisiones->size();
 	
 	//Marco al destino como visitado
 	this->destinos_visitados[eleccion.id] = 1;	
@@ -124,7 +125,6 @@ void MaestroPokemon::elegir(Eleccion eleccion){
 	this->eleccionActual = Eleccion(this);
 	//cout << "ELEGI:   ";
 	//this->printEleccion(eleccion);
-	this->paso = decisiones->size();
 	
 
 }

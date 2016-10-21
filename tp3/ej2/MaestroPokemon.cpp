@@ -159,6 +159,7 @@ void MaestroPokemon::elegir(Eleccion eleccion){
 
 	//Guardo la decision en la rama que estoy explorando
 	this->decisiones->push_back(eleccion);
+	this->paso = decisiones->size();
 	
 	//Marco al destino como visitado
 	this->destinos_visitados[eleccion.id] = 1;	
@@ -177,7 +178,6 @@ void MaestroPokemon::elegir(Eleccion eleccion){
 	this->eleccionActual = Eleccion(this);
 	//cout << "ELEGI:   ";
 	//this->printEleccion(eleccion);
-	this->paso = decisiones->size();
 	
 
 }
