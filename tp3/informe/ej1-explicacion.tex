@@ -8,5 +8,6 @@ Para esto se resuelve aplicar la técnica de backtracking sobre el conjunto tota
 \item No se puede visitar un gimnasio sin la cantidad necesaria de pociones: de no contemplar esta poda se analizan caminos donde se pierde en gimnasios, los cuales por la primera restriccion, quedan como perdidos, y no generan solución.
 \item No se recorren pokeparadas si la mochila está llena: el objetivo de una pokeparada es rellenar la mochila de pociones. Al estar llena la mochila se desperdicia la pokeparada ya que no se la podrá volver a visitar. En adición, visitar una pokeparada innecesariamente, aumenta obligatoriamente la distancia recorrida por el maestro pokemon, ya que en vez de estar tomando un camino directo entre 2 lugares, accede a la pokeparada, aumentando asi la distancia euclidea.
 \item Los caminos se continúan construyendo siempre y cuando no superen la distancia minima lograda anteriormente por alguna solucion previa.
+\item Si algún gimnasio requiere mayor cantidad de pociones que las que caben en la mochila, entonces no hay solución 
 
 \end{itemize}
