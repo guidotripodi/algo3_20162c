@@ -71,44 +71,63 @@ int main(int argc, char* argv[])
 			return NULL;
 		}
 		
-		printf("HOLA");
+		
 	bool exitoBack = true;
 	
 	int minimo = -1; 
-	MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
 	std::list<int> * camino;
-	while(exitoBack){
-		ash.printStatus();
-		if (ash.gane())
-		{
-			if (ash.distancia < minimo || minimo == -1)
+
+	for (int x = 0; x < cant_pokeParadas; ++x)
+	{
+		exitoBack = true;
+		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
+		while(exitoBack){
+			//ash.printStatus();
+			if (ash.gane())
 			{
-			//	cout<<"fin de rama\n";
-				minimo = ash.distancia;
-				camino = ash.caminoRecorrido();
+				if (ash.distancia < minimo || minimo == -1)
+				{
+				//	cout<<"fin de rama\n";
+					minimo = ash.distancia;
+					camino = ash.caminoRecorrido();
 
-			}
-			
-		}
-
-		MaestroPokemon::Eleccion eleccion = ash.eleccionPosible();
-			//Si hay un par posible y si la rama que estoy evaluando
-			//me sigue dando una mejor solucion a la ya encontrada
-
-		if (eleccion.posible==1 && (minimo == -1 || ash.distancia<minimo))
-		{
-			//printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
-
-			ash.printEleccion(eleccion);
-			if(ash.eleccionMinimaPosible(eleccion)){
-				ash.printEleccion(eleccion);
-				ash.elegir(eleccion);
+				}
 				
 			}
-			
-		}else{
-			exitoBack = false;
+
+			MaestroPokemon::Eleccion eleccion = ash.eleccionPosible();
+				//Si hay un par posible y si la rama que estoy evaluando
+				//me sigue dando una mejor solucion a la ya encontrada
+
+			if (eleccion.posible==1 && (minimo == -1 || ash.distancia<minimo))
+			{
+				//printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
+
+				//ash.printEleccion(eleccion);
+				if(ash.eleccionMinimaPosible(eleccion)){
+					//ash.printEleccion(eleccion);
+					ash.elegir(eleccion);
+					
+				}
+				
+			}else{
+				exitoBack = false;
+			}
 		}
+		pair <int, int> posicion;
+		for (int h = 0; h < cant_pokeParadas; ++h){
+
+			if (h == 0)	{
+				posicion = posiciones_pp[cant_pokeParadas-1]; 
+				posiciones_pp[cant_pokeParadas-1] = posiciones_pp[0];
+				posiciones_pp[cant_pokeParadas-2] = posicion;
+			}else{
+				if (h+1 < cant_pokeParadas)	{
+					posiciones_pp[h] = posiciones_pp[h+1];
+				}
+			}
+		}
+
 	}
 
 	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
