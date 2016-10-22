@@ -18,6 +18,7 @@ using namespace std;
 typedef pair <pair<int,int>, int> Gimnasio;
 typedef pair<int,int> Pokeparada;
 
+vector<int> mejorarSwap(vector<int> solucionParcial);
 vector<int> mejorar2opt(vector<int> solucionParcial);
 vector<int> mejorar3opt(vector<int> solucionParcial);
 
@@ -141,11 +142,10 @@ int main(){
 }
 
 
-//version 2opt
-vector<int> mejorar2opt(vector<int> solucionParcial){
+vector<int> mejorarSwap(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
 	long long costoAnterior = calcularCosto(solucionParcial);
-	int cantNodos = cantGyms + cantPokeParadas;//gusanito
+	int cantNodos = solucionParcial.size();
 
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
@@ -165,11 +165,34 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 	return solucion;
 }
 
-//version 3opt
+vector<int> mejorar2opt(vector<int> solucionParcial){
+	vector<int> solucion = solucionParcial;
+	long long costoAnterior = calcularCosto(solucionParcial);
+	int cantNodos = solucionParcial.size();
+
+    for (int i = 0; i < cantNodos-1; i++) {
+        for (int j = i+1; j < cantNodos; j++) {
+			reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+
+			long long costoActual = calcularCosto(solucionParcial);
+
+			if (costoActual != -1 && costoActual < costoAnterior) {
+				costoAnterior = costoActual;
+				solucion = solucionParcial;
+				printf("Costo mejorado: %lld\n", costoActual);
+			}
+			
+			//volver al original
+			reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+		}
+	}
+	return solucion;
+}
+
 vector<int> mejorar3opt(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
 	long long costoAnterior = calcularCosto(solucionParcial);
-	int cantNodos = cantGyms + cantPokeParadas;//gusanito
+	int cantNodos = solucionParcial.size();
 
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
