@@ -10,7 +10,8 @@
 using namespace std;
 
 
-pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[]);
+
+pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]);
 
 int main(int argc, char* argv[])
 {
@@ -20,6 +21,7 @@ int main(int argc, char* argv[])
 
 	pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
 	pair <int, int>  posiciones_pp[cant_pokeParadas];
+	pair <int, int>  pp_aux[cant_pokeParadas];
 
 	int i = 0;
 	for (i = 0; i < cant_gimnasios; i++){
@@ -35,16 +37,19 @@ int main(int argc, char* argv[])
 		cin >> posicion.first >> posicion.second;
 		
 		posiciones_pp[i] = posicion;
+		/*Uso ese aux para saber el orden inicial*/
+		pp_aux[i] = posicion;
 		
 	}
 
 	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 	
-	if ( f == NULL)	{
+	if ( f == NULL || f->first == -1)	{
 		cout << "-1" << "\n";
-		return -1; 
+		return -1;
 	}
 	cout << f->first <<" "<< f->second->size();
+	
 	for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 		cout << " " << *it;
 
@@ -53,9 +58,9 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
- pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
+ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
 {
-		int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
+	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
 	int pocionesANecesitar = 0;
 	for (int i = 0; i < cant_gimnasios; ++i){
 		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
@@ -67,9 +72,9 @@ int main(int argc, char* argv[])
 	}
 	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-			
-			return NULL;
-		}
+		
+		return NULL;
+	}
 		
 		
 	bool exitoBack = true;
@@ -77,19 +82,21 @@ int main(int argc, char* argv[])
 	int minimo = -1; 
 	std::list<int> * camino;
 
+
 	for (int x = 0; x < cant_pokeParadas; ++x)
 	{
+
 		exitoBack = true;
 		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
 		while(exitoBack){
-			//ash.printStatus();
+			ash.printStatus();
 			if (ash.gane())
 			{
 				if (ash.distancia < minimo || minimo == -1)
 				{
 				//	cout<<"fin de rama\n";
 					minimo = ash.distancia;
-					camino = ash.caminoRecorrido();
+					camino = ash.caminoRecorrido(pp_aux);
 
 				}
 				
@@ -105,25 +112,38 @@ int main(int argc, char* argv[])
 
 				//ash.printEleccion(eleccion);
 				if(ash.eleccionMinimaPosible(eleccion)){
-					//ash.printEleccion(eleccion);
+				//	printf("Elegi: ---- ");
+				//	ash.printEleccion(eleccion);
 					ash.elegir(eleccion);
 					
 				}
 				
 			}else{
+				//printf("No fue minima\n");
 				exitoBack = false;
 			}
 		}
 		pair <int, int> posicion;
 		for (int h = 0; h < cant_pokeParadas; ++h){
-
+			/*Luego de la vuelta completa reordeno el array pp pasando al primer pp al ultimo y 
+			muevo todo de esta forma me garantizo que todas las pp van a tener su rama como inicial*/
 			if (h == 0)	{
-				posicion = posiciones_pp[cant_pokeParadas-1]; 
-				posiciones_pp[cant_pokeParadas-1] = posiciones_pp[0];
-				posiciones_pp[cant_pokeParadas-2] = posicion;
+				posicion.first = posiciones_pp[cant_pokeParadas-1].first; 
+				posicion.second = posiciones_pp[cant_pokeParadas-1].second; 
+			//	printf("Posicion : %d posicion: %d \n",posicion.first, posicion.second );
+				posiciones_pp[cant_pokeParadas-1].first = posiciones_pp[0].first;
+				posiciones_pp[cant_pokeParadas-1].second = posiciones_pp[0].second;
+				posiciones_pp[0].first = posiciones_pp[1].first;
+				posiciones_pp[0].second = posiciones_pp[1].second;
 			}else{
-				if (h+1 < cant_pokeParadas)	{
-					posiciones_pp[h] = posiciones_pp[h+1];
+				if (h+1 < cant_pokeParadas-1)	{
+					posiciones_pp[h].first = posiciones_pp[h+1].first;
+					posiciones_pp[h].second = posiciones_pp[h+1].second;
+					
+				}else{
+					posiciones_pp[cant_pokeParadas-2].first = posicion.first;
+					posiciones_pp[cant_pokeParadas-2].second = posicion.second;
+				
 				}
 			}
 		}

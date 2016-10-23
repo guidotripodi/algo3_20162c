@@ -41,7 +41,8 @@ int main(int argc, char* argv[])
 	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 	
 	if ( f == NULL || f->first == -1)	{
-		return -1; 
+		cout << "-1" << "\n";
+		return -1;
 	}
 	cout << f->first <<" "<< f->second->size();
 	
@@ -55,14 +56,22 @@ int main(int argc, char* argv[])
 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
 {
-
+	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
+	int pocionesANecesitar = 0;
 	for (int i = 0; i < cant_gimnasios; ++i){
-		if (posiciones_gym[i].second > cap_mochila){
+		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
+		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
 			
 			return NULL;
 		}
 	}
+	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
+			//Sin solucion!
+		
+		return NULL;
+	}
+	
 	bool exitoBack = true;
 	
 	int minimo = -1; 

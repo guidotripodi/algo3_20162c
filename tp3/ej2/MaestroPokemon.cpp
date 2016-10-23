@@ -37,6 +37,8 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 bool MaestroPokemon::eleccionMinimaPosible(Eleccion eleccion) const{
 	/*Llegue a este chequeo eso significa que la eleccion es valida hasta el momento,
 	 *  deseo chequear que tambien es la minina*/
+	printf("Estoy viendo la minima: ");
+	printEleccion(eleccion);
 	int minimo = eleccion.distancia;
 	int id = eleccion.id;
 	int xM = 0;
@@ -217,14 +219,27 @@ bool MaestroPokemon::gane()
 }
 
 
-std::list<int> * MaestroPokemon::caminoRecorrido(){
+std::list<int> * MaestroPokemon::caminoRecorrido(const pair <int,int> pp_aux[]){
 	std::list<int> * camino = new list<int>();
 	for (std::list<Eleccion>::iterator it=this->decisiones->begin(); it != this->decisiones->end(); ++it){
-		camino->push_back((*it).id+1);
+		pair <int, int> posicion;
+		posicion.first = (*it).posicion.first;
+		posicion.second = (*it).posicion.second;
+		/*Como se realizan pp ramas tengo que ver cual es el id inicial ya que fue cambiando*/
+
+		for (int i = 0; i < cant_pokeParadas; ++i){
+			if (pp_aux[i].first == posicion.first && pp_aux[i].second == posicion.second ){
+		
+				camino->push_back(i+cant_gimnasios+1);
+			}
+			if (gyms[i].first.first == posicion.first && gyms[i].first.second == posicion.second ){
+		
+				camino->push_back(i+1);
+			}
+		}
 
 	}
 	return camino;
-
 
 
 }

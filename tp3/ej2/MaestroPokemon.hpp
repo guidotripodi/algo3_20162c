@@ -121,7 +121,7 @@ public:
 	void elegir(const Eleccion eleccion);
 	bool deshacerEleccion();
 	bool gane();
-	std::list<int> * caminoRecorrido();
+	std::list<int> * caminoRecorrido(const pair <int,int> pp_aux[]);
 
 	//Para ver el estado del sistema
 	void printEleccion(Eleccion par) const;
