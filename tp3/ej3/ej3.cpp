@@ -170,11 +170,12 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 	long long costoAnterior = calcularCosto(solucionParcial);
 	int cantNodos = solucionParcial.size();
 
+	long long costoActual;
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
-			reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
 
-			long long costoActual = calcularCosto(solucionParcial);
+			reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+			costoActual = calcularCosto(solucionParcial);
 
 			if (costoActual != -1 && costoActual < costoAnterior) {
 				costoAnterior = costoActual;
@@ -193,23 +194,52 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
 	long long costoAnterior = calcularCosto(solucionParcial);
 	int cantNodos = solucionParcial.size();
-
+	long long costoActual;
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
+			for (int k = j+1; k < cantNodos; k++) {
+/*
+ * Quiero cambiar aristas siendo nuetros entes vertices, el numero (a) que swapeo es 
+ * el destino de la arista que cambio
+ * pero a tiene que seguir conectada a su vecino sino estoy cambiando otras aristas
+ * Sean los nodos i j y k los que voy a swapear y se encuentran en ese orden.
+ * Las formas de cambiarlos (para que no sean movimientos 2opt)
+ * son j k i y k i j . 
+ * */
 
-            swap(solucionParcial[j], solucionParcial[(j+1)% cantNodos] );
-			swap(solucionParcial[i], solucionParcial[i+1]);
+				//caso jki
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+				reverse(solucionParcial.begin() + j+1, solucionParcial.begin() + k);
 
-			long long costoActual = calcularCosto(solucionParcial);
 
-			if (costoActual != -1 && costoActual < costoAnterior) {
-				costoAnterior = costoActual;
-				solucion = solucionParcial;
-				printf("Costo mejorado: %lld\n", costoActual);
+
+				costoActual = calcularCosto(solucionParcial);
+
+				if (costoActual != -1 && costoActual < costoAnterior) {
+					costoAnterior = costoActual;
+					solucion = solucionParcial;
+					printf("Costo mejorado: %lld\n", costoActual);
+				}
+				
+				reverse(solucionParcial.begin() + j+1, solucionParcial.begin() + k);
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+
+				//caso kij
+				//donde carajo cambiaste tres aristas man?
+				//porque esto no es un movimiento 2opt entre k e i?
+				
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
+				costoActual = calcularCosto(solucionParcial);
+
+				if (costoActual != -1 && costoActual < costoAnterior) {
+					costoAnterior = costoActual;
+					solucion = solucionParcial;
+					printf("Costo mejorado: %lld\n", costoActual);
+				}
+
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 			}
 
-			swap(solucionParcial[i], solucionParcial[i+1]);//volver al original
-			swap(solucionParcial[j], solucionParcial[(j+1)% cantNodos] );//volver al original
 		}
 	}
 	return solucion;
