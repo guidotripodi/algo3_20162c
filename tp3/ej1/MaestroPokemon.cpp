@@ -138,11 +138,10 @@ bool MaestroPokemon::deshacerEleccion()
 	Eleccion eleccionADeshacer = this->decisiones->back();
 	this->decisiones->pop_back();
 	this->paso = decisiones->size();
-
 	this->destinos_visitados[eleccionADeshacer.id] = 0;
 
 	this->distancia = this->distancia - eleccionADeshacer.distancia;
-	//printf("\tDistancia sin Eleccion tomada:%d\n",this->distancia  );
+	printf("\tDistancia sin Eleccion tomada:%d\n",this->distancia  );
 	if (eleccionADeshacer.tipo == GIMNASIO)
 	{
 		this->cant_gimnasios_por_ganar++;

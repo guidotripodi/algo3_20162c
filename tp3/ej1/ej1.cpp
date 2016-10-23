@@ -40,10 +40,11 @@ int main(int argc, char* argv[])
 
 	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 	
-	if ( f == NULL)	{
+	if ( f == NULL || f->first == -1)	{
 		return -1; 
 	}
 	cout << f->first <<" "<< f->second->size();
+	
 	for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 		cout << " " << *it;
 
@@ -93,7 +94,7 @@ int main(int argc, char* argv[])
 			ash.elegir(eleccion);
 		}else{
 				//vuelve al paso anterior
-			//cout << "Backtrack \n" ;
+			cout << "Backtrack \n" ;
 			exitoBack = ash.deshacerEleccion();
 		}
 	}
