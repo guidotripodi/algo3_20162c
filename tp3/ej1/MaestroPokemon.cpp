@@ -24,7 +24,7 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 	}else{
 		//Si es un gimnasio entonces:
 		//Si la cantidad de pociones disponibles no es suficiente entonces no puedo ir
-		if (this->cantidad_pociones <= eleccion.pocionesNecesarias)
+		if (this->cantidad_pociones < eleccion.pocionesNecesarias)
 		{
 		//	cout<<"\t\terror: falta de pociones\n";
 			return false;
@@ -141,7 +141,7 @@ bool MaestroPokemon::deshacerEleccion()
 	this->destinos_visitados[eleccionADeshacer.id] = 0;
 
 	this->distancia = this->distancia - eleccionADeshacer.distancia;
-	printf("\tDistancia sin Eleccion tomada:%d\n",this->distancia  );
+	//printf("\tDistancia sin Eleccion tomada:%d\n",this->distancia  );
 	if (eleccionADeshacer.tipo == GIMNASIO)
 	{
 		this->cant_gimnasios_por_ganar++;

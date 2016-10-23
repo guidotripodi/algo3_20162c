@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
 			ash.elegir(eleccion);
 		}else{
 				//vuelve al paso anterior
-			cout << "Backtrack \n" ;
+			//cout << "Backtrack \n" ;
 			exitoBack = ash.deshacerEleccion();
 		}
 	}
