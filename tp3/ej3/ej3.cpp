@@ -202,7 +202,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
  * Quiero cambiar aristas siendo nuetros entes vertices, el numero (a) que swapeo es 
  * el destino de la arista que cambio
  * pero a tiene que seguir conectada a su vecino sino estoy cambiando otras aristas
- * Sean los nodos i j y k los que voy a swapear y se encuentran en ese orden.
+ * Sean las aristas i j y k los que voy a swapear y se encuentran en ese orden.
  * Las formas de cambiarlos (para que no sean movimientos 2opt)
  * son j k i y k i j . 
  * */

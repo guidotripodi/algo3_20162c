@@ -22,6 +22,7 @@ typedef pair <pair<int,int>, int> Gimnasio;
 typedef pair<int,int> Pokeparada;
 
 vector<int> tabuSearch(vector<int> solucionParcial);
+list< vector<int> > vecindadSwap(vector<int> solucionParcial);
 list< vector<int> > vecindad2opt(vector<int> solucionParcial);
 list< vector<int> > vecindad3opt(vector<int> solucionParcial);
 
@@ -202,17 +203,16 @@ vector<int> tabuSearch(vector<int> solucionParcial){
 }
 
 
-
-//version 2opt
-list< vector<int> > vecindad2opt(vector<int> solucionParcial){
+list< vector<int> > vecindadSwap(vector<int> solucionParcial){
 	list< vector<int> > soluciones;
 	//int cantNodos = cantGyms + cantPokeParadas;//al final era gusanito!!
 	int cantNodos = solucionParcial.size();
-    for (int i = 0; i < cantNodos-1; i++) {
+    long long costoActual; 
+	for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
             swap(solucionParcial[i], solucionParcial[j]);
 
-			long long costoActual = calcularCosto(solucionParcial);
+			costoActual = calcularCosto(solucionParcial);
 			if (costoActual != -1) {
 				soluciones.push_back(solucionParcial);
 			}
@@ -222,25 +222,57 @@ list< vector<int> > vecindad2opt(vector<int> solucionParcial){
 	return soluciones;
 }
 
+//version 2opt
+list< vector<int> > vecindad2opt(vector<int> solucionParcial){
+	list< vector<int> > soluciones;
+	//int cantNodos = cantGyms + cantPokeParadas;//al final era gusanito!!
+	int cantNodos = solucionParcial.size();
+	long long costoActual; 
+    for (int i = 0; i < cantNodos-1; i++) {
+        for (int j = i+1; j < cantNodos; j++) {
+			reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+
+			costoActual = calcularCosto(solucionParcial);
+			if (costoActual != -1) {
+				soluciones.push_back(solucionParcial);
+			}
+			reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+		}
+	}
+	return soluciones;
+}
+
 //version 3opt
 list< vector<int> > vecindad3opt(vector<int> solucionParcial){
 	list< vector<int> > soluciones;
 	int cantNodos = cantGyms + cantPokeParadas;//gusanito
-
+	long long costoActual; 
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
+			for (int k = j+1; k < cantNodos; k++) {
 
-            swap(solucionParcial[j], solucionParcial[(j+1)% cantNodos] );
-			swap(solucionParcial[i], solucionParcial[i+1]);
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+				reverse(solucionParcial.begin() + j+1, solucionParcial.begin() + k);
 
-			long long costoActual = calcularCosto(solucionParcial);
+				costoActual = calcularCosto(solucionParcial);
 
-			if ( costoActual != -1 ){
-				soluciones.push_back(solucionParcial);
+				if ( costoActual != -1 ){
+					soluciones.push_back(solucionParcial);
+				}
+				
+				reverse(solucionParcial.begin() + j+1, solucionParcial.begin() + k);
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+
+				
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
+				costoActual = calcularCosto(solucionParcial);
+
+				if ( costoActual != -1 ){
+					soluciones.push_back(solucionParcial);
+				}
+
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 			}
-
-			swap(solucionParcial[i], solucionParcial[i+1]);//volver al original
-			swap(solucionParcial[j], solucionParcial[(j+1)% cantNodos] );//volver al original
 		}
 	}
 	return soluciones;
