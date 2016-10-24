@@ -176,6 +176,12 @@ si los intervalos no son consecutivos, no interesa si invertimos.
 
 en gnral, invertir en un 3opt da mas resultados, pero no es obligatorio.
 
+Como la cosa es circular, hay que dejar los bordes tranquilos. son problematicos
+
+1->2->3->4->5->6->7 y supongamos que quiero joder ->3-> y ->7
+
+1->2->7->4->5->6->3 pero cambiaron 4 aristas, 3->1 tambien es nueva.
+
 */
 
 vector<int> mejorarSwap(vector<int> solucionParcial){
