@@ -170,7 +170,7 @@ si los intervalos no son consecutivos, no interesa si invertimos.
 
 1->2->3->4->5->6->7 y tomamos 3 y 5->6
 
-1->2->5->6->4->3->7 y podemos invertir 5->6
+1->2->5->6->4->3->7 y podemos invertir 5->6 
 
 1->2->6->5->4->3->7
 
@@ -240,18 +240,27 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
 			for (int k = j+1; k < cantNodos; k++) {
-/*
- * Quiero cambiar aristas siendo nuetros entes vertices, el numero (a) que swapeo es 
- * el destino de la arista que cambio
- * pero a tiene que seguir conectada a su vecino sino estoy cambiando otras aristas
- * Sean las aristas i j y k los que voy a swapear y se encuentran en ese orden.
- * Las formas de cambiarlos (para que no sean movimientos 2opt)
- * son j k i y k i j . 
- * */
 
-				//caso jki
+/* Mi error fue tratar de asociar el concepto de arista a un nodo (el destino)
+ * Al eliminar las 3 aristas que elegimos quedan dos(o tres?) maneras de reconectar el camino
+ * sin que sea un camino 2opt. Sean 0 -> a  b->c d->fin aristas y las borramos.
+ * Caso1: Reconectamos 0 -> b, a -> d y c -> fin (intervalos (a,b) (c,d) invertidos)
+ * Caso2: Reconectamos 0 -> c, d -> a y b -> fin ("swap" de rangos sin invertir)
+ * Caso3: Reconectamos 0 -> d, c -> a y b -> fin (swap + invertir rango (c,d))
+ * Caso4: Reconectamos 0 -> c, d -> b y a -> fin (swap + invertir rango (a,b))
+ *
+ * Nota: 0 no es el principio del arreglo y fin no es el fin del arreglo
+ * solo indican principio y fin del subarreglo que deberia cambiar.
+ * TODO: analizar casos borde!!!
+ * Propiedades utiles para la implementacion: 
+ * 0 = a-1
+ * b = c-1
+ * d = fin - 1
+ * me deja usar 3 subindices*/
+				
+				//Caso 1
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
-				reverse(solucionParcial.begin() + j+1, solucionParcial.begin() + k);
+				reverse(solucionParcial.begin() + j+1, solucionParcial.begin() + k);//aca estoy asumiendo que el nodo c 
 
 
 
@@ -270,7 +279,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 				//donde carajo cambiaste tres aristas man?
 				//porque esto no es un movimiento 2opt entre k e i?
 				
-				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
+				swap_ranges(solucionParcial.begin() + i, solucionParcial.begin() + k);
 				costoActual = calcularCosto(solucionParcial);
 
 				if (costoActual != -1 && costoActual < costoAnterior) {
