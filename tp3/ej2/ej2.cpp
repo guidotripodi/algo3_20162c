@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 		
 	}
 
-	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
+	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
 	
 	if ( f == NULL || f->first == -1)	{
 		cout << "-1" << "\n";
@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
 	}
 	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-		
+
 		return NULL;
 	}
 		

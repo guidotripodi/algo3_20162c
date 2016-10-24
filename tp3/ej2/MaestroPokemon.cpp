@@ -62,7 +62,7 @@ bool MaestroPokemon::eleccionMinimaPosible(Eleccion eleccion) const{
 				y = this->gyms[id].first.second;
 				int pocionesNecesarias = this->gyms[id].second;
 				distancia = pow(x - xM, 2) + pow(y - yM, 2);
-				if (this->cantidad_pociones <= pocionesNecesarias && distancia < minimo){
+				if (this->cantidad_pociones < pocionesNecesarias && distancia < minimo){
 					/*Si es posible esta eleccion que no fue visitada, osea que las pociones que tenemos hasta el momento
 					 * sirven para ganar y la distancia de este es menor al inicial return false*/
 					return false;
