@@ -149,7 +149,7 @@ un swap puede ser 2opt si swapeo dos consecutivos
 
 1->3->2->4
 
-un 3opt puede ser un 2opt si los dos intervalos son consecutivos
+un 3opt puede ser un 2opt si se invierten los intervalos, dado que son contiguos
 
 1->2->3->4->5->6
 
@@ -165,22 +165,6 @@ un ejemplo similar pero tomando 3->4 y 5 como los intervalos
 
 1->2->5->4->3->6 que es un 2opt igual al obtenido tomando 
 3 y 4->5 como los intervalos
-
-si los intervalos no son consecutivos, no interesa si invertimos.
-
-1->2->3->4->5->6->7 y tomamos 3 y 5->6
-
-1->2->5->6->4->3->7 y podemos invertir 5->6 
-
-1->2->6->5->4->3->7
-
-en gnral, invertir en un 3opt da mas resultados, pero no es obligatorio.
-
-Como la cosa es circular, hay que dejar los bordes tranquilos. son problematicos
-
-1->2->3->4->5->6->7 y supongamos que quiero joder ->3-> y ->7
-
-1->2->7->4->5->6->3 pero cambiaron 4 aristas, 3->1 tambien es nueva.
 
 */
 
