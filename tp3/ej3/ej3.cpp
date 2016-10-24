@@ -149,7 +149,7 @@ un swap puede ser 2opt si swapeo dos consecutivos
 
 1->3->2->4
 
-un 3opt puede ser un 2opt si alguno de los dos intervalos tiene long 1 y son consecutivos
+un 3opt puede ser un 2opt si los dos intervalos son consecutivos
 
 1->2->3->4->5->6
 
@@ -166,7 +166,7 @@ un ejemplo similar pero tomando 3->4 y 5 como los intervalos
 1->2->5->4->3->6 que es un 2opt igual al obtenido tomando 
 3 y 4->5 como los intervalos
 
-si los intervalos no son consecutivos, no importa si hay uno de long 1.
+si los intervalos no son consecutivos, no interesa si invertimos.
 
 1->2->3->4->5->6->7 y tomamos 3 y 5->6
 
