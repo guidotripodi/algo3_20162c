@@ -247,34 +247,97 @@ list< vector<int> > vecindad3opt(vector<int> solucionParcial){
 	list< vector<int> > soluciones;
 	int cantNodos = cantGyms + cantPokeParadas;//gusanito
 	long long costoActual; 
-    for (int i = 0; i < cantNodos-1; i++) {
-        for (int j = i+1; j < cantNodos; j++) {
-			for (int k = j+1; k < cantNodos; k++) {
+	
+	for (int i = 1; i < cantNodos-3; i++) {
+		for (int j = i+1; j < cantNodos-2; j++) {
+			for (int k = j+2; k < cantNodos; k++) {
+				
+				//rango 1: i a j
+				//rango 2: j+1 a k 
 
+				//Caso 1
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
-				reverse(solucionParcial.begin() + j+1, solucionParcial.begin() + k);
+				reverse(solucionParcial.begin() + j, solucionParcial.begin() + k);
 
 				costoActual = calcularCosto(solucionParcial);
 
-				if ( costoActual != -1 ){
+				if (costoActual != -1) {
 					soluciones.push_back(solucionParcial);
 				}
-				
-				reverse(solucionParcial.begin() + j+1, solucionParcial.begin() + k);
-				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+			
+				printf("Caso 1 - i: %d, j: %d k: %d\n", i, j ,k);
+				for(int i = 0; i < (int) solucionParcial.size(); i++){
+					printf("%d ", solucionParcial[i]);
+				}
+				printf("\n");
 
+
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
+				reverse(solucionParcial.begin() + j, solucionParcial.begin() + k);
+
+				//Caso 2
+
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j) );//len(rango 2)
+				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
+
+				costoActual = calcularCosto(solucionParcial);
+
+				if (costoActual != -1) {
+					soluciones.push_back(solucionParcial);
+				}
+
+				printf("Caso 2 - i: %d, j: %d k: %d\n", i, j ,k);
+				for(int i = 0; i < (int) solucionParcial.size(); i++){
+					printf("%d ", solucionParcial[i]);
+				}
+				printf("\n");
+
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j));//len(rango 2)
+				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
+				
+				//Caso 3
 				
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j));//len(rango 2)
+				
 				costoActual = calcularCosto(solucionParcial);
 
-				if ( costoActual != -1 ){
+				if (costoActual != -1) {
+					soluciones.push_back(solucionParcial);
+				}
+				printf("Caso 3 - i: %d, j: %d k: %d\n", i, j ,k);
+				for(int i = 0; i < (int) solucionParcial.size(); i++){
+					printf("%d ", solucionParcial[i]);
+				}
+				printf("\n");
+			
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j));//len(rango 2)
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
+				
+				//Caso 4
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
+				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
+
+				costoActual = calcularCosto(solucionParcial);
+
+				if (costoActual != -1) {
 					soluciones.push_back(solucionParcial);
 				}
 
+				printf("Caso 4 - i: %d, j: %d k: %d\n", i, j ,k);
+				for(int i = 0; i < (int) solucionParcial.size(); i++){
+					printf("%d ", solucionParcial[i]);
+				}
+				printf("\n");
+
+				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 			}
 		}
 	}
+
 	return soluciones;
 }
 

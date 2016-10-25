@@ -124,10 +124,14 @@ int main(){
 	
 	long long costo = calcularCosto(solucionParcial);
 	
+		for(int i = 0; i < (int) solucionParcial.size(); i++){
+			printf("%d ", solucionParcial[i]);
+		}
+		printf("\n");
 	printf("Costo inicial: %lld\n", costo);
 	//mejorar solucion
 	if( solucionParcial.size()){
-		vector <int> solucion2opt= mejorar2opt(solucionParcial);
+		vector <int> solucion2opt= mejorar3opt(solucionParcial);
 		//imprimir solucion mejorada
 		for(int i = 0; i < (int) solucion2opt.size(); i++){
 			printf("%d ", solucion2opt[i]);
@@ -222,29 +226,29 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
  * Caso1: Reconectamos 0 -> b, a -> d y c -> fin (intervalos (a,b) (c,d) invertidos)
  * Caso2: Reconectamos 0 -> c, d -> a y b -> fin ("swap" de rangos sin invertir)
  * Caso3: Reconectamos 0 -> d, c -> a y b -> fin (swap + invertir rango (c,d))
- * Caso4: Reconectamos 0 -> c, d -> b y a -> fin (swap + invertir rango (a,b))
- *
- * Nota: 0 no es el principio del arreglo y fin no es el fin del arreglo
- * solo indican principio y fin del subarreglo que deberia cambiar.
- * TODO: analizar casos borde!!!
- * Propiedades utiles para la implementacion: 
- * 0 = a-1
- * b = c-1
- * d = fin - 1
- * me deja usar 3 subindices*/
-				
+	 * Caso4: Reconectamos 0 -> c, d -> b y a -> fin (swap + invertir rango (a,b))
+	 *
+	 * Nota: 0 no es el principio del arreglo y fin no es el fin del arreglo
+	 * solo indican principio y fin del subarreglo que deberia cambiar.
+	 * TODO: analizar casos borde!!!
+	 * Propiedades utiles para la implementacion: 
+	 * 0 = a-1
+	 * b = c-1
+	 * d = fin - 1
+	 * me deja usar 3 subindices*/
+					
 vector<int> mejorar3opt(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
 	long long costoAnterior = calcularCosto(solucionParcial);
 	int cantNodos = solucionParcial.size();
 	long long costoActual;
 	
-    
+	
 	// fijate como recorro:
-    // lo mas chica que puede ser la entrada para 3opt es de 5 eltos: 1->2->3->4->5 y no se recorre asi nomas
-    // [0...i-1][i...j-1][j...k-1][k...size-1]
-    for (int i = 1; i < cantNodos-3; i++) {
-        for (int j = i+1; j < cantNodos-2; j++) {
+	// lo mas chica que puede ser la entrada para 3opt es de 5 eltos: 1->2->3->4->5 y no se recorre asi nomas
+	// [0...i-1][i...j-1][j...k-1][k...size-1]
+	for (int i = 1; i < cantNodos-3; i++) {
+		for (int j = i+1; j < cantNodos-2; j++) {
 			for (int k = j+2; k < cantNodos; k++) {
 				
 				//rango 1: i a j
@@ -252,7 +256,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 
 				//Caso 1
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
-				reverse(solucionParcial.begin() + j+1, solucionParcial.begin() + k);//aca estoy asumiendo que el nodo c 
+				reverse(solucionParcial.begin() + j, solucionParcial.begin() + k);
 
 				costoActual = calcularCosto(solucionParcial);
 
@@ -261,15 +265,22 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 					solucion = solucionParcial;
 					printf("Costo mejorado: %lld\n", costoActual);
 				}
-				
+			
+				printf("Caso 1 - i: %d, j: %d k: %d\n", i, j ,k);
+				for(int i = 0; i < (int) solucionParcial.size(); i++){
+					printf("%d ", solucionParcial[i]);
+				}
+				printf("\n");
+
+
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
-				reverse(solucionParcial.begin() + j+1, solucionParcial.begin() + k);
+				reverse(solucionParcial.begin() + j, solucionParcial.begin() + k);
 
 				//Caso 2
 
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
-				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j+1));//len(rango 2)
-				reverse(solucionParcial.begin() + (k - j+1)+ 1, solucionParcial.begin() + k);
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j) );//len(rango 2)
+				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
 
 				costoActual = calcularCosto(solucionParcial);
 
@@ -277,14 +288,21 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 					costoAnterior = costoActual;
 					solucion = solucionParcial;
 				}
-				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j+1));//len(rango 2)
-				reverse(solucionParcial.begin() + (k - j+1)+ 1, solucionParcial.begin() + k);
+
+				printf("Caso 2 - i: %d, j: %d k: %d\n", i, j ,k);
+				for(int i = 0; i < (int) solucionParcial.size(); i++){
+					printf("%d ", solucionParcial[i]);
+				}
+				printf("\n");
+
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j));//len(rango 2)
+				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 				
 				//Caso 3
 				
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
-				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j+1));//len(rango 2)
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j));//len(rango 2)
 				
 				costoActual = calcularCosto(solucionParcial);
 
@@ -292,13 +310,18 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 					costoAnterior = costoActual;
 					solucion = solucionParcial;
 				}
-				
-				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j+1));//len(rango 2)
-				everse(solucionParcial.begin() + i, solucionParcial.begin() + k);
+				printf("Caso 3 - i: %d, j: %d k: %d\n", i, j ,k);
+				for(int i = 0; i < (int) solucionParcial.size(); i++){
+					printf("%d ", solucionParcial[i]);
+				}
+				printf("\n");
+			
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j));//len(rango 2)
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 				
 				//Caso 4
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
-				reverse(solucionParcial.begin() + (k - j+1)+ 1, solucionParcial.begin() + k);
+				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
 
 				costoActual = calcularCosto(solucionParcial);
 
@@ -306,12 +329,20 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 					costoAnterior = costoActual;
 					solucion = solucionParcial;
 				}
-				reverse(solucionParcial.begin() + (k - j+1)+ 1, solucionParcial.begin() + k);
+
+				printf("Caso 4 - i: %d, j: %d k: %d\n", i, j ,k);
+				for(int i = 0; i < (int) solucionParcial.size(); i++){
+					printf("%d ", solucionParcial[i]);
+				}
+				printf("\n");
+
+				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 			}
 
 		}
 	}
+
 	return solucion;
 }
 
