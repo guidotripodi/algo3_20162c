@@ -338,11 +338,12 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 
 				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
-		}
+			}
 
+		}
 	}
-}
-return solucion;
+
+	return solucion;
 }
 
 bool pasoPosible(int destino, int capacidadParcial){
