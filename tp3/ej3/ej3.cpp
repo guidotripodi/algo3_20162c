@@ -294,7 +294,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 				}
 				
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j+1));//len(rango 2)
-				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
+				everse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 				
 				//Caso 4
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
