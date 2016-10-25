@@ -1,0 +1,45 @@
+\begin{algorithm}[H] %or another one check
+ \Fn{main()}{
+ %     \SetAlgoLined
+	encolo nodo origen en una cola de nodos \hfill O(1)\\
+	    \While{$\neg$ cola vacia}{ \hfill ciclo: O(F $\ast$ C $\ast$ P)\\
+	    Nodo actual $\gets$ tope cola \hfill O(1)\\
+	    procesar vecinos\hfill O(4)\\
+	    }
+	    \textbf{\hfill total: O(F $\ast$ C $\ast$ P)}\\
+}
+\end{algorithm}
+
+
+\begin{algorithm}[H] %or another one check
+
+\Fn{procesarNodo(Nodo nod)}{
+ 	Nodo nod es un vecino de actual en el Mapa\\
+	
+       	   	 \If{$\#$ paredes rotas hasta actual + esPared(nod) < $\#$ paredes rotas hasta actual nod}{
+       	   	 																		  \hfill guarda: O(1)\\
+       	   	 para distancia hasta nod $\gets$ distancia hasta actual + 1 \hfill O(1)\\
+       	   	 para $\#$ paredes rotas hasta nod $\gets$ $\#$ paredes rotas hasta actual + esPared(nod)\hfill O(1)\\ 
+			\If{nod = nodo destino}	{
+																	       \hfill guarda: O(1)\\
+				devolver distancia hasta nodo destino y terminar \hfill O(1)
+			}
+	   	   	 \If{$\#$ paredes rotas hasta nod $\leq$ Pmax}{
+	   	   	 					 \hfill guarda: O(1)\\
+       	   		 encolar nod \hfill O(1)
+       	   		 }
+       	   } 
+		  \textbf{\hfill total: O(1)}\\
+}
+\end{algorithm}
+
+\textbf{Aclaraciones de variables y transformaci\'on de entrada}
+
+\begin{itemize}
+\item {\bf Variable Mapa}: la matriz $(F \ast C)$ de nodos.
+\item {\bf Tipo Nodo}: Dicho tipo, fue creado para contener m\'as informaci\'on de cada nodo, el mismo esta compuesto por posici\'on i, j del nodo en el Mapa, si es pared o no y por \'ultimo la cantidad de paredes destruidas y la distancia recorrida hasta dicho nodo.
+\item {\bf cola}: Como la palabra lo indica, en esta cola se ir\'an encolando los nodos.
+\end{itemize}  
+
+
+

@@ -1,0 +1,8 @@
+Dado un mapa con $N$ estaciones y el tiempo que toma viajar entre dos de ellas, debemos encontrar la forma más rapida de viajar entre la primera estación y la \'ultima. Para ello, decidimos representar el mapa como un grafo orientado con pesos en sus aristas, donde cada estaci\'on fue representada por un nodo y el camino de estaci\'on a estaci\'on por aristas. Dado este grafo (al cual decidimos implementar mediante listas de adyacencia) el problema se reduce a encontrar el camino mínimo sobre él.
+
+Para lo enunciado, aplicamos el algoritmo de Dijkstra sobre nuestra representación del grafo. 
+
+En el mismo se recorren los nodos del grafo teniendo en cuenta primero los más cercanos al origen, comenzando por el origen mismo. Un invariante de este algoritmo es que, para el conjunto de nodos ya visitados se conoce definitivamente el camino mínimo desde el origen hacia cualquier nodo perteneciente a dicho conjunto.\\
+Cuando se visita un nodo se comprueba si se puede desde este nodo llegar más rapido a sus vecinos que lo calculado anteriormente. De ser así, se actualiza la distancia de ese vecino al origen y se guarda el nodo adyacente desde  el cual se pudo conseguir dicha distancia. Cuando visitamos el nodo destino es porque se encontro el camino más corto a él.
+
+Por \'ultimo, solo resta recorrer desde el nodo salida y armar el camino mínimo a partir de los nodos previos que guardabamos cuando se iban actualizando las distancias parciales de estos.

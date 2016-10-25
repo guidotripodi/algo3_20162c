@@ -1,0 +1,23 @@
+Para demostrar que nuestro algoritmo es válido para solucionar el problema en cuesti\'on, tendremos que probar las siguientes condiciones:\\
+
+\begin{itemize}
+\item El algoritmo finaliza siempre.
+\item De haber solución, el algoritmo la encuentra.
+\item El camino resultante es el m\'as corto dentro de los posibles.
+\end{itemize}
+
+\subsubsection*{El algoritmo finaliza }
+Como nuestro algoritmo puede encolar nodos ya visitados, queremos ver que no se producen ciclos infinitos entre nodos con la condici\'on mencionada. Como se vio en la sección de complejidad, la máxima cantidad de veces que cada nodo puede ser recorrido es "P", con lo cual, necesariamente el algoritmo termina.
+
+\subsubsection*{El algoritmo halla la solución}
+
+Como cada nodo se puede recorrer siempre y cuando se posea la cantidad de paredes a romper necesarias para alcanzarlo, entonces particualrmente, el nodo destino será alcanzado solo si existe un camino que rompa una cantidad menor o igual a la parametrizada, es decir, si existe solución a la instancia del problema. 
+
+\subsubsection*{La soluci\'on encontrada es la mejor}
+
+Al igual que el algoritmo $BFS$, el grafo se recorre en anchura, por lo tanto en la cola todos los nodos a una distancia $d$ > 1 del origen estarán encolados de manera contigua, es decir, cuando se visita un nodo a distancia $d-1$ del origen, se encolan los vecinos, que son los que están a distancia $d$ del nodo inicial, siempre y cuando la cantidad de paredes rotas para llegar a los mismos no exceda el l\'imite. Si interpretamos a cada nodo encolado como la cabeza de un camino que empieza en el nodo origen, puede verse que en cada paso del algoritmo se están evaluando todos los caminos posibles de longitud creciente: de alcanzar en algún momento el nodo destino, por consiguiente, será a travez del camino más corto.\\
+
+Como el procedimiento permite volver a recorrer nodos, es necesario que al alcanzar el nodo destino se finalice el algoritmo: de no suceder, puede existir otro camino que pueda volver a recorrer el destino con una menor cantidad de paredes rotas pero necesariamente con un mayor tiempo de recorrido, sobreescribiendo el tiempo logrado por el camino minimo y generando una solución que no es la mejor.
+
+
+
