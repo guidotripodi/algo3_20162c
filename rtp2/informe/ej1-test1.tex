@@ -2,47 +2,40 @@
 seg\'un la complejidad del algoritmo calculada anteriormente.\\
 
 
-A continuaci\'on mostraremos un gr\'afico de tiempos comparativo entre distintas familias de casos:\\ 
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.4]{./EJ1/comparativo.png}
- {            $Gr$\'a$fico$ \ 1.1 - $Comparativo$}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Se puede observar en el gr\'afico, tres funciones las cuales representan el tiempo de ejecuci\'on de las familias de casos:\\
+Se pueden observar en el siguiente gráfico cinco funciones, las cuales representan el tiempo de ejecuci\'on de las familias de casos mencionadas:\\
 \begin{enumerate}
 \item No existe camino para atravezar el laberinto
 \item Existe un camino sin atravesar paredes para recorrer todo el laberinto
 \item Rompiendo todas las paredes posibles para pasar el laberinto
 \item Rompiendo una cantidad menor de paredes posibles para pasar el laberinto
-\item Multiples caminos para llegar a destino
+\item Múltiples caminos para llegar a destino
 \end{enumerate}
 
 
-
-Como se observa en el gr\'afico la funci\'on representativa de la flia n\'umero 1, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que en el primer paso no puede salir por ning\'un camino posible, o su adyacente es el nodo destino por lo tanto chequea solo los nodos adyacentes del origen y finaliza su ejecuci\'on.
-
-Por lo cual, el mejor caso teniendo en cuenta a nivel performance de nuestro algoritmo ser\'a cuando se presente un problema \textbf{No existe camino para atravezar el laberinto}
-
-Los grafos que representan lo dicho ser\'ian los siguiente:\\
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.7]{./EJ1/comparativo.png}
+ {            $Gr$\'a$fico$ \ 1.1 - $Comparativo$}
+  \end{center}
+  \vspace*{0.3cm}
+  
+Se puede observar que la familia 1, presenta una mejor performance en relaci\'on a las otras. Esto se puede deber a dos motivos, o bien en el primer paso no puede salir por ning\'un camino posible o bien su adyacente es el nodo destino, por lo tanto chequea solo los nodos adyacentes al origen y finaliza su ejecuci\'on. Con lo cual esta familia representa el mejor caso en performance para el algoritmo.
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 \includegraphics[scale=0.65]{./EJ1/ej1grafomejorcaso.jpeg}
-{$Ejemplo Grafo$ \ G1.1 - $Mejor$ $Caso$ $Con$ $P=0$ }
+{$Grafo$ \ G1.1 - $Mejor$ $Caso$ $Con$ $P=0$ }
   \end{center}
   \vspace*{0.3cm}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 \includegraphics[scale=0.65]{./EJ1/ej1grafomejorcaso2.jpeg}
-{$Ejemplo Grafo$ \ G1.1 - $Mejor$ $Caso$ $Con$ $P=0$ }
+{$Grafo$ \ G1.1 - $Mejor$ $Caso$ $Con$ $P=0$ }
   \end{center}
   \vspace*{0.3cm}
 
-Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instancias:\\
+Para un mayor detalle desarrollamos las siguientes comparaciones para la familia 1, las cuales nos permiteen observar que la diferencia con la misma es constante, evidenciando la pertenencia a la complejidad:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -50,10 +43,6 @@ Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instan
  {$Gr$\'a$fico$ \ 1.1 - $Mejor$ $Caso$}
   \end{center}
   \vspace*{0.3cm}
-
-Como la complejidad que calculamos se basa en la cantidad de nodos posibles que puede haber multiplicado por las paredes contrastaremos nuestras mediciones con los valores de O(F $\times$ C $\times$ P).\\
-
-Luego, dividiendo la funci\'on resultante de nuestro algoritmo sobre el tiempo que demanda realizar O(F $\times$ C $\times$ P) nos da lo siguiente:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
