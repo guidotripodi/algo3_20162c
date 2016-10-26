@@ -157,13 +157,13 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 {
 	vector<int> solucionActual = solucionParcial;
 	vector<int> mejorSolucion= solucionParcial;
-	list< vector<int> > listaTabu;
+	set<Arista> atributosTabu;
 	int iteraciones = 0;			
-	while(iteraciones < ITERMAX){
-		//vector< vector<int> > candidatos; 
-		//esta linea aparece en wikipedia pero no se usa. 
-		//Supongo que representa la lista de vecinos?
+	while(iteraciones < ITERMAX)
+	{
 		vector<int> mejorCandidato;
+		list<Arista> aristasModificadas; 
+		//cada solucion esta asociada a las aristas que cambiaron
 		list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
 		// podemos hacer union entre 2opt y 3opt
 		
@@ -190,6 +190,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 			{
 				// funcion de aspiracion A(listaTabu, candidatoActual) = 
 				// el menos tabu de los tabu o 
+				aristasModificadas = vecindad.front().second;
 				mejorCandidato = candidatoActual;
 			}
 
@@ -200,7 +201,10 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		{
 			mejorSolucion = mejorCandidato;
 		}
-		listaTabu.push_back(mejorCandidato);
+		//inserto la lista de aristas entera o una por una?
+		atributosTabu.insert(aristasModificadas);
+		
+		for(int i = 0; i < mejorCandidato.second.size(); i++)
 		if(listaTabu.size() > TENOR) listaTabu.pop_front();
 
 		iteraciones++;
