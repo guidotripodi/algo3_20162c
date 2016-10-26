@@ -1,8 +1,8 @@
 \indent En lo que sigue, mostraremos buenos y malos casos para nuestro algoritmo, y a su vez, daremos el tiempo estimado 
 seg\'un la complejidad del algoritmo calculada anteriormente.\\
 
+Se pueden observar en el  gráfico 1.1, cinco funciones, las cuales representan el tiempo de ejecuci\'on de las familias de casos mencionadas en el apartado anterior:\\
 
-Se pueden observar en el siguiente gráfico cinco funciones, las cuales representan el tiempo de ejecuci\'on de las familias de casos mencionadas:\\
 \begin{enumerate}
 \item No existe camino para atravezar el laberinto
 \item Existe un camino sin atravesar paredes para recorrer todo el laberinto
@@ -11,103 +11,70 @@ Se pueden observar en el siguiente gráfico cinco funciones, las cuales represen
 \item Múltiples caminos para llegar a destino
 \end{enumerate}
 
-
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- \includegraphics[scale=0.7]{./EJ1/comparativo.png}
- {            $Gr$\'a$fico$ \ 1.1 - $Comparativo$}
+ \includegraphics[scale=0.5]{./EJ1/comparativo.png}
+ {Grafico \ 1.1 - $Comparativo$}
   \end{center}
   \vspace*{0.3cm}
   
-Se puede observar que la familia 1, presenta una mejor performance en relaci\'on a las otras. Esto se puede deber a dos motivos, o bien en el primer paso no puede salir por ning\'un camino posible o bien su adyacente es el nodo destino, por lo tanto chequea solo los nodos adyacentes al origen y finaliza su ejecuci\'on. Con lo cual esta familia representa el mejor caso en performance para el algoritmo.
+Se puede notar que la familia 1, presenta una mejor performance en relaci\'on a las otras. Esto se puede deber a dos motivos, o bien en el primer paso no puede salir por ning\'un camino posible o bien su adyacente es el nodo destino, por lo tanto chequea solo los nodos adyacentes al origen y finaliza su ejecuci\'on. Con lo cual esta familia representa el mejor caso en performance para el algoritmo.
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.65]{./EJ1/ej1grafomejorcaso.jpeg}
-{$Grafo$ \ G1.1 - $Mejor$ $Caso$ $Con$ $P=0$ }
+\includegraphics[scale=0.7]{./EJ1/ej1grafomejorcaso.jpeg}
+{Grafo 1.1 - $Con$ $P=0$ Termina sin poder romper paredes en una iteracion}
   \end{center}
   \vspace*{0.3cm}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.65]{./EJ1/ej1grafomejorcaso2.jpeg}
-{$Grafo$ \ G1.1 - $Mejor$ $Caso$ $Con$ $P=0$ }
+\includegraphics[scale=0.7]{./EJ1/ej1grafomejorcaso2.jpeg}
+{Grafo 1.1 - $Con$ $P=0$ Nodo destino (f) vecino a nodo inicio (i)}
   \end{center}
   \vspace*{0.3cm}
 
-Para un mayor detalle desarrollamos las siguientes comparaciones para la familia 1, las cuales nos permiteen observar que la diferencia con la misma es constante, evidenciando la pertenencia a la complejidad:\\
+Uno de los peores casos para nuestro algoritmo es la familia 5 \textbf{Multiples caminos para llegar a destino}, que sucede cuando por ejemplo, todos los caminos tienen igual longitud. Esto se da as\'i ya que nuestro algoritmo chequea todos los caminos posibles y como todos pueden ser soluci\'on posible avanza por todos y llega al final del laberinto con el mismo valor en todos los posibles caminos.\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- \includegraphics[scale=0.65]{./EJ1/mejorcaso.png}
- {$Gr$\'a$fico$ \ 1.1 - $Mejor$ $Caso$}
+\includegraphics[scale=0.7]{./EJ1/ej1grafopeorcaso.jpeg}
+{Grafico 1.2 - Multiples caminos para llegar a destino de misma longitud}
   \end{center}
   \vspace*{0.3cm}
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.65]{./EJ1/mejorcaso1.png}
- {$Gr$\'a$fico$ \ 1.2 - $Mejor$ $Caso$ $Sobre$ $Complejidad$ $O(F \times C \times P)$}
-  \end{center}
-  \vspace*{0.3cm}
+\textit{---> habria que explicar un poco que pasa en los otros casos!!!}\\
 
- Para obtener dichas instancias nos resulto prudente realizar aproximadamente unas 20 corridas con el mismo input y sacar el promedio de estas 20 corridas para cada instancia para obtener resultados m\'as consisos.\\ 
+Para obtener dichas instancias se realizaron aproximadamente unas 20 corridas con el mismo input y se tom\'o el promedio de estas 20 corridas en cada instancia para obtener un valor m\'as cercano a la media.\\ 
 
-Se observa en el gr\'afico 1.1 como la funci\'on que representa al tiempo de nuestro algoritmo en el mejor caso es considerablemente mejor que la funci\'on de la cota te\'orica, mientras que al realizar la divisi\'on entre ambas funciones se llega a que la misma nunca supera el valor 0.9 quedando siempre por debajo de 1 mostrando as\'i que para cualquier valor de entrada posible el mejor caso queda siempre en el orden de  O(F $\times$ C $\times$ P).\\
+\textit{---> 20 corridas ? no fueron mas?!!!}\\
 
-Luego, uno de los peores casos para nuestro algoritmo es en el cual  \textbf{se debe recorrer todos los posibles caminos ya que son todos exactamente iguales}, esto se da as\'i ya que nuestro algoritmo chequea todos los caminos posibles y como todos pueden ser soluci\'on posible avanza por todos y llega al final del laberinto con el mismo valor en todos los posibles caminos\\
+Veamos en detalle como se comportan el mejor y peor caso con respecto a la complejidad calculada.\\
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.65]{./EJ1/ej1grafopeorcaso.jpeg}
-{$Ejemplo Grafo$ \ G1.2 - $Peor$ $Caso$}
-  \end{center}
-  \vspace*{0.3cm}
-
-Para este grafo realizamos las respectivas mediciones las cuales arrojaron los siguientes resultados:\\
-
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.4]{./EJ1/peorcaso.png}
-{$Gr$\'a$fico$ \ 1.3 - $Peor$ $Caso$}
-  \end{center}
-  \vspace*{0.3cm}
-
-Dividiendo por la complejidad se llego a lo siguiente:\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.5]{./EJ1/peorcaso1.png}
-{$Gr$\'a$fico$ \ 1.4 - $Peor$ $Caso$ $Sobre$ $Complejidad$ $O(F \times C \times P)$}
-  \end{center}
-  \vspace*{0.3cm}
-
- Para obtener dichas instancias nos resulto prudente realizar aproximadamente unas 20 corridas con el mismo input y sacar el promedio de estas 20 corridas para cada instancia para obtener resultados m\'as consisos.\\ 
-
-Podemos observar en la figura 1.3 como la funci\'on resultante de nuestro algoritmo en el peor caso se mantiene por debajo de la funci\'on final del tiempo de realizar O(F $\times$ C $\times$ P) operaciones lo cual fue la complejidad precalculada. Y, en el gr\'afico 1.4 es posible observar como la funci\'on obtenida presenta disversos picos los cuales nunca llegan a superar 1, y cuando el tamaño de entrada aumenta la funci\'on queda asintotizada por 0.95.\\
-
-Por \'ultimo mostraremos un gr\'afico comparativo con el mejor, el peor y el caso promedio contra la complejidad precalculada .\\
-
-  
   \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.4]{./EJ1/comparativo1.png}
-{$Gr$\'a$fico$ \ 1.5 - $Comparativo$}
+\includegraphics[scale=0.5]{./EJ1/MejorYPeorCaso.png}
+{Grafico 1.5 - $Comparativo$}
   \end{center}
   \vspace*{0.3cm}
   
- Es visible en este gr\'afico comparativo como las funciones relacionadas a nuestro algoritmo estan acotadas por la funci\'on de la complejidad te\'orica.
+Podemos ver en este gr\'afico comparativo como las familias est\'an acotadas por la funci\'on de la complejidad te\'orica.\\
 
-Mostraremos a continuaci\'on un caso en el cual se dejaron fijas las variables F y C, ambas en 50 y se trabajo con P movil para ver como se comporta nuestro algoritmo en esta situaci\'on.
+\textit{---> Sobre la complejidad teorica calculada habria que decir algo no? porque F*C*P parece una cubica? habria que hablar un poco de que a P tenes que aumentarlo casi linealmente junto con el tamanio de F y C. El test del final creo que quiere mostrar un poco eso, aunque para mi esta mal. La idea es decir que no sirve de nada fijar el tamanio (no tengo enie) de la matriz o fijar P porque no genera resultados que muestren algo sobre el algoritmo, y que por eso al final tus resultados son cubicos, tenes tres variables aumentando casi linealmente y con valores parecidos, por eso termina estando dentro de la familia de las cubicas}\\
+
+Mostraremos a continuaci\'on sobre un grafo de tamano fijo, es decir, F y C no variables ambos en 50 y con P variable, que es lo que sucede al ir agregando linealmente una cantidad de paredes determinada entre el nodo inicio y destino de manera que...??\\
+
+\textit{---> De manera que??? pensa que es lineal para este grafo que armaste que ni siquiera explicaste como es...que es lo que pasa cuando agregas paredes? En la conclusion hablas de que se hacen O(P) operaciones...porque? porque voy a necesitar chequear todas las paredes? capas ni hace falta...pensa en el mejor caso. Si agregas paredes y paredes del lado donde no esta el nodo final no influye!! Si queres decir que sucede para cualquier grafo...entonces tenes que MOSTRARLO!}\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.65]{./EJ1/pMovil.png}
-{$Gr$\'a$fico$ \ 1.6 - $P$ $movil$ $y$ $F,C$ $Fijos$}
+\includegraphics[scale=0.7]{./EJ1/pVariable.png}
+{Grafico 1.6 - $P$ $variable$ $y$ $F,C$ $fijos$}
   \end{center}
   \vspace*{0.3cm}
 
-Se puede observar en el gr\'afico 1.6 como al trabajar con este caso en el cual a medida que P aumenta es necesario romper P paredes para llegar a destino, la funci\'on resultante se comporta de la misma manera que O(P), chequeando de esta forma que trabajando con una cantidad fija de nodos nuestro algoritmo realiza O(P) operaciones por cada elemento del grafo.\\
+Se puede observar en el gr\'afico 1.6 como al aumentar P, aumenta linealmente el tiempo de resoluci\'on, ya que se agrega una cantidad extra de paredes manteniendo la cantidad de nodos del grafo. Se chequea por lo tanto que trabajar con una cantidad fija de nodos nuestro algoritmo realiza O(P) operaciones por cada elemento del grafo.\\
+
+\textit{---> Otra vez, como sabes que es lineal?, es mas, hasta parece constante. Para empezar esta mal explicado el experimento. Pensa que Curcio nos dijo en general que los experiementos tenian las conclusiones flojas y esto yo lo escuche!}\\
 
 Luego de lo mostrado, se pudo observar que, tanto en el mejor como en el peor caso nuestro algoritmo se encuentra en el orden de la complejidad calculada.

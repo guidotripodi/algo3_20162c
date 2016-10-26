@@ -17,7 +17,7 @@ A continuaci\'on se detalla el pseudo-c\'odigo de la parte principal del algorit
 	\For{arista $\in$ vecinos}{
 	\hfill  Ciclo: O(N)\\
 	para dist asignar distancia(actual) + peso(arista)\hfill O(1)\\
-	\If{ dist < distancia(arista.destino) || distancia(arista.destino) == invalido}{
+	\If{ dist < distancia(arista.destino) $\lor$ distancia(arista.destino) = invalido}{
 	para distancia[v.destino] asignar dist\hfill O(1)\\
 	para previos[v.destino] asignar actual\hfill O(1)\\
 	}
