@@ -24,6 +24,19 @@ typedef pair <pair<int,int>, int> Gimnasio;
 typedef pair<int,int> Pokeparada;
 typedef pair<int,int> Arista;
 
+struct compArista
+{
+	bool operator() (const Arista &izq, const Arista &der)
+	{
+		//si der es izq invertido
+		if(izq.first == der.second && izq.second == der.first)
+			return false;
+		return izq.first<der.first || (!(der.first<izq.first) && izq.second<der.second);
+	}
+};
+
+typedef set<Arista,compArista> SetTabu;
+
 //Funciones importantes
 vector<int> tabuSearch(vector<int> solucionParcial);
 list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParcial);
@@ -31,7 +44,8 @@ list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParci
 list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParcial);
 
 //auxiliares
-int tabuCount(set<Arista> atributos, vector<int> solucion);
+pair< vector<int>, list<Arista> > funcionAspiracion( SetTabu atributosTabu, list< pair< vector<int>, list<Arista> > > vecindad);
+int tabuCount(SetTabu atributos, vector<int> solucion);
 long long calcularCosto(vector<int> &camino);
 
 //variables globales
@@ -158,7 +172,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 {
 	vector<int> solucionActual = solucionParcial;
 	vector<int> mejorSolucion= solucionParcial;
-	set<Arista> atributosTabu;
+	SetTabu atributosTabu;
 	int iteraciones = 0;			
 	while(iteraciones < ITERMAX)
 	{
@@ -167,10 +181,12 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		//cada solucion esta asociada a las aristas que cambiaron
 		list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
 		// podemos hacer union entre 2opt y 3opt
-		
-		while(vecindad.size() > 0)
+		if(vecindad.size() == 0) return mejorSolucion; //Esto es por las moscas. No deberia pasar	
+		list< pair< vector<int>, list<Arista> > >::iterator iteradorVecindad; 
+
+		for(iteradorVecindad = vecindad.begin(); iteradorVecindad != vecindad.end(); ++iteradorVecindad)
 		{
-			vector<int> candidatoActual = vecindad.front().first;
+			vector<int> candidatoActual = iteradorVecindad->first;
 			long long costoActual = calcularCosto(candidatoActual);
 			long long costoMejor = calcularCosto(mejorCandidato);
 
@@ -187,16 +203,28 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 			// hay que elegir la menos tabu de todas o la que aun siendo tabu mejore la funcion objetivo
 			
 			if(!tabuCount(atributosTabu, candidatoActual) && 
-				(costoActual < costoMejor || costoMejor == -1))
+				(costoActual < costoMejor || costoMejor == -1)
+				//tengo que poner aca
+				//que ignore la condicion tabu si mejora la mejor solucion
+				)
 			{
 				// funcion de aspiracion A(listaTabu, candidatoActual) = 
 				// el menos tabu de los tabu o 
-				aristasModificadas = vecindad.front().second;
+				aristasModificadas = iteradorVecindad->second;
 				mejorCandidato = candidatoActual;
 			}
 
-			vecindad.pop_front();
 		}
+		
+		if(mejorCandidato.size() == 0)
+		{
+			//no encontre un vecino no tabu
+			pair< vector<int>, list<Arista> > menosTabu = funcionAspiracion(atributosTabu, vecindad);
+			mejorCandidato = menosTabu.first;
+			//Hay que marcar las aristas que se usaron para esta solucion como tabu
+			aristasModificadas = menosTabu.second;
+		}
+
 		solucionActual = mejorCandidato;
 		if(calcularCosto(mejorCandidato) < calcularCosto(mejorSolucion))
 		{
@@ -208,21 +236,41 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		{
 			atributosTabu.insert(*it);
 			//que me asegura que no estoy insertando la misma arista al reves?
+			//que pair tiene operator< definido
 		}
 		
-		//for(int i = 0; i < mejorCandidato.size(); i++)
-		if(atributosTabu.size() > TENOR) atributosTabu.erase(atributosTabu.begin());
+		//es posta el mejor para borrar?
+		while(atributosTabu.size() > TENOR) 
+		{
+			atributosTabu.erase(atributosTabu.begin());
+		}
 
 		iteraciones++;
 	}
 	return mejorSolucion;
 }
 
+pair< vector<int>, list<Arista> > funcionAspiracion( SetTabu atributosTabu, list< pair< vector<int>, list<Arista> > > vecindad)
+{
+	pair< vector<int>, list<Arista> > solucionMenosTabu = vecindad.front();
+	int menorCantidad = tabuCount(atributosTabu, solucionMenosTabu.first);
+	list< pair< vector<int>, list<Arista> > >::iterator iteradorVecindad;
+	
+	for(iteradorVecindad = next(vecindad.begin(), 1); iteradorVecindad != vecindad.end(); ++iteradorVecindad)
+	{
+		int cantidadAtributos = tabuCount(atributosTabu, iteradorVecindad->first); 
+		if( cantidadAtributos < menorCantidad )
+		{
+			solucionMenosTabu = *iteradorVecindad;
+			menorCantidad = cantidadAtributos;
+		}
+	}
+	return solucionMenosTabu;
+}
 
 list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParcial)
 {
 	list< pair< vector<int>, list<Arista> > > soluciones;
-	//int cantNodos = cantGyms + cantPokeParadas;//al final era gusanito!!
 	int cantNodos = solucionParcial.size();
     long long costoActual; 
 	for (int i = 0; i < cantNodos-1; i++) {
@@ -466,7 +514,7 @@ long long calcularCosto(vector<int> &camino){
 
 //en vez de decir si una funcion es tabu o no, cuenta cuantos
 //atributos tabu tiene.
-int tabuCount(set<Arista> atributos, vector<int> solucion)
+int tabuCount( SetTabu atributos, vector<int> solucion )
 {
 	int tabuAtributeCount = 0;
 	vector<int>::iterator itSolucion;
@@ -489,3 +537,4 @@ int tabuCount(set<Arista> atributos, vector<int> solucion)
 		tabuAtributeCount++;
 	return 0;
 }
+
