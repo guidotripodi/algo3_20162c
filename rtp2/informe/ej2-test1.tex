@@ -1,16 +1,12 @@
-\indent Acorde a lo solicitado, mostraremos distintos tipos de familias de casos para nuestro algoritmo, y adem\'as, daremos el tiempo estimado 
-seg\'un la complejidad del algoritmo calculada anteriormente.\\
+\indent En los siguientes tests queremos observar que sucede con cada familia de casos al ir variando los parámetros de entrada F, C de manera creciente y lineal y tomando los tiempos de corrida de cada input para poder compararlos.\\
+Se comienza, por lo tanto, con una entrada de F*C = N y se la hace crecer en $n$ filas y columnas en cada instancia, por lo tanto cada familia crece linealmente. De manera que no hay desigualdades y todas las familias se miden en instancias de igual tamaño e igual cantidad de paredes.\\
 
-A continuaci\'on mostraremos un gr\'afico de tiempos comparativo entre distintas familias de casos:\\ 
+Para obtener dichas instancias se realizaron aproximadamente unas 20 corridas con el mismo input y se tom\'o el promedio de esas 20 corridas en cada instancia para obtener un valor m\'as cercano a la media.\\ 
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.65]{./EJ2/comparativo.png}
- {$Gr$\'a$fico$ \ 2.1 - $Comparativo$}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Se puede observar en el gr\'afico, cinco funciones las cuales representan el tiempo de ejecuci\'on de las familias de casos:\\
+\textit{---> 20 corridas ? no fueron mas?!!! PREGUNTA SERIA: LOS PARAMETROS AUMETAN LINEALMENTE EN LOS TESTS? ESO ES RE IMPORTANTE SI QUEREMOS ALGO CON UNA MEJOR FORMA}\\
+
+Se pueden observar en el  gráfico 2.1, cinco funciones, que representan el tiempo de ejecuci\'on de las familias de casos mencionadas en el apartado anterior:\\
+
 \begin{enumerate}
 \item No existe arbol que conecte todas las salas
 \item Existe un camino que conecta todas las salas de esfuerzo 0
@@ -19,12 +15,21 @@ Se puede observar en el gr\'afico, cinco funciones las cuales representan el tie
 \item Camino por las salas random
 \end{enumerate}
 
-Como se observa en el gr\'afico la funci\'on representativa de la familia n\'umero 4, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que nuestro algoritmo al intentar chequear las aristas, observa que no hay ninguna por lo tanto finaliza su ejecuci\'on insumiendo unicamente la creaci\'on del grafo (nodos aislados)
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.65]{./EJ2/comparativo.png}
+ {$Gr$\'a$fico$ \ 2.1 - $Comparativo$}
+  \end{center}
+  \vspace*{0.3cm}
+ 
+\textit{---> VER GRAFICO: REHACER. OJO LAS ETIQUETAS DEL GRAFICO, LA COMPLEJIDAD NO IRIA}\\
+
+Como se observa en el gr\'afico la funci\'on representativa de la familia 4, presenta una mejor performance en relaci\'on a las otras. Esto se debe a que nuestro algoritmo al intentar chequear las aristas, observa que no hay ninguna y finaliza su ejecuci\'on insumiendo en tiempo unicamente la creaci\'on del grafo (nodos aislados)
 
 Habiendo chequeado dichas instancias, llegamos a la conclusi\'on que la familia de casos que presenta una mejor performance para nuestro algoritmo
-es en el cual \textbf{el grafo que se obtiene de transformar el laberinto recibido como par\'ametro no presenta ninguna arista}
+es la número 4 "\textbf{No existe arbol que conecte todas las salas}" dado que el grafo que se obtiene de transformar el laberinto recibido como par\'ametro no presenta ninguna arista.\\
 
-Un grafo representativo de lo dicho ser\'ia el siguiente:
+Un grafo representativo de esta familia ser\'ia el siguiente:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -32,37 +37,8 @@ Un grafo representativo de lo dicho ser\'ia el siguiente:
  \\{$Grafo$ \ 2.1 - $Mejor$ $Caso$}
   \end{center}
   \vspace*{0.3cm}
-  
-Para llegar a dicha conclusi\'on trabajamos con 50 instancias.\\
 
-Para una mayor observaci\'on desarrollamos el siguiente gr\'afico con las instancias:\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.65]{./EJ2/mejorcaso.png}
- {$Gr$\'a$fico$ \ 2.1 - $Mejor Caso$}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Como es posible observar en el gr\'afico, la funci\'on resultante de la cota teorica crece mucho m\'as r\'apido que la de nuestro algoritmo la cual queda considerablemente por debajo .
-
-Luego, dividiendo por la complejidad te\'orica de nuestro algoritmo llegamos a:\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.65]{./EJ2/mejorcaso1.png}
-{$Gr$\'a$fico$ \ 2.2 - $Mejor$ $Caso$ / $Complejidad$ $O(F*C* log(F*C))$}
-  \end{center}
-  \vspace*{0.3cm}
-
-Para realizar esta experimentaci\'on nos parecio prudente, realizar un promedio con el mismo input de aproximadamente 20 corridas
-tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para
-obtener resultados m\'as relevantes.\\ 
-
-Se puede observar en el gr\'afico 2.2, como luego de realizar la divisi\'on por la complejidad se ve que la funci\'on resultante llega a un m\'aximo igual a 0.2 y cuando el valor de entrada aumenta la funci\'on tiende a 0. Por lo tanto, podemos concluir que para el mejor caso nuestro algoritmo se encuentra considerablemente por debajo de la cota teorica $O(F*C* log(F*C))$.\\
-
-Luego, verificando el peor caso, llegamos a la conclusi\'on que la familia de casos en el que resulta menos beneficioso trabajar con nuestro algoritmo ser\'a cuando \textbf{el grafo que se obtiene de transformar el laberinto de entrada es aquel que presenta un ciclo por cada habitaci\'on posible}, dandonos el siguiente grafo una vez transformado:\\
-
+Verificando el peor caso en el gráfico 2.1, llegamos a la conclusi\'on que la familia de casos que hace que el algoritmo tenga más tiempo de computo ser\'a la familia 2 "\textbf{Existe un camino que conecta todas las salas de esfuerzo 0}" dado que el grafo que se obtiene de transformar el laberinto de entrada es aquel que presenta un ciclo por cada habitaci\'on posible, dandonos el siguiente grafo una vez transformado:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -71,33 +47,9 @@ Luego, verificando el peor caso, llegamos a la conclusi\'on que la familia de ca
   \end{center}
   \vspace*{0.3cm}
   
-Realizando experimentos con un total de 50 instancias, desarrollamos dos gr\'aficos los cuales mostraremos a continuaci\'on: \\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.50]{./EJ2/peorcaso.png}
- {$Gr$\'a$fico$ \ 2.3 - $Peor$ $Caso$}
-  \end{center}
-  \vspace*{0.3cm}
-
-
-Dividiendo por la complejidad propuesta llegamos a:\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.50]{./EJ2/peorcaso1.png}
- {$Gr$\'a$fico$ \ 2.4 - $Peor$ $Caso$ / $Complejidad$ $O(F*C* log(F*C))$}
-  \end{center}
-  \vspace*{0.3cm}
-
-Para realizar esta experimentaci\'on nos parecio acorde, realizar un promedio con el mismo input de aproximadamente 20 corridas
-tanto para la complejidad como para nuestro algoritmo y una vez calculado dicho promedio de ambas cosas realizamos la divisi\'on para
-obtener resultados m\'as relevantes.\\ 
-
-Como se puede observar en el gr\'afico 2.3, la funci\'on resultante de nuestro algoritmo es considerablemente mejor que la de la cota teorica  y presenta un tiempo similar al de la funci\'on resultante de la cota.
-Luego, en el gr\'afico 2.4 se ve como la función resultante esta asintotizada por 1.\\
-
-Por \'ultimo, mostraremos un gr\'afico comparativo entre el mejor y peor caso contra la complejidad que se solicito:\\
+\textit{---> habria que explicar un poco que pasa en los otros casos!!!}\\
+  
+Veamos en detalle como se comportan el mejor y peor caso con respecto a la complejidad teorica calculada.\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -106,4 +58,10 @@ Por \'ultimo, mostraremos un gr\'afico comparativo entre el mejor y peor caso co
   \end{center}
   \vspace*{0.3cm}
   
-Luego de dichos experimentos y casos probados, se puede concluir que a pesar de tener ciclos en todas las salas y donde dichos ciclos presenten aristas con pesos iguales lo que generara al algoritmo la posibilidad de crear varias ramas posibles de soluci\'on nos mantenemos dentro de la complejidad propuesta como hab\'iamos mostrado en nuestro desarrollo de la complejidad.\\
+\textit{---> VER GRAFICO: ESTE NO ES EL COMPARATIVO DE MEJOR Y PEOR. OJO LAS ETIQUETAS DEL GRAFICO, LA COMPLEJIDAD LA FITEAMOS}\\  
+  
+Podemos ver en este gr\'afico comparativo como las familias est\'an acotadas por la funci\'on de la complejidad te\'orica calculada.\\
+
+\textit{---> Cuando retestiemos, vamos a fitear esto con nuestra complejidad, que no se como es, luego tenemos que hacer alguna conclusion. Deberia ser algo cuadratica.}\\
+  
+Luego de dichos experimentos y casos probados, se puede concluir que a pesar de tener ciclos en todas las salas y donde dichos ciclos presenten aristas con pesos iguales lo que genera al algoritmo la posibilidad de crear varias ramas posibles de soluci\'on los tiempos se mantienen dentro de la complejidad propuesta.\\
