@@ -26,10 +26,10 @@ int main(){
 	
 	vias[0] = 1;
 	vias[1] = 2;
-	vias[2] = rand() % 1000 + 1; //cualquier peso entre 1 y 10 al cubo
+	vias[2] = 0; 
 	vias[3] = 2;
 	vias[4] = 1;
-	vias[5] = rand() % 1000 + 1; //cualquier peso entre 1 y 10 al cubo
+	vias[5] = 0;
 	
 	int indiceVias = 3;
 
@@ -45,11 +45,11 @@ auto end = ya();
 			//arista desde i al destino
 			vias[indiceVias] = i;
 			vias[indiceVias + 1] = cantidadEstaciones + 1;
-			vias[indiceVias + 2] = rand() % 1000 + 1;
+			vias[indiceVias + 2] = i == cantidadEstaciones? 0 : 1000;
 			cantidadVias++;
 			vias[indiceVias + 3] = cantidadEstaciones + 1;
 			vias[indiceVias + 4] = i;
-			vias[indiceVias + 5] = rand() % 1000 + 1;
+			vias[indiceVias + 5] = vias[indiceVias + 2];
 			i++;
 			cantidadVias++;
 			indiceVias += 6;
