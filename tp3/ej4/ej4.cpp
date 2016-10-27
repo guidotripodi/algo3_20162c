@@ -19,22 +19,23 @@
 #define ITERMAX 10
 using namespace std;
 
+//Tipos
 typedef pair <pair<int,int>, int> Gimnasio;
 typedef pair<int,int> Pokeparada;
 typedef pair<int,int> Arista;
 
+//Funciones importantes
 vector<int> tabuSearch(vector<int> solucionParcial);
 list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParcial);
 list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParcial);
 list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParcial);
 
-//probaclemente haya una funcion en la std para esto pero fue
-bool contains(list< vector<int> > lista, vector<int> solucion);
-
+//auxiliares
+int tabuCount(set<Arista> atributos, vector<int> solucion);
 long long calcularCosto(vector<int> &camino);
 
+//variables globales
 int cantGyms, cantPokeParadas, capMochila;
-
 Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
 
@@ -44,14 +45,14 @@ int main(){
 	srand(SEED);
 	
 	
-	bool utilizado[RADIO][RADIO];
+/*	bool utilizado[RADIO][RADIO];
 	
 	for(int i = 0; i < RADIO; i++){
 		for(int j = 0; j < RADIO; j++){
 			utilizado[i][j] = false;
 		}
 	}
-	
+*/	
 	cantGyms = 2;
 	Gimnasio gimnasiosArr[cantGyms];
 	
@@ -185,7 +186,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 			// Cuando todas las soluciones disponibles en la vecindad analizada son tabu active:
 			// hay que elegir la menos tabu de todas o la que aun siendo tabu mejore la funcion objetivo
 			
-			if(!contains(listaTabu, candidatoActual) && 
+			if(!tabuCount(atributosTabu, candidatoActual) && 
 				(costoActual < costoMejor || costoMejor == -1))
 			{
 				// funcion de aspiracion A(listaTabu, candidatoActual) = 
@@ -202,10 +203,15 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 			mejorSolucion = mejorCandidato;
 		}
 		//inserto la lista de aristas entera o una por una?
-		atributosTabu.insert(aristasModificadas);
+		list<Arista>::iterator it;
+		for(it = aristasModificadas.begin(); it != aristasModificadas.end(); it++)
+		{
+			atributosTabu.insert(*it);
+			//que me asegura que no estoy insertando la misma arista al reves?
+		}
 		
-		for(int i = 0; i < mejorCandidato.second.size(); i++)
-		if(listaTabu.size() > TENOR) listaTabu.pop_front();
+		//for(int i = 0; i < mejorCandidato.size(); i++)
+		if(atributosTabu.size() > TENOR) atributosTabu.erase(atributosTabu.begin());
 
 		iteraciones++;
 	}
@@ -221,18 +227,24 @@ list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParci
     long long costoActual; 
 	for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
-            swap(solucionParcial[i], solucionParcial[j]);
+            list<Arista> aristasModificadas;
+			
+			//en un swap cambian cuatro aristas
+			//quiero guardar las aristas antes de que sean modificadas
+			//TODO casos borde, o quizas no; el set tabu me los va a planchar si meto cosas repetidas aca.
+			aristasModificadas.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
+			aristasModificadas.push_back( Arista( solucionParcial[i], solucionParcial[i+1]) );
+			aristasModificadas.push_back( Arista( solucionParcial[j], solucionParcial[(j+1)%cantNodos]) );
+			aristasModificadas.push_back( Arista( solucionParcial[(j-1)%cantNodos], solucionParcial[j]) );
+			
+			swap(solucionParcial[i], solucionParcial[j]);
 
 			costoActual = calcularCosto(solucionParcial);
-			if (costoActual != -1) 
+			if (costoActual != -1)
 			{
 				pair< vector<int>, list<Arista> > solucionConAtributos;
 				solucionConAtributos.first = solucionParcial;
-				//en un swap cambian cuatro aristas
-				solucionConAtributos.second.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
-				solucionConAtributos.second.push_back( Arista( solucionParcial[i], solucionParcial[i+1]) );
-				solucionConAtributos.second.push_back( Arista( solucionParcial[j], solucionParcial[(j+1)%cantNodos]) );
-				solucionConAtributos.second.push_back( Arista( solucionParcial[(j-1)%cantNodos], solucionParcial[j]) );
+				solucionConAtributos.second = aristasModificadas;
 				soluciones.push_back(solucionConAtributos);
 			}
 			swap(solucionParcial[i], solucionParcial[j]);//volver al original
@@ -249,6 +261,14 @@ list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParci
 	long long costoActual; 
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
+            list<Arista> aristasModificadas;
+			
+			//en un swap cambian cuatro aristas
+			//quiero guardar las aristas antes de que sean modificadas
+			//TODO casos borde, o quizas no; el set tabu me los va a planchar si meto cosas repetidas aca.
+			aristasModificadas.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
+			aristasModificadas.push_back( Arista( solucionParcial[j], solucionParcial[(j+1)%cantNodos]) );
+			
 			reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
 
 			costoActual = calcularCosto(solucionParcial);
@@ -256,8 +276,7 @@ list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParci
 			{
 				pair< vector<int>, list<Arista> > solucionConAtributos;
 				solucionConAtributos.first = solucionParcial;
-				solucionConAtributos.second.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
-				solucionConAtributos.second.push_back( Arista( solucionParcial[j], solucionParcial[(j+1)%cantNodos]) );
+				solucionConAtributos.second = aristasModificadas;
 				soluciones.push_back(solucionConAtributos);
 			}
 			reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
@@ -276,7 +295,11 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 		for (int j = i+1; j < cantNodos-2; j++) {
 			for (int k = j+2; k < cantNodos; k++) {
 				
+				list<Arista> aristasModificadas;
 				//Caso 1
+				aristasModificadas.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
+				aristasModificadas.push_back( Arista( solucionParcial[j], solucionParcial[j+1]) );
+				aristasModificadas.push_back( Arista( solucionParcial[k], solucionParcial[(k+1)%cantNodos]) );
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
 				reverse(solucionParcial.begin() + j, solucionParcial.begin() + k);
 
@@ -286,10 +309,8 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 				{
 					pair< vector<int>, list<Arista> > solucionConAtributos;
 					solucionConAtributos.first = solucionParcial;
+					solucionConAtributos.second = aristasModificadas;
 					//3opt modifica 3 aristas
-					solucionConAtributos.second.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
-					solucionConAtributos.second.push_back( Arista( solucionParcial[j], solucionParcial[j+1]) );
-					solucionConAtributos.second.push_back( Arista( solucionParcial[k], solucionParcial[(k+1)%cantNodos]) );
 					soluciones.push_back(solucionConAtributos);
 				}
 			
@@ -298,6 +319,10 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 
 				//Caso 2
 
+				list<Arista> aristasModificadas2;
+				aristasModificadas2.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
+				aristasModificadas2.push_back( Arista( solucionParcial[i + (k - j)], solucionParcial[i+ (k - j)+1]) );
+				aristasModificadas2.push_back( Arista( solucionParcial[k], solucionParcial[(k+1)%cantNodos]) );
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j) );//len(rango 2)
 				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
@@ -309,10 +334,7 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 				{
 					pair< vector<int>, list<Arista> > solucionConAtributos;
 					solucionConAtributos.first = solucionParcial;
-					//3opt modifica 3 aristas
-					solucionConAtributos.second.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
-					solucionConAtributos.second.push_back( Arista( solucionParcial[i + (k - j)], solucionParcial[i+ (k - j)+1]) );
-					solucionConAtributos.second.push_back( Arista( solucionParcial[k], solucionParcial[(k+1)%cantNodos]) );
+					solucionConAtributos.second = aristasModificadas2;
 					soluciones.push_back(solucionConAtributos);
 				}
 
@@ -322,6 +344,10 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 				
 				//Caso 3
 				
+				list<Arista> aristasModificadas3;
+				aristasModificadas3.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
+				aristasModificadas3.push_back( Arista( solucionParcial[i + (k - j)], solucionParcial[i+ (k - j)+1]) );
+				aristasModificadas3.push_back( Arista( solucionParcial[k], solucionParcial[(k+1)%cantNodos]) );
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j));//len(rango 2)
 				
@@ -331,10 +357,7 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 				{
 					pair< vector<int>, list<Arista> > solucionConAtributos;
 					solucionConAtributos.first = solucionParcial;
-					//3opt modifica 3 aristas
-					solucionConAtributos.second.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
-					solucionConAtributos.second.push_back( Arista( solucionParcial[i + (k - j)], solucionParcial[i+ (k - j)+1]) );
-					solucionConAtributos.second.push_back( Arista( solucionParcial[k], solucionParcial[(k+1)%cantNodos]) );
+					solucionConAtributos.second = aristasModificadas3;
 					soluciones.push_back(solucionConAtributos);
 				}
 				
@@ -342,6 +365,10 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 				
 				//Caso 4
+				list<Arista> aristasModificadas4;
+				aristasModificadas4.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
+				aristasModificadas4.push_back( Arista( solucionParcial[i + (k - j)], solucionParcial[i+ (k - j)+1]) );
+				aristasModificadas4.push_back( Arista( solucionParcial[k], solucionParcial[(k+1)%cantNodos]) );
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
 
@@ -351,10 +378,7 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 				{
 					pair< vector<int>, list<Arista> > solucionConAtributos;
 					solucionConAtributos.first = solucionParcial;
-					//3opt modifica 3 aristas
-					solucionConAtributos.second.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
-					solucionConAtributos.second.push_back( Arista( solucionParcial[i + (k - j)], solucionParcial[i+ (k - j)+1]) );
-					solucionConAtributos.second.push_back( Arista( solucionParcial[k], solucionParcial[(k+1)%cantNodos]) );
+					solucionConAtributos.second = aristasModificadas4;
 					soluciones.push_back(solucionConAtributos);
 				}
 
@@ -440,11 +464,28 @@ long long calcularCosto(vector<int> &camino){
 	return costo;
 }
 
-bool contains(list< vector<int> > lista, vector<int> solucion){
-	list< vector<int> >::iterator it;
-	for(it = lista.begin(); it != lista.end(); it++){
-		if(*it == solucion) return true;//gusanito
-	}
-	return false;
-}
+//en vez de decir si una funcion es tabu o no, cuenta cuantos
+//atributos tabu tiene.
+int tabuCount(set<Arista> atributos, vector<int> solucion)
+{
+	int tabuAtributeCount = 0;
+	vector<int>::iterator itSolucion;
+	for(itSolucion = solucion.begin(); itSolucion != solucion.end()-1; itSolucion++){
 
+		if(atributos.find( Arista(*itSolucion, *(itSolucion+1)) ) != atributos.end())
+		{
+			tabuAtributeCount++;
+		} 
+		else
+		{
+			Arista inversa = Arista(*(itSolucion+1), *itSolucion);
+			if(atributos.find(inversa) != atributos.end()) tabuAtributeCount++;
+		}
+
+	}
+
+	if(atributos.find( Arista( *itSolucion, *solucion.begin() ) ) != atributos.end())
+		//mas parentesis que lisp
+		tabuAtributeCount++;
+	return 0;
+}
