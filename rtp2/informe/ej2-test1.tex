@@ -1,18 +1,17 @@
 \indent En los siguientes tests queremos observar que sucede con cada familia de casos al ir variando los parámetros de entrada F, C de manera creciente y lineal y tomando los tiempos de corrida de cada input para poder compararlos.\\
-Se comienza, por lo tanto, con una entrada de F*C = N y se la hace crecer en $n$ filas y columnas en cada instancia, por lo tanto cada familia crece linealmente. De manera que no hay desigualdades y todas las familias se miden en instancias de igual tamaño e igual cantidad de paredes.\\
+Se comienza, por lo tanto, con una entrada de F*C = N y se la aumenta en cada test en una fila y columna hasta llegar a una matriz de 50*50. De manera que no hay desigualdades y todas las familias se miden en instancias de igual tamaño.\\
+El origen siempre estará en la primer columna posible y el destino en la última. A medida que la matriz crezca, las posiciones de los mismos no serán alteradas y la cantidad de paredes y como varie el $P_{max}$ en cada caso, serán acordes para que siempre se encuentren dentro de la misma familia.\\
 
 Para obtener dichas instancias se realizaron aproximadamente unas 20 corridas con el mismo input y se tom\'o el promedio de esas 20 corridas en cada instancia para obtener un valor m\'as cercano a la media.\\ 
-
-\textit{---> 20 corridas ? no fueron mas?!!! PREGUNTA SERIA: LOS PARAMETROS AUMETAN LINEALMENTE EN LOS TESTS? ESO ES RE IMPORTANTE SI QUEREMOS ALGO CON UNA MEJOR FORMA}\\
 
 Se pueden observar en el  gráfico 2.1, cinco funciones, que representan el tiempo de ejecuci\'on de las familias de casos mencionadas en el apartado anterior:\\
 
 \begin{enumerate}
-\item No existe arbol que conecte todas las salas
-\item Existe un camino que conecta todas las salas de esfuerzo 0
-\item El AGM es todo el grafo
-\item Sin ejes
-\item Camino por las salas random
+\item \textbf{No existe árbol que conecte todas las salas:}
+\item \textbf{Existe un camino que conecta todas las salas de esfuerzo 0:}
+\item \textbf{El AGM es todo el grafo:}
+\item \textbf{Sin ejes:}
+\item \textbf{Camino por las salas random:}
 \end{enumerate}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
