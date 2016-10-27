@@ -1,19 +1,10 @@
-\indent Veremos que es lo que sucede al ir variando los parámetros de entrada para cada familia de manera manera tal que a medida que F, C y P crecen linealmente, podamos observar que sucede con cada familia de casos (es decir, las familias se mantienen, solo varia el tamaño de la entrada en todos los casos).\\
-Se comienza, por lo tanto, con una entrada de F*C = x y P = y y se la hace crecer +n filas y columnas y +m paredes en cada instancia. De manera que no hay desigualdades y todas las familias se miden en instancias de igual tamaño e igual cantidad de paredes.\\
+\indent Veremos que es lo que sucede al ir variando los parámetros de entrada para cada familia, de manera tal que, a medida que F, C y P crecen linealmente podamos observar que sucede con cada familia de casos (es decir, las familias se mantienen, solo varia el tamaño de la entrada en todos los casos).\\
+Se comienza, por lo tanto, con una entrada de 5 filas y columnas y se la aumenta en cada test en una fila y columna hasta llegar a una matriz de 50*50. De manera que no hay desigualdades y todas las familias se miden en instancias de igual tamaño.\\
+El origen siempre estará en la primer columna posible y el destino en la última. A medida que la matriz crezca, las posiciones de los mismos no serán alteradas y la cantidad de paredes y como varie el $P_{max}$ en cada caso, serán acordes para que siempre se encuentren dentro de la misma familia.
 
-Para obtener dichas instancias se realizaron aproximadamente unas 20 corridas con el mismo input y se tom\'o el promedio de esas 20 corridas en cada instancia para obtener un valor m\'as cercano a la media.\\ 
+Para obtener dichas instancias se realizaron aproximadamente unas 20 corridas con el mismo input y se tom\'o el promedio de las mismas en cada instancia para obtener un valor m\'as cercano a la media.\\ 
 
-\textit{---> 20 corridas ? no fueron mas?!!! PREGUNTA SERIA: LOS PARAMETROS AUMETAN LINEALMENTE EN LOS TESTS? ESO ES RE IMPORTANTE SI QUEREMOS ALGO CON UNA MEJOR FORMA}\\
-
-Se pueden observar en el  gráfico 1.1, cinco funciones, que representan el tiempo de ejecuci\'on de las familias de casos mencionadas en el apartado anterior:\\
-
-\begin{enumerate}
-\item No existe camino para atravezar el laberinto
-\item Existe un camino sin atravesar paredes para recorrer todo el laberinto
-\item Rompiendo todas las paredes posibles para pasar el laberinto
-\item Rompiendo una cantidad menor de paredes posibles para pasar el laberinto
-\item Múltiples caminos para llegar a destino
-\end{enumerate}
+Se puede observar en el  gráfico 1.1, cinco funciones, que representan el tiempo de ejecuci\'on de las familias de casos mencionadas en el apartado anterior:\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -22,7 +13,7 @@ Se pueden observar en el  gráfico 1.1, cinco funciones, que representan el tiem
   \end{center}
   \vspace*{0.3cm}
   
-Se puede notar que la familia 1 "\textbf{No existe camino para atravezar el laberint}", presenta una mejor performance en relaci\'on a las otras. Esto se puede deber a dos motivos, o bien en el primer paso no puede salir por ning\'un camino posible o bien su adyacente es el nodo destino, por lo tanto chequea solo los nodos adyacentes al origen y finaliza su ejecuci\'on. Con lo cual esta familia representa el mejor caso en performance para el algoritmo.
+Se puede notar que la familia 1 "\textbf{No existe camino para atravezar el laberinto}", presenta una mejor performance en relaci\'on a las otras. Esto se puede deber a dos motivos, o bien en el primer paso no puede salir por ning\'un camino posible o bien su adyacente es el nodo destino, por lo tanto chequea solo los nodos adyacentes al origen y finaliza su ejecuci\'on. Con lo cual esta familia representa el mejor caso en performance para el algoritmo.
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -38,12 +29,12 @@ Se puede notar que la familia 1 "\textbf{No existe camino para atravezar el labe
   \end{center}
   \vspace*{0.3cm}
 
-Uno de los peores casos para nuestro algoritmo es la familia 5 "\textbf{Multiples caminos para llegar a destino}", que sucede cuando por ejemplo, todos los caminos tienen igual longitud. Esto se da as\'i ya que nuestro algoritmo chequea todos los caminos posibles y como todos pueden ser soluci\'on posible avanza por todos y llega al final del laberinto con el mismo valor en todos los posibles caminos.\\
+Uno de los peores casos para nuestro algoritmo es la familia 5 "\textbf{Múltiples caminos para llegar a destino}", que sucede cuando por ejemplo, todos los caminos tienen igual longitud. Esto se da as\'i ya que nuestro algoritmo chequea todos los caminos posibles y como todos pueden ser soluci\'on posible avanza por todos y llega al final del laberinto con el mismo valor en todos los posibles caminos.\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 \includegraphics[scale=0.7]{./EJ1/ej1grafopeorcaso.jpeg}
-{Gr\'afico 1.2 - Multiples caminos para llegar a destino de misma longitud}
+{Gr\'afico 1.2 - Múltiples caminos para llegar a destino de misma longitud}
   \end{center}
   \vspace*{0.3cm}
 

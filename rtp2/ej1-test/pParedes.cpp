@@ -108,7 +108,7 @@ for (int l = 5; l < 50; ++l){
     finalizar = false;
         F = 50;
         C = 50;
-        PMax = l;
+        PMax = l+2;
 
                   char map[F*C];
 
@@ -141,7 +141,7 @@ for (int l = 5; l < 50; ++l){
         }
         
 
-
+/*
                   printf("FILAS: %d\n", F);
    printf("COLUMNAS: %d\n", C);
 
@@ -151,8 +151,8 @@ for (int l = 5; l < 50; ++l){
             printf("%c",map[(i*C)+j] );
         }
        
-    }
-    //auto start = ya();
+    }*/
+    auto start = ya();
     Map = new Node**[F];
     
     for(int i = 0; i < F; i++){
@@ -182,13 +182,12 @@ for (int l = 5; l < 50; ++l){
     }
     
     mazeBfs();
-    printf("\n");
-    printf("Distancia minima obtenida: %d \n", nodeEnd->distMinToNode);
+    //printf("\n");
+    //printf("Distancia minima obtenida: %d \n", nodeEnd->distMinToNode);
     /*Descomentar esto para correr la medicion correspondiente*/
-  /*auto end = ya();
+  auto end = ya();
             cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-            printf("\n");*/
-  PMax = x/2;
+            printf("\n");
 }
     return 0;
 }
