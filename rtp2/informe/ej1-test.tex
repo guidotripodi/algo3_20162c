@@ -1,7 +1,7 @@
 \indent Para estudiar el funcionamiento de nuestro algoritmo frente a la problematica planteada, elaboramos diversos tests que ser\'an enunciados a continuaci\'on.\\
 
 \begin{center}
- \subsubsection*{Caso 1: No existe camino para atravezar el laberinto}
+ \subsubsection*{Familia 1: No existe camino para atravezar el laberinto}
 \end{center}
 
 Para que no haya soluci \'on asignamos un $P_{max}$ (la cantidad de paredes m\'axima a romper) inferior a la cantidad de paredes necesarias para llegar al nodo destino.\\
@@ -23,7 +23,7 @@ El grafo que representa a esta entrada es de la siguiente forma:\\
   \vspace*{0.3cm}
 
  \begin{center}
- \subsubsection*{Caso 2: Existe un camino sin atravesar paredes para recorrer todo el laberinto}
+ \subsubsection*{Familia 2: Existe un camino sin atravesar paredes para recorrer todo el laberinto}
 \end{center}
 
 Se toma un $P_{max}$ igual a cero y se arma un camino puntual dentro del laberinto en el cual no es necesario atravezar ninguna pared para llegar a destino. El $P_{max}$ es cero para asegurarse que el algoritmo no intente romper paredes.\\
@@ -46,7 +46,7 @@ El grafo que representa a este tipo es de la siguiente forma:\\
 
   
 \begin{center}
- \subsubsection*{Caso 3: Rompiendo todas las paredes posibles para pasar el laberinto}
+ \subsubsection*{Familia 3: Rompiendo todas las paredes posibles para pasar el laberinto}
 \end{center}
 
 El primer camino que recorre es el primero con $P_{max}$.\\
@@ -68,7 +68,7 @@ El grafo que representa a este tipo es de la siguiente forma:\\
   \vspace*{0.3cm}
 
 \begin{center}
-  \subsubsection*{Caso 4: Rompiendo una cantidad menor de paredes posibles para pasar el laberinto}
+  \subsubsection*{Familia 4: Rompiendo una cantidad menor de paredes posibles para pasar el laberinto}
 \end{center}
 
 El primer camino que recorre rompe una cantidad de paredes menor a $P_{max}$.\\
@@ -90,7 +90,7 @@ El grafo que representa a este tipo es de la siguiente forma:\\
   \vspace*{0.3cm}
 
 \begin{center}
-  \subsubsection*{Caso 5: M\'ultiples caminos llegan a destino}
+  \subsubsection*{Familia 5: M\'ultiples caminos llegan a destino}
 \end{center}
 
 Cualquier camino llega en la misma cantidad de pasos al destino.
