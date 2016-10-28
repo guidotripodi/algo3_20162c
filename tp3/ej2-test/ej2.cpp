@@ -6,6 +6,8 @@
 #include <utility>
 #include "MaestroPokemon.hpp"
 #include <chrono>
+#define cantMaxGym 101
+#define cantMaxPP 100
 #define ya chrono::high_resolution_clock::now
 using namespace std;
 
@@ -15,7 +17,7 @@ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_
 
 int main(int argc, char* argv[])
 {
-	int cant_gimnasios, cant_pokeParadas, cap_mochila;
+	/*int cant_gimnasios, cant_pokeParadas, cap_mochila;
 	cin >> cant_gimnasios >> cant_pokeParadas >> cap_mochila;
 
 
@@ -37,11 +39,42 @@ int main(int argc, char* argv[])
 		cin >> posicion.first >> posicion.second;
 		
 		posiciones_pp[i] = posicion;
-		/*Uso ese aux para saber el orden inicial*/
+		
 		pp_aux[i] = posicion;
 		
-	}
-
+	}*/
+	/*Caso sin solucion:*/
+	
+	int cant_gimnasios = 0; 
+	int cant_pokeParadas = 0;
+	int cap_mochila = 0;
+	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
+	pair <int, int>  posiciones_pp[cantMaxPP];
+	pair <int, int>  pp_aux[cantMaxPP];
+	for(int j = 1; j < 2; j++){
+		cant_gimnasios = j+1;
+		cant_pokeParadas = j;
+		
+		int i = 0;
+		int cantidad_pociones_necesarias_total = 0;
+		for (i = 0; i < cant_gimnasios; i++){
+			pair <pair<int,int>, int> gymPuebloPaleta;
+			gymPuebloPaleta.first.first = i;
+			gymPuebloPaleta.first.second = i+1;
+			gymPuebloPaleta.second = i*3;
+			cantidad_pociones_necesarias_total += i*3;
+			posiciones_gym[i] = gymPuebloPaleta;
+			
+		}
+		for (i = 0; i < cant_pokeParadas; i++)	{
+			pair <int, int> posicion;
+			posicion.first = i;
+			posicion.second = i+2;
+			posiciones_pp[i] = posicion;
+			pp_aux[i] = posicion;
+		}
+		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
+		cap_mochila = cantidad_pociones_necesarias_total;
 	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
 	
 	if ( f == NULL || f->first == -1)	{
@@ -55,6 +88,7 @@ int main(int argc, char* argv[])
 
 	}
 	cout << "\n";
+}
 	return 0;
 }
 

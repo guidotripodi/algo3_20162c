@@ -37,7 +37,37 @@ int main(int argc, char* argv[])
 		posiciones_pp[i] = posicion;
 		
 	}
-
+/*Caso sin solucion:*/
+	
+	int cant_gimnasios = 0; 
+	int cant_pokeParadas = 0;
+	int cap_mochila = 0;
+	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
+	pair <int, int>  posiciones_pp[cantMaxPP];
+	
+	for(int j = 1; j < 2; j++){
+		cant_gimnasios = j+1;
+		cant_pokeParadas = j;
+		
+		int i = 0;
+		int cantidad_pociones_necesarias_total = 0;
+		for (i = 0; i < cant_gimnasios; i++){
+			pair <pair<int,int>, int> gymPuebloPaleta;
+			gymPuebloPaleta.first.first = i;
+			gymPuebloPaleta.first.second = i+1;
+			gymPuebloPaleta.second = i*3;
+			cantidad_pociones_necesarias_total += i*3;
+			posiciones_gym[i] = gymPuebloPaleta;
+			
+		}
+		for (i = 0; i < cant_pokeParadas; i++)	{
+			pair <int, int> posicion;
+			posicion.first = i;
+			posicion.second = i+2;
+			posiciones_pp[i] = posicion;
+		}
+		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
+		cap_mochila = cantidad_pociones_necesarias_total;
 	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 	
 	if ( f == NULL)	{
@@ -49,6 +79,7 @@ int main(int argc, char* argv[])
 
 	}
 	cout << "\n";
+}
 	return 0;
 }
 

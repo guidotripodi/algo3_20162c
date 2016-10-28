@@ -7,6 +7,8 @@
 #include "MaestroPokemon.hpp"
 #include <chrono>
 #define ya chrono::high_resolution_clock::now
+#define cantMaxGym 101
+#define cantMaxPP 100
 using namespace std;
 
 
@@ -39,73 +41,84 @@ int main(int argc, char* argv[])
 	}*/
 
 	/*Caso sin solucion:*/
+	int cant_gimnasios = 0; 
+	int cant_pokeParadas = 0;
+	int cap_mochila = 0;
+	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
+	pair <int, int>  posiciones_pp[cantMaxPP];
 	
-	int cant_gimnasios; 
-	int cant_pokeParadas;
-	int cap_mochila;
-	pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
-	pair <int, int>  posiciones_pp[cant_pokeParadas];
-	
-	for(int j = 0; j < 100; j++){
+	for(int j = 4; j < 50; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
+		
+		int i = 0;
+			for (i = 0; i < cant_gimnasios; i++){
+			pair <pair<int,int>, int> gymPuebloPaleta;
+			gymPuebloPaleta.first.first = i;
+			gymPuebloPaleta.first.second = i+1;
+			gymPuebloPaleta.second = (i+1)*3;
+			//cantidad_pociones_necesarias_total += i*3;
+			posiciones_gym[i] = gymPuebloPaleta;
+			
+		}
+		for (i = 0; i < cant_pokeParadas; i++)	{
+			pair <int, int> posicion;
+			posicion.first = i;
+			posicion.second = i+2;
+			posiciones_pp[i] = posicion;
+		}
 		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
+		cap_mochila = cantMaxGym*3	;
 		
-	int i = 0;
-	int cantidad_pociones_necesarias_total = 0;
-	for (i = 0; i < cant_gimnasios; i++){
-		pair <pair<int,int>, int> gymPuebloPaleta;
+		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
-		gymPuebloPaleta.first.first = i;
-		gymPuebloPaleta.first.second = i+1;
-		gymPuebloPaleta.second = i*3;
-		cantidad_pociones_necesarias_total += i*3;
-		posiciones_gym[i] = gymPuebloPaleta;
-		
-	}
-	for (i = 0; i < cant_pokeParadas; i++)	{
-		pair <int, int> posicion;
-		
-		posicion.first = i;
-		posicion.second = i+1;
-		
-		posiciones_pp[i] = posicion;
-		
-	}
+		for(i = 0; i < cant_gimnasios; i++){
+			printf("%d %d %d \n", posiciones_gym[i].first.first, posiciones_gym[i].first.second, posiciones_gym[i].second );
+			}
+			
+		for(i = 0; i < cant_pokeParadas; i++){
+			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
+			
+			}
 
-	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
+		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 	
-	if ( f == NULL || f->first == -1)	{
-		cout << "-1" << "\n";
-		return -1;
-	}
-	cout << f->first <<" "<< f->second->size();
-	
-	for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
-		cout << " " << *it;
-
-	}
-	cout << "\n";
+		if ( f == NULL || f->first == -1)	{
+			cout << "-1" << "\n";
+			//return -1;
+		}else{
+			//cout << f->first <<" "<< f->second->size();
+			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
+				cout << " " << *it;
+			}
+		}
+		
+		
+		
+		cout << "j es:" << j << "\n";
+		delete f;
 	}
 	return 0;
 }
 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
 {
+	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
+	
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
 	int pocionesANecesitar = 0;
 	for (int i = 0; i < cant_gimnasios; ++i){
 		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
 		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-			
-			return NULL;
+			final->first = -1;
+			return final;
 		}
 	}
 	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-		
-		return NULL;
+		final->first = -1;
+		return final;
 	}
 	
 	bool exitoBack = true;
@@ -144,7 +157,6 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
 	final->first = minimo;
 	final->second = camino;
 	return final;

@@ -77,6 +77,7 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 }
 
 MaestroPokemon::~MaestroPokemon(){
+	delete this->decisiones;
 
 }
 
