@@ -172,6 +172,8 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 {
 	vector<int> solucionActual = solucionParcial;
 	vector<int> mejorSolucion= solucionParcial;
+	long long costoMejor = calcularCosto(mejorSolucion);
+	long long costoMejorVecino;
 	SetTabu atributosTabu;
 	int iteraciones = 0;			
 	while(iteraciones < ITERMAX)
@@ -182,31 +184,23 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
 		// podemos hacer union entre 2opt y 3opt
 		if(vecindad.size() == 0) return mejorSolucion; //Esto es por las moscas. No deberia pasar	
+		
 		list< pair< vector<int>, list<Arista> > >::iterator iteradorVecindad; 
-
 		for(iteradorVecindad = vecindad.begin(); iteradorVecindad != vecindad.end(); ++iteradorVecindad)
 		{
 			vector<int> candidatoActual = iteradorVecindad->first;
 			long long costoActual = calcularCosto(candidatoActual);
-			long long costoMejor = calcularCosto(mejorCandidato);
+			costoMejorVecino = calcularCosto(mejorCandidato);
 
-			// contains deberia determinar si una solucion es tabu observando
-			// atributos (por recencia o frecuencia) como por ejemplo 
-			// ejes no deseables o algo por el estilo
-			// y ademas determinar que atributos son tabu activos
-			// luego una solucion no visitada puede ser tabu segun los atributos tabu activos
-			// hay que determinar que atributos sirven para clasificar
 			// utilizamos long term memory 
 			// porque no nos concentramos solamente en un subconjunto de una vecindad, 
 			// si no en sucesivas vecindades.
 			// Cuando todas las soluciones disponibles en la vecindad analizada son tabu active:
 			// hay que elegir la menos tabu de todas o la que aun siendo tabu mejore la funcion objetivo
 			
-			if(!tabuCount(atributosTabu, candidatoActual) && 
-				(costoActual < costoMejor || costoMejor == -1)
-				//tengo que poner aca
-				//que ignore la condicion tabu si mejora la mejor solucion
-				)
+			if(	costoActual < costoMejor ||
+				(!tabuCount(atributosTabu, candidatoActual) && 
+				(costoActual < costoMejorVecino || costoMejorVecino == -1)))
 			{
 				// funcion de aspiracion A(listaTabu, candidatoActual) = 
 				// el menos tabu de los tabu o 
@@ -226,20 +220,21 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		}
 
 		solucionActual = mejorCandidato;
-		if(calcularCosto(mejorCandidato) < calcularCosto(mejorSolucion))
+		if(costoMejorVecino < costoMejor)
 		{
 			mejorSolucion = mejorCandidato;
+			costoMejor = costoMejorVecino;
 		}
-		//inserto la lista de aristas entera o una por una?
+		
 		list<Arista>::iterator it;
 		for(it = aristasModificadas.begin(); it != aristasModificadas.end(); it++)
 		{
 			atributosTabu.insert(*it);
-			//que me asegura que no estoy insertando la misma arista al reves?
-			//que pair tiene operator< definido
 		}
 		
-		//es posta el mejor para borrar?
+		//TODO es posta el mejor para borrar?
+		//el orden en el que se guardan los objetos
+		//no es cronologico como la lista.
 		while(atributosTabu.size() > TENOR) 
 		{
 			atributosTabu.erase(atributosTabu.begin());
@@ -247,6 +242,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 
 		iteraciones++;
 	}
+
 	return mejorSolucion;
 }
 
