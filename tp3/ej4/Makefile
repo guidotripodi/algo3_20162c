@@ -1,13 +1,28 @@
+# Compilador que será utilizado
 CC=g++
-CFLAGS= -g -std=c++11 -Wall
 
-all: ej4
+# flags de compilación
+CFLAGS=-g -Wall -std=c++11
 
-ej4: ejercicio4.o
-	$(CC) $(CFLAGS) ejercicio4.o -o ej4
+# flags de linkeo
+LDFLAGS=
 
-ejercicio4.o: ej4.cpp
-	$(CC) $(CFLAGS) -c ej4.cpp -o ejercicio4.o
+# Agregar acá los archivos .cpp a compilar
+SOURCES=ej4.cpp setTabu.cpp
+
+# Objetos que serán generados
+OBJECTS=ej4.o setTabu.o
+
+# Nombre del ejecutable a generar
+EXECUTABLE=ej4
+
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS) 
+	$(CC) $(CFLAGS) $(OBJECTS) -o $@
 
 clean:
-	rm *o ej4
+	rm -rf $(EXECUTABLE) $(OBJECTS)
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) $< -c -o $@

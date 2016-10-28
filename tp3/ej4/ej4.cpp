@@ -1,6 +1,5 @@
 #include <iostream>	/* printf, cout*/
 #include <vector> 
-#include <set>
 #include <algorithm> 
 #include <fstream>
 #include <utility>
@@ -10,6 +9,7 @@
 #include <math.h>	/* pow */
 #include <cstdlib> /* swap */
 #include <list>
+#include "setTabu.h"
 
 #define ya chrono::high_resolution_clock::now
 #define SEED 39
@@ -23,19 +23,6 @@ using namespace std;
 typedef pair <pair<int,int>, int> Gimnasio;
 typedef pair<int,int> Pokeparada;
 typedef pair<int,int> Arista;
-
-struct compArista
-{
-	bool operator() (const Arista &izq, const Arista &der)
-	{
-		//si der es izq invertido
-		if(izq.first == der.second && izq.second == der.first)
-			return false;
-		return izq.first<der.first || (!(der.first<izq.first) && izq.second<der.second);
-	}
-};
-
-typedef set<Arista,compArista> SetTabu;
 
 //Funciones importantes
 vector<int> tabuSearch(vector<int> solucionParcial);
@@ -229,7 +216,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		list<Arista>::iterator it;
 		for(it = aristasModificadas.begin(); it != aristasModificadas.end(); it++)
 		{
-			atributosTabu.insert(*it);
+			atributosTabu.push(*it);
 		}
 		
 		//TODO es posta el mejor para borrar?
@@ -237,7 +224,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		//no es cronologico como la lista.
 		while(atributosTabu.size() > TENOR) 
 		{
-			atributosTabu.erase(atributosTabu.begin());
+			atributosTabu.pop();
 		}
 
 		iteraciones++;
@@ -516,19 +503,19 @@ int tabuCount( SetTabu atributos, vector<int> solucion )
 	vector<int>::iterator itSolucion;
 	for(itSolucion = solucion.begin(); itSolucion != solucion.end()-1; itSolucion++){
 
-		if(atributos.find( Arista(*itSolucion, *(itSolucion+1)) ) != atributos.end())
+		if(atributos.belongs( Arista(*itSolucion, *(itSolucion+1)) ))
 		{
 			tabuAtributeCount++;
 		} 
 		else
 		{
 			Arista inversa = Arista(*(itSolucion+1), *itSolucion);
-			if(atributos.find(inversa) != atributos.end()) tabuAtributeCount++;
+			if(atributos.belongs(inversa)) tabuAtributeCount++;
 		}
 
 	}
 
-	if(atributos.find( Arista( *itSolucion, *solucion.begin() ) ) != atributos.end())
+	if(atributos.belongs( Arista( *itSolucion, *solucion.begin() ) ))
 		//mas parentesis que lisp
 		tabuAtributeCount++;
 	return 0;
