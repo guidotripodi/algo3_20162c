@@ -1,13 +1,28 @@
+# Compilador que será utilizado
 CC=g++
-CFLAGS= -g -std=c++11 -Wall
 
-all: ej3
+# flags de compilación
+CFLAGS=-g -Wall -std=c++11
 
-ej3: ejercicio3.o
-	$(CC) $(CFLAGS) ejercicio3.o -o ej3
+# flags de linkeo
+LDFLAGS=
 
-ejercicio3.o: ej3.cpp
-	$(CC) $(CFLAGS) -c ej3.cpp -o ejercicio3.o
+# Agregar acá los archivos .cpp a compilar
+SOURCES=ej3.cpp MaestroPokemon.cpp trie.cpp
+
+# Objetos que serán generados
+OBJECTS=ej3.o MaestroPokemon.o
+
+# Nombre del ejecutable a generar
+EXECUTABLE=ej3
+
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS) 
+	$(CC) $(CFLAGS) $(OBJECTS) -o $@
 
 clean:
-	rm *o ej3
+	rm -rf $(EXECUTABLE) $(OBJECTS)
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) $< -c -o $@

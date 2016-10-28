@@ -189,8 +189,6 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 				(!tabuCount(atributosTabu, candidatoActual) && 
 				(costoActual < costoMejorVecino || costoMejorVecino == -1)))
 			{
-				// funcion de aspiracion A(listaTabu, candidatoActual) = 
-				// el menos tabu de los tabu o 
 				aristasModificadas = iteradorVecindad->second;
 				mejorCandidato = candidatoActual;
 			}
@@ -294,7 +292,6 @@ list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParci
         for (int j = i+1; j < cantNodos; j++) {
             list<Arista> aristasModificadas;
 			
-			//en un swap cambian cuatro aristas
 			//quiero guardar las aristas antes de que sean modificadas
 			//TODO casos borde, o quizas no; el set tabu me los va a planchar si meto cosas repetidas aca.
 			aristasModificadas.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
@@ -341,7 +338,6 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 					pair< vector<int>, list<Arista> > solucionConAtributos;
 					solucionConAtributos.first = solucionParcial;
 					solucionConAtributos.second = aristasModificadas;
-					//3opt modifica 3 aristas
 					soluciones.push_back(solucionConAtributos);
 				}
 			
