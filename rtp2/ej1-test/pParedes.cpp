@@ -39,6 +39,7 @@ Node *nodeStart; // marcado por defecto
 Node *nodeEnd;
 
 queue<Node*> cola;
+vector<Node*> pila;
 
 int max(int a, int b){
     return (a > b) ? a : b;
@@ -63,23 +64,28 @@ void proccessNode(int i, int j, Node *actual) {
             
             if(node->wallsBroken <= PMax) {
                 cola.push(node);
+                //pila.push_back(node);
             }
         }
     }
 }
 
 void mazeBfs () {
+	//pila.push_back(nodeStart);
     cola.push(nodeStart);
     
     while(cola.size()){
         Node *actual = cola.front();
+		//Node *actual = pila.back();
         cola.pop();
+        //pila.pop_back();
         
         int i = actual->i;
         int j = actual->j;
 
-        proccessNode(i-1, j, actual);
+		
         proccessNode(i+1, j, actual);
+        proccessNode(i-1, j, actual);
         proccessNode(i, j-1, actual);
         proccessNode(i, j+1, actual);
         
@@ -104,16 +110,16 @@ int main(){
 */
 
 
-for (int l = 5; l < 50; ++l){
+for (int l = 0; l <= 94; ++l){
     finalizar = false;
-        F = 50;
-        C = 50;
-        PMax = l+2;
+        F = 100;
+        C = 100;
+        PMax = l;
 
-                  char map[F*C];
+    	 char map[F*C];
 
-                 int h = F;
-                 int x = C;
+		 int h = F;
+		 int x = C;
 
             //armando matriz            
                 for (int i = 0; i < h; ++i) {
@@ -125,13 +131,7 @@ for (int l = 5; l < 50; ++l){
                          }else{ if (i == 1 && j == 1) {
                                     map[(i*x)+j] = 'o';
                                 }else{
-                                    if ((j % 2 == 0)){
                                         map[(i*x)+j] = '#';
-
-                                    }else{
-                                        map[(i*x)+j] = '.';
-                                    }
-
                                 }
                             }
                         }
@@ -152,7 +152,7 @@ for (int l = 5; l < 50; ++l){
         }
        
     }*/
-    auto start = ya();
+    
     Map = new Node**[F];
     
     for(int i = 0; i < F; i++){
@@ -180,12 +180,14 @@ for (int l = 5; l < 50; ++l){
             }
         }
     }
-    
+    auto start = ya();
     mazeBfs();
     //printf("\n");
     //printf("Distancia minima obtenida: %d \n", nodeEnd->distMinToNode);
     /*Descomentar esto para correr la medicion correspondiente*/
   auto end = ya();
+	  cola = queue<Node*>();
+      //pila.clear();
             cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
             printf("\n");
 }
