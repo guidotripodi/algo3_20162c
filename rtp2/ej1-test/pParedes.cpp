@@ -63,30 +63,31 @@ void proccessNode(int i, int j, Node *actual) {
             }
             
             if(node->wallsBroken <= PMax) {
-                //cola.push(node);
-                pila.push_back(node);
+                cola.push(node);
+                //pila.push_back(node);
             }
         }
     }
 }
 
 void mazeBfs () {
-	pila.push_back(nodeStart);
-    //cola.push(nodeStart);
+	//pila.push_back(nodeStart);
+    cola.push(nodeStart);
     
     while(cola.size()){
-        //Node *actual = cola.front();
-		Node *actual = pila.back();
-        //cola.pop();
-        pila.pop_back();
+        Node *actual = cola.front();
+		//Node *actual = pila.back();
+        cola.pop();
+        //pila.pop_back();
         
         int i = actual->i;
         int j = actual->j;
 
-		proccessNode(i, j+1, actual);
+		
         proccessNode(i+1, j, actual);
         proccessNode(i-1, j, actual);
         proccessNode(i, j-1, actual);
+        proccessNode(i, j+1, actual);
         
         if (finalizar) {
             break;
@@ -185,6 +186,8 @@ for (int l = 0; l <= 94; ++l){
     //printf("Distancia minima obtenida: %d \n", nodeEnd->distMinToNode);
     /*Descomentar esto para correr la medicion correspondiente*/
   auto end = ya();
+	  cola = queue<Node*>();
+      //pila.clear();
             cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
             printf("\n");
 }
