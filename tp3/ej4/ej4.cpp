@@ -1,6 +1,5 @@
 #include <iostream>	/* printf, cout*/
 #include <vector> 
-#include <set>
 #include <algorithm> 
 #include <fstream>
 #include <utility>
@@ -10,6 +9,7 @@
 #include <math.h>	/* pow */
 #include <cstdlib> /* swap */
 #include <list>
+#include "setTabu.h"
 
 #define ya chrono::high_resolution_clock::now
 #define SEED 39
@@ -23,19 +23,6 @@ using namespace std;
 typedef pair <pair<int,int>, int> Gimnasio;
 typedef pair<int,int> Pokeparada;
 typedef pair<int,int> Arista;
-
-struct compArista
-{
-	bool operator() (const Arista &izq, const Arista &der)
-	{
-		//si der es izq invertido
-		if(izq.first == der.second && izq.second == der.first)
-			return false;
-		return izq.first<der.first || (!(der.first<izq.first) && izq.second<der.second);
-	}
-};
-
-typedef set<Arista,compArista> SetTabu;
 
 //Funciones importantes
 vector<int> tabuSearch(vector<int> solucionParcial);
@@ -202,8 +189,6 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 				(!tabuCount(atributosTabu, candidatoActual) && 
 				(costoActual < costoMejorVecino || costoMejorVecino == -1)))
 			{
-				// funcion de aspiracion A(listaTabu, candidatoActual) = 
-				// el menos tabu de los tabu o 
 				aristasModificadas = iteradorVecindad->second;
 				mejorCandidato = candidatoActual;
 			}
@@ -229,7 +214,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		list<Arista>::iterator it;
 		for(it = aristasModificadas.begin(); it != aristasModificadas.end(); it++)
 		{
-			atributosTabu.insert(*it);
+			atributosTabu.push(*it);
 		}
 		
 		//TODO es posta el mejor para borrar?
@@ -237,7 +222,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		//no es cronologico como la lista.
 		while(atributosTabu.size() > TENOR) 
 		{
-			atributosTabu.erase(atributosTabu.begin());
+			atributosTabu.pop();
 		}
 
 		iteraciones++;
@@ -307,7 +292,6 @@ list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParci
         for (int j = i+1; j < cantNodos; j++) {
             list<Arista> aristasModificadas;
 			
-			//en un swap cambian cuatro aristas
 			//quiero guardar las aristas antes de que sean modificadas
 			//TODO casos borde, o quizas no; el set tabu me los va a planchar si meto cosas repetidas aca.
 			aristasModificadas.push_back( Arista( solucionParcial[i-1], solucionParcial[i]) );
@@ -354,7 +338,6 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 					pair< vector<int>, list<Arista> > solucionConAtributos;
 					solucionConAtributos.first = solucionParcial;
 					solucionConAtributos.second = aristasModificadas;
-					//3opt modifica 3 aristas
 					soluciones.push_back(solucionConAtributos);
 				}
 			
@@ -516,19 +499,19 @@ int tabuCount( SetTabu atributos, vector<int> solucion )
 	vector<int>::iterator itSolucion;
 	for(itSolucion = solucion.begin(); itSolucion != solucion.end()-1; itSolucion++){
 
-		if(atributos.find( Arista(*itSolucion, *(itSolucion+1)) ) != atributos.end())
+		if(atributos.belongs( Arista(*itSolucion, *(itSolucion+1)) ))
 		{
 			tabuAtributeCount++;
 		} 
 		else
 		{
 			Arista inversa = Arista(*(itSolucion+1), *itSolucion);
-			if(atributos.find(inversa) != atributos.end()) tabuAtributeCount++;
+			if(atributos.belongs(inversa)) tabuAtributeCount++;
 		}
 
 	}
 
-	if(atributos.find( Arista( *itSolucion, *solucion.begin() ) ) != atributos.end())
+	if(atributos.belongs( Arista( *itSolucion, *solucion.begin() ) ))
 		//mas parentesis que lisp
 		tabuAtributeCount++;
 	return 0;

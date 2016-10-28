@@ -8,6 +8,7 @@
 #include <time.h>       /* time */
 #include <math.h>
 #include <cstdlib>
+#include "MaestroPokemon.hpp"
 #define ya chrono::high_resolution_clock::now
 #define SEED 39
 #define MAX_PODER 25
@@ -18,6 +19,7 @@ using namespace std;
 typedef pair <pair<int,int>, int> Gimnasio;
 typedef pair<int,int> Pokeparada;
 
+pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]);
 vector<int> mejorarSwap(vector<int> solucionParcial);
 vector<int> mejorar2opt(vector<int> solucionParcial);
 vector<int> mejorar3opt(vector<int> solucionParcial);
@@ -30,20 +32,11 @@ Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
 //nuestros costos son enteros, suma de distancias euclidianas sin tomar raiz cuadrada
 
-int main(){
-	//generar entradas
-	//srand (time(NULL));
-	srand(SEED);
+int main()
+{
 	
-	
-	bool utilizado[RADIO][RADIO];
-	
-	for(int i = 0; i < RADIO; i++){
-		for(int j = 0; j < RADIO; j++){
-			utilizado[i][j] = false;
-		}
-	}
-	
+	/*
+	//testing
 	cantGyms = 2;
 	Gimnasio gimnasiosArr[cantGyms];
 	
@@ -70,7 +63,27 @@ int main(){
 	pokeParadasArr[4].second = 3;
 	
 	capMochila = 8;
+	vector<int> solucionParcial;
+	
+	solucionParcial.push_back(2);
+	solucionParcial.push_back(3);
+	solucionParcial.push_back(5);
+	solucionParcial.push_back(0);
+	solucionParcial.push_back(6);
+	solucionParcial.push_back(1);
+	*/
+ 
 	/*
+	//testing aleatorio
+	srand(SEED);
+	bool utilizado[RADIO][RADIO];
+	
+	for(int i = 0; i < RADIO; i++){
+		for(int j = 0; j < RADIO; j++){
+			utilizado[i][j] = false;
+		}
+	}
+
 	Gimnasio gimnasiosArr[cantGyms];
 	for(int i = 0; i < cantGyms; i++){
 		Gimnasio gymPuebloPaleta;//gimnasio (uno solo)
@@ -109,37 +122,71 @@ int main(){
 		utilizado[x][y] = true;
 	}
 	*/
-	
-	gimnasiosArrPtr = gimnasiosArr;
-	pokeParadasArrPtr = pokeParadasArr;
-	
+	cin >> cantGyms >> cantPokeParadas >> capMochila;
+	Gimnasio gimnasiosArr[cantGyms];
+	for(int i = 0; i < cantGyms; i++)
+	{
+		Gimnasio gymPuebloPaleta;
+		cin >> 
+			gymPuebloPaleta.first.first >> 
+			gymPuebloPaleta.first.second >>
+			gymPuebloPaleta.second;
+		gimnasiosArr[i] = gymPuebloPaleta;
+	}
+
+	Pokeparada pokeParadasArr[cantPokeParadas];
+	Pokeparada pokeParadasAux[cantPokeParadas];
+	for(int i = 0; i < cantPokeParadas; i++)
+	{
+		Pokeparada posicion;
+		cin >> posicion.first >> posicion.second;
+		pokeParadasArr[i] = posicion;
+		pokeParadasAux[i] = posicion;
+	}
+
+	pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
+			cantGyms, 
+			cantPokeParadas,
+			capMochila, 
+			gimnasiosArr, 
+			pokeParadasArr, 
+			pokeParadasAux);
+
+	list<int> *solucionInicialLista = solucionInicial->second;
 	vector<int> solucionParcial;
+
+	list<int>::iterator itLista;
+	for(itLista = solucionInicialLista->begin();
+			itLista != solucionInicialLista->end();
+			itLista++ )
+	{
+		solucionParcial.push_back(*itLista);
+	}
+
+	gimnasiosArrPtr = gimnasiosArr;
+	pokeParadasArrPtr = pokeParadasAux;
 	
-	solucionParcial.push_back(2);
-	solucionParcial.push_back(3);
-	solucionParcial.push_back(5);
-	solucionParcial.push_back(0);
-	solucionParcial.push_back(6);
-	solucionParcial.push_back(1);
 	
 	long long costo = calcularCosto(solucionParcial);
 	
-		for(int i = 0; i < (int) solucionParcial.size(); i++){
-			printf("%d ", solucionParcial[i]);
-		}
-		printf("\n");
+	for(int i = 0; i < (int) solucionParcial.size(); i++)
+	{
+		printf("%d ", solucionParcial[i]);
+	}
+	printf("\n");
 	printf("Costo inicial: %lld\n", costo);
 	//mejorar solucion
-	if( solucionParcial.size()){
+	if( solucionParcial.size())
+	{
 		vector <int> solucion2opt= mejorar3opt(solucionParcial);
-		//imprimir solucion mejorada
-		for(int i = 0; i < (int) solucion2opt.size(); i++){
+		for(int i = 0; i < (int) solucion2opt.size(); i++)
+		{
 			printf("%d ", solucion2opt[i]);
 		}
 		printf("\n");
-	}else{
+	} 
+	else{
 		printf("%d", -1);
-		//no hubo solucion parcial a partir de la cual trabajar
 	}
 
 	return 0;
@@ -244,9 +291,6 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 	long long costoActual;
 	
 	
-	// fijate como recorro:
-	// lo mas chica que puede ser la entrada para 3opt es de 5 eltos: 1->2->3->4->5 y no se recorre asi nomas
-	// [0...i-1][i...j-1][j...k-1][k...size-1]
 	for (int i = 1; i < cantNodos-3; i++) {
 		for (int j = i+1; j < cantNodos-2; j++) {
 			for (int k = j+2; k < cantNodos; k++) {
@@ -279,7 +323,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 				//Caso 2
 
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
-				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j) );//len(rango 2)
+				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j) );
 				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
 
 				costoActual = calcularCosto(solucionParcial);
@@ -416,3 +460,100 @@ long long calcularCosto(vector<int> &camino){
 	return costo;
 }
 
+ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
+{
+	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
+	int pocionesANecesitar = 0;
+	for (int i = 0; i < cant_gimnasios; ++i){
+		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
+		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
+			//Sin solucion!
+			
+			return NULL;
+		}
+	}
+	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
+			//Sin solucion!
+
+		return NULL;
+	}
+		
+		
+	bool exitoBack = true;
+	
+	int minimo = -1; 
+	std::list<int> * camino;
+
+
+	for (int x = 0; x < cant_pokeParadas; ++x)
+	{
+
+		exitoBack = true;
+		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
+		while(exitoBack){
+			ash.printStatus();
+			if (ash.gane())
+			{
+				if (ash.distancia < minimo || minimo == -1)
+				{
+				//	cout<<"fin de rama\n";
+					minimo = ash.distancia;
+					camino = ash.caminoRecorrido(pp_aux);
+
+				}
+				
+			}
+
+			MaestroPokemon::Eleccion eleccion = ash.eleccionPosible();
+				//Si hay un par posible y si la rama que estoy evaluando
+				//me sigue dando una mejor solucion a la ya encontrada
+
+			if (eleccion.posible==1 && (minimo == -1 || ash.distancia<minimo))
+			{
+				//printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
+
+				//ash.printEleccion(eleccion);
+				if(ash.eleccionMinimaPosible(eleccion)){
+				//	printf("Elegi: ---- ");
+				//	ash.printEleccion(eleccion);
+					ash.elegir(eleccion);
+					
+				}
+				
+			}else{
+				//printf("No fue minima\n");
+				exitoBack = false;
+			}
+		}
+		pair <int, int> posicion;
+		for (int h = 0; h < cant_pokeParadas; ++h){
+			/*Luego de la vuelta completa reordeno el array pp pasando al primer pp al ultimo y 
+			muevo todo de esta forma me garantizo que todas las pp van a tener su rama como inicial*/
+			if (h == 0)	{
+				posicion.first = posiciones_pp[cant_pokeParadas-1].first; 
+				posicion.second = posiciones_pp[cant_pokeParadas-1].second; 
+			//	printf("Posicion : %d posicion: %d \n",posicion.first, posicion.second );
+				posiciones_pp[cant_pokeParadas-1].first = posiciones_pp[0].first;
+				posiciones_pp[cant_pokeParadas-1].second = posiciones_pp[0].second;
+				posiciones_pp[0].first = posiciones_pp[1].first;
+				posiciones_pp[0].second = posiciones_pp[1].second;
+			}else{
+				if (h+1 < cant_pokeParadas-1)	{
+					posiciones_pp[h].first = posiciones_pp[h+1].first;
+					posiciones_pp[h].second = posiciones_pp[h+1].second;
+					
+				}else{
+					posiciones_pp[cant_pokeParadas-2].first = posicion.first;
+					posiciones_pp[cant_pokeParadas-2].second = posicion.second;
+				
+				}
+			}
+		}
+
+	}
+
+	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
+	final->first = minimo;
+	final->second = camino;
+	return final;
+}
