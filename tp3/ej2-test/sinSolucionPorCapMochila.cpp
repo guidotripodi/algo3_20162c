@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 			pp_aux[i] = posicion;
 		}
 		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
-		cap_mochila = cantMaxGym*3	;
+		cap_mochila = cant_gimnasios;
 		
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		

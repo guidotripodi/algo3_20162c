@@ -1,3 +1,5 @@
+#Para agregar ejecutables. Agregar a EXECUTABLES y MAINOBJECTS
+
 # Compilador que será utilizado
 CC=g++
 
@@ -11,18 +13,20 @@ LDFLAGS=
 SOURCES=ej1.cpp MaestroPokemon.cpp trie.cpp
 
 # Objetos que serán generados
-OBJECTS=ej1.o MaestroPokemon.o
+MAINOBJECTS=ej1.o sinSolucionPorPP.o sinSolucionPorCapMochila.cpp
+
+OBJECTS=MaestroPokemon.o trie.o
 
 # Nombre del ejecutable a generar
-EXECUTABLE=ej1
+EXECUTABLES=ej2.test sinSolucionPorPP.test sinSolucionPorCapMochila.test
 
-all: $(EXECUTABLE)
+all: $(EXECUTABLES)
 
-$(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(CFLAGS) $(OBJECTS) -o $@
-
-clean:
-	rm -rf $(EXECUTABLE) $(OBJECTS)
+%.test: $(OBJECTS) %.o  
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) $< -c -o $@
+
+clean:
+	rm -rf $(EXECUTABLES) $(MAINOBJECTS) $(OBJECTS)
