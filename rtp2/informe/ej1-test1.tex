@@ -74,6 +74,15 @@ Mostraremos a continuaci\'on que sucede al variar $P_{max}$ desde 0 hasta 94.\\
 Se puede observar en el gr\'afico 1.6 como al aumentar $P_{max}$, aumenta cuadráticamente el tiempo de resoluci\'on, ya que lo que sucede es que al aumentar el $P_{max}$ el algoritmo solo puede chequear en una sub matriz de $P_{max}^2$ caminos posibles a destino.\\
 Al ser un algoritmo con espirutu $BFS$ recorre en anchura estas sub matrices, probando todas las posibilidades sin seguir un camino particular.  Por lo cual, que haya un camino directo a destino, rompiendo exactamente 94 paredes, no influye sobre el resultado. Ya que para llegar a destino, serán analizadas todas las posibilidades. 
 
-Conociendo el mejor camino, si el algoritmo recorriera en profundidad (como un $DFS$), y además, el primer vecino analizado fuera el derecho (en dirección al destino), podria obtenerse un mejor resultado, ya que el camino elegido sería el directo al destino.\\ 
+Conociendo el mejor camino, si el algoritmo recorriera en profundidad (como un $DFS$), y además, el primer vecino analizado fuera el derecho (en dirección al destino), podría obtenerse un mejor resultado, ya que el camino elegido sería el directo al destino.\\ 
+Por lo tanto fué modificado el algoritmo para utilizar una pila en lugar de una cola, obteniendo un pseudo $DFS$ y poder corroborar este hecho. Y ademas que el primer vecino analizado sea el derecho.\\
 
-Luego de lo mostrado, se pudo observar que, tanto en el mejor como en el peor caso nuestro algoritmo se encuentra en el orden de la complejidad calculada.
+  \begin{center}
+\includegraphics[scale=0.5]{./EJ1/pVariable.png}
+{Gr\'afico 1.7 - $P$ $variable$ $y$ $F,C$ $fijos$}
+  \end{center}
+  \vspace*{0.3cm}
+
+Podemos observar en el gráfico 1.7 que el caso con $P_{max}$ = 94 se resuelve en $x$ $ns$ contra los aprox. $3.5x10^5$ $ns$ (gráfico 1.6) del test original. No sabemos explicar exactamente que sucede con $P_{max}$ < 94. Asumimos que los tiempos serían similares al test con el algoritmo inicial, es decir crecientes cuadráticamente, ya que no hay solución para esos valores de $P_{max}$. Contrariamente, los tiempos están bastante por debajo de lo que suponiamos. No tenemos una respuesta certera para este hecho. Pero si podemos concluir que el algoritmo obtiene la solución por el camino directo de manera mucho más rápida. Con lo cual concluimos que bajo estas modificaciones, cuando hay solución y sabemos en que dirección movernos, podemos obtener un resultado muy bueno con estas modificaciones. 
+
+Luego de lo mostrado, se pudo observar que, tanto en el mejor como en el peor caso nuestro algoritmo se encuentra en el orden de la complejidad calculada y cumple con lo enunciado por el problema inicialmente.
