@@ -1,5 +1,15 @@
 from pylab import *
 
+ # Como utilizar
+ #Para armar una instancia hay que determinar:
+ #			- Un método que posicione los elementos : Seccion GENERADORES DE POSICIONES
+ #			- Un metodo que asigne de determinada forma las pociones a los gimnasios: Seccion GENERADORES DE POCIONES
+ #			- Un metodo que genere lainstancia con lo anterior: Seccion INSTANCIAS
+ #			
+ # Ploteo
+ # Para cisualizar lainstancia se debe pasar a la funcion de ploeteo el nombre de la funcion generadora de instancias (verejemplo)
+
+
 ###############################################
 #			GENERADORES DE POSICIONES
 def randomPositions(n, notin=[]):
@@ -32,6 +42,8 @@ def circularPositions(rad_circ, n):
 ###############################################
 #			GENERADORES DE POCIONES
 
+#En base a la cantidadde cada tipo de lugar y la capacidad de mochila
+#asigna pociones de forma que hayasolucion (osea que no muera en las podas basicas)
 def randomPotions(gyms, pps, k_bag):
 	gym_res = []
 	pociones_totales = 3*len(pps)
@@ -46,10 +58,11 @@ def randomPotions(gyms, pps, k_bag):
 ###############################################
 #				UTILITARIOS
 def plotInstance(instance):
-	for ((x, y), p) in instance[0]:
+	i = instance()
+	for ((x, y), p) in i[0]:
 	    plot(x, y, 'ro')
 	
-	for (x, y) in instance[1]:
+	for (x, y) in i[1]:
 	    plot(x, y, 'bo')
 	
 	show()
@@ -57,14 +70,25 @@ def plotInstance(instance):
 
 ###############################################
 #				INSTANCIAS
+
+ #Random: Determinado N
+ #		  Posiciones random
+ #		  Pociones random pero con solucion
+ #		  #gyms y #pp random
+ #		  mochila K=10
 def randomInstance(n):
-	gyms = randomPositions(n/2)
+	cg = randint(0,n)
+	gyms = randomPositions(n-cg)
 	pps = randomPositions(n/2, gyms)
 	gymsD = randomPotions(gyms, pps, 10)
 
 	return gymsD, pps
 
-
+ #Disposicio circular: Determinado numero de gimnasios y pp
+ #		  Posiciones en forma de anillos concentricos de radios 2, 1.5 1 0.5
+ #		  Pociones random pero con solucion
+ #		  #gyms y #pp random
+ #		  mochila K=10
 def circularInstance(cant_gyms, cant_pp):
 	gyms = circularPositions([1, 2], cant_gyms)
 	pps = circularPositions([0.5, 1.5], cant_pp)
@@ -72,6 +96,11 @@ def circularInstance(cant_gyms, cant_pp):
 
 	return gymsD, pps
 
+
+ #Mochila de capacidad 0: determinado numero de gimnasios y pp
+ #		  Posiciones en forma de anillos concentricos de radios 2, 1.5 1 0.5
+ #		  Pociones random pero con solucion
+ #		  mochila K=0
 def noBagInstance(cant_gyms, cant_pp)
 	gyms = circularPositions([1, 2], cant_gyms)
 	pps = circularPositions([0.5, 1.5], cant_pp)
@@ -79,12 +108,21 @@ def noBagInstance(cant_gyms, cant_pp)
 
 	return gymsD, pps 
 
+ #Todos gimnasios: Determinado N (se parametriza cuanto de uno y de otro)
+ #		  Posiciones en forma de anillos concentricos de radios 2, 1.5 1 0.5
+ #		  Pociones random pero con solucion
+ #		  #pp = 0
+ #		  mochila K=10
 def noPPInstance(n):
 	gyms = randomPositions(n)
 	gymsD = randomPotions(gyms, pps, 10)
 
+
+
 ###############################################
 #				MAIN
 
-plotInstance(randomInstance(1000))
-plotInstance(circularInstance(100, 10))
+
+
+plotInstance(randomInstance)
+plotInstance(circularInstance)
