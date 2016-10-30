@@ -16,47 +16,29 @@ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_
 
 int main(int argc, char* argv[])
 {
-	/*int cant_gimnasios, cant_pokeParadas, cap_mochila;
-	cin >> cant_gimnasios >> cant_pokeParadas >> cap_mochila;
-
-
-	pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
-	pair <int, int>  posiciones_pp[cant_pokeParadas];
-
-	int i = 0;
-	for (i = 0; i < cant_gimnasios; i++){
-		pair <pair<int,int>, int> gymPuebloPaleta;
-		
-		cin >> gymPuebloPaleta.first.first >> gymPuebloPaleta.first.second >> gymPuebloPaleta.second;
-		posiciones_gym[i] = gymPuebloPaleta;
-		
-	}
-	for (i = 0; i < cant_pokeParadas; i++)	{
-		pair <int, int> posicion;
-		
-		cin >> posicion.first >> posicion.second;
-		
-		posiciones_pp[i] = posicion;
-		
-	}*/
-
-	/*Caso sin solucion:*/
+/*Caso con GYM con 0:*/
 	int cant_gimnasios = 0; 
 	int cant_pokeParadas = 0;
 	int cap_mochila = 0;
-	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
-	pair <int, int>  posiciones_pp[cantMaxPP];
 	
-	for(int j = 4; j < 50; j++){
+	for(int j = 4; j < 8; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
+		
+		pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
+		pair <int, int>  posiciones_pp[cant_pokeParadas];
 		
 		int i = 0;
 			for (i = 0; i < cant_gimnasios; i++){
 			pair <pair<int,int>, int> gymPuebloPaleta;
 			gymPuebloPaleta.first.first = i;
 			gymPuebloPaleta.first.second = i+1;
-			gymPuebloPaleta.second = 0;
+			if (i % 2 == 0)	{
+				gymPuebloPaleta.second = 0;
+			}else{
+				gymPuebloPaleta.second = i;
+			}
+			//algun gym no necesita pociones para ser vencido puntualmente todos los i pares
 			//cantidad_pociones_necesarias_total += i*3;
 			posiciones_gym[i] = gymPuebloPaleta;
 			
@@ -67,8 +49,11 @@ int main(int argc, char* argv[])
 			posicion.second = i+2;
 			posiciones_pp[i] = posicion;
 		}
-		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
-		cap_mochila = cantMaxGym*3	;
+		
+		cap_mochila = cant_gimnasios*3;
+		/*IMPRIMO EN PANTALLA EL CASO: */
+
+		cout << "\n" << "j es:" << j << "\n";
 		
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
@@ -81,44 +66,42 @@ int main(int argc, char* argv[])
 			
 			}
 
+			/*Ejecuto el algoritmo*/
+			//printf("Estoy aca\n");
 		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 	
+	/*IMPRIMO EN PANTALLA EL RESULTADO:*/
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
 		}else{
-			//cout << f->first <<" "<< f->second->size();
+			cout << f->first <<" "<< f->second->size();
 			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << " " << *it;
 			}
 		}
-		
-		
-		
-		cout << "j es:" << j << "\n";
-		delete f;
+				
+		//delete f;
 	}
 	return 0;
 }
 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
 {
-	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
-	
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
 	int pocionesANecesitar = 0;
 	for (int i = 0; i < cant_gimnasios; ++i){
 		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
 		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-			final->first = -1;
-			return final;
+			
+			return NULL;
 		}
 	}
 	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-		final->first = -1;
-		return final;
+		
+		return NULL;
 	}
 	
 	bool exitoBack = true;
@@ -157,6 +140,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
+	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
 	final->first = minimo;
 	final->second = camino;
 	return final;

@@ -220,6 +220,7 @@ bool MaestroPokemon::gane()
 
 
 std::list<int> * MaestroPokemon::caminoRecorrido(const pair <int,int> pp_aux[]){
+	printf("TAMAÑO ARREGLO: %d\n",this->decisiones->size());
 	std::list<int> * camino = new list<int>();
 	for (std::list<Eleccion>::iterator it=this->decisiones->begin(); it != this->decisiones->end(); ++it){
 		pair <int, int> posicion;
@@ -235,6 +236,14 @@ std::list<int> * MaestroPokemon::caminoRecorrido(const pair <int,int> pp_aux[]){
 			if (gyms[i].first.first == posicion.first && gyms[i].first.second == posicion.second ){
 		
 				camino->push_back(i+1);
+			}
+		}
+		if (camino->size() < this->decisiones->size()){
+			for (int i = cant_pokeParadas; i < cant_gimnasios; ++i)	{
+				if (gyms[i].first.first == posicion.first && gyms[i].first.second == posicion.second ){
+		
+				camino->push_back(i+1);
+				}
 			}
 		}
 
