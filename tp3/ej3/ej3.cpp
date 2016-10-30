@@ -451,6 +451,8 @@ long long calcularCosto(vector<int> &camino){
 				if(capacidadParcial > capMochila){
 					capacidadParcial = capMochila;
 				}
+			} else {
+				capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino].second;
 			}
 		} else{
 			return -1;

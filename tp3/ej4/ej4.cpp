@@ -273,11 +273,19 @@ list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParci
 			
 			swap(solucionParcial[i], solucionParcial[j]);
 
+
 			costoActual = calcularCosto(solucionParcial);
 			if (costoActual != -1)
 			{
+				vector<int> solucionOptimizada = solucionParcial; //copia
+				int i = solucionOptimizada.size() -1;
+				while(solucionOptimizada[i] >= cantGyms && i > 0)
+				{
+					solucionOptimizada.pop_back();
+					i--;
+				}
 				pair< vector<int>, list<Arista> > solucionConAtributos;
-				solucionConAtributos.first = solucionParcial;
+				solucionConAtributos.first = solucionOptimizada;
 				solucionConAtributos.second = aristasModificadas;
 				soluciones.push_back(solucionConAtributos);
 			}
@@ -303,12 +311,20 @@ list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParci
 			aristasModificadas.push_back( Arista( solucionParcial[j], solucionParcial[(j+1)%cantNodos]) );
 			
 			reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
-
+			
+			
 			costoActual = calcularCosto(solucionParcial);
 			if (costoActual != -1) 
 			{
+				vector<int> solucionOptimizada = solucionParcial; //copia
+				int i = solucionOptimizada.size() -1;
+				while(solucionOptimizada[i] >= cantGyms && i > 0)
+				{
+					solucionOptimizada.pop_back();
+					i--;
+				}
 				pair< vector<int>, list<Arista> > solucionConAtributos;
-				solucionConAtributos.first = solucionParcial;
+				solucionConAtributos.first = solucionOptimizada;
 				solucionConAtributos.second = aristasModificadas;
 				soluciones.push_back(solucionConAtributos);
 			}
@@ -341,8 +357,15 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 
 				if (costoActual != -1) 
 				{
+					vector<int> solucionOptimizada = solucionParcial; //copia
+					int i = solucionOptimizada.size() -1;
+					while(solucionOptimizada[i] >= cantGyms && i > 0)
+					{
+						solucionOptimizada.pop_back();
+						i--;
+					}
 					pair< vector<int>, list<Arista> > solucionConAtributos;
-					solucionConAtributos.first = solucionParcial;
+					solucionConAtributos.first = solucionOptimizada;
 					solucionConAtributos.second = aristasModificadas;
 					soluciones.push_back(solucionConAtributos);
 				}
@@ -488,6 +511,8 @@ long long calcularCosto(vector<int> &camino){
 				if(capacidadParcial > capMochila){
 					capacidadParcial = capMochila;
 				}
+			} else {
+				capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino].second;
 			}
 		} else{
 			return -1;
