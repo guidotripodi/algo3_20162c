@@ -168,8 +168,13 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		vector<int> mejorCandidato;
 		list<Arista> aristasModificadas; 
 		//cada solucion esta asociada a las aristas que cambiaron
+		// hacemos union entre swap, 2opt y 3opt
 		list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
-		// podemos hacer union entre 2opt y 3opt
+		list< pair< vector<int>, list<Arista> > > vecindad3 = vecindad3opt(solucionActual);
+		list< pair< vector<int>, list<Arista> > > vecindadS = vecindadSwap(solucionActual);
+
+		vecindad.splice(vecindad.end(), vecindad3);
+		vecindad.splice(vecindad.end(), vecindadS);
 		if(vecindad.size() == 0) return mejorSolucion; //Esto es por las moscas. No deberia pasar	
 		
 		list< pair< vector<int>, list<Arista> > >::iterator iteradorVecindad; 
@@ -314,7 +319,8 @@ list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParci
 }
 
 //version 3opt
-list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParcial){
+list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParcial)
+{
 	list< pair< vector<int>, list<Arista> > > soluciones;
 	int cantNodos = solucionParcial.size();
 	long long costoActual; 
