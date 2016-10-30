@@ -7,8 +7,6 @@
 #include "MaestroPokemon.hpp"
 #include <chrono>
 #define ya chrono::high_resolution_clock::now
-#define cantMaxGym 101
-#define cantMaxPP 100
 using namespace std;
 
 
@@ -67,7 +65,9 @@ int main(int argc, char* argv[])
 			}
 
 			/*Ejecuto el algoritmo*/
-			//printf("Estoy aca\n");
+			/*ESTO ES MAGICO, SI COMENTAS ESTE PRINTF NO FUNCIONA EXPLOTA VALGA UNO A SABER 
+			PORQUE CARAJO PASA ESO*/
+			printf("Estoy aca\n");
 		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 	
 	/*IMPRIMO EN PANTALLA EL RESULTADO:*/
@@ -85,6 +85,7 @@ int main(int argc, char* argv[])
 	}
 	return 0;
 }
+
 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
 {

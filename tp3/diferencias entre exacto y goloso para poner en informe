@@ -57,3 +57,15 @@ DIFERENCIA CON EL GOLOSO YA QUE AGARRA PRIMERO LOS GYM 0 Y DSP VA Y VIENE BUSCAN
 RESULUCION IGUAL EN GOLOSO Y EXACTO
 
 Decir en la explicacion que el goloso chequea si existe una combinacion minima de pp-gym osea elige siempre q se pueda ir a una pp y dsp a gym cual es la menor distancia a realizar para ir a una pp y dsp a cierto gym cercano a dicha pp
+
+
+
+----------------------------
+
+j es:1
+2 1 6 
+0 1 0 
+1 2 1 
+0 2
+
+IGUALDAD EN GOLOSO Y EXACTO!
