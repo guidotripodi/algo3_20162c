@@ -59,11 +59,11 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 	this->gyms = gyms;
 	this->posiciones_pp = posiciones_pp; 
 	this->paso=0;
-	
 
 	this->decisiones = new list<MaestroPokemon::Eleccion>();
-	
+	this->destinos_visitados = new int[this->cant_gimnasios + this->cant_pokeParadas];
 	this->distancia=0;
+	
 	
 	
 	for (int i = 0; i < this->cant_gimnasios + this->cant_pokeParadas; i++)
@@ -78,7 +78,7 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 
 MaestroPokemon::~MaestroPokemon(){
 	delete this->decisiones;
-
+	delete this->destinos_visitados;
 }
 
 MaestroPokemon::Eleccion MaestroPokemon::eleccionPosible()
