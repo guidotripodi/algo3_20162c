@@ -1,4 +1,4 @@
-#include "setTabu.h"
+#include "SetTabu.hpp"
 
 SetTabu::SetTabu(){}
 SetTabu::~SetTabu(){}
