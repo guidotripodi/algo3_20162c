@@ -11,14 +11,14 @@
 %\item Si algún gimnasio requiere mayor cantidad de pociones que las que caben en la mochila, entonces no hay solución. 
 %\end{itemize}
 
-El problema propuesto plantea encotrar el menor camino a recorrer. En base a esto se decide buscar en cada paso el menor camino que una a dos puntos, generando una aproximación de heuristica golosa.
+El problema propuesto plantea encontrar el menor camino a recorrer. En base a esto se decide buscar en cada paso el menor camino que una a dos puntos, generando una aproximación de heur\'istica golosa.
 
-Para generar la heuristica se toma de base la lógica restrictiva de las podas del backtracking, lo que nos asegurará que de encontrar una solución será correcta. Para el paso goloso se tienen encuenta los siguientes puntos:
+Para generar la heur\'istica se toma de base la lógica restrictiva de las podas del backtracking, lo que nos asegurará que de encontrar una solución será correcta. Para el paso goloso se tienen en cuenta los siguientes puntos:
 
 \begin{itemize}
-\item La elección de movimiento será aquella que este más proxima al lugar actual del maestro pokemon: Se busca la minima distancia entre nodos. 
-\item En cada iteracion de busqueda de un nuevo destino, primero se evaluarán los gimnasios y luego las poke-paradas: Si ya se cuenta con una cantidad suficiente de pociones para derrotar a un gimnasio entonces se procede a vencerlo.
-\item Al finalizar una rama completa, es decir habiendo recorrido todos los gimnasios de haber sido posible desde un origen determinado, se vuelve a correr el algoritmo pero desde un origen diferente, intentando generar así una mejor solución. De enconrarla se la tomará como la mejor solución hasta el momento.
+\item La elección de movimiento será aquella que este más proxima al lugar actual del maestro pokemon: Se busca la m\'inima distancia entre nodos. 
+\item En cada iteraci\'on de b\'usqueda de un nuevo destino, primero se evaluarán los gimnasios y luego las poke-paradas: Si ya se cuenta con una cantidad suficiente de pociones para derrotar a un gimnasio entonces se procede a vencerlo.
+\item Al finalizar una rama completa, es decir habiendo recorrido todos los gimnasios de haber sido posible desde una pokeparada determinada, se vuelve a correr el algoritmo desde otra pokeparada diferente, intentando generar así una mejor solución. De encontrarla se la tomará como la mejor solución hasta el momento.
 \end{itemize}
  
 
@@ -27,7 +27,7 @@ Para generar la heuristica se toma de base la lógica restrictiva de las podas d
 
 %Por consiguiente, luego de pasar por una pokeparada, se chequear\'a si existe alg\'un gimnasio con menor cantidad de pociones que las que se tienen hasta el momento, y en caso de existir m\'as de uno se fijar\'a cual es el que se encuentra m\'as cercano a \'el e ir\'a a vencerlo. Luego de esta batalla y haber vencido el gimnasio, se vuelve a chequear si existe otro gimnasio con menor cantidad de pociones de las que nos quedan despues de la batalla anterior, si existe se ir\'a a vencer a dicho gimnasio, y en caso contrario se buscar\'a la pokeparada m\'as cercana para ir a recuperar pociones. Esta secuencia ser\'a repetida hasta ganar en todos los gimnasios y as\'i convertirse en \textbf{Maestro Pokem\'on}.
 
-La aproximación a travez de una heurística nos permite obtener soluciones en forma mucho más rápida que el método de backtracking. El paso goloso nos permite ahorrar evaluaciones de casos en que es trivial su invalidez. Un ejemplo de una solución correcta alcnzada por el algoritmo es el siguiente:
+La aproximación a travez de una heurística nos permite obtener soluciones en forma mucho más rápida que el método de backtracking. El paso goloso nos permite ahorrar evaluaciones de casos en que es trivial su invalidez. Un ejemplo de una solución correcta alcanzada por el algoritmo es el siguiente:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}

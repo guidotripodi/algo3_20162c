@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 	pair <int, int>  posiciones_pp[cantMaxPP];
 	pair <int, int>  pp_aux[cantMaxPP];
 	
-	for(int j = 4; j < 50; j++){
+	for(int j = 4; j < 10; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		
@@ -58,7 +58,15 @@ int main(int argc, char* argv[])
 			pair <pair<int,int>, int> gymPuebloPaleta;
 			gymPuebloPaleta.first.first = i;
 			gymPuebloPaleta.first.second = i+1;
-			gymPuebloPaleta.second = (i+1)*3;
+			if(i % 3 == 0){
+				gymPuebloPaleta.second = 1;
+			}
+			if(i % 3 == 1){
+				gymPuebloPaleta.second = 2;
+			}
+			if(i % 3 == 2){
+				gymPuebloPaleta.second = 3;
+			}
 			//cantidad_pociones_necesarias_total += i*3;
 			posiciones_gym[i] = gymPuebloPaleta;
 			
@@ -92,13 +100,13 @@ int main(int argc, char* argv[])
 		}else{
 			//cout << f->first <<" "<< f->second->size();
 			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
-				cout << " " << *it;
+				cout << *it << " ";
 			}
 		}
+		cout << "\n";
 		
 		
 		
-		cout << "j es:" << j << "\n";
 		delete f;
 	}
 	return 0;
@@ -135,7 +143,7 @@ int main(int argc, char* argv[])
 		exitoBack = true;
 		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
 		while(exitoBack){
-			ash.printStatus();
+		//	ash.printStatus();
 			if (ash.gane())
 			{
 				if (ash.distancia < minimo || minimo == -1)

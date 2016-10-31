@@ -92,13 +92,14 @@ int main(int argc, char* argv[])
 		}else{
 			//cout << f->first <<" "<< f->second->size();
 			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
-				cout << " " << *it;
+				cout << *it << " ";
 			}
+			cout <<  "\n";
 		}
 		
 		
 		
-		cout << "j es:" << j << "\n";
+		
 		delete f;
 	}
 	return 0;

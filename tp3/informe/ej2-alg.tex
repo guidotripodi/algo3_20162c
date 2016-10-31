@@ -1,18 +1,18 @@
 \begin{algorithm}[H]
 \Fn{EJ2()}{
-crear cola desiciones para guardar elecciones\\
+crear cola decisiones para guardar elecciones\\
 eleccion contiene un id, posicion de la misma y distancia desde el punto anterior hasta el como tambien la cantidad de pociones hasta el momento\\
-se crea booleanos seTuvoExito con valor verdadero \hfill O(1) \\
-se crea un entero minimo con valor -1 \hfill O(1)\\ 
+se crea seTuvoExito $gets$ verdadero \hfill O(1) \\
+se crea minimo $gets$ -1 \hfill O(1)\\ 
 \For{pokeparada}{
 asignar pokeparada como inicio de camino \hfill O(1)\\	
 \While{seTuvoExito}{  
 	\If{lesGaneATodos(MaestroPokemon) $\wedge$ tiempo(MaestroPokemon) < minimo}{
 	 \hfill  guarda: O(1)\\
-			para minimo $\gets$ tiempo(MaestroPokemon) \hfill O(1)\\	
-			para caminoRecorrido $\gets$ caminoRecorrido(MaestroPokemon) \hfill O(1)\\	
+			minimo $\gets$ tiempo(MaestroPokemon) \hfill O(1)\\	
+			caminoRecorrido $\gets$ caminoRecorrido(MaestroPokemon) \hfill O(1)\\	
 	}
-			eleccion asignar eleccionPosible(MaestroPokemon) \hfill O(n + m)\\			
+			eleccion  $\gets$ eleccionPosible(MaestroPokemon) \hfill O(n + m)\\			
 			\If{$\exists$ eleccion $\wedge$ esMinima(eleccion)}	{	
 			aplicarEleccion(eleccion, MaestroPokemon)\hfill O(1)\\
 		}\Else{
@@ -23,7 +23,7 @@ asignar pokeparada como inicio de camino \hfill O(1)\\
 		devolver minimo, tamaño(caminoRecorrido) y caminoRecorrido 	\hfill O(n + m)\\
 }
 		
-		\textbf{\hfill total: $O()$}\\
+		\textbf{\hfill total: $O((n+m)^2 \times m)$}\\
 \end{algorithm}
 
 \begin{algorithm}[H]
@@ -32,10 +32,10 @@ asignar pokeparada como inicio de camino \hfill O(1)\\
 	actualizar estado del sistema en base a la decision tomada: \hfill 0(1) \\
 	\If{tipo(eleccion) == GIMNASIO}{
 	\hfill  guarda: O(1)\\
-	 	decrementar	maestroPokemon.cantidadGymFaltantes 1 \hfill O(1) \\
-		para maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) - pocionesNecesarias(eleccion) \hfill O(1) \\
+	 	decrementar	maestroPokemon.cantidadGymFaltantes en 1 \hfill O(1) \\
+		maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) - pocionesNecesarias(eleccion) \hfill O(1) \\
 	}\Else{
-		para maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) + 3\hfill O(1) \\
+		maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) + 3\hfill O(1) \\
 	
 	}
 	sumar a maestroPokemon.tiempo tiempo(eleccion) \hfill O(1) \\
@@ -43,7 +43,7 @@ asignar pokeparada como inicio de camino \hfill O(1)\\
 	actualizar eleccionActual con la nueva eleccion\hfill O(1) \\
 
 }
-\textbf{\hfill Complejidad total: $O(n+m)$}\\ 
+\textbf{\hfill Complejidad total: $O(1)$}\\ 
 \end{algorithm}
 
 
@@ -74,7 +74,7 @@ asignar pokeparada como inicio de camino \hfill O(1)\\
 
 	}
 }
-\textbf{\hfill Complejidad total: $O\binom{n+m}{1} \times n+m$}\\ 
+\textbf{\hfill Complejidad total: $O(n+m)$}\\ 
 \end{algorithm}
 
 

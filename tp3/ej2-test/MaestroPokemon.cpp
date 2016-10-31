@@ -37,8 +37,8 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 bool MaestroPokemon::eleccionMinimaPosible(Eleccion eleccion) const{
 	/*Llegue a este chequeo eso significa que la eleccion es valida hasta el momento,
 	 *  deseo chequear que tambien es la minina*/
-	printf("Estoy viendo la minima: ");
-	printEleccion(eleccion);
+	//printf("Estoy viendo la minima: ");
+	//printEleccion(eleccion);
 	int minimo = eleccion.distancia;
 	int id = eleccion.id;
 	int xM = 0;
@@ -117,7 +117,7 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 	
 
 	this->decisiones = new list<MaestroPokemon::Eleccion>();
-	
+	this->destinos_visitados = new int[this->cant_gimnasios + this->cant_pokeParadas];
 	this->distancia=0;
 	
 	
@@ -132,7 +132,8 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 }
 
 MaestroPokemon::~MaestroPokemon(){
-
+	delete this->decisiones;
+	delete this->destinos_visitados;
 }
 
 MaestroPokemon::Eleccion MaestroPokemon::eleccionPosible()
@@ -220,6 +221,7 @@ bool MaestroPokemon::gane()
 
 
 std::list<int> * MaestroPokemon::caminoRecorrido(const pair <int,int> pp_aux[]){
+	//printf("TAMAÑO ARREGLO: %d\n",this->decisiones->size());
 	std::list<int> * camino = new list<int>();
 	for (std::list<Eleccion>::iterator it=this->decisiones->begin(); it != this->decisiones->end(); ++it){
 		pair <int, int> posicion;
@@ -237,9 +239,18 @@ std::list<int> * MaestroPokemon::caminoRecorrido(const pair <int,int> pp_aux[]){
 				camino->push_back(i+1);
 			}
 		}
+		if (camino->size() < this->decisiones->size()){
+			for (int i = cant_pokeParadas; i < cant_gimnasios; ++i)	{
+				if (gyms[i].first.first == posicion.first && gyms[i].first.second == posicion.second ){
+		
+				camino->push_back(i+1);
+				}
+			}
+		}
 
 	}
 	return camino;
 
 
 }
+
