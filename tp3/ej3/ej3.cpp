@@ -24,13 +24,14 @@ vector<int> mejorarSwap(vector<int> solucionParcial);
 vector<int> mejorar2opt(vector<int> solucionParcial);
 vector<int> mejorar3opt(vector<int> solucionParcial);
 
+//Funciones Auxiliares
+void optimizarSolucion(vector<int> *solucion);
 long long calcularCosto(vector<int> &camino);
 
+//variables globales
 int cantGyms, cantPokeParadas, capMochila;
-
 Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
-//nuestros costos son enteros, suma de distancias euclidianas sin tomar raiz cuadrada
 
 int main()
 {
@@ -232,12 +233,7 @@ vector<int> mejorarSwap(vector<int> solucionParcial){
 
 			if (costoActual != -1 && costoActual < costoAnterior) {
 				vector<int> solucionOptimizada = solucionParcial; 
-				int i = solucionOptimizada.size() -1;
-				while(solucionOptimizada[i] >= cantGyms && i > 0)
-				{
-					solucionOptimizada.pop_back();
-					i--;
-				}
+				optimizarSolucion(&solucionOptimizada);
 				costoAnterior = costoActual;
 				solucion = solucionOptimizada;
 				printf("Costo mejorado: %lld\n", costoActual);
@@ -263,12 +259,7 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 
 			if (costoActual != -1 && costoActual < costoAnterior) {
 				vector<int> solucionOptimizada = solucionParcial;
-				int i = solucionOptimizada.size() -1;
-				while(solucionOptimizada[i] >= cantGyms && i > 0)
-				{
-					solucionOptimizada.pop_back();
-					i--;
-				}
+				optimizarSolucion(&solucionOptimizada);
 				costoAnterior = costoActual;
 				solucion = solucionOptimizada;
 				printf("Costo mejorado: %lld\n", costoActual);
@@ -321,12 +312,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 				if (costoActual != -1 && costoActual < costoAnterior)
 				{
 					vector<int> solucionOptimizada = solucionParcial;
-					int i = solucionOptimizada.size() -1;
-					while(solucionOptimizada[i] >= cantGyms && i > 0)
-					{
-						solucionOptimizada.pop_back();
-						i--;
-					}
+					optimizarSolucion(&solucionOptimizada);
 					costoAnterior = costoActual;
 					solucion = solucionOptimizada;
 					printf("Costo mejorado: %lld\n", costoActual);
@@ -353,12 +339,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 				if (costoActual != -1 && costoActual < costoAnterior) 
 				{
 					vector<int> solucionOptimizada = solucionParcial;
-					int i = solucionOptimizada.size() -1;
-					while(solucionOptimizada[i] >= cantGyms && i > 0)
-					{
-						solucionOptimizada.pop_back();
-						i--;
-					}
+					optimizarSolucion(&solucionOptimizada);
 					costoAnterior = costoActual;
 					solucion = solucionOptimizada;
 				}
@@ -382,12 +363,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 
 				if (costoActual != -1 && costoActual < costoAnterior) {
 					vector<int> solucionOptimizada = solucionParcial;
-					int i = solucionOptimizada.size() -1;
-					while(solucionOptimizada[i] >= cantGyms && i > 0)
-					{
-						solucionOptimizada.pop_back();
-						i--;
-					}
+					optimizarSolucion(&solucionOptimizada);
 					costoAnterior = costoActual;
 					solucion = solucionOptimizada;
 				}
@@ -408,12 +384,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 
 				if (costoActual != -1 && costoActual < costoAnterior) {
 					vector<int> solucionOptimizada = solucionParcial;
-					int i = solucionOptimizada.size() -1;
-					while(solucionOptimizada[i] >= cantGyms && i > 0)
-					{
-						solucionOptimizada.pop_back();
-						i--;
-					}
+					optimizarSolucion(&solucionOptimizada);
 					costoAnterior = costoActual;
 					solucion = solucionOptimizada;
 				}
@@ -504,6 +475,16 @@ long long calcularCosto(vector<int> &camino){
 	}
 	
 	return costo;
+}
+
+void optimizarSolucion(vector<int> *solucion)
+{
+	int i = solucion->size() -1;
+	while(solucion[i] >= cantGyms && i > 0)
+	{
+		solucion->pop_back();
+		i--;
+	}
 }
 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])

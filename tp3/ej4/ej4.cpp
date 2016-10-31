@@ -278,12 +278,7 @@ list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParci
 			if (costoActual != -1)
 			{
 				vector<int> solucionOptimizada = solucionParcial; //copia
-				int i = solucionOptimizada.size() -1;
-				while(solucionOptimizada[i] >= cantGyms && i > 0)
-				{
-					solucionOptimizada.pop_back();
-					i--;
-				}
+				optimizarSolucion(&solucionOptimizada);
 				pair< vector<int>, list<Arista> > solucionConAtributos;
 				solucionConAtributos.first = solucionOptimizada;
 				solucionConAtributos.second = aristasModificadas;
@@ -317,12 +312,7 @@ list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParci
 			if (costoActual != -1) 
 			{
 				vector<int> solucionOptimizada = solucionParcial; //copia
-				int i = solucionOptimizada.size() -1;
-				while(solucionOptimizada[i] >= cantGyms && i > 0)
-				{
-					solucionOptimizada.pop_back();
-					i--;
-				}
+				optimizarSolucion(&solucionOptimizada);
 				pair< vector<int>, list<Arista> > solucionConAtributos;
 				solucionConAtributos.first = solucionOptimizada;
 				solucionConAtributos.second = aristasModificadas;
@@ -358,12 +348,7 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 				if (costoActual != -1) 
 				{
 					vector<int> solucionOptimizada = solucionParcial; //copia
-					int i = solucionOptimizada.size() -1;
-					while(solucionOptimizada[i] >= cantGyms && i > 0)
-					{
-						solucionOptimizada.pop_back();
-						i--;
-					}
+					optimizarSolucion(&solucionOptimizada);
 					pair< vector<int>, list<Arista> > solucionConAtributos;
 					solucionConAtributos.first = solucionOptimizada;
 					solucionConAtributos.second = aristasModificadas;
@@ -389,14 +374,9 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 				if (costoActual != -1) 
 				{
 					vector<int> solucionOptimizada = solucionParcial; //copia
-					int i = solucionOptimizada.size() -1;
-					while(solucionOptimizada[i] >= cantGyms && i > 0)
-					{
-						solucionOptimizada.pop_back();
-						i--;
-					}
+					optimizarSolucion(&solucionOptimizada);
 					pair< vector<int>, list<Arista> > solucionConAtributos;
-					solucionConAtributos.first = solucionParcial;
+					solucionConAtributos.first = solucionOptimizada;
 					solucionConAtributos.second = aristasModificadas2;
 					soluciones.push_back(solucionConAtributos);
 				}
@@ -419,14 +399,9 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 				if (costoActual != -1) 
 				{
 					vector<int> solucionOptimizada = solucionParcial; //copia
-					int i = solucionOptimizada.size() -1;
-					while(solucionOptimizada[i] >= cantGyms && i > 0)
-					{
-						solucionOptimizada.pop_back();
-						i--;
-					}
+					optimizarSolucion(&solucionOptimizada);
 					pair< vector<int>, list<Arista> > solucionConAtributos;
-					solucionConAtributos.first = solucionParcial;
+					solucionConAtributos.first = solucionOptimizada;
 					solucionConAtributos.second = aristasModificadas3;
 					soluciones.push_back(solucionConAtributos);
 				}
@@ -447,14 +422,9 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 				if (costoActual != -1) 
 				{
 					vector<int> solucionOptimizada = solucionParcial; //copia
-					int i = solucionOptimizada.size() -1;
-					while(solucionOptimizada[i] >= cantGyms && i > 0)
-					{
-						solucionOptimizada.pop_back();
-						i--;
-					}
+					optimizarSolucion(&solucionOptimizada);
 					pair< vector<int>, list<Arista> > solucionConAtributos;
-					solucionConAtributos.first = solucionParcial;
+					solucionConAtributos.first = solucionOptimizada;
 					solucionConAtributos.second = aristasModificadas4;
 					soluciones.push_back(solucionConAtributos);
 				}
@@ -569,3 +539,13 @@ int tabuCount( SetTabu atributos, vector<int> solucion )
 	return 0;
 }
 
+
+void optimizarSolucion(vector<int> *solucion)
+{
+	int i = solucion->size() -1;
+	while(solucion[i] >= cantGyms && i > 0)
+	{
+		solucion->pop_back();
+		i--;
+	}
+}
