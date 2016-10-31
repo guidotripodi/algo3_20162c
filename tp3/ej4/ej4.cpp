@@ -9,7 +9,8 @@
 #include <math.h>	/* pow */
 #include <cstdlib> /* swap */
 #include <list>
-#include "setTabu.h"
+#include "SetTabu.hpp"
+#include "MaestroPokemon.hpp"
 
 #define ya chrono::high_resolution_clock::now
 #define SEED 39
@@ -25,6 +26,7 @@ typedef pair<int,int> Pokeparada;
 typedef pair<int,int> Arista;
 
 //Funciones importantes
+pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]);
 vector<int> tabuSearch(vector<int> solucionParcial);
 list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParcial);
 list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParcial);
@@ -53,7 +55,7 @@ int main(){
 			utilizado[i][j] = false;
 		}
 	}
-*/	
+*//*	
 	cantGyms = 2;
 	Gimnasio gimnasiosArr[cantGyms];
 	
@@ -80,6 +82,8 @@ int main(){
 	pokeParadasArr[4].second = 3;
 	
 	capMochila = 8;
+	
+	*/
 	/*
 	Gimnasio gimnasiosArr[cantGyms];
 	for(int i = 0; i < cantGyms; i++){
@@ -119,7 +123,7 @@ int main(){
 		utilizado[x][y] = true;
 	}
 	*/
-	
+/*	
 	gimnasiosArrPtr = gimnasiosArr;
 	pokeParadasArrPtr = pokeParadasArr;
 	
@@ -131,7 +135,53 @@ int main(){
 	solucionParcial.push_back(0);
 	solucionParcial.push_back(6);
 	solucionParcial.push_back(1);
+*/
+
+	cin >> cantGyms >> cantPokeParadas >> capMochila;
+	Gimnasio gimnasiosArr[cantGyms];
+	for(int i = 0; i < cantGyms; i++)
+	{
+		Gimnasio gymPuebloPaleta;
+		cin >> 
+			gymPuebloPaleta.first.first >> 
+			gymPuebloPaleta.first.second >>
+			gymPuebloPaleta.second;
+		gimnasiosArr[i] = gymPuebloPaleta;
+	}
+
+	Pokeparada pokeParadasArr[cantPokeParadas];
+	Pokeparada pokeParadasAux[cantPokeParadas];
+	for(int i = 0; i < cantPokeParadas; i++)
+	{
+		Pokeparada posicion;
+		cin >> posicion.first >> posicion.second;
+		pokeParadasArr[i] = posicion;
+		pokeParadasAux[i] = posicion;
+	}
+
+	pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
+			cantGyms, 
+			cantPokeParadas,
+			capMochila, 
+			gimnasiosArr, 
+			pokeParadasArr, 
+			pokeParadasAux);
+
+	list<int> *solucionInicialLista = solucionInicial->second;
+	vector<int> solucionParcial;
+
+	list<int>::iterator itLista;
+	for(itLista = solucionInicialLista->begin();
+			itLista != solucionInicialLista->end();
+			itLista++ )
+	{
+		solucionParcial.push_back(*itLista);
+	}
+
+	gimnasiosArrPtr = gimnasiosArr;
+	pokeParadasArrPtr = pokeParadasAux;
 	
+
 	long long costo = calcularCosto(solucionParcial);
 	
 	printf("Costo inicial: %lld\n", costo);
