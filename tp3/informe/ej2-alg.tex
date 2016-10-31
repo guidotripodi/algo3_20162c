@@ -1,5 +1,5 @@
 \begin{algorithm}[H]
-\Fn{EJ1()}{
+\Fn{EJ2()}{
 crear cola desiciones para guardar elecciones\\
 eleccion contiene un id, posicion de la misma y distancia desde el punto anterior hasta el como tambien la cantidad de pociones hasta el momento\\
 se crea booleanos seTuvoExito con valor verdadero \hfill O(1) \\
@@ -9,7 +9,7 @@ asignar pokeparada como inicio de camino \hfill O(1)\\
 \While{seTuvoExito}{  
 	\If{lesGaneATodos(MaestroPokemon) $\wedge$ tiempo(MaestroPokemon) < minimo}{
 	 \hfill  guarda: O(1)\\
-			para minimo asignar tiempo(MaestroPokemon) \hfill O(1)\\	
+			para minimo $\gets$ tiempo(MaestroPokemon) \hfill O(1)\\	
 			para caminoRecorrido $\gets$ caminoRecorrido(MaestroPokemon) \hfill O(1)\\	
 	}
 			eleccion asignar eleccionPosible(MaestroPokemon) \hfill O(n + m)\\			
