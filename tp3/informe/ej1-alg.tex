@@ -7,14 +7,14 @@ se crea un entero minimo con valor -1 \hfill O(1)\\
 \While{sePudoDeshacerEleccion}{  
 	\If{lesGaneATodos(MaestroPokemon) $\wedge$ tiempo(MaestroPokemon) < minimo}{
 	 \hfill  guarda: O(1)\\
-			para minimo asignar tiempo(MaestroPokemon) \hfill O(1)\\	
-			para caminoRecorrido asignar caminoRecorrido(MaestroPokemon) \hfill O(1)\\	
+			para minimo $\gets$ tiempo(MaestroPokemon) \hfill O(1)\\	
+			para caminoRecorrido $\gets$ caminoRecorrido(MaestroPokemon) \hfill O(1)\\	
 	}
-			eleccion asignar eleccionPosible(MaestroPokemon) \hfill O(n + m)\\			
+			eleccion $\gets$ eleccionPosible(MaestroPokemon) \hfill O(n + m)\\			
 			\If{$\exists$ eleccion}	{	
 			aplicarEleccion(eleccion, MaestroPokemon)\hfill O(1)\\
 		}\Else{
-			sePudoDeshacerEleccion asginar deshacerEleccion(MaestroPokemon) \hfill O(1)\\
+			sePudoDeshacerEleccion $\gets$ deshacerEleccion(MaestroPokemon) \hfill O(1)\\
 		}
 		}
 		devolver minimo, tamaño(caminoRecorrido) y caminoRecorrido 	\hfill O(n + m)\\
@@ -30,9 +30,9 @@ se crea un entero minimo con valor -1 \hfill O(1)\\
 	\If{tipo(eleccion) == GIMNASIO}{
 	\hfill  guarda: O(1)\\
 	 	decrementar	maestroPokemon.cantidadGymFaltantes 1 \hfill O(1) \\
-		para maestroPokemon.cantidadPociones  asignar pociones(maestroPokemon) - pocionesNecesarias(eleccion) \hfill O(1) \\
+		para maestroPokemon.cantidadPociones  $\gets$ pociones(maestroPokemon) - pocionesNecesarias(eleccion) \hfill O(1) \\
 	}\Else{
-		para maestroPokemon.cantidadPociones  asignar pociones(maestroPokemon) + 3\hfill O(1) \\
+		para maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) + 3\hfill O(1) \\
 	
 	}
 	sumar a maestroPokemon.tiempo tiempo(eleccion) \hfill O(1) \\
@@ -52,9 +52,9 @@ se crea un entero minimo con valor -1 \hfill O(1)\\
 	\If{tipo(eleccion) == GIMNASIO}{
 	\hfill  guarda: O(1)\\
 	 	incrementar	maestroPokemon.cantidadGymFaltantes 1 \hfill O(1) \\
-		para maestroPokemon.cantidadPociones  asignar pociones(maestroPokemon) + pocionesNecesarias(eleccion) \hfill O(1) \\
+		para maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) + pocionesNecesarias(eleccion) \hfill O(1) \\
 	}\Else{
-		para maestroPokemon.cantidadPociones  asignar pociones(maestroPokemon) - 3\hfill O(1) \\
+		para maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) - 3\hfill O(1) \\
 	
 	}
 	restar a maestroPokemon.tiempo tiempo(eleccion) \hfill O(1) \\
