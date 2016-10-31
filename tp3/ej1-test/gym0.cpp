@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 			PORQUE CARAJO PASA ESO*/
 			printf("Estoy aca\n");
 		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
-	
+
 	/*IMPRIMO EN PANTALLA EL RESULTADO:*/
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
@@ -104,12 +104,12 @@ int main(int argc, char* argv[])
 		
 		return NULL;
 	}
-	
 	bool exitoBack = true;
 	
 	int minimo = -1; 
 	MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
 	std::list<int> * camino;
+	printf("Estoy aca 2\n");
 	while(exitoBack){
 		//ash.printStatus();
 		if (ash.gane())

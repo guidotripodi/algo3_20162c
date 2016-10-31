@@ -148,10 +148,10 @@ def noPPInstance(n):
 ###############################################
 #				MAIN
 
-#plotInstance(circularInstance(100, 3))
+plotInstance(circularInstance(10, 10))
 
-for i in xrange(3,1000):
-	r = randomInstance(i)
-	#plotInstance(r)
-	saveInstance(r, "test1.in","a")
-	pass
+#for i in xrange(3,1000):
+#	r = randomInstance(i)
+#	#plotInstance(r)
+#	saveInstance(r, "test1.in","a")
+#	pass
