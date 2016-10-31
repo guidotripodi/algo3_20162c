@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
 		
 		cap_mochila = cant_gimnasios*3;
 		/*IMPRIMO EN PANTALLA EL CASO: */
-
+/*
 		cout << "\n" << "j es:" << j << "\n";
 		
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
@@ -62,15 +62,17 @@ int main(int argc, char* argv[])
 		for(i = 0; i < cant_pokeParadas; i++){
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 			
-			}
+			}*/
 
 			/*Ejecuto el algoritmo*/
-			/*ESTO ES MAGICO, SI COMENTAS ESTE PRINTF NO FUNCIONA EXPLOTA VALGA UNO A SABER 
-			PORQUE CARAJO PASA ESO*/
-			printf("Estoy aca\n");
+		
+		auto start = ya();
 		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
+	auto end = ya();
+			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+				cout << "\n";
 
-	/*IMPRIMO EN PANTALLA EL RESULTADO:*/
+	/*IMPRIMO EN PANTALLA EL RESULTADO:*//*
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
@@ -80,8 +82,8 @@ int main(int argc, char* argv[])
 				cout << " " << *it;
 			}
 		}
-				
-		//delete f;
+				*/
+		delete f;
 	}
 	return 0;
 }

@@ -58,8 +58,7 @@ int main(int argc, char* argv[])
 			pair <pair<int,int>, int> gymPuebloPaleta;
 			gymPuebloPaleta.first.first = i;
 			gymPuebloPaleta.first.second = i+1;
-			gymPuebloPaleta.second = (i+1)*3;
-			//cantidad_pociones_necesarias_total += i*3;
+			gymPuebloPaleta.second = 0;
 			posiciones_gym[i] = gymPuebloPaleta;
 			
 		}
@@ -70,8 +69,8 @@ int main(int argc, char* argv[])
 			posiciones_pp[i] = posicion;
 			pp_aux[i] = posicion;
 		}
-		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
-		cap_mochila = cant_gimnasios;
+		
+		cap_mochila = cantMaxGym*3	;
 		/*
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
@@ -84,12 +83,11 @@ int main(int argc, char* argv[])
 			
 			}
 */
-			auto start = ya();
+		auto start = ya();
 		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
-	auto end = ya();
+		auto end = ya();
 			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
 				cout << "\n";
-	
 	/*
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
@@ -99,12 +97,9 @@ int main(int argc, char* argv[])
 			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << *it << " ";
 			}
-			cout <<  "\n";
 		}
+		cout << "\n";
 		*/
-		
-		
-		
 		delete f;
 	}
 	return 0;
@@ -141,7 +136,7 @@ int main(int argc, char* argv[])
 		exitoBack = true;
 		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
 		while(exitoBack){
-			ash.printStatus();
+		//	ash.printStatus();
 			if (ash.gane())
 			{
 				if (ash.distancia < minimo || minimo == -1)

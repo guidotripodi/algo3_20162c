@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
 	pair <int, int>  posiciones_pp[cantMaxPP];
 	
-	for(int j = 4; j < 8; j++){
+	for(int j = 4; j < 25; j++){
 		cant_gimnasios = j;
 		cant_pokeParadas = j;
 		
@@ -56,7 +56,16 @@ int main(int argc, char* argv[])
 			pair <pair<int,int>, int> gymPuebloPaleta;
 			gymPuebloPaleta.first.first = i;
 			gymPuebloPaleta.first.second = i+2;
-			gymPuebloPaleta.second = 3;
+			if(i % 3 == 0){
+				gymPuebloPaleta.second = 1;
+			}
+			if(i % 3 == 1){
+				gymPuebloPaleta.second = 2;
+			}
+			if(i % 3 == 2){
+				gymPuebloPaleta.second = 3;
+			}
+			
 			//cantidad_pociones_necesarias_total += i*3;
 			posiciones_gym[i] = gymPuebloPaleta;
 			
@@ -71,7 +80,7 @@ int main(int argc, char* argv[])
 		
 
 		/*Imprimo instancia: */
-		cout << "j es:" << j << "\n";
+		/*cout << "j es:" << j << "\n";
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
 		for(i = 0; i < cant_gimnasios; i++){
@@ -82,10 +91,14 @@ int main(int argc, char* argv[])
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 			
 			}
-			printf("Ejecucion: \n");
+			printf("Ejecucion: \n");*/
+		auto start = ya();
 		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
+	auto end = ya();
+			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+				cout << "\n";
 	
-		/*Imprimo  solucion: */
+		/*Imprimo  solucion: *//*
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
@@ -95,7 +108,7 @@ int main(int argc, char* argv[])
 				cout << " " << *it;
 			}
 		}
-		cout << "\n";
+		cout << "\n";*/
 		
 		
 		
