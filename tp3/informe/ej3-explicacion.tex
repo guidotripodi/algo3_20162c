@@ -1,0 +1,18 @@
+Dado que una solución exacta al problema de nuestro entrenador pokemon es costosa, ya que debe recurrirse al backtracking por ser un problema que busca un circuito hamiltoniano minimo en cantidad de pokeparadas, en el punto anterior se decidió implementar una solución basada en un algoritmo goloso. Dado que la misma puede no ser exacta, nos interesa tratar de mejor sus resultados. 
+
+Para esto, dado que una solución es representada como una sucesion de nodos, tal que dos nodos consecutivos identifican una arista de nuestro camino, si intercambiamos el orden de ciertos nodos, estaremos modificando la solución reemplazando aristas de la solución original (De ahora en más $S_o$) y agregando nuevas a la misma. 
+
+De esta manera existen una cierta cantidad y tipo de movimientos que podemos realizar a la que denominamos $vecindad$ de $S_o$. Esta técnica de optimización se denomina heuristica de búsqueda local, ya que todas los cambios que se realicen, se harán sobre $S_o$. 
+Se denomina $k-opt$ cuando especificamente se modifican $k$ aristas de la solución. Generalmente se suele utilizar un $k$ de 2 o 3 por motivos de simplicidad de los algoritmos (?). Cuantas más arista se intercambien a la vez, menos granularidad poseen las vecindades estudiadas. Aunque esto último depende mucho del problema analizado y las entradas del algoritmo. Para este informe elegimos $2-opt$ y $3-opt$.
+
+ALGUN DIBUJITO MOSTRANDO 2-OPT Y 3-OPT 
+
+Además, realizando un simple swap de nodos, podemos obtener muy facilmente soluciones que intercambian 2 o 4 aristas. Serán dos si los nodos intercambiados de posición son consecutivos y cuatro si no lo son.
+
+ALGUN DIBUJITO MOSTRANDO SWAP
+ 
+De esta manera, podremos movernos a travez del espacio de soluciones vecinas de $S_o$ y tal vez mejorar la solución, aunque que de esto, por ser una heuristica, no tendremos ninguna garantia.
+
+En este punto nos centraremos en estudiar y tratar de concluir cual de las heuristicas consideradas en este punto es mejor utilizar para mejorar los resultados obtenidos por el algoritmo goloso del punto anterior. Es decir, dado un tipo de entrada, que en este caso se corresponde con un mapa de pokeparadas y gimnasios, que tendrá alguna particularidad que hará que el algoritmo goloso produzca un resultado bueno o malo, veremos que tipo de busqueda local será mejor aplicar para mejorar la solución o si no conviene aplicar ninguna de las heuristicas de este punto ya que a pesar de ser la solución buena o mala, no se obtienen mejores resultados.
+
+Primero veremos los pseudocodigos de las tres heuristicas y analizaremos sus complejidades. Luego realizaremos un análisis cualitativo de las mismas aplicadas a los resultados de cada tipo de entrada, tratando de abordar las carácteristicas de las mismas y explicar porque una heuristica resulta mejor o no en cada caso. Luego compararemos los mejores resultados y si es posible haremos un análisis para determinar si podría haberse obtenido una solución mejor intercambiando más aristas.
