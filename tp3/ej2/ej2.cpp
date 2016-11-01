@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 			{
 				if (ash.distancia < minimo || minimo == -1)
 				{
-					cout<<"minimo alcanzado\n";
+					//cout<<"minimo alcanzado\n";
 					minimo = ash.distancia;
 					camino = ash.caminoRecorrido(pp_aux);
 
@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
 			posible = posible && (minimo == -1 || ash.distancia<minimo);
 			
 		}
-		cout << "termine rama\n";
+		//cout << "termine rama\n";
 		pair <int, int> posicion;
 		for (int h = 0; h < cant_pokeParadas; ++h){
 			/*Luego de la vuelta completa reordeno el array pp pasando al primer pp al ultimo y 

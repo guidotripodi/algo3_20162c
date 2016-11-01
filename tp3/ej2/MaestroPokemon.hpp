@@ -114,18 +114,14 @@ public:
 	MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[]);
 	~MaestroPokemon();
 	//Devuelve el identificador de la eleccion
-	Eleccion eleccionPosible();
 
-	void elegir(const Eleccion eleccion);
-	bool deshacerEleccion();
 	bool gane();
-	std::list<int> * caminoRecorrido(const pair <int,int> pp_aux[]);
+	bool eleccionGolosa();
 
 	//Para ver el estado del sistema
 	void printEleccion(Eleccion par) const;
 	void printStatus()const;
-	bool eleccionMinimaPosible(Eleccion eleccion) const;
-	bool eleccionGolosa();
+	std::list<int> * caminoRecorrido(const pair <int,int> pp_aux[]);
 
 private:
 	int cant_pokeParadas;
