@@ -1,8 +1,82 @@
 \begin{algorithm}[H] %or another one check
- \Fn{main()}{
+ \Fn{swap()}{
  %     \SetAlgoLined
+   $S_o$ es la solución que brinda el algoritmo goloso
+  	n es cantidad de nodos \\
+	\For{i de 1 a n}{ 
+		\hfill ciclo: O(n)\\	
+		\For{j de 1 a n}{ 
+		\hfill ciclo: O(n)\\	
+			 $intercambiar$ $posiciones$ i con j en $S_o$ \hfill O(1)\\	
+			 calcular nuevo costo y guardar si es mejor que $S_o$ y la mejor obtenida hasta la iteración anterior junto con la solución obtenida \hfill O(n)\\	
+			 $intercambiar$ $posiciones$ i con j en $S_o$ \hfill O(1)\\	 		
+		}	
+	}
 	
+	\hfill complejidad total: O($n^3$)\\			
 }
 \end{algorithm}
+
+\begin{algorithm}[H] %or another one check
+ \Fn{2opt()}{
+ %     \SetAlgoLined
+   $S_o$ es la solución que brinda el algoritmo goloso
+  	n es cantidad de nodos \\
+	\For{i de 1 a n}{
+	\hfill ciclo: O(n)\\
+		\For{j de i+1 a n}{
+		\hfill ciclo: O(n)\\
+			 $invertir$ $rango$ de i a j en $S_o$ \hfill O(n)\\
+			 calcular nuevo costo y guardar si es mejor que $S_o$ y la mejor obtenida hasta la iteración anterior junto con la solución obtenida \hfill O(n)\\
+			 $invertir$ $rango$ de i a j en $S_o$ \hfill O(n)\\
+		}	
+	}	
+	
+	\hfill complejidad total: O($n^3$)\\	
+}
+\end{algorithm}
+
+\begin{algorithm}[H] %or another one check
+ \Fn{3opt()}{
+ %     \SetAlgoLined
+   $S_o$ es la solución que brinda el algoritmo goloso
+  	n es cantidad de nodos \\
+	\For{i de 1 a n-3}{
+	\hfill ciclo: O(n)\\
+		\For{j de i+1 a n-2}{
+		\hfill ciclo: O(n)\\
+				\For{k de j+2 a n}{
+				\hfill ciclo: O(n)\\
+			 caso 1:\\
+			 $invertir$ $rango$ de i a j en $S_o$ \hfill O(n)\\
+			 $invertir$ $rango$ de j+1 a k en $S_o$ \hfill O(n)\\
+			 calcular nuevo costo y guardar si es mejor que $S_o$ y la mejor obtenida hasta la iteración anterior junto con la solución obtenida \hfill O(n)\\
+			 $invertir$ $rango$ de j+1 a k en $S_o$	\hfill O(n)\\	 
+			 $invertir$ $rango$ de i a j en $S_o$ \hfill O(n)\\
+			 
+			 caso 2: \\
+			$intercambiar$ $rango$ de i a j con el de j+1 a k en $S_o$ \hfill O(n)\\
+			 calcular nuevo costo y guardar si es mejor que $S_o$ y la mejor obtenida hasta la iteración anterior junto con la solución obtenida \hfill O(n)\\
+			 $intercambiar$ $rango$ de i a j con el de j+1 a k en $S_o$ \hfill O(n)\\
+			 
+			 caso 3:\\
+			 es igual al caso 2 pero invirtiendo el rango i a j \hfill O(4*n)\\
+			 
+			 caso 4: \\
+			 es igual al caso 2 pero invirtiendo el rango j+1 a k \hfill O(4*n)\\
+			}
+		}	
+	}		
+
+	\hfill complejidad total: O($n^4$)\\
+}
+\end{algorithm}
+
+\begin{itemize}
+\item n = cantidad de nodos del mapa (pokeparadas y gimnasios) que conforman la solución $S_o$
+\end{itemize}
+
+Podemos ver que todos los algoritmos iteran sobre la solución $S_o$, que en el peor caso puede contener todos los nodos del mapa. Operaciones como $invertir$ $rango$ o $intercambiar$ $rango$  en el peor caso serán realizadas sobre los $n$ nodos de $S_o$.
+Luego, realizar busquedas locales con las vecindades planteadas es, en el peor caso, de complejidad polinómica. 
 
 
