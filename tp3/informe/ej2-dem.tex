@@ -61,7 +61,7 @@ Se obtendr\'a la soluci\'on \'optima ya que, se reciben primero pokeparadas para
   \end{center}
   \vspace*{0.3cm}
 
-Luego, no se obtendr\'a una soluci\'on \'optima cuando las pokeparadas esten todas juntas y los gimnasios muy lejos, teniendo los gimnasios una cantidad necesaria bastante menor que ciertas sumas de pociones otorgadas por las pokeparadas (TRATAR DE ESCRIBIRLO MEJOR ESTO)
+En cambio, no se obtendr\'a una soluci\'on \'optima cuando en vez de juntar una determinada cantidad de poder para vencer varios gimnasios consecutivos, el algoritmo decida ir a una pokeparada y luego a un gimnasio a derrotarlo, para luego repetir esta secuencia.
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -78,7 +78,9 @@ Luego, no se obtendr\'a una soluci\'on \'optima cuando las pokeparadas esten tod
   \end{center}
   \vspace*{0.3cm}
 
-La soluci\'on obtenida que dista de la \'optima puede ser tan mala como la cantidad de veces que se tenga que ir a una pokeparada, ganarle al gimnasio y luego ir a otra pokeparada a recuperarse por m\'as que esta \'ultima se encuentre mucho m\'as cerca de la pokeparada inicial que el gimnasio.
+La soluci\'on obtenida distará tanto de la óptima como la cantidad de veces que el algoritmo recorra una pokeparada y luego un gimnasio a vencerlo, sin importar si lo más optimo era pasar primero por las pokeparadas juntando poder y luego visitar varios gimnasios consecutivamente venciendolos a todos.
+El peor caso será cuando el mapa sea un anillo de pokeparadas con un anillo interno o externo de gimnasios. 
+El algoritmo iniciará en una pokeparada, luego irá a ganar a un gimansio con distancia mínima dentro de los gimansios no visitados, y siguiendo este recorrido, volverá a una pokeparada que se encuentre a una distancia menor de la pokeparada previa.\\
 
 Se puede observar en el ejemplo 2.5 como nuestro algorimo va a la primer pokeparada y de ah\'i va a vencer al gimnasio m\'as cercano en vez de ir a la pokeparada que se encuentra inmediatamente consecutiva. Esto lo hace hasta vencer a todos los gimnasios.
-Este estilo de caso sera uno de los peores en referencia a la solucion obtenida que se obtenga ya que la misma ser\'a muy distante a la optima
+Este estilo de caso será uno de los peores en referencia a la solucion obtenida que se obtenga ya que la misma ser\'a muy distante a la optima
