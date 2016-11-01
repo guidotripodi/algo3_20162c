@@ -1,8 +1,8 @@
 \begin{algorithm}[H] %or another one check
  \Fn{swap()}{
  %     \SetAlgoLined
-   $S_o$ es la solución que brinda el algoritmo goloso
-  	n es cantidad de nodos \\
+   $S_o$ es la solución que brinda el algoritmo goloso \\
+  	n es cantidad de nodos de $S_o$ \\
 	\For{i de 1 a n}{ 
 		\hfill ciclo: O(n)\\	
 		\For{j de 1 a n}{ 
@@ -20,8 +20,8 @@
 \begin{algorithm}[H] %or another one check
  \Fn{2opt()}{
  %     \SetAlgoLined
-   $S_o$ es la solución que brinda el algoritmo goloso
-  	n es cantidad de nodos \\
+   $S_o$ es la solución que brinda el algoritmo goloso \\
+  	n es cantidad de nodos de $S_o$ \\
 	\For{i de 1 a n}{
 	\hfill ciclo: O(n)\\
 		\For{j de i+1 a n}{
@@ -39,8 +39,8 @@
 \begin{algorithm}[H] %or another one check
  \Fn{3opt()}{
  %     \SetAlgoLined
-   $S_o$ es la solución que brinda el algoritmo goloso
-  	n es cantidad de nodos \\
+   $S_o$ es la solución que brinda el algoritmo goloso \\
+  	n es cantidad de nodos de $S_o$ \\
 	\For{i de 1 a n-3}{
 	\hfill ciclo: O(n)\\
 		\For{j de i+1 a n-2}{
@@ -76,7 +76,12 @@
 \item n = cantidad de nodos del mapa (pokeparadas y gimnasios) que conforman la solución $S_o$
 \end{itemize}
 
-Podemos ver que todos los algoritmos iteran sobre la solución $S_o$, que en el peor caso puede contener todos los nodos del mapa. Operaciones como $invertir$ $rango$ o $intercambiar$ $rango$  en el peor caso serán realizadas sobre los $n$ nodos de $S_o$.
+Podemos ver que todos los algoritmos iteran sobre la solución $S_o$, que en el peor caso puede contener todos los nodos del mapa. 
+
+Las operaciones $invertir$ $rango$ o $intercambiar$ $rango$ en el peor caso serán realizadas sobre los $n$ nodos de $S_o$.
+
+La operación costo es $\theta(n)$ ya que requiere recorrer $S_o$ hasta la última posición. 
+
 Luego, realizar busquedas locales con las vecindades planteadas es, en el peor caso, de complejidad polinómica. 
 
 
