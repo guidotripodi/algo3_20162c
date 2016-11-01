@@ -56,10 +56,10 @@ bool MaestroPokemon::eleccionMinimaPosible(Eleccion eleccion) const{
 	if(id < this->cant_gimnasios){
 		/*La eleccion es un gym por lo tanto chequeo si es el minimo gym no me interesan las pokeparadas*/
 		for(int i = 0; i < this->cant_gimnasios; i++){
-			if(this->destinos_visitados[i] == 0){
+				x = this->gyms[i].first.first;
+				y = this->gyms[i].first.second;
+			if(this->destinos_visitados[i] == 0 && x != xM && y != yM){
 				/*chequeo solo con los que no fueron visitados y sean posibles*/
-				x = this->gyms[id].first.first;
-				y = this->gyms[id].first.second;
 				int pocionesNecesarias = this->gyms[id].second;
 				distancia = pow(x - xM, 2) + pow(y - yM, 2);
 				if (this->cantidad_pociones < pocionesNecesarias && distancia < minimo){
@@ -71,13 +71,13 @@ bool MaestroPokemon::eleccionMinimaPosible(Eleccion eleccion) const{
 			}
 	}else{
 		/*La eleccion es una pokeparada por lo tanto chequeo si es la minima pokeparada no me interesan los gym*/
-		int id2 = id - cant_gimnasios;
-		for(int i = this->cant_gimnasios; i < this->cant_pokeParadas + this->cant_gimnasios; i++){
+		//int id2 = id - cant_gimnasios;
+		for(int i = 0; i < this->cant_pokeParadas; i++){
 			/*chequeo solo lo que no fueron visitados, aca toda pokeparada va a ser posible ya que esta funcion se ejecuta dsp del 
 			 * es posible inicial que ya chequea nuestras podas de mochila y cantidades*/
-			if(this->destinos_visitados[i] == 0){
-				x = this->posiciones_pp[id2].first;
-				y = this->posiciones_pp[id2].second;
+				x = this->posiciones_pp[i].first;
+				y = this->posiciones_pp[i].second;
+			if(this->destinos_visitados[i] == 0 && x != xM && y != yM){
 				distancia = pow(x - xM, 2) + pow(y - yM, 2);
 				if(distancia < minimo){
 					return false;
@@ -117,7 +117,7 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 	
 
 	this->decisiones = new list<MaestroPokemon::Eleccion>();
-	
+	this->destinos_visitados = new int[this->cant_gimnasios + this->cant_pokeParadas];
 	this->distancia=0;
 	
 	
@@ -132,7 +132,8 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 }
 
 MaestroPokemon::~MaestroPokemon(){
-
+	delete this->decisiones;
+	delete this->destinos_visitados;
 }
 
 MaestroPokemon::Eleccion MaestroPokemon::eleccionPosible()
@@ -156,6 +157,11 @@ MaestroPokemon::Eleccion MaestroPokemon::eleccionPosible()
 	return eleccion;
 }
 
+
+void MaestroPokemon::recalculoId(){
+	this->eleccionActual.id++;
+
+}
 
 void MaestroPokemon::elegir(Eleccion eleccion){
 

@@ -33,9 +33,9 @@ int main(int argc, char* argv[])
 	}
 	for (i = 0; i < cant_pokeParadas; i++)	{
 		pair <int, int> posicion;
-		cout << "hola";
+		//cout << "hola";
 		cin >> posicion.first >> posicion.second;
-		cout << "chau";
+		//cout << "chau";
 		
 		posiciones_pp[i] = posicion;
 		/*Uso ese aux para saber el orden inicial*/
@@ -116,6 +116,8 @@ int main(int argc, char* argv[])
 				//	ash.printEleccion(eleccion);
 					ash.elegir(eleccion);
 					
+				}else{
+					ash.recalculoId();
 				}
 				
 			}else{

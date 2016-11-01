@@ -127,6 +127,7 @@ public:
 	void printEleccion(Eleccion par) const;
 	void printStatus()const;
 	bool eleccionMinimaPosible(Eleccion eleccion) const;
+	void recalculoId();
 
 private:
 	int cant_pokeParadas;
