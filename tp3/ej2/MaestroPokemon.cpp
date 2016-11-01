@@ -72,7 +72,7 @@ bool MaestroPokemon::eleccionMinimaPosible(Eleccion eleccion) const{
 	}else{
 		/*La eleccion es una pokeparada por lo tanto chequeo si es la minima pokeparada no me interesan los gym*/
 		int id2 = id - cant_gimnasios;
-		for(int i = this->cant_gimnasios; i < this->cant_pokeParadas; i++){
+		for(int i = this->cant_gimnasios; i < this->cant_pokeParadas + this->cant_gimnasios; i++){
 			/*chequeo solo lo que no fueron visitados, aca toda pokeparada va a ser posible ya que esta funcion se ejecuta dsp del 
 			 * es posible inicial que ya chequea nuestras podas de mochila y cantidades*/
 			if(this->destinos_visitados[i] == 0){
@@ -220,7 +220,7 @@ bool MaestroPokemon::gane()
 
 
 std::list<int> * MaestroPokemon::caminoRecorrido(const pair <int,int> pp_aux[]){
-	printf("TAMAÑO ARREGLO: %d\n",this->decisiones->size());
+	printf("TAMAÑO ARREGLO: %ld\n",this->decisiones->size());
 	std::list<int> * camino = new list<int>();
 	for (std::list<Eleccion>::iterator it=this->decisiones->begin(); it != this->decisiones->end(); ++it){
 		pair <int, int> posicion;
