@@ -6,8 +6,6 @@
 #include <utility>
 #include "MaestroPokemon.hpp"
 #include <chrono>
-#define cantMaxGym 101
-#define cantMaxPP 100
 #define ya chrono::high_resolution_clock::now
 using namespace std;
 
@@ -17,12 +15,13 @@ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_
 
 int main(int argc, char* argv[])
 {
-	/*int cant_gimnasios, cant_pokeParadas, cap_mochila;
+	int cant_gimnasios, cant_pokeParadas, cap_mochila;
 	cin >> cant_gimnasios >> cant_pokeParadas >> cap_mochila;
 
 
 	pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
 	pair <int, int>  posiciones_pp[cant_pokeParadas];
+	pair <int, int>  pp_aux[cant_pokeParadas];
 
 	int i = 0;
 	for (i = 0; i < cant_gimnasios; i++){
@@ -34,73 +33,27 @@ int main(int argc, char* argv[])
 	}
 	for (i = 0; i < cant_pokeParadas; i++)	{
 		pair <int, int> posicion;
-		
+
 		cin >> posicion.first >> posicion.second;
-		
+
 		posiciones_pp[i] = posicion;
+		/*Uso ese aux para saber el orden inicial*/
+		pp_aux[i] = posicion;
 		
-	}*/
-
-	/*Caso sin solucion:*/
-	int cant_gimnasios = 0; 
-	int cant_pokeParadas = 0;
-	int cap_mochila = 0;
-	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
-	pair <int, int>  posiciones_pp[cantMaxPP];
-	pair <int, int>  pp_aux[cantMaxPP];
-	
-	for(int j = 4; j < 50; j++){
-		cant_gimnasios = j+1;
-		cant_pokeParadas = j;
-		
-		int i = 0;
-			for (i = 0; i < cant_gimnasios; i++){
-			pair <pair<int,int>, int> gymPuebloPaleta;
-			gymPuebloPaleta.first.first = i;
-			gymPuebloPaleta.first.second = i+1;
-			gymPuebloPaleta.second = (i+1)*3;
-			//cantidad_pociones_necesarias_total += i*3;
-			posiciones_gym[i] = gymPuebloPaleta;
-			
-		}
-		for (i = 0; i < cant_pokeParadas; i++)	{
-			pair <int, int> posicion;
-			posicion.first = i;
-			posicion.second = i+2;
-			posiciones_pp[i] = posicion;
-			pp_aux[i] = posicion;
-		}
-		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
-		cap_mochila = cantMaxGym*3	;
-		
-		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
-		
-		for(i = 0; i < cant_gimnasios; i++){
-			printf("%d %d %d \n", posiciones_gym[i].first.first, posiciones_gym[i].first.second, posiciones_gym[i].second );
-			}
-			
-		for(i = 0; i < cant_pokeParadas; i++){
-			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
-			
-			}
-
-		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
-	
-		if ( f == NULL || f->first == -1)	{
-			cout << "-1" << "\n";
-			//return -1;
-		}else{
-			//cout << f->first <<" "<< f->second->size();
-			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
-				cout << " " << *it;
-			}
-		}
-		
-		
-		
-		cout << "j es:" << j << "\n";
-		delete f;
 	}
+	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
+	
+	if ( f == NULL || f->first == -1)	{
+		cout << "-1" << "\n";
+		return -1;
+	}
+	cout << f->first <<" "<< f->second->size();
+	
+	for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
+		cout << " " << *it;
+
+	}
+	cout << "\n";
 	return 0;
 }
 
@@ -123,7 +76,7 @@ int main(int argc, char* argv[])
 	}
 		
 		
-	bool exitoBack = true;
+	bool posible = true;
 	
 	int minimo = -1; 
 	std::list<int> * camino;
@@ -132,15 +85,15 @@ int main(int argc, char* argv[])
 	for (int x = 0; x < cant_pokeParadas; ++x)
 	{
 
-		exitoBack = true;
+		posible = true;
 		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
-		while(exitoBack){
-			ash.printStatus();
+		while(posible){
+			//ash.printStatus();
 			if (ash.gane())
 			{
 				if (ash.distancia < minimo || minimo == -1)
 				{
-				//	cout<<"fin de rama\n";
+					//cout<<"minimo alcanzado\n";
 					minimo = ash.distancia;
 					camino = ash.caminoRecorrido(pp_aux);
 
@@ -148,27 +101,11 @@ int main(int argc, char* argv[])
 				
 			}
 
-			MaestroPokemon::Eleccion eleccion = ash.eleccionPosible();
-				//Si hay un par posible y si la rama que estoy evaluando
-				//me sigue dando una mejor solucion a la ya encontrada
-
-			if (eleccion.posible==1 && (minimo == -1 || ash.distancia<minimo))
-			{
-				//printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
-
-				//ash.printEleccion(eleccion);
-				if(ash.eleccionMinimaPosible(eleccion)){
-				//	printf("Elegi: ---- ");
-				//	ash.printEleccion(eleccion);
-					ash.elegir(eleccion);
-					
-				}
-				
-			}else{
-				//printf("No fue minima\n");
-				exitoBack = false;
-			}
+			posible = ash.eleccionGolosa();
+			posible = posible && (minimo == -1 || ash.distancia<minimo);
+			
 		}
+		//cout << "termine rama\n";
 		pair <int, int> posicion;
 		for (int h = 0; h < cant_pokeParadas; ++h){
 			/*Luego de la vuelta completa reordeno el array pp pasando al primer pp al ultimo y 
