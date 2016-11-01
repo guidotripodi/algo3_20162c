@@ -33,15 +33,15 @@ int main(int argc, char* argv[])
 	}
 	for (i = 0; i < cant_pokeParadas; i++)	{
 		pair <int, int> posicion;
-		
+		cout << "hola";
 		cin >> posicion.first >> posicion.second;
+		cout << "chau";
 		
 		posiciones_pp[i] = posicion;
 		/*Uso ese aux para saber el orden inicial*/
 		pp_aux[i] = posicion;
 		
 	}
-
 	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
 	
 	if ( f == NULL || f->first == -1)	{
