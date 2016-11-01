@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 	int cant_pokeParadas = 0;
 	int cap_mochila = 0;
 	
-	for(int j = 4; j < 8; j++){
+	for(int j = 2; j < 12; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		
@@ -50,9 +50,7 @@ int main(int argc, char* argv[])
 		
 		cap_mochila = cant_gimnasios*3;
 		/*IMPRIMO EN PANTALLA EL CASO: */
-/*
-		cout << "\n" << "j es:" << j << "\n";
-		
+
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
 		for(i = 0; i < cant_gimnasios; i++){
@@ -62,27 +60,28 @@ int main(int argc, char* argv[])
 		for(i = 0; i < cant_pokeParadas; i++){
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 			
-			}*/
+			}
 
 			/*Ejecuto el algoritmo*/
-		
-		auto start = ya();
+		cout << "Cantidad de elementos:" << cant_gimnasios + cant_pokeParadas << "\n";
+		//auto start = ya();
 		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
-	auto end = ya();
+	/*auto end = ya();
 			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-				cout << "\n";
+				cout << "\n";*/
 
-	/*IMPRIMO EN PANTALLA EL RESULTADO:*//*
+	/*IMPRIMO EN PANTALLA EL RESULTADO:*/
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
 		}else{
-			cout << f->first <<" "<< f->second->size();
+			cout << f->first <<" "<< f->second->size()<< " ";
 			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << " " << *it;
 			}
 		}
-				*/
+		cout << "\n";
+				
 		delete f;
 	}
 	return 0;
@@ -111,7 +110,6 @@ int main(int argc, char* argv[])
 	int minimo = -1; 
 	MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
 	std::list<int> * camino;
-	printf("Estoy aca 2\n");
 	while(exitoBack){
 		//ash.printStatus();
 		if (ash.gane())
