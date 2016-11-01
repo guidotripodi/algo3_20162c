@@ -6,29 +6,21 @@ Como mencionamos, nos interesa saber que heuristica de búsqueda local se adapta
 \item Entrada fuera de orden (orden diferente para lograr el óptimo)
 \item Movida segura
 \item Hay un quinto!!!
+\item Y capaz un sexto!!!
 \end{enumerate}
 
-Debido a que las familias 1 y 2 no proveen una solución inicial sobre la que realizar búsqueda local, solo se considerarán las familias 3 y 4.\\
-Veremos entonces para las familias 3 y 4, cual de las búsquedas locales nos provee una solución mejor a la solución provista por el algoritmo $greedy$. O en caso de no poder mejorarla, trataremos de dar respuesta a los motivos.
+Las familias de casos que no tienen solución (y por lo tanto no se puede aplicar búsqueda local) o las que proveen la solución óptima, serán descartadas por motivos obvios.\\
+Por lo tanto, nos centraremos en las familias enumeradas anteriormente para ver cual de las búsquedas locales puede obtener una solución mejor a la solución provista por el algoritmo $greedy$. O en caso de no poder mejorarla, trataremos de dar respuesta a los motivos.\\
 
 Para cada búsqueda local, se tomará una media alfa podada con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado. De esta forma no habrá outliers en las muestras consideradas. 
 La cantidad de mediciones para tomar la media será de 30. Además se tomará la varianza muestral usando la media calculada y las mediciones que queden luego de aplicar la media.\\
 
-\subsubsection*{Familia 3}
+\subsubsection*{Familia 1}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.5]{./EJ3/local_search_familia.png}
- {            \textit{Gráfico \ 3.3 - Búsquedas locales sobre Familia 3}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\subsubsection*{Familia 4}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ3/local_search_familia.png}
- {            \textit{Gráfico \ 3.4 - Búsquedas locales sobre Familia 4}}
+ {            \textit{Gráfico \ 3.1 - Búsquedas locales sobre Familia 1}}
   \end{center}
   \vspace*{0.3cm}
   
