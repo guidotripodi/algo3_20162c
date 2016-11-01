@@ -61,28 +61,36 @@ Podemos ver en este gr\'afico comparativo como las familias est\'an acotadas por
 
 \subsubsection*{Variando $P_{max}$ en un laberinto}
 
-Para el siguiente test vamos a trabajar con un laberinto de tamaño fijo, con el origen en la segunda columna y el destino en la penultima (misma fila), que además en cada posición solo tiene paredes. Siendo el laberinto de tamaño 100*100 habrá 94 paredes por fila (sin contar los bordes).
-Mostraremos a continuaci\'on que sucede al variar $P_{max}$ desde 0 hasta 94.\\
+Para el siguiente test vamos a trabajar con un laberinto de tamaño fijo, con el origen en la segunda columna y el destino en la penultima (misma fila), que además en cada posición solo tiene paredes. Siendo el laberinto de tamaño 100*100 habrá 96 paredes por fila (sin contar los bordes).
+Mostraremos a continuaci\'on que sucede al variar $P_{max}$ desde 0 hasta 96.\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.5]{./EJ1/pVariable.png}
+\includegraphics[scale=0.6]{./EJ1/pVariableBfs.png}
 {Gr\'afico 1.6 - $P$ $variable$ $y$ $F,C$ $fijos$}
   \end{center}
   \vspace*{0.3cm}
 
 Se puede observar en el gr\'afico 1.6 como al aumentar $P_{max}$, aumenta cuadráticamente el tiempo de resoluci\'on, ya que lo que sucede es que al aumentar el $P_{max}$ el algoritmo solo puede chequear en una sub matriz de $P_{max}^2$ caminos posibles a destino.\\
-Al ser un algoritmo con espirutu $BFS$ recorre en anchura estas sub matrices, probando todas las posibilidades sin seguir un camino particular.  Por lo cual, que haya un camino directo a destino, rompiendo exactamente 94 paredes, no influye sobre el resultado. Ya que para llegar a destino, serán analizadas todas las posibilidades. 
+Al ser un algoritmo con espirutu $BFS$ recorre en anchura estas sub matrices, probando todas las posibilidades sin seguir un camino particular.  Por lo cual, que haya un camino directo a destino, rompiendo exactamente 96 paredes, no influye sobre el resultado. Ya que para llegar a destino, serán analizadas todas las posibilidades. 
 
 Conociendo el mejor camino, si el algoritmo recorriera en profundidad (como un $DFS$), y además, el primer vecino analizado fuera el derecho (en dirección al destino), podría obtenerse un mejor resultado, ya que el camino elegido sería el directo al destino.\\ 
-Por lo tanto fué modificado el algoritmo para utilizar una pila en lugar de una cola, obteniendo un pseudo $DFS$ y poder corroborar este hecho. Y ademas que el primer vecino analizado sea el derecho.\\
+Por lo tanto fué modificado el algoritmo para utilizar una pila en lugar de una cola, y además apilar los vecinos de manera tal que el último en apilarse sea el derecho, obteniendo de esta manera un pseudo $DFS$ que nos permite corroborar este hecho.\\
 
   \begin{center}
-\includegraphics[scale=0.5]{./EJ1/pVariable.png}
+\includegraphics[scale=0.6]{./EJ1/pVariableDfs.png}
 {Gr\'afico 1.7 - $P$ $variable$ $y$ $F,C$ $fijos$}
   \end{center}
   \vspace*{0.3cm}
 
-Podemos observar en el gráfico 1.7 que el caso con $P_{max}$ = 94 se resuelve en $x$ $ns$ contra los aprox. $3.5x10^5$ $ns$ (gráfico 1.6) del test original. No sabemos explicar exactamente que sucede con $P_{max}$ < 94. Asumimos que los tiempos serían similares al test con el algoritmo inicial, es decir crecientes cuadráticamente, ya que no hay solución para esos valores de $P_{max}$. Contrariamente, los tiempos están bastante por debajo de lo que suponiamos. No tenemos una respuesta certera para este hecho. Pero si podemos concluir que el algoritmo obtiene la solución por el camino directo de manera mucho más rápida. Con lo cual concluimos que bajo estas modificaciones, cuando hay solución y sabemos en que dirección movernos, podemos obtener un resultado muy bueno con estas modificaciones. 
+Podemos observar en el gráfico 1.7 que el caso con $P_{max}$ = 96 hay solución, y se obtiene muy rapidamente debido a que el camino elegido es el directo a destino. Veamos que sucede en comparación al algoritmo original
 
-Luego de lo mostrado, se pudo observar que, tanto en el mejor como en el peor caso nuestro algoritmo se encuentra en el orden de la complejidad calculada y cumple con lo enunciado por el problema inicialmente.
+  \begin{center}
+\includegraphics[scale=0.6]{./EJ1/bfsVsDfs.png}
+{Gr\'afico 1.8 - $P$ $variable$ $y$ $F,C$ $fijos$}
+  \end{center}
+  \vspace*{0.3cm}
+  
+Podemos observar claramente, que bajo las condiciones planteadas para esta modificación, es un factor muy imporante saber en que dirección guiar la busqueda de este $DFS$. En el gráfico 1.8 podemos ver claramente como con $DFS$ se obtiene un resultado mucho mejor que el algoritmoo original ($DFS$). Concluyendo así lo supuesto al realizar los tests.
+
+Luego de lo mostrado, se pudo observar que, tanto en el mejor como en el peor caso nuestro algoritmo se encuentra en el orden de la complejidad calculado y cumple con lo enunciado por el problema inicialmente. Además pudimos observar una particularidad del tipo de busqueda realizado y se propuso una variante al mismo que bajo ciertas condiciones puede mejorar el resultado original.
