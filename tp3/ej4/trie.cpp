@@ -47,7 +47,6 @@ class TrieTree
 		}
 		
 		~TrieTree(){
-			TrieTreeNode* nodoActual = root;
 			borrarNodo(root);
 		}	
 
@@ -61,7 +60,8 @@ class TrieTree
             TrieTreeNode * temp = root;
              
             int i = 0;
-            while (i < word.size()) {      // Until there is something to process
+            int ws = word.size();
+            while (i < ws) {      // Until there is something to process
                 if (temp->children[word[i] - 'a'] == NULL) {
                     // There is no node in 'trie_tree' corresponding to this alphabet
           
@@ -84,7 +84,7 @@ class TrieTree
         void lexicographPrint(TrieTreeNode * trie_tree, vector<char> printUtilVector)
         {
             int i;
-            bool noChild = true;
+            //bool noChild = true;
                          
             vector<int>::iterator itr = trie_tree->occurrences.begin();
           
@@ -92,7 +92,7 @@ class TrieTree
                 if (trie_tree->children[i] == NULL) {
                     continue;
                 } else {
-                    noChild = false;
+                    //noChild = false;
                     printUtilVector.push_back('a' + i);    // Select a child
           
                     // and explore everything associated with the cild
