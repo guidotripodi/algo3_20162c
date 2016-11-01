@@ -33,10 +33,9 @@ int main(int argc, char* argv[])
 	}
 	for (i = 0; i < cant_pokeParadas; i++)	{
 		pair <int, int> posicion;
-		cout << "hola";
+
 		cin >> posicion.first >> posicion.second;
-		cout << "chau";
-		
+
 		posiciones_pp[i] = posicion;
 		/*Uso ese aux para saber el orden inicial*/
 		pp_aux[i] = posicion;
@@ -77,7 +76,7 @@ int main(int argc, char* argv[])
 	}
 		
 		
-	bool exitoBack = true;
+	bool posible = true;
 	
 	int minimo = -1; 
 	std::list<int> * camino;
@@ -86,15 +85,15 @@ int main(int argc, char* argv[])
 	for (int x = 0; x < cant_pokeParadas; ++x)
 	{
 
-		exitoBack = true;
+		posible = true;
 		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
-		while(exitoBack){
-			ash.printStatus();
+		while(posible){
+			//ash.printStatus();
 			if (ash.gane())
 			{
 				if (ash.distancia < minimo || minimo == -1)
 				{
-				//	cout<<"fin de rama\n";
+					cout<<"minimo alcanzado\n";
 					minimo = ash.distancia;
 					camino = ash.caminoRecorrido(pp_aux);
 
@@ -102,27 +101,11 @@ int main(int argc, char* argv[])
 				
 			}
 
-			MaestroPokemon::Eleccion eleccion = ash.eleccionPosible();
-				//Si hay un par posible y si la rama que estoy evaluando
-				//me sigue dando una mejor solucion a la ya encontrada
-
-			if (eleccion.posible==1 && (minimo == -1 || ash.distancia<minimo))
-			{
-				//printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
-
-				//ash.printEleccion(eleccion);
-				if(ash.eleccionMinimaPosible(eleccion)){
-				//	printf("Elegi: ---- ");
-				//	ash.printEleccion(eleccion);
-					ash.elegir(eleccion);
-					
-				}
-				
-			}else{
-				//printf("No fue minima\n");
-				exitoBack = false;
-			}
+			posible = ash.eleccionGolosa();
+			posible = posible && (minimo == -1 || ash.distancia<minimo);
+			
 		}
+		cout << "termine rama\n";
 		pair <int, int> posicion;
 		for (int h = 0; h < cant_pokeParadas; ++h){
 			/*Luego de la vuelta completa reordeno el array pp pasando al primer pp al ultimo y 

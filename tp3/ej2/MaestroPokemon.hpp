@@ -56,8 +56,6 @@ public:
 
 		void recalcular(){
 			
-			id = id + 1;
-
 			posible = MP->cant_pokeParadas + MP->cant_gimnasios > id;
 			if (posible)
 			{
@@ -127,6 +125,7 @@ public:
 	void printEleccion(Eleccion par) const;
 	void printStatus()const;
 	bool eleccionMinimaPosible(Eleccion eleccion) const;
+	bool eleccionGolosa();
 
 private:
 	int cant_pokeParadas;
@@ -137,6 +136,7 @@ private:
 	int cant_gimnasios;
 	int cant_gimnasios_por_ganar;
 	std::list<Eleccion> * decisiones;
+	std::list<int> * opciones;
 	Eleccion eleccionActual;
 	bool eleccionValida(Eleccion eleccion) const;
 
