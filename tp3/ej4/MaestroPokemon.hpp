@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include "trie.cpp"
 
-#include <math.h> //TODO sacar esto!
 #define GIMNASIO 0
 #define PP 1
 
@@ -38,6 +37,7 @@ public:
 	};
 	struct Eleccion
 	{
+		const MaestroPokemon* MP;
 		int distancia;
 		int id = -1; // El id da ordinalidad a todas las elecciones posibles, dentro de la matriz #personas x #personas
 		bool posible;
@@ -45,7 +45,6 @@ public:
 		int tipo =-1;
 		int pocionesNecesarias = -1;
 		pair <int, int> posicion;
-		const MaestroPokemon* MP;
 		Eleccion(){};
 		Eleccion(const MaestroPokemon* MP):
 		MP(MP),
@@ -57,8 +56,6 @@ public:
 
 		void recalcular(){
 			
-			id = id + 1;
-
 			posible = MP->cant_pokeParadas + MP->cant_gimnasios > id;
 			if (posible)
 			{
@@ -117,17 +114,14 @@ public:
 	MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[]);
 	~MaestroPokemon();
 	//Devuelve el identificador de la eleccion
-	Eleccion eleccionPosible();
 
-	void elegir(const Eleccion eleccion);
-	bool deshacerEleccion();
 	bool gane();
-	std::list<int> * caminoRecorrido(const pair <int,int> pp_aux[]);
+	bool eleccionGolosa();
 
 	//Para ver el estado del sistema
 	void printEleccion(Eleccion par) const;
 	void printStatus()const;
-	bool eleccionMinimaPosible(Eleccion eleccion) const;
+	std::list<int> * caminoRecorrido(const pair <int,int> pp_aux[]);
 
 private:
 	int cant_pokeParadas;
@@ -138,6 +132,7 @@ private:
 	int cant_gimnasios;
 	int cant_gimnasios_por_ganar;
 	std::list<Eleccion> * decisiones;
+	std::list<int> * opciones;
 	Eleccion eleccionActual;
 	bool eleccionValida(Eleccion eleccion) const;
 

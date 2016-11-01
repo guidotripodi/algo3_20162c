@@ -9,10 +9,9 @@
 #include <math.h>
 #include <cstdlib>
 #include "MaestroPokemon.hpp"
+
 #define ya chrono::high_resolution_clock::now
-#define SEED 39
-#define MAX_PODER 25
-#define RADIO 100
+#define TEST_ITER 40
 
 using namespace std;
 
@@ -25,6 +24,7 @@ vector<int> mejorar2opt(vector<int> solucionParcial);
 vector<int> mejorar3opt(vector<int> solucionParcial);
 
 //Funciones Auxiliares
+pair<float, float> mediaPodadaVarianzaMuestral(vector<long long> &muestra);
 void optimizarSolucion(vector<int> &solucion);
 long long calcularCosto(vector<int> &camino);
 
@@ -36,189 +36,154 @@ Pokeparada *pokeParadasArrPtr;
 int main()
 {
 	
-	/*
-	//testing
-	cantGyms = 2;
-	Gimnasio gimnasiosArr[cantGyms];
+	int j = 49;
+	cantGyms = j+1;
+	cantPokeParadas = j;
+	pair <pair<int,int>, int> gimnasiosArr[cantGyms];
+	pair <int, int>  pokeParadasArr[cantPokeParadas];
+	pair <int, int>  pokeParadasAux[cantPokeParadas];
 	
-	gimnasiosArr[0].first.first = 2;
-	gimnasiosArr[0].first.second = 3;
-	gimnasiosArr[0].second = 2;
+	vector<long long> tiemposSwap(TEST_ITER);
+	vector<long long> tiempos2opt(TEST_ITER);
+	vector<long long> tiempos3opt(TEST_ITER);
 	
-	gimnasiosArr[1].first.first = 3;
-	gimnasiosArr[1].first.second = 2;
-	gimnasiosArr[1].second = 3;
-	
-	cantPokeParadas = 5;
-	Pokeparada pokeParadasArr[cantPokeParadas];
-	
-	pokeParadasArr[0].first = 0;
-	pokeParadasArr[0].second = 0;
-	pokeParadasArr[1].first = 0;
-	pokeParadasArr[1].second = 1;
-	pokeParadasArr[2].first = 1;
-	pokeParadasArr[2].second = 1;
-	pokeParadasArr[3].first = 2;
-	pokeParadasArr[3].second = 2;
-	pokeParadasArr[4].first = 1;
-	pokeParadasArr[4].second = 3;
-	
-	capMochila = 8;
+	vector<int> solucionSwap;
+	vector<int> solucion2opt;
+	vector<int> solucion3opt;
+
 	vector<int> solucionParcial;
 	
-	solucionParcial.push_back(2);
-	solucionParcial.push_back(3);
-	solucionParcial.push_back(5);
-	solucionParcial.push_back(0);
-	solucionParcial.push_back(6);
-	solucionParcial.push_back(1);
-	*/
- 
-	/*
-	//testing aleatorio
-	srand(SEED);
-	bool utilizado[RADIO][RADIO];
-	
-	for(int i = 0; i < RADIO; i++){
-		for(int j = 0; j < RADIO; j++){
-			utilizado[i][j] = false;
-		}
-	}
-
-	Gimnasio gimnasiosArr[cantGyms];
-	for(int i = 0; i < cantGyms; i++){
-		Gimnasio gymPuebloPaleta;//gimnasio (uno solo)
-		bool usado = true;
-		int x, y;
-		while(usado){
-			x = rand() % RADIO;
-			y = rand() % RADIO;	
-			if(!utilizado[x][y]) 
-				usado = false;
-		}
-		gymPuebloPaleta.first.first = x;
-		gymPuebloPaleta.first.second = y;
-		gymPuebloPaleta.second = rand() % MAX_PODER;
-		gimnasiosArr[i] = gymPuebloPaleta;
-		utilizado[x][y] = true;
-	}
-	
-	
-	cantPokeParadas = ((MAX_PODER * cantGyms)/3)*2;
-	Pokeparada pokeParadasArr[cantPokeParadas];
-	
-	for(int j = 0; j < cantPokeParadas; j++){
-		Pokeparada posicion;
-		bool usado = true;
-		int x, y;
-		while(usado){
-			x = rand() % RADIO;
-			y = rand() % RADIO;	
-			if(!utilizado[x][y]) 
-				usado = false;
-		}
-		posicion.first = x;
-		posicion.second = y;
-		pokeParadasArr[j] = posicion;
-		utilizado[x][y] = true;
-	}
-	*/
-	cin >> cantGyms >> cantPokeParadas >> capMochila;
-	Gimnasio gimnasiosArr[cantGyms];
-	for(int i = 0; i < cantGyms; i++)
+	for(int it = 0; it < TEST_ITER; it++)
 	{
-		Gimnasio gymPuebloPaleta;
-		cin >> 
-			gymPuebloPaleta.first.first >> 
-			gymPuebloPaleta.first.second >>
-			gymPuebloPaleta.second;
-		gimnasiosArr[i] = gymPuebloPaleta;
-	}
-
-	Pokeparada pokeParadasArr[cantPokeParadas];
-	Pokeparada pokeParadasAux[cantPokeParadas];
-	for(int i = 0; i < cantPokeParadas; i++)
-	{
-		Pokeparada posicion;
-		cin >> posicion.first >> posicion.second;
-		pokeParadasArr[i] = posicion;
-		pokeParadasAux[i] = posicion;
-	}
-
-	pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
-			cantGyms, 
-			cantPokeParadas,
-			capMochila, 
-			gimnasiosArr, 
-			pokeParadasArr, 
-			pokeParadasAux);
-
-	list<int> *solucionInicialLista = solucionInicial->second;
-	vector<int> solucionParcial;
-
-	list<int>::iterator itLista;
-	for(itLista = solucionInicialLista->begin();
-			itLista != solucionInicialLista->end();
-			itLista++ )
-	{
-		solucionParcial.push_back(*itLista);
-	}
-
-	gimnasiosArrPtr = gimnasiosArr;
-	pokeParadasArrPtr = pokeParadasAux;
-	
-	
-	long long costo = calcularCosto(solucionParcial);
-	
-	for(int i = 0; i < (int) solucionParcial.size(); i++)
-	{
-		printf("%d ", solucionParcial[i]);
-	}
-	printf("\n");
-	printf("Costo inicial: %lld\n", costo);
-	//mejorar solucion
-	if( solucionParcial.size())
-	{
-		vector <int> solucion2opt= mejorar3opt(solucionParcial);
-		for(int i = 0; i < (int) solucion2opt.size(); i++)
+		
+		int i = 0;
+		for (i = 0; i < cantGyms; i++)
 		{
-			printf("%d ", solucion2opt[i]);
+			Gimnasio gymPuebloPaleta;
+			gymPuebloPaleta.first.first = i;
+			gymPuebloPaleta.first.second = i+1;
+			gymPuebloPaleta.second = 0;
+			gimnasiosArr[i] = gymPuebloPaleta;
+			
 		}
-		printf("\n");
-	} 
-	else{
-		printf("%d", -1);
+		for (i = 0; i < cantPokeParadas; i++)	{
+			Pokeparada posicion;
+			posicion.first = i;
+			posicion.second = i+2;
+			pokeParadasArr[i] = posicion;
+			pokeParadasAux[i] = posicion;
+		}
+		
+		capMochila = cantGyms*3;
+
+		pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
+				cantGyms, 
+				cantPokeParadas,
+				capMochila, 
+				gimnasiosArr, 
+				pokeParadasArr, 
+				pokeParadasAux);
+
+
+		list<int> *solucionInicialLista = solucionInicial->second;
+
+		list<int>::iterator itLista;
+		for(itLista = solucionInicialLista->begin();
+				itLista != solucionInicialLista->end();
+				itLista++ )
+		{
+			solucionParcial.push_back(*itLista);
+		}
+
+		gimnasiosArrPtr = gimnasiosArr;
+		pokeParadasArrPtr = pokeParadasAux;
+		
+		//mejorar solucion
+		if( solucionParcial.size())
+		{
+			auto start = ya();
+			solucionSwap = mejorar2opt(solucionParcial);
+			auto end = ya();
+			tiemposSwap[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+			start = ya();
+			solucion2opt = mejorar2opt(solucionParcial);
+			end = ya();
+			tiempos2opt[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+			start = ya();
+			solucion3opt = mejorar2opt(solucionParcial);
+			end = ya();
+			tiempos3opt[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+		} 
+		else{
+			//
+			printf("%d", -1);
+		}
+
+		delete solucionInicial;
 	}
+
+	pair <float, float> estadisticasSwap = mediaPodadaVarianzaMuestral(tiemposSwap);
+	pair <float, float> estadisticas2opt = mediaPodadaVarianzaMuestral(tiempos2opt);
+	pair <float, float> estadisticas3opt = mediaPodadaVarianzaMuestral(tiempos3opt);
+
+	long long mejoraSwap = calcularCosto(solucionParcial) - calcularCosto(solucionSwap);
+	long long mejora2opt = calcularCosto(solucionParcial) - calcularCosto(solucion2opt);
+	long long mejora3opt = calcularCosto(solucionParcial) - calcularCosto(solucion3opt);
+
+	cout << estadisticasSwap.first << estadisticasSwap.second << mejoraSwap << "\n";
+	for(int i = 0; i < (int) solucionSwap.size(); i++) cout << solucionSwap[i];
+	printf("\n");
+
+	
+	cout << estadisticas2opt.first << estadisticas2opt.second << mejora2opt << "\n";
+	for(int i = 0; i < (int) solucion2opt.size(); i++) cout << solucion2opt[i];
+	printf("\n");
+
+	
+	cout << estadisticas3opt.first << estadisticas3opt.second << mejora3opt << "\n";
+	for(int i = 0; i < (int) solucion3opt.size(); i++) cout << solucion3opt[i];
+	printf("\n");
+
 
 	return 0;
 }
 
-/*
 
-un swap puede ser 2opt si swapeo dos consecutivos
+pair<float, float> mediaPodadaVarianzaMuestral(vector<long long> &muestra)
+{
+	float alpha = 0.5;
+	int n = TEST_ITER;
+	int x1, x2;
 
-1->2->3->4
+	x1 = n*alpha/2; //quiero sacar de ambos lados
+	x2 = n*alpha/2; 
 
-1->3->2->4
 
-un 3opt puede ser un 2opt si se invierten los intervalos, dado que son contiguos
+	sort(muestra.begin(), muestra.end());
+	
+	for(int i = 0; i < x1; i++)
+		muestra.pop_back();
 
-1->2->3->4->5->6
+	//for(int i = 0; i < x2; i++)
+	//	muestra.pop_front();
 
-1->2->4->5->3->6 (ya cambiaron 3 aristas: 2->4 5->3 y 3->6 son las nuevas)
+	long long sum = 0;
+	for(int i = x2; i < (int)muestra.size(); i++) sum += muestra[i];
+	float mean = (float) sum / (float) (muestra.size() - x2);
+	
+	float sampleVariance;
+	float total = 0;
+	for(int i = x2; i < (int)muestra.size(); i++)
+	{
+		sampleVariance = muestra[i] - mean;
+		sampleVariance *= sampleVariance;
+		total += sampleVariance;
+	}
+	total = total / (float)(muestra.size() - x2);
+	total = sqrt(total);
 
-pero si invierto 4->5 
-
-1->2->5->4->3->6 se convierte en un 2opt
-
-un ejemplo similar pero tomando 3->4 y 5 como los intervalos
-
-1->2->5->3->4->6 y ahora si invertimos 3->4 queda
-
-1->2->5->4->3->6 que es un 2opt igual al obtenido tomando 
-3 y 4->5 como los intervalos
-
-*/
+	return make_pair(mean, total);
+}
 
 vector<int> mejorarSwap(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
@@ -271,24 +236,7 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 	}
 	return solucion;
 }
-
-/* Mi error fue tratar de asociar el concepto de arista a un nodo (el destino)
- * Al eliminar las 3 aristas que elegimos quedan dos(o tres?) maneras de reconectar el camino
- * sin que sea un camino 2opt. Sean 0 -> a  b->c d->fin aristas y las borramos.
- * Caso1: Reconectamos 0 -> b, a -> d y c -> fin (intervalos (a,b) (c,d) invertidos)
- * Caso2: Reconectamos 0 -> c, d -> a y b -> fin ("swap" de rangos sin invertir)
- * Caso3: Reconectamos 0 -> d, c -> a y b -> fin (swap + invertir rango (c,d))
-	 * Caso4: Reconectamos 0 -> c, d -> b y a -> fin (swap + invertir rango (a,b))
-	 *
-	 * Nota: 0 no es el principio del arreglo y fin no es el fin del arreglo
-	 * solo indican principio y fin del subarreglo que deberia cambiar.
-	 * TODO: analizar casos borde!!!
-	 * Propiedades utiles para la implementacion: 
-	 * 0 = a-1
-	 * b = c-1
-	 * d = fin - 1
-	 * me deja usar 3 subindices*/
-					
+		
 vector<int> mejorar3opt(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
 	long long costoAnterior = calcularCosto(solucionParcial);
