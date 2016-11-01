@@ -1,4 +1,4 @@
-Como mencionamos, nos interesa saber que heuristica de búsqueda local se adapta mejor a cada tipo de entrada estudiada con el algoritmo del ejercicio 2. Para esto, las enunciaremos nuevamente:
+Como mencionamos, nos interesa saber que heuristica de búsqueda local se adapta mejor aplicada a alguna de las familias estudiadas con el algoritmo del ejercicio 2. Para esto, las enunciaremos nuevamente:
 
 \begin{enumerate}
 \item No se obtiene soluci\'on por no haber las pokeparadas necesarias para ganar en todos los gimnasios.
@@ -7,28 +7,11 @@ Como mencionamos, nos interesa saber que heuristica de búsqueda local se adapta
 \item Las pokeparadas y los gimnasios se reciben en orden de la forma en la cual exista una pokeparada puntual para ir a cada gimnasio
 \end{enumerate}
 
-Veremos para cada una de las familias enunciadas, cual de las búsquedas locales nos provee una solución mejor a la solución provista por el algoritmo $greedy$. O en caso de no proveer ninguna solución, trataremos de dar respuesta a los motivos.
+Debido a que las familias 1 y 2 no proveen una solución inicial sobre la que realizar búsqueda local, solo se considerarán las familias 3 y 4.\\
+Veremos entonces para las familias 3 y 4, cual de las búsquedas locales nos provee una solución mejor a la solución provista por el algoritmo $greedy$. O en caso de no poder mejorarla, trataremos de dar respuesta a los motivos.
 
 Para cada búsqueda local, se tomará una media alfa podada con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado. De esta forma no habrá outliers en las muestras consideradas. 
 La cantidad de mediciones para tomar la media será de 30. Además se tomará la varianza muestral usando la media calculada y las mediciones que queden luego de aplicar la media.\\
-
-\subsubsection*{Familia 1}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ3/local_search_familia.png}
- {            \textit{Gráfico \ 3.1 - Búsquedas locales sobre Familia 1}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\subsubsection*{Familia 2}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ3/local_search_familia.png}
- {            \textit{Gráfico \ 3.2 - Búsquedas locales sobre Familia 2}}
-  \end{center}
-  \vspace*{0.3cm}
 
 \subsubsection*{Familia 3}
 
@@ -47,3 +30,5 @@ La cantidad de mediciones para tomar la media será de 30. Además se tomará la
  {            \textit{Gráfico \ 3.4 - Búsquedas locales sobre Familia 4}}
   \end{center}
   \vspace*{0.3cm}
+  
+SEGURAMENTE SON MAS CASOS O POR FAMILIA O MAS FAMILIAS! TESTEAR TODAS Y OBTENER CONCLUSIONES
