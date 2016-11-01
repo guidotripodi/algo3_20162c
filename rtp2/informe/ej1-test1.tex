@@ -76,7 +76,7 @@ Mostraremos a continuaci\'on que sucede al variar $P_{max}$ desde 0 hasta 96.\\
 Se puede observar en el gr\'afico 1.6 como al aumentar $P_{max}$, aumenta cuadráticamente el tiempo de resoluci\'on, ya que lo que sucede es que al aumentar el $P_{max}$ el algoritmo solo puede chequear en una sub matriz de $P_{max}^2$ caminos posibles a destino.\\
 Al ser un algoritmo con espirutu $BFS$ recorre en anchura estas sub matrices, probando todas las posibilidades sin seguir un camino particular.  Por lo cual, que haya un camino directo a destino, rompiendo exactamente 96 paredes, no influye sobre el resultado. Ya que para llegar a destino, serán analizadas todas las posibilidades. 
 
-Conociendo el mejor camino, si el algoritmo recorriera en profundidad (como un $DFS$), y además, el primer vecino analizado fuera el derecho (en dirección al destino), podría obtenerse un mejor resultado, ya que el camino elegido sería el directo al destino.\\ 
+Conociendo aproximadamente la dirección del mejor camino, si el algoritmo recorriera en profundidad (como un $DFS$), y además, el primer vecino analizado fuera el derecho (en dirección al destino), podría obtenerse un mejor resultado, ya que el camino elegido sería el directo al destino.\\ 
 Por lo tanto fué modificado el algoritmo para utilizar una pila en lugar de una cola, y además apilar los vecinos de manera tal que el último en apilarse sea el derecho, obteniendo de esta manera un pseudo $DFS$ que nos permite corroborar este hecho.\\
 
   \begin{center}
