@@ -11,7 +11,7 @@
 #include "MaestroPokemon.hpp"
 
 #define ya chrono::high_resolution_clock::now
-#define TEST_ITER 40
+#define TEST_ITER 20
 
 using namespace std;
 
@@ -36,7 +36,7 @@ Pokeparada *pokeParadasArrPtr;
 int main()
 {
 	
-	int j = 49;
+	int j = 8;
 	cantGyms = j+1;
 	cantPokeParadas = j;
 	pair <pair<int,int>, int> gimnasiosArr[cantGyms];
@@ -53,63 +53,67 @@ int main()
 
 	vector<int> solucionParcial;
 	
+		
+	int i = 0;
+	for (i = 0; i < cantGyms; i++)
+	{
+		Gimnasio gymPuebloPaleta;
+		gymPuebloPaleta.first.first = i;
+		gymPuebloPaleta.first.second = i+1;
+		if(i % 3 == 0)
+		{
+			gymPuebloPaleta.second = 0;
+		} else
+		{
+			gymPuebloPaleta.second = 1;
+		}
+		gimnasiosArr[i] = gymPuebloPaleta;
+		
+	}
+	for (i = 0; i < cantPokeParadas; i++)	{
+		Pokeparada posicion;
+		posicion.first = i;
+		posicion.second = i+2;
+		pokeParadasArr[i] = posicion;
+		pokeParadasAux[i] = posicion;
+	}
+	
+	capMochila = cantGyms*3;
+
+	pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
+			cantGyms, 
+			cantPokeParadas,
+			capMochila, 
+			gimnasiosArr, 
+			pokeParadasArr, 
+			pokeParadasAux);
+
+
+	list<int> *solucionInicialLista = solucionInicial->second;
+
+	list<int>::iterator itLista;
+	for(itLista = solucionInicialLista->begin();
+			itLista != solucionInicialLista->end();
+			itLista++ )
+	{
+		solucionParcial.push_back(*itLista);
+		cout << *itLista << " ";
+	}
+	cout << "\n";
+
+	gimnasiosArrPtr = gimnasiosArr;
+	pokeParadasArrPtr = pokeParadasAux;
+		
 	for(int it = 0; it < TEST_ITER; it++)
 	{
-		
-		int i = 0;
-		for (i = 0; i < cantGyms; i++)
-		{
-			Gimnasio gymPuebloPaleta;
-			gymPuebloPaleta.first.first = i;
-			gymPuebloPaleta.first.second = i+1;
-			if(i % 3 == 0)
-			{
-				gymPuebloPaleta.second = 0;
-			} else
-			{
-				gymPuebloPaleta.second = 1;
-			}
-			gimnasiosArr[i] = gymPuebloPaleta;
-			
-		}
-		for (i = 0; i < cantPokeParadas; i++)	{
-			Pokeparada posicion;
-			posicion.first = i;
-			posicion.second = i+2;
-			pokeParadasArr[i] = posicion;
-			pokeParadasAux[i] = posicion;
-		}
-		
-		capMochila = cantGyms*3;
-
-		pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
-				cantGyms, 
-				cantPokeParadas,
-				capMochila, 
-				gimnasiosArr, 
-				pokeParadasArr, 
-				pokeParadasAux);
-
-
-		list<int> *solucionInicialLista = solucionInicial->second;
-
-		list<int>::iterator itLista;
-		for(itLista = solucionInicialLista->begin();
-				itLista != solucionInicialLista->end();
-				itLista++ )
-		{
-			solucionParcial.push_back(*itLista);
-		}
-
-		gimnasiosArrPtr = gimnasiosArr;
-		pokeParadasArrPtr = pokeParadasAux;
-		
 		//mejorar solucion
 		if( solucionParcial.size())
 		{
 			auto start = ya();
 			solucionSwap = mejorar2opt(solucionParcial);
 			auto end = ya();
+			for(int i = 0; i < (int) solucionSwap.size(); i++) cout << solucionSwap[i] << " ";
+			printf("\n");
 			tiemposSwap[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
 			start = ya();
 			solucion2opt = mejorar2opt(solucionParcial);
@@ -207,7 +211,7 @@ vector<int> mejorarSwap(vector<int> solucionParcial){
 				optimizarSolucion(solucionOptimizada);
 				costoAnterior = costoActual;
 				solucion = solucionOptimizada;
-				printf("Costo mejorado: %lld\n", costoActual);
+				//printf("Costo mejorado: %lld\n", costoActual);
 			}
 
 			swap(solucionParcial[i], solucionParcial[j]);//volver al original
@@ -233,7 +237,7 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 				optimizarSolucion(solucionOptimizada);
 				costoAnterior = costoActual;
 				solucion = solucionOptimizada;
-				printf("Costo mejorado: %lld\n", costoActual);
+				//printf("Costo mejorado: %lld\n", costoActual);
 			}
 			
 			//volver al original
@@ -267,7 +271,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 					optimizarSolucion(solucionOptimizada);
 					costoAnterior = costoActual;
 					solucion = solucionOptimizada;
-					printf("Costo mejorado: %lld\n", costoActual);
+					//printf("Costo mejorado: %lld\n", costoActual);
 				}
 			
 				printf("Caso 1 - i: %d, j: %d k: %d\n", i, j ,k);
