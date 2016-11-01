@@ -10,6 +10,10 @@ ALGUN DIBUJITO MOSTRANDO 2-OPT Y 3-OPT
 Además, realizando un simple swap de nodos, podemos obtener muy facilmente soluciones que intercambian 2 o 4 aristas. Serán dos si los nodos intercambiados de posición son consecutivos y cuatro si no lo son.
 
 ALGUN DIBUJITO MOSTRANDO SWAP
+
+Además tenemos que tener en cuenta, que al permutar una solución con alguno de los métodos mencionados, y la solucion sea válida, pueden quedar pokeparadas al final del recorrido, por lo cual es necesario eliminarlas del mismo, ya que al considerar el recorrido hasta las mismas, se podría sumar distancia a la solución que ya no aporta, debido a que todos los gimnasios fueron derrotados. Además,   podría desestimarse como solución candidata si luego se obtiene otra que tiene menor distancia solo porque se están contando pokeparadas de más.\\
+
+HACER ALGUN DIBUJITO QUE LO REFLEJE
  
 De esta manera, podremos movernos a travez del espacio de soluciones vecinas de $S_o$ y tal vez mejorar la solución, aunque que de esto, por ser una heuristica, no tendremos ninguna garantia.
 

@@ -80,7 +80,7 @@ Podemos ver que todos los algoritmos iteran sobre la solución $S_o$, que en el 
 
 Las operaciones $invertir$ $rango$ o $intercambiar$ $rango$ en el peor caso serán realizadas sobre los $n$ nodos de $S_o$.
 
-La operación costo es $\theta(n)$ ya que requiere recorrer $S_o$ hasta la última posición. 
+La operación costo es $\theta(n)$ ya que requiere recorrer $S_o$ hasta la última posición observando si un movimiento es válido. Recordemos que la validez de un movimiento se observa cuando se avanza hacia un gimnasio. Este movimiento será válido si y solo si se puede vencer al gimnasio. Esto último es un chequeo que puede realizarse en tiempo constante.  
 
 Luego, realizar busquedas locales con las vecindades planteadas es, en el peor caso, de complejidad polinómica. 
 
