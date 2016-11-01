@@ -1,96 +1,49 @@
-\indent Para verificar el correcto funcionamiento de nuestro algoritmo , elaboramos diversos tests,
-los cuales ser\'an enunciados a continuaci\'on.\\
+Como mencionamos, nos interesa saber que heuristica de búsqueda local se adapta mejor a cada tipo de entrada estudiada con el algoritmo del ejercicio 2. Para esto, las enunciaremos nuevamente:
 
-\begin{center}
- \subsubsection*{Caso 1: No existe camino para atravezar el laberinto}
-\end{center}
+\begin{enumerate}
+\item No se obtiene soluci\'on por no haber las pokeparadas necesarias para ganar en todos los gimnasios.
+\item No se obtiene soluci\'on ya que la capacidad de la mochila no puede contener las pociones necesarias para vencer a un cierto gimnasio.
+\item Todos los gimnasios sin necesidad de pociones para ser vencidos.
+\item Las pokeparadas y los gimnasios se reciben en orden de la forma en la cual exista una pokeparada puntual para ir a cada gimnasio
+\end{enumerate}
 
-Este caso se da cuando en cualquier camino nos encontramos con paredes irrompibles sin la posibilidad de esquivarlas.\\
- 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- %\includegraphics[scale=1.60]{./EJ1/ej1sinsolucion.jpeg}
-\\{$Ejemplo$ \ 1.1 - $Caso$ $Sin$ $Soluci$\'on}
-  \end{center}
-  \vspace*{0.3cm}
+Veremos para cada una de las familias enunciadas, cual de las búsquedas locales nos provee una solución mejor a la solución provista por el algoritmo $greedy$. O en caso de no proveer ninguna solución, trataremos de dar respuesta a los motivos.
 
-El grafo que representa a esta entrada es de la siguiente forma:\\
+Para cada búsqueda local, se tomará una media alfa podada con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado. De esta forma no habrá outliers en las muestras consideradas. 
+La cantidad de mediciones para tomar la media será de 30. Además se tomará la varianza muestral usando la media calculada y las mediciones que queden luego de aplicar la media.\\
+
+\subsubsection*{Familia 1}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- %\includegraphics[scale=0.5]{./EJ1/ej1grafosinsolucion.jpeg}
- \\{$Representación$ \ 1.1 - $Caso$ $Sin$ $Soluci$\'on}
+ \includegraphics[scale=0.5]{./EJ3/local_search_familia.png}
+ {            \textit{Gráfico \ 3.1 - Búsquedas locales sobre Familia 1}}
   \end{center}
   \vspace*{0.3cm}
 
-
- \begin{center}
- \subsubsection*{Caso 2: Existe un camino sin atravesar paredes para recorrer todo el laberinto}
-\end{center}
- 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- %\includegraphics[scale=1.6]{./EJ1/ej1solucionsinpared.jpeg}
- \\{$Ejemplo$ \ 1.2 - $Caso$ $Sin$ $Romper$ $Paredes$}
-  \end{center}
-  \vspace*{0.3cm}
-
-El grafo que representa a este tipo es de la siguiente forma:\\
+\subsubsection*{Familia 2}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- %\includegraphics[scale=0.5]{./EJ1/ej1grafosolucionsinpared.jpeg}
- \\{$Representación$ \ 1.2 - $Caso$ $Sin$ $Romper$ $Paredes$}
+ \includegraphics[scale=0.5]{./EJ3/local_search_familia.png}
+ {            \textit{Gráfico \ 3.2 - Búsquedas locales sobre Familia 2}}
   \end{center}
   \vspace*{0.3cm}
 
-  
-\begin{center}
- \subsubsection*{Caso 3: Rompiendo todas las paredes posibles para pasar el laberinto}
-\end{center}
- 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- %\includegraphics[scale=1.6]{./EJ1/ej1rompertodasparedes.jpeg}
-\\ {$Ejemplo$ \ 1.3 - $Caso$ $Rompiendo$ $Todas$ $Paredes$ $Las$ $Posibles$}
-  \end{center}
-  \vspace*{0.3cm}
-
-El grafo que representa a este tipo es de la siguiente forma:\\
+\subsubsection*{Familia 3}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- %\includegraphics[scale=0.5]{./EJ1/ej1grafosolucionconpared.jpeg}
- \\{$Representación$ \ 1.3 - $Caso$ $Rompiendo$ $Todas$ $Paredes$ $Las$ $Posibles$}
+ \includegraphics[scale=0.5]{./EJ3/local_search_familia.png}
+ {            \textit{Gráfico \ 3.3 - Búsquedas locales sobre Familia 3}}
   \end{center}
   \vspace*{0.3cm}
 
-
-\begin{center}
-  \subsubsection*{Caso 4: Rompiendo una cantidad menor de paredes posibles para pasar el laberinto}
-\end{center}
-
+\subsubsection*{Familia 4}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- %\includegraphics[scale=1.6]{./EJ1/ej1random.jpeg}
-\\ {$Ejemplo$ \ 1.4 - \textit{Caso con solución}}
+ \includegraphics[scale=0.5]{./EJ3/local_search_familia.png}
+ {            \textit{Gráfico \ 3.4 - Búsquedas locales sobre Familia 4}}
   \end{center}
   \vspace*{0.3cm}
-
-El grafo que representa a este tipo es de la siguiente forma:\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- %\includegraphics[scale=0.5]{./EJ1/ej1graforandom.jpeg}
- \\{$Representación$ \ 1.4 - \textit{Caso con solución}}
-  \end{center}
-  \vspace*{0.3cm}
-
-
-
-\textbf{Aclaraciones:} 
-\begin{itemize}
-\item Nodo color celeste es una pared.
-\item Nodo color rojo es caminable.
-\end{itemize}
