@@ -159,8 +159,6 @@ int main(int argc, char* argv[])
 			posible = posible && (minimo == -1 || ash.distancia<minimo);
 			
 		}
-		cout << "termine rama\n";
-
 	}
 
 	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;

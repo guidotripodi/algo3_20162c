@@ -57,6 +57,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+ 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
 {
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
@@ -105,9 +106,6 @@ int main(int argc, char* argv[])
 			posible = posible && (minimo == -1 || ash.distancia<minimo);
 			
 		}
-		//cout << "termine rama\n";
-		
-
 	}
 
 	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;

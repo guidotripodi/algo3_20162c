@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 		}
 		
 		cap_mochila = cantMaxGym*3	;
-		/*
+		
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
 		for(i = 0; i < cant_gimnasios; i++){
@@ -82,13 +82,13 @@ int main(int argc, char* argv[])
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 			
 			}
-*/
-		auto start = ya();
+
+//		auto start = ya();
 		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
-		auto end = ya();
-			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-				cout << "\n";
-	/*
+//		auto end = ya();
+//			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+//				cout << "\n";
+	
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
@@ -99,12 +99,14 @@ int main(int argc, char* argv[])
 			}
 		}
 		cout << "\n";
-		*/
+		
 		delete f;
 	}
 	return 0;
 }
 
+ 
+ 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
 {
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
@@ -153,8 +155,6 @@ int main(int argc, char* argv[])
 			posible = posible && (minimo == -1 || ash.distancia<minimo);
 			
 		}
-		//cout << "termine rama\n";
-
 	}
 
 	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
