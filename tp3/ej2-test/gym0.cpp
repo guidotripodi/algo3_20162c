@@ -159,7 +159,7 @@ int main(int argc, char* argv[])
 			posible = posible && (minimo == -1 || ash.distancia<minimo);
 			
 		}
-		//cout << "termine rama\n";
+		cout << "termine rama\n";
 
 	}
 

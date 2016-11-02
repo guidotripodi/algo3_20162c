@@ -106,6 +106,7 @@ int main(int argc, char* argv[])
 			
 		}
 		//cout << "termine rama\n";
+		
 
 	}
 

@@ -60,16 +60,11 @@ public:
 			if (posible)
 			{
 				int x, y, xM, yM;
-				if (MP->decisiones->size()==0)
-				{
-					
-					xM = MP->eleccionActual.posicion.first;
-					yM = MP->eleccionActual.posicion.second;
-				}else{
-					xM = MP->decisiones->back().posicion.first;
-					yM = MP->decisiones->back().posicion.second;
-					
-				}
+
+
+				xM = MP->eleccionActual.posicion.first;
+				yM = MP->eleccionActual.posicion.second;
+				
 
 				if (id >= MP->cant_gimnasios)
 				{
@@ -90,13 +85,9 @@ public:
 				//Actualizo posicion
 				posicion.first = x;
 				posicion.second = y;
-				if (MP->paso == 0)
-				{
-					distancia = 0;
-				}else{
-					distancia = pow(x - xM, 2) + pow(y - yM, 2);
-				}
-
+				
+				distancia = pow(x - xM, 2) + pow(y - yM, 2);
+			
 				//printf("[recalcular]  |(%d ,%d) , (%d,%d)| = %d MP->paso: %d  \n",xM, yM, x, y, distancia,MP->paso );
 				//printf("- - -DR: %d\n",distancia );
 
