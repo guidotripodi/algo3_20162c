@@ -44,16 +44,17 @@ int main(int argc, char* argv[])
 	pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
 	
 	if ( f == NULL || f->first == -1)	{
-		cout << "-1" << "\n";
-		return -1;
-	}
-	cout << f->first <<" "<< f->second->size();
-	
-	for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
-		cout << " " << *it;
-
-	}
-	cout << "\n";
+			cout << "-1" << "\n";
+			return -1;
+		}else{
+			cout << f->first <<" "<< f->second->size()<< " ";
+			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
+				cout << *it << " ";
+			}
+		}
+		cout << "\n";
+		
+		delete f;
 	return 0;
 }
 
