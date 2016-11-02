@@ -1,8 +1,59 @@
 \begin{algorithm}[H] %or another one check
- \Fn{main()}{
+ \Fn{tabuSearch()}{
  %     \SetAlgoLined
+ $S_o$ es la solución provista por el algoritmo greedy \\
+ ConjuntoTabu attributosTabu\\ 
+ Recorrido mejorSolucion $\leftarrow$ $S_o$ \\
+ Recorrido  solucionActual $\leftarrow$ $S_o$ \\ 
+ entero mejorCosto $\leftarrow$ CalcularCosto(mejorSolucion) \\
+ 
+ \For{0 hasta Cantidad de iteraciones maxima}{
+  	Recorrido mejorCandidato \\
+  	Lista<Arista> aristasModificadas \\
+  	entero costoMejorCandidato $\leftarrow$ -1 \\
+  	
+  	Conjunto<Recorrido, Lista<Arista>> vecindadActual $\leftarrow$ BusquedaLocalFiltrada(s) \\
+  	
+  	\For{par en vecindadActual}{
+  		Recorrido candidatoActual $\leftarrow$ par.first \\
+  		entero costoActual $\leftarrow$ CalcularCosto(candidatoActual) \\
+		costoMejorCandidato  	$\leftarrow$ CalcularCosto(mejorCandidatol) \\
+		
+		\If{costoActual < costoMejor $\vee$ (!tabuCount(atributosTabu, candidatoActual) $\wedge$ (costoActual < costoMejorCandidato $\vee$ costoMejorVecino = -1)}{
+			aristasModificadas $\leftarrow$ par.second \\
+			mejorCandidato $\leftarrow$ candidatoActual \\
+		}
+  	}  	
+  	
+	\If{|mejorCandidato| > 0}{
+		<Recorrido, Lista<Arista>> menosTabu $\leftarrow$ funcionAspiracion(atributosTabu, vecindad) \\
+		
+		mejorCandidato $\leftarrow$ menosTabu.first \\
+		aristasModificadas $\leftarrow$ menosTabu.second \\
+	}  	
 	
+	
+	solucionActual $\leftarrow$ mejorCandidato \\
+		
+	\If{costoMejorCandidato < mejorCosto}{
+		mejorSolucion $\leftarrow$ mejorCandidato \\
+		mejorCosto $\leftarrow$ costoMejorCandidato \\
+	}
+
+   \For{Arista a en aristasModificadas}{
+   		atributosTabu.push(a) \\
+   }
+  	
+   \While{|atributosTabu| > TenorTabu}{
+		atributosTabu.pop() \\
+   }
+
 }
+
+devolver mejorSolucion \\
+
+}
+
 \end{algorithm}
 
 
