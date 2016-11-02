@@ -111,7 +111,7 @@ public:
 	};
 
 
-	MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[]);
+	MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[], int idInicial);
 	~MaestroPokemon();
 	//Devuelve el identificador de la eleccion
 

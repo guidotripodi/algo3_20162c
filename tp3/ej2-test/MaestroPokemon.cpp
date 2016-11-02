@@ -39,7 +39,7 @@ void MaestroPokemon::printStatus() const
 }
 
 
-MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[]){
+MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[], int idInicial){
 	
 	this->cant_gimnasios = cant_gimnasios;
 	this->cant_gimnasios_por_ganar = cant_gimnasios;
@@ -58,7 +58,11 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 	this->distancia=0;
 	
 	
-	for (int i = 0; i < this->cant_gimnasios + this->cant_pokeParadas; i++)
+	for (int i = idInicial; i < this->cant_gimnasios + this->cant_pokeParadas - idInicial; i++)
+	{
+		opciones->push_back(i);
+	}
+	for (int i = 0; i < idInicial; i++)
 	{
 		opciones->push_back(i);
 	}
@@ -102,7 +106,7 @@ bool MaestroPokemon::eleccionGolosa(){
 
 	opciones->erase(itm);
 	//Incremento la distancia
-	distancia = this->distancia + eleccionActual.distancia;
+	distancia += eleccionActual.distancia;
 	
 	if (eleccionActual.tipo == GIMNASIO)
 	{
