@@ -112,8 +112,6 @@ int main()
 			auto start = ya();
 			solucionSwap = mejorar2opt(solucionParcial);
 			auto end = ya();
-			for(int i = 0; i < (int) solucionSwap.size(); i++) cout << solucionSwap[i] << " ";
-			printf("\n");
 			tiemposSwap[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
 			start = ya();
 			solucion2opt = mejorar2opt(solucionParcial);
@@ -129,7 +127,7 @@ int main()
 			printf("%d", -1);
 		}
 
-		delete solucionInicial;
+		//delete solucionInicial;
 	}
 
 	pair <float, float> estadisticasSwap = mediaPodadaVarianzaMuestral(tiemposSwap);
@@ -140,19 +138,30 @@ int main()
 	long long mejora2opt = calcularCosto(solucionParcial) - calcularCosto(solucion2opt);
 	long long mejora3opt = calcularCosto(solucionParcial) - calcularCosto(solucion3opt);
 
-	cout << estadisticasSwap.first << estadisticasSwap.second << mejoraSwap << "\n";
-	for(int i = 0; i < (int) solucionSwap.size(); i++) cout << solucionSwap[i];
-	printf("\n");
+	cout << estadisticasSwap.first << " " 
+		<< estadisticasSwap.second << " "
+		<< mejoraSwap << "\n";
+
+	for(int i = 0; i < (int) solucionSwap.size(); i++) 
+		cout << solucionSwap[i] << " ";
+	cout << "\n";
 
 	
-	cout << estadisticas2opt.first << estadisticas2opt.second << mejora2opt << "\n";
-	for(int i = 0; i < (int) solucion2opt.size(); i++) cout << solucion2opt[i];
-	printf("\n");
+	cout << estadisticas2opt.first << " "
+		<< estadisticas2opt.second << " "
+		<< mejora2opt << "\n";
+
+	for(int i = 0; i < (int) solucion2opt.size(); i++) 
+		cout << solucion2opt[i] << " ";
+	cout << "\n";
 
 	
-	cout << estadisticas3opt.first << estadisticas3opt.second << mejora3opt << "\n";
-	for(int i = 0; i < (int) solucion3opt.size(); i++) cout << solucion3opt[i];
-	printf("\n");
+	cout << estadisticas3opt.first << " "
+		<< estadisticas3opt.second << " " 
+		<< mejora3opt << "\n";
+	for(int i = 0; i < (int) solucion3opt.size(); i++) 
+		cout << solucion3opt[i] << " ";
+	cout << "\n";
 
 
 	return 0;

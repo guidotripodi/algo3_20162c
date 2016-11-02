@@ -11,7 +11,7 @@
 #include "MaestroPokemon.hpp"
 
 #define ya chrono::high_resolution_clock::now
-#define TEST_ITER 40
+#define TEST_ITER 20
 
 using namespace std;
 
@@ -36,7 +36,7 @@ Pokeparada *pokeParadasArrPtr;
 int main()
 {
 	
-	int j = 49;
+	int j = 8;
 	cantGyms = j+1;
 	cantPokeParadas = j;
 	pair <pair<int,int>, int> gimnasiosArr[cantGyms];
@@ -53,57 +53,56 @@ int main()
 
 	vector<int> solucionParcial;
 	
+	int i = 0;
+	for (i = 0; i < cantGyms; i++)
+	{
+		Gimnasio gymPuebloPaleta;
+		gymPuebloPaleta.first.first = i;
+		gymPuebloPaleta.first.second = i+1;
+		gymPuebloPaleta.second = (i % 3) + 1; //{1..3}
+		gimnasiosArr[i] = gymPuebloPaleta;
+		
+	}
+	for (i = 0; i < cantPokeParadas; i++)
+	{
+		Pokeparada posicion;
+		posicion.first = i;
+		posicion.second = i+2;
+		pokeParadasArr[i] = posicion;
+		pokeParadasAux[i] = posicion;
+	}
+	
+	capMochila = cantGyms*3;
+
+	pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
+			cantGyms, 
+			cantPokeParadas,
+			capMochila, 
+			gimnasiosArr, 
+			pokeParadasArr, 
+			pokeParadasAux);
+
+
+	list<int> *solucionInicialLista = solucionInicial->second;
+
+	list<int>::iterator itLista;
+	for(itLista = solucionInicialLista->begin();
+			itLista != solucionInicialLista->end();
+			itLista++ )
+	{
+		solucionParcial.push_back(*itLista);
+	}
+
+	gimnasiosArrPtr = gimnasiosArr;
+	pokeParadasArrPtr = pokeParadasAux;
+	
 	for(int it = 0; it < TEST_ITER; it++)
 	{
-		
-		int i = 0;
-		for (i = 0; i < cantGyms; i++)
-		{
-			Gimnasio gymPuebloPaleta;
-			gymPuebloPaleta.first.first = i;
-			gymPuebloPaleta.first.second = i+1;
-			gymPuebloPaleta.second = (i % 3) + 1; //{1..3}
-			gimnasiosArr[i] = gymPuebloPaleta;
-			
-		}
-		for (i = 0; i < cantPokeParadas; i++)
-		{
-			Pokeparada posicion;
-			posicion.first = i;
-			posicion.second = i+2;
-			pokeParadasArr[i] = posicion;
-			pokeParadasAux[i] = posicion;
-		}
-		
-		capMochila = cantGyms*3;
-
-		pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
-				cantGyms, 
-				cantPokeParadas,
-				capMochila, 
-				gimnasiosArr, 
-				pokeParadasArr, 
-				pokeParadasAux);
-
-
-		list<int> *solucionInicialLista = solucionInicial->second;
-
-		list<int>::iterator itLista;
-		for(itLista = solucionInicialLista->begin();
-				itLista != solucionInicialLista->end();
-				itLista++ )
-		{
-			solucionParcial.push_back(*itLista);
-		}
-
-		gimnasiosArrPtr = gimnasiosArr;
-		pokeParadasArrPtr = pokeParadasAux;
-		
 		//mejorar solucion
 		if( solucionParcial.size())
 		{
 			auto start = ya();
-			solucionSwap = mejorar2opt(solucionParcial);
+			solucionSwap = mejorarSwap(solucionParcial);
 			auto end = ya();
 			tiemposSwap[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
 			start = ya();
@@ -111,7 +110,7 @@ int main()
 			end = ya();
 			tiempos2opt[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
 			start = ya();
-			solucion3opt = mejorar2opt(solucionParcial);
+			solucion3opt = mejorar3opt(solucionParcial);
 			end = ya();
 			tiempos3opt[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
 		} 
@@ -120,7 +119,6 @@ int main()
 			printf("%d", -1);
 		}
 
-		delete solucionInicial;
 	}
 
 	pair <float, float> estadisticasSwap = mediaPodadaVarianzaMuestral(tiemposSwap);
@@ -131,21 +129,33 @@ int main()
 	long long mejora2opt = calcularCosto(solucionParcial) - calcularCosto(solucion2opt);
 	long long mejora3opt = calcularCosto(solucionParcial) - calcularCosto(solucion3opt);
 
-	cout << estadisticasSwap.first << estadisticasSwap.second << mejoraSwap << "\n";
-	for(int i = 0; i < (int) solucionSwap.size(); i++) cout << solucionSwap[i];
-	printf("\n");
+	cout << estadisticasSwap.first << " " 
+		<< estadisticasSwap.second << " "
+		<< mejoraSwap << "\n";
+
+	for(int i = 0; i < (int) solucionSwap.size(); i++) 
+		cout << solucionSwap[i] << " ";
+	cout << "\n";
 
 	
-	cout << estadisticas2opt.first << estadisticas2opt.second << mejora2opt << "\n";
-	for(int i = 0; i < (int) solucion2opt.size(); i++) cout << solucion2opt[i];
-	printf("\n");
+	cout << estadisticas2opt.first << " "
+		<< estadisticas2opt.second << " "
+		<< mejora2opt << "\n";
+
+	for(int i = 0; i < (int) solucion2opt.size(); i++) 
+		cout << solucion2opt[i] << " ";
+	cout << "\n";
 
 	
-	cout << estadisticas3opt.first << estadisticas3opt.second << mejora3opt << "\n";
-	for(int i = 0; i < (int) solucion3opt.size(); i++) cout << solucion3opt[i];
-	printf("\n");
+	cout << estadisticas3opt.first << " "
+		<< estadisticas3opt.second << " " 
+		<< mejora3opt << "\n";
+	for(int i = 0; i < (int) solucion3opt.size(); i++) 
+		cout << solucion3opt[i] << " ";
+	cout << "\n";
 
 
+	delete solucionInicial;
 	return 0;
 }
 
@@ -166,19 +176,19 @@ pair<float, float> mediaPodadaVarianzaMuestral(vector<long long> &muestra)
 		muestra.pop_back();
 
 	//for(int i = 0; i < x2; i++)
-	//	muestra.pop_front();
+	//	muestra.pop_front(); pop front no existe!
 
 	long long sum = 0;
 	for(int i = x2; i < (int)muestra.size(); i++) sum += muestra[i];
 	float mean = (float) sum / (float) (muestra.size() - x2);
 	
 	float sampleVariance;
-	float total = 0;
+	float total = 0.0;
 	for(int i = x2; i < (int)muestra.size(); i++)
 	{
 		sampleVariance = muestra[i] - mean;
-		sampleVariance *= sampleVariance;
-		total += sampleVariance;
+		sampleVariance = sampleVariance * sampleVariance;
+		total = total + sampleVariance;
 	}
 	total = total / (float)(muestra.size() - x2);
 	total = sqrt(total);
@@ -202,7 +212,6 @@ vector<int> mejorarSwap(vector<int> solucionParcial){
 				optimizarSolucion(solucionOptimizada);
 				costoAnterior = costoActual;
 				solucion = solucionOptimizada;
-				printf("Costo mejorado: %lld\n", costoActual);
 			}
 
 			swap(solucionParcial[i], solucionParcial[j]);//volver al original
@@ -228,7 +237,6 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 				optimizarSolucion(solucionOptimizada);
 				costoAnterior = costoActual;
 				solucion = solucionOptimizada;
-				printf("Costo mejorado: %lld\n", costoActual);
 			}
 			
 			//volver al original
@@ -262,7 +270,6 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 					optimizarSolucion(solucionOptimizada);
 					costoAnterior = costoActual;
 					solucion = solucionOptimizada;
-					printf("Costo mejorado: %lld\n", costoActual);
 				}
 			
 				printf("Caso 1 - i: %d, j: %d k: %d\n", i, j ,k);
