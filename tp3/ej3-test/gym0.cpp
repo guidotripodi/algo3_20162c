@@ -66,6 +66,7 @@ int main()
 		{
 			gymPuebloPaleta.second  = i;
 		}
+		gimnasiosArr[i] = gymPuebloPaleta;
 	}
 	for (i = 0; i < cantPokeParadas; i++)
 	{
@@ -94,8 +95,15 @@ int main()
 			itLista != solucionInicialLista->end();
 			itLista++ )
 	{
-		solucionParcial.push_back(*itLista);
 		printf("%d ", *itLista);
+	}
+	cout << "\n";
+
+	for(itLista = solucionInicialLista->begin();
+			itLista != solucionInicialLista->end();
+			itLista++ )
+	{
+		solucionParcial.push_back(*itLista);
 	}
 	cout << "\n";
 
