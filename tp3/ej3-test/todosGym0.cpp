@@ -445,7 +445,7 @@ long long calcularCosto(vector<int> &camino){
 void optimizarSolucion(vector<int> &solucion)
 {
 	int i = solucion.size() -1;
-	while(solucion[i] >= cantGyms && i > 0)
+	while(solucion[i] > cantGyms && i > 0)
 	{
 		solucion.pop_back();
 		i--;

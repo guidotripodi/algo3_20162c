@@ -95,7 +95,9 @@ int main()
 			itLista++ )
 	{
 		solucionParcial.push_back(*itLista);
+		printf("%d ", *itLista);
 	}
+	cout << "\n";
 
 	gimnasiosArrPtr = gimnasiosArr;
 	pokeParadasArrPtr = pokeParadasAux;
@@ -448,7 +450,7 @@ long long calcularCosto(vector<int> &camino){
 void optimizarSolucion(vector<int> &solucion)
 {
 	int i = solucion.size() -1;
-	while(solucion[i] >= cantGyms && i > 0)
+	while(solucion[i] > cantGyms && i > 0)
 	{
 		solucion.pop_back();
 		i--;
