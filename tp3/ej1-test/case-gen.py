@@ -27,16 +27,27 @@ def randomPositions(n, notin=[]):
 
 	return li	
 
-def circularPositions(rad_circ, n):
-	obj_x_circ = n/len(rad_circ)
+def circularPositions(n, notin=[], rad_circ=10, dist_anillos = 10):
+
+	
+	
 	li = []
-	for r_i in range(0,len(rad_circ)):
-		r = rad_circ[r_i]	
-		for y in xrange(0,obj_x_circ):
-			t = 2*pi/obj_x_circ * y
-			v = (int(r*cos(t)), int(r*sin(t)))
+	while n>0:
+		
+		noSePisaron = True
+		y = 0
+		while noSePisaron:
+			t = y
+			v = (int(rad_circ*cos(t)), int(rad_circ*sin(t)))
+
+			if v in notin or v in li:
+				rad_circ = rad_circ + dist_anillos
+				noSePisaron = False
+				continue
 			
 			li.append(v)
+			n = n-1
+			y = y+1
 	
 	return li	
 
@@ -115,8 +126,8 @@ def randomInstance(n):
  #		  mochila K=10
 def circularInstance(cant_gyms, cant_pp):
 	mochila = 10
-	gyms = circularPositions([1, 2], cant_gyms)
-	pps = circularPositions([0.5, 1.5], cant_pp)
+	gyms = circularPositions(cant_gyms,rad_circ=5, dist_anillos= 10)
+	pps = circularPositions(cant_pp, notin=gyms, rad_circ=10, dist_anillos = 10)
 	gymsD = randomPotions(gyms, pps, mochila)
 
 	return gymsD, pps, mochila
@@ -127,11 +138,7 @@ def circularInstance(cant_gyms, cant_pp):
  #		  Pociones random pero con solucion
  #		  mochila K=0
 def noBagInstance(cant_gyms, cant_pp):
-	gyms = circularPositions([1, 2], cant_gyms)
-	pps = circularPositions([0.5, 1.5], cant_pp)
-	gymsD = randomPotions(gyms, pps, 0)
-
-	return gymsD, pps, 0 
+	pass
 
  #Todos gimnasios: Determinado N (se parametriza cuanto de uno y de otro)
  #		  Posiciones en forma de anillos concentricos de radios 2, 1.5 1 0.5
@@ -148,7 +155,7 @@ def noPPInstance(n):
 ###############################################
 #				MAIN
 
-plotInstance(circularInstance(10, 10))
+plotInstance(circularInstance(55, 55))
 
 #for i in xrange(3,1000):
 #	r = randomInstance(i)
