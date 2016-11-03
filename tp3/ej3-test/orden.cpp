@@ -213,7 +213,6 @@ vector<int> mejorarSwap(vector<int> solucionParcial){
 			if (costoActual != -1 && costoActual < costoAnterior) {
 				costoAnterior = costoActual;
 				solucion = solucionOptimizada;
-				printf("hola\n");
 			}
 
 			swap(solucionParcial[i], solucionParcial[j]);//volver al original
@@ -453,9 +452,7 @@ void optimizarSolucion(vector<int> &solucion)
 	}
 }
 
-
-
- pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
+pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
 {
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
 	int pocionesANecesitar = 0;
@@ -480,11 +477,11 @@ void optimizarSolucion(vector<int> &solucion)
 	std::list<int> * camino;
 
 
-	for (int x = 0; x < cant_pokeParadas; ++x)
+	for (int x = 0; x < cant_pokeParadas + cant_gimnasios; ++x)
 	{
 
 		posible = true;
-		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
+		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, x); //Aca se registran en el Pokedex
 		while(posible){
 			//ash.printStatus();
 			if (ash.gane())
@@ -503,32 +500,6 @@ void optimizarSolucion(vector<int> &solucion)
 			posible = posible && (minimo == -1 || ash.distancia<minimo);
 			
 		}
-		//cout << "termine rama\n";
-		pair <int, int> posicion;
-		for (int h = 0; h < cant_pokeParadas; ++h){
-			/*Luego de la vuelta completa reordeno el array pp pasando al primer pp al ultimo y 
-			muevo todo de esta forma me garantizo que todas las pp van a tener su rama como inicial*/
-			if (h == 0)	{
-				posicion.first = posiciones_pp[cant_pokeParadas-1].first; 
-				posicion.second = posiciones_pp[cant_pokeParadas-1].second; 
-			//	printf("Posicion : %d posicion: %d \n",posicion.first, posicion.second );
-				posiciones_pp[cant_pokeParadas-1].first = posiciones_pp[0].first;
-				posiciones_pp[cant_pokeParadas-1].second = posiciones_pp[0].second;
-				posiciones_pp[0].first = posiciones_pp[1].first;
-				posiciones_pp[0].second = posiciones_pp[1].second;
-			}else{
-				if (h+1 < cant_pokeParadas-1)	{
-					posiciones_pp[h].first = posiciones_pp[h+1].first;
-					posiciones_pp[h].second = posiciones_pp[h+1].second;
-					
-				}else{
-					posiciones_pp[cant_pokeParadas-2].first = posicion.first;
-					posiciones_pp[cant_pokeParadas-2].second = posicion.second;
-				
-				}
-			}
-		}
-
 	}
 
 	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
@@ -536,3 +507,4 @@ void optimizarSolucion(vector<int> &solucion)
 	final->second = camino;
 	return final;
 }
+

@@ -13,12 +13,13 @@ LDFLAGS=
 SOURCES=ej3.cpp MaestroPokemon.cpp trie.cpp orden.cpp sinOrden.cpp gym0.cpp todosGym0.cpp
 
 # Objetos que serán generados
-MAINOBJECTS=ej3.o sinSolucionPorPP.o sinSolucionPorCapMochila.o orden.o sinOrden.o gym0.o todosGym0.o
+MAINOBJECTS= sinSolucionPorPP.o sinSolucionPorCapMochila.o orden.o sinOrden.o gym0.o todosGym0.o
 
-OBJECTS=MaestroPokemon.o trie.o
+OBJECTS=MaestroPokemon.o trie.o 
+#ej3.o
 
 # Nombre del ejecutable a generar
-EXECUTABLES=ej3.test todosGym0.test orden.test sinOrden.test gym0.test  
+EXECUTABLES=orden.test todosGym0.test sinOrden.test gym0.test   
 #sinSolucionPorPP.test sinSolucionPorCapMochila.test 
 
 all: $(EXECUTABLES)
