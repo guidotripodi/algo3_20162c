@@ -1,10 +1,8 @@
-\indent Veremos que es lo que sucede al ir variando los parámetros de entrada para cada familia, de manera tal que, a medida que F, C y P crecen linealmente podamos observar que sucede con cada familia de casos (es decir, las familias se mantienen, solo varia el tamaño de la entrada en todos los casos).\\
+\indent Veremos que es lo que sucede al ir variando los parámetros de entrada para cada familia, de manera tal que, a medida que F y C crecen linealmente, podamos observar que sucede con cada familia de casos (es decir, las familias se mantienen, solo varia el tamaño de la entrada en todos los casos).\\
 Se comienza, por lo tanto, con una entrada de 5 filas y columnas y se la aumenta en cada test en una fila y columna hasta llegar a una matriz de 50*50. De manera que no hay desigualdades y todas las familias se miden en instancias de igual tamaño.\\
 El origen siempre estará en la primer columna posible y el destino en la última. A medida que la matriz crezca, las posiciones de los mismos no serán alteradas y la cantidad de paredes y como varie el $P_{max}$ en cada caso, serán acordes para que siempre se encuentren dentro de la misma familia.
 
 Para obtener dichas instancias se realizaron aproximadamente unas 20 corridas con el mismo input y se tom\'o el promedio de las mismas en cada instancia para obtener un valor m\'as cercano a la media.\\ 
-
-
 
 Se puede observar en el  gráfico 1.1, cinco funciones, que representan el tiempo de ejecuci\'on de las familias de casos mencionadas en el apartado anterior:\\
 
@@ -18,7 +16,7 @@ Se puede observar en el  gráfico 1.1, cinco funciones, que representan el tiemp
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
- \includegraphics[scale=0.5]{./EJ1/comparativo.png}
+ \includegraphics[scale=0.4]{./EJ1/comparativo.png}
  {Gr\'afico \ 1.1 - $Comparativo$}
   \end{center}
   \vspace*{0.3cm}
@@ -48,32 +46,33 @@ Uno de los peores casos para nuestro algoritmo es la familia 5 "\textbf{Múltipl
   \end{center}
   \vspace*{0.3cm}
 
-Veamos en detalle como se comportan el mejor y peor caso con respecto a la complejidad calculada.\\
+Para observar con mejor detalle la diferencia entre el mejor y peor caso exponemos el siguiente gráfico sin las demás familias:
 
   \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.5]{./EJ1/MejorYPeorCaso.png}
+\includegraphics[scale=0.65]{./EJ1/MejorYPeorCaso.png}
 {Gr\'afico 1.5 - $Comparativo$}
   \end{center}
   \vspace*{0.3cm}
 
-EXPLICAR COMO SE OBTUVO EL FITEO CON LA COMPLEJIDAD!!!
+Dado que las familias de casos vienen dadas por la cantidad y disposición de las paredes en el mapa y el valor del $P_{max}$ para cada una de las familias tiene sentido si se asigna un valor determinado, el caso de análisis donde se varía el tamaño de entrada y la cantidad y disposición de paredes, dejando fijo $P_{max}$, carece de sentido analítico ya que ,  
 
-Podemos ver en este gr\'afico comparativo como las familias est\'an acotadas por la funci\'on de la complejidad te\'orica calculada.\\
+%Para poder evidenciar la complejidad del algoritmo sobre las mediciones tomadas, al depender la misma de F*C cantidad de elementos de la entrada, y P un parámetro que solo influye siempre y cuando $P<F*C$, se necesitaria poder variar F*C con P fijo y vice versa. No obstante esto solo tiene sentido al variar el parametro P con F*C fijo, ya que en el caso contrario, 
+
 
 \subsubsection*{Variando $P_{max}$ en un laberinto}
 
-Para el siguiente test vamos a trabajar con un laberinto de tamaño fijo, con el origen en la segunda columna y el destino en la penultima (misma fila), que además en cada posición solo tiene paredes. Siendo el laberinto de tamaño 100*100 habrá 96 paredes por fila (sin contar los bordes).
-Mostraremos a continuaci\'on que sucede al variar $P_{max}$ desde 0 hasta 96.\\
+Para el siguiente test vamos a trabajar con un laberinto de tamaño fijo, con el origen en la segunda columna y el destino en la penultima (misma fila), que además en cada posición \textbf{solo tiene paredes}. Siendo el laberinto de tamaño 100*100 habrá 96 paredes por fila (sin contar los bordes).
+Mostraremos a continuaci\'on que sucede al variar $P_{max}$ desde 0 hasta 96 linealmente.\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.6]{./EJ1/pVariableBfs.png}
+\includegraphics[scale=0.5]{./EJ1/pVariableBfs.png}
 {Gr\'afico 1.6 - $P$ $variable$ $y$ $F,C$ $fijos$}
   \end{center}
   \vspace*{0.3cm}
 
-Se puede observar en el gr\'afico 1.6 como al aumentar $P_{max}$, aumenta cuadráticamente el tiempo de resoluci\'on, ya que lo que sucede es que al aumentar el $P_{max}$ el algoritmo solo puede chequear en una sub matriz de $P_{max}^2$ caminos posibles a destino.\\
+Se puede observar en el gr\'afico 1.6 como al aumentar $P_{max}$, aumenta cuadráticamente el tiempo de resoluci\'on, ya que lo que sucede es que al aumentar el $P_{max}$ el algoritmo solo puede chequear en una sub matriz de $P_{max}^2$ caminos posibles a destino, dado que en cada posición solo hay paredes y es por esto que no puede recorrer una distancia mayor a $P_{max}$ en ninguna dirección.\\
 Al ser un algoritmo con espirutu $BFS$ recorre en anchura estas sub matrices, probando todas las posibilidades sin seguir un camino particular.  Por lo cual, que haya un camino directo a destino, rompiendo exactamente 96 paredes, no influye sobre el resultado. Ya que para llegar a destino, serán analizadas todas las posibilidades. 
 
 Conociendo aproximadamente la dirección del mejor camino, si el algoritmo recorriera en profundidad (como un $DFS$), y además, el primer vecino analizado fuera el derecho (en dirección al destino), podría obtenerse un mejor resultado, ya que el camino elegido sería el directo al destino.\\ 
