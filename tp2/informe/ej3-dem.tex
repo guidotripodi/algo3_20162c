@@ -1,8 +1,0 @@
-
-%La onda seria explicar porque representar al problema como un grafo orientado y tomar camino minimo sobre el resuelve el problema correctamente.
-
-Nuestro problema plantea un escenario donde deseamos ir de la estacion 1 a la estacion $n$ en el menor tiempo posible. Tomamos cada estación como un nodo del grafo y el trayecto entre dos estaciones como una arista. Utilizamos como el peso de estas aristas el tiempo que toma ir de una estacion a otra. Luego, el tiempo que toma recorrer un camino entre estaciones es la suma del peso de sus aristas. 
-
-Teniendo en cuenta esto, podemos aplicar algún algoritmo que busque el camino mínimo en nuestro grafo. El algoritmo de Dijkstra nos va a permitir esto. Podemos aplicarlo al ser nuestro grafo dirigido y sin ejes negativos. Cada vez que visita un nodo nos asegura que ya encontro el camino mínimo al mismo, por lo tanto podemos dejar de buscar una vez que nuestro algoritmo visita el nodo que representa la salida de la fortaleza.
-
-Para que el algoritmo pueda visitar un nodo tiene que ser el nodo no visitado con menor distancia al nodo origen. Esta distancia parcial se calcula con los caminos que se pueden formar con los nodos visitados. Si un nodo puede ser visitado entonces no es posible que exista un camino más corto hacia él, sino ese camino hubiera sido descubierto antes debido a que el algoritmo siempre visita los nodos más cercanos.

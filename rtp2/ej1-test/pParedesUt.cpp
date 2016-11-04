@@ -116,10 +116,9 @@ int main(){
      '#','#','#','#','#','#','#','#','#'};
      */
     
-    
-    for (int l = 0; l < 50; l++){
-        F = 50;
-        C = 50;
+    for (int l = 0; l <= 96; l++){
+        F = 100;
+        C = 100;
         PMax = l;
         
         for (int cantIt=0; cantIt < 19; cantIt++) {
@@ -163,8 +162,6 @@ int main(){
              }
              */
             
-            auto start = ya();
-            
             Map = new Node**[F];
             
             for(int i = 0; i < F; i++){
@@ -192,6 +189,8 @@ int main(){
                     }
                 }
             }
+            
+            auto start = ya(); // se comienza a medir desde aqui dado que el procesador optimiza la creacion de la matriz (ya que es siempre la misma) y hace que los resultados no sean adecuados.
         
             mazeBfs();
 
