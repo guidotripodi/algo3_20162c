@@ -55,10 +55,11 @@ Para observar con mejor detalle la diferencia entre el mejor y peor caso exponem
   \end{center}
   \vspace*{0.3cm}
 
-Dado que las familias de casos vienen dadas por la cantidad y disposición de las paredes en el mapa y el valor del $P_{max}$ para cada una de las familias tiene sentido si se asigna un valor determinado, el caso de análisis donde se varía el tamaño de entrada y la cantidad y disposición de paredes, dejando fijo $P_{max}$, carece de sentido analítico ya que ,  
+Dado que los valores relevantes de $P_{max}$ están acotados por F*C, es decir, a lo sumo se pueden romper F*C paredes, se evaluará la variación de este parámetro en una matriz de tamaño fijo y cantidad y disposición de paredes fijas.
+El caso contrario, en donde se fija $P_{max}$ y se fija el tamaño de la matriz variando la cantidad y disposición de paredes, no será analizado ya que al hacer esto, se obtendrían resultados para diferentes familias según la configuración que se realice y esto 
+es equivalente al análisis estudiado en el tests de familias.
 
-%Para poder evidenciar la complejidad del algoritmo sobre las mediciones tomadas, al depender la misma de F*C cantidad de elementos de la entrada, y P un parámetro que solo influye siempre y cuando $P<F*C$, se necesitaria poder variar F*C con P fijo y vice versa. No obstante esto solo tiene sentido al variar el parametro P con F*C fijo, ya que en el caso contrario, 
-
+De esta forma el análisis de complejidad será reducido a estudiar el comportamiento de $P_{max}$ con un laberinto fijo.
 
 \subsubsection*{Variando $P_{max}$ en un laberinto}
 
@@ -72,8 +73,8 @@ Mostraremos a continuaci\'on que sucede al variar $P_{max}$ desde 0 hasta 96 lin
   \end{center}
   \vspace*{0.3cm}
 
-Se puede observar en el gr\'afico 1.6 como al aumentar $P_{max}$, aumenta cuadráticamente el tiempo de resoluci\'on, ya que lo que sucede es que al aumentar el $P_{max}$ el algoritmo solo puede chequear en una sub matriz de $P_{max}^2$ caminos posibles a destino, dado que en cada posición solo hay paredes y es por esto que no puede recorrer una distancia mayor a $P_{max}$ en ninguna dirección.\\
-Al ser un algoritmo con espirutu $BFS$ recorre en anchura estas sub matrices, probando todas las posibilidades sin seguir un camino particular.  Por lo cual, que haya un camino directo a destino, rompiendo exactamente 96 paredes, no influye sobre el resultado. Ya que para llegar a destino, serán analizadas todas las posibilidades. 
+Se puede observar en el gr\'afico 1.6 como al aumentar $P_{max}$, aumenta cuadráticamente el tiempo de resoluci\'on, ya que lo que sucede es que al aumentar el $P_{max}$ el algoritmo solo puede chequear en una sub matriz de $P_{max}^2$ caminos posibles a destino y como en cada posición solo hay paredes, no se podrá recorrer una distancia mayor a $P_{max}$ en ninguna dirección.\\
+Al ser un algoritmo con espirutu $BFS$, recorre en anchura estas sub matrices, probando todas las posibilidades sin seguir un camino particular. De esta manera, que haya un camino directo a destino, rompiendo exactamente 96 paredes, no influye sobre el resultado. Ya que para llegar a destino, serán analizadas todas las posibilidades. 
 
 Conociendo aproximadamente la dirección del mejor camino, si el algoritmo recorriera en profundidad (como un $DFS$), y además, el primer vecino analizado fuera el derecho (en dirección al destino), podría obtenerse un mejor resultado, ya que el camino elegido sería el directo al destino.\\ 
 Por lo tanto fué modificado el algoritmo para utilizar una pila en lugar de una cola, y además apilar los vecinos de manera tal que el último en apilarse sea el derecho, obteniendo de esta manera un pseudo $DFS$ que nos permite corroborar este hecho.\\
