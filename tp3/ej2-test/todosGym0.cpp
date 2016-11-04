@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 	pair <int, int>  posiciones_pp[cantMaxPP];
 	pair <int, int>  pp_aux[cantMaxPP];
 	
-	for(int j = 4; j < 50; j++){
+	for(int j = 2; j < 50; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		
@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
 			cout << "-1" << "\n";
 			//return -1;
 		}else{
-			//cout << f->first <<" "<< f->second->size();
+			cout << f->first <<" "<< f->second->size() << " ";
 			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << *it << " ";
 			}

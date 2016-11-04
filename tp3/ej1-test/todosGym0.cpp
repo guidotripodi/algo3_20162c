@@ -6,38 +6,59 @@
 #include <utility>
 #include "MaestroPokemon.hpp"
 #include <chrono>
+#define cantMaxGym 101
+#define cantMaxPP 100
 #define ya chrono::high_resolution_clock::now
 using namespace std;
+
 
 
 pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[]);
 
 int main(int argc, char* argv[])
 {
-/*Caso con GYM con 0:*/
+	/*int cant_gimnasios, cant_pokeParadas, cap_mochila;
+	cin >> cant_gimnasios >> cant_pokeParadas >> cap_mochila;
+
+
+	pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
+	pair <int, int>  posiciones_pp[cant_pokeParadas];
+
+	int i = 0;
+	for (i = 0; i < cant_gimnasios; i++){
+		pair <pair<int,int>, int> gymPuebloPaleta;
+		
+		cin >> gymPuebloPaleta.first.first >> gymPuebloPaleta.first.second >> gymPuebloPaleta.second;
+		posiciones_gym[i] = gymPuebloPaleta;
+		
+	}
+	for (i = 0; i < cant_pokeParadas; i++)	{
+		pair <int, int> posicion;
+		
+		cin >> posicion.first >> posicion.second;
+		
+		posiciones_pp[i] = posicion;
+		
+	}*/
+
+	/*Caso sin solucion:*/
 	int cant_gimnasios = 0; 
 	int cant_pokeParadas = 0;
 	int cap_mochila = 0;
+	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
+	pair <int, int>  posiciones_pp[cantMaxPP];
+	pair <int, int>  pp_aux[cantMaxPP];
 	
 	for(int j = 2; j < 10; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
-		
-		pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
-		pair <int, int>  posiciones_pp[cant_pokeParadas];
 		
 		int i = 0;
 			for (i = 0; i < cant_gimnasios; i++){
 			pair <pair<int,int>, int> gymPuebloPaleta;
 			gymPuebloPaleta.first.first = i;
 			gymPuebloPaleta.first.second = i+1;
-			if (i % 2 == 0)	{
-				gymPuebloPaleta.second = 0;
-			}else{
-				gymPuebloPaleta.second = i;
-			}
-			//algun gym no necesita pociones para ser vencido puntualmente todos los i pares
-			//cantidad_pociones_necesarias_total += i*3;
+			gymPuebloPaleta.second = 0;
 			posiciones_gym[i] = gymPuebloPaleta;
 			
 		}
@@ -48,9 +69,8 @@ int main(int argc, char* argv[])
 			posiciones_pp[i] = posicion;
 		}
 		
-		cap_mochila = cant_gimnasios*3;
-		/*IMPRIMO EN PANTALLA EL CASO: */
-
+		cap_mochila = cantMaxGym*3	;
+		
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
 		for(i = 0; i < cant_gimnasios; i++){
@@ -62,32 +82,30 @@ int main(int argc, char* argv[])
 			
 			}
 
-			/*Ejecuto el algoritmo*/
-		cout << "Cantidad de elementos:" << cant_gimnasios + cant_pokeParadas << "\n";
-		//auto start = ya();
+//		auto start = ya();
 		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
-	/*auto end = ya();
-			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-				cout << "\n";*/
-
-	/*IMPRIMO EN PANTALLA EL RESULTADO:*/
+//		auto end = ya();
+//			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+//				cout << "\n";
+	
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
 		}else{
-			cout << f->first <<" "<< f->second->size()<< " ";
+			cout << f->first <<" "<< f->second->size() << " ";
 			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
-				cout << " " << *it;
+				cout << *it << " ";
 			}
 		}
 		cout << "\n";
-				
+		
 		delete f;
 	}
 	return 0;
 }
 
-
+ 
+ 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
 {
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;

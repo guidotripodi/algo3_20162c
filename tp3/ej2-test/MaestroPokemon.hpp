@@ -38,7 +38,7 @@ public:
 	struct Eleccion
 	{
 		const MaestroPokemon* MP;
-		int distancia;
+		int distancia =0;
 		int id = -1; // El id da ordinalidad a todas las elecciones posibles, dentro de la matriz #personas x #personas
 		bool posible;
 
@@ -95,7 +95,7 @@ public:
 				pocionesNecesarias = -1;
 				posicion.first= -888;
 				posicion.second= -888;
-				distancia = -1;
+				distancia = 0;
 
 			}
 		}
