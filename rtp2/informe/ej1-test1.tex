@@ -55,7 +55,7 @@ Para observar con mejor detalle la diferencia entre el mejor y peor caso exponem
   \end{center}
   \vspace*{0.3cm}
   
-Al ser O(F*C*P) una complejidad pseudo polinomial, se hace dificil analizar esta cota variando todos los parametros, dado que los resultados como pudimos observar cambian mucho dependiendo de que familia de casos se esté dando por la configuración de paredes que posea la matriz, es decir, para un tamaño de matriz fijo y un mismo $P_{max}$ se pueden obtener diferentes configuraciones de una matriz que darían resultados muy diferentes. Por esto mismo, se decidió no realizar un grafico comparativo con la complejidad, ya que entendemos que la misma no tiene una forma clara por pertenecer a una clase de complejidad pseudo polinomial y no poder reflejar en la misma las diferentes configuraciones posibles de paredes que existen.\\
+Al ser O(F*C*P) una complejidad pseudo polinomial, se hace dificil analizar esta cota variando todos los parametros, dado que los resultados como pudimos observar cambian mucho dependiendo de que familia de casos se esté dando por la configuración de paredes que posea la matriz, es decir, para un tamaño de matriz fijo y un mismo $P_{max}$ se pueden obtener diferentes configuraciones de una matriz que darían resultados muy diferentes. Por esto mismo, se decidió no realizar un gr\'afico comparativo con la complejidad, ya que entendemos que la misma no tiene una forma clara por pertenecer a una clase de complejidad pseudo polinomial y no poder reflejar en la misma las diferentes configuraciones posibles de paredes que existen.\\
 
 Como se suele hacer en este tipo de coplejidades, se trata de fijar un parámetro para poder analizar que sucede cuando el otro varia.
 Como los valores relevantes de $P_{max}$ están acotados por F*C, es decir, a lo sumo se pueden romper F*C paredes, se evaluará la variación de este parámetro en una matriz de tamaño fijo y cantidad y disposición de paredes fijas, de manera que cualquier cambio este correlacionado con el valor de $P_{max}$ en ese instante.
@@ -96,6 +96,8 @@ Podemos observar en el gráfico 1.7 que el caso con $P_{max}$ = 96 hay solución
   \end{center}
   \vspace*{0.3cm}
   
-Podemos observar claramente, que bajo las condiciones planteadas para esta modificación, es un factor muy imporante saber en que dirección guiar la busqueda de este $DFS$. En el gráfico 1.8 podemos ver claramente como con $DFS$ se obtiene un resultado mucho mejor que el algoritmoo original ($BFS$). Concluyendo así lo supuesto al realizar los tests.
+Podemos observar claramente, que bajo las condiciones planteadas para esta modificación, es un factor muy imporante saber en que dirección guiar la busqueda de este $DFS$. En el gráfico 1.8 podemos ver claramente como con $DFS$ se obtiene un resultado mucho mejor que el algoritmoo original ($BFS$). Concluyendo así lo supuesto al realizar los tests.\\
 
-Luego de lo mostrado, se pudo observar que, tanto en el mejor como en el peor caso nuestro algoritmo se encuentra en el orden de la complejidad calculado y cumple con lo enunciado por el problema inicialmente. Además pudimos observar una particularidad del tipo de busqueda realizado y se propuso una variante al mismo que bajo ciertas condiciones puede mejorar el resultado original.
+Aunque este tipo de complejidades pseudo polinomiales es dificil de analizar, pudimos observar que sucede al variar los parámetros de entrada y obtener diferentes comportamientos y particularidades del algoritmo.
+
+Podemos concluir además, luego de todo lo realizado, que el algoritmo propuesto resuelve efectivamente el problema enunciado.
