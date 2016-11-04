@@ -5,6 +5,7 @@
 #include <vector>
 #include <queue>
 #include <chrono>
+#include <stack>
 
 #define ya chrono::high_resolution_clock::now
 
@@ -41,6 +42,7 @@ Node *nodeStart; // marcado por defecto
 Node *nodeEnd;
 
 queue<Node*> cola;
+stack<Node*> pila;
 
 int max(int a, int b){
     return (a > b) ? a : b;
@@ -56,7 +58,11 @@ void proccessNode(int i, int j, Node *actual) {
                 actual->distMinToNode = 0;
             }
             node->distMinToNode = actual->distMinToNode+1;
-            node->wallsBroken = actual->wallsBroken+(int)node->iAmWall;
+            node->wallsBroken = actual->wallsBroken;
+            
+            if (node->iAmWall) {
+                node->wallsBroken++;
+            }
             
             if (node->i == nodeEnd->i && node->j == nodeEnd->j) {
                 finalizar = true;
@@ -65,6 +71,7 @@ void proccessNode(int i, int j, Node *actual) {
             
             if(node->wallsBroken <= PMax) {
                 cola.push(node);
+                //pila.push(node);
             }
         }
     }
@@ -72,10 +79,14 @@ void proccessNode(int i, int j, Node *actual) {
 
 void mazeBfs () {
     cola.push(nodeStart);
+    //pila.push(nodeStart);
     
+    // cambiar por cola si se usa cola!!
     while(cola.size()){
         Node *actual = cola.front();
         cola.pop();
+        //Node *actual = pila.top();
+        //pila.pop();
         
         int i = actual->i;
         int j = actual->j;
@@ -95,21 +106,30 @@ int main(){
     
     F = 5;
     C = 9;
-    PMax = 1;
+    PMax = 3;
     
+    /*
+     char map[] = {'#','#','#','#','#','#','#','#','#',
+     '#','o','.','#','#','#','#','x','#',
+     '#','.','.','#','.','#','#','#','#',
+     '#','.','.','.','.','#','#','#','#',
+     '#','#','#','#','#','#','#','#','#'};
+     */
     
-    for (int l = 5; l < 50; l++){
-        F = l;
-        C = l+4;
+    for (int l = 0; l <= 96; l++){
+        F = 100;
+        C = 100;
+        PMax = l;
         
         for (int cantIt=0; cantIt < 19; cantIt++) {
-            
             finalizar = false;
+
             char map[F*C];
             
             int h = F;
             int x = C;
             
+            //armando matriz
             for (int i = 0; i < h; ++i) {
                 for (int j = 0; j < x; ++j) {
                     if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
@@ -119,12 +139,7 @@ int main(){
                     }else{ if (i == 1 && j == 1) {
                         map[(i*x)+j] = 'o';
                     }else{
-                        if ((i == 1 && j == x-3 )||( i == 1 && j == x-4 )||( i == 2 && j == x-2 )||( i == 2 && j == x-3 ) ||( i == 3 && j == x-2 )||( i == 3 && j == x-3 ) ){
-                            map[(i*x)+j] = '#';
-                        }else{
-                            map[(i*x)+j] = '.';
-                        }
-                        
+                        map[(i*x)+j] = '#';
                     }
                     }
                     }
@@ -133,7 +148,9 @@ int main(){
                 
             }
             
-            /*printf("FILAS: %d\n", F);
+            
+            /*
+             printf("FILAS: %d\n", F);
              printf("COLUMNAS: %d\n", C);
              
              for (int i = 0; i < F; ++i){
@@ -142,9 +159,8 @@ int main(){
              printf("%c",map[(i*C)+j] );
              }
              
-             }*/
-            
-            auto start = ya();
+             }
+             */
             
             Map = new Node**[F];
             
@@ -174,13 +190,16 @@ int main(){
                 }
             }
             
+            auto start = ya(); // se comienza a medir desde aqui dado que el procesador optimiza la creacion de la matriz (ya que es siempre la misma) y hace que los resultados no sean adecuados.
+        
             mazeBfs();
-            
+
             auto end = ya();
             
             repeticiones.push_back(chrono::duration_cast<std::chrono::nanoseconds>(end-start).count());
             
             cola = queue<Node*>();
+            //pila = stack<Node*>();
         }
         
         int prom = 0;
@@ -196,5 +215,6 @@ int main(){
         
         repeticiones.clear();
     }
+    
     return 0;
 }

@@ -117,14 +117,14 @@ int main(){
      */
     
     
-    for (int l = 0; l <= 96; l++){
+    for (int l = 0; l < 50; l++){
+        F = 50;
+        C = 50;
+        PMax = l;
+        
         for (int cantIt=0; cantIt < 19; cantIt++) {
-            
             finalizar = false;
-            F = 100;
-            C = 100;
-            PMax = l;
-            
+
             char map[F*C];
             
             int h = F;
@@ -163,6 +163,8 @@ int main(){
              }
              */
             
+            auto start = ya();
+            
             Map = new Node**[F];
             
             for(int i = 0; i < F; i++){
@@ -190,11 +192,9 @@ int main(){
                     }
                 }
             }
-            auto start = ya();
+        
             mazeBfs();
-            //printf("\n");
-            //printf("Distancia minima obtenida: %d \n", nodeEnd->distMinToNode);
-            /*Descomentar esto para correr la medicion correspondiente*/
+
             auto end = ya();
             
             repeticiones.push_back(chrono::duration_cast<std::chrono::nanoseconds>(end-start).count());
@@ -216,5 +216,6 @@ int main(){
         
         repeticiones.clear();
     }
+    
     return 0;
 }
