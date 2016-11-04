@@ -11,6 +11,8 @@
 
 using namespace std;
 
+vector<long> repeticiones;
+
 using std::queue;
 
 int PMax;
@@ -68,23 +70,23 @@ void proccessNode(int i, int j, Node *actual) {
             }
             
             if(node->wallsBroken <= PMax) {
-                //cola.push(node);
-                pila.push(node);
+                cola.push(node);
+                //pila.push(node);
             }
         }
     }
 }
 
 void mazeBfs () {
-    //cola.push(nodeStart);
-    pila.push(nodeStart);
+    cola.push(nodeStart);
+    //pila.push(nodeStart);
     
     // cambiar por cola si se usa cola!!
-    while(pila.size()){
-        //Node *actual = cola.front();
-        //cola.pop();
-        Node *actual = pila.top();
-        pila.pop();
+    while(cola.size()){
+        Node *actual = cola.front();
+        cola.pop();
+        //Node *actual = pila.top();
+        //pila.pop();
         
         int i = actual->i;
         int j = actual->j;
@@ -116,86 +118,103 @@ int main(){
     
     
     for (int l = 0; l <= 96; l++){
-        finalizar = false;
-        F = 100;
-        C = 100;
-        PMax = l;
-        
-        char map[F*C];
-        
-        int h = F;
-        int x = C;
-        
-        //armando matriz
-        for (int i = 0; i < h; ++i) {
-            for (int j = 0; j < x; ++j) {
-                if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
-                    map[(i*x)+j] = '#';
-                }else{ if (i == 1 && j == x-2){
-                    map[(i*x)+j] = 'x';
-                }else{ if (i == 1 && j == 1) {
-                    map[(i*x)+j] = 'o';
-                }else{
-                    map[(i*x)+j] = '#';
-                }
-                }
+        for (int cantIt=0; cantIt < 19; cantIt++) {
+            
+            finalizar = false;
+            F = 100;
+            C = 100;
+            PMax = l;
+            
+            char map[F*C];
+            
+            int h = F;
+            int x = C;
+            
+            //armando matriz
+            for (int i = 0; i < h; ++i) {
+                for (int j = 0; j < x; ++j) {
+                    if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
+                        map[(i*x)+j] = '#';
+                    }else{ if (i == 1 && j == x-2){
+                        map[(i*x)+j] = 'x';
+                    }else{ if (i == 1 && j == 1) {
+                        map[(i*x)+j] = 'o';
+                    }else{
+                        map[(i*x)+j] = '#';
+                    }
+                    }
+                    }
+                    
                 }
                 
             }
             
-        }
-        
-        
-        /*
-         printf("FILAS: %d\n", F);
-         printf("COLUMNAS: %d\n", C);
-         
-         for (int i = 0; i < F; ++i){
-         printf("\n");
-         for (int j = 0; j < C; ++j) {
-         printf("%c",map[(i*C)+j] );
-         }
-         
-         }
-         */
-        
-        Map = new Node**[F];
-        
-        for(int i = 0; i < F; i++){
-            Map[i] = new Node*[C];
-            for(int j = 0; j < C; j++){
-                
-                Node *n = new Node();
-                n->i = i;
-                n->j = j;
-                Map[i][j] = n;
-                
-                char value = map[(i*C)+j];
-                
-                if(value == '#'){
-                    n->iAmWall = true;
-                }else if(value == 'o'){
-                    nodeStart = n;
-                    n->iAmWall = false;
-                    n->wallsBroken = 0;
-                }else if(value == 'x'){
-                    nodeEnd = n;
-                    n->iAmWall = false;
-                }else {
-                    n->iAmWall = false;
+            
+            /*
+             printf("FILAS: %d\n", F);
+             printf("COLUMNAS: %d\n", C);
+             
+             for (int i = 0; i < F; ++i){
+             printf("\n");
+             for (int j = 0; j < C; ++j) {
+             printf("%c",map[(i*C)+j] );
+             }
+             
+             }
+             */
+            
+            Map = new Node**[F];
+            
+            for(int i = 0; i < F; i++){
+                Map[i] = new Node*[C];
+                for(int j = 0; j < C; j++){
+                    
+                    Node *n = new Node();
+                    n->i = i;
+                    n->j = j;
+                    Map[i][j] = n;
+                    
+                    char value = map[(i*C)+j];
+                    
+                    if(value == '#'){
+                        n->iAmWall = true;
+                    }else if(value == 'o'){
+                        nodeStart = n;
+                        n->iAmWall = false;
+                        n->wallsBroken = 0;
+                    }else if(value == 'x'){
+                        nodeEnd = n;
+                        n->iAmWall = false;
+                    }else {
+                        n->iAmWall = false;
+                    }
                 }
             }
+            auto start = ya();
+            mazeBfs();
+            //printf("\n");
+            //printf("Distancia minima obtenida: %d \n", nodeEnd->distMinToNode);
+            /*Descomentar esto para correr la medicion correspondiente*/
+            auto end = ya();
+            
+            repeticiones.push_back(chrono::duration_cast<std::chrono::nanoseconds>(end-start).count());
+            
+            cola = queue<Node*>();
+            //pila = stack<Node*>();
         }
-        auto start = ya();
-        mazeBfs();
-        //printf("\n");
-        //printf("Distancia minima obtenida: %d \n", nodeEnd->distMinToNode);
-        /*Descomentar esto para correr la medicion correspondiente*/
-        auto end = ya();
-        //cola = queue<Node*>();
-        pila = stack<Node*>();
-        cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+        
+        int prom = 0;
+        
+        for (int t = 0; t<repeticiones.size(); t++) {
+            prom+=repeticiones[t];
+        }
+        
+        prom = prom/repeticiones.size();
+        
+        cout << prom << "\t";
         printf("\n");
+        
+        repeticiones.clear();
     }
     return 0;
 }
