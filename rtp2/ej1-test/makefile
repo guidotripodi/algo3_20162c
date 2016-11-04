@@ -11,7 +11,6 @@ LDFLAGS=
 SOURCES=ejercicio1.cpp sinRomperParedes.cpp rompiendoPparedes.cpp sinSolucion.cpp pParedes.cpp pParedesUt.cpp
 
 # Objetos que serán generados
-OBJECTS=ejercicio1.o 
 OBJECTS1 = sinRomperParedes.o 
 OBJECTS2 = rompiendoPparedes.o 
 OBJECTS3 = sinSolucion.o
@@ -19,15 +18,12 @@ OBJECTS5 = pParedes.o
 OBJECTS6 = pParedesUt.o
 
 # Nombre del ejecutable a generar
-EXECUTABLE=ej1 sinRomperParedes rompiendoPparedes sinSolucion pParedes pParedesUt
+EXECUTABLE=sinRomperParedes rompiendoPparedes sinSolucion pParedes pParedesUt
 
 all: $(EXECUTABLE)
 
 clean:
-	rm -rf $(EXECUTABLE) $(OBJECTS) $(OBJECTS1) $(OBJECTS2) $(OBJECTS3) $(OBJECTS5) $(OBJECTS6)
-
-ej1: ejercicio1.o
-	$(CC) $(CFLAGS) $(OBJECTS) -o $@		
+	rm -rf $(EXECUTABLE) $(OBJECTS1) $(OBJECTS2) $(OBJECTS3) $(OBJECTS5) $(OBJECTS6)
 
 sinRomperParedes: sinRomperParedes.o
 	$(CC) $(CFLAGS) $(OBJECTS1) -o $@				
