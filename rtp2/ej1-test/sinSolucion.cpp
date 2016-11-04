@@ -98,7 +98,7 @@ int main(){
     PMax = 1;
     
     
-    for (int l = 5; l < 50; ++l){
+    for (int l = 5; l < 50; l++){
         F = l;
         C = l+4;
         

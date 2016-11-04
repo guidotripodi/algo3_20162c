@@ -10,6 +10,8 @@
 
 using namespace std;
 
+vector<long> repeticiones;
+
 int F, C;
 int V, E;
 
@@ -129,174 +131,189 @@ int main() {
     F = 7;
     C = 11;
     
-  
-for (int l = 5; l < 50; ++l){
-    //Sirven para saber del grafo cuantos nodos y aristas tengo
-    V = 0;
-    E = 0;
-    representanteFinal = -1;
-    
-       F = l;
+    for (int l = 5; l < 50; l++){
+        //Sirven para saber del grafo cuantos nodos y aristas tengo
+        V = 0;
+        E = 0;
+        
+        F = l;
         C = l+4;
-        char map[F*C];
-        int h = F;
-        int x = C;
-
-        for (int i = 0; i < h; ++i) {
+        
+        for (int cantIt=0; cantIt < 19; cantIt++) {
+            representanteFinal = -1;
+            
+            char map[F*C];
+            int h = F;
+            int x = C;
+            
+            for (int i = 0; i < h; ++i) {
                 for (int j = 0; j < x; ++j) {
                     if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
                         map[(i*x)+j] = '#';
                     }else{
-                          map[(i*x)+j] = '.';
+                        map[(i*x)+j] = '.';
                     }
-
-                }
-        }
-                
                     
-   printf("FILAS: %d\n", F);
-   printf("COLUMNAS: %d\n", C);
-
-    for (int i = 0; i < F; ++i){
-            printf("\n");
-        for (int j = 0; j < C; ++j) {
-            printf("%c",map[(i*C)+j] );
-        }
+                }
+            }
+            
+            /*printf("FILAS: %d\n", F);
+             printf("COLUMNAS: %d\n", C);
+             
+             for (int i = 0; i < F; ++i){
+             printf("\n");
+             for (int j = 0; j < C; ++j) {
+             printf("%c",map[(i*C)+j] );
+             }
+             
+             }*/
+            
+            init ();
+            
+            Map = new Node**[F];
+            
+            //armo la matriz de nodos
+            for(int i = 0; i < F; i++){
+                Map[i] = new Node*[C];
+                for(int j = 0; j < C; j++){
+                    
+                    Node *n = new Node();
+                    n->i = i;
+                    n->j = j;
+                    Map[i][j] = n;
+                    
+                    char value = map[(i*C)+j];
+                    if (value == '#') {
+                        n->value = 10; // los valores van de 0..9 por lo tanto 10 seria inf.
+                    }else if (value != '.'){
+                        n->value = value - '0';
+                    }
+                }
+            }
+            
+            auto start = ya();
+            
+            //la recorro para armar las aristas
+            for(int i = 1; i < F-1; i++){
+                for(int j = 1; j < C-1; j++){
+                    
+                    Node *actual = Map[i][j];
+                    actual->visited = true;
+                    
+                    if (actual->value != 0) {
+                        continue;
+                    }
+                    
+                    // Es nodo si es igual a cero!
+                    V++;
+                    
+                    Node *abajo = Map[i+1][j];
+                    
+                    if (!(abajo->value == 10)) {
+                        Arista *a = new Arista();
+                        a->inicio = (i*C)+j;
+                        
+                        if (abajo->value == 0) {
+                            a->fin = ((i+1)*C)+j;
+                        }else {
+                            a->fin = ((i+2)*C)+j;
+                        }
+                        
+                        a->costo = abajo->value;
+                        
+                        //pusheo monticulo
+                        aristas.push_back(a);
+                        
+                        E++;
+                    }
+                    
+                    
+                    Node *derecha = Map[i][j+1];
+                    
+                    if (!(derecha->value == 10)) {
+                        Arista *a = new Arista();
+                        a->inicio = (i*C)+j;
+                        
+                        if (derecha->value == 0) {
+                            a->fin = (i*C)+(j+1);
+                        }else {
+                            a->fin = (i*C)+(j+2);
+                        }
+                        
+                        a->costo = derecha->value;
+                        
+                        //pusheo monticulo
+                        aristas.push_back(a);
+                        
+                        E++;
+                    }
+                }
+            }
+            
+            sort(aristas.begin(), aristas.end(), comparePtrToArista); // ordeno las aristas por peso de menor a mayor
+            
+            for (int i = 0; i < E; i++) {
+                Arista *a = aristas[i];
        
-    }
-
-    // auto start = ya();
-    init ();
-    
-    Map = new Node**[F];
-    
-    //armo la matriz de nodos
-    for(int i = 0; i < F; i++){
-        Map[i] = new Node*[C];
-        for(int j = 0; j < C; j++){
-            
-            Node *n = new Node();
-            n->i = i;
-            n->j = j;
-            Map[i][j] = n;
-            
-            char value = map[(i*C)+j];
-            if (value == '#') {
-                n->value = 10; // los valores van de 0..9 por lo tanto 10 seria inf.
-            }else if (value != '.'){
-                n->value = value - '0';
-            }
-        }
-    }
-
-    //la recorro para armar las aristas
-    for(int i = 1; i < F-1; i++){
-        for(int j = 1; j < C-1; j++){
-            
-            Node *actual = Map[i][j];
-            actual->visited = true;
-            
-            if (actual->value != 0) {
-                continue;
-            }
-            
-            // Es nodo si es igual a cero!
-            V++;
-            
-            Node *abajo = Map[i+1][j];
- 
-            if (!(abajo->value == 10)) {
-                Arista *a = new Arista();
-                a->inicio = (i*C)+j;
-                
-                if (abajo->value == 0) {
-                    a->fin = ((i+1)*C)+j;
-                }else {
-                    a->fin = ((i+2)*C)+j;
+                if (find(a->inicio) != find(a->fin)) {
+                    uni(a->inicio, a->fin, a->costo);
                 }
                 
-                a->costo = abajo->value;
-                
-                //pusheo monticulo
-                aristas.push_back(a);
-               
-                E++;
+                //PODA
+                if (representanteFinal > 0) {
+                    break;
+                }
+                //FIN PODA
             }
             
+            /*printf("\nLa suma total es:");
+             if (representanteFinal > 0) {
+             printf("%d \n", costCompLider[representanteFinal]);
+             }else {
+             printf("-1 \n");
+             }*/
             
-            Node *derecha = Map[i][j+1];
+            auto end = ya();
             
-            if (!(derecha->value == 10)) {
-                Arista *a = new Arista();
-                a->inicio = (i*C)+j;
-                
-                if (derecha->value == 0) {
-                    a->fin = (i*C)+(j+1);
-                }else {
-                    a->fin = (i*C)+(j+2);
+            repeticiones.push_back(chrono::duration_cast<std::chrono::nanoseconds>(end-start).count());
+            
+            delete[] altura;
+            delete[] padre;
+            delete[] costCompLider;
+            delete[] cantAristas;
+            
+            for(int i = 0; i < F; i++){
+                for(int j = 0; j < C; j++){    
+                    Node *n = Map[i][j];
+                    delete n;
                 }
-                
-                a->costo = derecha->value;
-                
-                //pusheo monticulo
-                aristas.push_back(a);
-                
-                E++;
+                delete[] Map[i];
+            }
+            
+            delete[] Map;
+            
+            aristas.clear();
+            
+            for (int i = 0; i < E; i++) {
+                Arista *a = aristas[i];
+                delete a;
             }
         }
-    }
-    
-    sort(aristas.begin(), aristas.end(), comparePtrToArista); // ordeno las aristas por peso de menor a mayor
-    
-  
-    for (int i = 0; i < E; i++) {
-        Arista *a = aristas[i];
         
-               
-        if (find(a->inicio) != find(a->fin)) {
-            uni(a->inicio, a->fin, a->costo);
+        int prom = 0;
+        
+        for (int t = 0; t<repeticiones.size(); t++) {
+            prom+=repeticiones[t];
         }
-
-                
-        //PODA
-        if (representanteFinal > 0) {
-            break;
-        }
-        //FIN PODA
+        
+        prom = prom/repeticiones.size();
+        
+        cout << prom << "\t";
+        printf("\n");
+        
+        repeticiones.clear();
     }
-    printf("\nLa suma total es:");
-    if (representanteFinal > 0) {
-        printf("%d \n", costCompLider[representanteFinal]);
-    }else {
-        printf("-1 \n");
-    }
-
-    delete[] altura;
-    delete[] padre;
-    delete[] costCompLider;
-    delete[] cantAristas;
-
-    for(int i = 0; i < F; i++){
-        for(int j = 0; j < C; j++){    
-            Node *n = Map[i][j];
-            delete n;
-        }
-        delete[] Map[i];
-    }
-
-    delete[] Map;
-
-    aristas.clear();
-
-    for (int i = 0; i < E; i++) {
-        Arista *a = aristas[i];
-        delete a;
-    }
-/*Descomentar esto para poder realizar medicion del caso*/
-    /*auto end = ya();
-            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-            printf("\n");*/
-    }
-        return 0;
+    
+    return 0;
 }
-                
+
