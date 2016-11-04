@@ -139,34 +139,33 @@ int main() {
         F = l;
         C = l+4;
         
-        for (int cantIt=0; cantIt < 19; cantIt++) {
-            representanteFinal = -1;
-            
-            char map[F*C];
-            int h = F;
-            int x = C;
-            
-            for (int i = 0; i < h; ++i) {
-                for (int j = 0; j < x; ++j) {
-                    if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
-                        map[(i*x)+j] = '#';
-                    }else{
-                        map[(i*x)+j] = '.';
-                    }
-                    
+        char map[F*C];
+        int h = F;
+        int x = C;
+        
+        for (int i = 0; i < h; ++i) {
+            for (int j = 0; j < x; ++j) {
+                if (i == 0 || j == 0 || j == x-1 || i == h-1)   {
+                    map[(i*x)+j] = '#';
+                }else{
+                    map[(i*x)+j] = '.';
                 }
             }
-            
-            /*printf("FILAS: %d\n", F);
-             printf("COLUMNAS: %d\n", C);
-             
-             for (int i = 0; i < F; ++i){
-             printf("\n");
-             for (int j = 0; j < C; ++j) {
-             printf("%c",map[(i*C)+j] );
-             }
-             
-             }*/
+        }
+        
+        /*printf("FILAS: %d\n", F);
+         printf("COLUMNAS: %d\n", C);
+         
+         for (int i = 0; i < F; ++i){
+         printf("\n");
+         for (int j = 0; j < C; ++j) {
+         printf("%c",map[(i*C)+j] );
+         }
+         
+         }*/
+        
+        //for (int cantIt=0; cantIt < 19; cantIt++) {
+            representanteFinal = -1;
             
             init ();
             
@@ -254,7 +253,7 @@ int main() {
             
             for (int i = 0; i < E; i++) {
                 Arista *a = aristas[i];
-       
+                
                 if (find(a->inicio) != find(a->fin)) {
                     uni(a->inicio, a->fin, a->costo);
                 }
@@ -275,7 +274,10 @@ int main() {
             
             auto end = ya();
             
-            repeticiones.push_back(chrono::duration_cast<std::chrono::nanoseconds>(end-start).count());
+            //repeticiones.push_back(chrono::duration_cast<std::chrono::nanoseconds>(end-start).count());
+            
+            cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+            printf("\n");
             
             delete[] altura;
             delete[] padre;
@@ -283,7 +285,7 @@ int main() {
             delete[] cantAristas;
             
             for(int i = 0; i < F; i++){
-                for(int j = 0; j < C; j++){    
+                for(int j = 0; j < C; j++){
                     Node *n = Map[i][j];
                     delete n;
                 }
@@ -300,19 +302,19 @@ int main() {
             }
         }
         
-        int prom = 0;
-        
-        for (int t = 0; t<repeticiones.size(); t++) {
-            prom+=repeticiones[t];
-        }
-        
-        prom = prom/repeticiones.size();
-        
-        cout << prom << "\t";
-        printf("\n");
-        
-        repeticiones.clear();
-    }
+//        int prom = 0;
+//        
+//        for (int t = 0; t<repeticiones.size(); t++) {
+//            prom+=repeticiones[t];
+//        }
+//        
+//        prom = prom/repeticiones.size();
+//        
+//        cout << prom << "\t";
+//        printf("\n");
+//        
+//        repeticiones.clear();
+//    }
     
     return 0;
 }
