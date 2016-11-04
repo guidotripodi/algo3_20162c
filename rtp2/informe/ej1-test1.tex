@@ -1,6 +1,6 @@
 \indent Veremos que es lo que sucede al ir variando los parámetros de entrada para cada familia, de manera tal que, a medida que F y C crecen linealmente, podamos observar que sucede con cada familia de casos (es decir, las familias se mantienen, solo varia el tamaño de la entrada en todos los casos).\\
 Se comienza, por lo tanto, con una entrada de 5 filas y columnas y se la aumenta en cada test en una fila y columna hasta llegar a una matriz de 50*50. De manera que no hay desigualdades y todas las familias se miden en instancias de igual tamaño.\\
-El origen siempre estará en la primer columna posible y el destino en la última. A medida que la matriz crezca, las posiciones de los mismos no serán alteradas y la cantidad de paredes y como varie el $P_{max}$ en cada caso, serán acordes para que siempre se encuentren dentro de la misma familia.
+El origen siempre estará en la primer columna posible y el destino en la última. A medida que la matriz crezca, las posiciones de los mismos no serán alteradas y la cantidad de paredes, disposición de las mismas y como varie el $P_{max}$ en cada caso, serán acordes para que siempre se encuentren dentro de la misma familia. Esto último es clave para poder analizar familias de casos diferentes a medida que la matriz crece.\\
 
 Para obtener dichas instancias se realizaron aproximadamente unas 20 corridas con el mismo input y se tom\'o el promedio de las mismas en cada instancia para obtener un valor m\'as cercano a la media.\\ 
 
@@ -54,12 +54,15 @@ Para observar con mejor detalle la diferencia entre el mejor y peor caso exponem
 {Gr\'afico 1.5 - $Comparativo$}
   \end{center}
   \vspace*{0.3cm}
+  
+Al ser O(F*C*P) una complejidad pseudo polinomial, se hace dificil analizar esta cota variando todos los parametros, dado que los resultados como pudimos observar cambian mucho dependiendo de que familia de casos se esté dando por la configuración de paredes que posea la matriz, es decir, para un tamaño de matriz fijo y un mismo $P_{max}$ se pueden obtener diferentes configuraciones de una matriz que darían resultados muy diferentes. Por esto mismo, se decidió no realizar un grafico comparativo con la complejidad, ya que entendemos que la misma no tiene una forma clara por pertenecer a una clase de complejidad pseudo polinomial y no poder reflejar en la misma las diferentes configuraciones posibles de paredes que existen.\\
 
-Dado que los valores relevantes de $P_{max}$ están acotados por F*C, es decir, a lo sumo se pueden romper F*C paredes, se evaluará la variación de este parámetro en una matriz de tamaño fijo y cantidad y disposición de paredes fijas.
-El caso contrario, en donde se fija $P_{max}$ y se fija el tamaño de la matriz variando la cantidad y disposición de paredes, no será analizado ya que al hacer esto, se obtendrían resultados para diferentes familias según la configuración que se realice y esto 
+Como se suele hacer en este tipo de coplejidades, se trata de fijar un parámetro para poder analizar que sucede cuando el otro varia.
+Como los valores relevantes de $P_{max}$ están acotados por F*C, es decir, a lo sumo se pueden romper F*C paredes, se evaluará la variación de este parámetro en una matriz de tamaño fijo y cantidad y disposición de paredes fijas, de manera que cualquier cambio este correlacionado con el valor de $P_{max}$ en ese instante.
+El caso contrario, en donde se fija $P_{max}$ y se fija el tamaño de la matriz variando la cantidad y disposición de paredes, no será analizado ya que al hacer esto, se obtendrían resultados para diferentes familias según la configuración de paredes que se realice y esto sería
 es equivalente al análisis estudiado en el tests de familias.
 
-De esta forma el análisis de complejidad será reducido a estudiar el comportamiento de $P_{max}$ con un laberinto fijo.
+De esta forma el análisis de complejidad será reducido a estudiar el comportamiento de $P_{max}$ con un laberinto fijo que tendrá una forma particular.
 
 \subsubsection*{Variando $P_{max}$ en un laberinto}
 
