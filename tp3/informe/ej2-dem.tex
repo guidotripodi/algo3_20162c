@@ -40,12 +40,23 @@ Ambas familias devolveran -1 ya que como se explico anteriomente tanto el greedy
 
 En este caso, como nuestro greedy chequea si hay alg\'un gimnasio a ser vencido con la cantidad de pociones que se tienen en el momento (se inicia con 0), y como todos necesitan 0, recorre los gimnasios sin necesidad de pasar por las pokeparadas, obteniendo la mejor soluci\'on posible.
 
+A continuaci\'on mostraremos el camino obtenido tanto para el algoritmo exacto como el goloso de un caso el cual trabaja con 19 elementos en total para ejemplificar lo enunciado anteriormente:
+
   \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.60]{./EJ2/gym0.jpeg}
-\\{\textit{Ejemplo 2.3 La soluci\'on obtenida es la \'optima (Devuelve el camino optimo de recorrer todos los gyms)}}
+\includegraphics[scale=0.60]{./EJ2/grafotodos0.png}
+\\{\textit{Ejemplo 2.3 Camino obtenido -- Algoritmo Exacto}}
   \end{center}
   \vspace*{0.3cm}
+
+  \vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.60]{./EJ2/grafotodos0.png}
+\\{\textit{Ejemplo 2.4 Camino Obtenido -- Algoritmo Goloso}}
+  \end{center}
+  \vspace*{0.3cm}
+
+Como se observa en ambos ejemplos el camino obtenido es exactamente el mismo.
 
 
 \begin{center}
@@ -78,22 +89,61 @@ Familia sin soluci\'on \'optima n\'umero 1
 
 Este estilo de familia se elabora de la forma en la cual existan gimnasios que no necesiten pociones para ser vencidos y otros que si. Nuestro algoritmo como por cada iteraci\'on chequea si puede elegir un gimnasio que se encuentre a una distancia m\'inima en relaci\'on a los demas, y adem\'as corrobora si posee las pociones necesarias para vencerlo, decide inicialmente ir a vencer a los gimnasios que posean cero poder, lo cual puede no ser \'optimo para el resultado final.
 
-Debido al poder de computo, el algoritmo exacto solo puede tomar hasta 20 elementos, mientras que el goloso puede tomar una mayor cantidad de elementos. Es por esto que se realizaron las comparaciones con la cantidad de elementos soportadas por el exacto.
+Debido al poder de computo, el algoritmo exacto solo puede tomar hasta 20/25 elementos, mientras que el goloso puede tomar una mayor cantidad de elementos. Es por esto que se realizaron las comparaciones con la cantidad de elementos soportadas por el exacto.
+
+A continuaci\'on un ejemplo comparativo entre ambos algoritmos con el cual se trabajo, dicho ejemplo contendr\'a un total de 21 elementos:
+
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.5]{./EJ2/algunGym0Exacto.png}
+\\{\textit{Ejemplo 2.5 Resultados obtenidos - Algoritmo Exacto }}
+  \end{center}
+  \vspace*{0.3cm}
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.5]{./EJ2/algunGym0Goloso.png}
+\\{\textit{Ejemplo 2.6 Resultados obtenidos - Algoritmo Goloso }}
+  \end{center}
+  \vspace*{0.3cm}
+
+Veremos a continuaci\'on en base a esta familia y el poder de computo cuanto ser\'a la diferencia de cada instancia de los algoritmos para luego calcular un porcentaje aproximado de la diferencia entre la soluci\'on obtenida del goloso y la \'optima.
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 \includegraphics[scale=0.5]{./EJ2/algungym0.png}
-\\{\textit{Ejemplo 2.5 Resultados obtenidos (Camino recorrido total) }}
+\\{\textit{Ejemplo 2.7 Resultados obtenidos (Camino recorrido total) }}
   \end{center}
   \vspace*{0.3cm}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 \includegraphics[scale=0.5]{./EJ2/Diferenciagym0.png}
-\\{\textit{Ejemplo 2.5 Diferencia resultados obtenidos (Camino recorrido total) }}
+\\{\textit{Ejemplo 2.8 Diferencia resultados obtenidos (Camino recorrido total) }}
   \end{center}
   \vspace*{0.3cm}
 
+Luego, tomando el valor final de las diferencias obtenidas desarrollamos la siguiente tabla:
+
+   \begin{tabular}{ | l | c | r |}
+   \hline
+	Cant de & Diferencia entre  & \textbf{Porcenaje}  \\ 
+elementos($n+m$) & soluciones($l$) &  \\ \hline
+5 &	7 &	75 \\ \hline
+7 &	19 & 216,6 \\ \hline
+9 &	17 & 112,5 \\ \hline 
+11 & 57 & 470 \\ \hline
+13 & 63 & 425 \\ \hline
+15 & 145 & 935,7 \\ \hline
+17 & 163 & 918,7 \\ \hline
+19 & 199 & 1005,5 \\ \hline
+21 & 223 & 1015 \\ 
+\hline
+   \end{tabular}\\
+
+
+Debido al poder de computo ya enunciado, como se trabaja con pocas instancias, no sera posible obtener datos consisos cuando tomemos el promedio de las diferencias para para luego calcular el porcentual del error en la soluci\'on obtenida.
 
 \begin{center}
 Familia sin soluci\'on \'optima n\'umero 2
