@@ -117,7 +117,7 @@ int main()
 		} 
 		else{
 			//TODO
-			printf("%d", -1);
+		printf("%d", -1);
 		}
 
 	}
