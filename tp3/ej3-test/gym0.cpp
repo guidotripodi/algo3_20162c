@@ -91,6 +91,7 @@ int main()
 	list<int> *solucionInicialLista = solucionInicial->second;
 
 	list<int>::iterator itLista;
+/*
 	for(itLista = solucionInicialLista->begin();
 			itLista != solucionInicialLista->end();
 			itLista++ )
@@ -98,14 +99,13 @@ int main()
 		printf("%d ", *itLista);
 	}
 	cout << "\n";
-
+*/
 	for(itLista = solucionInicialLista->begin();
 			itLista != solucionInicialLista->end();
 			itLista++ )
 	{
 		solucionParcial.push_back(*itLista);
 	}
-	cout << "\n";
 
 	gimnasiosArrPtr = gimnasiosArr;
 	pokeParadasArrPtr = pokeParadasAux;
@@ -167,10 +167,12 @@ int main()
 		cout << solucion3opt[i] << " ";
 	cout << "\n";
 
+	/*
 	cout << calcularCosto(solucionParcial) << " "
 		<< calcularCosto(solucionSwap) << " "
 		<< calcularCosto(solucion2opt) << " "
 		<< calcularCosto(solucion3opt) << "\n";
+	*/
 
 	delete solucionInicial;
 	return 0;
@@ -190,12 +192,8 @@ pair<float, float> mediaPodadaVarianzaMuestral(vector<long long> &muestra)
 
 
 	sort(muestra.begin(), muestra.end());
-	
 	for(int i = 0; i < x1; i++)
 		muestra.pop_back();
-
-	//for(int i = 0; i < x2; i++)
-	//	muestra.pop_front(); pop front no existe!
 
 	long long sum = 0;
 	for(int i = x2; i < (int)muestra.size(); i++) sum += muestra[i];

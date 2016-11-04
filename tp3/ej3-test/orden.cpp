@@ -160,7 +160,6 @@ int main()
 }
 
 
-
 pair<float, float> mediaPodadaVarianzaMuestral(vector<long long> &muestra) 
 {
 	//asume TEST_ITER divisible por 4
@@ -173,12 +172,8 @@ pair<float, float> mediaPodadaVarianzaMuestral(vector<long long> &muestra)
 
 
 	sort(muestra.begin(), muestra.end());
-	
 	for(int i = 0; i < x1; i++)
 		muestra.pop_back();
-
-	//for(int i = 0; i < x2; i++)
-	//	muestra.pop_front(); pop front no existe!
 
 	long long sum = 0;
 	for(int i = x2; i < (int)muestra.size(); i++) sum += muestra[i];
@@ -381,7 +376,7 @@ bool pasoPosible(int destino, int capacidadParcial){
 		poderGym = gimnasiosArrPtr[destino-1].second;
 	}
 	
-	if (poderGym == 0 || capacidadParcial > poderGym)
+	if (poderGym == 0 || capacidadParcial >= poderGym)
 	{
 		return true;
 	}
@@ -400,7 +395,7 @@ long long calcularCosto(vector<int> &camino){
 	
 	
 	for(int i = 0; i < (int) camino.size() -1; i++){
-		if(pasoPosible(camino[i], capacidadParcial)){
+		if(pasoPosible(camino[i+1], capacidadParcial)){
 			
 			pair<int, int> pOrigen;
 			pair<int, int> pDestino;
@@ -437,6 +432,17 @@ long long calcularCosto(vector<int> &camino){
 				capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino - 1].second;
 			}
 		} else{
+			/*
+			cout << "ERROR\n" 
+				<< "capacidad " << capMochila << "\n"
+				<< "capacidad Parcial " << capacidadParcial << "\n"
+				<< "origen " << camino[i] << "\n"
+				<< "destino " << camino[i+1] << "\n";
+			if(camino[i+1] <= cantGyms)
+			{
+				cout << "poder Gym: " << gimnasiosArrPtr[camino[i+1] - 1].second << "\n";
+			}
+			*/
 			return -1;
 		}
 	}
