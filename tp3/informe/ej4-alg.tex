@@ -5,19 +5,19 @@
  ConjuntoTabu attributosTabu\\ 
  Recorrido mejorSolucion $\leftarrow$ $S_o$ \\
  Recorrido  solucionActual $\leftarrow$ $S_o$ \\ 
- entero mejorCosto $\leftarrow$ CalcularCosto(mejorSolucion) \\
+ entero mejorCosto $\leftarrow$ calcularCosto(mejorSolucion) \\
  
  \For{0 hasta Cantidad de iteraciones maxima}{
   	Recorrido mejorCandidato \\
   	Lista<Arista> aristasModificadas \\
   	entero costoMejorCandidato $\leftarrow$ -1 \\
   	
-  	Conjunto<Recorrido, Lista<Arista>> vecindadActual $\leftarrow$ BusquedaLocalFiltrada(s) \\
+  	Conjunto<Recorrido, Lista<Arista> > vecindadActual $\leftarrow$ busquedaLocalFiltrada(s) \\
   	
   	\For{par en vecindadActual}{
   		Recorrido candidatoActual $\leftarrow$ par.first \\
-  		entero costoActual $\leftarrow$ CalcularCosto(candidatoActual) \\
-		costoMejorCandidato  	$\leftarrow$ CalcularCosto(mejorCandidatol) \\
+  		entero costoActual $\leftarrow$ calcularCosto(candidatoActual) \\
+		costoMejorCandidato  	$\leftarrow$ calcularCosto(mejorCandidatol) \\
 		
 		\If{costoActual < costoMejor $\vee$ (!tabuCount(atributosTabu, candidatoActual) $\wedge$ (costoActual < costoMejorCandidato $\vee$ costoMejorVecino = -1)}{
 			aristasModificadas $\leftarrow$ par.second \\
@@ -26,7 +26,7 @@
   	}  	
   	
 	\If{|mejorCandidato| > 0}{
-		<Recorrido, Lista<Arista>> menosTabu $\leftarrow$ funcionAspiracion(atributosTabu, vecindad) \\
+		<Recorrido, Lista<Arista> > menosTabu $\leftarrow$ funcionAspiracion(atributosTabu, vecindadActual) \\
 		
 		mejorCandidato $\leftarrow$ menosTabu.first \\
 		aristasModificadas $\leftarrow$ menosTabu.second \\
@@ -35,7 +35,7 @@
 	
 	solucionActual $\leftarrow$ mejorCandidato \\
 		
-	\If{costoMejorCandidato < mejorCosto}{
+	\If{costoMejorCandidato $<$ mejorCosto}{
 		mejorSolucion $\leftarrow$ mejorCandidato \\
 		mejorCosto $\leftarrow$ costoMejorCandidato \\
 	}
@@ -56,4 +56,11 @@ devolver mejorSolucion \\
 
 \end{algorithm}
 
+\begin{itemize}
+\item Arista = < Punto a , Punto b >
+\item Punto = < entero x, entero y >
+\item La función costo total ya fue definida en el apartado del algoritmo del ejercicio 3.
+\item La función busquedaLocal filtrada realiza alguna de las busquedas locales vistas en el ejercicio 3 y devuelve además del mejor recorrido, una lista de aristas modificadas en el proceso.
+\item La función funcionAspiracion devuelve dada una vecindad y los atributos tabú, el recorrido que menos atributos tabú tenga y además las aristas modificadas para obtener ese recorrido
+\end{itemize}
 
