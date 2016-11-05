@@ -205,12 +205,11 @@ vector<int> mejorarSwap(vector<int> solucionParcial){
 
 			vector<int> solucionOptimizada = solucionParcial; 
 			optimizarSolucion(solucionOptimizada);
-			long long costoActual = calcularCosto(solucionParcial);
+			long long costoActual = calcularCosto(solucionOptimizada);
 
 			if (costoActual != -1 && costoActual < costoAnterior) {
 				costoAnterior = costoActual;
 				solucion = solucionOptimizada;
-				printf("Costo mejorado: %lld\n", costoActual);
 			}
 
 			swap(solucionParcial[i], solucionParcial[j]);//volver al original
@@ -223,22 +222,19 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
 	long long costoAnterior = calcularCosto(solucionParcial);
 	int cantNodos = solucionParcial.size();
-	vector<int> solucionOptimizada;
-	long long costoActual;
 
+	long long costoActual;
     for (int i = 0; i < cantNodos-1; i++) {
         for (int j = i+1; j < cantNodos; j++) {
 
 			reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
-			
-			solucionOptimizada = solucionParcial;
+			vector<int> solucionOptimizada = solucionParcial;
 			optimizarSolucion(solucionOptimizada);
-			costoActual = calcularCosto(solucionParcial);
+			costoActual = calcularCosto(solucionOptimizada);
 
 			if (costoActual != -1 && costoActual < costoAnterior) {
 				costoAnterior = costoActual;
 				solucion = solucionOptimizada;
-				printf("Costo mejorado: %lld\n", costoActual);
 			}
 			
 			//volver al original
@@ -247,29 +243,13 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
 	}
 	return solucion;
 }
-
-/* Mi error fue tratar de asociar el concepto de arista a un nodo (el destino)
- * Al eliminar las 3 aristas que elegimos quedan dos(o tres?) maneras de reconectar el camino
- * sin que sea un camino 2opt. Sean 0 -> a  b->c d->fin aristas y las borramos.
- * Caso1: Reconectamos 0 -> b, a -> d y c -> fin (intervalos (a,b) (c,d) invertidos)
- * Caso2: Reconectamos 0 -> c, d -> a y b -> fin ("swap" de rangos sin invertir)
- * Caso3: Reconectamos 0 -> d, c -> a y b -> fin (swap + invertir rango (c,d))
-	 * Caso4: Reconectamos 0 -> c, d -> b y a -> fin (swap + invertir rango (a,b))
-	 *
-	 * Nota: 0 no es el principio del arreglo y fin no es el fin del arreglo
-	 * solo indican principio y fin del subarreglo que deberia cambiar.
-	 * TODO: analizar casos borde!!!
-	 * Propiedades utiles para la implementacion: 
-	 * 0 = a-1
-	 * b = c-1
-	 * d = fin - 1
-	 * me deja usar 3 subindices*/
-					
+		
 vector<int> mejorar3opt(vector<int> solucionParcial){
 	vector<int> solucion = solucionParcial;
 	long long costoAnterior = calcularCosto(solucionParcial);
 	int cantNodos = solucionParcial.size();
 	long long costoActual;
+	
 	vector<int> solucionOptimizada;
 	
 	for (int i = 1; i < cantNodos-3; i++) {
@@ -281,22 +261,23 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
 				reverse(solucionParcial.begin() + j, solucionParcial.begin() + k);
 
-				costoActual = calcularCosto(solucionParcial);
 				solucionOptimizada = solucionParcial;
 				optimizarSolucion(solucionOptimizada);
+				costoActual = calcularCosto(solucionOptimizada);
 
 				if (costoActual != -1 && costoActual < costoAnterior)
 				{
 					costoAnterior = costoActual;
 					solucion = solucionOptimizada;
-					printf("Costo mejorado: %lld\n", costoActual);
 				}
 			
-				printf("Caso 1 - i: %d, j: %d k: %d\n", i, j ,k);
+				/*	
+			 	printf("Caso 1 - i: %d, j: %d k: %d\n", i, j ,k);
 				for(int i = 0; i < (int) solucionParcial.size(); i++){
 					printf("%d ", solucionParcial[i]);
 				}
 				printf("\n");
+				*/
 
 
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
@@ -308,21 +289,23 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j) );
 				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
 
-				costoActual = calcularCosto(solucionParcial);
 				solucionOptimizada = solucionParcial;
 				optimizarSolucion(solucionOptimizada);
+				costoActual = calcularCosto(solucionOptimizada);
 
 				if (costoActual != -1 && costoActual < costoAnterior) 
 				{
 					costoAnterior = costoActual;
 					solucion = solucionOptimizada;
 				}
-
+				
+				/*
 				printf("Caso 2 - i: %d, j: %d k: %d\n", i, j ,k);
 				for(int i = 0; i < (int) solucionParcial.size(); i++){
 					printf("%d ", solucionParcial[i]);
 				}
 				printf("\n");
+				*/
 
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j));//len(rango 2)
 				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
@@ -341,12 +324,15 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 					costoAnterior = costoActual;
 					solucion = solucionOptimizada;
 				}
+				
+				/*
 				printf("Caso 3 - i: %d, j: %d k: %d\n", i, j ,k);
 				for(int i = 0; i < (int) solucionParcial.size(); i++){
 					printf("%d ", solucionParcial[i]);
 				}
 				printf("\n");
-			
+				*/
+
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + i + (k - j));//len(rango 2)
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
 				
@@ -363,11 +349,13 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
 					solucion = solucionOptimizada;
 				}
 
+				/*
 				printf("Caso 4 - i: %d, j: %d k: %d\n", i, j ,k);
 				for(int i = 0; i < (int) solucionParcial.size(); i++){
 					printf("%d ", solucionParcial[i]);
 				}
 				printf("\n");
+				*/
 
 				reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
 				reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
@@ -386,10 +374,10 @@ bool pasoPosible(int destino, int capacidadParcial){
 
 	if (destino < cantGyms)
 	{
-		poderGym = gimnasiosArrPtr[destino].second;
+		poderGym = gimnasiosArrPtr[destino-1].second;
 	}
 	
-	if (poderGym == 0 || capacidadParcial > poderGym)
+	if (poderGym == 0 || capacidadParcial >= poderGym)
 	{
 		return true;
 	}
@@ -398,44 +386,43 @@ bool pasoPosible(int destino, int capacidadParcial){
 }
 
 long long distancia(pair<int, int> origen, pair<int, int> destino){
-	return 
-		pow(origen.first - destino.first, 2) +
-		pow(origen.second - destino.second, 2);
+	return pow(origen.first - destino.first, 2) + pow(origen.second - destino.second, 2);//gusanito
 }
 
 long long calcularCosto(vector<int> &camino){
 	long long costo = 0;
 	int capacidadParcial = 0;
+
 	
-	for(int i = 1; i < (int) camino.size(); i++){
-		if(pasoPosible(camino[i], capacidadParcial)){
+	
+	for(int i = 0; i < (int) camino.size() -1; i++){
+		if(pasoPosible(camino[i+1], capacidadParcial)){
 			
 			pair<int, int> pOrigen;
 			pair<int, int> pDestino;
-			
-			int origen = camino[i-1];
-			int destino = camino[i];
+		
+			int origen = camino[i];
+			int destino = camino[i+1];
 			
 			bool destinoEsPP = false;
 			
-			if (origen < cantGyms)
+			if (origen <= cantGyms)
 			{
-				pOrigen = gimnasiosArrPtr[origen].first;
+				pOrigen = gimnasiosArrPtr[origen - 1].first;
 			}else {
-				pOrigen = pokeParadasArrPtr[origen-cantGyms];
+				pOrigen = pokeParadasArrPtr[origen - cantGyms - 1];
 			}
 			
-			if (destino < cantGyms)
+			if (destino <= cantGyms)
 			{
-				pDestino = gimnasiosArrPtr[destino].first;
+				pDestino = gimnasiosArrPtr[destino - 1].first;
 			}else {
-				pDestino = pokeParadasArrPtr[destino-cantGyms];
+				pDestino = pokeParadasArrPtr[destino - cantGyms - 1];
 				destinoEsPP = true;
 			}			
 			
 			costo = costo + distancia(pOrigen, pDestino);
 			
-		//	printf("Distancia de (%d,%d) a (%d,%d) = %lld \n", pOrigen.first, pOrigen.second, pDestino.first, pDestino.second, distancia(pOrigen, pDestino));
 			
 			if(destinoEsPP){
 				capacidadParcial += 3;
@@ -443,9 +430,20 @@ long long calcularCosto(vector<int> &camino){
 					capacidadParcial = capMochila;
 				}
 			} else {
-				capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino].second;
+				capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino - 1].second;
 			}
 		} else{
+			/*
+			cout << "ERROR\n" 
+				<< "capacidad " << capMochila << "\n"
+				<< "capacidad Parcial " << capacidadParcial << "\n"
+				<< "origen " << camino[i] << "\n"
+				<< "destino " << camino[i+1] << "\n";
+			if(camino[i+1] <= cantGyms)
+			{
+				cout << "poder Gym: " << gimnasiosArrPtr[camino[i+1] - 1].second << "\n";
+			}
+			*/
 			return -1;
 		}
 	}
@@ -462,7 +460,6 @@ void optimizarSolucion(vector<int> &solucion)
 		i--;
 	}
 }
-
 
 pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
 {
@@ -519,3 +516,4 @@ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_
 	final->second = camino;
 	return final;
 }
+
