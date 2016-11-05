@@ -9,7 +9,7 @@ Como mencionamos, nos interesa saber que heuristica de búsqueda local se adapta
 \item Y capaz un sexto!!!
 \end{enumerate}
 
-Las familias de casos que no tienen solución (y por lo tanto no se puede aplicar búsqueda local) o las que proveen la solución óptima, serán descartadas por motivos obvios.\\
+Las familias de casos que no tienen solución (y por lo tanto no se puede aplicar búsqueda local) o las que proveen la solución óptima, serán descartadas. En el caso de las soluciones óptimas, dado que ya sabemos que lo son y los algoritmos de busqueda local tienen un tiempo de corrida prefijado, por lo que no se puede observar nada interesante de estos casos.\\
 Por lo tanto, nos centraremos en las familias enumeradas anteriormente para ver cual de las búsquedas locales puede obtener una solución mejor a la solución provista por el algoritmo $greedy$. O en caso de no poder mejorarla, trataremos de dar respuesta a los motivos.\\
 
 Se tomarán 30 mediciones por búsqueda local. Se tomará una media alfa podada de las mismas con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado. De esta forma se reducen los outliers en las muestras consideradas. 

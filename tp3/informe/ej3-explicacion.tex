@@ -1,4 +1,7 @@
-Dado que una solución exacta al problema de nuestro entrenador pokemon es costosa, ya que debe recurrirse al backtracking por ser un problema que busca un circuito hamiltoniano minimo en cantidad de pokeparadas, en el punto anterior se decidió implementar una solución basada en un algoritmo goloso. Dado que la misma puede no ser exacta, nos interesa tratar de mejor sus resultados. 
+Dado que una solución exacta al problema de nuestro entrenador pokemon es costosa, ya que debe recurrirse al backtracking por ser un problema que busca un circuito minimo en cantidad de pokeparadas pasando una sola vez por las mismas y sin repetir gimnasios. Esto es similar a buscar un camino hamiltoniano, pero sin recorrer absolutamente todos los nodos, con lo que se generan aun más combinaciones posibles.
+
+En el punto anterior se decidió implementar una solución basada en un algoritmo goloso. Dado que la misma puede no ser exacta, nos interesa tratar de mejor sus resultados. 
+
 
 Para esto, dado que una solución es representada como una sucesion de nodos, tal que dos nodos consecutivos identifican una arista de nuestro camino, si intercambiamos el orden de ciertos nodos, estaremos modificando la solución reemplazando aristas de la solución original (De ahora en más $S_o$) y agregando nuevas a la misma. 
 
