@@ -1,11 +1,11 @@
 \begin{algorithm}[H] %or another one check
  \Fn{swap()}{
  %     \SetAlgoLined
-   $S_o$ es la solución que brinda el algoritmo goloso \\
+   $S_o$ es un Recorrido solución que brinda el algoritmo goloso \\
   	n es cantidad de nodos de $S_o$ \\
-  	$S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
+  	Recorrido $S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
   	entero costoAnterior $\leftarrow$ calcularCosto($S_o$) \hfill O(1)\\
-  	$S_{final}$ $\leftarrow$ $S_o$ \hfill O(n)\\
+  	Recorrido $S_{final}$ $\leftarrow$ $S_o$ \hfill O(n)\\
 	\For{i de 1 a n}{ 
 		\hfill ciclo: O(n)\\	
 		\For{j de 1 a n}{ 
@@ -30,11 +30,11 @@
 \begin{algorithm}[H] %or another one check
  \Fn{2opt()}{
  %     \SetAlgoLined
-   $S_o$ es la solución que brinda el algoritmo goloso \\
+   Recorrido $S_o$ es la solución que brinda el algoritmo goloso \\
   	n es cantidad de nodos de $S_o$ \\
-  	$S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
+  	Recorrido $S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
   	entero costoAnterior $\leftarrow$ calcularCosto($S_o$) \hfill O(1)\\
-  	$S_{final}$ = $S_o$ \hfill O(n)\\
+  	Recorrido $S_{final}$ = $S_o$ \hfill O(n)\\
 	\For{i de 1 a n}{
 	\hfill ciclo: O(n)\\
 		\For{j de i+1 a n}{
@@ -59,11 +59,11 @@
 \begin{algorithm}[H] %or another one check
  \Fn{3opt()}{
  %     \SetAlgoLined
-   $S_o$ es la solución que brinda el algoritmo goloso \\
+   Recorrido $S_o$ es la solución que brinda el algoritmo goloso \\
   	n es cantidad de nodos de $S_o$ \\
-  	$S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
+  	Recorrido $S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
   	entero costoAnterior $\leftarrow$ calcularCosto($S_o$) \hfill O(1)\\
-  	$S_{final}$ = $S_o$ \hfill O(n)\\
+  	Recorrido $S_{final}$ = $S_o$ \hfill O(n)\\
 	\For{i de 1 a n-3}{
 	\hfill ciclo: O(n)\\
 		\For{j de i+1 a n-2}{
@@ -124,7 +124,7 @@
 
 \begin{algorithm}[H]
 
-\Fn{calcularCosto(camino)}{
+\Fn{calcularCosto(Recorrido camino)}{
 	entero costo = 0 \hfill O(1) \\
 	entero capacidadParcial = 0 \hfill O(1) \\
 	
@@ -198,15 +198,17 @@
 \end{algorithm}
 
 \begin{itemize}
-\item n = cantidad de nodos del mapa (pokeparadas y gimnasios) que conforman la solución $S_o$
-\item Un indice en un camino es un número entre 1 y n donde los primeros m indices, con m < n, es la cantidad de gimnasios (cantGyms) y los restantes n-m indices,  pokeparadas. Luego hay un arreglo de gimnasios para los primeros m indices y uno de pokeparadas para los últimos n-m indices.
+\item Recorido = Lista de enteros
+\item n = |$S_o$|
+\item Todos los enteros en un Recorrido estan entre 1 y N con N la cantidad total de nodos (pokeparadas y gimnasios)
+\item Los primeros M indices, con M < N, es la cantidad de gimnasios (cantGyms) y los restantes N-M indices,  pokeparadas. Luego hay un arreglo de gimnasios para los primeros M indices y uno de pokeparadas para los últimos N-M indices.
 \item Gimnasio = < <entero x, entero y>, entero poder>
 \item PokeParada = <entero x, entero y>
 \item gimnasiosArr es un arreglo de Gimnasio
 \item pokeParadasArr es un arreglo de PokeParada
 \end{itemize}
 
-Podemos ver que todos los algoritmos iteran sobre la solución $S_o$, que en el peor caso puede contener todos los nodos del mapa. 
+Podemos ver que todos los algoritmos iteran sobre la solución $S_o$, que en el peor caso puede contener todos los nodos del mapa, osea, n = N.
 
 Las operaciones $invertir$ $rango$ o $intercambiar$ $rango$ en el peor caso serán realizadas sobre los $n$ nodos de $S_o$.
 
