@@ -11,22 +11,23 @@ def printWay(way, w):
 		if p_v!=None:
 			#arrow(p_v[0],p_v[1], points[c][0]-p_v[0],points[c][1]-p_v[1], head_length=0.1, head_width=0.1,length_includes_head=True)
 			if w!=0:
-				annotate("", xy=points[c], xytext=p_v, arrowprops=dict(linewidth = 2,arrowstyle="-|>", ls=ls[w]))
+				annotate("", xy=points[c], xytext=p_v, arrowprops=dict(linewidth = 4,arrowstyle="-|>", ls=ls[w]))
 			else:
 				r.append((points[c],p_v))
-				annotate("", xy=points[c], xytext=p_v, arrowprops=dict(linewidth = 1,arrowstyle="-|>", ls=ls[w]))
+				annotate("", xy=points[c], xytext=p_v, arrowprops=dict(linewidth = 2,arrowstyle="-|>", ls=ls[w]))
 				
 		p_v = points[c]
 
 def printPP(line):
 	line = line.split(" ", 2)
-	plot(int(line[0]), int(line[1]), "co", markersize=20)
+	plot(int(line[0]), int(line[1]), "co", markersize=40)
 	points.append((int(line[0]), int(line[1])))
 
 def printGym(line):
 	line = line.split(" ", 3)
-	plot(int(line[0]), int(line[1]), "ro",  markersize=20)
-	annotate(line[2], xy = (line[0], line[1]), xytext = (3.5, -6), textcoords = 'offset points', ha = 'right', va = 'bottom')
+	plot(int(line[0]), int(line[1]), "ro",  markersize=40)
+	#annotate(line[2], xy = (line[0], line[1]), xytext = (3.5, -6), textcoords = 'offset points', ha = 'right', va = 'bottom')
+	text(int(line[0])-0.03, int(line[1])-0.1, line[2], fontsize=24)
 	points.append((int(line[0]), int(line[1])))
 
 def printFirstNLast(ways):
@@ -38,18 +39,18 @@ def printFirstNLast(ways):
 		is_gym_first = int(way[0])<=g
 		
 		#truco para hacerle el borde de otro color (circulo sobre circulo)
-		plot(last[0], last[1], "yo", markersize=25)
-		plot(first[0], first[1], "go", markersize=25)
+		plot(last[0], last[1], "yo", markersize=50)
+		plot(first[0], first[1], "go", markersize=50)
 		
 		if is_gym_first:
-			plot(first[0], first[1], "ro", markersize=20)
+			plot(first[0], first[1], "ro", markersize=40)
 		else:
-			plot(first[0], first[1], "co", markersize=20)
+			plot(first[0], first[1], "co", markersize=40)
 		
 		if is_gym_last:
-			plot(last[0], last[1], "ro", markersize=20)
+			plot(last[0], last[1], "ro", markersize=40)
 		else:
-			plot(last[0], last[1], "co", markersize=20)
+			plot(last[0], last[1], "co", markersize=40)
 	
 
 

@@ -1,32 +1,37 @@
-\indent Para estudiar el funcionamiento de nuestro algoritmo frente a la problematica planteada, elaboramos diversos tests que ser\'an enunciados a continuaci\'on.\\
+\indent Para estudiar el comportamiento de nuestros algoritmos con distintos tipos de entradas, se gerneraron 7 familias, cada una con distintas caracteristicas, las cuales nos permitirán evaluár las  podas y estrategias tomadas en los algoritmos. Las mismas son las siguientes:
 
-\begin{center}
- \subsubsection*{Familia 1: Sin Soluci\'on 1. La capacidad de la mochila no es apta para ganar ciertos gimnasios}
-\end{center}
+\begin{enumerate}
+\item {\bf Familia 1:}  Sin solución. La capacidad de la mochila no es apta para ganar ciertos gimnasios
+\item {\bf Familia 2:} Sin solucion. La cantidad de pokeparadas no es suficiente para ganar todos los gimnasios
+\item {\bf Familia 3:} Con solución. Ning\'un gimnasio necesita pociones para ser vencido.
+\item {\bf Familia 4:}Con solución. Algún gimnasio necesita pociones para ser vencido y las pociones disponibles son suficientes.
+\item {\bf Familia 5:} Con solución. La solución corresponde a ordenar los elementos recibidos por distancia.
+\item {\bf Familia 6:} Con solución. Entrada fuera de orden, caso opuesto a la familia 5.
+\item {\bf Familia 7:}Con solución. Se busca agrupar los elementos de forma que haya muchas soluciones cercanas a la óptima. Esto se logra formando anillos concentricos de gimnasios y pokeparadas.
+\end{enumerate}
 
-Para que no haya soluci \'on asignamos la capacidad de la mochila inferior a la cantidad de pociones necesarias para ganar en algun gimnasio.\\
+
+ \subsubsection*{Ejemplificaciones de las familias}
  
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.60]{./EJ1/sinSolucion.jpeg}
-\\{$Ejemplo$ \ 1.1 - $Caso$ $Sin$ $Soluci$\'on}
-  \end{center}
-  \vspace*{0.3cm}
+\begin{figure} [!ht]
+ \centering
+  \subfloat[Familia 1: K=3, pociones necesarias = 6]{
+    \includegraphics[width=0.40\textwidth]{./EJ1/sinSolucion.jpeg}}
+       \label{fig:jaggies}
+  \subfloat[Familia 2: No hay suficientes pociones]{
+    \includegraphics[width=0.40\textwidth]{./EJ1/sinSolucion1.jpeg}}
+    \label{fig:moire}
+     \subfloat[Familia 3: Gimnasios de 0 pociones]{
+    \includegraphics[width=0.40\textwidth]{./EJ1/gym0.jpeg}}
+    \label{fig:f3}
+ \subfloat[Familia 4: Caso normal]{
+    \includegraphics[width=0.40\textwidth]{./EJ1/gymPos.jpeg}}
+    \label{fig:f4}
+ \caption{Ejemplos de la}
+ \label{fig:artifacts}
+\end{figure}
 
----> HABRIA Q AGREGAR EL GRAFO DEL PYTHON O MODIFICAR LAS POSICIONES EN ESTE\\
 
-\begin{center}
- \subsubsection*{Familia 2: Sin Soluci\'on 2. La cantidad de pokeparadas no es suficiente para ganar todos los gimnasios}
-\end{center}
-
-Para que no haya soluci \'on asignamos una cantidad menor de pokeparadas necesarias a la suma total de pociones necesarias para poder vencer en todos los gimnasios\\
- 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.6]{./EJ1/sinSolucion1.jpeg}
- \\{$Ejemplo$ \ 1.2 - $Caso$ $Sin$ $Soluci$\'on}
-  \end{center}
-  \vspace*{0.3cm}
   
 \begin{center}
  \subsubsection*{Familia 3: Ning\'un gimnasio necesita pociones para ser vencido}

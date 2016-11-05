@@ -16,6 +16,7 @@ El problema propuesto plantea encontrar el menor camino a recorrer. En base a es
 Para generar la heur\'istica se toma de base la lógica restrictiva de las podas del backtracking, lo que nos asegurará que de encontrar una solución será correcta. Para el paso goloso se tienen en cuenta los siguientes puntos:
 
 \begin{itemize}
+\item Se prioriza ganar gimnasios, por lo tanto de poder ganar un gimnasio se procederá a hacerlo.
 \item La elección de movimiento será aquella que este más proxima al lugar actual del maestro pokemon: Se busca la m\'inima distancia entre nodos. 
 \item En cada iteraci\'on de b\'usqueda de un nuevo destino, primero se evaluarán los gimnasios y luego las poke-paradas: Si ya se cuenta con una cantidad suficiente de pociones para derrotar a un gimnasio entonces se procede a vencerlo.
 \item Al finalizar una rama completa, es decir habiendo recorrido todos los gimnasios de haber sido posible desde una pokeparada determinada, se vuelve a correr el algoritmo desde otra pokeparada diferente, intentando generar así una mejor solución. De encontrarla se la tomará como la mejor solución hasta el momento.
