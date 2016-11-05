@@ -3,15 +3,25 @@
  %     \SetAlgoLined
    $S_o$ es la solución que brinda el algoritmo goloso \\
   	n es cantidad de nodos de $S_o$ \\
+  	$S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
+  	entero costoAnterior $\leftarrow$ calcularCosto($S_o$) \hfill O(1)\\
+  	$S_{final}$ $\leftarrow$ $S_o$ \hfill O(n)\\
 	\For{i de 1 a n}{ 
 		\hfill ciclo: O(n)\\	
 		\For{j de 1 a n}{ 
 		\hfill ciclo: O(n)\\	
-			 $intercambiar$ $posiciones$ i con j en $S_o$ \hfill O(1)\\	
-			 calcular nuevo costo y guardar si es mejor que $S_o$ y la mejor obtenida hasta la iteración anterior junto con la solución obtenida \hfill $\theta(n)$\\	
-			 $intercambiar$ $posiciones$ i con j en $S_o$ \hfill O(1)\\	 		
+			 $intercambiar$ $posiciones$ i con j en $S_{actual}$ \hfill O(1)\\
+			 optimizarS($S_{actual}$) \hfill O(n)\\
+			 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
+			 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
+			 	costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
+			 	$S_{final}$ $\leftarrow$ $S_{actual}$ \hfill O(n)\\
+			 }
+			 $intercambiar$ $posiciones$ i con j en $S_{actual}$ \hfill O(1)\\	 		
 		}	
 	}
+	
+	devolver $S_{final}$ \\	
 	
 	\hfill complejidad total: O($n^3$)\\			
 }
@@ -22,15 +32,25 @@
  %     \SetAlgoLined
    $S_o$ es la solución que brinda el algoritmo goloso \\
   	n es cantidad de nodos de $S_o$ \\
+  	$S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
+  	entero costoAnterior $\leftarrow$ calcularCosto($S_o$) \hfill O(1)\\
+  	$S_{final}$ = $S_o$ \hfill O(n)\\
 	\For{i de 1 a n}{
 	\hfill ciclo: O(n)\\
 		\For{j de i+1 a n}{
 		\hfill ciclo: O(n)\\
-			 $invertir$ $rango$ de i a j en $S_o$ \hfill O(n)\\
-			 calcular nuevo costo y guardar si es mejor que $S_o$ y la mejor obtenida hasta la iteración anterior junto con la solución obtenida \hfill $\theta(n)$\\
-			 $invertir$ $rango$ de i a j en $S_o$ \hfill O(n)\\
+			 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
+			 optimizarS($S_{actual}$) \hfill O(n)\\
+			 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
+			 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
+			 	costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
+			 	$S_{final}$ $\leftarrow$ $S_{actual}$ \hfill O(n)\\
+			 }
+			 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
 		}	
 	}	
+	
+	devolver $S_{final}$ \\	
 	
 	\hfill complejidad total: O($n^3$)\\	
 }
@@ -41,46 +61,156 @@
  %     \SetAlgoLined
    $S_o$ es la solución que brinda el algoritmo goloso \\
   	n es cantidad de nodos de $S_o$ \\
+  	$S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
+  	entero costoAnterior $\leftarrow$ calcularCosto($S_o$) \hfill O(1)\\
+  	$S_{final}$ = $S_o$ \hfill O(n)\\
 	\For{i de 1 a n-3}{
 	\hfill ciclo: O(n)\\
 		\For{j de i+1 a n-2}{
 		\hfill ciclo: O(n)\\
 				\For{k de j+2 a n}{
 				\hfill ciclo: O(n)\\
+				
 			 caso 1:\\
-			 $invertir$ $rango$ de i a j en $S_o$ \hfill O(n)\\
-			 $invertir$ $rango$ de j+1 a k en $S_o$ \hfill O(n)\\
-			 calcular nuevo costo y guardar si es mejor que $S_o$ y la mejor obtenida hasta la iteración anterior junto con la solución obtenida \hfill $\theta(n)$\\
-			 $invertir$ $rango$ de j+1 a k en $S_o$	\hfill O(n)\\	 
-			 $invertir$ $rango$ de i a j en $S_o$ \hfill O(n)\\
+			 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
+			 $invertir$ $rango$ de j+1 a k en $S_{actual}$ \hfill O(n)\\
+			 optimizarS($S_{actual}$) \hfill O(n)\\
+			 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
+			 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
+			 	costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
+			 	$S_{final}$ = $S_{actual}$ \hfill O(n)\\
+			 }
+			 $invertir$ $rango$ de j+1 a k en $S_{actual}$	\hfill O(n)\\	 
+			 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
+			 
 			 
 			 caso 2: \\
-			$intercambiar$ $rango$ de i a j con el de j+1 a k en $S_o$ \hfill O(n)\\
-			 calcular nuevo costo y guardar si es mejor que $S_o$ y la mejor obtenida hasta la iteración anterior junto con la solución obtenida \hfill $\theta(n)$\\
-			 $intercambiar$ $rango$ de i a j con el de j+1 a k en $S_o$ \hfill O(n)\\
+			$intercambiar$ $rango$ de i a j con el de j+1 a k en $S_{actual}$ \hfill O(n)\\
+			 optimizarS($S_{actual}$) \hfill O(n)\\
+			 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
+			 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
+			 	costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
+			 	$S_{final}$ = $S_{actual}$ \hfill O(n)\\
+			 }
+			 $intercambiar$ $rango$ de i a j con el de j+1 a k en $S_{actual}$ \hfill O(n)\\
+			 
 			 
 			 caso 3:\\
-			 es igual al caso 2 pero invirtiendo el rango i a j \hfill O(4*n)\\
+			 es igual al caso 2 pero además invirtiendo el rango i a j \hfill O(4*n)\\
+			 
 			 
 			 caso 4: \\
-			 es igual al caso 2 pero invirtiendo el rango j+1 a k \hfill O(4*n)\\
+			 es igual al caso 2 pero además invirtiendo el rango j+1 a k \hfill O(4*n)\\
 			}
 		}	
 	}		
 
+	devolver $S_{final}$ \\
+
 	\hfill complejidad total: O($n^4$)\\
 }
+
+\end{algorithm}
+
+\begin{algorithm}[H]
+
+\Fn{optimizarS($S_o$)}{
+	\While{back($S_o$).tipo = $pokeparada$}{
+		pop\_back($S_o$)\\
+	}
+}
+
+\end{algorithm}
+
+\begin{algorithm}[H]
+
+\Fn{calcularCosto(camino)}{
+	entero costo = 0 \hfill O(1) \\
+	entero capacidadParcial = 0 \hfill O(1) \\
+	
+	\For{i desde 2 hasta camino.size()}{
+	\hfill ciclo: O(n) \\
+		\If{pasoPosible(camino[i], capacidadParcial)}{
+			\hfill guarda: O(1) \\
+			$<entero, entero>$ pOrigen \\
+			$<entero, entero>$ pDestino \\
+			
+			entero origen $\leftarrow$ camino[i-1]  \hfill O(1) \\
+			entero destino $\leftarrow$ camino[i] \hfill O(1) \\
+			
+			bool destinoEsPP $\leftarrow$ false \hfill O(1) \\
+			
+			\If{origen $<$ cantGyms}{
+				pOrigen $\leftarrow$ gimnasiosArr[origen].coord \hfill O(1) \\
+			}\Else {
+				pOrigen $\leftarrow$ pokeParadasArr[origen-cantGyms] \hfill O(1) \\
+			}
+			
+			\If{destino $<$ cantGyms}{
+				pDestino $\leftarrow$ gimnasiosArr[destino].coord \hfill O(1) \\
+			}\Else {
+				pDestino $\leftarrow$ pokeParadasArr[destino-cantGyms] \hfill O(1) \\
+				destinoEsPP $\leftarrow$ true \hfill O(1) \\
+			}
+		
+		    costo $\leftarrow$ costo + distanciaEuclidea(pOrigen, pDestino) \hfill O(1) \\
+			
+			\If{destinoEsPP}{
+				capacidadParcial += 3 \hfill O(1) \\
+				\If{capacidadParcial $>$ capMochila}{
+					capacidadParcial $\leftarrow$ capMochila \hfill O(1) \\
+				}
+			}\Else {
+				capacidadParcial $\leftarrow$ capacidadParcial - gimnasiosArr[destino].poder \hfill O(1) \\
+			}	
+					
+		}\Else{
+			devolver -1 \\
+		}
+	}
+	
+	devolver costo \\
+	
+	\hfill complejidad total: O(n) \\
+}
+
+\end{algorithm}
+	
+\begin{algorithm}[H]
+
+\Fn{pasoPosible(entero destino, entero capacidadParcial}{
+
+	entero poderGym $\leftarrow$ 0 \hfill O(1) \\
+
+	\If {destino $<$ cantGyms}{
+		poderGym $\leftarrow$ gimnasiosArr[destino].poder \hfill O(1) \\
+	}
+	
+	\If {poderGym = 0 $\vee$ capacidadParcial $>$ poderGym}{
+		devolver true \hfill O(1) \\
+	}
+	
+	devolver false \\
+	
+	\hfill complejidad total: O(1) \\
+}
+
 \end{algorithm}
 
 \begin{itemize}
 \item n = cantidad de nodos del mapa (pokeparadas y gimnasios) que conforman la solución $S_o$
+\item Un indice en un camino es un número entre 1 y n donde los primeros m indices, con m < n, es la cantidad de gimnasios (cantGyms) y los restantes n-m indices,  pokeparadas. Luego hay un arreglo de gimnasios para los primeros m indices y uno de pokeparadas para los últimos n-m indices.
+\item Gimnasio = < <entero x, entero y>, entero poder>
+\item PokeParada = <entero x, entero y>
+\item gimnasiosArr es un arreglo de Gimnasio
+\item pokeParadasArr es un arreglo de PokeParada
 \end{itemize}
 
 Podemos ver que todos los algoritmos iteran sobre la solución $S_o$, que en el peor caso puede contener todos los nodos del mapa. 
 
 Las operaciones $invertir$ $rango$ o $intercambiar$ $rango$ en el peor caso serán realizadas sobre los $n$ nodos de $S_o$.
 
-La operación costo es $\theta(n)$ ya que requiere recorrer $S_o$ hasta la última posición observando si un movimiento es válido. Recordemos que la validez de un movimiento se observa cuando se avanza hacia un gimnasio. Este movimiento será válido si y solo si se puede vencer al gimnasio. Esto último es un chequeo que puede realizarse en tiempo constante.  
+La operación costo es O(n) ya que requiere recorrer $S_o$ hasta la última posición observando si un movimiento es válido. Recordemos que la validez de un movimiento se observa cuando se avanza hacia un gimnasio. Este movimiento será válido si y solo si se puede vencer al gimnasio. Esto último es un chequeo que puede realizarse en tiempo constante.  
 
 Luego, realizar busquedas locales con las vecindades planteadas es, en el peor caso, de complejidad polinómica. 
 
