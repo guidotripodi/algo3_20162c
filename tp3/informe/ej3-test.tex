@@ -12,7 +12,7 @@ Como mencionamos, nos interesa saber que heuristica de búsqueda local se adapta
 Las familias de casos que no tienen solución (y por lo tanto no se puede aplicar búsqueda local) o las que proveen la solución óptima, serán descartadas por motivos obvios.\\
 Por lo tanto, nos centraremos en las familias enumeradas anteriormente para ver cual de las búsquedas locales puede obtener una solución mejor a la solución provista por el algoritmo $greedy$. O en caso de no poder mejorarla, trataremos de dar respuesta a los motivos.\\
 
-Para cada búsqueda local, se tomará una media alfa podada con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado. De esta forma no habrá outliers en las muestras consideradas. 
+Para cada búsqueda local, se tomará una media alfa podada con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado. De esta forma se reducen los outliers en las muestras consideradas. 
 La cantidad de mediciones para tomar la media será de 30. Además se tomará la varianza muestral usando la media calculada y las mediciones que queden luego de aplicar la media.\\
 
 \subsubsection*{Familia 1}
