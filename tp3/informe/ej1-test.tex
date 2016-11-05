@@ -8,6 +8,7 @@
 \item {\bf Familia 5:} Con solución. La solución corresponde a ordenar los elementos recibidos por distancia.
 \item {\bf Familia 6:} Con solución. Entrada fuera de orden, caso opuesto a la familia 5.
 \item {\bf Familia 7:}Con solución. Se busca agrupar los elementos de forma que haya muchas soluciones cercanas a la óptima. Esto se logra formando anillos concentricos de gimnasios y pokeparadas.
+\item {\bf Familia 8:} Random.
 \end{enumerate}
 
 
@@ -27,102 +28,40 @@
  \subfloat[Familia 4: Caso normal]{
     \includegraphics[width=0.40\textwidth]{./EJ1/gymPos.jpeg}}
     \label{fig:f4}
- \caption{Ejemplos de la}
- \label{fig:artifacts}
+\end{figure}\begin{figure} [!ht]
+ \centering
+\subfloat[Familia 5: Solución ordenada]{
+    \includegraphics[width=0.40\textwidth]{./EJ1/fam5.jpeg}}
+    \label{fig:f5}
+\subfloat[Familia 6: Solución desordenada]{
+    \includegraphics[width=0.40\textwidth]{./EJ1/fam6.jpeg}}
+    \label{fig:f6}
+\subfloat[Familia 7: Anillos]{
+    \includegraphics[width=0.40\textwidth]{./EJ1/fam7.jpeg}}
+    \label{fig:f7}
+\subfloat[Familia 8: Random]{
+    \includegraphics[width=0.40\textwidth]{./EJ1/fam8.jpeg}}
+    \label{fig:f8}
 \end{figure}
 
 
-  
-\begin{center}
- \subsubsection*{Familia 3: Ning\'un gimnasio necesita pociones para ser vencido}
-\end{center}
-
-En este caso, como el titulo lo indica, no hay gimnasio que necesite pociones para ser vencido, todos tendran valor 0.
+\newpage
  
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.6]{./EJ1/gym0.jpeg}
-\\ {$Ejemplo$ \ 1.3 - $Caso$ $Todos$ $Los$ $Gym$ $Con$ $0$}
-  \end{center}
-  \vspace*{0.3cm}
+ 
+  \subsubsection*{Evaluación del algoitmo sobre las familias}
 
-\begin{center}
-  \subsubsection*{Familia 4: Alg\'un gimnasio necesita pociones para ser vencido}
-\end{center}
+\indent Veremos entonces que es lo que sucede al ir variando los parámetros de entrada para cada familia, de manera tal que, a medida que N y M crecen linealmente.\\
 
-A diferencia de la familia anterior, en este caso solo algunos gimnasios no necesitan pociones para ser vencidos.\\
+Se comienza con una entrada de un gimnasio y un pokeparada y se la aumenta en cada test en uno hasta llegar a un total de 20 elementos entre ambos conjuntos (Debido al poder de computo, no es posible trabajar con instancias de mayor tamaño). De manera que no hay desigualdades y todas las familias se miden en instancias de igual tamaño.\\
 
------->> FALTA HACER
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.6]{./EJ1/gym0.jpeg}
-\\ {$Ejemplo$ \ 1.4 - \textit{Algunos gimnasios con 0}}
-  \end{center}
-  \vspace*{0.3cm}
------->> FALTA HACER\\
-
-\begin{center}
-  \subsubsection*{Familia 5: Se reciben pokeparadas y gimnasios en orden}
-\end{center}
-
-Este caso se da cuando se reciben las pokeparadas y gimnasios con el camino minimo ya armado.
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.6]{./EJ1/optima.jpeg}
-\\ {$Ejemplo$ \ 1.5 - \textit{Camino minimo recibido como entrada}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\begin{center}
-  \subsubsection*{Familia 6: Entrada fuera de orden (orden diferente para lograr el óptimo)}
-\end{center}
-
-Este estilo de familia presenta a los gimnasios y pokeparadas desordenados en referencia a las posiciones, es decir, para ganar a cierto gimnasio es necesario pasar por una cantidad puntual de pokeparadas las cuales estan de un lado y del otro de dicho gimnasio.
----->Explicar bien este
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.6]{./EJ1/desorden.jpeg}
-\\ {$Ejemplo$ \ 1.6 - \textit{Camino desordenado}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\begin{center}
-  \subsubsection*{Familia 7: Anillos de pokeparadas y gimnasios}
-\end{center}
-
-Este estilo de familia se elabora de la forma en la cual se tengan todos los gimnasios en ciertas posiciones, donde el conjunto total de estos nos devuelva una forma de anillo, mientras que las pokeparadas presenten la misma forma que los gimnasios a una distancia euclidea id\'entica entre pokeparada-gimnasio.\\
-
---->HACER EL GRAFICO PARA ESTE
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.6]{./EJ1/desorden.jpeg}
-\\ {$Ejemplo$ \ 1.6 - \textit{Camino desordenado}}
-  \end{center}
-  \vspace*{0.3cm}
---->HACER EL GRAFICO PARA ESTE\\
-
-
-\indent Luego de haber enunciado cada familia de test, veremos que es lo que sucede al ir variando los parámetros de entrada para cada familia, de manera tal que, a medida que N y M crecen linealmente podamos observar que sucede con cada familia de casos (es decir, las familias se mantienen, solo varia el tamaño de la entrada en todos los casos).\\
-Se comienza, por lo tanto, con una entrada de un gimnasio y un pokeparada y se la aumenta en cada test en uno hasta llegar a un total de 20 elementos entre ambos conjuntos (Debido al poder de computo, no es posible trabajar con instancias de mayor tamaño). De manera que no hay desigualdades y todas las familias se miden en instancias de igual tamaño.\\
-
-Para obtener dichas instancias se realizaron aproximadamente unas 20 corridas con el mismo input y se tom\'o el promedio de las mismas en cada instancia para obtener un valor m\'as cercano a la media.\\ 
+Para obtener las mediciones se realizaron aproximadamente unas 20 corridas sobre cada una de las instancias y se tom\'o el promedio de las mediciones resultantes.\\ 
 
 Se puede observar en el  gráfico 1.1, siete funciones, que representan el tiempo de ejecuci\'on de las familias de casos mencionadas en el apartado anterior:\\
 
-\begin{enumerate}
-\item Sin Solucion 1. La capacidad de la mochila no es apta para ganar ciertos gimnasios
-\item Sin Solucion 2. La cantidad de pokeparadas no es suficiente para ganar todos los gimnasios
-\item Ning\'un gimnasio necesita pociones para ser vencido
-\item Alg\'un gimnasio necesita pociones para ser vencido
-\item Se reciben pokeparadas y gimnasios en orden
-\item Entrada fuera de orden (orden diferente para lograr el óptimo)
-\item Anillos de pokeparadas y gimnasios
-\end{enumerate}
+-----> FALTAN TERMINAR LAS MEDICIONES PARA HACERLO Y HACER EL TEST DEL ANILLO\\
 
+VER SI NO ES MEJOR METER BOXPLOTS
 
------>> FALTAN TERMINAR LAS MEDICIONES PARA HACERLO Y HACER EL TEST DEL ANILLO\\
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 % \includegraphics[scale=0.5]{./EJ1/comparativo.png}
@@ -130,13 +69,18 @@ Se puede observar en el  gráfico 1.1, siete funciones, que representan el tiemp
   \end{center}
   \vspace*{0.3cm}
   
-Se puede notar que la familia 1 "\textbf{La capacidad de la mochila no es apta para ganar ciertos gimnasios}" y la n\'umero 2 "\textbf{La cantidad de pokeparadas no es suficiente para ganar todos los gimnasios}", presentan una mejor performance en relaci\'on a las otras. Esto se debe a que se realizan dos podas para chequear si la entrada posee o no soluci\'on. Puntualmente, la familia uno es un poco mejor a la segunda debido a que en la implementaci\'on de dicha poda a penas chequea que existe al menos un gimnasio con mayor cantidad de pociones para ser vencido que la capacidad corta directamente la ejecuci\'on y finaliza, mientras que para la segunda, la poda implementada debe chequear gimnasio por gimnasio la cantidad de pociones necesarias para sumarlas y luego chequear si la cantidad de pokeparadas alcanzar\'an para poder vencer en todos los gimnasios.\\
+Se puede notar que la familia 1 y la n\'umero 2, presentan una mejor performance en relaci\'on a las otras. Esto se debe a que se realizan dos podas para chequear si la entrada posee o no soluci\'on. Puntualmente, la familia 1 es un poco mejor a la segunda debido a que en la implementaci\'on de las podas: la que evalúa si la mochila es de capacidad suficiente corta apenas encuentra un gimnasio que no se pueda derrotar, en cambio la otra (checkeo de la cantidad de pociones disponibles vs necesarias) debe necesariamente recorrer todos los gimnasios y pokeparadas, tardando más tiempo.
 
------>VER SI HACEMOS UN GRAFICO CON LAS DOS FAMILIAS \\
 
-Uno de los peores casos para nuestro algoritmo es la familia 7 "\textbf{Anillos de pokeparadas y gimnasios}", que sucede cuando por ejemplo, todos los caminos tienen igual longitud. Esto se da as\'i ya que nuestro algoritmo chequea todas las ramas posibles del backtraking y como todos pueden ser soluci\'on posible avanza por todos llegando al final de cada rama con el mismo valor en todos los posibles caminos.\\
+
+Uno de los peores casos para nuestro algoritmo es la familia 7 , que sucede cuando por ejemplo, todos los caminos tienen igual longitud. Esto se da as\'i ya que nuestro algoritmo chequea todas las ramas posibles del backtraking y como todos pueden ser soluci\'on posible avanza por todos llegando al final de cada rama con el mismo valor en todos los posibles caminos.\\
 
 -----> HACER EL GRAFICO DE ANILLOS\\
+
+
+
+ \subsubsection*{Cota al tiempo de ejecución}
+
 
 Veamos en detalle como se comportan el mejor y peor caso con respecto a la complejidad calculada.\\
 
@@ -148,4 +92,6 @@ Veamos en detalle como se comportan el mejor y peor caso con respecto a la compl
   \vspace*{0.3cm}
 
 Podemos ver en este gr\'afico comparativo como las familias est\'an acotadas por la funci\'on de la complejidad te\'orica calculada.\\
+
+
 

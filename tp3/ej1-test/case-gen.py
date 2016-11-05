@@ -155,7 +155,7 @@ def noPPInstance(n):
 ###############################################
 #				MAIN
 
-plotInstance(circularInstance(55, 55))
+plotInstance(randomInstance(20))
 
 #for i in xrange(3,1000):
 #	r = randomInstance(i)
