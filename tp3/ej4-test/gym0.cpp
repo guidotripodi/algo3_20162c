@@ -31,8 +31,7 @@ int main(){
     pair <int, int>  pokeParadasArr[MAX_CANT_PP];
     pair <int, int>  pokeParadasAux[MAX_CANT_PP];
 
-    int i = 0;
-    for (i = 0; i < cantGyms; i++)
+    for (int i = 0; i < cantGyms; i++)
     {
         Gimnasio gymPuebloPaleta;
         gymPuebloPaleta.first.first = i;
@@ -46,7 +45,7 @@ int main(){
         }
         gimnasiosArr[i] = gymPuebloPaleta;
     }
-    for (i = 0; i < cantPokeParadas; i++)
+    for (int i = 0; i < cantPokeParadas; i++)
     {
         Pokeparada posicion;
         posicion.first = i;
