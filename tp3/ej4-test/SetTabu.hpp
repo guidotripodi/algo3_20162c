@@ -3,7 +3,7 @@
 #include <utility>
 
 //usaria unordered_set si no fuera para la facu
-
+using namespace std;
 typedef std::pair<int,int> Arista;
 
 
