@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 		}
 		
 		cap_mochila = cantMaxGym*3	;
-		
+		/*
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
 		for(i = 0; i < cant_gimnasios; i++){
@@ -80,13 +80,20 @@ int main(int argc, char* argv[])
 		for(i = 0; i < cant_pokeParadas; i++){
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 			
-			}
+			}*/
+pair <int,std::list<int> * > * f;
+			for (int h = 0; h < 3; ++h){
+				/* code */
+				auto start = ya();
+				f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
+				auto end = ya();
+				if (h == 2){
+					cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+					cout << "\n";
+				}
 
-//		auto start = ya();
-		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
-//		auto end = ya();
-//			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-//				cout << "\n";
+			}
+				/*
 	
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
@@ -97,7 +104,7 @@ int main(int argc, char* argv[])
 				cout << *it << " ";
 			}
 		}
-		cout << "\n";
+		cout << "\n";*/
 		
 		delete f;
 	}
