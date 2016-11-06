@@ -4,7 +4,7 @@ using namespace std;
 
 bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 {
-
+	//printEleccion(eleccion);
 	if (eleccion.tipo == PP){
 		//Si ya esta llena, enotnces no tiene sentido ir, porque la distancia a otro gym directamente
 		//es menor.
@@ -22,6 +22,7 @@ bool MaestroPokemon::eleccionValida(Eleccion eleccion) const
 			return false;
 		}
 	}
+	//cout<<"Es valida\n";
 	return true;
 
 }
@@ -39,7 +40,7 @@ void MaestroPokemon::printStatus() const
 }
 
 
-MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[]){
+MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[], int idInicial){
 	
 	this->cant_gimnasios = cant_gimnasios;
 	this->cant_gimnasios_por_ganar = cant_gimnasios;
@@ -58,7 +59,11 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 	this->distancia=0;
 	
 	
-	for (int i = 0; i < this->cant_gimnasios + this->cant_pokeParadas; i++)
+	for (int i = idInicial; i < this->cant_gimnasios + this->cant_pokeParadas - idInicial; i++)
+	{
+		opciones->push_back(i);
+	}
+	for (int i = 0; i < idInicial; i++)
 	{
 		opciones->push_back(i);
 	}
@@ -69,21 +74,33 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 }
 
 MaestroPokemon::~MaestroPokemon(){
-delete this->decisiones;
-delete this->opciones;
+	delete this->decisiones;
+	delete this->opciones;
 }
 
 bool MaestroPokemon::eleccionGolosa(){
 	Eleccion eleccion = Eleccion(this);
 	int minima = -1;
+	bool minimo_es_gym = false;
+	bool gym;
 	std::list<int>::iterator itm;
+	int i = 0;
 	for (std::list<int>::iterator it=opciones->begin(); it != opciones->end(); ++it){
+	//	cout<<i++<<"\n";
 		eleccion.id = *it;
 		eleccion.recalcular();
 		if ((eleccion.distancia < minima || minima==-1 ) && eleccionValida(eleccion) )
 		{
-			minima = eleccion.distancia;
-			itm=std::list<int>::iterator(it);
+			//Si el anterior minimo fue un gym, y el nuevo minimo es una PP...entonces me quedo con el gym
+			//Si el anterior minimo no fue un gym, entonces me quedo con el minimo que calcule
+			if (!(minimo_es_gym && eleccion.tipo==PP))
+			{
+				minima = eleccion.distancia;
+				minimo_es_gym = eleccion.tipo!=PP;
+	//		cout<<"minima local!\n";
+				itm=std::list<int>::iterator(it);
+				
+			}
 		}
 	}
 
@@ -102,7 +119,7 @@ bool MaestroPokemon::eleccionGolosa(){
 
 	opciones->erase(itm);
 	//Incremento la distancia
-	distancia = this->distancia + eleccionActual.distancia;
+	distancia += eleccionActual.distancia;
 	
 	if (eleccionActual.tipo == GIMNASIO)
 	{
@@ -110,10 +127,10 @@ bool MaestroPokemon::eleccionGolosa(){
 		cant_gimnasios_por_ganar--;
 		cantidad_pociones= cantidad_pociones - eleccionActual.pocionesNecesarias;
 	}else{
-	
+
 		cantidad_pociones = cantidad_pociones+3;//HARDCODE!!!
 	}
-
+	//cout <<"Elegida\n";
 	return true;
 
 }

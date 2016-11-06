@@ -1,209 +1,51 @@
-#include <iostream>	/* printf, cout*/
-#include <vector> 
-#include <algorithm> 
-#include <fstream>
-#include <utility>
-#include <chrono>  /* clock */
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
-#include <math.h>	/* pow */
-#include <cstdlib> /* swap */
-#include <list>
-#include "SetTabu.hpp"
-#include "MaestroPokemon.hpp"
+#include "ej4.hpp"
 
-#define ya chrono::high_resolution_clock::now
-#define SEED 39
-#define MAX_PODER 25
-#define RADIO 100
-#define TENOR 5 //tenor tabu
-#define ITERMAX 10
 using namespace std;
-
-//Tipos
-typedef pair <pair<int,int>, int> Gimnasio;
-typedef pair<int,int> Pokeparada;
-typedef pair<int,int> Arista;
-
-//Funciones importantes
-pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]);
-vector<int> tabuSearch(vector<int> solucionParcial);
-list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParcial);
-list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParcial);
-list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParcial);
-
-//auxiliares
-pair< vector<int>, list<Arista> > funcionAspiracion( SetTabu atributosTabu, list< pair< vector<int>, list<Arista> > > vecindad);
-int tabuCount(SetTabu atributos, vector<int> solucion);
-long long calcularCosto(vector<int> &camino);
-void optimizarSolucion(vector<int> &solucion);
 
 //variables globales
 int cantGyms, cantPokeParadas, capMochila;
 Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
 
-int main(){
-	//generar entradas
-	//srand (time(NULL));
-	srand(SEED);
-	
-	
-/*	bool utilizado[RADIO][RADIO];
-	
-	for(int i = 0; i < RADIO; i++){
-		for(int j = 0; j < RADIO; j++){
-			utilizado[i][j] = false;
-		}
-	}
-*/	
-	cantGyms = 2;
-	Gimnasio gimnasiosArr[cantGyms];
-	
-	gimnasiosArr[0].first.first = 2;
-	gimnasiosArr[0].first.second = 3;
-	gimnasiosArr[0].second = 2;
-	
-	gimnasiosArr[1].first.first = 3;
-	gimnasiosArr[1].first.second = 2;
-	gimnasiosArr[1].second = 3;
-	
-	cantPokeParadas = 5;
-	Pokeparada pokeParadasArr[cantPokeParadas];
-	
-	pokeParadasArr[0].first = 0;
-	pokeParadasArr[0].second = 0;
-	pokeParadasArr[1].first = 0;
-	pokeParadasArr[1].second = 1;
-	pokeParadasArr[2].first = 1;
-	pokeParadasArr[2].second = 1;
-	pokeParadasArr[3].first = 2;
-	pokeParadasArr[3].second = 2;
-	pokeParadasArr[4].first = 1;
-	pokeParadasArr[4].second = 3;
-	
-	capMochila = 8;
-	
-	gimnasiosArrPtr = gimnasiosArr;
-	pokeParadasArrPtr = pokeParadasArr;
-	
-	vector<int> solucionParcial;
-	
-	solucionParcial.push_back(2);
-	solucionParcial.push_back(3);
-	solucionParcial.push_back(5);
-	solucionParcial.push_back(0);
-	solucionParcial.push_back(6);
-	solucionParcial.push_back(1);
-	
-	/*
-	Gimnasio gimnasiosArr[cantGyms];
-	for(int i = 0; i < cantGyms; i++){
-		Gimnasio gymPuebloPaleta;//gimnasio (uno solo)
-		bool usado = true;
-		int x, y;
-		while(usado){
-			x = rand() % RADIO;
-			y = rand() % RADIO;	
-			if(!utilizado[x][y]) 
-				usado = false;
-		}
-		gymPuebloPaleta.first.first = x;
-		gymPuebloPaleta.first.second = y;
-		gymPuebloPaleta.second = rand() % MAX_PODER;
-		gimnasiosArr[i] = gymPuebloPaleta;
-		utilizado[x][y] = true;
-	}
-	
-	
-	cantPokeParadas = ((MAX_PODER * cantGyms)/3)*2;
-	Pokeparada pokeParadasArr[cantPokeParadas];
-	
-	for(int j = 0; j < cantPokeParadas; j++){
-		Pokeparada posicion;
-		bool usado = true;
-		int x, y;
-		while(usado){
-			x = rand() % RADIO;
-			y = rand() % RADIO;	
-			if(!utilizado[x][y]) 
-				usado = false;
-		}
-		posicion.first = x;
-		posicion.second = y;
-		pokeParadasArr[j] = posicion;
-		utilizado[x][y] = true;
-	}
-	*/
-/*
-	cin >> cantGyms >> cantPokeParadas >> capMochila;
-	Gimnasio gimnasiosArr[cantGyms];
-	for(int i = 0; i < cantGyms; i++)
-	{
-		Gimnasio gymPuebloPaleta;
-		cin >> 
-			gymPuebloPaleta.first.first >> 
-			gymPuebloPaleta.first.second >>
-			gymPuebloPaleta.second;
-		gimnasiosArr[i] = gymPuebloPaleta;
-	}
-
-	Pokeparada pokeParadasArr[cantPokeParadas];
-	Pokeparada pokeParadasAux[cantPokeParadas];
-	for(int i = 0; i < cantPokeParadas; i++)
-	{
-		Pokeparada posicion;
-		cin >> posicion.first >> posicion.second;
-		pokeParadasArr[i] = posicion;
-		pokeParadasAux[i] = posicion;
-	}
-
-	pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
-			cantGyms, 
-			cantPokeParadas,
-			capMochila, 
-			gimnasiosArr, 
-			pokeParadasArr, 
-			pokeParadasAux);
-
-	list<int> *solucionInicialLista = solucionInicial->second;
-	vector<int> solucionParcial;
-
-	list<int>::iterator itLista;
-	for(itLista = solucionInicialLista->begin();
-			itLista != solucionInicialLista->end();
-			itLista++ )
-	{
-		solucionParcial.push_back(*itLista);
-	}
-
-	gimnasiosArrPtr = gimnasiosArr;
-	pokeParadasArrPtr = pokeParadasAux;
-	*/
-
-	long long costo = calcularCosto(solucionParcial);
-	
-	printf("Costo inicial: %lld\n", costo);
-	//mejorar solucion
-	if(solucionParcial.size()){
-		vector <int> mejorada = tabuSearch(solucionParcial);
-		//imprimir solucion mejorada
-		costo = calcularCosto(mejorada);
-		for(int i = 0; i < (int) mejorada.size(); i++){
-			printf("%d ", mejorada[i]);
-		}
-		printf("\n");
-		printf("Costo final: %lld\n", costo);
-	}else{
-		printf("%d", -1);
-		//no hubo solucion parcial a partir de la cual trabajar
-	}
-
-	return 0;
-}
-
 //http://crema.di.unimi.it/~righini/Didattica/Algoritmi%20Euristici/MaterialeAE/Taratura%20parametri%20TS.pdf
 //http://www.uv.es/rmarti/paper/docs/ts1.pdf
+pair<float, float> mediaPodadaVarianzaMuestral(vector<long long> &muestra) 
+{
+	//asume TEST_ITER divisible por 4
+	float alpha = 0.5;
+	int n = (int) muestra.size(); 
+	int x1, x2;
+
+	x1 = n*alpha/2; //quiero sacar de ambos lados
+	x2 = n*alpha/2; 
+
+
+	sort(muestra.begin(), muestra.end());
+	
+	for(int i = 0; i < x1; i++)
+		muestra.pop_back();
+
+	//for(int i = 0; i < x2; i++)
+	//	muestra.pop_front(); pop front no existe!
+
+	long long sum = 0;
+	for(int i = x2; i < (int)muestra.size(); i++) sum += muestra[i];
+	float mean = (float) sum / (float) (muestra.size() - x2);
+	
+	float sampleVariance;
+	float total = 0.0;
+	for(int i = x2; i < (int)muestra.size(); i++)
+	{
+		sampleVariance = muestra[i] - mean;
+		sampleVariance = sampleVariance * sampleVariance;
+		total = total + sampleVariance;
+	}
+	total = total / (float)(muestra.size() - x2);
+	total = sqrt(total);
+
+	return make_pair(mean, total);
+}
+
 vector<int> tabuSearch(vector<int> solucionParcial)
 {
 	vector<int> solucionActual = solucionParcial;
@@ -303,6 +145,31 @@ pair< vector<int>, list<Arista> > funcionAspiracion( SetTabu atributosTabu, list
 	return solucionMenosTabu;
 }
 
+//en vez de decir si una funcion es tabu o no, cuenta cuantos
+//atributos tabu tiene.
+int tabuCount( SetTabu atributos, vector<int> solucion )
+{
+	int tabuAtributeCount = 0;
+	vector<int>::iterator itSolucion;
+	for(itSolucion = solucion.begin(); itSolucion != solucion.end()-1; itSolucion++){
+
+		if(atributos.belongs( Arista(*itSolucion, *(itSolucion+1)) ))
+		{
+			tabuAtributeCount++;
+		} 
+		else
+		{
+			Arista inversa = Arista(*(itSolucion+1), *itSolucion);
+			if(atributos.belongs(inversa)) tabuAtributeCount++;
+		}
+
+	}
+
+	if(atributos.belongs( Arista( *itSolucion, *solucion.begin() ) ))
+		//mas parentesis que lisp
+		tabuAtributeCount++;
+	return 0;
+}
 list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParcial)
 {
 	list< pair< vector<int>, list<Arista> > > soluciones;
@@ -487,6 +354,12 @@ list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParci
 	return soluciones;
 }
 
+long long distancia(pair<int, int> origen, pair<int, int> destino){
+	return 
+		pow(origen.first - destino.first, 2) + 
+		pow(origen.second - destino.second, 2);
+}
+
 bool pasoPosible(int destino, int capacidadParcial){
 	Gimnasio gym;
 
@@ -494,10 +367,10 @@ bool pasoPosible(int destino, int capacidadParcial){
 
 	if (destino < cantGyms)
 	{
-		poderGym = gimnasiosArrPtr[destino].second;
+		poderGym = gimnasiosArrPtr[destino-1].second;
 	}
 	
-	if (poderGym == 0 || capacidadParcial > poderGym)
+	if (poderGym == 0 || capacidadParcial >= poderGym)
 	{
 		return true;
 	}
@@ -505,46 +378,41 @@ bool pasoPosible(int destino, int capacidadParcial){
 	return false;
 }
 
-long long distancia(pair<int, int> origen, pair<int, int> destino){
-	return pow(origen.first - destino.first, 2) + pow(origen.second - destino.second, 2);//gusanito
-}
 
 long long calcularCosto(vector<int> &camino){
-	//toda la complejidad del ejercicio es esto en realidad
 	long long costo = 0;
 	int capacidadParcial = 0;
-	
-	if(camino.size() == 0 ) return -1;//vector vacio
 
-	for(int i = 1; i < (int) camino.size(); i++){
-		if(pasoPosible(camino[i], capacidadParcial)){
+	
+	
+	for(int i = 0; i < (int) camino.size() -1; i++){
+		if(pasoPosible(camino[i+1], capacidadParcial)){
 			
 			pair<int, int> pOrigen;
 			pair<int, int> pDestino;
-			
-			int origen = camino[i-1];
-			int destino = camino[i];
+		
+			int origen = camino[i];
+			int destino = camino[i+1];
 			
 			bool destinoEsPP = false;
 			
-			if (origen < cantGyms)
+			if (origen <= cantGyms)
 			{
-				pOrigen = gimnasiosArrPtr[origen].first;
+				pOrigen = gimnasiosArrPtr[origen - 1].first;
 			}else {
-				pOrigen = pokeParadasArrPtr[origen-cantGyms];
+				pOrigen = pokeParadasArrPtr[origen - cantGyms - 1];
 			}
 			
-			if (destino < cantGyms)
+			if (destino <= cantGyms)
 			{
-				pDestino = gimnasiosArrPtr[destino].first;
+				pDestino = gimnasiosArrPtr[destino - 1].first;
 			}else {
-				pDestino = pokeParadasArrPtr[destino-cantGyms];
+				pDestino = pokeParadasArrPtr[destino - cantGyms - 1];
 				destinoEsPP = true;
 			}			
 			
 			costo = costo + distancia(pOrigen, pDestino);
 			
-		//	printf("Distancia de (%d,%d) a (%d,%d) = %lld \n", pOrigen.first, pOrigen.second, pDestino.first, pDestino.second, distancia(pOrigen, pDestino));
 			
 			if(destinoEsPP){
 				capacidadParcial += 3;
@@ -552,9 +420,20 @@ long long calcularCosto(vector<int> &camino){
 					capacidadParcial = capMochila;
 				}
 			} else {
-				capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino].second;
+				capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino - 1].second;
 			}
 		} else{
+			/*
+			cout << "ERROR\n" 
+				<< "capacidad " << capMochila << "\n"
+				<< "capacidad Parcial " << capacidadParcial << "\n"
+				<< "origen " << camino[i] << "\n"
+				<< "destino " << camino[i+1] << "\n";
+			if(camino[i+1] <= cantGyms)
+			{
+				cout << "poder Gym: " << gimnasiosArrPtr[camino[i+1] - 1].second << "\n";
+			}
+			*/
 			return -1;
 		}
 	}
@@ -562,44 +441,17 @@ long long calcularCosto(vector<int> &camino){
 	return costo;
 }
 
-//en vez de decir si una funcion es tabu o no, cuenta cuantos
-//atributos tabu tiene.
-int tabuCount( SetTabu atributos, vector<int> solucion )
-{
-	int tabuAtributeCount = 0;
-	vector<int>::iterator itSolucion;
-	for(itSolucion = solucion.begin(); itSolucion != solucion.end()-1; itSolucion++){
-
-		if(atributos.belongs( Arista(*itSolucion, *(itSolucion+1)) ))
-		{
-			tabuAtributeCount++;
-		} 
-		else
-		{
-			Arista inversa = Arista(*(itSolucion+1), *itSolucion);
-			if(atributos.belongs(inversa)) tabuAtributeCount++;
-		}
-
-	}
-
-	if(atributos.belongs( Arista( *itSolucion, *solucion.begin() ) ))
-		//mas parentesis que lisp
-		tabuAtributeCount++;
-	return 0;
-}
-
-
 void optimizarSolucion(vector<int> &solucion)
 {
 	int i = solucion.size() -1;
-	while(solucion[i] >= cantGyms && i > 0)
+	while(solucion[i] > cantGyms && i > 0)
 	{
 		solucion.pop_back();
 		i--;
 	}
 }
 
- pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
+pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
 {
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
 	int pocionesANecesitar = 0;
@@ -624,11 +476,11 @@ void optimizarSolucion(vector<int> &solucion)
 	std::list<int> * camino;
 
 
-	for (int x = 0; x < cant_pokeParadas; ++x)
+	for (int x = 0; x < cant_pokeParadas + cant_gimnasios; ++x)
 	{
 
 		posible = true;
-		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp); //Aca se registran en el Pokedex
+		MaestroPokemon ash = MaestroPokemon(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, x); //Aca se registran en el Pokedex
 		while(posible){
 			//ash.printStatus();
 			if (ash.gane())
@@ -647,32 +499,6 @@ void optimizarSolucion(vector<int> &solucion)
 			posible = posible && (minimo == -1 || ash.distancia<minimo);
 			
 		}
-		//cout << "termine rama\n";
-		pair <int, int> posicion;
-		for (int h = 0; h < cant_pokeParadas; ++h){
-			/*Luego de la vuelta completa reordeno el array pp pasando al primer pp al ultimo y 
-			muevo todo de esta forma me garantizo que todas las pp van a tener su rama como inicial*/
-			if (h == 0)	{
-				posicion.first = posiciones_pp[cant_pokeParadas-1].first; 
-				posicion.second = posiciones_pp[cant_pokeParadas-1].second; 
-			//	printf("Posicion : %d posicion: %d \n",posicion.first, posicion.second );
-				posiciones_pp[cant_pokeParadas-1].first = posiciones_pp[0].first;
-				posiciones_pp[cant_pokeParadas-1].second = posiciones_pp[0].second;
-				posiciones_pp[0].first = posiciones_pp[1].first;
-				posiciones_pp[0].second = posiciones_pp[1].second;
-			}else{
-				if (h+1 < cant_pokeParadas-1)	{
-					posiciones_pp[h].first = posiciones_pp[h+1].first;
-					posiciones_pp[h].second = posiciones_pp[h+1].second;
-					
-				}else{
-					posiciones_pp[cant_pokeParadas-2].first = posicion.first;
-					posiciones_pp[cant_pokeParadas-2].second = posicion.second;
-				
-				}
-			}
-		}
-
 	}
 
 	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
@@ -680,3 +506,4 @@ void optimizarSolucion(vector<int> &solucion)
 	final->second = camino;
 	return final;
 }
+
