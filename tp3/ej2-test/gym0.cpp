@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 	pair <int, int>  posiciones_pp[cantMaxPP];
 	pair <int, int>  pp_aux[cantMaxPP];
 	
-	for(int j = 1; j < 50; j++){
+	for(int j = 1; j < 2; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		
@@ -153,7 +153,7 @@ int main(int argc, char* argv[])
 			{
 				if (ash.distancia < minimo || minimo == -1)
 				{
-					//cout<<"minimo alcanzado\n";
+					cout<<"minimo alcanzado\n";
 					minimo = ash.distancia;
 					camino = ash.caminoRecorrido(pp_aux);
 

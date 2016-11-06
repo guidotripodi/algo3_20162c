@@ -82,9 +82,9 @@ bool MaestroPokemon::eleccionGolosa(){
 	Eleccion eleccion = Eleccion(this);
 	int minima = -1;
 	bool minimo_es_gym = false;
-	bool gym;
+	
 	std::list<int>::iterator itm;
-	int i = 0;
+	
 	for (std::list<int>::iterator it=opciones->begin(); it != opciones->end(); ++it){
 	//	cout<<i++<<"\n";
 		eleccion.id = *it;

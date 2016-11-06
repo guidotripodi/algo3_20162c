@@ -82,9 +82,9 @@ bool MaestroPokemon::eleccionGolosa(){
 	Eleccion eleccion = Eleccion(this);
 	int minima = -1;
 	bool minimo_es_gym = false;
-	bool gym;
+	
 	std::list<int>::iterator itm;
-	int i = 0;
+	
 	for (std::list<int>::iterator it=opciones->begin(); it != opciones->end(); ++it){
 	//	cout<<i++<<"\n";
 		eleccion.id = *it;
@@ -119,7 +119,13 @@ bool MaestroPokemon::eleccionGolosa(){
 
 	opciones->erase(itm);
 	//Incremento la distancia
+	printf("[distancia 0]  %d  \n", distancia );
+	if (decisiones->size()>1)
+	{
+		/* code */
 	distancia += eleccionActual.distancia;
+	}
+	printf("[distancia 1]  %d  \n", distancia );
 	
 	if (eleccionActual.tipo == GIMNASIO)
 	{
