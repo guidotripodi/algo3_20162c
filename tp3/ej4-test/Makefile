@@ -18,8 +18,8 @@ MAINOBJECTS=sinSolucionPorPP.o sinSolucionPorCapMochila.o orden.o sinOrden.o gym
 OBJECTS=MaestroPokemon.o trie.o SetTabu.o ej4.o
 
 # Nombre del ejecutable a generar
-EXECUTABLES=gym0.test  
-#todosGym0.test orden.test sinOrden.test 
+EXECUTABLES=gym0.test todosGym0.test orden.test 
+#sinOrden.test 
 #sinSolucionPorPP.test sinSolucionPorCapMochila.test 
 
 all: $(EXECUTABLES)
