@@ -31,26 +31,20 @@ int main(){
     pair <int, int>  pokeParadasArr[MAX_CANT_PP];
     pair <int, int>  pokeParadasAux[MAX_CANT_PP];
 
-    for (int i = 0; i < cantGyms; i++)
-    {
-        Gimnasio gymPuebloPaleta;
+    for (int i = 0; i < cantGyms; i++){
+        pair <pair<int,int>, int> gymPuebloPaleta;
         gymPuebloPaleta.first.first = i;
         gymPuebloPaleta.first.second = i+1;
-        if( i % 2 == 0)
-        {
-            gymPuebloPaleta.second = 0;
-        } else
-        {
-            gymPuebloPaleta.second  = i;
-        }
+        gymPuebloPaleta.second = 0;
         gimnasiosArr[i] = gymPuebloPaleta;
+        
     }
-    for (int i = 0; i < cantPokeParadas; i++)
-    {
-        Pokeparada posicion;
+    
+    for (int i = 0; i < cantPokeParadas; i++)	{
+        pair <int, int> posicion;
         posicion.first = i;
         posicion.second = i+2;
-        pokeParadasArr[i] = posicion;
+        pokeParadasAux[i] = posicion;
         pokeParadasAux[i] = posicion;
     }
     
