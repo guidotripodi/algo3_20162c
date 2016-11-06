@@ -84,6 +84,9 @@ void correr(vector<int> solucionParcial, long long itAct, long long tenorAct, lo
 
 void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[], int test) {
     
+    gimnasiosArrPtr = gimnasiosArr;
+    pokeParadasArrPtr = pokeParadasArr;
+    
     vector<int> solucionParcial;
     
     //Llamada a la heuristica(ej2)
