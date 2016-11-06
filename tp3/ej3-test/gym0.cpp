@@ -35,6 +35,7 @@ Pokeparada *pokeParadasArrPtr;
 
 #define CANT_MAX_GYMS 20
 #define CANT_MAX_PP 20
+#define MAX_SIZE 10
 
 int main()
 {
@@ -46,8 +47,19 @@ int main()
 	gimnasiosArrPtr = gimnasiosArr;
 	pokeParadasArrPtr = pokeParadasAux;
 	
+	vector<int> solucionesSwap[MAX_SIZE];
+	vector<int> soluciones2opt[MAX_SIZE];
+	vector<int> soluciones3opt[MAX_SIZE];
+	
+	vector<long long> mejorasSwap;
+	vector<long long> mejoras2opt;
+	vector<long long> mejoras3opt;
 
-	for(int j = 0; j < 10; j++)
+	vector< pair <float, float> > estadisticasSwap;
+	vector< pair <float, float> > estadisticas2opt;
+	vector< pair <float, float> > estadisticas3opt;
+
+	for(int j = 0; j < MAX_SIZE; j++)
 	{
 		cantGyms = j+1;
 		cantPokeParadas = j;
@@ -138,14 +150,18 @@ int main()
 
 		}
 
-		pair <float, float> estadisticasSwap = mediaPodadaVarianzaMuestral(tiemposSwap);
-		pair <float, float> estadisticas2opt = mediaPodadaVarianzaMuestral(tiempos2opt);
-		pair <float, float> estadisticas3opt = mediaPodadaVarianzaMuestral(tiempos3opt);
+		estadisticasSwap.push_back(mediaPodadaVarianzaMuestral(tiemposSwap));
+		estadisticas2opt.push_back( mediaPodadaVarianzaMuestral(tiempos2opt) );
+		estadisticas3opt.push_back( mediaPodadaVarianzaMuestral(tiempos3opt) );
 
-		long long mejoraSwap = calcularCosto(solucionSwap);
-		long long mejora2opt = calcularCosto(solucion2opt);
-		long long mejora3opt = calcularCosto(solucion3opt);
+		mejorasSwap.push_back( calcularCosto(solucionSwap) );
+		mejoras2opt.push_back( calcularCosto(solucion2opt) );
+		mejoras3opt.push_back( calcularCosto(solucion3opt) );
 
+		solucionesSwap[j] = solucionSwap;
+		soluciones2opt[j] = solucion2opt;
+		soluciones3opt[j] = solucion3opt;
+/*
 		cout << estadisticasSwap.first << " " 
 			<< estadisticasSwap.second << " "
 			<< mejoraSwap << "\n";
@@ -170,11 +186,43 @@ int main()
 		for(int i = 0; i < (int) solucion3opt.size(); i++) 
 			cout << solucion3opt[i] << " ";
 		cout << "\n";
-
+*/
 		delete solucionInicial;
 	}
 
 
+	for( int k = 0; k < 10; k++ )
+	{
+		cout << estadisticasSwap[k].first << " " 
+			<< estadisticasSwap[k].second << " "
+			<< mejorasSwap[k] << "\n";
+
+		for(int i = 0; i < (int) solucionesSwap[k].size(); i++) 
+			cout << solucionesSwap[k][i] << " ";
+		cout << "\n";
+	}
+
+	for( int k = 0; k < 10; k++ )
+	{
+		cout << estadisticas2opt[k].first << " " 
+			<< estadisticas2opt[k].second << " "
+			<< mejoras2opt[k] << "\n";
+
+		for(int i = 0; i < (int) soluciones2opt[k].size(); i++) 
+			cout << soluciones2opt[k][i] << " ";
+		cout << "\n";
+	}
+
+	for( int k = 0; k < 10; k++ )
+	{
+		cout << estadisticas3opt[k].first << " " 
+			<< estadisticas3opt[k].second << " "
+			<< mejoras3opt[k] << "\n";
+
+		for(int i = 0; i < (int) soluciones3opt[k].size(); i++) 
+			cout << soluciones3opt[k][i] << " ";
+		cout << "\n";
+	}
 	return 0;
 }
 
