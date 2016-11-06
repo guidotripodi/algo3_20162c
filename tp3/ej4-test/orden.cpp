@@ -25,8 +25,8 @@ int main(){
     cin >> test;
     
     int j = 8;
-    cantGyms = j+1;
-    cantPokeParadas = j;
+    cantGyms = j;
+    cantPokeParadas = j+1;
     pair <pair<int,int>, int> gimnasiosArr[MAX_CANT_GYMS];
     pair <int, int>  pokeParadasArr[MAX_CANT_PP];
     pair <int, int>  pokeParadasAux[MAX_CANT_PP];
