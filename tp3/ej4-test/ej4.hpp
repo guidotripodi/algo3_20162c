@@ -54,4 +54,3 @@ void optimizarSolucion(vector<int> &solucion);
 extern int cantGyms, cantPokeParadas, capMochila;
 extern Gimnasio *gimnasiosArrPtr;
 extern Pokeparada *pokeParadasArrPtr;
-
