@@ -28,20 +28,20 @@ Para generar la heur\'istica se toma de base la lógica restrictiva de las podas
 
 %Por consiguiente, luego de pasar por una pokeparada, se chequear\'a si existe alg\'un gimnasio con menor cantidad de pociones que las que se tienen hasta el momento, y en caso de existir m\'as de uno se fijar\'a cual es el que se encuentra m\'as cercano a \'el e ir\'a a vencerlo. Luego de esta batalla y haber vencido el gimnasio, se vuelve a chequear si existe otro gimnasio con menor cantidad de pociones de las que nos quedan despues de la batalla anterior, si existe se ir\'a a vencer a dicho gimnasio, y en caso contrario se buscar\'a la pokeparada m\'as cercana para ir a recuperar pociones. Esta secuencia ser\'a repetida hasta ganar en todos los gimnasios y as\'i convertirse en \textbf{Maestro Pokem\'on}.
 
-La aproximación a travez de una heurística nos permite obtener soluciones en forma mucho más rápida que el método de backtracking. El paso goloso nos permite ahorrar evaluaciones de casos en que es trivial su invalidez. Un ejemplo de una solución correcta alcanzada por el algoritmo es el siguiente:
+La aproximación a travez de una heurística nos permite obtener soluciones en forma mucho más rápida que el método de backtracking. El paso goloso nos permite ahorrar evaluaciones de casos en que es trivial su invalidez. Un ejemplo de una solución correcta alcanzada por el algoritmo es el siguiente,, en donde la solucion óptima esta representada por el camino 1, y la obtenida por el camino 2 (se encuentran ensimados):
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.60]{./EJ2/optima.jpeg}
+\includegraphics[scale=0.40]{./EJ2/optima.jpeg}
 \\{\textit{La soluci\'on obtenida es la \'optima}}
   \end{center}
   \vspace*{0.3cm}
 
-No obstante, la aproximación golosa tiene como desventaja de que ya no asegura que la solución a obtener sea la óptima: un ejemplo de esto se puede ver en el siguiente escenario:
+No obstante, la aproximación golosa tiene como desventaja de que ya no asegura que la solución a obtener sea la óptima: un ejemplo de esto se puede ver en el siguiente escenario, en donde la capacidad de la mochila es 9 y todos los gimnasios se vencen con 3 pociones:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.60]{./EJ2/nooptima.jpeg}
+\includegraphics[scale=0.20]{./EJ2/nooptima.jpeg}
 \\{\textit{La soluci\'on obtenida no es la \'optima}}
   \end{center}
   \vspace*{0.3cm}
