@@ -47,16 +47,20 @@ int main(int argc, char* argv[])
 	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
 	pair <int, int>  posiciones_pp[cantMaxPP];
 	
-	for(int j = 4; j < 50; j++){
-		cant_gimnasios = j+1;
-		cant_pokeParadas = j;
+	for(int j = 1; j < 7; j++){
+		cant_gimnasios = j;
+		cant_pokeParadas = j*2;
 		
 		int i = 0;
 			for (i = 0; i < cant_gimnasios; i++){
 			pair <pair<int,int>, int> gymPuebloPaleta;
 			gymPuebloPaleta.first.first = i;
 			gymPuebloPaleta.first.second = i+1;
-			gymPuebloPaleta.second = (i+1)*3;
+			if (i % 2 == 0){
+				gymPuebloPaleta.second = 3;
+			}else{
+				gymPuebloPaleta.second = 6;
+			}
 			//cantidad_pociones_necesarias_total += i*3;
 			posiciones_gym[i] = gymPuebloPaleta;
 			
@@ -69,7 +73,7 @@ int main(int argc, char* argv[])
 		}
 		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
 		cap_mochila = cantMaxGym*3	;
-		
+		cout << "j es:" << j << "\n"; 
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
 		for(i = 0; i < cant_gimnasios; i++){
@@ -87,15 +91,15 @@ int main(int argc, char* argv[])
 			cout << "-1" << "\n";
 			//return -1;
 		}else{
-			//cout << f->first <<" "<< f->second->size();
+			cout << f->first <<" "<< f->second->size();
 			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << " " << *it;
 			}
 		}
+		cout << "\n";
 		
 		
 		
-		cout << "j es:" << j << "\n";
 		delete f;
 	}
 	return 0;

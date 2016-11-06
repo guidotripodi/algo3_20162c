@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 	pair <int, int>  posiciones_pp[cantMaxPP];
 	pair <int, int>  pp_aux[cantMaxPP];
 	
-	for(int j = 2; j < 50; j++){
+	for(int j = 1; j < 50; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		
@@ -75,7 +75,8 @@ int main(int argc, char* argv[])
 		}
 		
 		cap_mochila = cant_gimnasios*3	;
-		
+/*		
+		cout << "Cantidad de elementos:" << cant_gimnasios + cant_pokeParadas << "\n";
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
 		for(i = 0; i < cant_gimnasios; i++){
@@ -86,14 +87,19 @@ int main(int argc, char* argv[])
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 			
 			}
-/*
-		auto start = ya();*/
-		cout << "Cantidad de elementos:" << cant_gimnasios + cant_pokeParadas << "\n";
-		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
-	/*	auto end = ya();
-			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-				cout << "\n";*/
+*/
+		pair <int,std::list<int> * > * f;
+			for (int h = 0; h < 10; ++h){
+				auto start = ya();	
+				f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
+				auto end = ya();
+				if (h == 9)	{
+					cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+					cout << "\n";
+				}
+			}
 	
+/*	
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
@@ -104,7 +110,7 @@ int main(int argc, char* argv[])
 			}
 		}
 		cout << "\n";
-		
+*/		
 		delete f;
 	}
 	return 0;

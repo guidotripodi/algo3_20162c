@@ -84,11 +84,16 @@ int main(int argc, char* argv[])
 			
 			}
 */
-			auto start = ya();
-		pair <int,std::list<int> * > * f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
-	auto end = ya();
-			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-				cout << "\n";
+		pair <int,std::list<int> * > * f;
+			for (int h = 0; h < 10; ++h){
+				auto start = ya();	
+				f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
+				auto end = ya();
+				if (h == 9)	{
+					cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+					cout << "\n";
+				}
+			}
 	
 	/*
 		if ( f == NULL || f->first == -1)	{
