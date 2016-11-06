@@ -33,148 +33,148 @@ int cantGyms, cantPokeParadas, capMochila;
 Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
 
+#define CANT_MAX_GYMS 20
+#define CANT_MAX_PP 20
+
 int main()
 {
 	
-	int j = 8;
-	cantGyms = j+1;
-	cantPokeParadas = j;
-	pair <pair<int,int>, int> gimnasiosArr[cantGyms];
-	pair <int, int>  pokeParadasArr[cantPokeParadas];
-	pair <int, int>  pokeParadasAux[cantPokeParadas];
+	pair <pair<int,int>, int> gimnasiosArr[CANT_MAX_GYMS];
+	pair <int, int>  pokeParadasArr[CANT_MAX_PP];
+	pair <int, int>  pokeParadasAux[CANT_MAX_PP];
 	
-	vector<long long> tiemposSwap(TEST_ITER);
-	vector<long long> tiempos2opt(TEST_ITER);
-	vector<long long> tiempos3opt(TEST_ITER);
-	
-	vector<int> solucionSwap;
-	vector<int> solucion2opt;
-	vector<int> solucion3opt;
-
-	vector<int> solucionParcial;
-	
-	int i = 0;
-	for (i = 0; i < cantGyms; i++)
-	{
-		Gimnasio gymPuebloPaleta;
-		gymPuebloPaleta.first.first = i;
-		gymPuebloPaleta.first.second = i+1;
-		if( i % 2 == 0)
-		{
-			gymPuebloPaleta.second = 0;
-		} else
-		{
-			gymPuebloPaleta.second  = i;
-		}
-		gimnasiosArr[i] = gymPuebloPaleta;
-	}
-	for (i = 0; i < cantPokeParadas; i++)
-	{
-		Pokeparada posicion;
-		posicion.first = i;
-		posicion.second = i+2;
-		pokeParadasArr[i] = posicion;
-		pokeParadasAux[i] = posicion;
-	}
-	
-	capMochila = cantGyms*3;
-
-	pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
-			cantGyms, 
-			cantPokeParadas,
-			capMochila, 
-			gimnasiosArr, 
-			pokeParadasArr, 
-			pokeParadasAux);
-
-
-	list<int> *solucionInicialLista = solucionInicial->second;
-
-	list<int>::iterator itLista;
-/*
-	for(itLista = solucionInicialLista->begin();
-			itLista != solucionInicialLista->end();
-			itLista++ )
-	{
-		printf("%d ", *itLista);
-	}
-	cout << "\n";
-*/
-	for(itLista = solucionInicialLista->begin();
-			itLista != solucionInicialLista->end();
-			itLista++ )
-	{
-		solucionParcial.push_back(*itLista);
-	}
-
 	gimnasiosArrPtr = gimnasiosArr;
 	pokeParadasArrPtr = pokeParadasAux;
 	
-	for(int it = 0; it < TEST_ITER; it++)
+
+	for(int j = 0; j < 10; j++)
 	{
-		//mejorar solucion
-		if( solucionParcial.size())
+		cantGyms = j+1;
+		cantPokeParadas = j;
+		vector<long long> tiemposSwap(TEST_ITER);
+		vector<long long> tiempos2opt(TEST_ITER);
+		vector<long long> tiempos3opt(TEST_ITER);
+		vector<int> solucionSwap;
+		vector<int> solucion2opt;
+		vector<int> solucion3opt;
+		vector<int> solucionParcial;
+		
+		int i = 0;
+		for (i = 0; i < cantGyms; i++)
 		{
-			auto start = ya();
-			solucionSwap = mejorarSwap(solucionParcial);
-			auto end = ya();
-			tiemposSwap[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
-			start = ya();
-			solucion2opt = mejorar2opt(solucionParcial);
-			end = ya();
-			tiempos2opt[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
-			start = ya();
-			solucion3opt = mejorar3opt(solucionParcial);
-			end = ya();
-			tiempos3opt[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
-		} 
-		else{
-			printf("%d", -1);
+			Gimnasio gymPuebloPaleta;
+			gymPuebloPaleta.first.first = i;
+			gymPuebloPaleta.first.second = i+1;
+			if( i % 2 == 0)
+			{
+				gymPuebloPaleta.second = 0;
+			} else
+			{
+				gymPuebloPaleta.second  = i;
+			}
+			gimnasiosArr[i] = gymPuebloPaleta;
+		}
+		for (i = 0; i < cantPokeParadas; i++)
+		{
+			Pokeparada posicion;
+			posicion.first = i;
+			posicion.second = i+2;
+			pokeParadasArr[i] = posicion;
+			pokeParadasAux[i] = posicion;
+		}
+		
+		capMochila = cantGyms*3;
+
+		pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
+				cantGyms, 
+				cantPokeParadas,
+				capMochila, 
+				gimnasiosArr, 
+				pokeParadasArr, 
+				pokeParadasAux);
+
+
+		list<int> *solucionInicialLista = solucionInicial->second;
+
+		list<int>::iterator itLista;
+
+		for(itLista = solucionInicialLista->begin();
+				itLista != solucionInicialLista->end();
+				itLista++ )
+		{
+			solucionParcial.push_back(*itLista);
+		}
+		
+		cout << calcularCosto(solucionParcial) << "\n";
+		for(itLista = solucionInicialLista->begin();
+				itLista != solucionInicialLista->end();
+				itLista++ )
+		{
+			cout << *itLista << " ";
+		}
+		cout << "\n";
+		
+		for(int it = 0; it < TEST_ITER; it++)
+		{
+			//mejorar solucion
+			if( solucionParcial.size())
+			{
+				auto start = ya();
+				solucionSwap = mejorarSwap(solucionParcial);
+				auto end = ya();
+				tiemposSwap[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+				start = ya();
+				solucion2opt = mejorar2opt(solucionParcial);
+				end = ya();
+				tiempos2opt[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+				start = ya();
+				solucion3opt = mejorar3opt(solucionParcial);
+				end = ya();
+				tiempos3opt[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+			} 
+			else{
+				printf("%d", -1);
+			}
+
 		}
 
+		pair <float, float> estadisticasSwap = mediaPodadaVarianzaMuestral(tiemposSwap);
+		pair <float, float> estadisticas2opt = mediaPodadaVarianzaMuestral(tiempos2opt);
+		pair <float, float> estadisticas3opt = mediaPodadaVarianzaMuestral(tiempos3opt);
+
+		long long mejoraSwap = calcularCosto(solucionSwap);
+		long long mejora2opt = calcularCosto(solucion2opt);
+		long long mejora3opt = calcularCosto(solucion3opt);
+
+		cout << estadisticasSwap.first << " " 
+			<< estadisticasSwap.second << " "
+			<< mejoraSwap << "\n";
+
+		for(int i = 0; i < (int) solucionSwap.size(); i++) 
+			cout << solucionSwap[i] << " ";
+		cout << "\n";
+
+		
+		cout << estadisticas2opt.first << " "
+			<< estadisticas2opt.second << " "
+			<< mejora2opt << "\n";
+
+		for(int i = 0; i < (int) solucion2opt.size(); i++) 
+			cout << solucion2opt[i] << " ";
+		cout << "\n";
+
+		
+		cout << estadisticas3opt.first << " "
+			<< estadisticas3opt.second << " " 
+			<< mejora3opt << "\n";
+		for(int i = 0; i < (int) solucion3opt.size(); i++) 
+			cout << solucion3opt[i] << " ";
+		cout << "\n";
+
+		delete solucionInicial;
 	}
 
-	pair <float, float> estadisticasSwap = mediaPodadaVarianzaMuestral(tiemposSwap);
-	pair <float, float> estadisticas2opt = mediaPodadaVarianzaMuestral(tiempos2opt);
-	pair <float, float> estadisticas3opt = mediaPodadaVarianzaMuestral(tiempos3opt);
 
-	long long mejoraSwap = calcularCosto(solucionParcial) - calcularCosto(solucionSwap);
-	long long mejora2opt = calcularCosto(solucionParcial) - calcularCosto(solucion2opt);
-	long long mejora3opt = calcularCosto(solucionParcial) - calcularCosto(solucion3opt);
-
-	cout << estadisticasSwap.first << " " 
-		<< estadisticasSwap.second << " "
-		<< mejoraSwap << "\n";
-
-	for(int i = 0; i < (int) solucionSwap.size(); i++) 
-		cout << solucionSwap[i] << " ";
-	cout << "\n";
-
-	
-	cout << estadisticas2opt.first << " "
-		<< estadisticas2opt.second << " "
-		<< mejora2opt << "\n";
-
-	for(int i = 0; i < (int) solucion2opt.size(); i++) 
-		cout << solucion2opt[i] << " ";
-	cout << "\n";
-
-	
-	cout << estadisticas3opt.first << " "
-		<< estadisticas3opt.second << " " 
-		<< mejora3opt << "\n";
-	for(int i = 0; i < (int) solucion3opt.size(); i++) 
-		cout << solucion3opt[i] << " ";
-	cout << "\n";
-
-	/*
-	cout << calcularCosto(solucionParcial) << " "
-		<< calcularCosto(solucionSwap) << " "
-		<< calcularCosto(solucion2opt) << " "
-		<< calcularCosto(solucion3opt) << "\n";
-	*/
-
-	delete solucionInicial;
 	return 0;
 }
 
