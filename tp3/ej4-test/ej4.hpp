@@ -16,6 +16,11 @@
 #define RADIO 100
 #define TENOR 5 //tenor tabu
 #define ITERMAX 10
+
+#define TEST_ITER 20
+
+#define ya chrono::high_resolution_clock::now
+
 using namespace std;
 
 //Tipos
@@ -24,17 +29,25 @@ typedef pair<int,int> Pokeparada;
 typedef pair<int,int> Arista;
 
 //Funciones importantes
+void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[], int test);
+
 pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]);
-vector<int> tabuSearch(vector<int> solucionParcial);
+
+vector<int> tabuSearch(vector<int> solucionParcial, long long maxIt, long long tenor, bool aristasNuevas, bool masTabu);
+
 list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParcial);
 list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParcial);
 list< pair< vector<int>, list<Arista> > > vecindad3opt(vector<int> solucionParcial);
 
 //auxiliares
-pair<float, float> mediaPodadaVarianzaMuestral(vector<long long> &muestra); 
+pair<float, float> estadisticas(vector<long long> &muestra); 
+
 pair< vector<int>, list<Arista> > funcionAspiracion( SetTabu atributosTabu, list< pair< vector<int>, list<Arista> > > vecindad);
+
 int tabuCount(SetTabu atributos, vector<int> solucion);
+
 long long calcularCosto(vector<int> &camino);
+
 void optimizarSolucion(vector<int> &solucion);
 
 //variables globales
