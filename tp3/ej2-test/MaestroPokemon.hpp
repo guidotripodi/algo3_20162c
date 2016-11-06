@@ -86,9 +86,14 @@ public:
 				posicion.first = x;
 				posicion.second = y;
 				
+				distancia=0;
+				if (id!=-1)
+				{
 				distancia = pow(x - xM, 2) + pow(y - yM, 2);
+					/* code */
+		}
 			
-				//printf("[recalcular]  |(%d ,%d) , (%d,%d)| = %d MP->paso: %d  \n",xM, yM, x, y, distancia,MP->paso );
+				
 				//printf("- - -DR: %d\n",distancia );
 
 			}else{
