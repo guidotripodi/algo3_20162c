@@ -35,7 +35,7 @@ Ambas familias devolveran -1 ya que como se explico anteriomente tanto el greedy
   \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 \includegraphics[scale=0.60]{./EJ2/mejorcaso.png}
-\\{\textit{Gr\'afico medici\'on de tiempos sin soluciones entre exacto y goloso}
+\\{\textit{Gr\'afico medici\'on de tiempos sin soluciones entre exacto y goloso}}
   \end{center}
   \vspace*{0.3cm}
 
@@ -51,14 +51,14 @@ A continuaci\'on mostraremos el camino obtenido tanto para el algoritmo exacto c
 
   \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.60]{./EJ2/grafotodos0.png}
+\includegraphics[scale=0.40]{./EJ2/grafotodos0.png}
 \\{\textit{Ejemplo 2.3 Camino obtenido -- Algoritmo Exacto}}
   \end{center}
   \vspace*{0.3cm}
 
   \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.60]{./EJ2/grafotodos0.png}
+\includegraphics[scale=0.40]{./EJ2/grafotodos0.png}
 \\{\textit{Ejemplo 2.4 Camino Obtenido -- Algoritmo Goloso}}
   \end{center}
   \vspace*{0.3cm}
@@ -103,14 +103,14 @@ A continuaci\'on un ejemplo comparativo entre ambos algoritmos con el cual se tr
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.5]{./EJ2/algunGym0Exacto.png}
+\includegraphics[scale=0.40]{./EJ2/algunGym0Exacto.png}
 \\{\textit{Ejemplo 2.5 Resultados obtenidos - Algoritmo Exacto }}
   \end{center}
   \vspace*{0.3cm}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.5]{./EJ2/algunGym0Goloso.png}
+\includegraphics[scale=0.40]{./EJ2/algunGym0Goloso.png}
 \\{\textit{Ejemplo 2.6 Resultados obtenidos - Algoritmo Goloso }}
   \end{center}
   \vspace*{0.3cm}
@@ -157,15 +157,20 @@ Debido al poder de computo ya enunciado, como se trabaja con pocas instancias, n
 Familia sin soluci\'on \'optima n\'umero 2
 \end{center}
 
-Este estilo de familia se elabora de la forma en la cual se tengan todos los gimnasios en ciertas posiciones, donde el conjunto total de estos nos devuelva una forma de anillo, mientras que las pokeparadas presenten la misma forma que los gimnasios a una distancia euclidea id\'entica entre pokeparada-gimnasio. Como mencionamos nuestro algoritmo siempre que puede vencer a alg\'un gimnasio busca cual es el m\'inimo en relaci\'on a la distancia y va a vencerlo, lo cual en este caso puntual ser\'a contraproducente ya que es preferible adquirir m\'as pociones para luego ir a varios gimnasios juntos. (ESTO HABRIA QUE REESCRIBIRLO PORQUE NO QUEDA MUY CLARO)
-
-
-/----> PONER DIBUJO Y GRAFICO QUE MUESTRE COMO VARIA LA SOLUCION OBTENIDA ENTRE EXACTO Y EL GOLOSO 
+Este estilo de familia presenta a los gimnasios y pokeparadas desordenados en referencia a las posiciones, es decir, para ganar a cierto gimnasio es necesario pasar por una cantidad puntual de pokeparadas las cuales estan de un lado y del otro de dicho gimnasio.
+(VER DE ESCRIBIR ESTO MAS EN DETALLE)
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.60]{./EJ2/nooptima.jpeg}
-\\{\textit{Ejemplo 2.5 La soluci\'on obtenida no es la \'optima}}
+\includegraphics[scale=0.40]{./EJ2/caminosinorden1.png}
+\\{\textit{Ejemplo 2.5 Resultados obtenidos - Algoritmo Goloso}}
+  \end{center}
+  \vspace*{0.3cm}
+  
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.40]{./EJ2/caminosinorden.png}
+\\{\textit{Ejemplo 2.6 Resultados obtenidos - Algoritmo Exacto}}
   \end{center}
   \vspace*{0.3cm}
 
@@ -176,19 +181,16 @@ A continuacion mostraremos para cada instancia posible de ser comparada el error
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 \includegraphics[scale=0.60]{./EJ2/sinOrden.png}
-\\{\textit{Ejemplo 2.6 Error producido en la soluci\'on obtenida}}
+\\{\textit{Ejemplo 2.7 Error producido en la soluci\'on obtenida}}
   \end{center}
   \vspace*{0.3cm}
+
 
 \begin{center}
 Familia sin soluci\'on \'optima n\'umero 3
 \end{center}
 
-Este estilo de familia presenta a los gimnasios y pokeparadas desordenados en referencia a las posiciones, es decir, para ganar a cierto gimnasio es necesario pasar por una cantidad puntual de pokeparadas las cuales estan de un lado y del otro de dicho gimnasio.
-(VER DE ESCRIBIR ESTO MAS EN DETALLE)
-
-/----> PONER GRAFICO QUE MUESTRE COMO VARIA LA SOLUCION OBTENIDA ENTRE EXACTO Y EL GOLOSO 
-
+Este estilo de familia se elabora de la forma en la cual se tengan todos los gimnasios en ciertas posiciones, donde el conjunto total de estos nos devuelva una forma de anillo, mientras que las pokeparadas presenten la misma forma que los gimnasios a una distancia euclidea id\'entica entre pokeparada-gimnasio. Como mencionamos nuestro algoritmo siempre que puede vencer a alg\'un gimnasio busca cual es el m\'inimo en relaci\'on a la distancia y va a vencerlo, lo cual en este caso puntual ser\'a contraproducente ya que es preferible adquirir m\'as pociones para luego ir a varios gimnasios juntos. (ESTO HABRIA QUE REESCRIBIRLO PORQUE NO QUEDA MUY CLARO)
 
 
 \vspace*{0.3cm} \vspace*{0.3cm}
