@@ -33,9 +33,9 @@ int cantGyms, cantPokeParadas, capMochila;
 Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
 
-#define CANT_MAX_GYMS 21
-#define CANT_MAX_PP 20
-#define MAX_SIZE 20
+#define CANT_MAX_GYMS 101
+#define CANT_MAX_PP 100
+#define MAX_SIZE 50
 
 int main()
 {
@@ -82,7 +82,13 @@ int main()
 				gymPuebloPaleta.second = 0;
 			} else
 			{
-				gymPuebloPaleta.second  = i;
+                if (i % 3 == 0) {
+                    gymPuebloPaleta.second = 0;
+                }else if (i % 3 == 1) {
+                    gymPuebloPaleta.second = 1;
+                }else {
+                    gymPuebloPaleta.second = 3;
+                }
 			}
 			gimnasiosArr[i] = gymPuebloPaleta;
 		}
@@ -116,14 +122,14 @@ int main()
 			solucionParcial.push_back(*itLista);
 		}
         
-		cout << calcularCosto(solucionParcial) << "\n";
+		/*cout << calcularCosto(solucionParcial) << "\n";
 		for(itLista = solucionInicialLista->begin();
 				itLista != solucionInicialLista->end();
 				itLista++ )
 		{
 			cout << *itLista << " ";
 		}
-		cout << "\n";
+		cout << "\n";*/
 		
 		for(int it = 0; it < TEST_ITER; it++)
 		{
