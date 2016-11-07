@@ -13,6 +13,9 @@
 #define ya chrono::high_resolution_clock::now
 #define TEST_ITER 20
 
+#define CANT_MAX_GYMS 20
+#define CANT_MAX_PP 20
+
 using namespace std;
 
 typedef pair <pair<int,int>, int> Gimnasio;
