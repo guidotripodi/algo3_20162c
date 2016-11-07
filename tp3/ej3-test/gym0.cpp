@@ -11,7 +11,7 @@
 #include "MaestroPokemon.hpp"
 
 #define ya chrono::high_resolution_clock::now
-#define TEST_ITER 20
+#define TEST_ITER 30
 
 using namespace std;
 
@@ -33,9 +33,9 @@ int cantGyms, cantPokeParadas, capMochila;
 Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
 
-#define CANT_MAX_GYMS 20
+#define CANT_MAX_GYMS 21
 #define CANT_MAX_PP 20
-#define MAX_SIZE 10
+#define MAX_SIZE 20
 
 int main()
 {
@@ -104,10 +104,9 @@ int main()
 				gimnasiosArr, 
 				pokeParadasArr, 
 				pokeParadasAux);
-
-
+        
 		list<int> *solucionInicialLista = solucionInicial->second;
-
+        
 		list<int>::iterator itLista;
 
 		for(itLista = solucionInicialLista->begin();
@@ -116,7 +115,7 @@ int main()
 		{
 			solucionParcial.push_back(*itLista);
 		}
-		
+        
 		cout << calcularCosto(solucionParcial) << "\n";
 		for(itLista = solucionInicialLista->begin();
 				itLista != solucionInicialLista->end();
@@ -189,7 +188,6 @@ int main()
 */
 		delete solucionInicial;
 	}
-
 
 	for( int k = 0; k < 10; k++ )
 	{
@@ -536,13 +534,13 @@ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_
 		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
 		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-			
+			//printf("no se que es esto error \n");
 			return NULL;
 		}
 	}
 	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
-			//Sin solucion!
-
+        //Sin solucion!
+        //printf("pociones a necesitar > cantidad total de pociones con suerte \n");
 		return NULL;
 	}
 		
