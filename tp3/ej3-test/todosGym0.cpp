@@ -42,9 +42,9 @@ int main()
 	int j = 8;
 	cantGyms = j+1;
 	cantPokeParadas = j;
-	pair <pair<int,int>, int> gimnasiosArr[cantGyms];
-	pair <int, int>  pokeParadasArr[cantPokeParadas];
-	pair <int, int>  pokeParadasAux[cantPokeParadas];
+	pair <pair<int,int>, int> gimnasiosArr[CANT_MAX_GYMS];
+	pair <int, int>  pokeParadasArr[CANT_MAX_PP];
+	pair <int, int>  pokeParadasAux[CANT_MAX_PP];
 	
 	vector<long long> tiemposSwap(TEST_ITER);
 	vector<long long> tiempos2opt(TEST_ITER);
