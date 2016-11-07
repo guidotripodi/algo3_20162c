@@ -119,13 +119,13 @@ bool MaestroPokemon::eleccionGolosa(){
 
 	opciones->erase(itm);
 	//Incremento la distancia
-	printf("[distancia 0]  %d  \n", distancia );
+	//printf("[distancia 0]  %d  \n", distancia );
 	if (decisiones->size()>1)
 	{
 		/* code */
 	distancia += eleccionActual.distancia;
 	}
-	printf("[distancia 1]  %d  \n", distancia );
+	//printf("[distancia 1]  %d  \n", distancia );
 	
 	if (eleccionActual.tipo == GIMNASIO)
 	{

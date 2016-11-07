@@ -36,7 +36,7 @@ def circularPositions(n, notin=[], rad_circ=10, dist_anillos = 10):
 		
 		noSePisaron = True
 		y = 0
-		while noSePisaron:
+		while noSePisaron and n>0	:
 			t = y
 			v = (int(rad_circ*cos(t)), int(rad_circ*sin(t)))
 
@@ -44,14 +44,23 @@ def circularPositions(n, notin=[], rad_circ=10, dist_anillos = 10):
 				rad_circ = rad_circ + dist_anillos
 				noSePisaron = False
 				continue
-			
+							
 			li.append(v)
 			n = n-1
 			y = y+1
-	
+			
 	return li	
 
-
+def circularPositions2(n, rad_circ=10):
+	li=[]
+	incremento = 2*pi / n
+	arc=incremento
+	for i in range(0, n):
+		v = (int(rad_circ*cos(arc)), int(rad_circ*sin(arc)))
+		arc = arc + incremento
+		li.append(v)
+	return li
+		
 ###############################################
 #			GENERADORES DE POCIONES
 
@@ -65,6 +74,13 @@ def randomPotions(gyms, pps, k_bag):
 		pociones = randint(0, min(k_bag, pociones_totales))
 		gym_res.append((gym, pociones))
 		pociones_totales = pociones_totales - pociones
+	return gym_res
+
+def kPotions(gyms, k):
+	gym_res = [];
+	for gym in gyms:
+		pociones = k
+		gym_res.append((gym, pociones))
 	return gym_res
 
 
@@ -126,12 +142,19 @@ def randomInstance(n):
  #		  mochila K=10
 def circularInstance(cant_gyms, cant_pp):
 	mochila = 10
-	gyms = circularPositions(cant_gyms,rad_circ=5, dist_anillos= 10)
-	pps = circularPositions(cant_pp, notin=gyms, rad_circ=10, dist_anillos = 10)
+	gyms = circularPositions(cant_gyms,rad_circ=20, dist_anillos= 30)
+	pps = circularPositions(cant_pp, notin=gyms, rad_circ=50, dist_anillos = 10)
 	gymsD = randomPotions(gyms, pps, mochila)
 
 	return gymsD, pps, mochila
 
+def circularInstance2(cant_gyms, cant_pp):
+	mochila = 21
+	gyms = circularPositions2(cant_gyms,rad_circ=25)
+	pps = circularPositions2(cant_pp, rad_circ=75)
+	gymsD = kPotions(gyms,3)
+
+	return gymsD, pps, mochila
 
  #Mochila de capacidad 0: determinado numero de gimnasios y pp
  #		  Posiciones en forma de anillos concentricos de radios 2, 1.5 1 0.5
@@ -155,10 +178,10 @@ def noPPInstance(n):
 ###############################################
 #				MAIN
 
-#plotInstance(circularInstance(10, 10))
-
-for i in xrange(0,2):
-	r = circularInstance(1,1)
+plotInstance(circularInstance2(7, 7))
+saveInstance(circularInstance2(7, 7), "test_circular.in","w")
+#for i in xrange(0,2):
+#	r = circularInstance(0,i)
 #	#plotInstance(r)
-	saveInstance(r, "test1.in","a")
-	pass
+#	saveInstance(r, "test1.in","a")
+#	pass

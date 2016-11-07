@@ -48,24 +48,29 @@ int main(int argc, char* argv[])
 	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
 	pair <int, int>  posiciones_pp[cantMaxPP];
 	pair <int, int>  pp_aux[cantMaxPP];
-	
-	for(int j = 1; j < 2; j++){
+	int i = 0;
+	for(int j = 49; j < 50; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		
-		int i = 0;
+		
 			for (i = 0; i < cant_gimnasios; i++){
 			pair <pair<int,int>, int> gymPuebloPaleta;
 			gymPuebloPaleta.first.first = i;
 			gymPuebloPaleta.first.second = i+1;
-			if (i % 2 == 0)	{
+			if (i % 3 == 0)	{
 				gymPuebloPaleta.second = 0;
-			}else{
-				gymPuebloPaleta.second = i;
 			}
-			posiciones_gym[i] = gymPuebloPaleta;
+			if (i % 3 == 1)	{
+				gymPuebloPaleta.second = 1;
+			}
+			if (i % 3 == 2)	{
+				gymPuebloPaleta.second = 3;
+			}
 			
-		}
+			posiciones_gym[i] = gymPuebloPaleta;
+			}
+		
 		for (i = 0; i < cant_pokeParadas; i++)	{
 			pair <int, int> posicion;
 			posicion.first = i;
@@ -75,7 +80,7 @@ int main(int argc, char* argv[])
 		}
 		
 		cap_mochila = cant_gimnasios*3	;
-/*		
+		
 		cout << "Cantidad de elementos:" << cant_gimnasios + cant_pokeParadas << "\n";
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
@@ -87,19 +92,19 @@ int main(int argc, char* argv[])
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 			
 			}
-*/
+
 		pair <int,std::list<int> * > * f;
-			for (int h = 0; h < 10; ++h){
-				auto start = ya();	
+//			for (int h = 0; h < 10; ++h){
+	//			auto start = ya();	
 				f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
-				auto end = ya();
-				if (h == 9)	{
-					cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-					cout << "\n";
-				}
-			}
+		//		auto end = ya();
+			//	if (h == 9)	{
+			//		cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+			//		cout << "\n";
+			//	}
+			//}
 	
-/*	
+
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
@@ -110,7 +115,7 @@ int main(int argc, char* argv[])
 			}
 		}
 		cout << "\n";
-*/		
+		
 		delete f;
 	}
 	return 0;
