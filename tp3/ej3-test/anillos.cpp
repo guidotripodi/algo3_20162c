@@ -153,12 +153,12 @@ int main()
 		soluciones2opt[j] = solucion2opt;
 		soluciones3opt[j] = solucion3opt;
 /*
-		cout << estadisticasSwap.first << " " 
-			<< estadisticasSwap.second << " "
+		cout << estadisticasSwap.first << "," 
+			<< estadisticasSwap.second << ","
 			<< mejoraSwap << "\n";
 
 		for(int i = 0; i < (int) solucionSwap.size(); i++) 
-			cout << solucionSwap[i] << " ";
+			cout << solucionSwap[i] << ",";
 		cout << "\n";
 
 		
@@ -167,15 +167,15 @@ int main()
 			<< mejora2opt << "\n";
 
 		for(int i = 0; i < (int) solucion2opt.size(); i++) 
-			cout << solucion2opt[i] << " ";
+			cout << solucion2opt[i] << ",";
 		cout << "\n";
 
 		
-		cout << estadisticas3opt.first << " "
-			<< estadisticas3opt.second << " " 
+		cout << estadisticas3opt.first << ","
+			<< estadisticas3opt.second << "," 
 			<< mejora3opt << "\n";
 		for(int i = 0; i < (int) solucion3opt.size(); i++) 
-			cout << solucion3opt[i] << " ";
+			cout << solucion3opt[i] << ",";
 		cout << "\n";
 */
 		delete solucionInicial;
@@ -184,8 +184,8 @@ int main()
 
 	for( int k = 0; k < 10; k++ )
 	{
-		cout << estadisticasSwap[k].first << " " 
-			<< estadisticasSwap[k].second << " "
+		cout << estadisticasSwap[k].first << "," 
+			<< estadisticasSwap[k].second << ","
 			<< mejorasSwap[k] << "\n";
 
 		for(int i = 0; i < (int) solucionesSwap[k].size(); i++) 
@@ -195,8 +195,8 @@ int main()
 
 	for( int k = 0; k < 10; k++ )
 	{
-		cout << estadisticas2opt[k].first << " " 
-			<< estadisticas2opt[k].second << " "
+		cout << estadisticas2opt[k].first << "," 
+			<< estadisticas2opt[k].second << ","
 			<< mejoras2opt[k] << "\n";
 
 		for(int i = 0; i < (int) soluciones2opt[k].size(); i++) 
@@ -206,8 +206,8 @@ int main()
 
 	for( int k = 0; k < 10; k++ )
 	{
-		cout << estadisticas3opt[k].first << " " 
-			<< estadisticas3opt[k].second << " "
+		cout << estadisticas3opt[k].first << "," 
+			<< estadisticas3opt[k].second << ","
 			<< mejoras3opt[k] << "\n";
 
 		for(int i = 0; i < (int) soluciones3opt[k].size(); i++) 
