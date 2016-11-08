@@ -195,93 +195,51 @@ int main()
 		delete solucionInicial;
 	}
 
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
-		cout << estadisticasSwap[k].first << "\n";
-	}
-	
-	cout << "\n";
+	//imprimir csv
+	cout 
+		<< "tiempo swap,"
+		<< "varianza swap,"
+		<< "distancia swap,"
+		<< "solucion swap,"
+		<< "tiempo 2opt,"
+		<< "varianza 2opt,"
+		<< "distancia 2opt,"
+		<< "solucion 2opt,"
+		<< "tiempo 3opt,"
+		<< "varianza 3opt,"
+		<< "distancia 3opt,"
+		<< "solucion 3opt,"
+		<< "\n";
+		
+
 
 	for( int k = 0; k < MAX_SIZE; k++ )
 	{
-		cout << estadisticasSwap[k].second << "\n";
-	}
-	
-	cout << "\n";
+		cout << estadisticasSwap[k].first << "," 
+			<< estadisticasSwap[k].second << ","
+			<< mejorasSwap[k] << ",";
 
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
-		cout << mejorasSwap[k] << "\n";
-	}
-	
-	cout << "\n";
-
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
 		for(int i = 0; i < (int) solucionesSwap[k].size(); i++) 
 			cout << solucionesSwap[k][i] << " ";
-		cout << "\n";
-	}
-	
-	cout << "\n";
+		cout << ",";
 
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
-		cout << estadisticas2opt[k].first << "\n";
-	}
-	
-	cout << "\n";
+		cout << estadisticas2opt[k].first << "," 
+			<< estadisticas2opt[k].second << ","
+			<< mejoras2opt[k] << ",";
 
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
-		cout << estadisticas2opt[k].second << "\n";
-	}
-	
-	cout << "\n";
-
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
-		cout << mejoras2opt[k] << "\n";
-	}
-	
-	cout << "\n";
-
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
 		for(int i = 0; i < (int) soluciones2opt[k].size(); i++) 
 			cout << soluciones2opt[k][i] << " ";
-		cout << "\n";
-	}
-	
-	cout << "\n";
-	
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
-		cout << estadisticas3opt[k].first << "\n";
-	}
-	
-	cout << "\n";
+		cout << ",";
 
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
-		cout << estadisticas3opt[k].second << "\n";
-	}
-	
-	cout << "\n";
+		cout << estadisticas3opt[k].first << "," 
+			<< estadisticas3opt[k].second << ","
+			<< mejoras3opt[k] << ",";
 
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
-		cout << mejoras3opt[k] << "\n";
-	}
-	
-	cout << "\n";
-
-	for( int k = 0; k < MAX_SIZE; k++ )
-	{
 		for(int i = 0; i < (int) soluciones3opt[k].size(); i++) 
 			cout << soluciones3opt[k][i] << " ";
 		cout << "\n";
 	}
+
 
 	return 0;
 }
