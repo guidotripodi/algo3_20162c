@@ -119,8 +119,8 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
         solucionParcial.push_back(*itLista);
     }
     
-    long long _maxIt = 30;
-    long long _tenor = 30;
+    long long _maxIt = 24;
+    long long _tenor = 24;
     bool _aristasNuevas = false;
     bool _masTabu = false;
     
@@ -135,14 +135,14 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
         cout << "\n";
         
         if (test == 1) {
-            for (int itAct = 0; itAct < _maxIt; itAct++) {
-                correr(solucionParcial, itAct, _tenor, _aristasNuevas, _masTabu);
+            for (int itAct = 0; itAct < _maxIt; itAct+=2) {
+                correr(solucionParcial, itAct, 10, _aristasNuevas, _masTabu);
             }
         }
         
         if (test == 2) {
-            for (int tenorAct = 1; tenorAct < _maxIt; tenorAct++) {
-                correr(solucionParcial, _maxIt, tenorAct, _aristasNuevas, _masTabu);
+            for (int tenorAct = 1; tenorAct < _tenor; tenorAct+=2) {
+                correr(solucionParcial, 10, tenorAct, _aristasNuevas, _masTabu);
             }
         }
         
@@ -188,11 +188,11 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long maxIt, long long t
         //cada solucion esta asociada a las aristas que cambiaron
         // hacemos union entre swap, 2opt y 3opt
         list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
-        list< pair< vector<int>, list<Arista> > > vecindad3 = vecindad3opt(solucionActual);
-        list< pair< vector<int>, list<Arista> > > vecindadS = vecindadSwap(solucionActual);
+        //list< pair< vector<int>, list<Arista> > > vecindad = vecindad3opt(solucionActual);
+        //list< pair< vector<int>, list<Arista> > > vecindad = vecindadSwap(solucionActual);
         
-        vecindad.splice(vecindad.end(), vecindad3);
-        vecindad.splice(vecindad.end(), vecindadS);
+        //vecindad.splice(vecindad.end(), vecindad3);
+        //vecindad.splice(vecindad.end(), vecindadS);
         if(vecindad.size() == 0) return mejorSolucion; //Esto es por las moscas. No deberia pasar
         
         list< pair< vector<int>, list<Arista> > >::iterator iteradorVecindad;

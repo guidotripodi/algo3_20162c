@@ -18,7 +18,7 @@ using namespace std;
 #define MAX_CANT_PP 100
 #define MAX_CANT_GYMS 101
 
-#define MAX_SIZE 50
+#define MAX_SIZE 15
 
 int main(){
     
