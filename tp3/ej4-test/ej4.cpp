@@ -102,6 +102,7 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
     
     list<int>::iterator itLista;
     
+    /*
     for(itLista = solucionInicialLista->begin();
         itLista != solucionInicialLista->end();
         itLista++ )
@@ -109,8 +110,8 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
         printf("%d ", *itLista);
     }
     cout << "\n";
-    
-    
+    */
+
     for(itLista = solucionInicialLista->begin();
         itLista != solucionInicialLista->end();
         itLista++ )
