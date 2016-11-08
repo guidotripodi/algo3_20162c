@@ -119,7 +119,7 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
         solucionParcial.push_back(*itLista);
     }
     
-    long long _maxIt = 24;
+    long long _maxIt = 34;
     long long _tenor = 24;
     bool _aristasNuevas = true;
     bool _masTabu = true;
@@ -135,13 +135,13 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
         cout << "\n";*/
         
         if (test == 1) {
-            for (int itAct = 0; itAct < _maxIt; itAct+=2) {
+            for (int itAct = 0; itAct < _maxIt; itAct++) {
                 correr(solucionParcial, itAct, 10, _aristasNuevas, _masTabu);
             }
         }
         
         if (test == 2) {
-            for (int tenorAct = 1; tenorAct < _tenor; tenorAct+=2) {
+            for (int tenorAct = 1; tenorAct < _tenor; tenorAct++) {
                 correr(solucionParcial, 10, tenorAct, _aristasNuevas, _masTabu);
             }
         }
