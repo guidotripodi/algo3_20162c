@@ -4,7 +4,7 @@
 CC=g++
 
 # flags de compilación
-CFLAGS=-g -Wall -std=c++11
+CFLAGS=-g -ggdb -Wall -std=c++11
 
 # flags de linkeo
 LDFLAGS=
@@ -20,7 +20,8 @@ OBJECTS=MaestroPokemon.o trie.o SetTabu.o ej4.o
 # Nombre del ejecutable a generar
 EXECUTABLES=gym0.test todosGym0.test orden.test 
 #sinOrden.test 
-#sinSolucionPorPP.test sinSolucionPorCapMochila.test 
+#sinSolucionPorPP.test 
+#sinSolucionPorCapMochila.test 
 
 all: $(EXECUTABLES)
 

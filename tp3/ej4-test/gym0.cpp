@@ -44,7 +44,13 @@ int main(){
                 gymPuebloPaleta.second = 0;
             } else
             {
-                gymPuebloPaleta.second  = i;
+                if (i % 3 == 0) {
+                    gymPuebloPaleta.second = 0;
+                }else if (i % 3 == 1) {
+                    gymPuebloPaleta.second = 1;
+                }else {
+                    gymPuebloPaleta.second = 3;
+                }
             }
             gimnasiosArr[i] = gymPuebloPaleta;
         }
@@ -70,4 +76,3 @@ int main(){
     
     return 0;
 }
-
