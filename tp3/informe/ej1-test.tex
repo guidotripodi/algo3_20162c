@@ -66,16 +66,14 @@ Para obtener las mediciones se realizaron aproximadamente unas 20 corridas sobre
 
 Se puede observar en el  gráfico 1.1, siete funciones, que representan el tiempo de ejecuci\'on de las familias de casos mencionadas en el apartado anterior:\\
 
------> FALTAN TERMINAR LAS MEDICIONES PARA HACERLO Y HACER EL TEST DEL ANILLO\\
-
-VER SI NO ES MEJOR METER BOXPLOTS
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-% \includegraphics[scale=0.5]{./EJ1/comparativo.png}
+ \includegraphics[scale=0.65]{./EJ1/comparativo.png}
  {Gr\'afico \ 1.1 - $Comparativo$}
   \end{center}
   \vspace*{0.3cm}
+----> VER CMO MEJORAMOS EL GRAFICO YA Q LA ESCALA ES MUY CHOTA
   
 Se puede notar que la familia 1 y la n\'umero 2, presentan una mejor performance en relaci\'on a las otras. Esto se debe a que se realizan dos podas para chequear si la entrada posee o no soluci\'on. Puntualmente, la familia 1 es un poco mejor a la segunda debido a que en la implementaci\'on de las podas: la que evalúa si la mochila es de capacidad suficiente corta apenas encuentra un gimnasio que no se pueda derrotar, en cambio la otra (checkeo de la cantidad de pociones disponibles vs necesarias) debe necesariamente recorrer todos los gimnasios y pokeparadas, tardando más tiempo.
 
@@ -83,8 +81,12 @@ Se puede notar que la familia 1 y la n\'umero 2, presentan una mejor performance
 
 Uno de los peores casos para nuestro algoritmo es la familia 7 , que sucede cuando por ejemplo, todos los caminos tienen igual longitud. Esto se da as\'i ya que nuestro algoritmo chequea todas las ramas posibles del backtraking y como todos pueden ser soluci\'on posible avanza por todos llegando al final de cada rama con el mismo valor en todos los posibles caminos.\\
 
------> HACER EL GRAFICO DE ANILLOS\\
-
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.65]{./EJ1/anilloexacto.png}
+ {Ejemplo n y m iguales en 7 elementos cada uno}
+  \end{center}
+  \vspace*{0.3cm}
 
 
  \subsubsection*{Cota al tiempo de ejecución}
