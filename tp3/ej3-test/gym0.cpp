@@ -35,7 +35,7 @@ Pokeparada *pokeParadasArrPtr;
 
 #define CANT_MAX_GYMS 101
 #define CANT_MAX_PP 100
-#define MAX_SIZE 50
+#define MAX_SIZE 20
 
 int main()
 {
