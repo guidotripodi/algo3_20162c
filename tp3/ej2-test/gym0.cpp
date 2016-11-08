@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 	pair <int, int>  posiciones_pp[cantMaxPP];
 	pair <int, int>  pp_aux[cantMaxPP];
 	int i = 0;
-	for(int j = 4; j < 5; j++){
+	for(int j = 49; j < 50; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		
