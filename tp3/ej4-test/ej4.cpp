@@ -52,16 +52,16 @@ pair<float, float> estadisticas(vector<long long> &muestra)
 }
 
 void printResults(pair < float, float > estadisticas, vector<int> solucionMejorada) {
-
     long long mejoraMejorada = calcularCosto(solucionMejorada);
-    
-    cout << estadisticas.first << " "
-    << estadisticas.second << " "
-    << mejoraMejorada << "\n";
+   
+    cout << estadisticas.first << ","
+    << estadisticas.second << ","
+    << mejoraMejorada << ",";
     
     for(int i = 0; i < (int) solucionMejorada.size(); i++)
         cout << solucionMejorada[i] << " ";
     cout << "\n";
+
 }
 
 void correr(vector<int> solucionParcial, long long itAct, long long tenorAct, long long attrAct, long long aspAct) {
