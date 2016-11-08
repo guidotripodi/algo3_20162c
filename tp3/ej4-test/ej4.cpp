@@ -121,18 +121,18 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
     
     long long _maxIt = 24;
     long long _tenor = 24;
-    bool _aristasNuevas = false;
-    bool _masTabu = false;
+    bool _aristasNuevas = true;
+    bool _masTabu = true;
     
     if(solucionParcial.size()) {
         
         long long mejoraParcial = calcularCosto(solucionParcial);
         
-        cout << mejoraParcial << ",";
+        /*cout << mejoraParcial << ",";
         
         for(int i = 0; i < (int) solucionParcial.size(); i++)
             cout << solucionParcial[i] << " ";
-        cout << "\n";
+        cout << "\n";*/
         
         if (test == 1) {
             for (int itAct = 0; itAct < _maxIt; itAct+=2) {
