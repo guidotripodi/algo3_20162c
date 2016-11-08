@@ -17,7 +17,7 @@ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_
 
 int main(int argc, char* argv[])
 {
-	for (int j = 0; j < 10; ++j)
+	for (int j = 0; j < 50; ++j)
 	{
 		int cant_gimnasios, cant_pokeParadas, cap_mochila;
 		cin >> cant_gimnasios >> cant_pokeParadas >> cap_mochila;
