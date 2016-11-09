@@ -61,7 +61,6 @@ void printResults(pair < float, float > estadisticas, vector<int> solucionMejora
     for(int i = 0; i < (int) solucionMejorada.size(); i++)
         cout << solucionMejorada[i] << " ";
     cout << "\n";
-    
 }
 
 void correr(vector<int> solucionParcial, long long itAct, long long tenorAct, long long attrAct, long long aspAct) {
@@ -99,6 +98,10 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
                                                                       pp_aux);
     
     list<int> *solucionInicialLista = solucionInicial->second;
+    
+    if (solucionInicial->first == -1) {
+        solucionInicialLista = new list<int>();
+    }
     
     list<int>::iterator itLista;
     
@@ -564,7 +567,7 @@ bool pasoPosible(int destino, int capacidadParcial){
     
     if (destino < cantGyms)
     {
-        poderGym = gimnasiosArrPtr[destino-1].second;
+        poderGym = gimnasiosArrPtr[destino].second;
     }
     
     if (poderGym == 0 || capacidadParcial >= poderGym)
@@ -575,41 +578,45 @@ bool pasoPosible(int destino, int capacidadParcial){
     return false;
 }
 
-
 long long calcularCosto(vector<int> &camino){
+    if (!camino.size()) {
+        return -1;
+    }
+    
     long long costo = 0;
     int capacidadParcial = 0;
     
-    
+    if(camino[0] > cantGyms) {
+        capacidadParcial = 3;
+    }
     
     for(int i = 0; i < (int) camino.size() -1; i++){
-        if(pasoPosible(camino[i+1], capacidadParcial)){
+        if(pasoPosible(camino[i+1]-1, capacidadParcial)){
             
             pair<int, int> pOrigen;
             pair<int, int> pDestino;
             
-            int origen = camino[i];
-            int destino = camino[i+1];
+            int origen = camino[i]-1;
+            int destino = camino[i+1]-1;
             
             bool destinoEsPP = false;
             
-            if (origen <= cantGyms)
+            if (origen < cantGyms)
             {
-                pOrigen = gimnasiosArrPtr[origen - 1].first;
+                pOrigen = gimnasiosArrPtr[origen].first;
             }else {
-                pOrigen = pokeParadasArrPtr[origen - cantGyms - 1];
+                pOrigen = pokeParadasArrPtr[origen - cantGyms];
             }
             
-            if (destino <= cantGyms)
+            if (destino < cantGyms)
             {
-                pDestino = gimnasiosArrPtr[destino - 1].first;
+                pDestino = gimnasiosArrPtr[destino].first;
             }else {
-                pDestino = pokeParadasArrPtr[destino - cantGyms - 1];
+                pDestino = pokeParadasArrPtr[destino - cantGyms];
                 destinoEsPP = true;
-            }			
+            }
             
             costo = costo + distancia(pOrigen, pDestino);
-            
             
             if(destinoEsPP){
                 capacidadParcial += 3;
@@ -617,11 +624,11 @@ long long calcularCosto(vector<int> &camino){
                     capacidadParcial = capMochila;
                 }
             } else {
-                capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino - 1].second;
+                capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino].second;
             }
         } else{
             /*
-             cout << "ERROR\n" 
+             cout << "ERROR\n"
              << "capacidad " << capMochila << "\n"
              << "capacidad Parcial " << capacidadParcial << "\n"
              << "origen " << camino[i] << "\n"

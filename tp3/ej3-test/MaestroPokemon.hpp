@@ -4,8 +4,8 @@
 #include <list>
 #include <stdio.h>
 #include <stdlib.h>
-#include "trie.cpp"
 #include <math.h>
+#include "trie.cpp"
 
 #define GIMNASIO 0
 #define PP 1
@@ -39,7 +39,7 @@ public:
 	struct Eleccion
 	{
 		const MaestroPokemon* MP;
-		int distancia;
+		int distancia =0;
 		int id = -1; // El id da ordinalidad a todas las elecciones posibles, dentro de la matriz #personas x #personas
 		bool posible;
 
@@ -87,16 +87,21 @@ public:
 				posicion.first = x;
 				posicion.second = y;
 				
+				distancia=0;
+				if (id!=-1)
+				{
 				distancia = pow(x - xM, 2) + pow(y - yM, 2);
+					/* code */
+		}
 			
-				//printf("[recalcular]  |(%d ,%d) , (%d,%d)| = %d MP->paso: %d  \n",xM, yM, x, y, distancia,MP->paso );
+				
 				//printf("- - -DR: %d\n",distancia );
 
 			}else{
 				pocionesNecesarias = -1;
 				posicion.first= -888;
 				posicion.second= -888;
-				distancia = -1;
+				distancia = 0;
 
 			}
 		}
