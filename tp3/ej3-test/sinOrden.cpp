@@ -39,14 +39,6 @@ Pokeparada *pokeParadasArrPtr;
 
 int main()
 {
-	
-	pair <pair<int,int>, int> gimnasiosArr[CANT_MAX_GYMS];
-	pair <int, int>  pokeParadasArr[CANT_MAX_PP];
-	pair <int, int>  pokeParadasAux[CANT_MAX_PP];
-	
-	gimnasiosArrPtr = gimnasiosArr;
-	pokeParadasArrPtr = pokeParadasAux;
-	
 	vector<int> solucionesSwap[MAX_SIZE];
 	vector<int> soluciones2opt[MAX_SIZE];
 	vector<int> soluciones3opt[MAX_SIZE];
@@ -72,9 +64,12 @@ int main()
         cantGyms = j;
         cantPokeParadas = j*2;
         
-        pair <pair<int,int>, int> gimnasiosArr[MAX_CANT_GYMS];
-        pair <int, int>  pokeParadasArr[MAX_CANT_PP];
-        pair <int, int>  pokeParadasAux[MAX_CANT_PP];
+        pair <pair<int,int>, int> gimnasiosArr[CANT_MAX_GYMS];
+        pair <int, int>  pokeParadasArr[CANT_MAX_PP];
+        pair <int, int>  pokeParadasAux[CANT_MAX_PP];
+        
+        gimnasiosArrPtr = gimnasiosArr;
+        pokeParadasArrPtr = pokeParadasArr;
         
         for (int i = 0; i < cantGyms; i++)
         {
@@ -97,7 +92,7 @@ int main()
             pokeParadasAux[i] = posicion;
         }
         
-        capMochila = MAX_CANT_GYMS*3;
+        capMochila = CANT_MAX_GYMS*3;
 
 		pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
 				cantGyms, 
