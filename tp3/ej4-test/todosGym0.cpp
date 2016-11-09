@@ -18,7 +18,7 @@ using namespace std;
 #define MAX_CANT_PP 100
 #define MAX_CANT_GYMS 101
 
-#define MAX_SIZE 50
+#define MAX_SIZE 20
 
 int main(){
     
@@ -35,7 +35,7 @@ int main(){
         pair <int, int>  pokeParadasAux[MAX_CANT_PP];
         
         for (int i = 0; i < cantGyms; i++){
-            pair <pair<int,int>, int> gymPuebloPaleta;
+            Gimnasio gymPuebloPaleta;
             gymPuebloPaleta.first.first = i;
             gymPuebloPaleta.first.second = i+1;
             gymPuebloPaleta.second = 0;
@@ -44,14 +44,14 @@ int main(){
         }
         
         for (int i = 0; i < cantPokeParadas; i++)	{
-            pair <int, int> posicion;
+            Pokeparada posicion;
             posicion.first = i;
             posicion.second = i+2;
             pokeParadasAux[i] = posicion;
             pokeParadasAux[i] = posicion;
         }
         
-        capMochila = cantGyms*3;
+        capMochila = MAX_CANT_GYMS*3;
         
         testear(
                 cantGyms,

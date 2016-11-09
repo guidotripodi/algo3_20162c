@@ -33,17 +33,12 @@ int cantGyms, cantPokeParadas, capMochila;
 Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
 
-#define CANT_MAX_GYMS 20
-#define CANT_MAX_PP 20
-#define MAX_SIZE 10
+#define CANT_MAX_GYMS 101
+#define CANT_MAX_PP 100
+#define MAX_SIZE 20
 
 int main()
 {
-	
-	pair <pair<int,int>, int> gimnasiosArr[CANT_MAX_GYMS];
-	pair <int, int>  pokeParadasArr[CANT_MAX_PP];
-	pair <int, int>  pokeParadasAux[CANT_MAX_PP];
-	
 	gimnasiosArrPtr = gimnasiosArr;
 	pokeParadasArrPtr = pokeParadasAux;
 	
@@ -61,33 +56,38 @@ int main()
 
 	for(int j = 0; j < MAX_SIZE; j++)
 	{
-		cin >> cantGyms >> cantPokeParadas >> capMochila;
-		vector<long long> tiemposSwap(TEST_ITER);
-		vector<long long> tiempos2opt(TEST_ITER);
-		vector<long long> tiempos3opt(TEST_ITER);
-		vector<int> solucionSwap;
-		vector<int> solucion2opt;
-		vector<int> solucion3opt;
-		vector<int> solucionParcial;
+        vector<long long> tiemposSwap(TEST_ITER);
+        vector<long long> tiempos2opt(TEST_ITER);
+        vector<long long> tiempos3opt(TEST_ITER);
+        vector<int> solucionSwap;
+        vector<int> solucion2opt;
+        vector<int> solucion3opt;
+        vector<int> solucionParcial;
+        
+        cin >> cantGyms >> cantPokeParadas >> capMochila;
+        
+        pair <pair<int,int>, int> gimnasiosArr[MAX_CANT_GYMS];
+        pair <int, int>  pokeParadasArr[MAX_CANT_PP];
+        pair <int, int>  pokeParadasAux[MAX_CANT_PP];
 		
-		int i = 0;
-		for (i = 0; i < cantGyms; i++)
-		{
-			Gimnasio gymPuebloPaleta;
-			cin 
-				>> gymPuebloPaleta.first.first 
-				>> gymPuebloPaleta.first.second 
-				>> gymPuebloPaleta.second;
-			gimnasiosArr[i] = gymPuebloPaleta;
-		}
-		for (i = 0; i < cantPokeParadas; i++)
-		{
-			Pokeparada posicion;
-			cin >> posicion.first >> posicion.second;
-			pokeParadasArr[i] = posicion;
-			pokeParadasAux[i] = posicion;
-		}
-		
+        for (int i = 0; i < cantGyms; i++)
+        {
+            Gimnasio gymPuebloPaleta;
+            
+            cin >> gymPuebloPaleta.first.first >> gymPuebloPaleta.first.second >> gymPuebloPaleta.second;
+            
+            gimnasiosArr[i] = gymPuebloPaleta;
+        }
+        for (int i = 0; i < cantPokeParadas; i++)
+        {
+            Pokeparada posicion;
+            
+            cin >> posicion.first >> posicion.second;
+            
+            pokeParadasArr[i] = posicion;
+            pokeParadasAux[i] = posicion;
+        }
+
 		pair < int, list<int> * > * solucionInicial = algoritmoResolucion(
 				cantGyms, 
 				cantPokeParadas,
@@ -95,10 +95,9 @@ int main()
 				gimnasiosArr, 
 				pokeParadasArr, 
 				pokeParadasAux);
-
-
+        
 		list<int> *solucionInicialLista = solucionInicial->second;
-
+        
 		list<int>::iterator itLista;
 
 		for(itLista = solucionInicialLista->begin();
@@ -107,15 +106,15 @@ int main()
 		{
 			solucionParcial.push_back(*itLista);
 		}
-		
-		cout << calcularCosto(solucionParcial) << "\n";
+        
+		/*cout << calcularCosto(solucionParcial) << "\n";
 		for(itLista = solucionInicialLista->begin();
 				itLista != solucionInicialLista->end();
 				itLista++ )
 		{
 			cout << *itLista << " ";
 		}
-		cout << "\n";
+		cout << "\n";*/
 		
 		for(int it = 0; it < TEST_ITER; it++)
 		{
@@ -153,12 +152,12 @@ int main()
 		soluciones2opt[j] = solucion2opt;
 		soluciones3opt[j] = solucion3opt;
 /*
-		cout << estadisticasSwap.first << "," 
-			<< estadisticasSwap.second << ","
+		cout << estadisticasSwap.first << " " 
+			<< estadisticasSwap.second << " "
 			<< mejoraSwap << "\n";
 
 		for(int i = 0; i < (int) solucionSwap.size(); i++) 
-			cout << solucionSwap[i] << ",";
+			cout << solucionSwap[i] << " ";
 		cout << "\n";
 
 		
@@ -167,15 +166,15 @@ int main()
 			<< mejora2opt << "\n";
 
 		for(int i = 0; i < (int) solucion2opt.size(); i++) 
-			cout << solucion2opt[i] << ",";
+			cout << solucion2opt[i] << " ";
 		cout << "\n";
 
 		
-		cout << estadisticas3opt.first << ","
-			<< estadisticas3opt.second << "," 
+		cout << estadisticas3opt.first << " "
+			<< estadisticas3opt.second << " " 
 			<< mejora3opt << "\n";
 		for(int i = 0; i < (int) solucion3opt.size(); i++) 
-			cout << solucion3opt[i] << ",";
+			cout << solucion3opt[i] << " ";
 		cout << "\n";
 */
 		delete solucionInicial;
@@ -225,6 +224,7 @@ int main()
 			cout << soluciones3opt[k][i] << " ";
 		cout << "\n";
 	}
+
 
 	return 0;
 }
@@ -539,13 +539,13 @@ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_
 		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
 		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-			
+			//printf("no se que es esto error \n");
 			return NULL;
 		}
 	}
 	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
-			//Sin solucion!
-
+        //Sin solucion!
+        //printf("pociones a necesitar > cantidad total de pociones con suerte \n");
 		return NULL;
 	}
 		

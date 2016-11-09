@@ -39,11 +39,6 @@ Pokeparada *pokeParadasArrPtr;
 
 int main()
 {
-	
-	pair <pair<int,int>, int> gimnasiosArr[CANT_MAX_GYMS];
-	pair <int, int>  pokeParadasArr[CANT_MAX_PP];
-	pair <int, int>  pokeParadasAux[CANT_MAX_PP];
-	
 	gimnasiosArrPtr = gimnasiosArr;
 	pokeParadasArrPtr = pokeParadasAux;
 	
@@ -61,16 +56,21 @@ int main()
 
 	for(int j = 0; j < MAX_SIZE; j++)
 	{
+        vector<long long> tiemposSwap(TEST_ITER);
+        vector<long long> tiempos2opt(TEST_ITER);
+        vector<long long> tiempos3opt(TEST_ITER);
+        vector<int> solucionSwap;
+        vector<int> solucion2opt;
+        vector<int> solucion3opt;
+        vector<int> solucionParcial;
+        
 		cantGyms = j+1;
 		cantPokeParadas = j;
-		vector<long long> tiemposSwap(TEST_ITER);
-		vector<long long> tiempos2opt(TEST_ITER);
-		vector<long long> tiempos3opt(TEST_ITER);
-		vector<int> solucionSwap;
-		vector<int> solucion2opt;
-		vector<int> solucion3opt;
-		vector<int> solucionParcial;
-		
+        
+        pair <pair<int,int>, int> gimnasiosArr[CANT_MAX_GYMS];
+        pair <int, int>  pokeParadasArr[CANT_MAX_PP];
+        pair <int, int>  pokeParadasAux[CANT_MAX_PP];
+        
 		int i = 0;
 		for (i = 0; i < cantGyms; i++)
 		{

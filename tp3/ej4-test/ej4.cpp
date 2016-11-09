@@ -134,32 +134,35 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
             cout << solucionParcial[i] << " ";
         cout << "\n";*/
         
+        //varia iteraciones aristas viejas,menos tabu
         if (test == 1) {
+            for (int itAct = 0; itAct < _maxIt; itAct++) {
+                correr(solucionParcial, itAct, 10, !_aristasNuevas, !_masTabu);
+            }
+        }
+        //varia el tenor aristas viejas, menos tabu
+        if (test == 2) {
+            for (int tenorAct = 1; tenorAct < _tenor; tenorAct++) {
+                correr(solucionParcial, 10, tenorAct, !_aristasNuevas, !_masTabu);
+            }
+        }
+        //varia iteraciones aristas nuevas, mas tabu
+        if (test == 3) {
             for (int itAct = 0; itAct < _maxIt; itAct++) {
                 correr(solucionParcial, itAct, 10, _aristasNuevas, _masTabu);
             }
         }
-        
-        if (test == 2) {
-            for (int tenorAct = 1; tenorAct < _tenor; tenorAct++) {
-                correr(solucionParcial, 10, tenorAct, _aristasNuevas, _masTabu);
+        //varia iteraciones aristas viejas, mas tabu
+        if (test == 4) {
+            for (int itAct = 0; itAct < _maxIt; itAct++) {
+                correr(solucionParcial, itAct, 10, !_aristasNuevas, _masTabu);
             }
         }
-        
-        if (test == 3) {
-            correr(solucionParcial, _maxIt, _tenor, _aristasNuevas, _masTabu);
-        }
-        
-        if (test == 4) {
-            correr(solucionParcial, _maxIt, _tenor, !_aristasNuevas, _masTabu);
-        }
-        
+        //varia iteraciones aristas nuevas, menos tabu
         if (test == 5) {
-            correr(solucionParcial, _maxIt, _tenor, _aristasNuevas, _masTabu);
-        }
-        
-        if (test == 6) {
-            correr(solucionParcial, _maxIt, _tenor, _aristasNuevas, !_masTabu);
+            for (int itAct = 0; itAct < _maxIt; itAct++) {
+                correr(solucionParcial, itAct, 10, _aristasNuevas, !_masTabu);
+            }
         }
     }else {
         printf("%d", -1);
@@ -183,7 +186,7 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long maxIt, long long t
     int iteraciones = 0;
     while(iteraciones < _maxIt)
     {
-        vector<int> mejorCandidato;
+        vector<int> mejorVecino;
         list<Arista> aristasModificadas;
         //cada solucion esta asociada a las aristas que cambiaron
         // hacemos union entre swap, 2opt y 3opt
@@ -200,7 +203,7 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long maxIt, long long t
         {
             vector<int> candidatoActual = iteradorVecindad->first;
             long long costoActual = calcularCosto(candidatoActual);
-            costoMejorVecino = calcularCosto(mejorCandidato);
+            costoMejorVecino = calcularCosto(mejorVecino);
             
             // utilizamos long term memory
             // porque no nos concentramos solamente en un subconjunto de una vecindad,
@@ -213,24 +216,26 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long maxIt, long long t
                 (costoActual < costoMejorVecino || costoMejorVecino == -1)))
             {
                 aristasModificadas = iteradorVecindad->second;
-                mejorCandidato = candidatoActual;
+                mejorVecino = candidatoActual;
             }
             
         }
         
-        if(mejorCandidato.size() == 0)
+        if(mejorVecino.size() == 0)
         {
             //no encontre un vecino no tabu
             pair< vector<int>, list<Arista> > menosTabu = funcionAspiracion(atributosTabu, vecindad);
-            mejorCandidato = menosTabu.first;
+            mejorVecino = menosTabu.first;
             //Hay que marcar las aristas que se usaron para esta solucion como tabu
             aristasModificadas = menosTabu.second;
         }
         
-        solucionActual = mejorCandidato;
+        costoMejorVecino = calcularCosto(mejorVecino);
+        
+        solucionActual = mejorVecino;
         if(costoMejorVecino < costoMejor)
         {
-            mejorSolucion = mejorCandidato;
+            mejorSolucion = mejorVecino;
             costoMejor = costoMejorVecino;
         }
         
