@@ -1,98 +1,81 @@
 \begin{algorithm}[H]
 \Fn{EJ2()}{
 crear cola decisiones para guardar elecciones\\
+crear cola opciones para guardar todas las opciones posibles\\
 eleccion contiene un id, posicion de la misma y distancia desde el punto anterior hasta el como tambien la cantidad de pociones hasta el momento\\
-se crea seTuvoExito $gets$ verdadero \hfill O(1) \\
+se crea esPosible $gets$ verdadero \hfill O(1) \\
 se crea minimo $gets$ -1 \hfill O(1)\\ 
-\For{pokeparada}{
-asignar pokeparada como inicio de camino \hfill O(1)\\	
-\While{seTuvoExito}{  
+\For{pokeparada y gimnasio}{
+asignar pokeparada o gimnasio como inicio de camino \hfill O(1)\\	
+\While{esPosible}{  
 	\If{lesGaneATodos(MaestroPokemon) $\wedge$ tiempo(MaestroPokemon) < minimo}{
 	 \hfill  guarda: O(1)\\
 			minimo $\gets$ tiempo(MaestroPokemon) \hfill O(1)\\	
 			caminoRecorrido $\gets$ caminoRecorrido(MaestroPokemon) \hfill O(1)\\	
 	}
-			eleccion  $\gets$ eleccionPosible(MaestroPokemon) \hfill O(n + m)\\			
-			\If{$\exists$ eleccion $\wedge$ esMinima(eleccion)}	{	
-			aplicarEleccion(eleccion, MaestroPokemon)\hfill O(1)\\
-		}\Else{
-			seTuvoExito asginar falso \hfill O(1)\\
-		}
+			esPosible $\gets$ eleccionGolosa(MaestroPokemon) \hfill O(n + m)\\			
+			
 		}
 		}
 		devolver minimo, tamaño(caminoRecorrido) y caminoRecorrido 	\hfill O(n + m)\\
 }
 		
-		\textbf{\hfill total: $O((n+m)^2 \times m)$}\\
+		\textbf{\hfill total: $O((n+m)^3)$}\\
 \end{algorithm}
 
 \begin{algorithm}[H]
-\Fn{aplicarEleccion(eleccion, maestroPokemon)}{
+\Fn{eleccionGolosa(maestroPokemon)}{
+creo eleccion \hfill O(1) \\ 
+\For{opcion}{
+	eleccion $\gets$ opcion \hfill O(1) \\ 
+	recalcular(eleccion) \hfill O(1) \\
+	\If{distancia(eleccion) < minima $\wedge$ esValida(eleccion)}{
+	\If{$\neg$ (minimo$\_$gym $\wedge$ tipo(eleccion) == pokeparada)}{ 
+	minimo $\gets$ distancia(eleccion) \hfill O(1) \\
+	minimo$\_$gym $\gets$ tipo(eleccion) $\neq$ pokeparada \hfill O(1) \\
+	}
+	}	
+	}
 	encolar en decisiones la eleccion tomada  \hfill O(1) \\
+	eliminar opcion de cola de opciones \hfill O(1) \\
 	actualizar estado del sistema en base a la decision tomada: \hfill 0(1) \\
 	\If{tipo(eleccion) == GIMNASIO}{
 	\hfill  guarda: O(1)\\
 	 	decrementar	maestroPokemon.cantidadGymFaltantes en 1 \hfill O(1) \\
 		maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) - pocionesNecesarias(eleccion) \hfill O(1) \\
 	}\Else{
-		maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) + 3\hfill O(1) \\
-	
+	maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) + 3\hfill O(1) \\
 	}
 	sumar a maestroPokemon.tiempo tiempo(eleccion) \hfill O(1) \\
-	guardar estado como efectuado\hfill O(n) \\
-	actualizar eleccionActual con la nueva eleccion\hfill O(1) \\
-
+	guardar estado como efectuado \hfill O(n) \\
+	actualizar eleccionActual con la nueva eleccion\hfill O(1) 
 }
-\textbf{\hfill Complejidad total: $O(1)$}\\ 
+\textbf{\hfill Complejidad total: $O(n+m)$}\\ 
 \end{algorithm}
 
 
 \begin{algorithm}[H]
-\Fn{eleccionPosible(maestroPokemon)}{
-	\While{Hay elecciones disponibles}{
-	\hfill Ciclo: O($\binom{n+m}{1}$)\\
-		\If{eleccion.tipo == POKEPARADA}{
+\Fn{esValida(eleccion)}{
+	\If{eleccion.tipo == POKEPARADA}{
 		\hfill  guarda: O(1)\\
 			\If{maestroPokemon.pociones == maestroPokemon.capacidadMochila}{
 			\hfill  guarda: O(1)\\
-				 recalcularEleccion en base a ultima posicion correcta \hfill O(n+m) \\	
-				}\Else{
-					devolver eleccion \hfill O(1) \\
+					devolver falso \hfill O(1) \\
 				}			
 			}\Else{
 			\If{maestroPokemon.pociones < pocionesNecesarias(eleccion)}{
-				\hfill  guarda: O(1)\\
-				recalcularEleccion en base a ultima posicion correcta \hfill O(n+m) \\	
-				}\Else{
-					devolver eleccion \hfill O(1) \\
+					devolver falso \hfill O(1) \\
 				}
 			
 			
 			}	
-	
-	
+			
+			devolver verdadero \hfill O(1) \\
+		}
 
-	}
-}
-\textbf{\hfill Complejidad total: $O(n+m)$}\\ 
+\textbf{\hfill Complejidad total: $O(1)$}\\ 
 \end{algorithm}
 
-
-
-\begin{algorithm}[H]
-\Fn{esMinima(eleccion)}{
-
-\For{eleccion no utilizada}{
-	\If{esPosible(eleccionNoUtilizada)}{
-	\If{distancia(eleccion) > distancia(eleccionNoUtilizada)}{
-		devolver falso	
-	}
-	}
-	devolver verdadero
-}
-}
-\textbf{\hfill Complejidad total: $O(n+m)$}\\ 
-\end{algorithm}
 
 
 
@@ -100,4 +83,7 @@ asignar pokeparada como inicio de camino \hfill O(1)\\
 
 Se trabajo con dos estructuras internas denominadas MaestroPokemon y Eleccion, donde la primera tiene la informaci\'on sobre la cantidad de gimnasios y pokeparadas, la cantidad de gimnasios ya derrotados, la posici\'on actual, la cantidad de posiciones que posee en cada momento como tambi\'en la capacidad m\'axima de la mochila, y dos listas las cuales poseen todos los destinos posibles visitados o no y otra con solo los visitados.
 Mientras que nuestra segunda estructura, como el nombre lo indica, nos otorga toda la informaci\'on necesaria para poder realizar la elecci\'on, como es el id de la misma para no ser repetida, la posici\'on en donde se encuentra, la cantidad de pociones necesarias en caso de ser un gimnasio y la distancia para llegar a dicha posici\'on desde cierto punto.
+La funcion recalcular, nos dara el valor distancia el cual se calcula realizando el cuadrado de las diferencias entre dos posiciones (x,y)
+
+(LEERLO)
 

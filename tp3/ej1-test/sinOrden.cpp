@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
 		}
 		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
 		cap_mochila = cantMaxGym*3	;
-		/*cout << "j es:" << j << "\n"; 
+		cout << "j es:" << j << "\n"; 
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
 		for(i = 0; i < cant_gimnasios; i++){
@@ -83,20 +83,20 @@ int main(int argc, char* argv[])
 		for(i = 0; i < cant_pokeParadas; i++){
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 			
-			}*/
+			}
 
 		pair <int,std::list<int> * > * f;
-			for (int h = 0; h < 1; ++h){
+			//for (int h = 0; h < 1; ++h){
 				
-		auto start = ya();
+		//auto start = ya();
 		f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
-	auto end = ya();
-		if(h == 0){
-			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-				cout << "\n";
-			}
-		}
-	/*
+	//auto end = ya();
+	//	if(h == 0){
+	//		    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+	//			cout << "\n";
+	//		}
+	//	}
+	
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
@@ -107,7 +107,7 @@ int main(int argc, char* argv[])
 			}
 		}
 		cout << "\n";
-	*/	
+		
 		
 		
 		delete f;

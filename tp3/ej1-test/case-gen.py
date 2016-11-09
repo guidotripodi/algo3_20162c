@@ -151,7 +151,7 @@ def circularInstance(cant_gyms, cant_pp):
 def circularInstance2(cant_gyms, cant_pp):
 	mochila = cant_gyms*6
 	gyms = circularPositions2(cant_gyms,rad_circ=5)
-	pps = circularPositions2(cant_pp, rad_circ=80)
+	pps = circularPositions2(cant_pp, rad_circ=10)
 	gymsD = kPotions(gyms,3)
 
 	return gymsD, pps, mochila
@@ -180,8 +180,8 @@ def noPPInstance(n):
 
 #plotInstance(randomInstance(4))
 
-for i in xrange(5,50):
-	r = randomInstance(i)
-	#plotInstance(r)
-	saveInstance(randomInstance(i),"random.in","a")
-	pass
+#for i in xrange(5,50):
+r = circularInstance2(4,4)
+plotInstance(r)
+saveInstance(circularInstance2(4,4),"prueba4.in","a")
+##	pass

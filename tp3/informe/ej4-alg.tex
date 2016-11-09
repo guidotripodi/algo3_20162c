@@ -2,31 +2,34 @@
  \Fn{tabuSearch()}{
  %     \SetAlgoLined
  $S_o$ es la solución provista por el algoritmo greedy \\
- ConjuntoTabu attributosTabu\\ 
- Recorrido mejorSolucion $\leftarrow$ $S_o$ \\
- Recorrido  solucionActual $\leftarrow$ $S_o$ \\ 
- entero mejorCosto $\leftarrow$ calcularCosto(mejorSolucion) \\
- 
- \For{0 hasta Cantidad de iteraciones maxima}{
-  	Recorrido mejorCandidato \\
-  	Lista<Arista> aristasModificadas \\
-  	entero costoMejorCandidato $\leftarrow$ -1 \\
+ ConjuntoTabu attributosTabu \hfill O(n) \\ 
+ Recorrido mejorSolucion $\leftarrow$ $S_o$ \hfill O(n)\\
+ Recorrido  solucionActual $\leftarrow$ $S_o$ \hfill O(n)\\ 
+ entero mejorCosto $\leftarrow$ calcularCosto(mejorSolucion) \hfill O(n)\\
+% 0 hasta Cantidad de iteraciones maxima
+ \For{ entero en $[0,Cantidad de iteraciones maxima)$ }{
+		 Recorrido mejorCandidato \hfill O(1) \\
+  	Lista<Arista> aristasModificadas \hfill O(1)\\
+  	entero costoMejorCandidato $\leftarrow$ -1 \hfill O(1)\\
   	
-  	Conjunto<Recorrido, Lista<Arista> > vecindadActual $\leftarrow$ busquedaLocalFiltrada(s) \\
+	Conjunto<Recorrido, Lista<Arista> > vecindadActual $\leftarrow$ busquedaLocalFiltrada(s) \hfill O(n3)\\%TODO
   	
   	\For{par en vecindadActual}{
-  		Recorrido candidatoActual $\leftarrow$ par.first \\
-  		entero costoActual $\leftarrow$ calcularCosto(candidatoActual) \\
-		costoMejorCandidato  	$\leftarrow$ calcularCosto(mejorCandidatol) \\
+		\hfill Ciclo: O(|vecindadActual|)\\%TODO
+  		Recorrido candidatoActual $\leftarrow$ par.first \hfill O(n)\\
+  		entero costoActual $\leftarrow$ calcularCosto(candidatoActual) \hfill O(n)\\
+		costoMejorCandidato  	$\leftarrow$ calcularCosto(mejorCandidatol) \hfill O(n)\\
 		
 		\If{costoActual < costoMejor $\vee$ (!tabuCount(atributosTabu, candidatoActual) $\wedge$ (costoActual < costoMejorCandidato $\vee$ costoMejorVecino = -1)}{
-			aristasModificadas $\leftarrow$ par.second \\
-			mejorCandidato $\leftarrow$ candidatoActual \\
+			\hfill Condicion: O(evaluar TabuCount)\\%TODO
+			aristasModificadas $\leftarrow$ par.second \hfill O(1) \\%|par.second|<=4
+			mejorCandidato $\leftarrow$ candidatoActual \hfill O(n)\\
 		}
   	}  	
   	
-	\If{|mejorCandidato| > 0}{
-		<Recorrido, Lista<Arista> > menosTabu $\leftarrow$ funcionAspiracion(atributosTabu, vecindadActual) \\
+	\If{no se encontro mejorCandidato}{
+		\hfill Condicion: O(1)\\
+		<Recorrido, Lista<Arista> > menosTabu $\leftarrow$ funcionAspiracion(atributosTabu, vecindadActual) \hfill O(?)\\%TODO
 		
 		mejorCandidato $\leftarrow$ menosTabu.first \\
 		aristasModificadas $\leftarrow$ menosTabu.second \\

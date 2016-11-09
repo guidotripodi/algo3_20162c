@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 			posiciones_pp[i] = posicion;
 			pp_aux[i] = posicion;
 			
-		}/*
+		}
 		cout << "j es:" << j << "\n"; 
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
@@ -55,18 +55,18 @@ int main(int argc, char* argv[])
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 			
 			}
-*/
+
 		pair <int,std::list<int> * > * f;
-			for (int h = 0; h < 20; ++h){
-				auto start = ya();	
+//			for (int h = 0; h < 20; ++h){
+//				auto start = ya();	
 				f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
-				auto end = ya();
-				if (h == 19)	{
-					cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-					cout << "\n";
-				}
-			}
-/*	
+//				auto end = ya();
+//				if (h == 19)	{
+//					cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+//					cout << "\n";
+//				}
+//			}
+	
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
 				cout << " " << *it;
 			}
 		}
-		cout << "\n";*/
+		cout << "\n";
 		
 		
 		

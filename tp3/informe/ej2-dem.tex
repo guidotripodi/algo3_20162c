@@ -106,19 +106,19 @@ Este estilo de familia presenta a los gimnasios y pokeparadas desordenados en re
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.40]{./EJ2/caminosinorden1.png}
+\includegraphics[scale=0.40]{./EJ2/caminosinorden.png}
 \\{\textit{Ejemplo 2.5 Resultados obtenidos - Algoritmo Goloso}}
   \end{center}
   \vspace*{0.3cm}
   
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.40]{./EJ2/caminosinorden.png}
+\includegraphics[scale=0.40]{./EJ2/caminosinorden1.png}
 \\{\textit{Ejemplo 2.6 Resultados obtenidos - Algoritmo Exacto}}
   \end{center}
   \vspace*{0.3cm}
 
-Se puede observar en el ejemplo 2.5 como nuestro algorimo va a la primer pokeparada y de ah\'i va a vencer al gimnasio m\'as cercano en vez de ir a la pokeparada que se encuentra inmediatamente consecutiva. Esto lo hace hasta vencer a todos los gimnasios.
+Se puede observar en el ejemplo 2.5 como nuestro algoritmo va a la primer pokeparada y de ah\'i va a vencer al gimnasio m\'as cercano en vez de ir a la pokeparada que se encuentra inmediatamente consecutiva. Esto lo hace hasta vencer a todos los gimnasios.
 
 A continuacion mostraremos para cada instancia posible de ser comparada el error obtenido en cada soluci\'on:
 
@@ -153,7 +153,21 @@ A continuacion mostraremos para cada instancia posible de ser comparada el error
 \\{\textit{Ejemplo 2.7 Resultados obtenidos (Camino recorrido total) }}
   \end{center}
   \vspace*{0.3cm}
-  
+
+Se puede observar en el \'ultimo gr\'afico como los resultados tienen valores diversos para casos pequeños. Esto se produce ya que en el armado del test, cuando se colocan las pokeparadas y gimnasios en sus respectivos anillos, se trabaja con el radio de cada anillo para obtener la distancia entre anillos, generando que cuando se aumente el radio en casos pequeños la distancia entre las pokeparadas aumente tambi\'en. Siendo optimo entonces un recorrido similar al goloso. (ESCRIBIRLO MEJOR)
+
+A continuacion, mostraremos la instancia con 10 elementos para ejemplificar lo comentado
+\begin{figure} [!ht]
+ \centering
+  \subfloat[Algoritmo exacto]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/anilloexactoerror.png}}
+       \label{fig:jaggies}
+  \subfloat[Algoritmo goloso]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/anillogolosoerror.png}}
+    \label{fig:moire}
+    \end{figure}
+    
+La instancia con 6 elementos presenta un caso similar.
   
 Por \'ultimo, la familia sin soluci\'on \'optima n\'umero 8 la cual es random.
 
@@ -206,6 +220,15 @@ Posteriormente, veremos como se comporta cada familia en funcion del tiempo al i
 \\{\textit{Tiempo de ejecución entre familias}}
   \end{center}
   \vspace*{0.3cm}
+  \begin{figure} [!ht]
+ \centering
+  \subfloat[]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/comparativo1.png}}
+       \label{fig:jaggies}
+  \subfloat[]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/comparativo2.png}}
+    \label{fig:moire}
+    \end{figure}
   
 Se puede observar como la familia n\'umero 6 presenta una peor performance en comparaci\'on al resto mientras que tanto la familia 1 como la 2 presentan un tiempo que se torna constante dando una mejor performance en relaci\'on al resto, lo cual se debe a las podas utilizadas para estas familias como mencionamos anteriormente. Mientras que la n\'umero 6 presenta la dificultad en la cual todos los elementos del mapa se encuentran desordenados, por lo tanto nuestro algoritmo tiene que llegar a hacer hasta un doble viaje para poder vencer a un gimnasio, ya que se dan instancias en las cuales los gimnasios de poder menor o igual a 3 se encuentran muy lejos de las pokeparadas en relaci\'on a los gimnasios de poder mayor los cuales estan "pegados" a las pokeparadas insumiendole as\'i un tiempo mayor de decisi\'on y ejecuci\'on. Como hab\'iamos visto, nuestro algoritmo siempre que puede vencer a un gimnasio va a vencerlo.
 
@@ -213,9 +236,10 @@ Luego, mostraremos como se comporta nuestro algoritmo en base a la complejidad c
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
-\includegraphics[scale=0.60]{./EJ2/mejorcaso1.png}
+\includegraphics[scale=0.60]{./EJ2/mejorcaso.png}
 \\{\textit{Tiempo de ejecución entre familias}}
   \end{center}
   \vspace*{0.3cm}
+  
   
 Es posible observar como las funciones resultantes del mejor y peor caso se encuentran por debajo de la cota de complejidad. Dicha complejidad fue calculada utilizando el m\'etodo de cuadrados m\'inimos generandonos una funcion la cual tomamos como cota dentro de nuestro orden de complejidad $(O(n+m)^3)$.
