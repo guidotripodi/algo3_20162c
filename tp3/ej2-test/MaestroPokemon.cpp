@@ -41,24 +41,24 @@ void MaestroPokemon::printStatus() const
 
 
 MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap_mochila, const pair <pair <int,int>, int> gyms[], const pair <int,int> posiciones_pp[], int idInicial){
-	
+
 	this->cant_gimnasios = cant_gimnasios;
 	this->cant_gimnasios_por_ganar = cant_gimnasios;
 	this->cant_pokeParadas = cant_pokeParadas;
 	this->capacidad_mochila = cap_mochila;
-	this->cantidad_pociones = 0; 
+	this->cantidad_pociones = 0;
 	this->gyms = gyms;
-	this->posiciones_pp = posiciones_pp; 
+	this->posiciones_pp = posiciones_pp;
 	this->paso=0;
-	
+
 
 	this->decisiones = new list<MaestroPokemon::Eleccion>();
 	this->opciones = new list<int>;
-	
+
 
 	this->distancia=0;
-	
-	
+
+
 	for (int i = idInicial; i < this->cant_gimnasios + this->cant_pokeParadas - idInicial; i++)
 	{
 		opciones->push_back(i);
@@ -67,9 +67,9 @@ MaestroPokemon::MaestroPokemon(int cant_gimnasios, int cant_pokeParadas, int cap
 	{
 		opciones->push_back(i);
 	}
-	
+
 	this->eleccionActual = Eleccion(this);
-	
+
 
 }
 
@@ -82,9 +82,9 @@ bool MaestroPokemon::eleccionGolosa(){
 	Eleccion eleccion = Eleccion(this);
 	int minima = -1;
 	bool minimo_es_gym = false;
-	
+
 	std::list<int>::iterator itm;
-	
+
 	for (std::list<int>::iterator it=opciones->begin(); it != opciones->end(); ++it){
 	//	cout<<i++<<"\n";
 		eleccion.id = *it;
@@ -99,7 +99,7 @@ bool MaestroPokemon::eleccionGolosa(){
 				minimo_es_gym = eleccion.tipo!=PP;
 	//		cout<<"minima local!\n";
 				itm=std::list<int>::iterator(it);
-				
+
 			}
 		}
 	}
@@ -112,7 +112,7 @@ bool MaestroPokemon::eleccionGolosa(){
 	//cout<<*itm<<" ";
 
 	paso = decisiones->size();
-	
+
 	eleccionActual.id=*itm;
 	eleccionActual.recalcular();
 	decisiones->push_back(eleccionActual);
@@ -126,7 +126,7 @@ bool MaestroPokemon::eleccionGolosa(){
 	distancia += eleccionActual.distancia;
 	}
 	//printf("[distancia 1]  %d  \n", distancia );
-	
+
 	if (eleccionActual.tipo == GIMNASIO)
 	{
 
@@ -134,7 +134,7 @@ bool MaestroPokemon::eleccionGolosa(){
 		cantidad_pociones= cantidad_pociones - eleccionActual.pocionesNecesarias;
 	}else{
 
-		cantidad_pociones = cantidad_pociones+3;//HARDCODE!!!
+		cantidad_pociones = min(cantidad_pociones+3,this->capacidad_mochila);//HARDCODE!!!
 	}
 	//cout <<"Elegida\n";
 	return true;
