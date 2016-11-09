@@ -153,12 +153,12 @@ int main()
 		soluciones2opt[j] = solucion2opt;
 		soluciones3opt[j] = solucion3opt;
 /*
-		cout << estadisticasSwap.first << " " 
-			<< estadisticasSwap.second << " "
+		cout << estadisticasSwap.first << "," 
+			<< estadisticasSwap.second << ","
 			<< mejoraSwap << "\n";
 
 		for(int i = 0; i < (int) solucionSwap.size(); i++) 
-			cout << solucionSwap[i] << " ";
+			cout << solucionSwap[i] << ",";
 		cout << "\n";
 
 		
@@ -167,53 +167,65 @@ int main()
 			<< mejora2opt << "\n";
 
 		for(int i = 0; i < (int) solucion2opt.size(); i++) 
-			cout << solucion2opt[i] << " ";
+			cout << solucion2opt[i] << ",";
 		cout << "\n";
 
 		
-		cout << estadisticas3opt.first << " "
-			<< estadisticas3opt.second << " " 
+		cout << estadisticas3opt.first << ","
+			<< estadisticas3opt.second << "," 
 			<< mejora3opt << "\n";
 		for(int i = 0; i < (int) solucion3opt.size(); i++) 
-			cout << solucion3opt[i] << " ";
+			cout << solucion3opt[i] << ",";
 		cout << "\n";
 */
 		delete solucionInicial;
 	}
 
+	//imprimir csv
+	cout 
+		<< "tiempo swap,"
+		<< "varianza swap,"
+		<< "distancia swap,"
+		<< "solucion swap,"
+		<< "tiempo 2opt,"
+		<< "varianza 2opt,"
+		<< "distancia 2opt,"
+		<< "solucion 2opt,"
+		<< "tiempo 3opt,"
+		<< "varianza 3opt,"
+		<< "distancia 3opt,"
+		<< "solucion 3opt,"
+		<< "\n";
+		
 
-	for( int k = 0; k < 10; k++ )
+
+	for( int k = 0; k < MAX_SIZE; k++ )
 	{
-		cout << estadisticasSwap[k].first << " " 
-			<< estadisticasSwap[k].second << " "
-			<< mejorasSwap[k] << "\n";
+		cout << estadisticasSwap[k].first << "," 
+			<< estadisticasSwap[k].second << ","
+			<< mejorasSwap[k] << ",";
 
 		for(int i = 0; i < (int) solucionesSwap[k].size(); i++) 
 			cout << solucionesSwap[k][i] << " ";
-		cout << "\n";
-	}
+		cout << ",";
 
-	for( int k = 0; k < 10; k++ )
-	{
-		cout << estadisticas2opt[k].first << " " 
-			<< estadisticas2opt[k].second << " "
-			<< mejoras2opt[k] << "\n";
+		cout << estadisticas2opt[k].first << "," 
+			<< estadisticas2opt[k].second << ","
+			<< mejoras2opt[k] << ",";
 
 		for(int i = 0; i < (int) soluciones2opt[k].size(); i++) 
 			cout << soluciones2opt[k][i] << " ";
-		cout << "\n";
-	}
+		cout << ",";
 
-	for( int k = 0; k < 10; k++ )
-	{
-		cout << estadisticas3opt[k].first << " " 
-			<< estadisticas3opt[k].second << " "
-			<< mejoras3opt[k] << "\n";
+		cout << estadisticas3opt[k].first << "," 
+			<< estadisticas3opt[k].second << ","
+			<< mejoras3opt[k] << ",";
 
 		for(int i = 0; i < (int) soluciones3opt[k].size(); i++) 
 			cout << soluciones3opt[k][i] << " ";
 		cout << "\n";
 	}
+
 	return 0;
 }
 

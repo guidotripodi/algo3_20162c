@@ -15,55 +15,64 @@ using namespace std;
 
 //variables globales definidas en ej4.hpp
 
-#define MAX_CANT_PP 20
-#define MAX_CANT_GYMS 20
+#define MAX_CANT_PP 100
+#define MAX_CANT_GYMS 101
+
+#define MAX_SIZE 20
 
 int main(){
-
+    
     int test = 0;
     
     cin >> test;
     
-    int j = 8;
-    cantGyms = j+1;
-    cantPokeParadas = j;
-    pair <pair<int,int>, int> gimnasiosArr[MAX_CANT_GYMS];
-    pair <int, int>  pokeParadasArr[MAX_CANT_PP];
-    pair <int, int>  pokeParadasAux[MAX_CANT_PP];
-
-    for (int i = 0; i < cantGyms; i++)
+    for(int j = 0; j < MAX_SIZE; j++)
     {
-        Gimnasio gymPuebloPaleta;
-        gymPuebloPaleta.first.first = i;
-        gymPuebloPaleta.first.second = i+1;
-        if( i % 2 == 0)
+        cantGyms = j+1;
+        cantPokeParadas = j;
+        pair <pair<int,int>, int> gimnasiosArr[MAX_CANT_GYMS];
+        pair <int, int>  pokeParadasArr[MAX_CANT_PP];
+        pair <int, int>  pokeParadasAux[MAX_CANT_PP];
+        
+        for (int i = 0; i < cantGyms; i++)
         {
-            gymPuebloPaleta.second = 0;
-        } else
-        {
-            gymPuebloPaleta.second  = i;
+            Gimnasio gymPuebloPaleta;
+            gymPuebloPaleta.first.first = i;
+            gymPuebloPaleta.first.second = i+1;
+            if( i % 2 == 0)
+            {
+                gymPuebloPaleta.second = 0;
+            } else
+            {
+                if (i % 3 == 0) {
+                    gymPuebloPaleta.second = 0;
+                }else if (i % 3 == 1) {
+                    gymPuebloPaleta.second = 1;
+                }else {
+                    gymPuebloPaleta.second = 3;
+                }
+            }
+            gimnasiosArr[i] = gymPuebloPaleta;
         }
-        gimnasiosArr[i] = gymPuebloPaleta;
+        for (int i = 0; i < cantPokeParadas; i++)
+        {
+            Pokeparada posicion;
+            posicion.first = i;
+            posicion.second = i+2;
+            pokeParadasArr[i] = posicion;
+            pokeParadasAux[i] = posicion;
+        }
+        
+        capMochila = cantGyms*3;
+        
+        testear(
+                cantGyms,
+                cantPokeParadas,
+                capMochila,
+                gimnasiosArr,
+                pokeParadasArr,
+                pokeParadasAux, test);
     }
-    for (int i = 0; i < cantPokeParadas; i++)
-    {
-        Pokeparada posicion;
-        posicion.first = i;
-        posicion.second = i+2;
-        pokeParadasArr[i] = posicion;
-        pokeParadasAux[i] = posicion;
-    }
-    
-    capMochila = cantGyms*3;
-    
-    testear(
-            cantGyms,
-            cantPokeParadas,
-            capMochila,
-            gimnasiosArr,
-            pokeParadasArr,
-            pokeParadasAux, test);
     
     return 0;
 }
-
