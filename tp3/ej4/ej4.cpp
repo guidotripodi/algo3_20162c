@@ -214,7 +214,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 	int iteraciones = 0;			
 	while(iteraciones < ITERMAX)
 	{
-		vector<int> mejorCandidato;
+		vector<int> mejorVecino;
 		list<Arista> aristasModificadas; 
 		//cada solucion esta asociada a las aristas que cambiaron
 		// hacemos union entre swap, 2opt y 3opt
@@ -231,7 +231,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		{
 			vector<int> candidatoActual = iteradorVecindad->first;
 			long long costoActual = calcularCosto(candidatoActual);
-			costoMejorVecino = calcularCosto(mejorCandidato);
+			costoMejorVecino = calcularCosto(mejorVecino);
 
 			// utilizamos long term memory 
 			// porque no nos concentramos solamente en un subconjunto de una vecindad, 
@@ -244,24 +244,26 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 				(costoActual < costoMejorVecino || costoMejorVecino == -1)))
 			{
 				aristasModificadas = iteradorVecindad->second;
-				mejorCandidato = candidatoActual;
+				mejorVecino = candidatoActual;
 			}
 
 		}
 		
-		if(mejorCandidato.size() == 0)
+		if(mejorVecino.size() == 0)
 		{
 			//no encontre un vecino no tabu
 			pair< vector<int>, list<Arista> > menosTabu = funcionAspiracion(atributosTabu, vecindad);
-			mejorCandidato = menosTabu.first;
+			mejorVecino = menosTabu.first;
 			//Hay que marcar las aristas que se usaron para esta solucion como tabu
 			aristasModificadas = menosTabu.second;
 		}
+        
+        costoMejorVecino = calcularCosto(mejorVecino);
 
-		solucionActual = mejorCandidato;
+		solucionActual = mejorVecino;
 		if(costoMejorVecino < costoMejor)
 		{
-			mejorSolucion = mejorCandidato;
+			mejorSolucion = mejorVecino;
 			costoMejor = costoMejorVecino;
 		}
 		
@@ -519,94 +521,98 @@ long long distancia(pair<int, int> origen, pair<int, int> destino){
 }
 
 bool pasoPosible(int destino, int capacidadParcial){
-	Gimnasio gym;
-
-	int poderGym = 0;
-
-	if (destino < cantGyms)
-	{
-		poderGym = gimnasiosArrPtr[destino-1].second;
-	}
-	
-	if (poderGym == 0 || capacidadParcial >= poderGym)
-	{
-		return true;
-	}
-	
-	return false;
+    Gimnasio gym;
+    
+    int poderGym = 0;
+    
+    if (destino < cantGyms)
+    {
+        poderGym = gimnasiosArrPtr[destino].second;
+    }
+    
+    if (poderGym == 0 || capacidadParcial >= poderGym)
+    {
+        return true;
+    }
+    
+    return false;
 }
 
-
 long long calcularCosto(vector<int> &camino){
-	long long costo = 0;
-	int capacidadParcial = 0;
-
-	
-	
-	for(int i = 0; i < (int) camino.size() -1; i++){
-		if(pasoPosible(camino[i+1], capacidadParcial)){
-			
-			pair<int, int> pOrigen;
-			pair<int, int> pDestino;
-		
-			int origen = camino[i];
-			int destino = camino[i+1];
-			
-			bool destinoEsPP = false;
-			
-			if (origen <= cantGyms)
-			{
-				pOrigen = gimnasiosArrPtr[origen - 1].first;
-			}else {
-				pOrigen = pokeParadasArrPtr[origen - cantGyms - 1];
-			}
-			
-			if (destino <= cantGyms)
-			{
-				pDestino = gimnasiosArrPtr[destino - 1].first;
-			}else {
-				pDestino = pokeParadasArrPtr[destino - cantGyms - 1];
-				destinoEsPP = true;
-			}			
-			
-			costo = costo + distancia(pOrigen, pDestino);
-			
-			
-			if(destinoEsPP){
-				capacidadParcial += 3;
-				if(capacidadParcial > capMochila){
-					capacidadParcial = capMochila;
-				}
-			} else {
-				capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino - 1].second;
-			}
-		} else{
-			/*
-			cout << "ERROR\n" 
-				<< "capacidad " << capMochila << "\n"
-				<< "capacidad Parcial " << capacidadParcial << "\n"
-				<< "origen " << camino[i] << "\n"
-				<< "destino " << camino[i+1] << "\n";
-			if(camino[i+1] <= cantGyms)
-			{
-				cout << "poder Gym: " << gimnasiosArrPtr[camino[i+1] - 1].second << "\n";
-			}
-			*/
-			return -1;
-		}
-	}
-	
-	return costo;
+    if (!camino.size()) {
+        return -1;
+    }
+    
+    long long costo = 0;
+    int capacidadParcial = 0;
+    
+    if(camino[0] > cantGyms) {
+        capacidadParcial = 3;
+    }
+    
+    for(int i = 0; i < (int) camino.size() -1; i++){
+        if(pasoPosible(camino[i+1]-1, capacidadParcial)){
+            
+            pair<int, int> pOrigen;
+            pair<int, int> pDestino;
+            
+            int origen = camino[i]-1;
+            int destino = camino[i+1]-1;
+            
+            bool destinoEsPP = false;
+            
+            if (origen < cantGyms)
+            {
+                pOrigen = gimnasiosArrPtr[origen].first;
+            }else {
+                pOrigen = pokeParadasArrPtr[origen - cantGyms];
+            }
+            
+            if (destino < cantGyms)
+            {
+                pDestino = gimnasiosArrPtr[destino].first;
+            }else {
+                pDestino = pokeParadasArrPtr[destino - cantGyms];
+                destinoEsPP = true;
+            }
+            
+            costo = costo + distancia(pOrigen, pDestino);
+            
+            if(destinoEsPP){
+                capacidadParcial += 3;
+                if(capacidadParcial > capMochila){
+                    capacidadParcial = capMochila;
+                }
+            } else {
+                capacidadParcial = capacidadParcial - gimnasiosArrPtr[destino].second;
+            }
+        } else{
+            /*
+             cout << "ERROR\n"
+             << "capacidad " << capMochila << "\n"
+             << "capacidad Parcial " << capacidadParcial << "\n"
+             << "origen " << camino[i] << "\n"
+             << "destino " << camino[i+1] << "\n";
+             if(camino[i+1] <= cantGyms)
+             {
+             cout << "poder Gym: " << gimnasiosArrPtr[camino[i+1] - 1].second << "\n";
+             }
+             */
+            return -1;
+        }
+    }
+    
+    return costo;
 }
 
 void optimizarSolucion(vector<int> &solucion)
 {
-	int i = solucion.size() -1;
-	while(solucion[i] > cantGyms && i > 0)
-	{
-		solucion.pop_back();
-		i--;
-	}
+    int i = solucion.size() -1;
+    while(solucion[i] > cantGyms && i > 0)
+    {
+        solucion.pop_back();
+        i--;
+    }
 }
 
 pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
