@@ -27,6 +27,7 @@ asignar pokeparada o gimnasio como inicio de camino \hfill O(1)\\
 \Fn{eleccionGolosa(maestroPokemon)}{
 creo eleccion \hfill O(1) \\ 
 \For{opcion}{
+	\hfill  ciclo: O(n+m)\\
 	eleccion $\gets$ opcion \hfill O(1) \\ 
 	recalcular(eleccion) \hfill O(1) \\
 	\If{distancia(eleccion) < minima $\wedge$ esValida(eleccion)}{
@@ -47,7 +48,7 @@ creo eleccion \hfill O(1) \\
 	maestroPokemon.cantidadPociones $\gets$ pociones(maestroPokemon) + 3\hfill O(1) \\
 	}
 	sumar a maestroPokemon.tiempo tiempo(eleccion) \hfill O(1) \\
-	guardar estado como efectuado \hfill O(n) \\
+	guardar estado como efectuado \hfill O(n+m) \\
 	actualizar eleccionActual con la nueva eleccion\hfill O(1) 
 }
 \textbf{\hfill Complejidad total: $O(n+m)$}\\ 

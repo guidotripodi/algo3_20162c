@@ -13,11 +13,11 @@ Nuestro algoritmo va chequeando en cada paso si existe alg\'un gimnasio capaz de
 \textbf{Familia 1 y 2}
 \end{center}
 
-Ambas familias devolveran -1 ya que como se explico anteriomente tanto el greedy como el exacto presentan podas para estos casos sin soluci\'on por lo tanto su tiempo de ejecuci\'on tambi\'en ser\'a id\'entico.
+Ambas familias devolveran -1 ya que como se explico anteriomente tanto el greedy como el exacto presentan podas para estos casos sin soluci\'on por lo tanto su tiempo de ejecuci\'on tambi\'en ser\'a id\'entico. \\\\\\\\\\\\\\\\\\\
 
 
 
-\begin{figure} [!ht]
+\begin{figure} 
  \centering
   \subfloat[Familia 1: actua poda 1]{
     \includegraphics[width=0.45\textwidth]{./EJ2/fam1medicion.png}}
@@ -28,7 +28,7 @@ Ambas familias devolveran -1 ya que como se explico anteriomente tanto el greedy
     \end{figure}
 
 
-Como se observa en los \'ultimos gr\'aficos, las funciones resultantes para cada familia en ambos algoritmos presentan el mismo tiempo por lo comentando sobre las podas realizadas.\\
+Como se observa en los \'ultimos gr\'aficos, las funciones resultantes para cada familia en ambos algoritmos presentan el mismo tiempo por lo comentando sobre las podas realizadas.
 
 \begin{center}
 \textbf{Familia 3}
@@ -36,7 +36,7 @@ Como se observa en los \'ultimos gr\'aficos, las funciones resultantes para cada
 
 En este caso, como nuestro greedy chequea si hay alg\'un gimnasio a ser vencido con la cantidad de pociones que se tienen en el momento (se inicia con 0), y como todos necesitan 0, recorre los gimnasios sin necesidad de pasar por las pokeparadas, obteniendo la mejor soluci\'on posible.
 
-A continuaci\'on mostraremos el camino obtenido tanto para el algoritmo exacto como el goloso de un caso el cual trabaja con 19 elementos en total para ejemplificar lo enunciado anteriormente:
+A continuaci\'on mostraremos el camino obtenido tanto para el algoritmo exacto como el goloso de un caso el cual trabaja con 8 elementos en total para ejemplificar lo enunciado anteriormente:
 
    \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -49,7 +49,7 @@ Como se observa en el ejemplo el camino obtenido es exactamente el mismo.
 
 
 \begin{center}
-\textbf{Familia 4}
+\textbf{Familia 5}
 \end{center}
 
 Se obtendr\'a la soluci\'on \'optima ya que, se reciben primero pokeparadas para vencer a un gimnasio cerca de ellas y luego m\'as pokeparadas para vencer a otros gimnasios que se encuentren cerca de estas \'ultimas, se mostrar\'a a continuaci\'on un dibujo que ejemplifica lo dicho:
@@ -64,14 +64,14 @@ Se obtendr\'a la soluci\'on \'optima ya que, se reciben primero pokeparadas para
 \subsubsection*{Familia con soluci\'on no \'optima}
 
 \begin{center}
-\textbf{Familia 5}
+\textbf{Familia 4}
 \end{center}
 
 Este estilo de familia se elabora de la forma en la cual existan gimnasios que no necesiten pociones para ser vencidos y otros que si. Nuestro algoritmo como por cada iteraci\'on chequea si puede elegir un gimnasio que se encuentre a una distancia m\'inima en relaci\'on a los demas, y adem\'as corrobora si posee las pociones necesarias para vencerlo, decide inicialmente ir a vencer a los gimnasios que posean cero poder, lo cual puede no ser \'optimo para el resultado final.
 
 Debido al poder de computo, el algoritmo exacto solo puede tomar entre 20 o 25 elementos (dependiendo el tipo de instancia), mientras que el goloso puede tomar una mayor cantidad de elementos. Es por esto que se realizaron las comparaciones con la cantidad de elementos soportadas por el exacto.
 
-A continuaci\'on un ejemplo comparativo entre ambos algoritmos con el cual se trabajo, dicho ejemplo contendr\'a un total de 21 elementos:
+A continuaci\'on un ejemplo comparativo entre ambos algoritmos con el cual se trabajo, dicho ejemplo contendr\'a un total de 10 elementos:
 
 
 
@@ -104,19 +104,15 @@ Veremos a continuaci\'on en base a esta familia y el poder de computo cuanto ser
 Este estilo de familia presenta a los gimnasios y pokeparadas desordenados en referencia a las posiciones, es decir, para ganar a cierto gimnasio es necesario pasar por una cantidad puntual de pokeparadas las cuales estan de un lado y del otro de dicho gimnasio.
 (VER DE ESCRIBIR ESTO MAS EN DETALLE)
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.40]{./EJ2/caminosinorden.png}
-\\{\textit{Ejemplo 2.5 Resultados obtenidos - Algoritmo Goloso}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.40]{./EJ2/caminosinorden1.png}
-\\{\textit{Ejemplo 2.6 Resultados obtenidos - Algoritmo Exacto}}
-  \end{center}
-  \vspace*{0.3cm}
+\begin{figure} [!ht]
+ \centering
+  \subfloat[Algoritmo exacto]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/caminosinorden1.png}}
+       \label{fig:jaggies}
+  \subfloat[Algoritmo goloso]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/caminosinorden.png}}
+    \label{fig:moire}
+    \end{figure}
 
 Se puede observar en el ejemplo 2.5 como nuestro algoritmo va a la primer pokeparada y de ah\'i va a vencer al gimnasio m\'as cercano en vez de ir a la pokeparada que se encuentra inmediatamente consecutiva. Esto lo hace hasta vencer a todos los gimnasios.
 
@@ -156,7 +152,7 @@ A continuacion mostraremos para cada instancia posible de ser comparada el error
 
 Se puede observar en el \'ultimo gr\'afico como los resultados tienen valores diversos para casos pequeños. Esto se produce ya que en el armado del test, cuando se colocan las pokeparadas y gimnasios en sus respectivos anillos, se trabaja con el radio de cada anillo para obtener la distancia entre anillos, generando que cuando se aumente el radio en casos pequeños la distancia entre las pokeparadas aumente tambi\'en. Siendo optimo entonces un recorrido similar al goloso. (ESCRIBIRLO MEJOR)
 
-A continuacion, mostraremos la instancia con 10 elementos para ejemplificar lo comentado
+A continuacion, mostraremos la instancia con 10 elementos para ejemplificar lo comentado \\\\\\\\\\
 \begin{figure} [!ht]
  \centering
   \subfloat[Algoritmo exacto]{
@@ -169,7 +165,7 @@ A continuacion, mostraremos la instancia con 10 elementos para ejemplificar lo c
     
 La instancia con 6 elementos presenta un caso similar.
   
-Por \'ultimo, la familia sin soluci\'on \'optima n\'umero 8 la cual es random.
+Por \'ultimo, la familia sin soluci\'on \'optima n\'umero 8 la cual es random.\\\\
 
 
 \begin{figure} [!ht]
@@ -182,7 +178,7 @@ Por \'ultimo, la familia sin soluci\'on \'optima n\'umero 8 la cual es random.
     \label{fig:moire}
     \end{figure}
 
-A continuacion mostraremos para cada instancia posible de ser comparada el error obtenido en cada soluci\'on:
+A continuacion mostraremos para cada instancia posible de ser comparada el error obtenido en cada soluci\'on: \\\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
