@@ -39,10 +39,7 @@ Pokeparada *pokeParadasArrPtr;
 
 int main()
 {
-	gimnasiosArrPtr = gimnasiosArr;
-	pokeParadasArrPtr = pokeParadasAux;
-	
-	vector<int> solucionesSwap[MAX_SIZE];
+    vector<int> solucionesSwap[MAX_SIZE];
 	vector<int> soluciones2opt[MAX_SIZE];
 	vector<int> soluciones3opt[MAX_SIZE];
 	
@@ -70,6 +67,9 @@ int main()
         pair <pair<int,int>, int> gimnasiosArr[CANT_MAX_GYMS];
         pair <int, int>  pokeParadasArr[CANT_MAX_PP];
         pair <int, int>  pokeParadasAux[CANT_MAX_PP];
+        
+        gimnasiosArrPtr = gimnasiosArr;
+        pokeParadasArrPtr = pokeParadasArr;
         
 		int i = 0;
 		for (i = 0; i < cantGyms; i++)
