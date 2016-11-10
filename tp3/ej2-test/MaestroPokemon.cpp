@@ -89,17 +89,21 @@ bool MaestroPokemon::eleccionGolosa(){
 	//	cout<<i++<<"\n";
 		eleccion.id = *it;
 		eleccion.recalcular();
-		if ((eleccion.distancia < minima || minima==-1 ) && eleccionValida(eleccion) )
+		bool es_minima = eleccion.distancia < minima || minima==-1 ; 
+		bool minimo_es_pp_yyo_gym = !minimo_es_gym && eleccion.tipo==GIMNASIO; // minimo es pp y eleccion es gimnasio
+
+		//Si la minima fue pp, entonces la eleccion puede ser substituida por cualquier gym valido
+		if ((es_minima || minimo_es_pp_yyo_gym) && eleccionValida(eleccion) )
 		{
 			//Si el anterior minimo fue un gym, y el nuevo minimo es una PP...entonces me quedo con el gym
 			//Si el anterior minimo no fue un gym, entonces me quedo con el minimo que calcule
+
 			if (!(minimo_es_gym && eleccion.tipo==PP))
 			{
 				minima = eleccion.distancia;
 				minimo_es_gym = eleccion.tipo!=PP;
-	//		cout<<"minima local!\n";
 				itm=std::list<int>::iterator(it);
-
+				
 			}
 		}
 	}
