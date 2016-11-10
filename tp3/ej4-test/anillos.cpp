@@ -22,9 +22,7 @@ using namespace std;
 
 int main(){
     
-    int test = 0;
-    
-    cin >> test;
+    int test = 1;
     
     for(int j = 0; j < MAX_SIZE; j++)
     {

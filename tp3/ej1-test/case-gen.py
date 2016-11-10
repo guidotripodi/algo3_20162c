@@ -5,7 +5,7 @@ from pylab import *
  #			- Un metodo que posicione los elementos : Seccion GENERADORES DE POSICIONES
  #			- Un metodo que asigne de determinada forma las pociones a los gimnasios: Seccion GENERADORES DE POCIONES
  #			- Un metodo que genere lainstancia con lo anterior: Seccion INSTANCIAS
- #			
+ #
  # Ploteo
  # Para cisualizar lainstancia se debe pasar a la funcion de ploeteo el nombre de la funcion generadora de instancias (verejemplo)
 
@@ -15,7 +15,7 @@ from pylab import *
 def randomPositions(n, notin=[]):
 	li = []
 	x = 1
-	while len(li)<n:	
+	while len(li)<n:
 		t = 2*pi*rand()
 		r = sqrt(randint(0,1000))
 		v =(int(r*cos(t)), int(r*sin(t)))
@@ -25,15 +25,15 @@ def randomPositions(n, notin=[]):
 
 		li.append(v)
 
-	return li	
+	return li
 
 def circularPositions(n, notin=[], rad_circ=10, dist_anillos = 10):
 
-	
-	
+
+
 	li = []
 	while n>0:
-		
+
 		noSePisaron = True
 		y = 0
 		while noSePisaron and n>0	:
@@ -44,12 +44,12 @@ def circularPositions(n, notin=[], rad_circ=10, dist_anillos = 10):
 				rad_circ = rad_circ + dist_anillos
 				noSePisaron = False
 				continue
-							
+
 			li.append(v)
 			n = n-1
 			y = y+1
-			
-	return li	
+
+	return li
 
 def circularPositions2(n, rad_circ=10):
 	li=[]
@@ -60,7 +60,7 @@ def circularPositions2(n, rad_circ=10):
 		arc = arc + incremento
 		li.append(v)
 	return li
-		
+
 ###############################################
 #			GENERADORES DE POCIONES
 
@@ -69,7 +69,7 @@ def circularPositions2(n, rad_circ=10):
 def randomPotions(gyms, pps, k_bag):
 	gym_res = []
 	pociones_totales = 3*len(pps)
-	
+
 	for gym in gyms:
 		pociones = randint(0, min(k_bag, pociones_totales))
 		gym_res.append((gym, pociones))
@@ -90,10 +90,10 @@ def plotInstance(i):
 
 	for ((x, y), p) in i[0]:
 	    plot(x, y, 'ro')
-	
+
 	for (x, y) in i[1]:
 	    plot(x, y, 'bo')
-	
+
 	show()
 
 def saveInstance(instance, file, mode="w"):
@@ -109,7 +109,7 @@ def saveInstance(instance, file, mode="w"):
 		target.write(str(gym[0][0])+" "+str(gym[0][1])+" "+str(gym[1])+"\n")
 	for pp in p:
 		target.write(str(pp[0])+" "+str(pp[1])+"\n")
-	
+
 	target.close()
 
 
@@ -180,8 +180,8 @@ def noPPInstance(n):
 
 #plotInstance(randomInstance(4))
 
-#for i in xrange(5,50):
-r = circularInstance2(4,4)
-plotInstance(r)
-saveInstance(circularInstance2(4,4),"prueba4.in","a")
-##	pass
+for i in xrange(5,50):
+	r = randomInstance(i)
+	#plotInstance(r)
+	saveInstance(r,"random5.in","a")
+#	pass
