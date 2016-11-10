@@ -6,21 +6,27 @@
   	Recorrido $S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
   	entero costoAnterior $\leftarrow$ calcularCosto($S_o$) \hfill O(1)\\
   	Recorrido $S_{final}$ $\leftarrow$ $S_o$ \hfill O(n)\\
-	\For{i de 1 a n}{ 
+	hayMejora $\leftarrow$ true \hfill O(1)\\
+	\While{hayMejora}{ 
+		\hfill ciclo: O(n)\\
+		\For{i de 1 a n}{
 		\hfill ciclo: O(n)\\	
-		\For{j de 1 a n}{ 
-		\hfill ciclo: O(n)\\	
-			 $intercambiar$ $posiciones$ i con j en $S_{actual}$ \hfill O(1)\\
-			 optimizarS($S_{actual}$) \hfill O(n)\\
-			 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
-			 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
-			 	costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
-			 	$S_{final}$ $\leftarrow$ $S_{actual}$ \hfill O(n)\\
-			 }
-			 $intercambiar$ $posiciones$ i con j en $S_{actual}$ \hfill O(1)\\	 		
-		}	
+			\For{j de i+1 a n}{ 
+			\hfill ciclo: O(n)\\	
+				 $intercambiar$ $posiciones$ i con j en $S_{actual}$ \hfill O(1)\\
+				 optimizarS($S_{actual}$) \hfill O(n)\\
+				 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
+				 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
+					costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
+					$S_{final}$ $\leftarrow$ $S_{actual}$ \hfill O(n)\\	 
+				}
+				 $intercambiar$ $posiciones$ i con j en $S_{actual}$ \hfill O(1)\\	 		
+			}
+		}
+		\If{ $S_{final}$ == $S_{actual}$}{
+			hayMejora $\leftarrow$ false \hfill O(1)\\	 
+		}
 	}
-	
 	devolver $S_{final}$ \\	
 	
 	\hfill complejidad total: O($n^3$)\\			
@@ -35,20 +41,26 @@
   	Recorrido $S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
   	entero costoAnterior $\leftarrow$ calcularCosto($S_o$) \hfill O(1)\\
   	Recorrido $S_{final}$ = $S_o$ \hfill O(n)\\
-	\For{i de 1 a n}{
+	\While{hayMejora}{ 
 	\hfill ciclo: O(n)\\
-		\For{j de i+1 a n}{
+		\For{i de 1 a n}{
 		\hfill ciclo: O(n)\\
-			 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
-			 optimizarS($S_{actual}$) \hfill O(n)\\
-			 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
-			 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
-			 	costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
-			 	$S_{final}$ $\leftarrow$ $S_{actual}$ \hfill O(n)\\
-			 }
-			 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
-		}	
-	}	
+			\For{j de i+1 a n}{
+			\hfill ciclo: O(n)\\
+				 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
+				 optimizarS($S_{actual}$) \hfill O(n)\\
+				 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
+				 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
+					costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
+					$S_{final}$ $\leftarrow$ $S_{actual}$ \hfill O(n)\\
+				}
+				 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
+			}	
+		}
+		\If{ $S_{final}$ == $S_{actual}$}{
+			hayMejora $\leftarrow$ false \hfill O(1)\\	 
+		}
+	}
 	
 	devolver $S_{final}$ \\	
 	
@@ -64,46 +76,54 @@
   	Recorrido $S_{actual}$ $\leftarrow$ $S_o$ \hfill O(n)\\
   	entero costoAnterior $\leftarrow$ calcularCosto($S_o$) \hfill O(1)\\
   	Recorrido $S_{final}$ = $S_o$ \hfill O(n)\\
-	\For{i de 1 a n-3}{
-	\hfill ciclo: O(n)\\
-		\For{j de i+1 a n-2}{
+  	hayMejora $\leftarrow$ true	
+	\While{hayMejora}{	
+	\hfill Ciclo: O(n)\\
+		\For{i de 1 a n-3}{
 		\hfill ciclo: O(n)\\
-				\For{k de j+2 a n}{
-				\hfill ciclo: O(n)\\
-				
-			 caso 1:\\
-			 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
-			 $invertir$ $rango$ de j+1 a k en $S_{actual}$ \hfill O(n)\\
-			 optimizarS($S_{actual}$) \hfill O(n)\\
-			 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
-			 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
-			 	costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
-			 	$S_{final}$ = $S_{actual}$ \hfill O(n)\\
-			 }
-			 $invertir$ $rango$ de j+1 a k en $S_{actual}$	\hfill O(n)\\	 
-			 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
-			 
-			 
-			 caso 2: \\
-			$intercambiar$ $rango$ de i a j con el de j+1 a k en $S_{actual}$ \hfill O(n)\\
-			 optimizarS($S_{actual}$) \hfill O(n)\\
-			 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
-			 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
-			 	costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
-			 	$S_{final}$ = $S_{actual}$ \hfill O(n)\\
-			 }
-			 $intercambiar$ $rango$ de i a j con el de j+1 a k en $S_{actual}$ \hfill O(n)\\
-			 
-			 
-			 caso 3:\\
-			 es igual al caso 2 pero además invirtiendo el rango i a j \hfill O(4*n)\\
-			 
-			 
-			 caso 4: \\
-			 es igual al caso 2 pero además invirtiendo el rango j+1 a k \hfill O(4*n)\\
-			}
+			\For{j de i+1 a n-2}{
+			\hfill ciclo: O(n)\\
+					\For{k de j+2 a n}{
+					\hfill ciclo: O(n)\\
+					
+				 caso 1:\\
+				 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
+				 $invertir$ $rango$ de j+1 a k en $S_{actual}$ \hfill O(n)\\
+				 optimizarS($S_{actual}$) \hfill O(n)\\
+				 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
+				 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
+					costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
+					$S_{final}$ = $S_{actual}$ \hfill O(n)\\
+				 }
+				 $invertir$ $rango$ de j+1 a k en $S_{actual}$	\hfill O(n)\\	 
+				 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
+				 
+				 
+				 caso 2: \\
+				$intercambiar$ $rango$ de i a j con el de j+1 a k en $S_{actual}$ \hfill O(n)\\
+				 optimizarS($S_{actual}$) \hfill O(n)\\
+				 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
+				 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
+					costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
+					$S_{final}$ = $S_{actual}$ \hfill O(n)\\
+				 }
+				 $intercambiar$ $rango$ de i a j con el de j+1 a k en $S_{actual}$ \hfill O(n)\\
+				 
+				 
+				 caso 3:\\
+				 es igual al caso 2 pero además invirtiendo el rango i a j \hfill O(4*n)\\
+				 
+				 
+				 caso 4: \\
+				 es igual al caso 2 pero además invirtiendo el rango j+1 a k \hfill O(4*n)\\
+				}
+			}	
 		}	
-	}		
+	}
+	
+	\If{ $S_{final}$ == $S_{actual}$}{
+		hayMejora $\leftarrow$ false \hfill O(1)\\	 
+	}	
 
 	devolver $S_{final}$ \\
 
