@@ -91,7 +91,7 @@ bool MaestroPokemon::eleccionGolosa(){
 	//	cout<<i++<<"\n";
 		eleccion.id = *it;
 		eleccion.recalcular();
-		printEleccion(eleccion);
+		//printEleccion(eleccion);
 		bool es_minima = (eleccion.distancia < minima) || minima==-1 ; 
 		bool minimo_es_pp_yyo_gym = !minimo_es_gym && eleccion.tipo==GIMNASIO; // minimo es pp y eleccion es gimnasio
 
