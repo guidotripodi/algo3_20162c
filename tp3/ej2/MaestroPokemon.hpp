@@ -4,6 +4,7 @@
 #include <list>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "trie.cpp"
 
 #define GIMNASIO 0
@@ -38,7 +39,7 @@ public:
 	struct Eleccion
 	{
 		const MaestroPokemon* MP;
-		int distancia;
+		int distancia =0;
 		int id = -1; // El id da ordinalidad a todas las elecciones posibles, dentro de la matriz #personas x #personas
 		bool posible;
 
@@ -86,16 +87,23 @@ public:
 				posicion.first = x;
 				posicion.second = y;
 				
-				distancia = pow(x - xM, 2) + pow(y - yM, 2);
-			
-				//printf("[recalcular]  |(%d ,%d) , (%d,%d)| = %d MP->paso: %d  \n",xM, yM, x, y, distancia,MP->paso );
+				distancia=0;
+				if (id!=-1)
+				{
+					distancia = pow(x - xM, 2) + pow(y - yM, 2);
+					if(distancia<0){
+						distancia = 0;
+					}
+				}
+
+				
 				//printf("- - -DR: %d\n",distancia );
 
 			}else{
 				pocionesNecesarias = -1;
 				posicion.first= -888;
 				posicion.second= -888;
-				distancia = -1;
+				distancia = 0;
 
 			}
 		}
@@ -114,6 +122,7 @@ public:
 	void printStatus()const;
 	std::list<int> * caminoRecorrido(const pair <int,int> pp_aux[]);
 
+	Eleccion eleccionActual;
 private:
 	int cant_pokeParadas;
 	int capacidad_mochila;
@@ -124,7 +133,6 @@ private:
 	int cant_gimnasios_por_ganar;
 	std::list<Eleccion> * decisiones;
 	std::list<int> * opciones;
-	Eleccion eleccionActual;
 	bool eleccionValida(Eleccion eleccion) const;
 
 
