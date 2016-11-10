@@ -210,27 +210,26 @@ vector<int> mejorarSwap(vector<int> solucionParcial){
     
     while (hayMejora) {
         
+        long long costoActual = -1;
+        
         for (int i = 0; i < cantNodos-1; i++) {
             for (int j = i+1; j < cantNodos; j++) {
                 swap(solucionParcial[i], solucionParcial[j]);
                 
                 vector<int> solucionOptimizada = solucionParcial;
                 optimizarSolucion(solucionOptimizada);
-                long long costoActual = calcularCosto(solucionOptimizada);
+                costoActual = calcularCosto(solucionOptimizada);
                 
                 if (costoActual != -1 && costoActual < costoAnterior) {
-                    hayMejora = true;
                     costoAnterior = costoActual;
                     solucion = solucionOptimizada;
-                }else {
-                    hayMejora = false;
                 }
                 
                 swap(solucionParcial[i], solucionParcial[j]);//volver al original
             }
         }
         
-        if (solucion == solucionParcial) {
+        if (costoActual == -1 || costoActual >= costoAnterior) {
             hayMejora = false;
         }
         
@@ -253,20 +252,19 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
     
     while (hayMejora) {
         
+        long long costoActual = -1;
+        
         for (int i = 0; i < cantNodos-1; i++) {
             for (int j = i+1; j < cantNodos; j++) {
                 
                 reverse(solucionParcial.begin() + i, solucionParcial.begin() + j);
                 vector<int> solucionOptimizada = solucionParcial;
                 optimizarSolucion(solucionOptimizada);
-                long long costoActual = calcularCosto(solucionOptimizada);
+                costoActual = calcularCosto(solucionOptimizada);
                 
                 if (costoActual != -1 && costoActual < costoAnterior) {
-                    hayMejora = true;
                     costoAnterior = costoActual;
                     solucion = solucionOptimizada;
-                }else {
-                    hayMejora = false;
                 }
                 
                 //volver al original
@@ -274,7 +272,7 @@ vector<int> mejorar2opt(vector<int> solucionParcial){
             }
         }
         
-        if (solucion == solucionParcial) {
+        if (costoActual == -1 || costoActual >= costoAnterior) {
             hayMejora = false;
         }
         
@@ -302,6 +300,8 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
     
     while (mejora1 || mejora2 || mejora3 || mejora4) {
         
+        long long costoActual = -1;
+        
         for (int i = 1; i < cantNodos-3; i++) {
             for (int j = i+1; j < cantNodos-2; j++) {
                 for (int k = j+2; k < cantNodos; k++) {
@@ -317,11 +317,8 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
                     
                     if (costoActual != -1 && costoActual < costoAnterior)
                     {
-                        mejora1 = true;
                         costoAnterior = costoActual;
                         solucion = solucionOptimizada;
-                    }else {
-                        mejora1 = false;
                     }
                     
                     /*
@@ -347,11 +344,8 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
                     
                     if (costoActual != -1 && costoActual < costoAnterior)
                     {
-                        mejora2 = true;
                         costoAnterior = costoActual;
                         solucion = solucionOptimizada;
-                    }else {
-                        mejora2 = false;
                     }
                     
                     /*
@@ -377,11 +371,8 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
                     
                     if (costoActual != -1 && costoActual < costoAnterior)
                     {
-                        mejora3 = true;
                         costoAnterior = costoActual;
                         solucion = solucionOptimizada;
-                    }else {
-                        mejora3 = false;
                     }
                     
                     /*
@@ -405,11 +396,8 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
                     
                     if (costoActual != -1 && costoActual < costoAnterior)
                     {
-                        mejora4 = true;
                         costoAnterior = costoActual;
                         solucion = solucionOptimizada;
-                    }else {
-                        mejora4 = false;
                     }
                     
                     /*
@@ -422,15 +410,12 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
                     
                     reverse(solucionParcial.begin() + i + (k - j - 1), solucionParcial.begin() + (j - i - 1));
                     reverse(solucionParcial.begin() + i, solucionParcial.begin() + k);
-                    
-                    
-                    
                 }
                 
             }
         }
         
-        if (solucion == solucionParcial) {
+        if (costoActual == -1 || costoActual >= costoAnterior) {
             mejora1 = false;
             mejora2 = false;
             mejora3 = false;

@@ -90,10 +90,12 @@ public:
 				distancia=0;
 				if (id!=-1)
 				{
-				distancia = pow(x - xM, 2) + pow(y - yM, 2);
-					/* code */
-		}
-			
+					distancia = pow(x - xM, 2) + pow(y - yM, 2);
+					if(distancia<0){
+						distancia = 0;
+					}
+				}
+
 				
 				//printf("- - -DR: %d\n",distancia );
 
@@ -120,6 +122,7 @@ public:
 	void printStatus()const;
 	std::list<int> * caminoRecorrido(const pair <int,int> pp_aux[]);
 
+	Eleccion eleccionActual;
 private:
 	int cant_pokeParadas;
 	int capacidad_mochila;
@@ -130,7 +133,6 @@ private:
 	int cant_gimnasios_por_ganar;
 	std::list<Eleccion> * decisiones;
 	std::list<int> * opciones;
-	Eleccion eleccionActual;
 	bool eleccionValida(Eleccion eleccion) const;
 
 

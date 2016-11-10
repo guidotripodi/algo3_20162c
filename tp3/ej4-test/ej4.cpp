@@ -122,48 +122,50 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
         solucionParcial.push_back(*itLista);
     }
     
+    cout << calcularCosto(solucionParcial) << "\n";
+    
     long long _maxIt = 34;
     long long _tenor = cant_gimnasios+cantPokeParadas;
     bool _aristasNuevas = true;
     bool _masTabu = true;
     
-    if(solucionParcial.size()) {
-        
-        long long mejoraParcial = calcularCosto(solucionParcial);
-        
-        /*cout << mejoraParcial << ",";
-        
-        for(int i = 0; i < (int) solucionParcial.size(); i++)
-            cout << solucionParcial[i] << " ";
-        cout << "\n";*/
-        
-        //varia iteraciones aristas viejas,menos tabu
-        if (test == 1) {
-            for (int itAct = 0; itAct < _maxIt; itAct++) {
-                correr(solucionParcial, itAct, _tenor, !_aristasNuevas, !_masTabu);
-            }
-        }
-        //varia iteraciones aristas nuevas, mas tabu
-        if (test == 2) {
-            for (int itAct = 0; itAct < _maxIt; itAct++) {
-                correr(solucionParcial, itAct, _tenor, _aristasNuevas, _masTabu);
-            }
-        }
-        //varia iteraciones aristas viejas, mas tabu
-        if (test == 3) {
-            for (int itAct = 0; itAct < _maxIt; itAct++) {
-                correr(solucionParcial, itAct, _tenor, !_aristasNuevas, _masTabu);
-            }
-        }
-        //varia iteraciones aristas nuevas, menos tabu
-        if (test == 4) {
-            for (int itAct = 0; itAct < _maxIt; itAct++) {
-                correr(solucionParcial, itAct, _tenor, _aristasNuevas, !_masTabu);
-            }
-        }
-    }else {
-        printf("%d\n", -1);
-    }
+//    if(solucionParcial.size()) {
+//        
+//        long long mejoraParcial = calcularCosto(solucionParcial);
+//        
+//        /*cout << mejoraParcial << ",";
+//        
+//        for(int i = 0; i < (int) solucionParcial.size(); i++)
+//            cout << solucionParcial[i] << " ";
+//        cout << "\n";*/
+//        
+//        //varia iteraciones aristas viejas,menos tabu
+//        if (test == 1) {
+//            for (int itAct = 0; itAct < _maxIt; itAct++) {
+//                correr(solucionParcial, itAct, _tenor, !_aristasNuevas, !_masTabu);
+//            }
+//        }
+//        //varia iteraciones aristas nuevas, mas tabu
+//        if (test == 2) {
+//            for (int itAct = 0; itAct < _maxIt; itAct++) {
+//                correr(solucionParcial, itAct, _tenor, _aristasNuevas, _masTabu);
+//            }
+//        }
+//        //varia iteraciones aristas viejas, mas tabu
+//        if (test == 3) {
+//            for (int itAct = 0; itAct < _maxIt; itAct++) {
+//                correr(solucionParcial, itAct, _tenor, !_aristasNuevas, _masTabu);
+//            }
+//        }
+//        //varia iteraciones aristas nuevas, menos tabu
+//        if (test == 4) {
+//            for (int itAct = 0; itAct < _maxIt; itAct++) {
+//                correr(solucionParcial, itAct, _tenor, _aristasNuevas, !_masTabu);
+//            }
+//        }
+//    }else {
+//        printf("%d\n", -1);
+//    }
     
     delete solucionInicial;
 }
