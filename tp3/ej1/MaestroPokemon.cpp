@@ -120,7 +120,7 @@ void MaestroPokemon::elegir(Eleccion eleccion){
 		this->cant_gimnasios_por_ganar--;
 		this->cantidad_pociones= this->cantidad_pociones - eleccion.pocionesNecesarias;
 	}else{
-		this->cantidad_pociones = cantidad_pociones+3;//HARDCODE!!!
+		this->cantidad_pociones = min(cantidad_pociones+3,this->capacidad_mochila);//HARDCODE!!!
 	}
 	//this->printEleccion(eleccion);
 	this->eleccionActual = Eleccion(this);
