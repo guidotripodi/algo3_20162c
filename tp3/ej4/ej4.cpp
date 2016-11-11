@@ -13,11 +13,14 @@
 #include "MaestroPokemon.hpp"
 
 #define ya chrono::high_resolution_clock::now
+
 #define SEED 39
 #define MAX_PODER 25
 #define RADIO 100
-#define TENOR 5 //tenor tabu
-#define ITERMAX 10
+
+#define TENOR 5
+#define ITERMAX 4
+
 using namespace std;
 
 //Tipos
@@ -202,8 +205,6 @@ int main(){
 	return 0;
 }
 
-//http://crema.di.unimi.it/~righini/Didattica/Algoritmi%20Euristici/MaterialeAE/Taratura%20parametri%20TS.pdf
-//http://www.uv.es/rmarti/paper/docs/ts1.pdf
 vector<int> tabuSearch(vector<int> solucionParcial)
 {
 	vector<int> solucionActual = solucionParcial;
@@ -211,8 +212,10 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 	long long costoMejor = calcularCosto(mejorSolucion);
 	long long costoMejorVecino;
 	SetTabu atributosTabu;
-	int iteraciones = 0;			
-	while(iteraciones < ITERMAX)
+    
+    int cantidadNoMejoras = 0;
+    
+    while(cantidadNoMejoras < ITERMAX)
 	{
 		vector<int> mejorVecino;
 		list<Arista> aristasModificadas; 
@@ -265,7 +268,9 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		{
 			mejorSolucion = mejorVecino;
 			costoMejor = costoMejorVecino;
-		}
+        }else {
+            cantidadNoMejoras++;
+        }
 		
 		list<Arista>::iterator it;
 		for(it = aristasModificadas.begin(); it != aristasModificadas.end(); it++)
@@ -279,9 +284,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		while(atributosTabu.size() > TENOR) 
 		{
 			atributosTabu.pop();
-		}
-
-		iteraciones++;
+        }
 	}
 
 	return mejorSolucion;

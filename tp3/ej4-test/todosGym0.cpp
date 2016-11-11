@@ -22,10 +22,6 @@ using namespace std;
 
 int main(){
     
-    int test = 0;
-    
-    cin >> test;
-    
     for(int j = 0; j < MAX_SIZE; j++)
     {
         cantGyms = j+1;
@@ -59,7 +55,7 @@ int main(){
                 capMochila,
                 gimnasiosArr,
                 pokeParadasArr,
-                pokeParadasAux, test);
+                pokeParadasAux);
         
     }
     

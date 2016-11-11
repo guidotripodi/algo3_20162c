@@ -21,9 +21,7 @@ using namespace std;
 #define MAX_SIZE 20
 
 int main(){
-    
-    int test = 1;
-    
+
     for(int j = 0; j < MAX_SIZE; j++)
     {
         cin >> cantGyms >> cantPokeParadas >> capMochila;
@@ -56,7 +54,7 @@ int main(){
                 capMochila,
                 gimnasiosArr,
                 pokeParadasArr,
-                pokeParadasAux, test);
+                pokeParadasAux);
     }
     
     return 0;

@@ -14,8 +14,6 @@
 
 #define MAX_PODER 25
 #define RADIO 100
-#define TENOR 5 //tenor tabu
-#define ITERMAX 10
 
 #define TEST_ITER 20
 
@@ -29,11 +27,11 @@ typedef pair<int,int> Pokeparada;
 typedef pair<int,int> Arista;
 
 //Funciones importantes
-void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[], int test);
+void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]);
 
 pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]);
 
-vector<int> tabuSearch(vector<int> solucionParcial, long long maxIt, long long tenor, bool aristasNuevas, bool masTabu);
+vector<int> tabuSearch(vector<int> solucionParcial, long long it);
 
 list< pair< vector<int>, list<Arista> > > vecindadSwap(vector<int> solucionParcial);
 list< pair< vector<int>, list<Arista> > > vecindad2opt(vector<int> solucionParcial);
