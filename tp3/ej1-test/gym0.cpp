@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 		
 		cap_mochila = cant_gimnasios*3;
 		/*IMPRIMO EN PANTALLA EL CASO: */
-/*
+
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 		
 		for(i = 0; i < cant_gimnasios; i++){
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 			
 			}
-*/
+
 		pair <int,std::list<int> * > * f;
 			//for (int h = 0; h < 3; ++h){
 				/* code */
@@ -85,10 +85,10 @@ int main(int argc, char* argv[])
 			cout << "-1" << "\n";
 			//return -1;
 		}else{
-			cout << f->first; //<<" "<< f->second->size()<< " ";
-			/*for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
+			cout << f->first <<" "<< f->second->size()<< " ";
+			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << " " << *it;
-			}*/
+			}
 		}
 		cout << "\n";
 				

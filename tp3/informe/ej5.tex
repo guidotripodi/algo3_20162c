@@ -1,6 +1,6 @@
-Para este punto se desarrollaron nuevas instancias random distintas a las anteriores. Se realizaron nuevas experimentaciones para corroborar la performance y calidad de soluci\'on de cada heuristica
+Para este punto se desarrollaron nuevas instancias random distintas a las anteriores. La generación de nuevos casos de prueba es debido a que los anteriormente utilizados podrían formar una muestra aleatoria que beneficiase más a ciertos algoritmos que a otros. De esta forma podremos evidenciar las diferencias que haya entre las distintas aproximaciones.
 
-Un ejemplo de dichas instancias es el siguiente:
+El siguiente es un ejemplo de una instancia dentro de este conjunto nuevo, ejecutada en las 3 variantes:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -8,23 +8,27 @@ Un ejemplo de dichas instancias es el siguiente:
 \\{\textit{Resultado goloso}}
   \end{center}
   \vspace*{0.3cm}
-----> PONER UN GRAFICO DE BL Y OTRO DE TABU
+----> PONER UN GRAFICO DE BL Y OTRO DE TABU XD
 
-\subsubsection{Comparaciones de performance entre heuristicas}
+\subsubsection{Comparaciones de tiempo entre heuristicas}
 
-Para corroborar la performance obtenida para este grupo de instancias se tomaron los tiempos que tarda cada algoritmo en obtener soluci\'on.
-
+Para corroborar la performance obtenida para este grupo de instancias se tomaron los tiempos que tarda cada algoritmo de busqueda local en obtener soluci\'on. 
 Dicho conjunto esta formado por un total de 50 instancias que van desde 2 elementos hasta 50 en total.
 
 -----> GRAFICO DE MEDICIONES 
 
+Podemos ver que las busquedas locales que se efectuan en menor tiempo son SWAP y 2-OPT. 
+Al igual que en los anteriores conjuntos de instancias, 3-OPT sigue siendo en relaci\'on a la  performance, el peor de todos, es por esto que, para los pr\'oximos gr\'aficos no ser\'a tenido en cuenta.
+
+------> GRAFICOS DE MEDICIONES DE CALIDAD ENTE TODAS LAS BUSQUEDAS LOCALES Y EL GOLOSO
 
 
+Se realizo una primera comparaci\'on entre las heur\'isticas y el backtraking tomando las primeras 10 instancias que son v\'alidas para ser ejecutadas.
 
+----> grafico entre heuristicas menos de 10
 
+-----> grafico entre heuristicas mas de 10
 
-\subsubsection*{Comparacion contra backtraking}
-INSERTAR LA HEURISTICA MAS LENTA VS BACKTRACKING
 \subsubsection{Comparacion de calidad de solución}
 INSERTAR GRAFICOS DE BOXPLOTS ENTRE LOS ERRORES DE CADA HEURISTICA:
 	ERROR VS TAMAÑO DE ENTRADA POR CADA HEURISTICA (cada columna que forme un boxplot en el grafico comparativo)

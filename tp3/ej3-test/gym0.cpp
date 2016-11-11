@@ -77,18 +77,12 @@ int main()
             Gimnasio gymPuebloPaleta;
             gymPuebloPaleta.first.first = i;
             gymPuebloPaleta.first.second = i+1;
-            if( i % 2 == 0)
-            {
+            if (i % 3 == 0) {
                 gymPuebloPaleta.second = 0;
-            } else
-            {
-                if (i % 3 == 0) {
-                    gymPuebloPaleta.second = 0;
-                }else if (i % 3 == 1) {
-                    gymPuebloPaleta.second = 1;
-                }else {
-                    gymPuebloPaleta.second = 3;
-                }
+            }else if (i % 3 == 1) {
+                gymPuebloPaleta.second = 1;
+            }else {
+                gymPuebloPaleta.second = 3;
             }
             gimnasiosArr[i] = gymPuebloPaleta;
         }
