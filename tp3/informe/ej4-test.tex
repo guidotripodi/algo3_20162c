@@ -363,31 +363,25 @@ Dando por finalizada esta familia, a pesar de la oscilacion en los resultados y 
 Como pudimos ver en este informe, para la mayoria de las familias es notoriamente mejor utilizar Tabu 2-OPT que Tabu 3-OPT ya que este ultimo insume un mayor tiempo en obtener soluciones, y dichas soluciones suelen ser siempre inferiores al primero.
 Debido a la oscilacion de la familia random podra ser elegida la busqueda local 2-OPT para esta misma ya que los valores obtenidos y el tiempo que insuma llegar a estos puede ser mayor para las meta-heuristicas trabajadas.
 
-A la hora de trabajar con estas familias y tener que elegir entre Tabu 3-OPT y la b\'usqueda respectiva, como vimos ser\'a preferible trabajar con la heur\'istica ya que esta obtendr\'a una mejor soluci\'on y en menor tiempo. Por el contrario, para el otro Tabu, obtendr\'a una solucion ampliamente mayor dejando de lado que el tiempo insumido pueda llegar a ser un poco mayor.
+A la hora de trabajar con estas familias y tener que elegir entre Tabu 3-OPT y la b\'usqueda respectiva, como vimos ser\'a preferible trabajar con la heur\'istica ya que esta obtendr\'a una mejor soluci\'on y en menor tiempo. Por el contrario, para el otro Tabu, obtendr\'a una solucion ampliamente mejor dejando de lado que el tiempo insumido pueda llegar a ser un poco mayor.
 
 
---> ANALISIS DEL TRADE OFF: sobre la cantidad de iteraciones y la condicion de corte por producirse limite de no mejoras
+En adicion a lo desarrollado, podemos ver que el tiempo de ejecución del algoritmo esta ligado plenamente a la cantidad de iteraciones que realiza el algoritmo.A estas iteraciones a su vez, como también determinan a la exactitud de la solución, se las debe acotar de forma tal que se pueda obtener un trade/off beneficioso entre tiempo de computo y solucion obtenida. Para este analisis amparamos 2 opciones:
+\begin{itemize}
+\item Corte por cantidad de iteraciones máxima: Esta variante implica determinar un numero máximo fijo de iteraciones (por ejemplo 100), determinando un tiempo fijo de ejecución máximo.
+\item Corte por criterio de calidad determinado: El criterio sería detectar cierta convergencia en la distancia minima lograda y cortar en ese limite. El criterio se basa en que si no se logra una mejora en la solución por 4 iteraciones, entonces se considera que no se puede mejorar la solucion.
+\end{itemize}
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/mejora.png}\\
- {            \textit{Gráfico \ 4.13}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-  \vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/mejora1.png}\\
- {            \textit{Gráfico \ 4.14}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-  \vspace*{0.3cm} \vspace*{0.3cm}
+La elección seleccionada fue la segunda. Esto se debe a que al analizar distintos tamaños de instancias, se podia ver que en las instancias de menor tamaño, se llegaba a una "meseta" de donde no se podia mejorar más la solucion, y las iteraciones restaantes, simplemente desperdiciaban tiempo de computo. Por otro lado, para instancias grandes, con muchos cambios posibles, se producia un corte en la mejora de la solución, ya que el algoritmo no llegaba a encontrar esa "meseta" por que cortaba las iteraciones antes de tiempo. 
+
+Al cambiar de metodología, se logró hacer que el algoritmo se adapte al tipo de instancia, dandole el tiempo suficiente para llegar a la "meseta" de cada instancia. Cabe destacar que esta elección de corte no determinaría una solución optima, ya que cada "meseta" simboliza un minimo en la funcion de mejoras, pero no se puede asumir que ese minimo también es un ínfimo.
+
+
   \begin{center}
  \includegraphics[scale=0.5]{./EJ4/mejora2.png}\\
- {            \textit{Gráfico \ 4.15}}
+ {            \textit{Instancias de distinto tamaño con cortes acordes a cada caso}}
   \end{center}
   \vspace*{0.3cm}
   
---> OBTENER CONCLUSIONES GENERALES: PORQUE SIRVE? CUANDO CONVIENE ? CUANDO NO ? 
-  
+
+  En el gráfico se puede observar el tiempo que cada instancia de un tamaño determinado (cada linea) haya su solución a travez del algoritmo, y cuando se detecta que ya no se pudo mejorar por un período de 4 iteraciones, entonces corta y devuelve la solución hallada como la mejor. Claramente no se puede decir que se halla la mejor solución (es decir el que produce el infimo error) pero si un minimo local para cierta vecindad de soluciones.
