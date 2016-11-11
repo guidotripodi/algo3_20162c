@@ -27,6 +27,8 @@ Estas ser\'an las únicas a ser a analizadas, ya que el resto son el resultado e
  
 \subsubsection*{Familia 4}
 
+Veamos algunos resultados de aplicar cada version de tabú search:
+
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.3]{./EJ4/fam4goloso.png}\\
@@ -48,11 +50,9 @@ Estas ser\'an las únicas a ser a analizadas, ya que el resto son el resultado e
   \end{center}
   \vspace*{0.3cm}
 
------> ACOMODARLO
+Nos parece interente comparar los resultados de mejora y tiempo de las búsquedas locales y tabú search que utilicen la misma vecindad, para ver si tabú search mejora lo logrado por la búsqueda local o empeora el resultado. Esto será realizado para cada familia mencionada.\\
 
-Nos parecio prudente corroborar cada heuristica del tabu search con la correspondiente busqueda local, para corroborar si la misma mejora o empeora y luego corroborar cual de las elegidas para dicho tabu es la mejor en relaci\'on tiempo-calidad de soluci\'on.
-
-Veamos como se comporta Tabu 2-OPT con respecto a la heuristica de busqueda local 2-OPT:
+Veamos como se comporta tabú 2-OPT con respecto a la heuristica de búsqueda local 2-OPT dentro de la familia 4:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -69,9 +69,8 @@ En cuanto a tiempo insumido vemos lo siguiente:
  {            \textit{Gráfico \ 4.2 - 2-OPT vs Tabu 2-OPT sobre Familia 4}}
   \end{center}
   \vspace*{0.3cm}
-
-
-Luego, para 3-OPT:
+  
+ Aplicando 3-OPT:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -80,8 +79,6 @@ Luego, para 3-OPT:
   \end{center}
   \vspace*{0.3cm}
 
-En cuanto a tiempo insumido vemos lo siguiente:
-
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.5]{./EJ4/medicion3optgym0.png}\\
@@ -89,7 +86,9 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
   
-Para la comparación entre algoritmos tabu, se comparará conjuntamente el tiempo de ejecución con la calidad de la solución. Para esta última tendremos en cuenta que los algoritmos, de devolver un resultado, será válido: esto quiere decir que cuanto menor distancia recorran en las soluciones, mejor serán las mismas:
+Podemos observar que tabú search 2-OPT mejora lo realizado por la heuristica de búsqueda local 2-OPT. Los tiempos insumidos para lograrlo son elevados, pero en relación a la mejora es un resultado aceptable en la práctica. No así tabú search 3-OPT que apenas mejora lo realizado por búsqueda local 3-OPT y requiere tiempos elevados de corrida del algoritmo.\\
+  
+Para decidir que vecindad es mejor utilizar en tabú search, se comparará conjuntamente el tiempo de ejecución con la calidad de la solución. Para esta última tendremos en cuenta que los algoritmos, de devolver un resultado, serán válidos: esto quiere decir que cuanto menor distancia recorran las soluciones, mejor serán las mismas:
 
 Las soluciones obtenidas fueron las siguientes:
 
@@ -109,11 +108,11 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
 
-  
------> HABLAR DE LA SOLUCION Q DA TABU 2-OPT Y 3-OPT CUAL SE MEJORO Y CUAL QUEDO IGUAL Y NO SERVIRIA USARLA EN ESTE CASO
+--> OBTENER CONCLUSIONES
 
 \subsubsection*{Familia 6}
 
+--> PRESENTAR FAMILIA
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -136,8 +135,6 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
 
------> ACOMODARLO
-
 Veamos como se comporta Tabu 2-OPT con respecto a la heuristica de busqueda local 2-OPT:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
@@ -147,15 +144,12 @@ Veamos como se comporta Tabu 2-OPT con respecto a la heuristica de busqueda loca
   \end{center}
   \vspace*{0.3cm}
 
-En cuanto a tiempo insumido vemos lo siguiente:
-
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.5]{./EJ4/medicion2optsinorden.png}\\
  {            \textit{Gráfico \ 4.8 - 2-OPT vs Tabu 2-OPT sobre Familia 6}}
   \end{center}
   \vspace*{0.3cm}
-
 
 Luego, para 3-OPT:
 
@@ -166,8 +160,6 @@ Luego, para 3-OPT:
   \end{center}
   \vspace*{0.3cm}
 
-En cuanto a tiempo insumido vemos lo siguiente:
-
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.5]{./EJ4/medicion3optsinorden.png}\\
@@ -175,9 +167,9 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
   
-Para la comparación entre algoritmos tabu, se comparará conjuntamente el tiempo de ejecución con la calidad de la solución. Para esta última tendremos en cuenta que los algoritmos, de devolver un resultado, será válido: esto quiere decir que cuanto menor distancia recorran en las soluciones, mejor serán las mismas:
-
-Las soluciones obtenidas fueron las siguientes:
+--> OBTENER CONCLUSIONES
+  
+Comparando las soluciones de cada version de tabú search podemos observar lo siguiente:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -194,12 +186,12 @@ En cuanto a tiempo insumido vemos lo siguiente:
  {            \textit{Gráfico \ 4.12 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 6}}
   \end{center}
   \vspace*{0.3cm}
-
-
-
+  
+--> OBTENER CONCLUSIONES
 
 \subsubsection*{Familia 7}
 
+--> PRESENTAR FAMILIA
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -222,8 +214,6 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
 
------> ACOMODARLO
-
 Veamos como se comporta Tabu 2-OPT con respecto a la heuristica de busqueda local 2-OPT:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
@@ -233,15 +223,12 @@ Veamos como se comporta Tabu 2-OPT con respecto a la heuristica de busqueda loca
   \end{center}
   \vspace*{0.3cm}
 
-En cuanto a tiempo insumido vemos lo siguiente:
-
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.5]{./EJ4/medicionanillos2opt.png}\\
  {            \textit{Gráfico \ 4.8 - 2-OPT vs Tabu 2-OPT sobre Familia 7}}
   \end{center}
   \vspace*{0.3cm}
-
 
 Luego, para 3-OPT:
 
@@ -252,8 +239,6 @@ Luego, para 3-OPT:
   \end{center}
   \vspace*{0.3cm}
 
-En cuanto a tiempo insumido vemos lo siguiente:
-
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.5]{./EJ4/medicionanillos3opt.png}\\
@@ -261,18 +246,16 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
   
-Para la comparación entre algoritmos tabu, se comparará conjuntamente el tiempo de ejecución con la calidad de la solución. Para esta última tendremos en cuenta que los algoritmos, de devolver un resultado, será válido: esto quiere decir que cuanto menor distancia recorran en las soluciones, mejor serán las mismas:
-
-Las soluciones obtenidas fueron las siguientes:
-
+--> OBTENER CONCLUSIONES  
+ 
+Comparando las soluciones de cada version de tabú search podemos observar lo siguiente: 
+  
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.5]{./EJ4/comparativoanillos1.png}\\
  {            \textit{Gráfico \ 4.11 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 7}}
   \end{center}
   \vspace*{0.3cm}
-
-En cuanto a tiempo insumido vemos lo siguiente:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -281,9 +264,9 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
 
-  
-  
 \subsubsection*{Familia 8}
+
+--> PRESENTAR FAMILIA
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -306,7 +289,6 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
 
------> ACOMODARLO
 Veamos como se comporta Tabu 2-OPT con respecto a la heuristica de busqueda local 2-OPT:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
@@ -316,15 +298,12 @@ Veamos como se comporta Tabu 2-OPT con respecto a la heuristica de busqueda loca
   \end{center}
   \vspace*{0.3cm}
 
-En cuanto a tiempo insumido vemos lo siguiente:
-
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.5]{./EJ4/medicionrandom2opt.png}\\
  {            \textit{Gráfico \ 4.8 - 2-OPT vs Tabu 2-OPT sobre Familia 6}}
   \end{center}
   \vspace*{0.3cm}
-
 
 Luego, para 3-OPT:
 
@@ -335,8 +314,6 @@ Luego, para 3-OPT:
   \end{center}
   \vspace*{0.3cm}
 
-En cuanto a tiempo insumido vemos lo siguiente:
-
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.5]{./EJ4/medicionrandom3opt.png}\\
@@ -344,9 +321,9 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
   
-Para la comparación entre algoritmos tabu, se comparará conjuntamente el tiempo de ejecución con la calidad de la solución. Para esta última tendremos en cuenta que los algoritmos, de devolver un resultado, será válido: esto quiere decir que cuanto menor distancia recorran en las soluciones, mejor serán las mismas:
-
-Las soluciones obtenidas fueron las siguientes:
+--> OBTENER CONCLUSIONES
+  
+Comparando las soluciones de cada version de tabú search podemos observar lo siguiente: 
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -355,8 +332,6 @@ Las soluciones obtenidas fueron las siguientes:
   \end{center}
   \vspace*{0.3cm}
 
-En cuanto a tiempo insumido vemos lo siguiente:
-
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[scale=0.5]{./EJ4/medicionrandom.png}\\
@@ -364,12 +339,11 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
   
+--> OBTENER CONCLUSIONES
 
-Habiendo chequeado dichas mediciones de tiempo de los algoritmos, se pudo observar como 3-OPT presento una peor performance con las familias evaluadas. En relaci\'on a tiempo - calidad de soluci\'on el mejor termino siendo 2-OPT.
-
-------> ACOMODAR
-Las mejoras se producen:
-
+--> OBTENER CONCLUSIONES GENERALES SOBRE ESTOS TESTS: CUAL VERSION DE TABU CONVIENE MAS? EN QUE CASOS CONVIENE HACER BUSQUEDA LOCAL UNICAMENTE?  
+  
+--> ANALISIS DEL TRADE OFF: sobre la cantidad de iteraciones y la condicion de corte por producirse limite de no mejoras
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -391,4 +365,6 @@ Las mejoras se producen:
  {            \textit{Gráfico \ 4.12 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 6}}
   \end{center}
   \vspace*{0.3cm}
+  
+--> OBTENER CONCLUSIONES GENERALES: PORQUE SIRVE? CUANDO CONVIENE ? CUANDO NO ? 
   
