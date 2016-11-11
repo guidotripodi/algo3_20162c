@@ -8,14 +8,15 @@
   	Recorrido $S_{final}$ $\leftarrow$ $S_o$ \hfill O(n)\\
 	hayMejora $\leftarrow$ true \hfill O(1)\\
 	\While{hayMejora}{ 
-		\hfill ciclo: O(n)\\
+	\hfill ciclo: O(n - longitud solucion optima)\\
+		entero costoActual $\leftarrow$ -1 \\
 		\For{i de 1 a n}{
 		\hfill ciclo: O(n)\\	
 			\For{j de i+1 a n}{ 
 			\hfill ciclo: O(n)\\	
 				 $intercambiar$ $posiciones$ i con j en $S_{actual}$ \hfill O(1)\\
 				 optimizarS($S_{actual}$) \hfill O(n)\\
-				 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
+				 costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
 				 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
 					costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
 					$S_{final}$ $\leftarrow$ $S_{actual}$ \hfill O(n)\\	 
@@ -23,7 +24,7 @@
 				 $intercambiar$ $posiciones$ i con j en $S_{actual}$ \hfill O(1)\\	 		
 			}
 		}
-		\If{ $S_{final}$ == $S_{actual}$}{
+		\If{costoActual = -1 $\vee$ costoActual $\geq$ costoAnterior}{
 			hayMejora $\leftarrow$ false \hfill O(1)\\	 
 		}
 	}
@@ -42,14 +43,15 @@
   	entero costoAnterior $\leftarrow$ calcularCosto($S_o$) \hfill O(1)\\
   	Recorrido $S_{final}$ = $S_o$ \hfill O(n)\\
 	\While{hayMejora}{ 
-	\hfill ciclo: O(n)\\
+	\hfill ciclo: O(n - longitud solucion optima)\\
+		entero costoActual $\leftarrow$ -1 \\
 		\For{i de 1 a n}{
 		\hfill ciclo: O(n)\\
 			\For{j de i+1 a n}{
 			\hfill ciclo: O(n)\\
 				 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
 				 optimizarS($S_{actual}$) \hfill O(n)\\
-				 entero costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
+				 costoActual $\leftarrow$ calcularCosto($S_{actual}$) \hfill O(n)\\
 				 \If{costoActual $<>$ -1 $\wedge$ costoActual < costoAnterior}{
 					costoAnterior $\leftarrow$ costoActual \hfill O(1)\\
 					$S_{final}$ $\leftarrow$ $S_{actual}$ \hfill O(n)\\
@@ -57,7 +59,7 @@
 				 $invertir$ $rango$ de i a j en $S_{actual}$ \hfill O(n)\\
 			}	
 		}
-		\If{ $S_{final}$ == $S_{actual}$}{
+		\If{costoActual = -1 $\vee$ costoActual $\geq$ costoAnterior}{
 			hayMejora $\leftarrow$ false \hfill O(1)\\	 
 		}
 	}
@@ -78,7 +80,8 @@
   	Recorrido $S_{final}$ = $S_o$ \hfill O(n)\\
   	hayMejora $\leftarrow$ true	
 	\While{hayMejora}{	
-	\hfill Ciclo: O(n)\\
+	\hfill ciclo: O(n - longitud solucion optima)\\
+		entero costoActual $\leftarrow$ -1 \\
 		\For{i de 1 a n-3}{
 		\hfill ciclo: O(n)\\
 			\For{j de i+1 a n-2}{
@@ -121,9 +124,9 @@
 		}	
 	}
 	
-	\If{ $S_{final}$ == $S_{actual}$}{
-		hayMejora $\leftarrow$ false \hfill O(1)\\	 
-	}	
+		\If{costoActual = -1 $\vee$ costoActual $\geq$ costoAnterior}{
+			hayMejora $\leftarrow$ false \hfill O(1)\\	 
+		}
 
 	devolver $S_{final}$ \\
 
@@ -218,17 +221,18 @@
 \end{algorithm}
 
 \begin{itemize}
+\item Justificación de la cota del ciclo principal: El algoritmo comienza con una solucion de $n$ nodos. Cada mejora en el peor de los casos se realiza en una unidad, ya que se trabaja con distancias enteras. Como se busca llegar al óptimo global, en el peor de los casos habrá O($n$-longitud de la solución óptima) iteraciones para el ciclo principal.
 \item Recorido = Lista de enteros
-\item n = |$S_o$|
-\item Todos los enteros en un Recorrido estan entre 1 y N con N la cantidad total de nodos (pokeparadas y gimnasios)
-\item Los primeros M indices, con M < N, es la cantidad de gimnasios (cantGyms) y los restantes N-M indices,  pokeparadas. Luego hay un arreglo de gimnasios para los primeros M indices y uno de pokeparadas para los últimos N-M indices.
+\item $n$ = |$S_o$|
+\item Todos los enteros en un Recorrido estan entre 1 y $N$ con $N$ la cantidad total de nodos (pokeparadas y gimnasios)
+\item Los primeros $M$ indices, con $M < N$, es la cantidad de gimnasios (cantGyms) y los restantes $N-M$ indices,  pokeparadas. Luego hay un arreglo de gimnasios para los primeros M indices y uno de pokeparadas para los últimos $N-M$ indices.
 \item Gimnasio = < <entero x, entero y>, entero poder>
 \item PokeParada = <entero x, entero y>
 \item gimnasiosArr es un arreglo de Gimnasio
 \item pokeParadasArr es un arreglo de PokeParada
 \end{itemize}
 
-Podemos ver que todos los algoritmos iteran sobre la solución $S_o$, que en el peor caso puede contener todos los nodos del mapa, osea, n = N.
+Podemos ver que todos los algoritmos iteran sobre la solución $S_o$, que en el peor caso puede contener todos los nodos del mapa, osea, $n = N$.
 
 Las operaciones $invertir$ $rango$ o $intercambiar$ $rango$ en el peor caso serán realizadas sobre los $n$ nodos de $S_o$.
 
