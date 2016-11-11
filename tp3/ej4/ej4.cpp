@@ -4,8 +4,6 @@
 #include <fstream>
 #include <utility>
 #include <chrono>  /* clock */
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
 #include <math.h>	/* pow */
 #include <cstdlib> /* swap */
 #include <list>
@@ -47,100 +45,9 @@ Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
 
 int main(){
-	//generar entradas
-	//srand (time(NULL));
-	srand(SEED);
 	
-	
-/*	bool utilizado[RADIO][RADIO];
-	
-	for(int i = 0; i < RADIO; i++){
-		for(int j = 0; j < RADIO; j++){
-			utilizado[i][j] = false;
-		}
-	}
-*/	
-	cantGyms = 2;
-	Gimnasio gimnasiosArr[cantGyms];
-	
-	gimnasiosArr[0].first.first = 2;
-	gimnasiosArr[0].first.second = 3;
-	gimnasiosArr[0].second = 2;
-	
-	gimnasiosArr[1].first.first = 3;
-	gimnasiosArr[1].first.second = 2;
-	gimnasiosArr[1].second = 3;
-	
-	cantPokeParadas = 5;
-	Pokeparada pokeParadasArr[cantPokeParadas];
-	
-	pokeParadasArr[0].first = 0;
-	pokeParadasArr[0].second = 0;
-	pokeParadasArr[1].first = 0;
-	pokeParadasArr[1].second = 1;
-	pokeParadasArr[2].first = 1;
-	pokeParadasArr[2].second = 1;
-	pokeParadasArr[3].first = 2;
-	pokeParadasArr[3].second = 2;
-	pokeParadasArr[4].first = 1;
-	pokeParadasArr[4].second = 3;
-	
-	capMochila = 8;
-	
-	gimnasiosArrPtr = gimnasiosArr;
-	pokeParadasArrPtr = pokeParadasArr;
-	
-	vector<int> solucionParcial;
-	
-	solucionParcial.push_back(2);
-	solucionParcial.push_back(3);
-	solucionParcial.push_back(5);
-	solucionParcial.push_back(0);
-	solucionParcial.push_back(6);
-	solucionParcial.push_back(1);
-	
-	/*
-	Gimnasio gimnasiosArr[cantGyms];
-	for(int i = 0; i < cantGyms; i++){
-		Gimnasio gymPuebloPaleta;//gimnasio (uno solo)
-		bool usado = true;
-		int x, y;
-		while(usado){
-			x = rand() % RADIO;
-			y = rand() % RADIO;	
-			if(!utilizado[x][y]) 
-				usado = false;
-		}
-		gymPuebloPaleta.first.first = x;
-		gymPuebloPaleta.first.second = y;
-		gymPuebloPaleta.second = rand() % MAX_PODER;
-		gimnasiosArr[i] = gymPuebloPaleta;
-		utilizado[x][y] = true;
-	}
-	
-	
-	cantPokeParadas = ((MAX_PODER * cantGyms)/3)*2;
-	Pokeparada pokeParadasArr[cantPokeParadas];
-	
-	for(int j = 0; j < cantPokeParadas; j++){
-		Pokeparada posicion;
-		bool usado = true;
-		int x, y;
-		while(usado){
-			x = rand() % RADIO;
-			y = rand() % RADIO;	
-			if(!utilizado[x][y]) 
-				usado = false;
-		}
-		posicion.first = x;
-		posicion.second = y;
-		pokeParadasArr[j] = posicion;
-		utilizado[x][y] = true;
-	}
-	*/
-/*
 	cin >> cantGyms >> cantPokeParadas >> capMochila;
-	Gimnasio gimnasiosArr[cantGyms];
+	Gimnasio* gimnasiosArr = new Gimnasio[cantGyms];
 	for(int i = 0; i < cantGyms; i++)
 	{
 		Gimnasio gymPuebloPaleta;
@@ -151,8 +58,8 @@ int main(){
 		gimnasiosArr[i] = gymPuebloPaleta;
 	}
 
-	Pokeparada pokeParadasArr[cantPokeParadas];
-	Pokeparada pokeParadasAux[cantPokeParadas];
+	Pokeparada *pokeParadasArr = new Pokeparada[cantPokeParadas];
+	Pokeparada *pokeParadasAux = new Pokeparada[cantPokeParadas];
 	for(int i = 0; i < cantPokeParadas; i++)
 	{
 		Pokeparada posicion;
@@ -182,23 +89,20 @@ int main(){
 
 	gimnasiosArrPtr = gimnasiosArr;
 	pokeParadasArrPtr = pokeParadasAux;
-	*/
 
-	long long costo = calcularCosto(solucionParcial);
 	
-	printf("Costo inicial: %lld\n", costo);
 	//mejorar solucion
 	if(solucionParcial.size()){
 		vector <int> mejorada = tabuSearch(solucionParcial);
 		//imprimir solucion mejorada
-		costo = calcularCosto(mejorada);
+		long long costo = calcularCosto(mejorada);
+		printf("%lld %zu ", costo, mejorada.size());
 		for(int i = 0; i < (int) mejorada.size(); i++){
-			printf("%d ", mejorada[i]);
+			printf(" %d", mejorada[i]);
 		}
 		printf("\n");
-		printf("Costo final: %lld\n", costo);
 	}else{
-		printf("%d", -1);
+		printf("%d\n", -1);
 		//no hubo solucion parcial a partir de la cual trabajar
 	}
 
