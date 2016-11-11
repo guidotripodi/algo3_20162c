@@ -1,4 +1,4 @@
-Nos interesa saber que heuristica de tabu se adapta mejor a alguna de las familias estudiadas con el algoritmo del ejercicio 2:
+Queremos analizar el comportamiento de las heuristicas de búsqueda local aplicadas a las siguientes familias de casos:
 
 \begin{enumerate}
 \item Familia 4
@@ -7,15 +7,15 @@ Nos interesa saber que heuristica de tabu se adapta mejor a alguna de las famili
 \item Familia 8
 \end{enumerate}
 
-Tanto las familias que no  poseen solución, como aquellas en las que la solución obtenida por la heuristica golosa es óptima, no serán analizadas, ya que no hay mejora a alcanzar.\\
+Tanto las familias que no  poseen solución, como aquellas en las que la solución obtenida por la heuristica golosa es óptima, no serán analizadas, ya que no existe mejora posible.\\
+
+Además, para entradas de menos de 20 elementos (aprox.), podremos comparar las distancias obtenidas con respecto a la exacta.\\
  
-Para evaluar las mejoras que se pudieran producir en las familias anteriormente citadas, se tomarán 30 mediciones por búsqueda local. Se tomará una media alfa podada de las mismas con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado para reducir la presencia de outliers.
-
-
+Para evaluar los tiempos de corrida para las familias anteriormente citadas, se tomarán 20 mediciones por búsqueda local. Se tomará una media alfa podada de las mismas con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado para reducir la presencia de outliers.
 
 \subsubsection*{Familia 4}
 
-Mostraremos un ejemplo de este conjunto de instancias mostrando inicialmente la soluci\'on golosa y como se modifican los caminos para cada heuristicas, y luego, compararemos todo el conjunto en cuesti\'on:
+Veamos un ejemplo de este conjunto de instancias mostrando inicialmente la soluci\'on golosa y como se modifican los caminos para cada heuristica:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -37,7 +37,6 @@ Mostraremos un ejemplo de este conjunto de instancias mostrando inicialmente la 
  {            \textit{Soluci\'on 2-OPT}}
   \end{center}
   \vspace*{0.3cm}
-
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -64,13 +63,13 @@ En cuanto a tiempo insumido vemos lo siguiente:
   \end{center}
   \vspace*{0.3cm}
 
-  
- En este caso, el tiempo de ejecuci\'on de SWAP y 2-OPT tienen un desempeño temporal muy similar, no obstante, al comparar la calidad de solución, 2-OPT posee los mejores resultados. En cuanto a la variante 3-OPT: no solo genera peores soluciones, sino que tarda mucho más que las otras 2. 
+En este caso, el tiempo de ejecuci\'on de SWAP y 2-OPT tienen un desempeño temporal muy similar, no obstante, al comparar la calidad de solución, 2-OPT posee los mejores resultados. En cuanto a la variante 3-OPT: no solo genera peores soluciones, sino que tarda mucho más que las otras dos búsquedas para instancias con muchas pokeparadas y gimnasios y la mejora no es significativa para entradas pequeñas, lo que puede inducir a que para esta familia de casos no sea conveniente utilizar 3-OPT.
 
+Como se explicó anteriormente, que una búsqueda local K-OPT no genere buenos resultados, siempre está relacionado con una entrada en particular y no al hecho de que la búsqueda en si misma sea mala. Es posible que partiendo de una solución golosa, la mejor solución se encuentre haciendo determinado número de movimiento de aristas y no otro. Encontrar una explicación al poque sucede esto para una entrada particular, requiere indagar fuertemente en las propiedades de la entrada, como la posicion de las pokeparadas y aristas que conforman la solución a optimizar, lo cual puede no ser sencillo.\\
 
 \subsubsection*{Familia 6}
 
-Mostraremos una instancia de este conjunto iniciando por el camino obtenido a partir de la soluci\'on golosa y como es modificado por cada heuristicas, para luego, comparar todo el conjunto en cuesti\'on:
+Mostraremos una instancia de este conjunto iniciando por el camino obtenido a partir de la soluci\'on golosa y como es modificado por cada heuristica, para luego, comparar todo el conjunto en cuesti\'on:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -117,15 +116,11 @@ Mostraremos una instancia de este conjunto iniciando por el camino obtenido a pa
   \end{center}
   \vspace*{0.3cm}
 
-
-
-Esta familia también muestra que a raz\'on de comparación en el tiempo de ejecución, SWAP es muy similar a 2-OPT y que 3-OPT posee el peor desempeño. Nuevamente podemos ver que a razón de calidad, 2-OPT logra una calidad superior a las otras búsquedas.
-
-
+Comparando los tiempos de ejecución, SWAP es muy similar a 2-OPT y 3-OPT  posee el peor desempeño. Con respecto a la calidad de los resultados, con 3-OPT se obtienen las mejoras más significativas, pero a un costo mayor en tiempo de ejecución, además, las mejoras realizadas por 2-OPT o SWAP pueden considerarse buenas si se tiene en cuenta la diferencia con respecto al goloso, que es aproximadamente del 50$%$ en todos los casos .\\
 
 \subsubsection*{Familia 7}
 
-Exhibiremos una instancia de dicha familia comenzando por el camino obtenido por la heur\'istica golosa y como es modificado por SWAP, 2-OPT y 3-OPT. Mas tarde, compararemos todo el conjunto en cuesti\'on:
+Exhibiremos una instancia de dicha familia comenzando por el camino obtenido por la heur\'istica golosa y como es modificado por las búsquedas locales. Luego, serán comparados los resultados obtenidos de las mediciones:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -171,13 +166,11 @@ Exhibiremos una instancia de dicha familia comenzando por el camino obtenido por
   \end{center}
   \vspace*{0.3cm}
   
-  
-  Los resultados se repiten como en las anteriores familias, marcando una clara diferencia temporal entre 3-OPT y las otras 2 busquedas. En cuanto a la calidad de soluci\'on, podemos ver que en este caso la heur\'istica 3-OPT logra una calidad superior que en las otras. Sin embargo, si se toma la relaci\'on tiempo-calidad la mejor opcion ser\'a 2-OPT.
-  
+Como sucedió en las familias anteriores, existe una clara diferencia temporal entre 3-OPT y las otras dos búsquedas. En cuanto a la calidad de soluci\'on, podemos ver en este caso que la heur\'istica 3-OPT logra una mejoras superiores en comparación a las otras búsquedas locales. Sin embargo, si se toma en cuenta la relaci\'on tiempo-calidad, debe pagarse un alto costo temporal para obtener estas soluciones.\\
   
 \subsubsection*{Familia 8}
 
-Como en las anteriores familias, veremos como se comporta cada heur\'istica para un ejemplo y  posteriormente la comparaci\'on general.
+Como en las anteriores familias, veremos como se comporta cada heur\'istica para un ejemplo y posteriormente se realizará la comparaci\'on general.
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -215,9 +208,14 @@ Como en las anteriores familias, veremos como se comporta cada heur\'istica para
  {            \textit{Gráfico \ 3.7 - Búsquedas locales sobre Familia 8}}
   \end{center}
   \vspace*{0.3cm}
-  
+ 
+Para este caso se evita la comparación de tiempos debido a que los resultados no ofrecen información relevante que pueda ser analizada comprensivamente, ya que las entradas son de tamaño variable y los tiempos involucrados son muy diferentes.\\
 
-  Para este caso se evita la comparación de tiempo debido a que los resultados son equivalentes a los ya obtenidos, y no ofrecen información relevante.
-  
+Con respecto a las mejoras obtenidas, los mejores resultados se dividen entre los obtenidos con las búsquedas locales 2-OPT y SWAP.
 
-Habiendo chequeado dichas mediciones de tiempo de los algoritmos, se pudo observar como 3-OPT presento una peor performance con las familias evaluadas. En relaci\'on a tiempo - calidad de soluci\'on el mejor termino siendo 2-OPT.
+Podemos considerar que tanto 2-OPT como 3-OPT ofrecen los mejores resultados en cuanto a mejoras se refiere, aunque en el último caso, considerando lo visto en las familias 6 y 7, pagando un alto coste temporal, lo cual puede ser negativo si lo que se busca es mayor velocidad de resolución.
+
+Dado que para entradas mayores a 20 elementos (aproximadamente) obtener resultados exactos es practicamente inviable, siempre que se tiene una solución golosa entre manos y se la optimiza, es complicado saber si se llegó a un óptimo global. Es muy probable que el resultado obtenido de aplicar búsqueda local, sea un mínimo local (de aquí el nombre el algoritmo).\\
+Para intentar mejorar los resultados del algoritmo goloso aún más, en el siguiente ejercicio será estudiada una meta heuristica basada en búsqueda local denominada tabú search. La misma trabaja sobre diferentes criterios de búsqueda para ir moviendose entre vecindades e intentar salir de mínimos locales.\\
+
+%Una manera de obtener resultados similares utilizando la misma búsqueda local en este tipo de familias (asumimos que aquel que trabaje con las entradas conoce el tipo de familias al que se enfrenta), podría ser utilizar una condicion de corte diferente donde se finalice la ejecución logrado cierto porcentaje de mejora o si la mejora obtenida en ralación al tiempo insumido no sea considerable.\\
