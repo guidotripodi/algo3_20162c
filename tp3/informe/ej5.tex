@@ -55,8 +55,7 @@ Podemos ver que las busquedas locales que se efectuan en menor tiempo son SWAP y
   \vspace*{0.3cm}
   
   
-  
-  ------------> GRAFICO DE TIEMPOS CONTRA EL EXACTO
+
 
 Al tener en cuenta la calidad de la solución, podemos ver que la golosa es mejorada por las búsquedas en la mayoría de los casos. En promedio las mejores las lleva a cabo 2-OPT y SWAP mientras que 3-OPT presenta el peor indice de mejora entre las busquedas locales. Por su parte, Tabú al utilizar 2-OPT, acompaña los buenos resultados de la misma e incluso, en aquellos en que el desempeño de 2-OPT no fue bueno, logra mejorarlo drasticamente (instancia de 20 elementos).
 Partiendo el set de pruebas en 2, instancias pqueñas e instancias grandes, podemos observar lo siguiente:
@@ -68,8 +67,15 @@ Partiendo el set de pruebas en 2, instancias pqueñas e instancias grandes, pode
   \end{center}
   \vspace*{0.3cm}
 
+  
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[scale=0.5]{./EJ5/medicionTodos.png}\\
+ {\textit{Gráfico \ 5.2 - Comparaci\'on de soluciones de todos los algoritmos}}
+  \end{center}
+  \vspace*{0.3cm}
 
-Las instancias de menor tamaño (de 5 a 15 elementos) producen peores soluciones al aplicarse la busqueda local que la misma heuristica golosa (cosniderando la instancia 14 como un outlier para el goloso). Lo mismo se puede observar entre 2-OPT y Tabú, en donde el segundo empeora todas las soluciones obtenidas por el primero.
+Las instancias de menor tamaño (de 5 a 15 elementos) producen peores soluciones al aplicarse la busqueda local que la misma heuristica golosa (cosniderando la instancia 14 como un outlier para el goloso). Lo mismo se puede observar entre 2-OPT y Tabú, en donde el segundo empeora todas las soluciones obtenidas por el primero. En cuestiones de tiempo, la utilización de Tabú pierde total sentido, ya que en aproximadamente el mismo tiempo puede obtenerse la solución exacta. Vale destacar que las mediciones de tiempo de las busquedas incluyen la ejecución del algoritmo goloso, y que en los casos en que el grafico reporta mejoras de las busquedas versus el goloso se deben a errores de medición.
 
 
 \vspace*{0.3cm} \vspace*{0.3cm}
