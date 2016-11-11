@@ -1,6 +1,6 @@
-Queremos observar que tan bueno es el algoritmo propuesto en la práctica. Para esto realizaremos una serie de tests utilizando las entradas que se utilizaron en el ejericio 3. Además, agregaremos los casos de entrada con solución óptima, ya que en principio, se desconoce la calidad del resultado y el algoritmo no tiene un tiempo de parada prefijado, con lo que estos casos pueden aportar conocimientos nuevos sobre el comportamiento de tabú search.\\
-La idea es tratar de encontrar la configuración ideal para que en promedio el algoritmo resuelva la mayoria de los casos eficientemente. Para lograr esto, debemos experimentar variando distintos parametros para cada entrada y obtener las respectivas conclusiones de los resultados obtenidos.\\
-Los parámetros de estudio serán:
+Queremos observar que tan bueno es el algoritmo propuesto en la práctica. Para esto realizaremos una serie de tests utilizando las entradas que se utilizaron en el ejercicio 3.
+La idea es tratar de encontrar la configuración ideal para que en promedio el algoritmo resuelva la mayoria de los casos eficientemente. Para lograr esto, experimentamos variando distintos parametros para cada entrada y obtener las respectivas conclusiones de los resultados obtenidos.\\
+Los parámetros de estudio fueron:
 
 \begin{enumerate}
 \item  \textbf{Cantidad de iteraciones}: Tenemos que observar en promedio, cuantas iteraciones conviene tomar para obtener un buen resutado.
@@ -9,8 +9,10 @@ Los parámetros de estudio serán:
 \item \textbf{Función de aspiración}: Elegir la solución más tabú o la menos tabú.
 \end{enumerate}
 
-Se tomarán 30 mediciones por cada tipo de test. En el caso de 1) y 2), por cada aumento realizado. Se tomará una media alfa podada de las mismas con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado. De esta forma se reducen los outliers en las muestras consideradas. 
-Además se tomará la varianza muestral usando la media calculada y las mediciones que queden luego de aplicar la media.\\
+Debemos aclarar, que tenor tabú fué establecido en cantidad de pokeparadas mas gimnasios. Este valor puede ser relativamente grande, pero cuanto más grande, más tiempo de resolución es necesario, con lo cual al final no es una cuestion de memoria, si no, una cuestion de tiempo de computos necesaria para correr el algoritmo.
+También se trabajó probando diferentes configuraciones de atributos tabú y función de aspiración, obteniendo en todos los casos los mismos resultados, por lo que al final se decidió dejar prefijado el estandar para tabú search que es aristas viejas como atributos tabú y solución menos tabú para la función de aspiración.\\
+
+Se tomarán 20 mediciones por cada tipo de test y se tomará una media alfa podada de las mismas con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado. De esta forma se reducen los outliers en las muestras consideradas. 
 
 Como fue enunciado en incisos anteriores de este trabajo las 4 familias en las que la heur\'istica golosa no otorga una soluci\'on \'optima son:
 
@@ -21,9 +23,8 @@ Como fue enunciado en incisos anteriores de este trabajo las 4 familias en las q
 \item Familia 8
 \end{enumerate}
 
-Estas ser\'an las unicas a ser a analizadas, ya que el resto no presentan una mejora para ser alcanzada o no tienen soluci\'on
+Estas ser\'an las únicas a ser a analizadas, ya que el resto son el resultado exacto o no tienen soluci\'on, con lo cual no aportan mayor relevancia.
  
-
 \subsubsection*{Familia 4}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
