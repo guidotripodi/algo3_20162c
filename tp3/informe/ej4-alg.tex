@@ -6,9 +6,8 @@
  Recorrido mejorSolucion $\leftarrow$ $S_o$ \hfill O(n)\\
  Recorrido  solucionActual $\leftarrow$ $S_o$ \hfill O(n)\\ 
  entero mejorCosto $\leftarrow$ calcularCosto(mejorSolucion) \hfill O(n)\\
-% 0 hasta Cantidad de iteraciones maxima
- \For{ entero en $[0,Cantidad de iteraciones maxima)$ }{
-	 \hfill Ciclo: O(Cantidad de iteraciones maxima)\\
+ \For{ entero noMejora en $[0, maxNoMejora)$ }{
+	 \hfill ciclo: O(costoInicial*maxNoMejora)\\
 	Recorrido mejorCandidato \hfill O(1) \\
   	Lista<Arista> aristasModificadas \hfill O(1)\\
   	entero costoMejorCandidato $\leftarrow$ -1 \hfill O(1)\\
@@ -38,6 +37,7 @@
 		aristasModificadas $\leftarrow$ menosTabu.second \hfill O(1)\\
 	}  	
 	
+	costoMejorCandidato = calcularCosto(mejorCandidato); \hfill O(n) \\
 	
 	solucionActual $\leftarrow$ mejorCandidato \hfill O(n)\\
 		
@@ -45,6 +45,8 @@
 		\hfill Condicion: O(1)\\
 		mejorSolucion $\leftarrow$ mejorCandidato \hfill O(n)\\
 		mejorCosto $\leftarrow$ costoMejorCandidato \hfill O(1)\\
+	}\Else{
+		noMejora+=1	
 	}
 
    \For{Arista a en aristasModificadas}{
@@ -68,6 +70,7 @@ Complejidad final: O(cantidad iteraciones maxima * ( $n^5$*log(TenorTabu) + Teno
 \end{algorithm}
 
 \begin{itemize}
+\item Justificación de la cota de complejidad del ciclo principal: En el peor caso, se repetirán $maxNoMejora$ cantidad de veces $costoInicial$ valores donde $costoInicial$ es la distancia de la solucion a optimizar. El algoritmo finaliza si se producen $maxNoMejora$ cantidad de iteraciones sin mejora.
 \item Arista = < Punto a , Punto b >
 \item Punto = < entero x, entero y >
 \item La función costo total ya fue definida en el apartado del algoritmo del ejercicio 3.
@@ -78,4 +81,3 @@ Complejidad final: O(cantidad iteraciones maxima * ( $n^5$*log(TenorTabu) + Teno
 \item La funcion tabuCount sirve para decidir si una solucion es tabu o no y cuenta cuantos atributos tabu posee dando de esta manera una medida de que "tan tabu" es una solucion. Se itera por las aristas de la solucion en tiempo lineal.
 \item Atributos tabu esta implementado sobre el set proveido por la STL de c++. Se observa una estructura de arbol rojinegro y se mantiene la cantidad de elementos de este por debajo de $TenorTabu$.
 \end{itemize}
-
