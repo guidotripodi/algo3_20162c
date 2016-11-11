@@ -293,12 +293,9 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
     
     vector<int> solucionAnterior;
     
-    bool mejora1 = true;
-    bool mejora2 = true;
-    bool mejora3 = true;
-    bool mejora4 = true;
+    bool hayMejora = true;
     
-    while (mejora1 || mejora2 || mejora3 || mejora4) {
+    while (hayMejora) {
         
         long long costoActual = -1;
         
@@ -416,10 +413,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
         }
         
         if (costoActual == -1 || costoActual >= costoAnterior) {
-            mejora1 = false;
-            mejora2 = false;
-            mejora3 = false;
-            mejora4 = false;
+            hayMejora = false;
         }
         
         solucionAnterior = solucionParcial;
@@ -429,6 +423,7 @@ vector<int> mejorar3opt(vector<int> solucionParcial){
     
     return solucion;
 }
+
 
 bool pasoPosible(int destino, int capacidadParcial){
     Gimnasio gym;
