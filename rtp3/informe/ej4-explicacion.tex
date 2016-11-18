@@ -1,0 +1,24 @@
+Como su nombre lo indica, búsqueda local analiza una vecindad local a la solución inicial $S_o$. Por lo que generalmente, la mejora obtenida puede no ser global, si no, la mejor solución dentro de la vecindad analizada. 
+
+Para salir de un óptimo local, existen meta heurisiticas que pueden o no proveer una mejor solución observando otras vecindades, y en algunos casos acercarse lo suficiente u obtener el óptimo global. Una de ellas es la elegida para este informe, denominada, \textit{tab\'u search}.\\
+
+La idea de esta meta heuristica es ir moviendose por las vecindades subyacentes a una vecindad analizada. Es decir, las vecindades de las soluciones que conforman una vecindad.
+Pero no todas ellas, si no, la vecindad de una solución elegida que cumpla con ciertos atributos, o mejor dicho, que no posea ciertos atributos o caracteristicas. 
+Esto es así, dado que se tiene que buscar una manera de descartar soluciones que no se consideren adecuadas para ser analizadas, si no, caeriamos en el problema de backtracking, donde se consideran todas las posibilidades, lo cual, puede ser impracticable.\\
+
+Los atributos elegidos como no adecuados para elegir una solución son los denominados atributos \textit{tab\'u}. Existen muchas posibilidades según el problema estudiado. Para el problema del maestro pokemon eligiremos como atributos \textit{tabú} las aristas que sean modificadas al moverse de una solución a otra. Luego intentaremos ver que sucede al tomar como \textit{tabú} las aristas nuevas en la solución y ver si se obtienen mejores resultados.
+Por lo tanto, se define un conjunto que alojará atributos \textit{tabú}.\\
+
+Los métodos para encontrar vecindades serán los mismos analizados en el ejercicio tres. Es decir, a traves de las búsquedas locales estudiadas: $swap$, $2-opt$ y $3-opt$. Solo que para este algoritmo se filtrarán aquellos recorridos que no sean válidos. Luego una vecindad $V(s)$ para una solución $s$, será un conjunto de recorridos de soluciones válidas para el problema.\\
+
+Debido a que la memoria tiene un limite, y los problemas podrian ser extremadamente grandes, se suele definir lo que se denomina \textit{tenor tabú} que es el tamaño máximo que el conjunto \textit{tabú} tiene para alojar atributos. Cuando el tamaño máximo es alcanzado, se tiene que determinar una manera de desalojar atributos para obtener espacio libre que pueda ser usado luego. El mótivo es tener una lista de tamaño acotado, pero que sea dinámica en contenido de atributos a lo largo de una corrida del algoritmo, dado que si no, al alcanzarse el tamaño máximo, la lista dejaria de crecer y los atributos dejarían de cambiar, acotando el universo de posibles soluciónes a la union de algunas vecindades.\\
+Los atributos que serán desalojados serán aquellos que tengan más tiempo dentro del conjunto, por lo que además, el conjunto \textit{tabú} tendrá la caracteristica de poder contener esa información y funcionar internamente como una pila. 
+La cantidad de atributos desalojados será determinada por la cantidad de atributos que se quiera alojar en el conjunto. En el peor caso, todos los atributos serán nuevos.\\
+
+Además, si el tenor definido en el punto anterior es lo suficientemente grande, indefectiblemente, en algún punto tendremos todos los atributos alojados. Por lo cual tendremos que tomar alguna decision para elegir una nueva solución en la vecindad analizada. Esta decision se conoce como función de aspiración $A(V(s)): \rightarrow s^{'}$ que dada una vecindad $V(s)$ a una solución $s$, determina que solución tomar.
+La decision puede tomarse en base a la cantidad de atributos \textit{tabú} que posee la solución analizada. Luego puede elegirse la más tabú o la menos tabú.
+En este informe estudiarmos ambas metodologias y veremos cual nos ofrece mejores resultados.\\
+
+Algo que hasta aquí no fue definido es el criterio de parada. Dado que el algoritmo se mueve entre vecindades sin marcar soluciones como ya visitadas, podría darse el caso de que se esté iterando sobre un conjunto de soluciones. Para poder finalizar el algoritmo en cierto punto, se utilizan diferentes estrategias. La más usual es cantidad de iteraciones limite y es la que usaremos en nuestro algoritmo.\\
+
+Hasta aquí pudimos describir las motivaciones para usar \textit{tabú search} y de que manera funciona a grandes rasgos. En lo que sigue podremos ver el pseudo codigo de la implementación realizada y luego aboradaremos los casos de tests para luego analizar los resultados.  La idea será trabajar sobre los casos de entrada del ejercicio 2 y ver que optimizaciones logra \textit{tabú search} con respecto a las soluciones provistas por el algoritmo goloso.
