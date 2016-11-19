@@ -7,11 +7,12 @@ int cantGyms, cantPokeParadas, capMochila;
 Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
 
-#define ITERMAX 4
+#define ITERMAXREP 4
 #define OLD_EDGES 1
 #define LESS_TABU 1
 
-long long _tenor;
+int _tenor;
+int _maxIter;
 
 pair<float, float> estadisticas(vector<long long> &muestra)
 {
@@ -121,8 +122,9 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
         solucionParcial.push_back(*itLista);
     }
     
-    _tenor = cant_gimnasios+cantPokeParadas;
-
+    _maxIter = cantGyms+cantPokeParadas;
+    _tenor = _maxIter;
+    
     if(solucionParcial.size()) {
         
         /*long long mejoraParcial = calcularCosto(solucionParcial);
@@ -149,9 +151,10 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long it)
     long long costoMejorVecino;
     SetTabu atributosTabu;
 
+    int iter = 0;
     int cantidadNoMejoras = 0;
     
-    while(cantidadNoMejoras < ITERMAX)
+    while(iter < _maxIter && cantidadNoMejoras < ITERMAXREP)
     {
         vector<int> mejorVecino;
         list<Arista> aristasModificadas;
@@ -207,6 +210,7 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long it)
         {
             mejorSolucion = mejorVecino;
             costoMejor = costoMejorVecino;
+            cantidadNoMejoras=0;
         }else {
             cantidadNoMejoras++;
         }
@@ -225,13 +229,12 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long it)
             atributosTabu.push(*it);
         }
         
-        //TODO es posta el mejor para borrar?
-        //el orden en el que se guardan los objetos
-        //no es cronologico como la lista.
         while(atributosTabu.size() > _tenor)
         {
             atributosTabu.pop();
         }
+        
+        iter++;
     }
     
     return mejorSolucion;
