@@ -120,7 +120,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
     
     int iter = 0;
     int maxIter = cantGyms+cantPokeParadas;
-    int tenor = cantGyms+cantPokeParadas;
+    int tenor = maxIter;
     
     while(iter < maxIter && cantidadNoMejoras < ITERMAXREP)
 	{
