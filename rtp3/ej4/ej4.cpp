@@ -16,8 +16,7 @@
 #define MAX_PODER 25
 #define RADIO 100
 
-#define TENOR 5
-#define ITERMAX 4
+#define ITERMAXREP 4
 
 using namespace std;
 
@@ -119,7 +118,11 @@ vector<int> tabuSearch(vector<int> solucionParcial)
     
     int cantidadNoMejoras = 0;
     
-    while(cantidadNoMejoras < ITERMAX)
+    int iter = 0;
+    int maxIter = cantGyms+cantPokeParadas;
+    int tenor = cantGyms+cantPokeParadas;
+    
+    while(iter < maxIter && cantidadNoMejoras < ITERMAXREP)
 	{
 		vector<int> mejorVecino;
 		list<Arista> aristasModificadas; 
@@ -168,6 +171,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		{
 			mejorSolucion = mejorVecino;
 			costoMejor = costoMejorVecino;
+            cantidadNoMejoras=0;
         }else {
             cantidadNoMejoras++;
         }
@@ -181,10 +185,12 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		//TODO es posta el mejor para borrar?
 		//el orden en el que se guardan los objetos
 		//no es cronologico como la lista.
-		while(atributosTabu.size() > TENOR) 
+		while(atributosTabu.size() > tenor)
 		{
 			atributosTabu.pop();
         }
+        
+        iter++;
 	}
 
 	return mejorSolucion;
