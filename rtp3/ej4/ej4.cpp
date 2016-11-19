@@ -181,10 +181,7 @@ vector<int> tabuSearch(vector<int> solucionParcial)
 		{
 			atributosTabu.push(*it);
 		}
-		
-		//TODO es posta el mejor para borrar?
-		//el orden en el que se guardan los objetos
-		//no es cronologico como la lista.
+	    
 		while(atributosTabu.size() > tenor)
 		{
 			atributosTabu.pop();
