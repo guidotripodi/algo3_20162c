@@ -11,11 +11,21 @@
 
 using namespace std;
 
+
+struct gimnasio
+{
+	int pos_x;
+	int pos_y;
+	int poder;
+	gimnasio(){};
+
+};
+
 class MaestroPokemon {
 
 private:
 	//Guardo la eleccion que se tomo en cada paso
-	
+
 	int* destinos_visitados;
 
 
@@ -29,7 +39,7 @@ public:
 		int tipo;
 		int cant_pociones;
 		pair <int, int> posicion;
-		destino(int tipo, int cant_pociones, pair <int, int> posicion): 
+		destino(int tipo, int cant_pociones, pair <int, int> posicion):
 		tipo(tipo),
 		cant_pociones(cant_pociones),
 		posicion(posicion){};
@@ -52,10 +62,10 @@ public:
 			recalcular();
 		};
 
-		
+
 
 		void recalcular(){
-			
+
 			posible = MP->cant_pokeParadas + MP->cant_gimnasios > id;
 			if (posible)
 			{
@@ -64,13 +74,13 @@ public:
 
 				xM = MP->eleccionActual.posicion.first;
 				yM = MP->eleccionActual.posicion.second;
-				
+
 
 				if (id >= MP->cant_gimnasios)
 				{
 					//Si es una pp
 					tipo = PP;
-					int id2 = id - MP->cant_gimnasios;				
+					int id2 = id - MP->cant_gimnasios;
 					x = MP->posiciones_pp[id2].first;
 					y = MP->posiciones_pp[id2].second;
 					pocionesNecesarias = 0;
@@ -85,7 +95,7 @@ public:
 				//Actualizo posicion
 				posicion.first = x;
 				posicion.second = y;
-				
+
 				distancia=0;
 				if (id!=-1)
 				{
@@ -95,7 +105,7 @@ public:
 					}
 				}
 
-				
+
 				//printf("- - -DR: %d\n",distancia );
 
 			}else{

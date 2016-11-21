@@ -27,49 +27,49 @@ int main(int argc, char* argv[])
 	int i = 0;
 	for (i = 0; i < cant_gimnasios; i++){
 		pair <pair<int,int>, int> gymPuebloPaleta;
-		
+
 		cin >> gymPuebloPaleta.first.first >> gymPuebloPaleta.first.second >> gymPuebloPaleta.second;
 		posiciones_gym[i] = gymPuebloPaleta;
-		
+
 	}
 	for (i = 0; i < cant_pokeParadas; i++)	{
 		pair <int, int> posicion;
-		
+
 		cin >> posicion.first >> posicion.second;
-		
+
 		posiciones_pp[i] = posicion;
-		
+
 	}*/
 
 	/*Caso sin solucion:*/
-	int cant_gimnasios = 0; 
+	int cant_gimnasios = 0;
 	int cant_pokeParadas = 0;
 	int cap_mochila = 0;
-	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
-	pair <int, int>  posiciones_pp[cantMaxPP];
-	pair <int, int>  pp_aux[cantMaxPP];
 	int i = 0;
-	for(int j = 200; j < 102; j++){
+	for(int j = 250; j < 5000; j + 250){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
-		
-		
+		pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
+		pair <int, int>  posiciones_pp[cant_pokeParadas];
+		pair <int, int>  pp_aux[cant_pokeParadas];
+
 			for (i = 0; i < cant_gimnasios; i++){
+
 			pair <pair<int,int>, int> gymPuebloPaleta;
 			gymPuebloPaleta.first.first = i;
 			gymPuebloPaleta.first.second = i+1;
 			if (i % 3 == 0)	{
 				gymPuebloPaleta.second = 0;
-			}/*
+			}
 			if (i % 3 == 1)	{
 				gymPuebloPaleta.second = 1;
 			}
 			if (i % 3 == 2)	{
 				gymPuebloPaleta.second = 3;
-			}*/
+			}
 			posiciones_gym[i] = gymPuebloPaleta;
 			}
-		
+
 		for (i = 0; i < cant_pokeParadas; i++)	{
 			pair <int, int> posicion;
 			posicion.first = i;
@@ -77,24 +77,24 @@ int main(int argc, char* argv[])
 			posiciones_pp[i] = posicion;
 			pp_aux[i] = posicion;
 		}
-		
+
 		cap_mochila = cant_gimnasios*3	;
-		
-		/*cout << "Cantidad de elementos:" << cant_gimnasios + cant_pokeParadas << "\n";
-		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
-		
+
+		cout << "Cantidad de elementos:" << cant_gimnasios + cant_pokeParadas << "\n";
+/*		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
+
 		for(i = 0; i < cant_gimnasios; i++){
 			printf("%d %d %d \n", posiciones_gym[i].first.first, posiciones_gym[i].first.second, posiciones_gym[i].second );
 			}
-			
+
 		for(i = 0; i < cant_pokeParadas; i++){
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
-			
-			}*/
+
+		}*/
 
 		pair <int,std::list<int> * > * f;
 //			for (int h = 0; h < 10; ++h){
-	//			auto start = ya();	
+	//			auto start = ya();
 				f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
 		//		auto end = ya();
 			//	if (h == 9)	{
@@ -102,38 +102,37 @@ int main(int argc, char* argv[])
 			//		cout << "\n";
 			//	}
 			//}
-	
+
 
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
 		}else{
-			cout << f->first; //<<" "<< f->second->size() << " ";
-			/*for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
+			cout << f->first <<" "<< f->second->size() << " ";
+			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << *it << " ";
 			}
-		*/}
+		}
 		cout << "\n";
-		
+
 		delete f;
 	}
 	return 0;
 }
 
- 
+
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
 {
 	/*
 	POR ALGUNA RAZON LA PODA AL HACERLO CON MAS DE 200 ELEMENTOS FRULEA
-
+*/
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
 	int pocionesANecesitar = 0;
 	for (int i = 0; i < cant_gimnasios; ++i){
-		printf("Pociones gym: %d\n",posiciones_gym[i].second);
 		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
 		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-			
+
 			return NULL;
 		}
 	}
@@ -142,11 +141,11 @@ int main(int argc, char* argv[])
 
 		return NULL;
 	}
-	*/	
-		
+
+
 	bool posible = true;
-	
-	int minimo = -1; 
+
+	int minimo = -1;
 	std::list<int> * camino;
 
 
@@ -166,12 +165,12 @@ int main(int argc, char* argv[])
 					camino = ash.caminoRecorrido(pp_aux);
 
 				}
-				
+
 			}
 
 			posible = ash.eleccionGolosa();
 			posible = posible && (minimo == -1 || ash.distancia<minimo);
-			
+
 		}
 	}
 
