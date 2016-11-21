@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 	int cant_pokeParadas = 0;
 	int cap_mochila = 0;
 
-	for(int j = 250; j < 5000; j++){
+	for(int j = 25; j < 500; j++){
 		cant_gimnasios = j;
 		cant_pokeParadas = j+1;
 		pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
@@ -74,7 +74,10 @@ int main(int argc, char* argv[])
 		}
 		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
 		cap_mochila = cantMaxGym*3	;
-		/*
+		
+		
+		cout << "Cantidad de elementos:" << cant_gimnasios + cant_pokeParadas << "\n";
+/*		
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 
 		for(i = 0; i < cant_gimnasios; i++){
@@ -86,11 +89,11 @@ int main(int argc, char* argv[])
 
 			}
 */		pair <int,std::list<int> * > * f;
-			for (int h = 0; h < 10; ++h){
+			for (int h = 0; h < 2; ++h){
 				auto start = ya();
 				f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
 				auto end = ya();
-				if (h == 9)	{
+				if (h == 1)	{
 					cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
 					cout << "\n";
 				}
@@ -110,7 +113,7 @@ int main(int argc, char* argv[])
 
 
 		delete f;
-		j += 249;
+		j += 24;
 	}
 	return 0;
 }
