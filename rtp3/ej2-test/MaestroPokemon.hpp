@@ -21,7 +21,7 @@ private:
 
 
 public:
-	int distancia;
+	long long distancia;
 	int paso = 0;
 
 	struct destino
@@ -38,7 +38,7 @@ public:
 	struct Eleccion
 	{
 		const MaestroPokemon* MP;
-		int distancia =0;
+		long long distancia =0;
 		int id = -1; // El id da ordinalidad a todas las elecciones posibles, dentro de la matriz #personas x #personas
 		bool posible;
 

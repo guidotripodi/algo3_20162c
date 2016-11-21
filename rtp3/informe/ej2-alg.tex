@@ -1,3 +1,10 @@
+Nuestro algoritmo cuenta con 3 secciones marcadas, la primera en la cual chequeamos las podas sin soluci\'on, la segunda donde se consigue el camino, y la \'ultima donde se devuelve dicho camino con la cantidad de nodos y distancia recorrida.\\
+En detalle, para nuestra primer etapa, desarrollamos un ciclo para poder ver el poder que posee cada uno de los gimnasios, chequeando si la capacidad de la mochila soporta el poder de los mismos. A su vez, se va sumando el poder de cada gimnasio para luego chequear si la cantidad de pokeparadas alcanza para ganar en todos los gimnasios.\\
+Luego, en la segunda secci\'on, se realiza un ciclo el cual realiza $\#$Poke-paradas + $\#$Gimnasios de vueltas. Este ciclo se realiz\'o para que exista un camino con cada uno de los nodos como inicio. Dentro de dicho ciclo por cada vuelta del mismo creamos un nuevo maestroPokemon para realizar sucesivas elecciones golosas para armar un camino posible. Dicha elecci\'on golosa tomar\'a un gimnasio siempre y cuando se lo pueda vencer y se encuentre a m\'inima distancia entre los que puedan ser vencidos. En el caso de que esto no sea posible, se tomar\'a a la pokeparada m\'as cercana. Se guardar\'a la distancia que ser\'a recorrida para ir a esta nueva posici\'on y las posiciones del nuevo nodo para ir formando el camino. Esto se realizar\'a hasta que se gane en todos los gimnasios. Luego, si la distancia recorrida es menor a la que ya se ten\'ia de una anterior iteraci\'on se reemplaza la anterior por la nueva al igual que el camino recorrido.
+Por \'ultimo, nuestra tercer secci\'on devolver\'a el mejor camino obtenido con la distancia recorrida y la cantidad de nodos del camino.
+
+A continuaci\'on, mostraremos el pseudocodigo que ejemplifica lo enunciado.
+
 \begin{algorithm}[H]
 \Fn{EJ2()}{
 crear cola decisiones para guardar elecciones\\

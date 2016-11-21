@@ -82,7 +82,7 @@ MaestroPokemon::~MaestroPokemon(){
 
 bool MaestroPokemon::eleccionGolosa(){
 	Eleccion eleccion = Eleccion(this);
-	int minima = -1;
+	long long minima = -1;
 	bool minimo_es_gym = false;
 
 	std::list<int>::iterator itm;

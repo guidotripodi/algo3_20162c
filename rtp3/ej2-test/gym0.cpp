@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 	pair <int, int>  posiciones_pp[cantMaxPP];
 	pair <int, int>  pp_aux[cantMaxPP];
 	int i = 0;
-	for(int j = 1; j < 50; j++){
+	for(int j = 200; j < 102; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		
@@ -60,13 +60,13 @@ int main(int argc, char* argv[])
 			gymPuebloPaleta.first.second = i+1;
 			if (i % 3 == 0)	{
 				gymPuebloPaleta.second = 0;
-			}
+			}/*
 			if (i % 3 == 1)	{
 				gymPuebloPaleta.second = 1;
 			}
 			if (i % 3 == 2)	{
 				gymPuebloPaleta.second = 3;
-			}
+			}*/
 			posiciones_gym[i] = gymPuebloPaleta;
 			}
 		
@@ -123,9 +123,13 @@ int main(int argc, char* argv[])
  
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
 {
+	/*
+	POR ALGUNA RAZON LA PODA AL HACERLO CON MAS DE 200 ELEMENTOS FRULEA
+
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
 	int pocionesANecesitar = 0;
 	for (int i = 0; i < cant_gimnasios; ++i){
+		printf("Pociones gym: %d\n",posiciones_gym[i].second);
 		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
 		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
@@ -138,7 +142,7 @@ int main(int argc, char* argv[])
 
 		return NULL;
 	}
-		
+	*/	
 		
 	bool posible = true;
 	
