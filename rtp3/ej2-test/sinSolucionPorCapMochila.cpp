@@ -45,11 +45,8 @@ int main(int argc, char* argv[])
 	int cant_gimnasios = 0;
 	int cant_pokeParadas = 0;
 	int cap_mochila = 0;
-	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
-	pair <int, int>  posiciones_pp[cantMaxPP];
-	pair <int, int>  pp_aux[cantMaxPP];
 
-	for(int j = 250; j < 5000; j + 250){
+	for(int j = 250; j < 5000; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
@@ -114,6 +111,7 @@ int main(int argc, char* argv[])
 
 
 		delete f;
+		j += 249;
 	}
 	return 0;
 }

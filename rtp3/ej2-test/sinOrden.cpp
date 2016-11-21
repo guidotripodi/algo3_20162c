@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 	int cap_mochila = 0;
 
 
-	for(int j = 250; j < 5000; j + 250){
+	for(int j = 250; j < 5000; j++){
 		cant_gimnasios = j;
 		cant_pokeParadas = j*2;
 		pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 			pp_aux[i] = posicion;
 		}
 		/*ACA LA MOCHILA SOPORTA LA CAPACIDAD MAXIMA PARA AVANZAR POR TODOS, SE VAN A HACER DOS TESTEOS SIN SOLUCION YA QUE TENEMOS DOS PODAS*/
-		cap_mochila = cantMaxGym*3	;
+		cap_mochila = cant_gimnasios*6	;
 
 		cout << "j es:" << j << "\n";
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
@@ -114,6 +114,7 @@ int main(int argc, char* argv[])
 
 
 		delete f;
+		j = j + 249;
 	}
 	return 0;
 }
