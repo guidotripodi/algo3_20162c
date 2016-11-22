@@ -173,15 +173,26 @@ def noPPInstance(n):
 	gymsD = randomPotions(gyms, pps, 10)
 	return gymsD, [], 10
 
+def someWithZeroInstance(n):
+	cg = randint(1,n-1)
+	mochila = 10
+	gyms = randomPositions(n-cg)
+	pps = randomPositions(n-len(gyms), gyms)
+	
+	k = int(n*0.2)
+	gymsD = randomPotions(gyms[k:n], pps, mochila)
+	gyms0 = kPotions(gyms[k:n], 0)
+
+	return gymsD + gyms0, pps, mochila
 
 
 ###############################################
 #				MAIN
 
-#plotInstance(randomInstance(4))
+plotInstance(someWithZeroInstance(4))
 
-for i in xrange(5,50):
-	r = randomInstance(i)
-	#plotInstance(r)
-	saveInstance(r,"random5.in","a")
+#for i in xrange(5,50):
+#	r = someWithZeroInstance(i)
+#	#plotInstance(r)
+#	saveInstance(r,"random5.in","a")
 #	pass
