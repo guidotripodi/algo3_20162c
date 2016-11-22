@@ -1,5 +1,7 @@
 from pylab import *
 
+import random
+
  # Como utilizar
  #Para armar una instancia hay que determinar:
  #			- Un metodo que posicione los elementos : Seccion GENERADORES DE POSICIONES
@@ -180,8 +182,18 @@ def noPPInstance(n):
 
 #plotInstance(randomInstance(4))
 
-for i in xrange(5,50):
-	r = randomInstance(i)
-	#plotInstance(r)
-	saveInstance(r,"random5.in","a")
+random.seed(45)
+
+for i in xrange(5, 500):
+	lim = i
+	
+	if lim > 15:
+		lim+=50
+		lim = lim*(0.10)	
+	
+	lim = int(lim)
+	for j in xrange(1, lim):
+		r = randomInstance(i)
+		#plotInstance(r)
+		saveInstance(r,"random6.in","a")
 #	pass
