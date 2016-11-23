@@ -27,6 +27,21 @@ def randomPositions(n, notin=[]):
 
 	return li
 
+def randomPositions2(n, notin=[], maxRad=1000, maxXY=100):
+	li = []
+	x = 1
+	while len(li)<n:
+		t = 2*pi*rand()
+		r = sqrt(randint(0, maxRad))
+		v =(int(r*cos(t))+randint(-maxXY,maxXY), int(r*sin(t))+randint(-maxXY,maxXY))
+
+		if v in notin or v in li:
+			continue
+
+		li.append(v)
+
+	return li
+
 def circularPositions(n, notin=[], rad_circ=10, dist_anillos = 10):
 	li = []
 	while n>0:
@@ -269,34 +284,52 @@ def ddInstance(n):
 	print("powers by cuad")
 	print(powersList)
 
-	gyms = circularPositions3(cants.pop(),15,20,20)
+	cant1 = cants.pop()
+	gyms = circularPositions3(cant1,15*cant1,20*cant1,20*cant1)
 	gymPos = gyms
 	gymD = randomPotions2(gyms, powersList.pop())
 
-	gyms = circularPositions3(cants.pop(),15,20,-20)
+	maxRad = 15*cant1
+	maxXY = 20*cant1
+
+	cant2 = cants.pop()
+	gyms = circularPositions3(cant1,15*cant2,20*cant2,-20*cant2)
 	gymsmPos = gymPos + gyms
 	gymD = gymD + randomPotions2(gyms, powersList.pop())
 	
-	gyms = circularPositions3(cants.pop(),15,-20,20)
+	if 15*cant2 > maxRad:
+		maxRad = 15*cant2
+		maxXY = 20*cant2
+
+	cant3 = cants.pop()
+	gyms = circularPositions3(cant1,15*cant3,-20*cant3,20*cant3)
 	gymPos = gymPos + gyms
 	gymD = gymD + randomPotions2(gyms, powersList.pop())
 	
-	gyms = circularPositions3(cants.pop(),15,-20,-20)
+	if 15*cant3 > maxRad:
+		maxRad = 15*cant3
+		maxXY = 20*cant3
+
+	cant4 = cants.pop()
+	gyms = circularPositions3(cant1,15*cant4,-20*cant4,-20*cant4)
 	gymPos = gymPos + gyms
 	gymD = gymD + randomPotions2(gyms, powersList.pop())
 	
-	pps = randomPositions(pp, gymPos)
+	if 15*cant4 > maxRad:
+		maxRad = 15*cant4
+		maxXY = 20*cant4
+
+	pps = randomPositions2(pp, gymPos, maxRad, maxXY)
 
 	return gymD , pps, kBag
 
 ###############################################
 #				MAIN
 
-#plotInstance(someWithZeroInstance(40))
 open("test.in", 'w+').close()
-saveInstance(ddInstance(60),"test.in","a")
-#for i in xrange(5,50):
-#	r = someWithZeroInstance(i)
-#	#plotInstance(r)
-#	saveInstance(r,"random5.in","a")
-#	pass
+#saveInstance(ddInstance(60),"test.in","a")
+for i in xrange(5,50):
+	r = ddInstance(i)
+	#plotInstance(r)
+	saveInstance(r,"random5.in","a")
+	pass
