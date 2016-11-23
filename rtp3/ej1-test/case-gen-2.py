@@ -291,7 +291,7 @@ def ddInstance(n):
 
 	cant2 = cants.pop()
 	if cant2 > 0:
-		gyms = circularPositions3(cant1,15*cant2,20*cant2,-20*cant2)
+		gyms = circularPositions3(cant2,15*cant2,20*cant2,-20*cant2)
 		gymsmPos = gymPos + gyms
 		gymD = gymD + randomPotions2(gyms, powersList.pop())
 		
@@ -301,7 +301,7 @@ def ddInstance(n):
 
 	cant3 = cants.pop()
 	if cant3 > 0:
-		gyms = circularPositions3(cant1,15*cant3,-20*cant3,20*cant3)
+		gyms = circularPositions3(cant3,15*cant3,-20*cant3,20*cant3)
 		gymPos = gymPos + gyms
 		gymD = gymD + randomPotions2(gyms, powersList.pop())
 		
@@ -311,7 +311,7 @@ def ddInstance(n):
 
 	cant4 = cants.pop()
 	if cant4 > 0:
-		gyms = circularPositions3(cant1,15*cant4,-20*cant4,-20*cant4)
+		gyms = circularPositions3(cant4,15*cant4,-20*cant4,-20*cant4)
 		gymPos = gymPos + gyms
 		gymD = gymD + randomPotions2(gyms, powersList.pop())
 		
