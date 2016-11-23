@@ -85,14 +85,11 @@ def randomPotions(gyms, pps, k_bag):
 		pociones_totales = pociones_totales - pociones
 	return gym_res
 
-def randomPotions2(gyms, pp, k_bag):
+def randomPotions2(gyms, poc):
 	gym_res = []
-	pociones_totales = 3*pp
-	maxPow = int(pociones_totales/len(gyms))
 
-	pociones = randint(1, min(k_bag, maxPow))
 	for gym in gyms:
-		gym_res.append((gym, pociones))
+		gym_res.append((gym, poc))
 	return gym_res
 
 def kPotions(gyms, k):
@@ -198,33 +195,97 @@ def someWithZeroInstance(n):
 	return gymsD + gyms0, pps, mochila
 
 def ddInstance(n):
-	cg = randint(1, int(n))
+	#al menos 4 gyms
+	min = 4
+
+	pp = randint(1, n-min)
+	gms = n-min-pp
+
+	while pp < gms/3:
+		pp = randint(1, n-min)
+		gms = n-min-pp
 	
-	print(c)
+	print("cant pp")
+	print(pp)
+
+	gms = n-pp 
+
+	print("cant gims")
+	print(gms)
 
 	kBag = randint(10, 50)
 
-	c = randint(0, (n-cg)-4)
+	c = gms
 
-	gyms = circularPositions3(c,15,20,20)
+	cants = []
+	while len(cants) < 4:
+		if c > 1:
+			r = randint(1, c)	
+		else:
+			r = 1
+
+		if c-r < min-1:
+			continue
+		
+		cants.append(r)
+		c = gms-r
+		min-=1
+
+	#objetos remanentes - se los doy al que popee
+	if c > 0:
+		el = cants.pop()
+		el+=c
+		cants.append(c)
+
+	powersList = []
+	powersSet = set()
+
+	maxPoc = 3*pp/gms
+
+	print("max poc")
+	print(maxPoc)
+
+	poc = 1
+	
+	if kBag < maxPoc:
+		maxPoc	= kBag
+
+	if maxPoc > 4:
+		while len(powersSet) < 4:
+			poc = randint(0, maxPoc)
+			powersSet.add(poc)
+	else:
+		powersList.append(1)
+		powersList.append(1)
+		powersList.append(1)
+		powersList.append(1)
+
+	if len(powersList) == 0:
+		while len(powersSet) > 0:
+			powersList.append(powersSet.pop())
+
+	print("cants by cuad")
+	print(cants)
+	print("powers by cuad")
+	print(powersList)
+
+	gyms = circularPositions3(cants.pop(),15,20,20)
 	gymPos = gyms
-	gymD = randomPotions2(gyms, cg, kBag)
-	
-	c = randint(0, (n-cg)-4)
+	gymD = randomPotions2(gyms, powersList.pop())
 
-	gyms = circularPositions3(c,15,20,-20)
+	gyms = circularPositions3(cants.pop(),15,20,-20)
 	gymsmPos = gymPos + gyms
-	gymD = gymD + randomPotions2(gyms, cg, kBag)
+	gymD = gymD + randomPotions2(gyms, powersList.pop())
 	
-	gyms = circularPositions3(c,15,-20,20)
+	gyms = circularPositions3(cants.pop(),15,-20,20)
 	gymPos = gymPos + gyms
-	gymD = gymD + randomPotions2(gyms, cg, kBag)
+	gymD = gymD + randomPotions2(gyms, powersList.pop())
 	
-	gyms = circularPositions3(c,15,-20,-20)
+	gyms = circularPositions3(cants.pop(),15,-20,-20)
 	gymPos = gymPos + gyms
-	gymD = gymD + randomPotions2(gyms, cg, kBag)
+	gymD = gymD + randomPotions2(gyms, powersList.pop())
 	
-	pps = randomPositions(cg, gymPos)
+	pps = randomPositions(pp, gymPos)
 
 	return gymD , pps, kBag
 
@@ -232,6 +293,7 @@ def ddInstance(n):
 #				MAIN
 
 #plotInstance(someWithZeroInstance(40))
+open("test.in", 'w+').close()
 saveInstance(ddInstance(60),"test.in","a")
 #for i in xrange(5,50):
 #	r = someWithZeroInstance(i)
