@@ -216,7 +216,7 @@ def ddInstance(n):
 	pp = randint(1, n-min)
 	gms = n-min-pp
 
-	while pp < gms/3:
+	while pp <= gms/3:
 		pp = randint(1, n-min)
 		gms = n-min-pp
 	
