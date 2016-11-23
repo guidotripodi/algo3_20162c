@@ -230,27 +230,20 @@ def ddInstance(n):
 
 	kBag = randint(10, 50)
 
-	c = gms
+	tot = 0
 
 	cants = []
-	while len(cants) < 4:
-		if c > 1:
-			r = randint(1, c)	
-		else:
-			r = 1
 
-		if c-r < min-1:
-			continue
-		
+	while len(cants) < 4:
+		r = randint(0, gms-tot)
+		tot += r
 		cants.append(r)
-		c = gms-r
-		min-=1
 
 	#objetos remanentes - se los doy al que popee
-	if c > 0:
+	if gms-tot > 0:
 		el = cants.pop()
-		el+=c
-		cants.append(c)
+		el+=gms-tot
+		cants.append(el)
 
 	powersList = []
 	powersSet = set()
@@ -284,40 +277,47 @@ def ddInstance(n):
 	print("powers by cuad")
 	print(powersList)
 
-	cant1 = cants.pop()
-	gyms = circularPositions3(cant1,15*cant1,20*cant1,20*cant1)
-	gymPos = gyms
-	gymD = randomPotions2(gyms, powersList.pop())
+	maxRad = 0
+	maxXY = 0
 
-	maxRad = 15*cant1
-	maxXY = 20*cant1
+	cant1 = cants.pop()
+	if cant1 > 0:
+		gyms = circularPositions3(cant1,15*cant1,20*cant1,20*cant1)
+		gymPos = gyms
+		gymD = randomPotions2(gyms, powersList.pop())
+
+		maxRad = 15*cant1
+		maxXY = 20*cant1
 
 	cant2 = cants.pop()
-	gyms = circularPositions3(cant1,15*cant2,20*cant2,-20*cant2)
-	gymsmPos = gymPos + gyms
-	gymD = gymD + randomPotions2(gyms, powersList.pop())
-	
-	if 15*cant2 > maxRad:
-		maxRad = 15*cant2
-		maxXY = 20*cant2
+	if cant2 > 0:
+		gyms = circularPositions3(cant1,15*cant2,20*cant2,-20*cant2)
+		gymsmPos = gymPos + gyms
+		gymD = gymD + randomPotions2(gyms, powersList.pop())
+		
+		if 15*cant2 > maxRad:
+			maxRad = 15*cant2
+			maxXY = 20*cant2
 
 	cant3 = cants.pop()
-	gyms = circularPositions3(cant1,15*cant3,-20*cant3,20*cant3)
-	gymPos = gymPos + gyms
-	gymD = gymD + randomPotions2(gyms, powersList.pop())
-	
-	if 15*cant3 > maxRad:
-		maxRad = 15*cant3
-		maxXY = 20*cant3
+	if cant3 > 0:
+		gyms = circularPositions3(cant1,15*cant3,-20*cant3,20*cant3)
+		gymPos = gymPos + gyms
+		gymD = gymD + randomPotions2(gyms, powersList.pop())
+		
+		if 15*cant3 > maxRad:
+			maxRad = 15*cant3
+			maxXY = 20*cant3
 
 	cant4 = cants.pop()
-	gyms = circularPositions3(cant1,15*cant4,-20*cant4,-20*cant4)
-	gymPos = gymPos + gyms
-	gymD = gymD + randomPotions2(gyms, powersList.pop())
-	
-	if 15*cant4 > maxRad:
-		maxRad = 15*cant4
-		maxXY = 20*cant4
+	if cant4 > 0:
+		gyms = circularPositions3(cant1,15*cant4,-20*cant4,-20*cant4)
+		gymPos = gymPos + gyms
+		gymD = gymD + randomPotions2(gyms, powersList.pop())
+		
+		if 15*cant4 > maxRad:
+			maxRad = 15*cant4
+			maxXY = 20*cant4
 
 	pps = randomPositions2(pp, gymPos, maxRad, maxXY)
 
@@ -328,7 +328,7 @@ def ddInstance(n):
 
 open("test.in", 'w+').close()
 #saveInstance(ddInstance(60),"test.in","a")
-for i in xrange(6,50):
+for i in xrange(6,100):
 	r = ddInstance(i)
 	#plotInstance(r)
 	saveInstance(r,"random5.in","a")
