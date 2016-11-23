@@ -328,7 +328,7 @@ def ddInstance(n):
 
 open("test.in", 'w+').close()
 #saveInstance(ddInstance(60),"test.in","a")
-for i in xrange(5,50):
+for i in xrange(6,50):
 	r = ddInstance(i)
 	#plotInstance(r)
 	saveInstance(r,"random5.in","a")
