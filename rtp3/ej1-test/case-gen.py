@@ -1,7 +1,5 @@
 from pylab import *
 
-import random
-
  # Como utilizar
  #Para armar una instancia hay que determinar:
  #			- Un metodo que posicione los elementos : Seccion GENERADORES DE POSICIONES
@@ -30,9 +28,6 @@ def randomPositions(n, notin=[]):
 	return li
 
 def circularPositions(n, notin=[], rad_circ=10, dist_anillos = 10):
-
-
-
 	li = []
 	while n>0:
 
@@ -53,12 +48,23 @@ def circularPositions(n, notin=[], rad_circ=10, dist_anillos = 10):
 
 	return li
 
-def circularPositions2(n, rad_circ=10):
+def circularPositions2(n, rad_circ=10, x=0, y=0):
 	li=[]
 	incremento = 2*pi / n
 	arc=incremento
 	for i in range(0, n):
-		v = (int(rad_circ*cos(arc)), int(rad_circ*sin(arc)))
+		v = (int(rad_circ*cos(arc)) + x, int(rad_circ*sin(arc)) + y)
+		arc = arc + incremento
+		li.append(v)
+	return li
+
+def circularPositions3(n, rad_c=10, x=0, y=0):
+	li=[]
+	incremento = 2*pi / n
+	arc=incremento
+	for i in range(0, n):
+		rad_circ = randint(0, rad_c)
+		v = (int(rad_circ*cos(arc)) + x, int(rad_circ*sin(arc)) + y)
 		arc = arc + incremento
 		li.append(v)
 	return li
@@ -68,14 +74,25 @@ def circularPositions2(n, rad_circ=10):
 
 #En base a la cantidadde cada tipo de lugar y la capacidad de mochila
 #asigna pociones de forma que hayasolucion (osea que no muera en las podas basicas)
+
 def randomPotions(gyms, pps, k_bag):
 	gym_res = []
 	pociones_totales = 3*len(pps)
 
 	for gym in gyms:
-		pociones = randint(0, min(k_bag, pociones_totales))
+		pociones = randint(1, min(k_bag, pociones_totales))
 		gym_res.append((gym, pociones))
 		pociones_totales = pociones_totales - pociones
+	return gym_res
+
+def randomPotions2(gyms, pp, k_bag):
+	gym_res = []
+	pociones_totales = 3*pp
+	maxPow = int(pociones_totales/len(gyms))
+
+	pociones = randint(1, min(k_bag, maxPow))
+	for gym in gyms:
+		gym_res.append((gym, pociones))
 	return gym_res
 
 def kPotions(gyms, k):
@@ -84,7 +101,6 @@ def kPotions(gyms, k):
 		pociones = k
 		gym_res.append((gym, pociones))
 	return gym_res
-
 
 ###############################################
 #				UTILITARIOS
@@ -113,12 +129,6 @@ def saveInstance(instance, file, mode="w"):
 		target.write(str(pp[0])+" "+str(pp[1])+"\n")
 
 	target.close()
-
-
-
-
-
-
 
 ###############################################
 #				INSTANCIAS
@@ -175,25 +185,56 @@ def noPPInstance(n):
 	gymsD = randomPotions(gyms, pps, 10)
 	return gymsD, [], 10
 
+def someWithZeroInstance(n):
+	cg = randint(1,n-1)
+	mochila = 10
+	gyms = randomPositions(n-cg)
+	pps = randomPositions(n-len(gyms), gyms)
+	
+	k = int(n*0.2)
+	gymsD = randomPotions(gyms[k:n], pps, mochila)
+	gyms0 = kPotions(gyms[1:k], 0)
 
+	return gymsD + gyms0, pps, mochila
+
+def ddInstance(n):
+	cg = randint(1, int(n))
+	
+	print(c)
+
+	kBag = randint(10, 50)
+
+	c = randint(0, (n-cg)-4)
+
+	gyms = circularPositions3(c,15,20,20)
+	gymPos = gyms
+	gymD = randomPotions2(gyms, cg, kBag)
+	
+	c = randint(0, (n-cg)-4)
+
+	gyms = circularPositions3(c,15,20,-20)
+	gymsmPos = gymPos + gyms
+	gymD = gymD + randomPotions2(gyms, cg, kBag)
+	
+	gyms = circularPositions3(c,15,-20,20)
+	gymPos = gymPos + gyms
+	gymD = gymD + randomPotions2(gyms, cg, kBag)
+	
+	gyms = circularPositions3(c,15,-20,-20)
+	gymPos = gymPos + gyms
+	gymD = gymD + randomPotions2(gyms, cg, kBag)
+	
+	pps = randomPositions(cg, gymPos)
+
+	return gymD , pps, kBag
 
 ###############################################
 #				MAIN
 
-#plotInstance(randomInstance(4))
-
-random.seed(45)
-
-for i in xrange(5, 500):
-	lim = i
-	
-	if lim > 15:
-		lim+=50
-		lim = lim*(0.10)	
-	
-	lim = int(lim)
-	for j in xrange(1, lim):
-		r = randomInstance(i)
-		#plotInstance(r)
-		saveInstance(r,"random6.in","a")
+#plotInstance(someWithZeroInstance(40))
+saveInstance(ddInstance(60),"test.in","a")
+#for i in xrange(5,50):
+#	r = someWithZeroInstance(i)
+#	#plotInstance(r)
+#	saveInstance(r,"random5.in","a")
 #	pass
