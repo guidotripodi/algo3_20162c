@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 	int cant_pokeParadas = 0;
 	int cap_mochila = 0;
 
-	for(int j = 25; j < 500; j++){
+	for(int j = 5; j < 250; j++){
 		cant_gimnasios = j;
 		cant_pokeParadas = j+1;
 		pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
@@ -76,8 +76,8 @@ int main(int argc, char* argv[])
 		cap_mochila = cantMaxGym*3	;
 		
 		
-		cout << "Cantidad de elementos:" << cant_gimnasios + cant_pokeParadas << "\n";
 /*		
+		cout << "Cantidad de elementos:" << cant_gimnasios + cant_pokeParadas << "\n";
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 
 		for(i = 0; i < cant_gimnasios; i++){
@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
 
 
 		delete f;
-		j += 24;
+		j += 4;
 	}
 	return 0;
 }

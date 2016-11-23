@@ -184,16 +184,16 @@ def noPPInstance(n):
 
 random.seed(45)
 acum = 0
-for i in xrange(5, 15):
+for i in xrange(5, 20):
 	lim = i
 	for j in xrange(1, lim):
 		r = randomInstance(i)
 		acum = acum + 1
 		#plotInstance(r)
-		saveInstance(r,"corridaRandom.in","a")
+		saveInstance(r,"randomPrueba.in","a")
 
 
-for i in xrange(15, 1000, 50):
+for i in xrange(20, 500, 10):
 	lim = i
 	tam = i
 	if lim > 15:
@@ -206,6 +206,6 @@ for i in xrange(15, 1000, 50):
 		r = randomInstance(tam)
 		acum = acum + 1
 		#plotInstance(r)
-		saveInstance(r,"corridaRandom.in","a")
+		saveInstance(r,"randomPrueba.in","a")
 #	pass
 print(acum)

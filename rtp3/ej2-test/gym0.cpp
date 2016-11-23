@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
 	int cant_pokeParadas = 0;
 	int cap_mochila = 0;
 	int i = 0;
-	for(int j = 25; j < 500; j++){
+	for(int j = 5; j < 250; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
 			cout << "-1" << "\n";
 			//return -1;
 		}else{
-			cout << f->first ;/*<<" "<< f->second->size() << " ";
+			cout << f->first ; /*<<" "<< f->second->size() << " ";
 			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << *it << " ";
 			}
@@ -116,7 +116,7 @@ int main(int argc, char* argv[])
 		cout << "\n";
 */
 		delete f;
-		j = j + 24;
+		j = j + 4;
 	}
 	return 0;
 }
