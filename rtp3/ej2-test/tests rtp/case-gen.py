@@ -124,8 +124,7 @@ def randomInstance(n):
 	
 	mochila = n
 	
-	#if mochila >= 10:
-	mochila = int(mochila*.50)
+	mochila = int(3*cg*.10)
 	
 	gyms = randomPositions(n-cg)
 	pps = randomPositions(n-len(gyms), gyms)
@@ -174,7 +173,7 @@ def noPPInstance(n):
 ###############################################
 #				MAIN
 
-fileName = "random50.in"
+fileName = "random10.in"
 
 open(fileName, 'w+').close()
 
@@ -182,6 +181,18 @@ open(fileName, 'w+').close()
 
 random.seed(45)
 
+i= 100
+lim= i
+tam = lim
+lim = lim*(0.10)	
+
+lim = int(lim)
+for j in xrange(1, lim):
+	r = randomInstance(tam)
+	#plotInstance(r)
+	saveInstance(r,fileName,"a")
+
+'''
 acum = 0
 for i in xrange(5, 20):
 	lim = i
@@ -207,3 +218,4 @@ for i in xrange(20, 500, 10):
 		saveInstance(r,fileName,"a")
 #	pass
 print(acum)
+'''

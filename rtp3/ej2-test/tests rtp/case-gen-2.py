@@ -229,8 +229,7 @@ def ddInstance(n):
 
 	kBag = n
 
-	#if kBag >= 10:
-	kBag = int(kBag*.50)
+	kBag = int(3*pp*.10)
 
 	tot = 0
 
@@ -328,7 +327,7 @@ def ddInstance(n):
 ###################i############################
 #				MAIN
 
-fileName = "familia50.in"
+fileName = "familia10.in"
 il
 open(fileName, 'w+').close()
 
@@ -336,6 +335,18 @@ open(fileName, 'w+').close()
 
 random.seed(45)
 
+i= 100
+lim= i
+tam = lim
+lim = lim*(0.10)	
+
+lim = int(lim)
+for j in xrange(1, lim):
+	r = randomInstance(tam)
+	#plotInstance(r)
+	saveInstance(r,fileName,"a")
+
+'''
 acum = 0
 for i in xrange(5, 20):
 	lim = i
@@ -361,4 +372,4 @@ for i in xrange(20, 500, 10):
 		saveInstance(r,fileName,"a")
 #	pass
 print(acum)
-
+'''
