@@ -101,21 +101,24 @@ int main(int argc, char* argv[])
 
  pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[])
 {
+	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
+	/*
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
 	int pocionesANecesitar = 0;
 	for (int i = 0; i < cant_gimnasios; ++i){
 		pocionesANecesitar = pocionesANecesitar + posiciones_gym[i].second;
 		if (posiciones_gym[i].second > cap_mochila || posiciones_gym[i].second > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-			
-			return NULL;
+			final->first = -1;
+			return final;
 		}
 	}
 	if(pocionesANecesitar > cantidadTotalDePocionesConSuerte){
 			//Sin solucion!
-		
-		return NULL;
+		final->first = -1;
+		return final;
 	}
+	*/
 	bool exitoBack = true;
 	
 	int minimo = -1; 
@@ -123,7 +126,7 @@ int main(int argc, char* argv[])
 	std::list<int> * camino;
 	while(exitoBack){
 		//ash.printStatus();
-		if (ash.gane())
+		/*if (ash.gane())
 		{
 			if (ash.distancia < minimo || minimo == -1)
 			{
@@ -133,17 +136,18 @@ int main(int argc, char* argv[])
 
 			}
 			
-		}
+		}*/
 
 		MaestroPokemon::Eleccion eleccion = ash.eleccionPosible();
 			//Si hay un par posible y si la rama que estoy evaluando
 			//me sigue dando una mejor solucion a la ya encontrada
 
-		if (eleccion.posible==1 && (minimo == -1 || ash.distancia<minimo))
+		if (eleccion.posible==1)
 		{
 			//printf("La eleccion tiene una distancia: %d \n",eleccion.distancia );
 
 			//ash.printEleccion(eleccion);
+			//cout << "Eligiendo \n" ;
 			ash.elegir(eleccion);
 		}else{
 				//vuelve al paso anterior
@@ -152,7 +156,6 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
 	final->first = minimo;
 	final->second = camino;
 	return final;
