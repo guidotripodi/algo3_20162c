@@ -45,7 +45,8 @@ int main(int argc, char* argv[])
 
 		}
 	
-		printf("%d %d %d ,", cant_gimnasios, cant_pokeParadas, cap_mochila);
+		printf("%d %d %d", cant_gimnasios, cant_pokeParadas, cap_mochila);
+		cout << ",";
 /*		cout << "Cantidad de elementos:" << "," << cant_gimnasios + cant_pokeParadas << ",";
 
 		for(i = 0; i < cant_gimnasios; i++){
