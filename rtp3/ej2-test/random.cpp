@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
 
 		}
 	
-		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
+		printf("%d %d %d ,", cant_gimnasios, cant_pokeParadas, cap_mochila);
 /*		cout << "Cantidad de elementos:" << "," << cant_gimnasios + cant_pokeParadas << ",";
 
 		for(i = 0; i < cant_gimnasios; i++){
@@ -72,10 +72,10 @@ int main(int argc, char* argv[])
 			cout << "-1" << "\n";
 			//return -1;
 		}else{
-			cout << f->first <<" "<< f->second->size();
-			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
+			cout << f->first <<" ";//<< f->second->size();
+			/*for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << " " << *it;
-			}
+			}*/
 		}
 		cout << "\n";
 		delete f;
