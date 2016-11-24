@@ -212,8 +212,6 @@ def someWithZeroInstance(n):
 	return gymsD + gyms0, pps, mochila
 
 def ddInstance(n):
-	#al menos 4 gyms
-
 	pp = randint(1, n)
 	gms = n-pp
 
@@ -229,7 +227,10 @@ def ddInstance(n):
 	print("cant gims")
 	print(gms)
 
-	kBag = n*.25
+	kBag = n
+
+	#if kBag >= 10:
+	kBag = int(kBag*.50)
 
 	tot = 0
 
@@ -250,20 +251,26 @@ def ddInstance(n):
 	powersSet = set()
 
 	maxPoc = 3*pp/gms
-
-	print("max poc")
-	print(maxPoc)
-
-	poc = 1
 	
 	if kBag < maxPoc:
 		maxPoc	= kBag
 
-	while len(powersSet) < 4:
-		poc = randint(0, maxPoc)
-		powersSet.add(poc)
+	print("max poc")
+	print(maxPoc)
+
+	if maxPoc > 4:
+		poc = 1
+		while len(powersSet) < 4:
+			poc = randint(0, maxPoc)
+			powersSet.add(poc)
 
 	if len(powersList) == 0:
+		if len(powersSet) == 0:
+			powersList.append(1)
+			powersList.append(1)
+			powersList.append(1)
+			powersList.append(1)
+		
 		while len(powersSet) > 0:
 			powersList.append(powersSet.pop())
 
@@ -321,10 +328,14 @@ def ddInstance(n):
 ###############################################
 #				MAIN
 
-fileName = "random25.in"
-random.seed(45)
+fileName = "random50.in"
+
 open(fileName, 'w+').close()
-#saveInstance(ddInstance(8),fileName,"a")
+
+#saveInstance(ddInstance(6),fileName,"a")
+
+random.seed(45)
+
 acum = 0
 for i in xrange(5, 20):
 	lim = i
@@ -350,3 +361,4 @@ for i in xrange(20, 500, 10):
 		saveInstance(r,fileName,"a")
 #	pass
 print(acum)
+

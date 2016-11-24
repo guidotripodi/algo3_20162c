@@ -121,7 +121,12 @@ def saveInstance(instance, file, mode="w"):
  #		  mochila K=10
 def randomInstance(n):
 	cg = randint(1,n-1)
-	mochila = n*.25
+	
+	mochila = n
+	
+	#if mochila >= 10:
+	mochila = int(mochila*.50)
+	
 	gyms = randomPositions(n-cg)
 	pps = randomPositions(n-len(gyms), gyms)
 	gymsD = randomPotions(gyms, pps, mochila)
@@ -166,15 +171,17 @@ def noPPInstance(n):
 	gymsD = randomPotions(gyms, pps, 10)
 	return gymsD, [], 10
 
-
-
 ###############################################
 #				MAIN
 
-fileName = "random25.in"
-random.seed(45)
+fileName = "random50.in"
+
 open(fileName, 'w+').close()
-#saveInstance(ddInstance(8),fileName,"a")
+
+#saveInstance(randomInstance(8),fileName,"a")
+
+random.seed(45)
+
 acum = 0
 for i in xrange(5, 20):
 	lim = i
@@ -200,3 +207,4 @@ for i in xrange(20, 500, 10):
 		saveInstance(r,fileName,"a")
 #	pass
 print(acum)
+'''
