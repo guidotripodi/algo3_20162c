@@ -121,10 +121,8 @@ def saveInstance(instance, file, mode="w"):
  #		  mochila K=10
 def randomInstance(n):
 	cg = randint(1,n-1)
-	
-	mochila = n
-	
-	mochila = ceil(3*cg*.10)
+
+	mochila = int(ceil(3*cg*.10))
 	
 	gyms = randomPositions(n-cg)
 	pps = randomPositions(n-len(gyms), gyms)

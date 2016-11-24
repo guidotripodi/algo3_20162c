@@ -227,10 +227,8 @@ def ddInstance(n):
 	print("cant gims")
 	print(gms)
 
-	kBag = n
-
-	kBag = ceil(3*pp*.10)
-
+	kBag = int(ceil(3*pp*.10))
+	
 	tot = 0
 
 	cants = []
@@ -341,7 +339,7 @@ lim = lim*(0.10)
 
 lim = int(lim)
 for j in xrange(1, lim):
-	r = randomInstance(tam)
+	r = ddInstance(tam)
 	#plotInstance(r)
 	saveInstance(r,fileName,"a")
 
