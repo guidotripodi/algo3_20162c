@@ -211,14 +211,13 @@ def someWithZeroInstance(n):
 
 def ddInstance(n):
 	#al menos 4 gyms
-	min = 4
 
-	pp = randint(1, n-min)
-	gms = n-min-pp
+	pp = randint(1, n)
+	gms = n-pp
 
-	while pp <= gms/3:
-		pp = randint(1, n-min)
-		gms = n-min-pp
+	while pp*3 < gms:
+		pp = randint(1, n)
+		gms = n-pp
 	
 	print("cant pp")
 	print(pp)
@@ -327,9 +326,9 @@ def ddInstance(n):
 #				MAIN
 
 open("test.in", 'w+').close()
-#saveInstance(ddInstance(60),"test.in","a")
-for i in xrange(6,100):
-	r = ddInstance(i)
-	#plotInstance(r)
-	saveInstance(r,"random5.in","a")
-	pass
+saveInstance(ddInstance(8),"test.in","a")
+#for i in xrange(6,100):
+#	r = ddInstance(i)
+#	#plotInstance(r)
+#	saveInstance(r,"random5.in","a")
+#	pass
