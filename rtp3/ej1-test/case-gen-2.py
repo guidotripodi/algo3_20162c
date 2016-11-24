@@ -325,11 +325,11 @@ def ddInstance(n):
 
 	return gymD , pps, kBag
 
-###############################################
+###################i############################
 #				MAIN
 
-fileName = "random50.in"
-
+fileName = "familia50.in"
+il
 open(fileName, 'w+').close()
 
 #saveInstance(ddInstance(6),fileName,"a")

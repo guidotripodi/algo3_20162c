@@ -207,4 +207,3 @@ for i in xrange(20, 500, 10):
 		saveInstance(r,fileName,"a")
 #	pass
 print(acum)
-'''
