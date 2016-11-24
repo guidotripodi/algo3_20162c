@@ -229,7 +229,7 @@ def ddInstance(n):
 
 	kBag = n
 
-	kBag = int(3*pp*.10)
+	kBag = ceil(3*pp*.10)
 
 	tot = 0
 
@@ -328,15 +328,14 @@ def ddInstance(n):
 #				MAIN
 
 fileName = "familia10.in"
-il
+
 open(fileName, 'w+').close()
 
 #saveInstance(ddInstance(6),fileName,"a")
 
 random.seed(45)
 
-i= 100
-lim= i
+lim= 100
 tam = lim
 lim = lim*(0.10)	
 

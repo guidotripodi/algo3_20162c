@@ -124,7 +124,7 @@ def randomInstance(n):
 	
 	mochila = n
 	
-	mochila = int(3*cg*.10)
+	mochila = ceil(3*cg*.10)
 	
 	gyms = randomPositions(n-cg)
 	pps = randomPositions(n-len(gyms), gyms)
@@ -181,8 +181,7 @@ open(fileName, 'w+').close()
 
 random.seed(45)
 
-i= 100
-lim= i
+lim= 100
 tam = lim
 lim = lim*(0.10)	
 
