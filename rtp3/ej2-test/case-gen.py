@@ -30,9 +30,6 @@ def randomPositions(n, notin=[]):
 	return li
 
 def circularPositions(n, notin=[], rad_circ=10, dist_anillos = 10):
-
-
-
 	li = []
 	while n>0:
 
@@ -114,12 +111,6 @@ def saveInstance(instance, file, mode="w"):
 
 	target.close()
 
-
-
-
-
-
-
 ###############################################
 #				INSTANCIAS
 
@@ -130,7 +121,7 @@ def saveInstance(instance, file, mode="w"):
  #		  mochila K=10
 def randomInstance(n):
 	cg = randint(1,n-1)
-	mochila = 10
+	mochila = n*.25
 	gyms = randomPositions(n-cg)
 	pps = randomPositions(n-len(gyms), gyms)
 	gymsD = randomPotions(gyms, pps, mochila)
@@ -180,9 +171,10 @@ def noPPInstance(n):
 ###############################################
 #				MAIN
 
-#plotInstance(randomInstance(4))
-
+fileName = "random25.in"
 random.seed(45)
+open(fileName, 'w+').close()
+#saveInstance(ddInstance(8),fileName,"a")
 acum = 0
 for i in xrange(5, 20):
 	lim = i
@@ -190,8 +182,7 @@ for i in xrange(5, 20):
 		r = randomInstance(i)
 		acum = acum + 1
 		#plotInstance(r)
-		saveInstance(r,"randomPrueba.in","a")
-
+		saveInstance(r,fileName,"a")
 
 for i in xrange(20, 500, 10):
 	lim = i
@@ -206,6 +197,6 @@ for i in xrange(20, 500, 10):
 		r = randomInstance(tam)
 		acum = acum + 1
 		#plotInstance(r)
-		saveInstance(r,"randomPrueba.in","a")
+		saveInstance(r,fileName,"a")
 #	pass
 print(acum)

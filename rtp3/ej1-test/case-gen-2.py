@@ -1,5 +1,7 @@
 from pylab import *
 
+import random
+
  # Como utilizar
  #Para armar una instancia hay que determinar:
  #			- Un metodo que posicione los elementos : Seccion GENERADORES DE POSICIONES
@@ -227,7 +229,7 @@ def ddInstance(n):
 	print("cant gims")
 	print(gms)
 
-	kBag = randint(10, 50)
+	kBag = n*.25
 
 	tot = 0
 
@@ -257,15 +259,9 @@ def ddInstance(n):
 	if kBag < maxPoc:
 		maxPoc	= kBag
 
-	if maxPoc > 4:
-		while len(powersSet) < 4:
-			poc = randint(0, maxPoc)
-			powersSet.add(poc)
-	else:
-		powersList.append(1)
-		powersList.append(1)
-		powersList.append(1)
-		powersList.append(1)
+	while len(powersSet) < 4:
+		poc = randint(0, maxPoc)
+		powersSet.add(poc)
 
 	if len(powersList) == 0:
 		while len(powersSet) > 0:
@@ -325,10 +321,32 @@ def ddInstance(n):
 ###############################################
 #				MAIN
 
-open("test.in", 'w+').close()
-saveInstance(ddInstance(8),"test.in","a")
-#for i in xrange(6,100):
-#	r = ddInstance(i)
-#	#plotInstance(r)
-#	saveInstance(r,"random5.in","a")
+fileName = "random25.in"
+random.seed(45)
+open(fileName, 'w+').close()
+#saveInstance(ddInstance(8),fileName,"a")
+acum = 0
+for i in xrange(5, 20):
+	lim = i
+	for j in xrange(1, lim):
+		r = ddInstance(i)
+		acum = acum + 1
+		#plotInstance(r)
+		saveInstance(r,fileName,"a")
+
+for i in xrange(20, 500, 10):
+	lim = i
+	tam = i
+	if lim > 15:
+		lim+=50
+		tam = lim
+		lim = lim*(0.10)	
+	
+	lim = int(lim)
+	for j in xrange(1, lim):
+		r = ddInstance(tam)
+		acum = acum + 1
+		#plotInstance(r)
+		saveInstance(r,fileName,"a")
 #	pass
+print(acum)
