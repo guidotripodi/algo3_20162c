@@ -168,7 +168,7 @@ def noPPInstance(n):
 #				MAIN
 
 random.seed(45)
-
+'''
 n = 100
 lim = n
 
@@ -191,7 +191,7 @@ while porc <= 1:
 
 	open(fileName, 'w+').close()
 
-	kBag = int(ceil(pp*porc))
+	kBag = int(ceil(n*porc))
 
 	lim = int(lim)
 	for j in xrange(1, lim):
@@ -202,24 +202,22 @@ while porc <= 1:
 	porc+=.10
 
 '''
-open(fileName, 'w+').close()
+fileName = "random50.txt"
 
-fileName = "random10.txt"
+open(fileName, 'w+').close()
 
 acum = 0
 for i in xrange(5, 20):
 	lim = i
 	for j in xrange(1, lim):
 		pp = randint(1, i)
-		gms = n-pp
+		gms = i-pp
 
 		while pp*3 < gms:
-			pp = randint(1, n)
-			gms = n-pp
+			pp = randint(1, i)
+			gms = i-pp
 
-		gms = n-pp 
-
-		kBag = int(ceil(pp*.10))
+		kBag = int(ceil(i*.5))
 		
 		r = randomInstance(pp, gms, kBag)
 		
@@ -238,15 +236,13 @@ for i in xrange(20, 500, 10):
 	lim = int(lim)
 	for j in xrange(1, lim):
 		pp = randint(1, tam)
-		gms = n-pp
+		gms = tam-pp
 
 		while pp*3 < gms:
-			pp = randint(1, n)
-			gms = n-pp
+			pp = randint(1, tam)
+			gms = tam-pp
 
-		gms = n-pp 
-
-		kBag = int(ceil(pp*.10))
+		kBag = int(ceil(tam*.5))
 
 		r = randomInstance(pp, gms, kBag)
 
@@ -255,4 +251,3 @@ for i in xrange(20, 500, 10):
 		saveInstance(r,fileName,"a")
 
 print(acum)
-'''

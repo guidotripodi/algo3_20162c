@@ -217,9 +217,12 @@ def ddInstance(pp = 1, gms = 1, kBag = 3, maxPoc = 1):
 	cants = []
 
 	while len(cants) < 4:
-		r = randint(0, gms-tot)
-		tot += r
-		cants.append(r)
+		if gms-tot == 0:
+			cants.append(0)
+		else:
+			r = randint(0, gms-tot)
+			tot += r
+			cants.append(r)
 
 	#objetos remanentes - se los doy al que popee
 	if gms-tot > 0:
@@ -245,11 +248,6 @@ def ddInstance(pp = 1, gms = 1, kBag = 3, maxPoc = 1):
 		
 		while len(powersSet) > 0:
 			powersList.append(powersSet.pop())
-
-	print("cants by cuad")
-	print(cants)
-	print("powers by cuad")
-	print(powersList)
 
 	maxRad = 0
 	maxXY = 0
@@ -301,7 +299,7 @@ def ddInstance(pp = 1, gms = 1, kBag = 3, maxPoc = 1):
 #				MAIN
 
 random.seed(45)
-
+'''
 n = 100
 lim = n
 
@@ -324,7 +322,7 @@ while porc <= 1:
 
 	open(fileName, 'w+').close()
 
-	kBag = int(ceil(pp*porc))
+	kBag = int(ceil(n*porc))
 
 	maxPoc = 3*pp/gms
 
@@ -340,24 +338,22 @@ while porc <= 1:
 	porc+=.10
 
 '''
-open(fileName, 'w+').close()
+fileName = "familia50.txt"
 
-fileName = "familia10.txt"
+open(fileName, 'w+').close()
 
 acum = 0
 for i in xrange(5, 20):
 	lim = i
 	for j in xrange(1, lim):
 		pp = randint(1, i)
-		gms = n-pp
+		gms = i-pp
 
 		while pp*3 < gms:
-			pp = randint(1, n)
-			gms = n-pp
+			pp = randint(1, i)
+			gms = i-pp
 
-		gms = n-pp 
-
-		kBag = int(ceil(pp*.10))
+		kBag = int(ceil(i*.5))
 
 		maxPoc = 3*pp/gms
 
@@ -381,15 +377,13 @@ for i in xrange(20, 500, 10):
 	lim = int(lim)
 	for j in xrange(1, lim):
 		pp = randint(1, tam)
-		gms = n-pp
+		gms = tam-pp
 
 		while pp*3 < gms:
-			pp = randint(1, n)
-			gms = n-pp
+			pp = randint(1, tam)
+			gms = tam-pp
 
-		gms = n-pp 
-
-		kBag = int(ceil(pp*.10))
+		kBag = int(ceil(tam*.5))
 
 		maxPoc = 3*pp/gms
 
@@ -403,4 +397,4 @@ for i in xrange(20, 500, 10):
 		saveInstance(r,fileName,"a")
 
 print(acum)
-'''
+
