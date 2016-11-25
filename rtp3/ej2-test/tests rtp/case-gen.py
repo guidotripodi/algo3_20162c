@@ -75,13 +75,28 @@ def randomPotions(gyms, pps, k_bag):
 		pociones_totales = pociones_totales - pociones
 	return gym_res
 
+def randomPotions2(gyms, pps):
+	gym_res = []
+	pociones_totales = 3*len(pps)
+
+	total = 0
+
+	for gym in gyms:
+		pociones = randint(0, pociones_totales)
+		if total+pociones < pociones_totales:
+			gym_res.append((gym, pociones))
+			total+= pociones
+		else:
+			gym_res.append(0)
+			
+	return gym_res
+
 def kPotions(gyms, k):
 	gym_res = [];
 	for gym in gyms:
 		pociones = k
 		gym_res.append((gym, pociones))
 	return gym_res
-
 
 ###############################################
 #				UTILITARIOS
@@ -119,12 +134,17 @@ def saveInstance(instance, file, mode="w"):
  #		  Pociones random pero con solucion
  #		  #gyms y #pp random
  #		  mochila K=10
-def randomInstance(pp = 1, gms = 1, kBag = 3):
+def randomInstance(pp = 1, gms = 1, weak = True):
 	gyms = randomPositions(gms)
 	pps = randomPositions(pp, gyms)
-	gymsD = randomPotions(gyms, pps, kBag)
+	powers = randomPotions2(gyms, pps)
+	
+	if weak:
+		kBag = min(powers) + 3
+	else:
+		kBag = sum(powers)
 
-	return gymsD, pps, kBag
+	return powers, pps, kBag
 
  #Disposicio circular: Determinado numero de gimnasios y pp
  #		  Posiciones en forma de anillos concentricos de radios 2, 1.5 1 0.5
@@ -168,43 +188,12 @@ def noPPInstance(n):
 #				MAIN
 
 random.seed(45)
-'''
-n = 100
-lim = n
 
-lim = lim*(0.20)	
-
-pp = randint(1, n)
-gms = n-pp
-
-while pp*3 < gms:
-	pp = randint(1, n)
-	gms = n-pp
-
-gms = n-pp 
-
-porc = .10
-
-while porc <= 1:
-
-	fileName = "random" + str(int(ceil(porc*100))) + ".txt"
-
-	open(fileName, 'w+').close()
-
-	kBag = int(ceil(n*porc))
-
-	lim = int(lim)
-	for j in xrange(1, lim):
-		r = randomInstance(pp, gms, kBag)
-	
-		saveInstance(r,fileName,"a")
-
-	porc+=.10
-
-'''
-fileName = "random50.txt"
+fileName = "randomWeak.txt"
 
 open(fileName, 'w+').close()
+
+weak = True
 
 acum = 0
 for i in xrange(5, 20):
@@ -217,9 +206,7 @@ for i in xrange(5, 20):
 			pp = randint(1, i)
 			gms = i-pp
 
-		kBag = int(ceil(i*.5))
-		
-		r = randomInstance(pp, gms, kBag)
+		r = randomInstance(pp, gms, weak)
 		
 		acum = acum + 1
 		
@@ -242,9 +229,7 @@ for i in xrange(20, 500, 10):
 			pp = randint(1, tam)
 			gms = tam-pp
 
-		kBag = int(ceil(tam*.5))
-
-		r = randomInstance(pp, gms, kBag)
+		r = randomInstance(pp, gms, weak)
 
 		acum = acum + 1
 
