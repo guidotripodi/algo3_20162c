@@ -211,7 +211,7 @@ def someWithZeroInstance(n):
 
 	return gymsD + gyms0, pps, mochila
 
-def ddInstance(pp = 1, gms = 1, weak = True):	
+def ddInstance(pp = 1, gms = 1):	
 	tot = 0
 
 	cants = []
@@ -248,12 +248,10 @@ def ddInstance(pp = 1, gms = 1, weak = True):
 				powers.append(poc)	
 			else:
 				break
+					
+	cantsOut = cants
+	powersOut = powers
 							
-	if weak:
-		kBag = min(powers) + 3
-	else:
-		kBag = sum([p*c for p,c in zip(powers,cants)])
-
 	maxRad = 0
 	maxXY = 0
 
@@ -261,7 +259,7 @@ def ddInstance(pp = 1, gms = 1, weak = True):
 	if cant1 > 0:
 		gyms = circularPositions3(cant1,15*cant1,20*cant1,20*cant1)
 		gymPos = gyms
-		gymD = randomPotions2(gyms, powersList.pop())
+		gymD = randomPotions2(gyms, powers.pop())
 
 		maxRad = 15*cant1
 		maxXY = 20*cant1
@@ -270,7 +268,7 @@ def ddInstance(pp = 1, gms = 1, weak = True):
 	if cant2 > 0:
 		gyms = circularPositions3(cant2,15*cant2,20*cant2,-20*cant2)
 		gymsmPos = gymPos + gyms
-		gymD = gymD + randomPotions2(gyms, powersList.pop())
+		gymD = gymD + randomPotions2(gyms, powers.pop())
 		
 		if 15*cant2 > maxRad:
 			maxRad = 15*cant2
@@ -280,7 +278,7 @@ def ddInstance(pp = 1, gms = 1, weak = True):
 	if cant3 > 0:
 		gyms = circularPositions3(cant3,15*cant3,-20*cant3,20*cant3)
 		gymPos = gymPos + gyms
-		gymD = gymD + randomPotions2(gyms, powersList.pop())
+		gymD = gymD + randomPotions2(gyms, powers.pop())
 		
 		if 15*cant3 > maxRad:
 			maxRad = 15*cant3
@@ -290,7 +288,7 @@ def ddInstance(pp = 1, gms = 1, weak = True):
 	if cant4 > 0:
 		gyms = circularPositions3(cant4,15*cant4,-20*cant4,-20*cant4)
 		gymPos = gymPos + gyms
-		gymD = gymD + randomPotions2(gyms, powersList.pop())
+		gymD = gymD + randomPotions2(gyms, powers.pop())
 		
 		if 15*cant4 > maxRad:
 			maxRad = 15*cant4
@@ -298,58 +296,57 @@ def ddInstance(pp = 1, gms = 1, weak = True):
 
 	pps = randomPositions2(pp, gymPos, maxRad, maxXY)
 
-	return gymD , pps, kBag
+	return gymD, pps, cantsOut, powersOut
 
 ###################i############################
 #				MAIN
 
 random.seed(45)
 
-fileName = "familiaWeak.txt"
+fileNameWeak = "familiaWeak.txt"
+fileNameStrong = "familiaStrong.txt"
 
 open(fileName, 'w+').close()
 
-weak = True
-
 acum = 0
-for i in xrange(5, 20):
+
+for i in xrange(5, 500):
 	lim = i
-	for j in xrange(1, lim):
-		pp = randint(1, i)
-		gms = i-pp
-
-		while pp*3 < gms:
-			pp = randint(1, i)
-			gms = i-pp
-
-		r = ddInstance(pp, gms, weak)
-		
-		acum = acum + 1
-		
-		saveInstance(r,fileName,"a")
-
-for i in xrange(20, 500, 10):
-	lim = i
-	tam = i
-	if lim > 15:
-		lim+=50
-		tam = lim
-		lim = lim*(0.10)	
 	
-	lim = int(lim)
-	for j in xrange(1, lim):
-		pp = randint(1, tam)
+	if lim > 20:
+		lim+=50
+		lim = lim*(0.10)
+		lim = int(lim)
+
+	for j in xrange(1, i):
+		pp = randint(1, i)
 		gms = tam-pp
 
 		while pp*3 < gms:
-			pp = randint(1, tam)
+			pp = randint(1, i)
 			gms = tam-pp
 		
-		r = ddInstance(pp, gms, weak)
+		r = ddInstance(pp, gms)
+
+		cants = r[2]
+		powers = r[3]
+		
+		kBag = max(powers) + 3
+			
+		rOut = (r[0], r[1], kBag)
+		saveInstance(r,fileNameWeak,"a")
+		
+		kBag = sum([p*c for p,c in zip(powers,cants)])
+		
+		rOut = (r[0], r[1], kBag)
+		saveInstance(r,fileNameStrong,"a")
 
 		acum = acum + 1
 
-		saveInstance(r,fileName,"a")
-
+		if i == 171:
+			print(acum)
+		elif i == 221:
+			print(acum)
+			 
 print(acum)
 

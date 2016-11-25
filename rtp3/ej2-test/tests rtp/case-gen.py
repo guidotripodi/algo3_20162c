@@ -87,7 +87,7 @@ def randomPotions2(gyms, pps):
 			gym_res.append((gym, pociones))
 			total+= pociones
 		else:
-			gym_res.append(0)
+			gym_res.append((gym, 0))
 			
 	return gym_res
 
@@ -134,17 +134,12 @@ def saveInstance(instance, file, mode="w"):
  #		  Pociones random pero con solucion
  #		  #gyms y #pp random
  #		  mochila K=10
-def randomInstance(pp = 1, gms = 1, weak = True):
+def randomInstance(pp = 1, gms = 1):
 	gyms = randomPositions(gms)
 	pps = randomPositions(pp, gyms)
-	powers = randomPotions2(gyms, pps)
+	gymsD = randomPotions2(gyms, pps)
 	
-	if weak:
-		kBag = min(powers) + 3
-	else:
-		kBag = sum(powers)
-
-	return powers, pps, kBag
+	return gymsD, pps
 
  #Disposicio circular: Determinado numero de gimnasios y pp
  #		  Posiciones en forma de anillos concentricos de radios 2, 1.5 1 0.5
@@ -189,50 +184,50 @@ def noPPInstance(n):
 
 random.seed(45)
 
-fileName = "randomWeak.txt"
+fileNameWeak = "randomWeak.txt"
+fileNameStrong = "randomStrong.txt"
 
 open(fileName, 'w+').close()
 
-weak = True
-
 acum = 0
-for i in xrange(5, 20):
+
+for i in xrange(5, 500):
 	lim = i
-	for j in xrange(1, lim):
-		pp = randint(1, i)
-		gms = i-pp
-
-		while pp*3 < gms:
-			pp = randint(1, i)
-			gms = i-pp
-
-		r = randomInstance(pp, gms, weak)
-		
-		acum = acum + 1
-		
-		saveInstance(r,fileName,"a")
-
-for i in xrange(20, 500, 10):
-	lim = i
-	tam = i
-	if lim > 15:
-		lim+=50
-		tam = lim
-		lim = lim*(0.10)	
 	
-	lim = int(lim)
-	for j in xrange(1, lim):
-		pp = randint(1, tam)
+	if lim > 20:
+		lim+=50
+		lim = lim*(0.10)
+		lim = int(lim)
+
+	for j in xrange(1, i):
+		pp = randint(1, i)
 		gms = tam-pp
 
 		while pp*3 < gms:
-			pp = randint(1, tam)
+			pp = randint(1, i)
 			gms = tam-pp
+		
+		r = randomInstance(pp, gms)
 
-		r = randomInstance(pp, gms, weak)
+		gymsD = r[0]
+		
+		powers = [b for a,b in gymsD]
+		
+		kBag = max(powers) + 3
+			
+		rOut = (r[0], r[1], kBag)
+		saveInstance(r,fileNameWeak,"a")
+		
+		kBag = sum([p*c for p,c in zip(powers,cants)])
+		
+		rOut = (r[0], r[1], kBag)
+		saveInstance(r,fileNameStrong,"a")
 
 		acum = acum + 1
 
-		saveInstance(r,fileName,"a")
-
+		if i == 171:
+			print(acum)
+		elif i == 221:
+			print(acum)
+			 
 print(acum)
