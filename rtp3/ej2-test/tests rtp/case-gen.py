@@ -119,16 +119,12 @@ def saveInstance(instance, file, mode="w"):
  #		  Pociones random pero con solucion
  #		  #gyms y #pp random
  #		  mochila K=10
-def randomInstance(n):
-	cg = randint(1,n-1)
+def randomInstance(pp = 1, gms = 1, kBag = 3):
+	gyms = randomPositions(gms)
+	pps = randomPositions(pp, gyms)
+	gymsD = randomPotions(gyms, pps, kBag)
 
-	mochila = int(ceil(3*cg*.10))
-	
-	gyms = randomPositions(n-cg)
-	pps = randomPositions(n-len(gyms), gyms)
-	gymsD = randomPotions(gyms, pps, mochila)
-
-	return gymsD, pps, mochila
+	return gymsD, pps, kBag
 
  #Disposicio circular: Determinado numero de gimnasios y pp
  #		  Posiciones en forma de anillos concentricos de radios 2, 1.5 1 0.5
@@ -171,32 +167,64 @@ def noPPInstance(n):
 ###############################################
 #				MAIN
 
-fileName = "random10.in"
-
-open(fileName, 'w+').close()
-
-#saveInstance(randomInstance(8),fileName,"a")
-
 random.seed(45)
 
-lim= 100
-tam = lim
-lim = lim*(0.10)	
+n = 100
+lim = n
 
-lim = int(lim)
-for j in xrange(1, lim):
-	r = randomInstance(tam)
-	#plotInstance(r)
-	saveInstance(r,fileName,"a")
+lim = lim*(0.20)	
+
+pp = randint(1, n)
+gms = n-pp
+
+while pp*3 < gms:
+	pp = randint(1, n)
+	gms = n-pp
+
+gms = n-pp 
+
+porc = .10
+
+while porc <= 1:
+
+	fileName = "random" + str(int(ceil(porc*100))) + ".txt"
+
+	open(fileName, 'w+').close()
+
+	kBag = int(ceil(pp*porc))
+
+	lim = int(lim)
+	for j in xrange(1, lim):
+		r = randomInstance(pp, gms, kBag)
+	
+		saveInstance(r,fileName,"a")
+
+	porc+=.10
 
 '''
+open(fileName, 'w+').close()
+
+fileName = "random10.txt"
+
 acum = 0
 for i in xrange(5, 20):
 	lim = i
 	for j in xrange(1, lim):
-		r = randomInstance(i)
+		pp = randint(1, i)
+		gms = n-pp
+
+		while pp*3 < gms:
+			pp = randint(1, n)
+			gms = n-pp
+
+		gms = n-pp 
+
+		kBag = int(ceil(pp*.10))
+		
+		r = randomInstance(pp, gms, kBag)
+		
 		acum = acum + 1
-		#plotInstance(r)
+		
 		saveInstance(r,fileName,"a")
 
 for i in xrange(20, 500, 10):
@@ -209,10 +237,22 @@ for i in xrange(20, 500, 10):
 	
 	lim = int(lim)
 	for j in xrange(1, lim):
-		r = randomInstance(tam)
+		pp = randint(1, tam)
+		gms = n-pp
+
+		while pp*3 < gms:
+			pp = randint(1, n)
+			gms = n-pp
+
+		gms = n-pp 
+
+		kBag = int(ceil(pp*.10))
+
+		r = randomInstance(pp, gms, kBag)
+
 		acum = acum + 1
-		#plotInstance(r)
+
 		saveInstance(r,fileName,"a")
-#	pass
+
 print(acum)
 '''

@@ -211,24 +211,7 @@ def someWithZeroInstance(n):
 
 	return gymsD + gyms0, pps, mochila
 
-def ddInstance(n):
-	pp = randint(1, n)
-	gms = n-pp
-
-	while pp*3 < gms:
-		pp = randint(1, n)
-		gms = n-pp
-	
-	print("cant pp")
-	print(pp)
-
-	gms = n-pp 
-
-	print("cant gims")
-	print(gms)
-
-	kBag = int(ceil(3*pp*.10))
-	
+def ddInstance(pp = 1, gms = 1, kBag = 3, maxPoc = 1):	
 	tot = 0
 
 	cants = []
@@ -246,14 +229,6 @@ def ddInstance(n):
 
 	powersList = []
 	powersSet = set()
-
-	maxPoc = 3*pp/gms
-	
-	if kBag < maxPoc:
-		maxPoc	= kBag
-
-	print("max poc")
-	print(maxPoc)
 
 	if maxPoc > 4:
 		poc = 1
@@ -325,32 +300,74 @@ def ddInstance(n):
 ###################i############################
 #				MAIN
 
-fileName = "familia10.in"
-
-open(fileName, 'w+').close()
-
-#saveInstance(ddInstance(6),fileName,"a")
-
 random.seed(45)
 
-lim= 100
-tam = lim
-lim = lim*(0.10)	
+n = 100
+lim = n
 
-lim = int(lim)
-for j in xrange(1, lim):
-	r = ddInstance(tam)
-	#plotInstance(r)
-	saveInstance(r,fileName,"a")
+lim = lim*(0.20)	
+
+pp = randint(1, n)
+gms = n-pp
+
+while pp*3 < gms:
+	pp = randint(1, n)
+	gms = n-pp
+
+gms = n-pp 
+
+porc = .10
+
+while porc <= 1:
+
+	fileName = "familia" + str(int(ceil(porc*100))) + ".txt"
+
+	open(fileName, 'w+').close()
+
+	kBag = int(ceil(pp*porc))
+
+	maxPoc = 3*pp/gms
+
+	if kBag < maxPoc:
+		maxPoc	= kBag
+
+	lim = int(lim)
+	for j in xrange(1, lim):
+		r = ddInstance(pp, gms, kBag, maxPoc)
+		
+		saveInstance(r,fileName,"a")
+
+	porc+=.10
 
 '''
+open(fileName, 'w+').close()
+
+fileName = "familia10.txt"
+
 acum = 0
 for i in xrange(5, 20):
 	lim = i
 	for j in xrange(1, lim):
-		r = ddInstance(i)
+		pp = randint(1, i)
+		gms = n-pp
+
+		while pp*3 < gms:
+			pp = randint(1, n)
+			gms = n-pp
+
+		gms = n-pp 
+
+		kBag = int(ceil(pp*.10))
+
+		maxPoc = 3*pp/gms
+
+		if kBag < maxPoc:
+			maxPoc	= kBag
+		
+		r = ddInstance(pp, gms, kBag, maxPoc)
+		
 		acum = acum + 1
-		#plotInstance(r)
+		
 		saveInstance(r,fileName,"a")
 
 for i in xrange(20, 500, 10):
@@ -363,10 +380,27 @@ for i in xrange(20, 500, 10):
 	
 	lim = int(lim)
 	for j in xrange(1, lim):
-		r = ddInstance(tam)
+		pp = randint(1, tam)
+		gms = n-pp
+
+		while pp*3 < gms:
+			pp = randint(1, n)
+			gms = n-pp
+
+		gms = n-pp 
+
+		kBag = int(ceil(pp*.10))
+
+		maxPoc = 3*pp/gms
+
+		if kBag < maxPoc:
+			maxPoc	= kBag
+		
+		r = ddInstance(pp, gms, kBag, maxPoc)
+
 		acum = acum + 1
-		#plotInstance(r)
+
 		saveInstance(r,fileName,"a")
-#	pass
+
 print(acum)
 '''
