@@ -75,13 +75,28 @@ def randomPotions(gyms, pps, k_bag):
 		pociones_totales = pociones_totales - pociones
 	return gym_res
 
+def randomPotions2(gyms, pps):
+	gym_res = []
+	pociones_totales = 3*len(pps)
+
+	total = 0
+
+	for gym in gyms:
+		pociones = randint(0, pociones_totales)
+		if total+pociones < pociones_totales:
+			gym_res.append((gym, pociones))
+			total+= pociones
+		else:
+			gym_res.append((gym, 0))
+			
+	return gym_res
+
 def kPotions(gyms, k):
 	gym_res = [];
 	for gym in gyms:
 		pociones = k
 		gym_res.append((gym, pociones))
 	return gym_res
-
 
 ###############################################
 #				UTILITARIOS
@@ -119,12 +134,12 @@ def saveInstance(instance, file, mode="w"):
  #		  Pociones random pero con solucion
  #		  #gyms y #pp random
  #		  mochila K=10
-def randomInstance(pp = 1, gms = 1, kBag = 3):
+def randomInstance(pp = 1, gms = 1):
 	gyms = randomPositions(gms)
 	pps = randomPositions(pp, gyms)
-	gymsD = randomPotions(gyms, pps, kBag)
-
-	return gymsD, pps, kBag
+	gymsD = randomPotions2(gyms, pps)
+	
+	return gymsD, pps
 
  #Disposicio circular: Determinado numero de gimnasios y pp
  #		  Posiciones en forma de anillos concentricos de radios 2, 1.5 1 0.5
@@ -168,86 +183,51 @@ def noPPInstance(n):
 #				MAIN
 
 random.seed(45)
-'''
-n = 100
-lim = n
 
-lim = lim*(0.20)	
-
-pp = randint(1, n)
-gms = n-pp
-
-while pp*3 < gms:
-	pp = randint(1, n)
-	gms = n-pp
-
-gms = n-pp 
-
-porc = .10
-
-while porc <= 1:
-
-	fileName = "random" + str(int(ceil(porc*100))) + ".txt"
-
-	open(fileName, 'w+').close()
-
-	kBag = int(ceil(n*porc))
-
-	lim = int(lim)
-	for j in xrange(1, lim):
-		r = randomInstance(pp, gms, kBag)
-	
-		saveInstance(r,fileName,"a")
-
-	porc+=.10
-
-'''
-fileName = "random50.txt"
+fileNameWeak = "randomWeak.txt"
+fileNameStrong = "randomStrong.txt"
 
 open(fileName, 'w+').close()
 
 acum = 0
-for i in xrange(5, 20):
+
+for i in xrange(5, 500):
 	lim = i
-	for j in xrange(1, lim):
-		pp = randint(1, i)
-		gms = i-pp
-
-		while pp*3 < gms:
-			pp = randint(1, i)
-			gms = i-pp
-
-		kBag = int(ceil(i*.5))
-		
-		r = randomInstance(pp, gms, kBag)
-		
-		acum = acum + 1
-		
-		saveInstance(r,fileName,"a")
-
-for i in xrange(20, 500, 10):
-	lim = i
-	tam = i
-	if lim > 15:
-		lim+=50
-		tam = lim
-		lim = lim*(0.10)	
 	
-	lim = int(lim)
-	for j in xrange(1, lim):
-		pp = randint(1, tam)
+	if lim > 20:
+		lim+=50
+		lim = lim*(0.10)
+		lim = int(lim)
+
+	for j in xrange(1, i):
+		pp = randint(1, i)
 		gms = tam-pp
 
 		while pp*3 < gms:
-			pp = randint(1, tam)
+			pp = randint(1, i)
 			gms = tam-pp
+		
+		r = randomInstance(pp, gms)
 
-		kBag = int(ceil(tam*.5))
-
-		r = randomInstance(pp, gms, kBag)
+		gymsD = r[0]
+		
+		powers = [b for a,b in gymsD]
+		
+		kBag = max(powers) + 3
+			
+		rOut = (r[0], r[1], kBag)
+		saveInstance(r,fileNameWeak,"a")
+		
+		kBag = sum([p*c for p,c in zip(powers,cants)])
+		
+		rOut = (r[0], r[1], kBag)
+		saveInstance(r,fileNameStrong,"a")
 
 		acum = acum + 1
 
-		saveInstance(r,fileName,"a")
-
+		if i == 171:
+			print(acum)
+		elif i == 221:
+			print(acum)
+			 
 print(acum)
