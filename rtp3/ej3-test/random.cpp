@@ -52,8 +52,6 @@ Pokeparada *pokeParadasArrPtr;
 
 int main()
 {
-	vector<int> solucionesSwap[INSTANCIAS];
-	vector<int> soluciones2opt[INSTANCIAS];
 	
 	vector<int> tams(INSTANCIAS);
 	vector<long long> mejorasParciales(INSTANCIAS);
@@ -144,16 +142,14 @@ int main()
 		
 		//guardar datos
 		tams[j] = cantGyms + cantPokeParadas; 
-        mejorasParciales[j] = calcularCosto(solucionParcial);
+		mejorasParciales[j] = calcularCosto(solucionParcial);
 		mejorasSwap[j] = calcularCosto(solucionSwap);
-        mejoras2opt[j] = calcularCosto(solucion2opt);
-        solucionesSwap[j] = solucionSwap;
-        soluciones2opt[j] = solucion2opt;
+		mejoras2opt[j] = calcularCosto(solucion2opt);
         
 		delete solucionInicial;
     }
     
-    //imprimir csv
+	//imprimir csv
 	//tiempo queda pero no es promedio
 	//varianzas se van
 	cout
@@ -172,26 +168,18 @@ int main()
     
     
     
-    for( int k = 0; k < INSTANCIAS; k++ )
-    {
+	for( int k = 0; k < INSTANCIAS; k++ )
+	{
 		cout 
 			<< tams[k] << "," 
 			<< mejorasParciales[k] << ","
 			<< tiemposSwap[k] << ","
 			<< mejorasSwap[k] << ",";
         
-        for(int i = 0; i < (int) solucionesSwap[k].size(); i++)
-            cout << solucionesSwap[k][i] << " ";
-        cout << ",";
         
-        cout 
+		cout 
 			<< tiempos2opt[k] << ","
 			<< mejoras2opt[k] << ",";
-        
-        for(int i = 0; i < (int) soluciones2opt[k].size(); i++)
-            cout << soluciones2opt[k][i] << " ";
-        cout << ",";
-        
 	}
    
 	// TODO
