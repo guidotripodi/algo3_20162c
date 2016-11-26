@@ -104,11 +104,25 @@ int main()
 				pokeParadasArr, 
 				pokeParadasAux);
         
-        list<int> *solucionInicialLista = solucionInicial->second;
-        
-        if (solucionInicial->first == -1) {
+        list<int> *solucionInicialLista;
+		//la idea de este fix es:
+		//en casos invalidos hacer que solucionParcial
+		//sea un vector vacio
+		//en mejorasParciales[instancia] se guarda un 0 o -1
+		//(depende lo que da calcularCosto en vector vacio)
+		//chequeo eso para no promediar esos casos
+        if(solucionInicial == NULL)
+		{
+            solucionInicialLista = new list<int>();
+		}
+		else if(solucionInicial->first == -1) 
+		{
             solucionInicialLista = new list<int>();
         }
+		else
+		{
+			solucionInicialLista = solucionInicial->second;
+		}
         
         list<int>::iterator itLista;
         
@@ -222,20 +236,24 @@ int main()
 				<< "ERROR, tams[h]: " << tams[h] 
 				<< " tam: " << tam << "\n";
 
-			acumTiemposSwap += tiemposSwap[h];
-			acumMejoraSwap += mejorasSwap[h];
+			if(	mejorasParciales[h]== 0 ||
+					mejorasParciales[h] == -1)
+			{//INSTANCIA INVALIDA
+				inst--;
+				h++;
+			}
+			else
+			{
+				acumTiemposSwap += tiemposSwap[h];
+				acumMejoraSwap += mejorasSwap[h];
 
-			//Esto indica: la distancia obtenida con swap es el x% de
-			//la distancia del goloso
-			acumPercSwap += (mejorasSwap[h] * 100 )/ mejorasParciales[h];
-			//este otro diria: la distancia obtenida con swap mejora
-			//en un x% la distancia obtenida con el goloso
-			//acumPercSwap += (mejorasParciales[h] - mejorasSwap[h]) * 100 / mejorasParciales[h];
-			acumTiempos2opt += tiempos2opt[h];
-			acumMejora2opt += mejoras2opt[h];
-			acumPerc2opt += (mejoras2opt[h] * 100 )/ mejorasParciales[h];
-			t++;
-			h++;
+				acumPercSwap += (mejorasSwap[h] * 100 )/ mejorasParciales[h];
+				acumTiempos2opt += tiempos2opt[h];
+				acumMejora2opt += mejoras2opt[h];
+				acumPerc2opt += (mejoras2opt[h] * 100 )/ mejorasParciales[h];
+				t++;
+				h++;
+			}
 		}
 
 		//promedios	
