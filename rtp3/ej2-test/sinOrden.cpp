@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 	int cap_mochila = 0;
 
 
-	for(int j = 25; j < 500; j++){
+	for(int j = 10; j < 500; j++){
 		cant_gimnasios = j;
 		cant_pokeParadas = j*2;
 		pair <pair<int,int>, int> posiciones_gym[cant_gimnasios];
@@ -115,7 +115,7 @@ int main(int argc, char* argv[])
 
 
 		delete f;
-		j = j + 24;
+		j = j + 9;
 	}
 	return 0;
 }
