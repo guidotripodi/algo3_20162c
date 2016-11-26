@@ -33,8 +33,6 @@ int cantGyms, cantPokeParadas, capMochila;
 Gimnasio *gimnasiosArrPtr;
 Pokeparada *pokeParadasArrPtr;
 
-#define CANT_MAX_GYMS 101
-#define CANT_MAX_PP 100
 #define MAX_SIZE 20
 
 #define INSTANCIAS 1029 
@@ -174,13 +172,8 @@ int main()
 		<< "distancia goloso,"
 		<< "tiempo swap,"
 		<< "distancia swap,"
-		<< "solucion swap,"
 		<< "tiempo 2opt,"
 		<< "distancia 2opt,"
-		<< "solucion 2opt,"
-		<< "tiempo 3opt,"
-		<< "distancia 3opt,"
-		<< "solucion 3opt,"
 		<< "\n";
     
     
@@ -196,7 +189,7 @@ int main()
         
 		cout 
 			<< tiempos2opt[k] << ","
-			<< mejoras2opt[k] << ",";
+			<< mejoras2opt[k] << "\n";
 	}
    
 	// TODO
@@ -215,31 +208,18 @@ int main()
 	while(h < INSTANCIAS)
 	{
 		int tam = tams[h];
-		if(tam <= 20)
-		{
-			inst = tam;
-		}
-		else
-		{
-			inst = (int)(tam * 0.10);//techo o parte entera?
-		}
 		int acumTiemposSwap = 0;
 		int acumTiempos2opt = 0;
 		int acumMejoraSwap = 0;
 		int acumMejora2opt = 0;
 		float acumPercSwap = 0;
 		float acumPerc2opt = 0;
-		int t = 0;
-		while(t < inst)
+		while(tams[h] != tam)
 		{
-			if(tams[h] != tam) cerr 
-				<< "ERROR, tams[h]: " << tams[h] 
-				<< " tam: " << tam << "\n";
 
 			if(	mejorasParciales[h]== 0 ||
 					mejorasParciales[h] == -1)
 			{//INSTANCIA INVALIDA
-				inst--;
 				h++;
 			}
 			else
@@ -251,12 +231,21 @@ int main()
 				acumTiempos2opt += tiempos2opt[h];
 				acumMejora2opt += mejoras2opt[h];
 				acumPerc2opt += (mejoras2opt[h] * 100 )/ mejorasParciales[h];
-				t++;
+				inst++;
 				h++;
 			}
 		}
 
 		//promedios	
+		cout 
+			<< "tamaño,"
+			<< "promedio tiempos swap,"
+			<< "promedio distancias swap,"
+			<< "promedio porcentaje Swap,"
+			<< "promedio tiempos 2opt,"
+			<< "promedio distancias 2opt,"
+			<< "promedio porcentaje 2opt\n";
+
 		cout 
 			<< tam << ","
 			<< (acumTiemposSwap / inst) << ","
