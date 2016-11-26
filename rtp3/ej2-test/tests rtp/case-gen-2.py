@@ -234,26 +234,35 @@ def ddInstance(pp = 1, gms = 1):
 
 	poc = 0
 	total = 0
-	
-	powers.append(0)
-	powers.append(0)
-	powers.append(0)
-	powers.append(0)
-	
+		
 	while len(powers) < 4:
-		poc = randint(0, 3*pp)
+		poc = randint(1, 3*pp)
+		mc = min(3*pp, poc*cants[len(powers)])
 		if not poc in powers: 
-			total += poc*cants[len(powers)]
-			if total <= 3*pp:
+			total += mc
+			if total <= int(3*pp):
 				powers.append(poc)	
 			else:
-				break
-					
-	cantsOut = cants
-	powersOut = powers
-							
+				powers.append(0)
+	
+	zipeada = zip(cants, powers)
+	
+	shuffle(zipeada)
+	
+	unzipeada = zip(*zipeada)
+	
+	cants = list(unzipeada[0])
+	powers = list(unzipeada[1])
+
+	cantsOut = list(cants)
+	powersOut = list(powers)
+			
 	maxRad = 0
 	maxXY = 0
+	
+	gyms = []
+	gymPos = []
+	gymD = []
 
 	cant1 = cants.pop()
 	if cant1 > 0:
@@ -306,24 +315,21 @@ random.seed(45)
 fileNameWeak = "familiaWeak.txt"
 fileNameStrong = "familiaStrong.txt"
 
-open(fileName, 'w+').close()
+open(fileNameWeak, 'w+').close()
+open(fileNameStrong, 'w+').close()
 
 acum = 0
 
-for i in xrange(5, 500):
+for i in xrange(5, 20):
 	lim = i
+	tam = i
 	
-	if lim > 20:
-		lim+=50
-		lim = lim*(0.10)
-		lim = int(lim)
-
-	for j in xrange(1, i):
-		pp = randint(1, i)
+	for j in xrange(1, tam):
+		pp = randint(1, tam)
 		gms = tam-pp
 
 		while pp*3 < gms:
-			pp = randint(1, i)
+			pp = randint(1, tam)
 			gms = tam-pp
 		
 		r = ddInstance(pp, gms)
@@ -334,19 +340,51 @@ for i in xrange(5, 500):
 		kBag = max(powers) + 3
 			
 		rOut = (r[0], r[1], kBag)
-		saveInstance(r,fileNameWeak,"a")
+		saveInstance(rOut,fileNameWeak,"a")
 		
 		kBag = sum([p*c for p,c in zip(powers,cants)])
 		
 		rOut = (r[0], r[1], kBag)
-		saveInstance(r,fileNameStrong,"a")
+		saveInstance(rOut,fileNameStrong,"a")
 
 		acum = acum + 1
 
-		if i == 171:
-			print(acum)
-		elif i == 221:
-			print(acum)
+for i in xrange(20, 500, 50):
+	lim = i
+	tam = i
+	
+	lim = lim*(0.10)
+	lim = int(lim)
+
+	for j in xrange(1, tam):
+		pp = randint(1, tam)
+		gms = tam-pp
+
+		while pp*3 < gms:
+			pp = randint(1, tam)
+			gms = tam-pp
+		
+		r = ddInstance(pp, gms)
+
+		cants = r[2]
+		powers = r[3]
+		
+		kBag = max(powers) + 3
+			
+		rOut = (r[0], r[1], kBag)
+		saveInstance(rOut,fileNameWeak,"a")
+		
+		kBag = sum([p*c for p,c in zip(powers,cants)])
+		
+		rOut = (r[0], r[1], kBag)
+		saveInstance(rOut,fileNameStrong,"a")
+
+		acum = acum + 1
+
+	if i == 120:
+		print(acum)
+	elif i == 270:
+		print(acum)
 			 
 print(acum)
 

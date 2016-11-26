@@ -111,6 +111,9 @@ def plotInstance(i):
 	show()
 
 def saveInstance(instance, file, mode="w"):
+
+	#print(file)
+
 	g = instance[0]
 	p = instance[1]
 	m = instance[2]
@@ -187,24 +190,21 @@ random.seed(45)
 fileNameWeak = "randomWeak.txt"
 fileNameStrong = "randomStrong.txt"
 
-open(fileName, 'w+').close()
+open(fileNameWeak, 'w+').close()
+open(fileNameStrong, 'w+').close()
 
 acum = 0
 
-for i in xrange(5, 500):
+for i in xrange(5, 20):
 	lim = i
+	tam = i
 	
-	if lim > 20:
-		lim+=50
-		lim = lim*(0.10)
-		lim = int(lim)
-
-	for j in xrange(1, i):
-		pp = randint(1, i)
+	for j in xrange(1, tam):
+		pp = randint(1, tam)
 		gms = tam-pp
 
 		while pp*3 < gms:
-			pp = randint(1, i)
+			pp = randint(1, tam)
 			gms = tam-pp
 		
 		r = randomInstance(pp, gms)
@@ -216,18 +216,51 @@ for i in xrange(5, 500):
 		kBag = max(powers) + 3
 			
 		rOut = (r[0], r[1], kBag)
-		saveInstance(r,fileNameWeak,"a")
+		saveInstance(rOut,fileNameWeak,"a")
 		
-		kBag = sum([p*c for p,c in zip(powers,cants)])
+		kBag = sum([b for a,b in gymsD])
 		
 		rOut = (r[0], r[1], kBag)
-		saveInstance(r,fileNameStrong,"a")
+		saveInstance(rOut,fileNameStrong,"a")
 
 		acum = acum + 1
 
-		if i == 171:
-			print(acum)
-		elif i == 221:
-			print(acum)
+for i in xrange(20, 500, 50):
+	lim = i
+	tam = i
+	
+	lim = lim*(0.10)
+	lim = int(lim)
+	
+	for j in xrange(1, tam):
+		pp = randint(1, tam)
+		gms = tam-pp
+
+		while pp*3 < gms:
+			pp = randint(1, tam)
+			gms = tam-pp
+		
+		r = randomInstance(pp, gms)
+
+		gymsD = r[0]
+		
+		powers = [b for a,b in gymsD]
+		
+		kBag = max(powers) + 3
+			
+		rOut = (r[0], r[1], kBag)
+		saveInstance(rOut,fileNameWeak,"a")
+				
+		kBag = sum([b for a,b in gymsD])
+		
+		rOut = (r[0], r[1], kBag)
+		saveInstance(rOut,fileNameStrong,"a")
+
+		acum = acum + 1
+
+	if i == 120:
+		print(acum)
+	elif i == 270:
+		print(acum)
 			 
 print(acum)
