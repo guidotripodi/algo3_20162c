@@ -16,8 +16,13 @@ pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_
 
 int main(int argc, char* argv[])
 {
-
-	for (int j = 0; j < 11; ++j)
+	cout << "Entrada" << "," << "Medicion" << "," << "Data" << "\n";
+	int cantidadElementos = 0;
+	int cant_aux = 0;
+	int cantidadInstancia = 1;
+	long long medicion = 0;
+	long long data = 0;
+	for (int j = 0; j < 100; ++j)
 	{
 		int cant_gimnasios, cant_pokeParadas, cap_mochila;
 		cin >> cant_gimnasios >> cant_pokeParadas >> cap_mochila;
@@ -55,29 +60,38 @@ int main(int argc, char* argv[])
 
 			}
 */
+			cant_aux = cant_pokeParadas + cant_gimnasios;
+		if (cantidadElementos == 0)	{
+			cantidadElementos = cant_pokeParadas + cant_gimnasios;
+		}
+		if (cantidadElementos != cant_aux && cantidadElementos != 0){
+			cout << cant_gimnasios + cant_pokeParadas << ",";
+			cout << medicion/cantidadInstancia << "," << data/cantidadInstancia << "\n";
+			medicion = 0;
+			data = 0;
+			cantidadElementos = cant_pokeParadas + cant_gimnasios;
+			cantidadInstancia = 1;
+		}else{
+			cantidadInstancia++;			
+		}
 		pair <int,std::list<int> * > * f;
-			for (int h = 0; h < 1; ++h){
-
+		
 		auto start = ya();
 		f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
-	auto end = ya();
-		if(h == 0){
-			    cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-				cout << "\n";
-			}
-		}
-/*
-		if ( f == NULL || f->first == -1)	{
-			cout << "-1" << "\n";
+		auto end = ya();
+		 medicion += chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+		
+
+	if ( f == NULL || f->first == -1)	{
+			//cout << "-1" << "\n";
 			//return -1;
 		}else{
-			cout << f->first <<" "<< f->second->size();
-			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
+			//cout << f->first <<" ";//<< f->second->size();
+			data += f->first;
+			/*for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << " " << *it;
-			}
+			}*/
 		}
-		cout << "\n";
-*/
 
 
 		delete f;

@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 	pair <pair<int,int>, int> posiciones_gym[cantMaxGym];
 	pair <int, int>  posiciones_pp[cantMaxPP];
 	
-	for(int j = 1; j < 1; j++){
+	for(int j = 1; j < 20; j++){
 		cant_gimnasios = j+1;
 		cant_pokeParadas = j;
 		
