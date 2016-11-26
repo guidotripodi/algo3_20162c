@@ -13,7 +13,7 @@ using namespace std;
 
 
 
-pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]);
+pair <long long,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]);
 
 int main(int argc, char* argv[])
 {
@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 
 			}
 */
-		pair <int,std::list<int> * > * f;
+		pair <long long,std::list<int> * > * f;
 		auto start = ya();
 		f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
 		auto end = ya();
@@ -98,7 +98,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
- pair <int,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
+ pair <long long,std::list<int> * > * algoritmoResolucion(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int>  posiciones_pp[], pair<int,int>  pp_aux[])
 {
 	int cantidadTotalDePocionesConSuerte = 3 * cant_pokeParadas;
 	int pocionesANecesitar = 0;
@@ -119,7 +119,7 @@ int main(int argc, char* argv[])
 
 	bool posible = true;
 
-	int minimo = -1;
+	long long minimo = -1;
 	std::list<int> * camino;
 
 
@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	pair <int,std::list<int>*> * final = new pair <int,std::list<int> * >;
+	pair <long long,std::list<int>*> * final = new pair <long long,std::list<int> * >;
 	final->first = minimo;
 	final->second = camino;
 	return final;

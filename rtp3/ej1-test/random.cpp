@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 	int cantidadInstancia = 1;
 	long long medicion = 0;
 	long long data = 0;
-	for (int j = 0; j < 100; ++j)
+	for (int j = 0; j < 185; ++j)
 	{
 		int cant_gimnasios, cant_pokeParadas, cap_mochila;
 		cin >> cant_gimnasios >> cant_pokeParadas >> cap_mochila;
