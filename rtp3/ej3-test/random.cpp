@@ -37,7 +37,7 @@ Pokeparada *pokeParadasArrPtr;
 #define CANT_MAX_PP 100
 #define MAX_SIZE 20
 
-#define INSTANCIAS 2168 
+#define INSTANCIAS 1029 
 //que es lo que quiero
 //correr para cada instancia una sola vez
 //tomar promedios de mierdas del mismo size
