@@ -315,9 +315,6 @@ random.seed(45)
 fileNameWeak = "familiaWeak.txt"
 fileNameStrong = "familiaStrong.txt"
 
-open(fileNameWeak, 'w+').close()
-open(fileNameStrong, 'w+').close()
-
 acum = 0
 
 for i in xrange(5, 20):
@@ -340,11 +337,13 @@ for i in xrange(5, 20):
 		kBag = max(powers) + 3
 			
 		rOut = (r[0], r[1], kBag)
+		open(fileNameWeak, 'a').close()
 		saveInstance(rOut,fileNameWeak,"a")
 		
 		kBag = sum([p*c for p,c in zip(powers,cants)])
 		
 		rOut = (r[0], r[1], kBag)
+		open(fileNameStrong, 'a').close()
 		saveInstance(rOut,fileNameStrong,"a")
 
 		acum = acum + 1
