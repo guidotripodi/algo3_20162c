@@ -235,15 +235,33 @@ def ddInstance(pp = 1, gms = 1):
 	poc = 0
 	total = 0
 		
-	while len(powers) < 4:
-		poc = randint(1, 3*pp)
-		mc = min(3*pp, poc*cants[len(powers)])
-		if not poc in powers: 
-			total += mc
+	cantItLimit = 100
+	it = 0
+	while len(powers) < 4 and it < cantItLimit:
+		canti = cants[len(powers)]
+
+		if canti == 0:
+			powers.append(0)
+			continue
+
+		div = int(ceil(3*pp/canti))
+
+		if div <= 1:
+			powers.append(div*canti)
+			continue
+
+		poc = randint(1, div)
+		if not poc in powers:
+			total += int(poc*canti)
 			if total <= int(3*pp):
 				powers.append(poc)	
 			else:
 				powers.append(0)
+		
+		it+=1
+	
+	while(len(powers) < 4):
+		powers.append(0)
 	
 	zipeada = zip(cants, powers)
 	
@@ -371,11 +389,13 @@ for i in xrange(20, 500, 50):
 		kBag = max(powers) + 3
 			
 		rOut = (r[0], r[1], kBag)
+		open(fileNameWeak, 'a').close()
 		saveInstance(rOut,fileNameWeak,"a")
 		
 		kBag = sum([p*c for p,c in zip(powers,cants)])
 		
 		rOut = (r[0], r[1], kBag)
+		open(fileNameStrong, 'a').close()
 		saveInstance(rOut,fileNameStrong,"a")
 
 		acum = acum + 1
