@@ -53,17 +53,14 @@ Pokeparada *pokeParadasArrPtr;
 int main()
 {
 	
-	vector<int> tams(INSTANCIAS);
-	vector<long long> mejorasParciales(INSTANCIAS);
-	vector<long long> mejorasSwap(INSTANCIAS);
-	vector<long long> mejoras2opt(INSTANCIAS);
+	int* tams = new int[INSTANCIAS];
+	long long* mejorasParciales = new long long[INSTANCIAS];
+	long long* mejorasSwap = new long long[INSTANCIAS];
+	long long* mejoras2opt = new long long[INSTANCIAS];
 
-	vector<long long> tiemposSwap(INSTANCIAS);
-	vector<long long> tiempos2opt(INSTANCIAS);
-
-	pair <pair<int,int>, int> gimnasiosArr[CANT_MAX_GYMS];
-	pair <int, int>  pokeParadasArr[CANT_MAX_PP];
-	pair <int, int>  pokeParadasAux[CANT_MAX_PP];
+	long long* tiemposSwap = new long long[INSTANCIAS];
+	long long* tiempos2opt = new long long[INSTANCIAS];
+	
 	
 	for(int j = 0; j < INSTANCIAS; j++)
 	{
@@ -74,6 +71,9 @@ int main()
         
         cin >> cantGyms >> cantPokeParadas >> capMochila;
         
+		pair <pair<int,int>, int> *gimnasiosArr = new pair <pair<int,int>, int>[cantGyms];
+		pair <int, int>  *pokeParadasArr = new pair <int, int>[cantPokeParadas];
+		pair <int, int>  *pokeParadasAux = new pair <int, int>[cantPokeParadas];
         gimnasiosArrPtr = gimnasiosArr;
         pokeParadasArrPtr = pokeParadasArr;
 		
@@ -147,6 +147,9 @@ int main()
 		mejoras2opt[j] = calcularCosto(solucion2opt);
         
 		delete solucionInicial;
+		delete[] gimnasiosArr;
+		delete[] pokeParadasArr;
+		delete[] pokeParadasAux;
     }
     
 	//imprimir csv
@@ -215,7 +218,10 @@ int main()
 		int t = 0;
 		while(t < inst)
 		{
-			if(tams[h] != tam) cerr << "ERROR";
+			if(tams[h] != tam) cerr 
+				<< "ERROR, tams[h]: " << tams[h] 
+				<< " tam: " << tam << "\n";
+
 			acumTiemposSwap += tiemposSwap[h];
 			acumMejoraSwap += mejorasSwap[h];
 
@@ -242,6 +248,15 @@ int main()
 			<< (acumMejora2opt / inst) << ","
 			<< (acumPerc2opt / inst) << "\n";
 	}
+
+
+	delete[] tams;
+	delete[] mejorasParciales; 
+	delete[] mejorasSwap; 
+	delete[] mejoras2opt; 
+
+	delete[] tiemposSwap; 
+	delete[] tiempos2opt; 
 	return 0;
 }
 /*
