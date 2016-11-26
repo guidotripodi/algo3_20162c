@@ -203,10 +203,10 @@ int main()
 	//(para cada local con respecto al goloso)
 	//promedio de tiempos
 	//promedio de mejoras
-	int inst;
 	int h = 0;
 	while(h < INSTANCIAS)
 	{
+		int inst = 0;
 		int tam = tams[h];
 		int acumTiemposSwap = 0;
 		int acumTiempos2opt = 0;
@@ -214,7 +214,7 @@ int main()
 		int acumMejora2opt = 0;
 		float acumPercSwap = 0;
 		float acumPerc2opt = 0;
-		while(tams[h] != tam)
+		while(tams[h] == tam)
 		{
 
 			if(	mejorasParciales[h]== 0 ||
