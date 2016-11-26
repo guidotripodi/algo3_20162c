@@ -173,10 +173,12 @@ std::list<int> * MaestroPokemon::caminoRecorrido(const pair <int,int> pp_aux[]){
 			if (pp_aux[i].first == posicion.first && pp_aux[i].second == posicion.second ){
 
 				camino->push_back(i+cant_gimnasios+1);
+				
 			}
-			if (gyms[i].first.first == posicion.first && gyms[i].first.second == posicion.second ){
-
-				camino->push_back(i+1);
+			if(i <= cant_gimnasios){
+				if (gyms[i].first.first == posicion.first && gyms[i].first.second == posicion.second ){
+					camino->push_back(i+1);
+				}
 			}
 		}
 		if (camino->size() < this->decisiones->size()){

@@ -92,15 +92,15 @@ int main(int argc, char* argv[])
 */
 		pair <int,std::list<int> * > * f;
 		//	for (int h = 0; h < 2; ++h){
-			//	auto start = ya();
+				auto start = ya();
 				f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp, pp_aux);
-				//auto end = ya();
+				auto end = ya();
 				//if (h == 1)	{
-		//			cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
-	//				cout << "\n";
+					cout << chrono::duration_cast<std::chrono::nanoseconds>(end-start).count() << "\t";
+					cout << "\n";
 	//			}
 		//	}
-
+/*
 		if ( f == NULL || f->first == -1)	{
 			cout << "-1" << "\n";
 			//return -1;
@@ -108,9 +108,9 @@ int main(int argc, char* argv[])
 			cout << f->first  ;/*<<" "<< f->second->size();
 			for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << " " << *it;
-			}*/
+			}
 		}
-		cout << "\n";
+		cout << "\n";*/
 
 
 
