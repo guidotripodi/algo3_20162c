@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 			cantidadElementos = cant_pokeParadas + cant_gimnasios;
 		}
 		if (cantidadElementos != cant_aux && cantidadElementos != 0){
-			cout << cant_gimnasios + cant_pokeParadas << ",";
+			cout << cantidadElementos << ",";
 			cout << medicion/cantidadInstancia << "," << data/cantidadInstancia << "\n";
 			medicion = 0;
 			data = 0;
