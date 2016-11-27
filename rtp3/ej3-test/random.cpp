@@ -35,7 +35,7 @@ Pokeparada *pokeParadasArrPtr;
 
 #define MAX_SIZE 20
 
-#define INSTANCIAS 1029 
+#define INSTANCIAS 2168 
 //que es lo que quiero
 //correr para cada instancia una sola vez
 //tomar promedios de mierdas del mismo size
@@ -203,15 +203,26 @@ int main()
 	//(para cada local con respecto al goloso)
 	//promedio de tiempos
 	//promedio de mejoras
+	
+	//promedios	
+	cout 
+		<< "tamaño,"
+		<< "promedio tiempos swap,"
+		<< "promedio distancias swap,"
+		<< "promedio porcentaje Swap,"
+		<< "promedio tiempos 2opt,"
+		<< "promedio distancias 2opt,"
+		<< "promedio porcentaje 2opt\n";
+	
 	int h = 0;
 	while(h < INSTANCIAS)
 	{
-		int inst = 0;
+		long long inst = 0;
 		int tam = tams[h];
-		int acumTiemposSwap = 0;
-		int acumTiempos2opt = 0;
-		int acumMejoraSwap = 0;
-		int acumMejora2opt = 0;
+		long long acumTiemposSwap = 0;
+		long long acumTiempos2opt = 0;
+		long long acumMejoraSwap = 0;
+		long long acumMejora2opt = 0;
 		float acumPercSwap = 0;
 		float acumPerc2opt = 0;
 		while(tams[h] == tam)
@@ -236,24 +247,15 @@ int main()
 			}
 		}
 
-		//promedios	
-		cout 
-			<< "tamaño,"
-			<< "promedio tiempos swap,"
-			<< "promedio distancias swap,"
-			<< "promedio porcentaje Swap,"
-			<< "promedio tiempos 2opt,"
-			<< "promedio distancias 2opt,"
-			<< "promedio porcentaje 2opt\n";
 
 		cout 
 			<< tam << ","
-			<< (acumTiemposSwap / inst) << ","
-			<< (acumMejoraSwap / inst) << ","
-			<< (acumPercSwap / inst) << ","
-			<< (acumTiempos2opt / inst) << ","
-			<< (acumMejora2opt / inst) << ","
-			<< (acumPerc2opt / inst) << "\n";
+			<< (float) (acumTiemposSwap / inst) << ","
+			<< (float)(acumMejoraSwap / inst) << ","
+			<< (float)(acumPercSwap / inst) << ","
+			<< (float)(acumTiempos2opt / inst) << ","
+			<< (float)(acumMejora2opt / inst) << ","
+			<< (float)(acumPerc2opt / inst) << "\n";
 	}
 
 
