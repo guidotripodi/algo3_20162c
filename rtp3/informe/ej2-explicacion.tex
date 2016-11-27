@@ -45,3 +45,5 @@ No obstante, la aproximación golosa tiene como desventaja de que ya no asegura 
 \\{\textit{La soluci\'on obtenida no es la \'optima\\ camino punteado = goloso, camino contínuo = exacto}}
   \end{center}
   \vspace*{0.3cm}
+  
+Ambos caminos empiezan en la misma pokeparada: el camino exacto recorre primero todas las pokeparadas y luego con todas las pociones, recorre los gimnasios resultando este camino mínimo. En cambio, el camino hecho por el goloso (punteado), al tener en la primera pokeparada las pociones necesarias para ganar un gimnasio, toma esta opción: al no tener más pociones, pasa a buscar más pociones que, al obtenerlas, vuelve a dirigirse hasta el próximo gimnasio. La distancia lograda de esta manera, resulta mucho mayor que la mínima necesaria.
