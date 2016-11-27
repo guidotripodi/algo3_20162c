@@ -63,22 +63,21 @@ void printResults(pair < float, float > estadisticas, vector<int> solucionMejora
     cout << "\n";
 }
 
-void correr(vector<int> solucionParcial) {
+pair<long long, long long> correr(vector<int> solucionParcial) {
     
-    vector<long long> tiempos(TEST_ITER);
-    
+    long long tiempo = 0;
     vector<int> solucionMejorada;
+    long long sit = 0;
+    auto start = ya();
+    solucionMejorada = tabuSearch(solucionParcial, it);
+    auto end = ya();
+    tiempo = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+   
     
-    for(int it = 0; it < TEST_ITER; it++) {
-        auto start = ya();
-        solucionMejorada = tabuSearch(solucionParcial, it);
-        auto end = ya();
-        tiempos[it] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
-    }
+//    pair <float, float> est = estadisticas(tiempos);
     
-    pair <float, float> est = estadisticas(tiempos);
-    
-    printResults(est, solucionMejorada);
+//    printResults(est, solucionMejorada);
+	return make_pair(tiempo, calcularCosto(solucionMejorada);
 }
 
 void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]) {
@@ -124,7 +123,7 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
     
     _maxIter = cantGyms+cantPokeParadas;
     _tenor = _maxIter;
-    
+    pair<long long, long long> res;
     if(solucionParcial.size()) {
         
         /*long long mejoraParcial = calcularCosto(solucionParcial);
@@ -135,9 +134,9 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
             cout << solucionParcial[i] << " ";
         cout << "\n";*/
         
-        correr(solucionParcial);
+        res = correr(solucionParcial);
     }else {
-        printf("%d\n", -1);
+        res = make_pair(0, 0);
     }
     
     delete solucionInicial;
@@ -161,9 +160,9 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long it)
         //cada solucion esta asociada a las aristas que cambiaron
         // hacemos union entre swap, 2opt y 3opt
         
-        //list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
+        list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
         
-        list< pair< vector<int>, list<Arista> > > vecindad = vecindad3opt(solucionActual);
+        //list< pair< vector<int>, list<Arista> > > vecindad = vecindad3opt(solucionActual);
         
         //list< pair< vector<int>, list<Arista> > > vecindad = vecindadSwap(solucionActual);
         
