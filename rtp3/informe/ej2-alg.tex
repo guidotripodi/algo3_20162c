@@ -13,8 +13,10 @@ eleccion contiene un id, posicion de la misma y distancia desde el punto anterio
 se crea esPosible $\gets$ verdadero \hfill O(1) \\
 se crea minimo $\gets$ -1 \hfill O(1)\\ 
 \For{pokeparada y gimnasio}{
+\hfill  ciclo: O(n+m)\\
 asignar pokeparada o gimnasio como inicio de camino \hfill O(1)\\	
 \While{esPosible}{  
+\hfill  $ciclo^1$: O(n+m)\\
 	\If{lesGaneATodos(MaestroPokemon) $\wedge$ tiempo(MaestroPokemon) < minimo}{
 	 \hfill  guarda: O(1)\\
 			minimo $\gets$ tiempo(MaestroPokemon) \hfill O(1)\\	
@@ -84,7 +86,10 @@ creo eleccion \hfill O(1) \\
 \textbf{\hfill Complejidad total: $O(1)$}\\ 
 \end{algorithm}
 
+\subsubsection{Nota 1}
+El ciclo con guarda \textit{esPosible} iterará \textit{n+m} veces dado que esta es la longitúd del camino más largo posible. Cada iteración realizará en el peor de los casos n+m comparaciones, buscando el siguiente destino para formar el camino.
 
+Como se evalúan todos los inicios de caminos posibles, entonces el ciclo descripto arriba se ejecutará n+m veces.
 
 
 \subsubsection{Estructura interna para chequear elecciones y estados ocurridos}
