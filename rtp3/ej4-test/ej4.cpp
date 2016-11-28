@@ -67,7 +67,7 @@ pair<long long, long long> correr(vector<int> solucionParcial) {
     
     long long tiempo = 0;
     vector<int> solucionMejorada;
-    long long sit = 0;
+    long long it = 0;
     auto start = ya();
     solucionMejorada = tabuSearch(solucionParcial, it);
     auto end = ya();
@@ -129,7 +129,7 @@ pair< pair<long long, long long>, long long > testear(int cant_gimnasios, int ca
     
     _maxIter = cantGyms+cantPokeParadas;
     _tenor = _maxIter;
-    pair<long long, long long> res;
+    pair< pair<long long, long long>, long long> res;
     if(solucionParcial.size()) {
         
         /*long long mejoraParcial = calcularCosto(solucionParcial);
@@ -140,11 +140,14 @@ pair< pair<long long, long long>, long long > testear(int cant_gimnasios, int ca
             cout << solucionParcial[i] << " ";
         cout << "\n";*/
         
-        res = make_pair(correr(solucionParcial), calcularCosto(solucionParcial));
+        res.first = correr(solucionParcial); 
+		res.second = calcularCosto(solucionParcial);
     }
     else
     {
-        res = make_pair(0, 0, 0);
+        res.first.first = 0; 
+        res.first.second = 0; 
+        res.second = 0; 
     }
     
     delete solucionInicial;

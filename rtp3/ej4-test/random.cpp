@@ -39,8 +39,8 @@ int main(){
        
 		int size = cantGyms + cantPokeParadas;
         pair <pair<int,int>, int>* gimnasiosArr = new pair <pair<int,int>, int>[size];
-        pair <int, int>*  pokeParadasArr = pair <int, int>[size];
-        pair <int, int>*  pokeParadasAux = pair <int, int>[size];
+        pair <int, int>*  pokeParadasArr = new pair<int, int>[size];
+        pair <int, int>*  pokeParadasAux = new pair<int, int>[size];
         
         for (int i = 0; i < cantGyms; i++)
         {
@@ -68,7 +68,7 @@ int main(){
                 pokeParadasArr,
                 pokeParadasAux);
 
-		long long tiempoBusqLocal = test.first.first;
+		long long tiempoLocal = test.first.first;
 		long long distanciaLocal = test.first.second;
 		long long distanciaGoloso = test.second;
 
@@ -80,7 +80,7 @@ int main(){
 		
 		tams[j] = cantGyms + cantPokeParadas;
 		mejorasParciales[j] = distanciaGoloso;
-		mejoraLocal[j] = distanciaLocal;
+		mejorasLocal[j] = distanciaLocal;
 		tiempos[j] = tiempoLocal;
 			
 		delete[] gimnasiosArr;
