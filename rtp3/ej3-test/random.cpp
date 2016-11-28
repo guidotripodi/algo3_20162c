@@ -207,6 +207,7 @@ int main()
 	//promedios	
 	cout 
 		<< "tamaño,"
+		<< "promedio goloso,"
 		<< "promedio tiempos swap,"
 		<< "promedio distancias swap,"
 		<< "promedio porcentaje Swap,"
@@ -219,12 +220,13 @@ int main()
 	{
 		long long inst = 0;
 		int tam = tams[h];
+		long long goloso = 0;
 		long long acumTiemposSwap = 0;
 		long long acumTiempos2opt = 0;
 		long long acumMejoraSwap = 0;
 		long long acumMejora2opt = 0;
-		float acumPercSwap = 0;
-		float acumPerc2opt = 0;
+		//float acumPercSwap = 0;
+		//float acumPerc2opt = 0;
 		while(tams[h] == tam)
 		{
 
@@ -235,27 +237,32 @@ int main()
 			}
 			else
 			{
+				goloso += mejorasParciales[h];
 				acumTiemposSwap += tiemposSwap[h];
 				acumMejoraSwap += mejorasSwap[h];
 
-				acumPercSwap += (mejorasSwap[h] * 100 )/ mejorasParciales[h];
+				//acumPercSwap += (mejorasSwap[h] * 100 )/ mejorasParciales[h];
 				acumTiempos2opt += tiempos2opt[h];
 				acumMejora2opt += mejoras2opt[h];
-				acumPerc2opt += (mejoras2opt[h] * 100 )/ mejorasParciales[h];
+				//acumPerc2opt += (mejoras2opt[h] * 100 )/ mejorasParciales[h];
 				inst++;
 				h++;
 			}
 		}
 
 
+		float promGoloso = (float)(goloso / inst);
+		float promSwap = (float)(acumMejoraSwap / inst);
+		float prom2opt = (float)(acumMejora2opt / inst);
 		cout 
 			<< tam << ","
-			<< (float) (acumTiemposSwap / inst) << ","
-			<< (float)(acumMejoraSwap / inst) << ","
-			<< (float)(acumPercSwap / inst) << ","
+			<< promGoloso << ","
+			<< (float)(acumTiemposSwap / inst) << ","
+			<< promSwap << ","
+			<< (float)(100 - ((promSwap * 100) / promGoloso)) << ","
 			<< (float)(acumTiempos2opt / inst) << ","
-			<< (float)(acumMejora2opt / inst) << ","
-			<< (float)(acumPerc2opt / inst) << "\n";
+			<< prom2opt << ","
+			<< (float)(100 - ((prom2opt * 100) / promGoloso )) << "\n";
 	}
 
 
