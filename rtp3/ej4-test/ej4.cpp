@@ -77,10 +77,10 @@ pair<long long, long long> correr(vector<int> solucionParcial) {
 //    pair <float, float> est = estadisticas(tiempos);
     
 //    printResults(est, solucionMejorada);
-	return make_pair(tiempo, calcularCosto(solucionMejorada);
+	return make_pair(tiempo, calcularCosto(solucionMejorada));
 }
 
-void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]) {
+pair< pair<long long, long long>, long long > testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[]) {
     
     gimnasiosArrPtr = posiciones_gym;
     pokeParadasArrPtr = posiciones_pp;
@@ -95,13 +95,19 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
                                                                       posiciones_gym,
                                                                       posiciones_pp,
                                                                       pp_aux);
-    
-    list<int> *solucionInicialLista = solucionInicial->second;
-    
-    if (solucionInicial->first == -1) {
+    list<int> *solucionInicialLista;
+    if(solucionInicial == NULL)
+    {
         solucionInicialLista = new list<int>();
-    }
+	}
+	else 
+	{
+		list<int> *solucionInicialLista = solucionInicial->second;
     
+		if (solucionInicial->first == -1) {
+			solucionInicialLista = new list<int>();
+		}
+	}
     list<int>::iterator itLista;
     
     /*
@@ -134,12 +140,15 @@ void testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <p
             cout << solucionParcial[i] << " ";
         cout << "\n";*/
         
-        res = correr(solucionParcial);
-    }else {
-        res = make_pair(0, 0);
+        res = make_pair(correr(solucionParcial), calcularCosto(solucionParcial));
+    }
+    else
+    {
+        res = make_pair(0, 0, 0);
     }
     
     delete solucionInicial;
+	return res;
 }
 
 vector<int> tabuSearch(vector<int> solucionParcial, long long it)

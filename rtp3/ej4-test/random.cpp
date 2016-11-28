@@ -22,6 +22,17 @@ using namespace std;
 
 int main(){
 
+	cout
+		<< "tamaño,"
+		<< "distancia goloso,"
+		<< "distancia tabu,"
+		<< "tiempo tabu\n";
+	
+	int* tams = new int[INSTANCIAS];
+	long long* mejorasParciales = new long long[INSTANCIAS];
+	long long* mejorasLocal = new long long[INSTANCIAS];
+	long long* tiempos = new long long[INSTANCIAS];
+
     for(int j = 0; j < INSTANCIAS; j++)
     {
         cin >> cantGyms >> cantPokeParadas >> capMochila;
@@ -49,7 +60,7 @@ int main(){
             pokeParadasAux[i] = posicion;
         }
         
-        testear(
+        pair< pair<long long, long long>, long long> test = testear(
                 cantGyms,
                 cantPokeParadas,
                 capMochila,
@@ -57,10 +68,71 @@ int main(){
                 pokeParadasArr,
                 pokeParadasAux);
 
+		long long tiempoBusqLocal = test.first.first;
+		long long distanciaLocal = test.first.second;
+		long long distanciaGoloso = test.second;
+
+		cout 
+			<< cantGyms + cantPokeParadas << ","
+			<< distanciaGoloso << ","
+			<< distanciaLocal << ","
+			<< tiempoLocal << ",";
+		
+		tams[j] = cantGyms + cantPokeParadas;
+		mejorasParciales[j] = distanciaGoloso;
+		mejoraLocal[j] = distanciaLocal;
+		tiempos[j] = tiempoLocal;
+			
 		delete[] gimnasiosArr;
 		delete[] pokeParadasArr;
 		delete[] pokeParadasAux;
     }
+    
+    cout 
+		<< "tamaño,"
+		<< "promedio tiempos,"
+		<< "promedio distancias goloso,"
+		<< "promedio distancias tabu,"
+		<< "promedio porcentaje\n";
+	
+	int h = 0;
+	while(h < INSTANCIAS)
+	{
+		long long inst = 0;
+		int tam = tams[h];
+		long long acumTiempos = 0;
+		long long acumMejoraGoloso = 0;
+		long long acumMejoraLocal = 0;
+		while(tams[h] == tam)
+		{
+
+			if(	mejorasParciales[h]== 0 ||
+					mejorasParciales[h] == -1)
+			{//INSTANCIA INVALIDA
+				h++;
+			}
+			else
+			{
+				acumTiempos += tiempos[h];
+				acumMejoraLocal += mejorasLocal[h];
+				acumMejoraGoloso += mejorasParciales[h];
+				inst++;
+				h++;
+			}
+		}
+
+		float promLocal = (float)(acumMejoraLocal / inst);
+		float promGoloso = (float)(acumMejoraGoloso / inst);
+		float promPerc = (float) 100 - ((promLocal * 100 )/ promGoloso);
+		
+		cout 
+			<< tam << ","
+			<< (float) (acumTiempos / inst) << ","
+			<< promGoloso << ","
+			<< promLocal<< ","
+			<< promPerc << "\n";
+	}
+
     
     return 0;
 }
