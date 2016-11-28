@@ -1,4 +1,4 @@
-Nuestro algoritmo va chequeando en cada paso si existe alg\'un gimnasio capaz de ser vencido y, si existe, busca cual es el m\'as cercano de estos a ser vencidos, por lo tanto existir\'an casos en los cuales la soluci\'on obtenida para los mismos sea la \'optima pero para algunos no lo ser\'a.
+Nuestro algoritmo chequea en cada paso si existe alg\'un gimnasio capaz de ser vencido y, si existe, busca cual es el m\'as cercano, por lo tanto existir\'an casos en los cuales la soluci\'on obtenida para los mismos sea la \'optima pero para algunos no lo ser\'a.
 
 \subsubsection*{Familias con soluci\'on obtenida igual a la \'optima}
 
@@ -13,8 +13,7 @@ Nuestro algoritmo va chequeando en cada paso si existe alg\'un gimnasio capaz de
 \textbf{Familia 1 y 2}
 \end{center}
 
-Ambas familias devolveran -1 ya que como se explico anteriomente tanto el greedy como el exacto presentan podas para estos casos sin soluci\'on por lo tanto, su tiempo de ejecuci\'on ser\'a aproximadamente el mismo. \\\\\\\\\\\\\\\\\\\
-
+Ambas familias devolveran -1 ya que como se explicó anteriomente tanto el greedy como el exacto presentan podas para estos casos sin soluci\'on por lo tanto, su tiempo de ejecuci\'on ser\'a aproximadamente el mismo. \\\\\\\\\\\\\\\\\\\
 
 
 \begin{figure} 
@@ -27,7 +26,6 @@ Ambas familias devolveran -1 ya que como se explico anteriomente tanto el greedy
     \label{fig:fam2medicion}
     \end{figure}
 
-
 Como se observa en los \'ultimos gr\'aficos, las funciones resultantes para cada familia en ambos algoritmos presentan el mismo tiempo por lo comentando sobre las podas realizadas.
 
 \begin{center}
@@ -36,7 +34,7 @@ Como se observa en los \'ultimos gr\'aficos, las funciones resultantes para cada
 
 En este caso, como nuestro greedy chequea si hay alg\'un gimnasio a ser vencido con la cantidad de pociones que se tienen en el momento (se inicia con 0), y como todos necesitan 0, recorre los gimnasios sin necesidad de pasar por las pokeparadas, obteniendo la mejor soluci\'on posible.
 
-A continuaci\'on mostraremos el camino obtenido tanto para el algoritmo exacto como el goloso de un caso el cual trabaja con 8 elementos en total para ejemplificar lo enunciado anteriormente:
+A continuaci\'on mostraremos el camino obtenido tanto para el algoritmo exacto como el goloso de un caso el cual se trabaja con 8 elementos en total para ejemplificar lo enunciado anteriormente:
 
    \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -47,12 +45,11 @@ A continuaci\'on mostraremos el camino obtenido tanto para el algoritmo exacto c
 
 Como se observa en el ejemplo el camino obtenido es exactamente el mismo.
 
-
 \begin{center}
 \textbf{Familia 5}
 \end{center}
 
-Se obtendr\'a la soluci\'on \'optima ya que, se reciben primero pokeparadas para vencer a un gimnasio cerca de ellas y luego m\'as pokeparadas para vencer a otros gimnasios que se encuentren cerca de estas \'ultimas, se mostrar\'a a continuaci\'on un dibujo que ejemplifica lo dicho:
+Se obtendr\'a la soluci\'on \'optima ya que, se reciben primero pokeparadas para vencer a un gimnasio cerca del mismo y luego m\'as pokeparadas para vencer a otros gimnasios que se encuentren cerca de la misma manera. Se mostrar\'a a continuaci\'on un dibujo que ejemplifica lo dicho:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -67,13 +64,11 @@ Se obtendr\'a la soluci\'on \'optima ya que, se reciben primero pokeparadas para
 \textbf{Familia 4}
 \end{center}
 
-Este estilo de familia se elabora de la forma en la cual existan gimnasios que no necesiten pociones para ser vencidos y otros que si. Nuestro algoritmo como por cada iteraci\'on chequea si puede elegir un gimnasio que se encuentre a una distancia m\'inima en relaci\'on a los demas, y adem\'as corrobora si posee las pociones necesarias para vencerlo, decide inicialmente ir a vencer a los gimnasios que posean cero poder, lo cual puede no ser \'optimo para el resultado final.
+Este estilo de familia se elabora de la forma en la cual existan gimnasios que no necesiten pociones para ser vencidos y otros que si. Nuestro algoritmo, por cada iteraci\'on chequea si puede elegir un gimnasio que se encuentre a una distancia m\'inima en relaci\'on a los demás, y adem\'as corrobora si posee las pociones necesarias para vencerlo, decide inicialmente ir a vencer a los gimnasios que posean cero poder, lo cual puede no ser \'optimo para el resultado final.
 
-Debido al poder de computo, el algoritmo exacto solo puede tomar entre 20 o 25 elementos (dependiendo el tipo de instancia), mientras que el goloso puede tomar una mayor cantidad de elementos. Es por esto que se realizaron las comparaciones con la cantidad de elementos soportadas por el exacto.
+Debido al poder de computo utilizado para realizar los tests, solo pudo testearse el algoritmo exacto hasta con 16 elementos, mientras que el goloso puede tomar una mayor cantidad de elementos. Es por esto que se realizaron las comparaciones con la cantidad de elementos soportadas por el exacto.
 
 Este es un ejemplo de ambos algoritmos con un total de 10 elementos:
-
-
 
 \begin{figure} [!ht]
  \centering
@@ -84,26 +79,15 @@ Este es un ejemplo de ambos algoritmos con un total de 10 elementos:
     \includegraphics[width=0.45\textwidth]{./EJ2/fam5goloso.png}}
     \label{fig:fam5goloso}
     \end{figure}
-
-
-
-En base a esta familia y el poder de cómputo, la diferencia (error) entre la soluci\'on obtenida del goloso y la \'optima para cada instancia se puede observar en el siguiente gráfico:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.5]{./EJ2/algungym0.png}
-
-  \end{center}
-  \vspace*{0.3cm}
-
+    
+    
+GRAFICOS DE BARRAS CON DISTANCIA EXACTA Y GOLOSA - LOS ERRORES SON PARA DESPUES!
 
 \begin{center}
 \textbf{Familia 6}
 \end{center}
 
 Este estilo de familia presenta a los gimnasios y pokeparadas desordenados en referencia a las posiciones, es decir, para ganar a cierto gimnasio es necesario pasar por una cantidad puntual de pokeparadas las cuales estan de un lado y del otro de dicho gimnasio.
-
-
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -112,7 +96,6 @@ Este estilo de familia presenta a los gimnasios y pokeparadas desordenados en re
    
   \end{center}
   \vspace*{0.3cm}
-
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -124,19 +107,16 @@ Este estilo de familia presenta a los gimnasios y pokeparadas desordenados en re
 
 Se puede observar en el ejemplo como nuestro algoritmo goloso va a la primer pokeparada y de ah\'i a vencer al gimnasio m\'as cercano en vez de ir a la pokeparada consecutiva. Esto lo hace hasta vencer a todos los gimnasios.
 
-A continuaci\'on mostraremos para cada instancia posible de ser comparada el error obtenido en cada soluci\'on:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.60]{./EJ2/sinOrden.png}
-  \end{center}
-  \vspace*{0.3cm}
+GRAFICOS DE BARRAS CON DISTANCIA EXACTA Y GOLOSA - LOS ERRORES SON PARA DESPUES!
   
 \begin{center}
 \textbf{Familia 7}
 \end{center}
 
-Esta familia se genera agrupando los gimnasios y pokeparadas en 2 anillos de radios diferentes. Dado que nuestro algoritmo siempre y cuando pueda vencer a alg\'un gimnasio buscará el m\'inimo en  distancia para vencerlo, para esta familia resulta contraproducente: es preferible adquirir m\'as pociones para luego ir a varios gimnasios juntos, que ganar apenas se pueda.\\\\\\\\\\\\\\\
+Esta familia se genera agrupando los gimnasios y pokeparadas en 2 anillos de radios diferentes. Dado que nuestro algoritmo siempre y cuando pueda vencer a alg\'un gimnasio buscará el m\'inimo en  distancia para vencerlo, para esta familia resulta contraproducente: es preferible adquirir m\'as pociones para luego ir a varios gimnasios juntos, que ganar apenas exista la posibilidad.
+
+\newpage
+
 \vspace*{0.3cm} \vspace*{0.3cm}
 \begin{figure} [!ht]
  \centering
@@ -149,18 +129,12 @@ Esta familia se genera agrupando los gimnasios y pokeparadas en 2 anillos de rad
     \end{figure}
 \vspace*{0.3cm} \vspace*{0.3cm}
 
-Mostraremos para cada instancia posible de ser comparada el error obtenido en cada soluci\'on:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.40]{./EJ2/anillosdif.png}
-  \end{center}
-  \vspace*{0.3cm}
-
 Se puede observar en el \'ultimo gr\'afico como los resultados tienen valores diversos para casos pequeños. En las instancias de mayor tamaño, las solución óptima resulta de recorrer primero todas las pokeparadas y luego los gimnasios, ya que la cantidad de pociones necesarias para vencer a todos los gimnasios es igual a la cantidad total de pociones presentes en el mapa, sumado a que la distancia entre pokeparadas es muy inferior que entre pokeparadas y gimnasios.
 No obstante, esto último no se respeta en los casos pequeños, resultando de esta forma el camino óptimo en una alternancia entre pokeparadas y gimnasios.
 
-A continuacion, mostraremos la instancia con 10 elementos para ejemplificar lo comentado:\\\\\\\\\\\\\\\\\
+A continuacion, mostraremos la instancia con 10 elementos para ejemplificar lo comentado:
+
+\newpage
 
 \begin{figure} [!ht]
  \centering
@@ -172,49 +146,14 @@ A continuacion, mostraremos la instancia con 10 elementos para ejemplificar lo c
     \label{fig:anillogolosoerror}
     \end{figure}
     
-La instancia con 6 elementos presenta un caso similar.
+Una instancia con 6 elementos presenta un caso similar.\\
+
+GRAFICOS DE BARRAS CON DISTANCIA EXACTA Y GOLOSA - LOS ERRORES SON PARA DESPUES!
   
-Por \'ultimo, la familia sin soluci\'on \'optima n\'umero 8 la cual es random.\\\\
+En conclusi\'on, la soluci\'on obtenida distará tanto de la óptima como la cantidad de veces que el algoritmo recorra una pokeparada y luego un gimnasio para vencerlo, sin importar si lo óptimo era pasar primero por las pokeparadas juntando poder y luego visitar varios gimnasios consecutivamente venciendolos a todos.
 
-
-\begin{figure} [!ht]
- \centering
-  \subfloat[Algoritmo exacto]{
-    \includegraphics[width=0.45\textwidth]{./EJ2/randomexacto.png}}
-       \label{fig:randomexacto}
-  \subfloat[Algoritmo goloso]{
-    \includegraphics[width=0.45\textwidth]{./EJ2/randomgoloso.png}}
-    \label{fig:randomgoloso}
-    \end{figure}
-
-Comparemos para cada instancia posible, el error obtenido: \\\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.40]{./EJ2/randomdif.png}
-\\{\textit{Error por cantidad de elementos }}
-  \end{center}
-  \vspace*{0.3cm}
-  
-
-Luego de lo comentado mostraremos dos gr\'aficos con los errores producidos por cada familia en la soluci\'on obtenida.
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.60]{./EJ2/box1.png}
-\\{\textit{Familia 5 y 6 error de solucion}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
-\includegraphics[scale=0.60]{./EJ2/box2.png}
-\\{\textit{Familia 7 y 8 error de solucion}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-En conclusi\'on, la soluci\'on obtenida distará tanto de la óptima como la cantidad de veces que el algoritmo recorra una pokeparada y luego un gimnasio a vencerlo, sin importar si lo optimo era pasar primero por las pokeparadas juntando poder y luego visitar varios gimnasios consecutivamente venciendolos a todos.
-El peor caso será cuando el mapa sea un anillo de pokeparadas con un anillo interno o externo de gimnasios. 
+El peor caso será cuando el mapa sea un anillo de pokeparadas con un anillo interno o externo de gimnasios.
+ 
 El algoritmo iniciará en una pokeparada, luego irá a ganar a un gimansio con distancia mínima dentro de los gimansios no visitados, y siguiendo este recorrido, volverá a una pokeparada que se encuentre a una distancia menor de la pokeparada previa.\\
 
 Posteriormente, veremos como se comporta cada familia en funci\'on del tiempo al ir aumentando la cantidad de elementos manteniendo las condiciones para que sigan perteneciendo cada uno a su respectiva familia.
@@ -235,7 +174,7 @@ Posteriormente, veremos como se comporta cada familia en funci\'on del tiempo al
     \label{fig:comparativo2}
     \end{figure}
   
-Se puede observar como la familia n\'umero 6 presenta una peor performance en comparaci\'on al resto mientras que tanto la familia 1 como la 2 presentan un tiempo que se torna constante dando una mejor performance en relaci\'on al resto, lo cual se debe a las podas utilizadas para estas familias como mencionamos anteriormente. Mientras que la n\'umero 6 presenta la dificultad en la cual todos los elementos del mapa se encuentran desordenados, por lo tanto nuestro algoritmo tiene que llegar a hacer hasta un doble viaje para poder vencer a un gimnasio, ya que se dan instancias en las cuales los gimnasios de poder menor o igual a 3 se encuentran muy lejos de las pokeparadas en relaci\'on a los gimnasios de poder mayor los cuales estan "pegados" a las pokeparadas insumiendole as\'i un tiempo mayor de decisi\'on y ejecuci\'on. Como hab\'iamos visto, nuestro algoritmo siempre que puede vencer a un gimnasio va a vencerlo.
+Se puede observar como la familia n\'umero 6 presenta una peor performance en comparaci\'on al resto mientras que tanto la familia 1 como la 2 presentan un tiempo que se torna constante dando una mejor performance en relaci\'on al resto, lo cual se debe a las podas utilizadas para estas familias como mencionamos anteriormente. Mientras que la n\'umero 6 presenta la dificultad en la cual todos los elementos del mapa se encuentran desordenados, por lo tanto nuestro algoritmo tiene que llegar a hacer hasta un doble viaje para poder vencer a un gimnasio, ya que se dan instancias en las cuales los gimnasios de poder menor o igual a 3 se encuentran muy lejos de las pokeparadas en relaci\'on a los gimnasios de poder mayor, los cuales estan "pegados" a las pokeparadas insumiendo as\'i un tiempo mayor de decisi\'on y ejecuci\'on. Como hab\'iamos visto, nuestro algoritmo siempre que puede vencer a un gimnasio va a vencerlo.
 
 Luego, mostraremos como se comporta nuestro algoritmo en base a la complejidad calculada anteriormente:
 
@@ -247,8 +186,38 @@ Luego, mostraremos como se comporta nuestro algoritmo en base a la complejidad c
   \vspace*{0.3cm}
   
   
-Es posible observar como las funciones resultantes del mejor y peor caso se encuentran por debajo de la cota de complejidad. Dicha complejidad fue calculada utilizando el m\'etodo de cuadrados m\'inimos generandonos una funcion la cual tomamos como cota dentro de nuestro orden de complejidad $(O(n+m)^3)$.
+Es posible observar como las funciones resultantes del mejor y peor caso se encuentran por debajo de la cota de complejidad. Dicha complejidad fue calculada utilizando el m\'etodo de cuadrados m\'inimos generandonos una funcion la cual tomamos como cota dentro de nuestro orden de complejidad $(O(n+m)^3)$. 
 
-\subsubsection*{Repercusi\'on del tamaño de la mochila en el algoritmo}
+--> INDICAR LA CONSTANTE: MELANIE LO PIDIO
 
-Dado que la heur\'istica golosa siempre que tiene la posibilidad va a vencer a un gimnasio, el tamaño de mochila no influir\'a ya que con tener una capacidad m\'inima de pociones, se proceder\'a a ganar sin tener que seguir llenandola.
+\subsubsection*{Repercusi\'on del tamaño de la mochila en el algoritmo hasta 16 elementos (pokeparadas + gimnasios)}
+
+PARA LOS CASOS CHICOS SE PUEDE MOSTRAR LA REPERCUSION DE LA MOCHILA!!! ESTOS DATOS LOS TIENEN
+
+\subsubsection*{Repercusi\'on del tamaño de la mochila en el algoritmo más de 16 elementos}
+
+Dado que la heur\'istica golosa siempre que tiene la posibilidad va a vencer a un gimnasio, el tamaño de mochila no influye, ya que con tener una capacidad m\'inima de pociones, se proceder\'a a ganar sin importar si conviene o no pasar por más pokeparadas. Como con más de 16 elementos nos fué imposible calcular el backtracking en el ordenador disponible, no podremos comparar que sucede al utilizar la peor y mejor mochila contra el resultado exacto.
+
+\subsubsection*{Familias random y por cuadrantes}
+
+Como se comentó previamente en el ejercicio uno, las anteriores familias fueron de utilidad para analizar que sucede con el algoritmo goloso dado cierto tipo de entradas y porque no obtiene solución óptima en algunos casos, además de servir para analizar las podas tanto del algorito exacto como el goloso. Lo que no fué posible con estas familias es analizar que sucede en el promedio de casos con soluciones aleatorias, dado que eran familias totalmente controladas para poder observar particularidades. Por este motivo introducimos aquí dos familias nuevas con el objetivo de analizar casos promedio dentro de conjuntos de un cierto tamaño.\\
+
+La primera es la familia random, que como el nombre lo indica, todo es absolutamente random en los parámetros de entrada.
+Para el caso del valor de la mochila, con más de 16 elementos solo se analizará tomando el mínimo, y hasta con 16 elementos, podremos comparar contra el exacto que resulta de tomar la peor o la mejor mochila.\\ <-- SI, HAY QUE TOMAR STRONG Y WEAK HASTA 16 ELTOS Y COMPARAR CONTRA EL EXACTO!!\\
+La segunda familia también tiene parámetros aleatorios, pero organiza gimnasios por cuadrantes, donde $\forall$ $C_i$ con $i$ $\in$ ${1..4}$, todos los gimnasios en el cuadrante $C_j$ tienen el mismo poder. Otra regla que trató de aplicarse es que el poder de los gimnasios sea diferente para cada cuadrante $C_i$, $C_j$ con $i \neq j$. Esto será posible siempre y cuando no sea posible asignar mas de 1 (uno) de poder a los gimnasios, en cuyo caso, puede haber cuadrantes que tienen el mismo poder para sus gimnasios.
+
+Esta familia será como una suerte de mapa por niveles. Veremos de esta manera como se desenvuelve sobre todo el algoritmo goloso para obtener un camino dentro de estas circunstancias.\\
+
+PRESENTAR LAS FAMILIAS RANDOM Y FAMILIAS POR CUADRANTE
+
+ESTE GRAFICO PARA MOSTRAR LA RANDOM Y PODEMOS GENERAR UNO PARA MOSTRAR LA QUE ES POR CUADRANTE
+\begin{figure} [!ht]
+ \centering
+  \subfloat[Algoritmo exacto]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/randomexacto.png}}
+       \label{fig:randomexacto}
+  \subfloat[Algoritmo goloso]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/randomgoloso.png}}
+    \label{fig:randomgoloso}
+    \end{figure}
+  

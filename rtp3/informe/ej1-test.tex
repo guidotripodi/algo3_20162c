@@ -8,7 +8,6 @@
 \item {\bf Familia 5:} Con solución. La solución corresponde a ordenar los elementos recibidos por distancia.
 \item {\bf Familia 6:} Con solución. Entrada fuera de orden, caso opuesto a la familia 5.
 \item {\bf Familia 7:} Con solución. Se busca agrupar los elementos de forma que haya muchas soluciones cercanas a la óptima. Esto se logra formando anillos concentricos de gimnasios y pokeparadas.
-\item {\bf Familia 8:} Random.
 \end{enumerate}
 
 
@@ -22,7 +21,7 @@ Para las representaciones de los casos se utilizan las siguientes referencias:
  
 \begin{figure} [!ht]
  \centering
-  \subfloat[Familia 1: K=3, pociones necesarias = 6]{
+  \subfloat[Familia 1: K=3 (K = cantidad pokeparadas), pociones necesarias = 6]{
     \includegraphics[width=0.40\textwidth]{./EJ1/sinSolucion.jpeg}}
        \label{fig:ss}
   \subfloat[Familia 2: No hay suficientes pociones]{
@@ -47,9 +46,6 @@ Para las representaciones de los casos se utilizan las siguientes referencias:
 \subfloat[Familia 7: Anillos]{
     \includegraphics[width=0.40\textwidth]{./EJ1/fam7.jpeg}}
     \label{fig:f7}
-\subfloat[Familia 8: Random]{
-    \includegraphics[width=0.40\textwidth]{./EJ1/fam8.jpeg}}
-    \label{fig:f8}
 \end{figure}
 
 
@@ -58,11 +54,13 @@ Para las representaciones de los casos se utilizan las siguientes referencias:
  
   \subsubsection*{Evaluación del algoritmo sobre las familias}
 
-\indent Veremos entonces que es lo que sucede al ir variando los parámetros de entrada para cada familia, de manera tal que, a medida que N y M crecen linealmente.\\
+\indent Veremos entonces que es lo que sucede al ir variando los parámetros de entrada para cada familia a medida que N y M (pokeparadas y gimnasios) crecen linealmente.\\
 
 Se comienza con una entrada de un gimnasio y una pokeparada y se la aumenta en cada test en uno hasta llegar a un total de 20 elementos entre ambos conjuntos (Debido al poder de computo, no es posible trabajar con instancias de mayor tamaño).\\
 
-Para obtener las mediciones se realizaron aproximadamente unas 20 corridas sobre cada una de las instancias y se tom\'o el promedio de las mediciones resultantes.\\ 
+Para obtener las mediciones se realizaron aproximadamente unas 20 corridas sobre cada una de las instancias y se tom\'o el promedio de las mediciones resultantes.\\
+Dado que estas familias están pensadas para mostrar el funcionamiento del algoritmo y como funcionan las podas, fué dificil crear varios casos de tests para cada tamaño ya que sus parámetros están totalmente controlados para asegurarse de estar dentro de la familia deseada.\\
+Por este motivo, en el ejercicio dos, serán presentadas dos familias nuevas, con las que se mostrará que sucede en promedio cuando se hace crecer el tamaño de entrada.\\
 
 Se puede observar en el  gráfico 1.1, ocho funciones, que representan el tiempo de ejecuci\'on de las familias de casos mencionadas en el apartado anterior, utilizando una escala logar\'itmica para una mejor visualizaci\'on de cada funci\'on:\\
 
@@ -73,11 +71,10 @@ Se puede observar en el  gráfico 1.1, ocho funciones, que representan el tiempo
  {Gr\'afico \ 1.1 - $Comparativo$}
   \end{center}
   \vspace*{0.3cm}
-
   
 Se puede notar que la familia 1 y la n\'umero 2, presentan una mejor performance en relaci\'on a las otras. Esto se debe a que se realizan dos podas para chequear si la entrada posee o no soluci\'on. Puntualmente, la familia 1 es un poco mejor que la 2 debido a que en la implementaci\'on de las podas, la que evalúa si la mochila es de capacidad suficiente, corta apenas encuentra un gimnasio que no se pueda derrotar. En cambio la otra (chequeo de la cantidad de pociones disponibles vs necesarias) debe necesariamente chequear todos los gimnasios y pokeparadas, tardando más tiempo.
 
-Uno de los peores casos para nuestro algoritmo es la familia 7 , que sucede cuando todos los caminos tienen igual longitud. Esto se da as\'i ya que nuestro algoritmo chequea todas las ramas posibles y, como todas pueden generar una soluci\'on posible, avanza por ellas, llegando al final de cada una con el mismo valor.\\
+Uno de los peores casos para nuestro algoritmo es la familia 7, que sucede cuando todos los caminos tienen igual longitud. Esto se da as\'i ya que nuestro algoritmo chequea todas las ramas posibles y, como todas pueden generar una soluci\'on posible, avanza por ellas, llegando al final de cada una con el mismo valor.\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -94,13 +91,10 @@ Esto genera, al comparar con un algoritmo de fuerza bruta sin podas, que los tie
  {\\Con y sin poda}
   \end{center}
   \vspace*{0.3cm}
-  
-
 
  \subsubsection*{Cota al tiempo de ejecución}
 
-
-Como se trabaja con pocos casos y la complejidad te\'orica es muy grande, no ser\'a posible graficarla ya que el tiempo insumido es muy elevado, y dado que N+M es pequeño (1 a 20), la muestra no es significativa. De querer trabajar con N+M > 20, la capacidad de cómputo de los dispositivos físicos disponibles es inferior a la necesaria, haciendo impracticable su análisis.
+Como se trabaja con pocos casos y la complejidad te\'orica es muy grande, no ser\'a posible graficar tiempos ya que los mismos son muy elevados, y dado que N+M es pequeño (1 a 20), la muestra no es significativa. De querer trabajar con N+M > 20, la capacidad de cómputo de los dispositivos físicos disponibles es inferior a la necesaria, haciendo impracticable su análisis.
 
 
 
