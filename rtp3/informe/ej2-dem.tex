@@ -158,7 +158,7 @@ A continuacion, mostraremos la instancia con 10 elementos para ejemplificar lo c
     
 Una instancia con 6 elementos presenta un caso similar.\\
 
-Con respecto a la diferencia entre la soluciones que se obtienen en relacion a las optimas elebaramos el siguiente gráfico:\\
+Con respecto a la diferencia entre la soluciones que se obtienen en relacion a las optimas elaboramos el siguiente gráfico:\\
  
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -256,30 +256,10 @@ Dado que la heur\'istica golosa siempre que tiene la posibilidad va a vencer a u
 \subsubsection*{Familias random y por cuadrantes}
 
 Como se comentó previamente en el ejercicio uno, las anteriores familias fueron de utilidad para analizar que sucede con el algoritmo goloso dado cierto tipo de entradas y porque no obtiene solución óptima en algunos casos, además de servir para analizar las podas tanto del algorito exacto como el goloso. Lo que no fué posible con estas familias es analizar que sucede en el promedio de casos con soluciones aleatorias, dado que eran familias totalmente controladas para poder observar particularidades. Por este motivo introducimos aquí dos familias nuevas con el objetivo de analizar casos promedio dentro de conjuntos de un cierto tamaño.\\
+Con respecto a la elaboracion de estas, en ambas se tomaron n+m desde 5 a 20 elementos en total corriendo un total de n+m instancias por cada tamaño. Y luego se fue aumentando de 50 en 50 hasta un total de 470 elementos en los cuales se realizo un 10$\%$ de instancias para cada tamaño. Esto fue diseñado de esta forma ya que debido al poder de computo enunciado, el backtraking solo llega a correr para un total de 15 elementos, por lo tanto, nos parecio prudente trabajar con un 100$\%$ de instancias para cada tamaño con $5 \leq n + m\leq 20$, y de esta forma, tomar un promedio de dichas instancias para cada tamaño y obtener resultados consisos.
 
 La primera es la familia random, que como el nombre lo indica, todo es absolutamente random en los parámetros de entrada.
 Para el caso del valor de la mochila, con más de 16 elementos solo se analizará tomando el mínimo, y hasta con 16 elementos, podremos comparar contra el exacto que resulta de tomar la peor o la mejor mochila.
-
-----> GRAFICOS:
-
----> familia: (habria q enumenarla? o ponerle un titulo?)
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[width=0.75\textwidth]{./EJ2/familiaDif.png}
-\\{\textit{Comparación solución golosa vs exacta}}
-  \end{center}
-----> random:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[width=0.75\textwidth]{./EJ2/random.png}
-\\{\textit{Comparación solución golosa vs exacta}}
-  \end{center}
-La segunda familia también tiene parámetros aleatorios, pero organiza gimnasios por cuadrantes, donde $\forall$ $C_i$ con $i$ $\in$ ${1..4}$, todos los gimnasios en el cuadrante $C_j$ tienen el mismo poder. Otra regla que trató de aplicarse es que el poder de los gimnasios sea diferente para cada cuadrante $C_i$, $C_j$ con $i \neq j$. Esto será posible siempre y cuando no sea posible asignar mas de 1 (uno) de poder a los gimnasios, en cuyo caso, puede haber cuadrantes que tienen el mismo poder para sus gimnasios.
-
-Esta familia será como una suerte de mapa por niveles. Veremos de esta manera como se desenvuelve sobre todo el algoritmo goloso para obtener un camino dentro de estas circunstancias.\\
-
-RANDOM:
 
 \begin{figure} [!ht]
  \centering
@@ -290,8 +270,22 @@ RANDOM:
     \includegraphics[width=0.45\textwidth]{./EJ2/randomgoloso.png}}
     \label{fig:randomgoloso}
     \end{figure}
-    
-    FAMILIA:
+ 
+ 
+Con respecto a la diferencia entre la soluciones que se obtienen en relaci\'on a las \'optimas elebaramos el siguiente gráfico:\\
+ 
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[width=0.75\textwidth]{./EJ2/random.png}
+\\{\textit{Comparación solución golosa vs exacta}}
+  \end{center}
+
+  
+La segunda familia también tiene parámetros aleatorios, pero organiza gimnasios por cuadrantes, donde $\forall$ $C_i$ con $i$ $\in$ ${1..4}$, todos los gimnasios en el cuadrante $C_j$ tienen el mismo poder. Otra regla que trató de aplicarse es que el poder de los gimnasios sea diferente para cada cuadrante $C_i$, $C_j$ con $i \neq j$. Esto será posible siempre y cuando no sea posible asignar m\'as de 1 (uno) de poder a los gimnasios, en cuyo caso, puede haber cuadrantes que tienen el mismo poder para sus gimnasios.
+
+Esta familia será como una suerte de mapa por niveles. Veremos de esta manera como se desenvuelve sobre todo el algoritmo goloso para obtener un camino dentro de estas circunstancias.\\
+
+ 
    \begin{figure} [!ht]
  \centering
   \subfloat[Algoritmo exacto]{
@@ -302,4 +296,10 @@ RANDOM:
     \label{fig:randomgoloso}
     \end{figure}
   
-  
+  Con respecto a la diferencia entre la soluciones que se obtienen en relaci\'on a las \'optimas elebaramos el siguiente gráfico:\\
+ 
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[width=0.75\textwidth]{./EJ2/random.png}
+\\{\textit{Comparación solución golosa vs exacta}}
+  \end{center}
