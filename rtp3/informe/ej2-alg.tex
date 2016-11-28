@@ -1,6 +1,6 @@
 Nuestro algoritmo cuenta con 3 secciones marcadas, la primera en la cual chequeamos las podas sin soluci\'on, la segunda donde se consigue el camino, y la \'ultima donde se devuelve dicho camino con la cantidad de nodos y distancia recorrida.\\
 En detalle, para nuestra primer etapa, desarrollamos un ciclo para poder ver el poder que posee cada uno de los gimnasios, chequeando si la capacidad de la mochila soporta el poder de los mismos. A su vez, se va sumando el poder de cada gimnasio para luego chequear si la cantidad de pokeparadas alcanza para ganar en todos los gimnasios.\\
-Luego, en la segunda secci\'on, se realiza un ciclo el cual realiza $\#$Poke-paradas + $\#$Gimnasios de vueltas. Este ciclo se realiz\'o para que exista un camino con cada uno de los nodos como inicio. Dentro de dicho ciclo por cada vuelta del mismo creamos un nuevo maestroPokemon para realizar sucesivas elecciones golosas para armar un camino posible. Dicha elecci\'on golosa tomar\'a un gimnasio siempre y cuando se lo pueda vencer y se encuentre a m\'inima distancia entre los que puedan ser vencidos. En el caso de que esto no sea posible, se tomar\'a a la pokeparada m\'as cercana. Se guardar\'a la distancia que ser\'a recorrida para ir a esta nueva posici\'on y las posiciones del nuevo nodo para ir formando el camino. Esto se realizar\'a hasta que se gane en todos los gimnasios. Luego, si la distancia recorrida es menor a la que ya se ten\'ia de una anterior iteraci\'on se reemplaza la anterior por la nueva al igual que el camino recorrido.
+Luego, en la segunda secci\'on, se realiza un ciclo el cual realizan $\#$Poke-paradas + $\#$Gimnasios de vueltas. Este ciclo se realiz\'o para que exista un camino con cada uno de los nodos como inicio. Dentro de dicho ciclo por cada iteración del mismo creamos un nuevo $maestroPokemon$ para realizar sucesivas elecciones golosas para armar un camino posible. Dicha elecci\'on golosa tomar\'a un gimnasio siempre y cuando se lo pueda vencer y se encuentre a m\'inima distancia entre los que puedan ser vencidos. En el caso de que esto no sea posible, se tomar\'a a la pokeparada m\'as cercana. Se guardar\'a la distancia que ser\'a recorrida para ir a esta nueva posici\'on y las posiciones del nuevo nodo para ir formando el camino. Esto se realizar\'a hasta que se gane en todos los gimnasios. Luego, si la distancia recorrida es menor a una anterior iteraci\'on se reemplaza la anterior por la nueva al igual que el camino recorrido.
 Por \'ultimo, nuestra tercer secci\'on devolver\'a el mejor camino obtenido con la distancia recorrida y la cantidad de nodos del camino.
 
 A continuaci\'on, mostraremos el pseudocodigo que ejemplifica lo enunciado.
@@ -87,14 +87,13 @@ creo eleccion \hfill O(1) \\
 \end{algorithm}
 
 \subsubsection{Nota 1}
-El ciclo con guarda \textit{esPosible} iterará \textit{n+m} veces dado que esta es la longitúd del camino más largo posible. Cada iteración realizará en el peor de los casos n+m comparaciones, buscando el siguiente destino para formar el camino.
+El ciclo con guarda \textit{esPosible} iterará \textit{n+m} veces (pokeparadas + gimnasios) dado que esta es la longitud del camino más largo posible. Cada iteración realizará en el peor de los casos n+m comparaciones, buscando el siguiente destino para formar el camino.
 
 Como se evalúan todos los inicios de caminos posibles, entonces el ciclo descripto arriba se ejecutará n+m veces.
 
-
 \subsubsection{Estructura interna para chequear elecciones y estados ocurridos}
 
-Se trabajo con dos estructuras internas denominadas MaestroPokemon y Eleccion, donde la primera tiene la informaci\'on sobre la cantidad de gimnasios y pokeparadas, la cantidad de gimnasios ya derrotados, la posici\'on actual, la cantidad de posiciones que posee en cada momento como tambi\'en la capacidad m\'axima de la mochila, y dos listas las cuales poseen todos los destinos posibles visitados o no y otra con solo los visitados.
+Se trabajó con dos estructuras internas denominadas $MaestroPokemon$ y $Eleccion$, donde la primera tiene la informaci\'on sobre la cantidad de gimnasios y pokeparadas, la cantidad de gimnasios ya derrotados, la posici\'on actual, la cantidad de posiciones que posee en cada momento como tambi\'en la capacidad m\'axima de la mochila, y dos listas que poseen todos los destinos posibles visitados o no y otra con solo los visitados.
 Mientras que nuestra segunda estructura, como el nombre lo indica, nos otorga toda la informaci\'on necesaria para poder realizar la elecci\'on, como es el id de la misma para no ser repetida, la posici\'on en donde se encuentra, la cantidad de pociones necesarias en caso de ser un gimnasio y la distancia para llegar a dicha posici\'on desde cierto punto.
-La funci\'on recalcular, nos dar\'a el valor de la distancia al cuadrado de las diferencias entre el nodo donde se está parado y la potencial elección.
+La funci\'on $recalcular$, nos dar\'a el valor de la distancia al cuadrado de las diferencias entre el nodo donde se está parado y la potencial elección.
 
