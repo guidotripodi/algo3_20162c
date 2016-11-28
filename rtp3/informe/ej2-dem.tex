@@ -156,7 +156,39 @@ A continuacion, mostraremos la instancia con 10 elementos para ejemplificar lo c
     \label{fig:anillogolosoerror}
     \end{figure}
     
-Una instancia con 6 elementos presenta un caso similar.\\
+
+Esto se debe a la forma de contrucciòn de estas instancias: como se busca un camino alternado para el goloso entre gimnasio y pokeparada, se le dan a todos los gimnasios la dificultad igual a la cantidad de pociones que aporta cada pokeparada y se crean la misma cantidad de gimnasios como de pokeparadas. En cuando a la distribuciòn de los mismos, se busco una forma de estrella, en la cual cada pokeparada está alineada con 2 gimnasios y una segunda pokeparada. Dadas estas restricciones se observa lo siguiente:
+
+INSERTAR DIBUJITO
+
+El camino goloso realiza un camino de longitud $\sum^{k}_{i=1}a + \sum^{j}_{i=1}c$ y el exacto $\sum^{n-1}_{i=1}b + \sum^{m-1}_{i=1}d + a$. Siendo $k$ el número de aristas como $a$ y $j$ como $c$, se tiene que $k + j = n+m-1$ (aristas en un camino de n+m elementos) y que $k=j+1$. Para que el algoritmo goloso difiera del exacto, se debe cumplir entonces la siguiente desigualdad:
+\[
+\sum^{k}_{i=1}a + \sum^{j}_{i=1}c \ge \sum^{n-1}_{i=1}b + \sum^{m-1}_{i=1}d + a
+\]
+
+La cual equivale a decir:
+
+\[
+\sum^{k}_{i=1}a + \sum^{j}_{i=1}c - a \ge (n-1)b + (m-1)d
+\]
+
+\[
+\sum^{j}_{i=1}a + \sum^{j}_{i=1}c \ge (n-1)b + (m-1)d
+\]
+
+\[
+j(a + c)\ge (n-1)b + (m-1)d
+\]
+
+Siendo que $n=m$ por como se construye la instancia, entonces:
+
+
+\[
+j(a + c) \ge (n-1)(b + d)
+\]
+
+Finalmente, como $k = j + 1 \wedge k+j=n+m-1 \leftrightarrow j = n - 1 $, se resolverán distintos caminos siempre y cuando $a +c \ge b + d$. Con lo cual, para generr correctamente las instancias para esta famila, se considero dicha desigualdad.
+
 
 Con respecto a la diferencia entre la soluciones que se obtienen en relacion a las optimas elebaramos el siguiente gráfico:\\
  
@@ -165,6 +197,9 @@ Con respecto a la diferencia entre la soluciones que se obtienen en relacion a l
  \includegraphics[width=0.75\textwidth]{./EJ2/anillosDif.png}
 \\{\textit{Comparación solución golosa vs exacta}}
   \end{center}
+  
+
+
   
 En conclusi\'on, la soluci\'on obtenida distará tanto de la óptima como la cantidad de veces que el algoritmo recorra una pokeparada y luego un gimnasio para vencerlo, sin importar si lo óptimo era pasar primero por las pokeparadas juntando poder y luego visitar varios gimnasios consecutivamente venciendolos a todos.
 
