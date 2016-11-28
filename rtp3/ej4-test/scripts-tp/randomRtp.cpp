@@ -18,7 +18,7 @@ using namespace std;
 #define MAX_CANT_PP 100
 #define MAX_CANT_GYMS 101
 
-#define INSTANCIAS 20
+#define INSTANCIAS 1029
 
 int main(){
 
