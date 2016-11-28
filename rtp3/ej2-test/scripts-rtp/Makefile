@@ -10,15 +10,15 @@ CFLAGS=-g -Wall -std=c++11
 LDFLAGS=
 
 # Agregar acá los archivos .cpp a compilar
-SOURCES=MaestroPokemon.cpp trie.cpp random.cpp
+SOURCES=MaestroPokemon.cpp trie.cpp orden.cpp sinOrden.cpp gym0.cpp todosGym0.cpp anillos.cpp random.cpp
 
 # Objetos que serán generados
-MAINOBJECTS=random.o
+MAINOBJECTS=sinSolucionPorPP.o sinSolucionPorCapMochila.o orden.o sinOrden.o gym0.o todosGym0.o anillos.o random.o
 
 OBJECTS=MaestroPokemon.o trie.o
 
 # Nombre del ejecutable a generar
-EXECUTABLES=random.test
+EXECUTABLES=sinSolucionPorPP.test sinSolucionPorCapMochila.test orden.test sinOrden.test gym0.test todosGym0.test anillos.test random.test
 
 all: $(EXECUTABLES)
 
