@@ -80,9 +80,13 @@ Este es un ejemplo de ambos algoritmos con un total de 10 elementos:
     \label{fig:fam5goloso}
     \end{figure}
     
-    
-GRAFICOS DE BARRAS CON DISTANCIA EXACTA Y GOLOSA - LOS ERRORES SON PARA DESPUES!
-
+Con respecto a la diferencia entre la soluciones que se obtienen en relacion a las optimas elebaramos el siguiente gráfico:\\
+ 
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[width=0.75\textwidth]{./EJ2/gym0Dif.png}
+\\{\textit{Comparación solución golosa vs exacta}}
+\end{center}
 \begin{center}
 \textbf{Familia 6}
 \end{center}
@@ -107,7 +111,13 @@ Este estilo de familia presenta a los gimnasios y pokeparadas desordenados en re
 
 Se puede observar en el ejemplo como nuestro algoritmo goloso va a la primer pokeparada y de ah\'i a vencer al gimnasio m\'as cercano en vez de ir a la pokeparada consecutiva. Esto lo hace hasta vencer a todos los gimnasios.
 
-GRAFICOS DE BARRAS CON DISTANCIA EXACTA Y GOLOSA - LOS ERRORES SON PARA DESPUES!
+Con respecto a la diferencia entre la soluciones que se obtienen en relacion a las optimas elebaramos el siguiente gráfico:\\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[width=0.75\textwidth]{./EJ2/sinOrdenDif.png}
+\\{\textit{Comparación solución golosa vs exacta}}
+  \end{center}
   
 \begin{center}
 \textbf{Familia 7}
@@ -146,9 +156,54 @@ A continuacion, mostraremos la instancia con 10 elementos para ejemplificar lo c
     \label{fig:anillogolosoerror}
     \end{figure}
     
-Una instancia con 6 elementos presenta un caso similar.\\
 
-GRAFICOS DE BARRAS CON DISTANCIA EXACTA Y GOLOSA - LOS ERRORES SON PARA DESPUES!
+Esto se debe a la forma de contrucciòn de estas instancias: como se busca un camino alternado para el goloso entre gimnasio y pokeparada, se le dan a todos los gimnasios la dificultad igual a la cantidad de pociones que aporta cada pokeparada y se crean la misma cantidad de gimnasios como de pokeparadas. En cuando a la distribuciòn de los mismos, se busco una forma de estrella, en la cual cada pokeparada está alineada con 2 gimnasios y una segunda pokeparada. Dadas estas restricciones se observa lo siguiente:
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[width=0.75\textwidth]{./EJ2/dibujoorientativo.png}
+\\{\textit{Comparación solución golosa vs exacta}}
+  \end{center}
+
+El camino goloso realiza un camino de longitud $\sum^{k}_{i=1}a + \sum^{j}_{i=1}c$ y el exacto $\sum^{n-1}_{i=1}b + \sum^{m-1}_{i=1}d + a$. Siendo $k$ el número de aristas como $a$ y $j$ como $c$, se tiene que $k + j = n+m-1$ (aristas en un camino de n+m elementos) y que $k=j+1$. Para que el algoritmo goloso difiera del exacto, se debe cumplir entonces la siguiente desigualdad:
+\[
+\sum^{k}_{i=1}a + \sum^{j}_{i=1}c \ge \sum^{n-1}_{i=1}b + \sum^{m-1}_{i=1}d + a
+\]
+
+La cual equivale a decir:
+
+\[
+\sum^{k}_{i=1}a + \sum^{j}_{i=1}c - a \ge (n-1)b + (m-1)d
+\]
+
+\[
+\sum^{j}_{i=1}a + \sum^{j}_{i=1}c \ge (n-1)b + (m-1)d
+\]
+
+\[
+j(a + c)\ge (n-1)b + (m-1)d
+\]
+
+Siendo que $n=m$ por como se construye la instancia, entonces:
+
+
+\[
+j(a + c) \ge (n-1)(b + d)
+\]
+
+Finalmente, como $k = j + 1 \wedge k+j=n+m-1 \leftrightarrow j = n - 1 $, se resolverán distintos caminos siempre y cuando $a +c \ge b + d$. Con lo cual, para generr correctamente las instancias para esta famila, se considero dicha desigualdad.
+
+
+Con respecto a la diferencia entre la soluciones que se obtienen en relacion a las optimas elaboramos el siguiente gráfico:\\
+ 
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[width=0.75\textwidth]{./EJ2/anillosDif.png}
+\\{\textit{Comparación solución golosa vs exacta}}
+  \end{center}
+  
+
+
   
 En conclusi\'on, la soluci\'on obtenida distará tanto de la óptima como la cantidad de veces que el algoritmo recorra una pokeparada y luego un gimnasio para vencerlo, sin importar si lo óptimo era pasar primero por las pokeparadas juntando poder y luego visitar varios gimnasios consecutivamente venciendolos a todos.
 
@@ -173,7 +228,7 @@ Posteriormente, veremos como se comporta cada familia en funci\'on del tiempo al
     \includegraphics[width=0.45\textwidth]{./EJ2/comparativo2.png}}
     \label{fig:comparativo2}
     \end{figure}
-  
+
 Se puede observar como la familia n\'umero 6 presenta una peor performance en comparaci\'on al resto mientras que tanto la familia 1 como la 2 presentan un tiempo que se torna constante dando una mejor performance en relaci\'on al resto, lo cual se debe a las podas utilizadas para estas familias como mencionamos anteriormente. Mientras que la n\'umero 6 presenta la dificultad en la cual todos los elementos del mapa se encuentran desordenados, por lo tanto nuestro algoritmo tiene que llegar a hacer hasta un doble viaje para poder vencer a un gimnasio, ya que se dan instancias en las cuales los gimnasios de poder menor o igual a 3 se encuentran muy lejos de las pokeparadas en relaci\'on a los gimnasios de poder mayor, los cuales estan "pegados" a las pokeparadas insumiendo as\'i un tiempo mayor de decisi\'on y ejecuci\'on. Como hab\'iamos visto, nuestro algoritmo siempre que puede vencer a un gimnasio va a vencerlo.
 
 Luego, mostraremos como se comporta nuestro algoritmo en base a la complejidad calculada anteriormente:
@@ -184,15 +239,54 @@ Luego, mostraremos como se comporta nuestro algoritmo en base a la complejidad c
 \\{\textit{Tiempo de ejecución entre familias}}
   \end{center}
   \vspace*{0.3cm}
-  
+
   
 Es posible observar como las funciones resultantes del mejor y peor caso se encuentran por debajo de la cota de complejidad. Dicha complejidad fue calculada utilizando el m\'etodo de cuadrados m\'inimos generandonos una funcion la cual tomamos como cota dentro de nuestro orden de complejidad $(O(n+m)^3)$. 
 
---> INDICAR LA CONSTANTE: MELANIE LO PIDIO
+--> INDICAR LA CONSTANTE: MELANIE LO PIDIO EL TEMA ES Q EL K NUESTRO ESTE ES UN NUMERO MEDIO TURBIO NO SE Q PONER.
 
 \subsubsection*{Repercusi\'on del tamaño de la mochila en el algoritmo hasta 16 elementos (pokeparadas + gimnasios)}
 
-PARA LOS CASOS CHICOS SE PUEDE MOSTRAR LA REPERCUSION DE LA MOCHILA!!! ESTOS DATOS LOS TIENEN
+
+---> MEJORAR CHAMUYO!
+
+Se realizaron dos experimentas en base a la familia random y a la nueva familia para ver como repercutia el tamaño enunciado, con una mochila denominada grande y la otra chica. Donde la chica tiene una capacidad igual al poder del gimnasio mas grande mientras que la otra es mayor a la primera. Luego de dicha experimentación, se desarrollaron los siguientes gr\'aficos en el cuales se podr\'a observar como la heur\'istica golosa no presenta cambios en su soluci\'on al tener una mochila mas grande o no, mientr\'as que el backtraking al tener una mochila con mayor capacidad logra obtener un camino diferente y de menor longitud.\\
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.60]{./EJ2/familiaMochila.png}
+\\{\textit{Repercusión del tamaño de la mochila en las soluciones de familia}}
+  \end{center}
+  \vspace*{0.3cm}
+  \begin{figure} [!ht]
+ \centering
+  \subfloat[Repercusión en goloso]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/mochilaGoloso.png}}
+    \label{fig:comparativo1}
+  \subfloat[Repercusión en backtraking]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/mochilaBacktrakingFamilia.png}}
+    \label{fig:comparativo2}
+    \end{figure}
+   
+
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.60]{./EJ2/randomMochila.png}
+\\{\textit{Repercusión del tamaño de la mochila en las soluciones de familia}}
+  \end{center}
+  \vspace*{0.3cm}
+  \begin{figure} [!ht]
+ \centering
+  \subfloat[Repercusión en goloso]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/mochilaGolosoRandom.png}}
+    \label{fig:comparativo1}
+  \subfloat[Repercusión en backtraking]{
+    \includegraphics[width=0.45\textwidth]{./EJ2/mochilaBacktrakingRandom.png}}
+    \label{fig:comparativo2}
+    \end{figure}
+   
+
+Como se observa, a la heurística golosa no le repercute el tamaño de dicha mochila, dado que la misma siempre que existe la posibilidad va a vencer a un gimnasio, por lo que el tamaño de la mochila no influye, debido a que con tener una capacidad minima de pociones la cual es apta para derrotar al gimnasio, la misma proceder\'a a hacero sin importar si era conveniente pasar por otra pokeparada antes.
 
 \subsubsection*{Repercusi\'on del tamaño de la mochila en el algoritmo más de 16 elementos}
 
@@ -201,16 +295,11 @@ Dado que la heur\'istica golosa siempre que tiene la posibilidad va a vencer a u
 \subsubsection*{Familias random y por cuadrantes}
 
 Como se comentó previamente en el ejercicio uno, las anteriores familias fueron de utilidad para analizar que sucede con el algoritmo goloso dado cierto tipo de entradas y porque no obtiene solución óptima en algunos casos, además de servir para analizar las podas tanto del algorito exacto como el goloso. Lo que no fué posible con estas familias es analizar que sucede en el promedio de casos con soluciones aleatorias, dado que eran familias totalmente controladas para poder observar particularidades. Por este motivo introducimos aquí dos familias nuevas con el objetivo de analizar casos promedio dentro de conjuntos de un cierto tamaño.\\
+Con respecto a la elaboracion de estas, en ambas se tomaron n+m desde 5 a 20 elementos en total corriendo un total de n+m instancias por cada tamaño. Y luego se fue aumentando de 50 en 50 hasta un total de 470 elementos en los cuales se realizo un 10$\%$ de instancias para cada tamaño. Esto fue diseñado de esta forma ya que debido al poder de computo enunciado, el backtraking solo llega a correr para un total de 15 elementos, por lo tanto, nos parecio prudente trabajar con un 100$\%$ de instancias para cada tamaño con $5 \leq n + m\leq 20$, y de esta forma, tomar un promedio de dichas instancias para cada tamaño y obtener resultados consisos.
 
 La primera es la familia random, que como el nombre lo indica, todo es absolutamente random en los parámetros de entrada.
-Para el caso del valor de la mochila, con más de 16 elementos solo se analizará tomando el mínimo, y hasta con 16 elementos, podremos comparar contra el exacto que resulta de tomar la peor o la mejor mochila.\\ <-- SI, HAY QUE TOMAR STRONG Y WEAK HASTA 16 ELTOS Y COMPARAR CONTRA EL EXACTO!!\\
-La segunda familia también tiene parámetros aleatorios, pero organiza gimnasios por cuadrantes, donde $\forall$ $C_i$ con $i$ $\in$ ${1..4}$, todos los gimnasios en el cuadrante $C_j$ tienen el mismo poder. Otra regla que trató de aplicarse es que el poder de los gimnasios sea diferente para cada cuadrante $C_i$, $C_j$ con $i \neq j$. Esto será posible siempre y cuando no sea posible asignar mas de 1 (uno) de poder a los gimnasios, en cuyo caso, puede haber cuadrantes que tienen el mismo poder para sus gimnasios.
+Para el caso del valor de la mochila, con más de 16 elementos solo se analizará tomando el mínimo, y hasta con 16 elementos, podremos comparar contra el exacto que resulta de tomar la peor o la mejor mochila.
 
-Esta familia será como una suerte de mapa por niveles. Veremos de esta manera como se desenvuelve sobre todo el algoritmo goloso para obtener un camino dentro de estas circunstancias.\\
-
-PRESENTAR LAS FAMILIAS RANDOM Y FAMILIAS POR CUADRANTE
-
-ESTE GRAFICO PARA MOSTRAR LA RANDOM Y PODEMOS GENERAR UNO PARA MOSTRAR LA QUE ES POR CUADRANTE
 \begin{figure} [!ht]
  \centering
   \subfloat[Algoritmo exacto]{
@@ -220,4 +309,36 @@ ESTE GRAFICO PARA MOSTRAR LA RANDOM Y PODEMOS GENERAR UNO PARA MOSTRAR LA QUE ES
     \includegraphics[width=0.45\textwidth]{./EJ2/randomgoloso.png}}
     \label{fig:randomgoloso}
     \end{figure}
+ 
+ 
+Con respecto a la diferencia entre la soluciones que se obtienen en relaci\'on a las \'optimas elebaramos el siguiente gráfico:\\
+ 
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[width=0.75\textwidth]{./EJ2/random.png}
+\\{\textit{Comparación solución golosa vs exacta}}
+  \end{center}
+
   
+La segunda familia también tiene parámetros aleatorios, pero organiza gimnasios por cuadrantes, donde $\forall$ $C_i$ con $i$ $\in$ ${1..4}$, todos los gimnasios en el cuadrante $C_j$ tienen el mismo poder. Otra regla que trató de aplicarse es que el poder de los gimnasios sea diferente para cada cuadrante $C_i$, $C_j$ con $i \neq j$. Esto será posible siempre y cuando no sea posible asignar m\'as de 1 (uno) de poder a los gimnasios, en cuyo caso, puede haber cuadrantes que tienen el mismo poder para sus gimnasios.
+
+Esta familia será como una suerte de mapa por niveles. Veremos de esta manera como se desenvuelve sobre todo el algoritmo goloso para obtener un camino dentro de estas circunstancias.\\
+
+ 
+   \begin{figure} [!ht]
+ \centering
+  \subfloat[Algoritmo exacto]{
+    \includegraphics[width=0.5\textwidth]{./EJ2/familiaexacto.png}}
+       \label{fig:randomexacto}
+  \subfloat[Algoritmo goloso]{
+    \includegraphics[width=0.5\textwidth]{./EJ2/familiaGoloso.png}}
+    \label{fig:randomgoloso}
+    \end{figure}
+  
+  Con respecto a la diferencia entre la soluciones que se obtienen en relaci\'on a las \'optimas elebaramos el siguiente gráfico:\\
+ 
+\vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+ \includegraphics[width=0.75\textwidth]{./EJ2/random.png}
+\\{\textit{Comparación solución golosa vs exacta}}
+  \end{center}

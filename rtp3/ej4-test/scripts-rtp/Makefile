@@ -13,12 +13,12 @@ LDFLAGS=
 SOURCES=ej4.cpp MaestroPokemon.cpp trie.cpp gym0.cpp todosGym0.cpp orden.cpp sinOrden.cpp anillos.cpp SetTabu.cpp random.cpp
 
 # Objetos que serán generados
-MAINOBJECTS=random.o
+MAINOBJECTS=randomRtp.o
 
 OBJECTS=MaestroPokemon.o trie.o SetTabu.o ej4.o
 
 # Nombre del ejecutable a generar
-EXECUTABLES=random.test
+EXECUTABLES=randomRtp.test
 
 all: $(EXECUTABLES)
 
