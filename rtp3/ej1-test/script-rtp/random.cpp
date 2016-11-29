@@ -19,10 +19,10 @@ int main(int argc, char* argv[])
 	cout << "Entrada" << "," << "Medicion" << "," << "Data" << "\n";
 	int cantidadElementos = 0;
 	int cant_aux = 0;
-	int cantidadInstancia = 1;
+	int cantidadInstancia = 0;
 	long long medicion = 0;
 	long long data = 0;
-	for (int j = 0; j < 185; ++j)
+	for (int j = 0; j < 880; ++j)
 	{
 		int cant_gimnasios, cant_pokeParadas, cap_mochila;
 		cin >> cant_gimnasios >> cant_pokeParadas >> cap_mochila;
