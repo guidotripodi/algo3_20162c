@@ -263,5 +263,5 @@ for i in xrange(20, 500, 50):
 		print(acum)
 	elif i == 270:
 		print(acum)
-			 
+	 
 print(acum)

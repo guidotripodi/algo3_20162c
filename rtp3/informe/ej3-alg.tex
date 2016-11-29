@@ -1,3 +1,10 @@
+En la explicación de las heurísticas ya se mencionó como son los intercambios de aristas válidos para cada búsqueda local. Un camino será representado mediante un vector $S_{actual}$ el cual se inicializa con el camino a mejorar $S_o$. 
+
+Cada posición del vector indica el $id$ de una pokeparada o gimnasio y cada par de $id's$ conforma una arista del mapa. Luego de los algoritmos se explicará que es un $id$ para una pokeparada y gimnasio.
+ 
+Se itera sobre toda la vecindad (todas las posibles reconecciones de aristas que sean válidas dentro de la heurística realizada) hasta que no se producen más mejoras. Cada mejora se guarda en un vector $S_{final}$ que es el camino mejorado a devolver.\\
+Como las distancias son enteras y las mejoras también, como mínimo se mejora la distancia en una unidad. Por lo tanto, o la distancia llega a cero en cuyo caso ya no habrá mejoras y el algoritmo finaliza o podría ser que se llegue a un mínimo local y por lo tanto no pueda seguir mejorandose la distancia, con lo cual el algoritmo también da por finalizada su ejecución.
+
 \begin{algorithm}[H] %or another one check
  \Fn{swap()}{
  %     \SetAlgoLined
