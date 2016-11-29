@@ -3,7 +3,6 @@
 #include <iostream>
 #include <list>
 #include <stdio.h>
-#include <stdlib.h>
 #include "trie.cpp"
 
 #define GIMNASIO 0
