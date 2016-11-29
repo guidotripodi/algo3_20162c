@@ -101,7 +101,7 @@ int main(){
 		<< "promedio distancias goloso,"
 		<< "promedio distancias tabu,"
 		<< "promedio porcentaje,"
-		<< "repeticiones,"
+		<< "iteraciones,"
 		<< "promedio distancia tabu para iteraciones\n";
 	
 	int h = 0;
