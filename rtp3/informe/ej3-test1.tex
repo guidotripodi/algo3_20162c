@@ -10,11 +10,9 @@ Para realizar los tests se tomaron dos rangos de tamaños:
 
 Para el Rango 1 se tomó cinco veces el total de elementos como cantidad de instancias aleatorias por cada tamaño y para el Rango 2 se tomó un 10\% del total de elementos como cantidad de instancias aleatorias.
 
-Se realizan las busquedas locales promediando los tiempos y distancias para todas las instancias de cada tamaño. Y se obtienen los porcentajes de mejora relativos a cada tamaño con respecto al promedio de las distancias del algoritmo goloso.
+Se realizan las búsquedas locales promediando los tiempos y distancias para todas las instancias de cada tamaño. Y se obtienen los porcentajes de mejora relativos a cada tamaño con respecto al promedio de las distancias del algoritmo goloso.
  
-Para las primeras 16 instancias, se obtiene el promedio de distancias del algoritmo exacto y se calcula el error relativo en base a los promedios de las distancias obtenidas por el algoritmo goloso y las búsquedas locales.
-
-La idea inicial del Rango 1 era poder comparar contra el backtracking las distancias obtenidas por el algoritmo goloso y las búsquedas locales, pero para instancias de 17 elementos en adelante el algoritmo demoraba demasiado tiempo y se decidió recortar hasta 16 elementos. Por cuestiones de tiempo los rangos quedaron como inicialmente se planearon.\\
+Para las primeras 15 instancias, se obtiene el promedio de distancias del algoritmo exacto y se calcula el error relativo en base a los promedios de las distancias obtenidas por el algoritmo goloso y las búsquedas locales.
 
 \subsubsection*{Random}
 
@@ -119,5 +117,3 @@ Los tiempos de ambas búsquedas locales son relativamente iguales. Teniendo en c
 
 Será particularmente importante observar en el siguiente ejercicio cuanto puede mejorar la distancia la meta heurística que será presentada, ya que queda bastante claro que los resultados del algoritmo goloso para este tipo de familia pueden ser extramadamente malos. 
 \\\\
-
-\textbf{Algún gráfico con instancias mayores a 470 elementos para mostrar que las hipótesis se cumplen?}
