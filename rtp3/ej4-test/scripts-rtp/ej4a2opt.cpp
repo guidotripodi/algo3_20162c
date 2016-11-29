@@ -12,7 +12,7 @@ Pokeparada *pokeParadasArrPtr;
 
 int _tenor;
 int _maxIter;
-int _maxRep = 10;
+int _maxRep;
 
 pair<float, float> estadisticas(vector<long long> &muestra)
 {
@@ -69,20 +69,16 @@ pair<long long, long long> correr(vector<int> solucionParcial, vector<long long>
     long long tiempo = 0;
     vector<int> solucionMejorada;
     long long it = 0;
-	while(it < _maxRep)
-	{
-		auto start = ya();
-		solucionMejorada = tabuSearch(solucionParcial, it, iteraciones);
-		auto end = ya();
-		tiempo = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
-		iteraciones.push_back(calcularCosto(solucionMejorada));
-		it++;
-	}  
-
+    auto start = ya();
+    solucionMejorada = tabuSearch(solucionParcial, it, iteraciones);
+    auto end = ya();
+    tiempo = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
+   
+    
 //    pair <float, float> est = estadisticas(tiempos);
     
 //    printResults(est, solucionMejorada);
-	return make_pair(tiempo, calcularCosto(solucionMejorada));//solo lo de la ultima iteracion
+	return make_pair(tiempo, calcularCosto(solucionMejorada));
 }
 
 pair< pair<long long, long long>, long long > testear(int cant_gimnasios, int cant_pokeParadas, int cap_mochila,  pair <pair <int,int>, int> posiciones_gym[],  pair<int,int> posiciones_pp[], pair<int,int>  pp_aux[], vector<long long> &iteraciones) 
@@ -178,11 +174,11 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long it, vector<long lo
     SetTabu atributosTabu;
 
     int iter = 0;
-    int cantidadNoMejoras = 0;//BRAVO
+    //int cantidadNoMejoras = 0;//BRAVO
     
     //while(iter < _maxIter && cantidadNoMejoras < ITERMAXREP)//CHARLIE ?
-    while(cantidadNoMejoras < it)//BRAVO
-    //while(iter < _maxIter)//ALFA
+    //while(cantidadNoMejoras < ITERMAXREP)//BRAVO
+    while(iter < _maxIter)//ALFA
     {
         vector<int> mejorVecino;
         list<Arista> aristasModificadas;
@@ -226,25 +222,23 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long it, vector<long lo
             mejorSolucion = mejorVecino;
             costoMejor = costoMejorVecino;
             
-			cantidadNoMejoras=0;//BRAVO
+			//cantidadNoMejoras=0;//BRAVO
         }else {
-            cantidadNoMejoras++;//BRAVO
+            //cantidadNoMejoras++;//BRAVO
         }
     
-        /*
-		if (it == 1) {
+        if (it == 1) {
             cout << costoMejor << ",";
             
             for(int i = 0; i < (int) mejorSolucion.size(); i++)
                 cout << mejorSolucion[i] << " ";
             cout << "\n";
         }
-        */
-
-        list<Arista>::iterator itList;
-        for(itList = aristasModificadas.begin(); itList != aristasModificadas.end(); itList++)
+        
+        list<Arista>::iterator it;
+        for(it = aristasModificadas.begin(); it != aristasModificadas.end(); it++)
         {
-            atributosTabu.push(*itList);
+            atributosTabu.push(*it);
         }
         
         while(atributosTabu.size() > _tenor)
@@ -253,10 +247,10 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long it, vector<long lo
         }
        
 		
-		//iteraciones.push_back(costoMejor);//ALFA
+		iteraciones.push_back(costoMejor);//ALFA
 		
 
-        //iter++;
+        iter++;
     }
     
     return mejorSolucion;
