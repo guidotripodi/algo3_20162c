@@ -83,7 +83,7 @@ int main(){
 			<< cantGyms + cantPokeParadas << ","
 			<< distanciaGoloso << ","
 			<< distanciaLocal << ","
-			<< tiempoLocal << ",";
+			<< tiempoLocal << "\n";
 		
 		tams[j] = cantGyms + cantPokeParadas;
 		mejorasParciales[j] = distanciaGoloso;
@@ -100,7 +100,9 @@ int main(){
 		<< "promedio tiempos,"
 		<< "promedio distancias goloso,"
 		<< "promedio distancias tabu,"
-		<< "promedio porcentaje\n";
+		<< "promedio porcentaje,"
+		<< "iteraciones,"
+		<< "promedio distancia tabu para iteraciones\n";
 	
 	int h = 0;
 	while(h < INSTANCIAS)
