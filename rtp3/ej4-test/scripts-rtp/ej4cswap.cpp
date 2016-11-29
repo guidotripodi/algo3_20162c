@@ -190,8 +190,8 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long it, vector<long lo
         vector<int> mejorVecino;
         list<Arista> aristasModificadas;
         
-        list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
-        //list< pair< vector<int>, list<Arista> > > vecindad = vecindadSwap(solucionActual);
+        //list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
+        list< pair< vector<int>, list<Arista> > > vecindad = vecindadSwap(solucionActual);
         
         //list< pair< vector<int>, list<Arista> > > vecindad = vecindad3opt(solucionActual);
         if(vecindad.size() == 0) return mejorSolucion;
