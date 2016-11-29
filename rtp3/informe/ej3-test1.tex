@@ -66,8 +66,6 @@ Para el Rango 2, podemos observar que a medida que el tamaño crece se observa u
 \subsubsection*{Gimnasios por grupos}
 
 Como ya sabemos, esta familia intenta organizar los gimnasios en grupos de hasta cuatro poderes distintos. Veamos que sucede al incrementar la cantidad de elementos en el mapa.
-Podemos observar en el Rango 1 como a medida que las instancias crecen en tamaño aumenta considerablemente la distancia del algoritmo goloso y las mejoras realizadas por ambas búsquedas locales son muy parecidas estando ambas por encima del 15\% en casi todos los casos. Para instancias pequeñas se hacer particularmente difícil decidir que búsqueda local es la ganadora. 
-\\\\
 
 \begin{figure}[h] 
  \centering
@@ -86,6 +84,9 @@ Podemos observar en el Rango 1 como a medida que las instancias crecen en tamañ
 	\\{\textit{Tiempos}}
   \end{center}
   \vspace*{0.3cm} 
+
+Podemos observar en el Rango 1 como a medida que las instancias crecen en tamaño aumenta considerablemente la distancia del algoritmo goloso y las mejoras realizadas por ambas búsquedas locales son muy parecidas estando ambas por encima del 15\% en casi todos los casos. Para instancias pequeñas se hacer particularmente difícil decidir que búsqueda local es la ganadora. 
+\\\\
 
 En relación a los tiempos se observa que $Swap$ se encuentra entre un 15\% y un 20\% por debajo de $2-opt$. En relación a las mejoras obtenidas es sugerente que $Swap$ parece una buena opción para casos particularemente pequeños en relación calidad-performance.
 \\\\
@@ -108,11 +109,15 @@ En relación a los tiempos se observa que $Swap$ se encuentra entre un 15\% y un
   \end{center}
   \vspace*{0.3cm} 
  
-Para el Rango 2 se sigue observando un incremento extremadamente alto en las distancias obtenidas por el goloso. Y a su vez las mejoras realizadas por ambas bú	quedas locales disminuyen conforme aumenta el tamaño. En principio se observa que no hay diferencias para instancias de 470 elementos. Debido a la discretización utilizada, este patron podría repetirse incluso a partir de los 400 elementos.
+Para el Rango 2 se sigue observando un incremento extremadamente alto en las distancias obtenidas por el goloso. Y a su vez las mejoras realizadas por ambas búsquedas locales disminuyen conforme aumenta el tamaño. En principio se observa que no hay diferencias para instancias de 470 elementos. Debido a la discretización utilizada, este patron podría repetirse incluso a partir de los 400 elementos.
 
 Creemos que las distancias observadas son particularmente altas debido a como están organizados los gimnasios. Al estar las pokeparadas distribuidas por todo el mapa y los gimnasios más agrupados, el algoritmo goloso deberá recorrer enormes distancias para vencer gimnasios y volver a buscar pokeparadas en la mayoria de los casos. Además debemos recordar que el algoritmo goloso no hace particular uso de la mochila ya que su premisa es siempre vencer un gimnasio cuando sea posible.
 
 Con respecto a la disminución en los porcentajes de mejora puede observarse lo mismo que en la familia $Random$, a medida que la instancia crece, la solución se hace cada vez más local y por lo tanto las mejoras tienden a ser mínimos locales. 
+
+Los tiempos de ambas búsquedas locales son relativamente iguales. Teniendo en cuenta la mínima ventaja de $Swap$ en cuanto a mejoras, podríamos decir que ambas búsquedas locales funcionan bien para intancias grandes.
+
 Será particularmente importante observar en el siguiente ejercicio cuanto puede mejorar la distancia la meta heurística que será presentada, ya que queda bastante claro que los resultados del algoritmo goloso para este tipo de familia pueden ser extramadamente malos. 
 \\\\
-  
+
+\textbf{Algún gráfico con instancias mayores a 470 elementos para mostrar que las hipótesis se cumplen?}

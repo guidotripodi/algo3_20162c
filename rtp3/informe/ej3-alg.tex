@@ -3,7 +3,7 @@ En la explicación de las heurísticas ya se mencionó como son los intercambios
 Cada posición del vector indica el $id$ de una pokeparada o gimnasio y cada par de $id's$ conforma una arista del mapa. Luego de los algoritmos se explicará que es un $id$ para una pokeparada y gimnasio.
  
 Se itera sobre toda la vecindad (todas las posibles reconecciones de aristas que sean válidas dentro de la heurística realizada) hasta que no se producen más mejoras. Cada mejora se guarda en un vector $S_{final}$ que es el camino mejorado a devolver.\\
-Como las distancias son enteras y las mejoras también, como mínimo se mejora la distancia en una unidad. Por lo tanto, o la distancia llega a cero en cuyo caso ya no habrá mejoras y el algoritmo finaliza o podría ser que se llegue a un mínimo local y por lo tanto no pueda seguir mejorandose la distancia, con lo cual el algoritmo también da por finalizada su ejecución.
+Como las distancias son enteros positivos y las mejoras son enteras, como mínimo se mejora la distancia en una unidad. Por lo tanto, o la distancia llega a cero en cuyo caso ya no habrá mejoras y el algoritmo finaliza su ejecución o podría ser que se llegue a un mínimo local y por lo tanto no pueda seguir mejorandose la distancia, con lo cual el algoritmo también da por finalizada su ejecución.
 
 \begin{algorithm}[H] %or another one check
  \Fn{swap()}{
@@ -227,11 +227,13 @@ Como las distancias son enteras y las mejoras también, como mínimo se mejora l
 
 \end{algorithm}
 
+\subsubsection*{Detalles de los algoritmos}
+\label{sec:alg3}
 \begin{itemize}
 \item Justificación de la cota del ciclo principal: El algoritmo comienza con una solucion de $n$ nodos. Cada mejora en el peor de los casos se realiza en una unidad, ya que se trabaja con distancias enteras. Como se busca llegar al óptimo global, en el peor de los casos habrá O($n$-longitud de la solución óptima) iteraciones para el ciclo principal.
-\item Recorido = Lista de enteros
+\item Recorido = Lista de $id$'s
 \item $n$ = |$S_o$|
-\item Todos los enteros en un Recorrido están entre 1 y $M+N$, con $M$ la cantidad de gimnasios y $N$ la cantidad de pokeparadas.
+\item Todos los $id$'s en un Recorrido son enteros entre 1 y $M+N$, con $M$ la cantidad de gimnasios y $N$ la cantidad de pokeparadas.
 \item Los primeros $M$ indices corresponden a los gimnasios y los restantes $N$ a pokeparadas.
 \item Gimnasio = < <entero x, entero y>, entero poder>
 \item PokeParada = <entero x, entero y>

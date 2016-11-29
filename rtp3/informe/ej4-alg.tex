@@ -1,3 +1,20 @@
+Como comentario inicial, se presenta el algoritmo $Tabu$ $Search$ con ambos criterios de parada en el ciclo principal (cantidad de iteraciones límite y cantidad de iteraciones sin mejora) ya que ambos pueden aplicarse a la vez o por separado que es como serán estudiados en la experimentación.
+
+El algoritmo itera sobre una solución inicial $S_o$ que es un vector con los $id$'s de las pokeparadas y gimnasios como fue definido en el ejericio tres. \ref{sec:alg3} 
+Se utiliza el vector $solucionActual$ para guardar el recorrido que se utiliza para recorrer vecindades. Mientras que $mejorSolucion$ guarda el mejor recorrido encontrado en todas las vecindades analizadas y será este el encargado de hacer valer la condición de corte de cantidad de iteraciones sin mejora.
+
+El algoritmo procede a calcular la vecindad de $solucionActual$ filtrando aquellos recorridos no válidos para el problema en cuestión (las condiciones de validez de una solución fueron dadas en el ejercicio dos) y luego busca el mejor candidato dentro de esta vecindad, que será aquella con menor costo y que no sea un recorrido marcado como tabú (es decir que previamente ya fue tomado).
+
+Si no obtuvo un candidato, procede a utilizar la función de aspiración, que será elegir aquel recorrido en el vecindario que sea menos tabú.
+
+En cualquier caso, siempre se obtienen las aristas modificadas para llegar a este recorrido dentro de la vecindad (esto depende de la búsqueda local utilizada) y se agregan las mismas a la lista tabú.
+
+Una vez hecho esto se actualiza el $mejorCosto$ y la $mejorSolucion$ si el recorrido encontrado mejora el $mejorCosto$ actual. Si esto no sucede, se aumenta en una unidad la cantidad de iteraciones sin mejora. 
+
+El algoritmo finaliza cuando se alcanza la cantidad de iteraciones límite o la cantidad de iteraciones sin mejora límite. Una u otra dependen de la elección del usuario.
+
+\newpage
+
 \begin{algorithm}[H] %or another one check
  \Fn{tabuSearch()}{
  %     \SetAlgoLined
@@ -75,8 +92,12 @@ devolver mejorSolucion \\
 \end{algorithm}
 
 Complejidad final: O(MaxIter * ( $n^5$ $\ast$ $log(TenorTabu)$ + $TenorTabu$)) = O($N+M$ $\ast$ ( $n^5$ $\ast$ $log(N+M)$ + $N+M$)) $\subset$ O($N+M$ $\ast$ ( $(N+M)^5$ $\ast$ $log(N+M)$ + $N+M$))
+\\
+Siendo $N$ = cantidad pokeparadas y $M$ = cantidad gimnasios.\\
 
-Siendo $N$ = cantidad pokeparadas y $M$ = cantidad gimnasios
+En general a la hora de implemetar y experimentar, serán tomados porcentajes de $N+M$ para la cantidad de iteraciones límite y el tenor tabú ya que pueden ser valores muy grandes.\\
+
+\subsubsection*{Detalles del algoritmo}
 
 \begin{itemize}
 \item Justificación de la cota de complejidad del ciclo principal: El algoritmo finaliza si se producen $maxNoMejora$ cantidad de iteraciones sin mejora de $costoInicial$ o si se alcanza $MaxIter$. 
