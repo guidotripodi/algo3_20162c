@@ -268,17 +268,15 @@ La mochila mínima será el valor del gimnasio con más poder más un extra de 3
 Con respecto a la creación de casos para cada familia se idearon dos rangos iniciales:
 
 \begin{enumerate}
-\item Rango 1: de 5 a 20 elementos. Por cada instancia de tamaño $n$ se tomaron $n*5$ instancias aleatorias.
+\item Rango 1: de 5 a 15 elementos. Por cada instancia de tamaño $n$ se tomaron $n*5$ instancias aleatorias.
 \item Rango 2: desde 70 hasta 470 elementos en intervalos de 50 elementos. Por cada instancia de tamaño $n$ se tomó un 10\% del tamaño de la entrada. 
 \end{enumerate}
 
 La cantidad de intancias dentro de cada tamaño será utilizada para promediar distancias y tiempos y así obtener errores relativos y porcentajes de mejora promedios por cada tamaño.\\
 
-La idea del Rango 1 era poder calcular hasta con 20 elementos el backtracking, pero debido a los elevados tiempos de resolución se fué achicando el tamaño de las instancias hasta 15. Igualmente, por cuestiones de tiempo, se decidió conservar el rango de la manera en que fué ideado. La cantidad de instancias tomadas por cada tamaño permite obtener promedios más consistentes para que las comparaciones contra el backtracking sean de la mejor calidad posible y puedan aportar información sobre que es lo que sucede.
+La idea del Rango 1 era poder calcular hasta con 20 elementos el backtracking, pero debido a los elevados tiempos de resolución se fué achicando el tamaño de las instancias hasta 15. La cantidad de instancias tomadas por cada tamaño permite obtener promedios más consistentes para que las comparaciones contra el backtracking sean de la mejor calidad posible y puedan aportar información sobre que es lo que sucede.
 
 Para instancias mayores vale decir que intervalos de 50 elementos podría parecer ser demasiado, pero cuanto más se discretiza más tiempo de espera se necesita para correr todos los algoritmos que se verán en este informe. Como el objetivo principal es observar que sucede a medida que la entrada crece, se priorizó testear casos grandes resignando discretización. 
-
-Ya que se decidió tomar intervalos de 50 elementos a partir de 20, el primer tamaño de entrada es 70. Puede observarse que un 10\% de 70 elementos son tan solo 7 elementos, pero aunque sea una cantidad pequeña, resultó ser igualmente buena para tomar promedios. Además, a medida que las instancias crecen en tamaño, el 10\% será una cantidad considerable de muestras generando buenos promedios para instancias grandes.
 
 \newpage   
 
