@@ -78,7 +78,7 @@ pair<long long, long long> correr(vector<int> solucionParcial, vector<long long>
 		auto end = ya();
 		tiempo = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
 		i++;
-		it += 0.05;
+		it += 0.1;
 		iteraciones.push_back(calcularCosto(solucionMejorada));
 	}
    
