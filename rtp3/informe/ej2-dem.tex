@@ -301,10 +301,10 @@ Se realizaron dos experimentas en base a la familia Random y a Gimnasios por gru
   \begin{figure} [h]
  \centering
   \subfloat[Repercusión en goloso]{
-    \includegraphics[width=0.45\textwidth]{./EJ2/mochilaGoloso.png}}
+    \includegraphics[width=0.45\textwidth]{./EJ2/familiaGoloso.png}}
     \label{fig:comparativo1}
   \subfloat[Repercusión en backtraking]{
-    \includegraphics[width=0.45\textwidth]{./EJ2/mochilaBacktrakingFamilia.png}}
+    \includegraphics[width=0.45\textwidth]{./EJ2/familiaBack.png}}
     \label{fig:comparativo2}
     \end{figure}
   
@@ -317,10 +317,10 @@ Se realizaron dos experimentas en base a la familia Random y a Gimnasios por gru
   \begin{figure} [h]
  \centering
   \subfloat[Repercusión en goloso]{
-    \includegraphics[width=0.45\textwidth]{./EJ2/mochilaGolosoRandom.png}}
+    \includegraphics[width=0.45\textwidth]{./EJ2/randomGoloso.png}}
     \label{fig:comparativo1}
   \subfloat[Repercusión en backtraking]{
-    \includegraphics[width=0.45\textwidth]{./EJ2/mochilaBacktrakingRandom.png}}
+    \includegraphics[width=0.45\textwidth]{./EJ2/randomBack.png}}
     \label{fig:comparativo2}
     \end{figure}
    
@@ -335,59 +335,36 @@ Como se mencionó en repetidas oportunidades, al algoritmo goloso no saca partid
 
 \subsubsection*{Comparación de bactracking y algoritmo goloso para la familia Random}
 
-\begin{figure} [h]
+
+ \vspace*{0.3cm} \vspace*{0.3cm}
+\begin{figure} [!ht]
  \centering
-  \subfloat[Algoritmo exacto]{
-    \includegraphics[width=0.45\textwidth]{./EJ2/randomexacto.png}}
-       \label{fig:randomexacto}
-  \subfloat[Algoritmo goloso]{
-    \includegraphics[width=0.45\textwidth]{./EJ2/randomgoloso.png}}
-    \label{fig:randomgoloso}
+  \subfloat[Comparación solución golosa vs exacta]{
+ \includegraphics[width=0.5\textwidth]{./EJ2/random.png}
+       \label{fig:anilloexacto}}
+  \subfloat[Error relativo]{
+   \includegraphics[width=0.5\textwidth]{./EJ2/randomError.png}
+    \label{fig:anillogoloso}}
     \end{figure}
- 
-Podemos ver a continuación la comparación entre soluciones obtenidas por ambos algoritmos:\\
- 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[width=0.75\textwidth]{./EJ2/random.png}
-\\{\textit{Comparación solución golosa vs exacta}}
-  \end{center}
-  
-     \vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[width=0.75\textwidth]{./EJ2/randomError.png}
-\\{\textit{Error relativo}}
-\end{center}
 
 Se observa para esta familia un error considerable cuanto más grande es la instancia, llegando a estar por arriba del 100\% con respecto al resultado exacto para entradas de 13 elementos. El motivo puede deberse a la variabilidad de los parámetros de entrada que hacen que el algoritmo goloso tenga que tomar las peores desiciones. Es decir, la mayoría de las veces se recorren grandes distancias para vencer a un gimnasio luego de juntar pokeparadas.
 
 \subsubsection*{Comparación de bactracking y algoritmo goloso para la familia de Gimnasios por grupos} 
 
 Podemos observar en las figuras el mismo mapa, donde (a) indica el recorrido exacto y (b) el recorrido goloso. Hay dos grupos de gimnasios. Un grupo con tres gimnasios de poder ocho y otro grupo con dos gimnasios de poder cero.
-
-   \begin{figure} [h]
- \centering
-  \subfloat[Algoritmo exacto]{
-    \includegraphics[width=0.45\textwidth]{./EJ2/familiaexacto.png}}
-       \label{fig:randomexacto}
-  \subfloat[Algoritmo goloso]{
-    \includegraphics[width=0.45\textwidth]{./EJ2/familiaGoloso.png}}
-    \label{fig:randomgoloso}
-    \end{figure}
-   
+ 
 Con respecto a la diferencia entre la soluciones que se obtienen en relaci\'on a las \'optimas elebaramos los siguientes gráficos:\\
  
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[width=0.75\textwidth]{./EJ2/familia.png}
-\\{\textit{Comparación solución golosa vs exacta}}
-  \end{center}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[width=0.75\textwidth]{./EJ2/familiaError.png}
-\\{\textit{Error relativo}}
-\end{center}
+ \vspace*{0.3cm} \vspace*{0.3cm}
+\begin{figure} [!ht]
+ \centering
+  \subfloat[Comparación solución golosa vs exacta]{
+ \includegraphics[width=0.5\textwidth]{./EJ2/familia.png}
+       \label{fig:anilloexacto}}
+  \subfloat[Error relativo]{
+   \includegraphics[width=0.5\textwidth]{./EJ2/familiaError.png}
+    \label{fig:anillogoloso}}
+    \end{figure}
 
 Podemos observar que habria que retestear tomando mas muestras!!
 
@@ -396,5 +373,5 @@ BOX: --->
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[width=0.75\textwidth]{./EJ2/box2.png}
-\\{\textit{Errores absolutos por familia}}
+\\{\textit{Errores relativos por familia}}
 \end{center}

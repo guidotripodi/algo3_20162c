@@ -47,8 +47,24 @@ int main(int argc, char* argv[])
 			posiciones_pp[i] = posicion;
 
 		}
-		/*
-		cout << "j es:" << j << "\n";
+			cant_aux = cant_pokeParadas + cant_gimnasios;
+		if (cantidadElementos == 0)	{
+			cantidadElementos = cant_pokeParadas + cant_gimnasios;
+		}
+		if (cantidadElementos != cant_aux && cantidadElementos != 0){
+			cout << cantidadElementos << ",";
+			cout << medicion/cantidadInstancia << "," << data/cantidadInstancia << "\n";
+			medicion = 0;
+			data = 0;
+			cantidadElementos = cant_pokeParadas + cant_gimnasios;
+			cantidadInstancia = 1;
+		}else{
+			cantidadInstancia++;			
+		}
+		pair <int,std::list<int> * > * f;
+		if (cantidadElementos == 15){
+			
+	
 		printf("%d %d %d \n", cant_gimnasios, cant_pokeParadas, cap_mochila);
 
 		for(i = 0; i < cant_gimnasios; i++){
@@ -59,23 +75,7 @@ int main(int argc, char* argv[])
 			printf("%d %d\n", posiciones_pp[i].first, posiciones_pp[i].second);
 
 			}
-*/
-			cant_aux = cant_pokeParadas + cant_gimnasios;
-		if (cantidadElementos == 0)	{
-			cantidadElementos = cant_pokeParadas + cant_gimnasios;
-		}
-		if (cantidadElementos != cant_aux && cantidadElementos != 0){
-			cout << cant_gimnasios + cant_pokeParadas << ",";
-			cout << medicion/cantidadInstancia << "," << data/cantidadInstancia << "\n";
-			medicion = 0;
-			data = 0;
-			cantidadElementos = cant_pokeParadas + cant_gimnasios;
-			cantidadInstancia = 1;
-		}else{
-			cantidadInstancia++;			
-		}
-		pair <int,std::list<int> * > * f;
-		
+
 		auto start = ya();
 		f = algoritmoResolucion(cant_gimnasios, cant_pokeParadas, cap_mochila, posiciones_gym, posiciones_pp);
 		auto end = ya();
@@ -88,6 +88,7 @@ int main(int argc, char* argv[])
 		}else{
 			//cout << f->first <<" ";//<< f->second->size();
 			data += f->first;
+			cout << f->first << "\n";
 			/*for (std::list<int>::iterator it=f->second->begin(); it != f->second->end(); ++it){
 				cout << " " << *it;
 			}*/
@@ -95,6 +96,13 @@ int main(int argc, char* argv[])
 
 
 		delete f;
+		if (cantidadInstancia == 30)
+		{
+			cout << cant_gimnasios + cant_pokeParadas << ",";
+			cout << medicion/cantidadInstancia << "," << data/cantidadInstancia << "\n";
+			j = 900;
+		}
+		}
 	}
 	return 0;
 }
