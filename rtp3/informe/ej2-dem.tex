@@ -208,7 +208,7 @@ Teniendo un grupo de familias que provocan soluciones con errores al aplicar el 
  \includegraphics[width=0.75\textwidth]{./EJ2/box.png}
 \end{center}
 
-Se evidencia el mejor desempeño del algoritmo sobre la familia 6, provocando un error medio mucho menor que la familia 4 (alrrededor de 110\% mejor) y con una dispersión del mismo mucho más baja. 
+Se evidencia el mejor desempeño del algoritmo sobre la familia 6, provocando un error medio mucho menor que la familia 4 (alrededor de 110\% mejor) y con una dispersión del mismo mucho más baja. 
 
 De forma separada, debido a los rangos que se manejan, se decidió analizar la distribución de la Familia 7. Vale destacar que el error de la misma es muy inferior al de las dos anteriores y posee la menor varianza de todas. Esto se debe al carácter controlado de la misma, y su característica de posicionamiento: 
 \vspace*{0.3cm} \vspace*{0.3cm}
@@ -250,13 +250,11 @@ Luego, mostraremos como se comporta nuestro algoritmo en base a la complejidad c
   
 Es posible observar como las funciones resultantes del mejor y peor caso se encuentran por debajo de la cota de complejidad. Dicha complejidad fué calculada utilizando el m\'etodo de cuadrados m\'inimos generando una función que es tomada como cota dentro de nuestro orden de complejidad $(O(n+m)^3)$. 
 
---> INDICAR LA CONSTANTE: MELANIE LO PIDIO EL TEMA ES Q EL K NUESTRO ESTE ES UN NUMERO MEDIO TURBIO NO SE Q PONER.
-
-\subsubsection{Familias random y Grupos de gimnasios}
+\subsubsection{Familias random y Gimnasios por grupos}
 
 Como se comentó previamente en el ejercicio uno, las anteriores familias fueron de utilidad para analizar que sucede con el algoritmo goloso dado cierto tipo de entradas y porque no obtiene solución óptima en algunos casos, además de servir para analizar las podas tanto del algorito exacto como el goloso. Lo que no fué posible con estas familias es analizar que sucede en el promedio de casos con soluciones aleatorias, dado que eran familias totalmente controladas para poder observar particularidades. Por este motivo introducimos aquí dos familias nuevas con el objetivo de analizar casos promedio dentro de conjuntos de un cierto tamaño.\\
 
-La primera es la familia Random, que como el nombre lo indica, todo es absolutamente random en los parámetros de entrada.
+La primera es la familia Random, que como el nombre lo indica, todo es absolutamente random en los parámetros de entrada. Con este tipo de instancias podremos observar cual es el desempeño de los algoritmos en promedio.
 
 La segunda familia también tiene parámetros aleatorios, pero organiza gimnasios por cuadrantes o grupos, donde $\forall$ $C_i$ con $i$ $\in$ ${1..4}$, todos los gimnasios en el cuadrante $C_j$ tienen el mismo poder. Otra regla que trató de aplicarse es que el poder de los gimnasios sea diferente para cada cuadrante $C_i$, $C_j$ con $i \neq j$. Esto será posible siempre y cuando no sea posible asignar m\'as de 1 (uno) de poder a los gimnasios, en cuyo caso, puede haber cuadrantes que tienen el mismo poder para sus gimnasios.
 
@@ -267,27 +265,37 @@ La mochila mínima será el valor del gimnasio con más poder más un extra de 3
 
 Con respecto a la creación de casos para cada familia se idearon dos rangos iniciales:
 
-\begin{enumerate}
+\begin{itemize}
 \item Rango 1: de 5 a 15 elementos. Por cada instancia de tamaño $n$ se tomaron $n*5$ instancias aleatorias.
 \item Rango 2: desde 70 hasta 470 elementos en intervalos de 50 elementos. Por cada instancia de tamaño $n$ se tomó un 10\% del tamaño de la entrada. 
-\end{enumerate}
+\end{itemize}
 
-La cantidad de intancias dentro de cada tamaño será utilizada para promediar distancias y tiempos y así obtener errores relativos y porcentajes de mejora promedios por cada tamaño.\\
+La cantidad de intancias dentro de cada tamaño será utilizada para promediar distancias y tiempos. En el caso del Rango 1 podremos calcular el error relativo de la solución del algoritmo goloso contra el exacto.\\
 
-La idea del Rango 1 era poder calcular hasta con 20 elementos el backtracking, pero debido a los elevados tiempos de resolución se fué achicando el tamaño de las instancias hasta 15. La cantidad de instancias tomadas por cada tamaño permite obtener promedios más consistentes para que las comparaciones contra el backtracking sean de la mejor calidad posible y puedan aportar información sobre que es lo que sucede.
+El calculo del error relativo se realiza tomando el promedio de todas las distancias obtenidas por el backtraking y el promedio de todas las distancias de las soluciones del algoritmo goloso para instancias del mismo tamaño. Sean $promedio_{exacto}$ y $promedio_{greedy}$ los valores respectivos, el error relativo se calcula como:
 
-Para instancias mayores vale decir que intervalos de 50 elementos podría parecer ser demasiado, pero cuanto más se discretiza más tiempo de espera se necesita para correr todos los algoritmos que se verán en este informe. Como el objetivo principal es observar que sucede a medida que la entrada crece, se priorizó testear casos grandes resignando discretización. 
+\begin{equation}
+Error_{abs} = |promedio_{greedy}-promedio_{exacto}|
+\end{equation}
+\begin{equation}
+Error_{rel} = \frac{Error_{abs}}{promedio_{exacto}} \ast 100
+\end{equation}
+
+La idea del Rango 1 era poder calcular hasta con 20 elementos utilizando backtracking, pero debido a los elevados tiempos de resolución se fué achicando el tamaño de las instancias hasta 15 elementos. La cantidad de instancias tomadas por cada tamaño permite obtener promedios más consistentes para que las comparaciones contra el backtracking sean de la mejor calidad posible y puedan aportar información relevante.
+
+Dentro del Rango 2 los intervalos de 50 elementos podrían parecer ser demasiado, pero cuanto más se discretiza más tiempo de espera se necesita para correr todos los algoritmos que se verán en este informe. Como el objetivo principal es observar que sucede a medida que la entrada crece, se priorizó testear casos grandes resignando discretización.
+El 10\% como elección en la cantidad de ejemplos tomados en cada tamaño fué suficiente para obtener resultados consistentes y mantener controlados los tiempos de experientación.
 
 \newpage   
 
-\subsubsection*{Repercusi\'on del tamaño de la mochila en el algoritmo hasta 15 elementos (pokeparadas + gimnasios)}
+\subsubsection*{Repercusi\'on del tamaño de la mochila: hasta 15 elementos (pokeparadas + gimnasios)}
 
-Se realizaron dos experimentas en base a la familia Random y a Grupos de gimnasios para ver como repercute el tamaño enunciado, con la mochila denominada grande y la chica. Luego de dicha experimentación, se desarrollaron los siguientes gr\'aficos en el cuales se podr\'a observar como la heur\'istica golosa no presenta cambios en su soluci\'on al tener una mochila mas grande o no, mientr\'as que el backtraking al tener una mochila con mayor capacidad logra obtener un camino diferente y de menor longitud.\\
+Se realizaron dos experimentas en base a la familia Random y a Gimnasios por grupos para ver como repercute el tamaño enunciado, con la mochila denominada grande y la chica. Luego de dicha experimentación, se desarrollaron los siguientes gr\'aficos en los cuales se puede observar como la heur\'istica golosa no presenta cambios en su soluci\'on al tener una mochila más grande, mientr\'as que el backtraking al tener una mochila con mayor capacidad logra obtener un camino diferente y de menor longitud.\\
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 \includegraphics[scale=0.60]{./EJ2/familiaMochila.png}
-\\{\textit{Grupos de gimnasios}}
+\\{\textit{Gimnasios por grupos}}
   \end{center}
   \vspace*{0.3cm}
   \begin{figure} [h]
@@ -317,13 +325,13 @@ Se realizaron dos experimentas en base a la familia Random y a Grupos de gimnasi
     \end{figure}
    
 
-Como se observa, en la heurística golosa no repercute el tamaño de la mochila, dado que la misma siempre que existe la posibilidad va a vencer a un gimnasio. Podemos notar sin embarlo algunas mejorías en cuanto a las mochilas grandes para los resultados del backtracking. Estos resultados tienen sentido. Ya que siempre se podrá obtener un resultado exacto mejor si se dispone de más capacidad de carga. Si hay las pokeparadas suficientes, con la mochila más grande posible podriamos primero cargar todas las pokeparadas necesarias y luego ir a vencer a todos los gimnasios. Si los gimnasios están lejos de todas las pokeparadas, esto termina beneficiando a la distancia recorrida ya que no será necesario volver a recargarse. 
+El motivo principal de que no haya cambios se debe a que siempre que existe la posibilidad de vencer a un gimnasio el algoritmo toma esa decisión. Podemos notar sin embargo, algunas mejorías en cuanto a las mochilas grandes para los resultados del backtracking. Siempre se podrá obtener un resultado exacto mejor si se dispone de más capacidad de carga. Si se dispone de las pokeparadas suficientes, con la mochila más grande posible podríamos primero cargar todas las pokeparadas necesarias y luego ir a vencer a todos los gimnasios. Si los gimnasios están lejos de todas las pokeparadas, esto termina beneficiando a la distancia recorrida ya que no será necesario volver a recargarse. 
 
 \newpage
 
-\subsubsection*{Repercusi\'on del tamaño de la mochila en el algoritmo más de 15 elementos}
+\subsubsection*{Repercusi\'on del tamaño de la mochila: más de 15 elementos}
 
-Como se mencionó en repetidas oportunidades, al algoritmo goloso no saca partida de la capacidad de la mochila. Como con más de 15 elementos nos fué imposible calcular el backtracking en el ordenador disponible en tiempos razonables (no se llegó a terminar en una hora de corrida para 16 elementos), no podremos comparar que sucede al utilizar la peor y mejor mochila contra el resultado exacto.
+Como se mencionó en repetidas oportunidades, al algoritmo goloso no saca partida de la capacidad de la mochila. Como con más de 15 elementos nos fué imposible calcular el backtracking en el ordenador disponible en tiempos razonables (más de 30 minutos para 16 elementos y era necesario correr al menos la mitad del tamaño en ejemplos para obtener promedios), no podremos comparar que sucede al utilizar la peor y mejor mochila contra el resultado exacto.
 
 \subsubsection*{Comparación de bactracking y algoritmo goloso para la familia Random}
 

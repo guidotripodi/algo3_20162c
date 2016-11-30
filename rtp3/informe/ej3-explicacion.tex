@@ -55,13 +55,13 @@ Además, realizando un simple swap de nodos, podemos obtener muy fácilmente sol
   \end{center}
   \vspace*{0.3cm}
 
-En el ejemplo se toma el camino 1,2,3,4,5,6,7,8 y se intercambian 2 por 6 generando 1,6,3,4,5,2,7,8 y generando asi 4 aristas nuevas (1,6), (6,3), (5,2) y (2,7).
+En el ejemplo se toma el camino 1,2,3,4,5,6,7,8 y se intercambian 2 por 6 generando 1,6,3,4,5,2,7,8 y generando asi 4 aristas nuevas (1,6), (6,3), (5,2) y (2,7).\\
 
 Además tenemos que tener en cuenta para nuestro problema, que al permutar una solución con alguno de los métodos mencionados, y la solución sea válida, pueden quedar pokeparadas al final del recorrido, por lo cual es necesario eliminarlas del mismo, ya que al considerar el recorrido hasta las mismas, se podría sumar distancia a la solución que ya no aporta, debido a que todos los gimnasios fueron derrotados. Además, podría desestimarse como solución candidata si luego se obtiene otra que tiene menor distancia solo porque se están contando pokeparadas de más.\\
 
-De esta manera, podremos movernos a través del espacio de soluciones locales a $S_o$ y tal vez mejorar la solución, aunque que de esto, por ser una heurística, no tendremos ninguna garantía.
+De esta manera, podremos movernos a través del espacio de soluciones locales a $S_o$ y tal vez mejorar la solución, aunque que de esto, por ser una heurística, no tendremos ninguna garantía.\\
 
-En este punto nos centraremos en estudiar y tratar de concluir cual de las heurísticas consideradas en este punto es mejor utilizar para mejorar los resultados obtenidos por el algoritmo goloso del punto anterior. Es decir, dado un tipo de entrada, que en este caso se corresponde con un mapa de pokeparadas y gimnasios, que tendrá alguna particularidad que hará que el algoritmo goloso produzca un resultado bueno o malo, veremos que tipo de busqueda local será mejor aplicar para mejorar la solución o si no conviene aplicar ninguna de las heurísticas de este punto ya que a pesar de ser la solución buena o mala, no se obtienen mejores resultados.
+En este punto nos centraremos en estudiar y tratar de concluir cual de las heurísticas consideradas en este punto es mejor utilizar para mejorar los resultados obtenidos por el algoritmo goloso del punto anterior. Es decir, dado un tipo de entrada, que en este caso se corresponde con un mapa de pokeparadas y gimnasios, que tendrá alguna particularidad que hará que el algoritmo goloso produzca un resultado bueno o malo, veremos que tipo de busqueda local será mejor aplicar para mejorar la solución o si no conviene aplicar ninguna de las heurísticas de este punto ya que a pesar de ser la solución buena o mala, no se obtienen mejores resultados.\\
 
 Primero veremos los pseudocódigos de las tres heurísticas y analizaremos sus complejidades. Luego realizaremos un análisis cualitativo de las mismas aplicadas a los resultados de cada tipo de entrada, tratando de abordar las características de las mismas y explicar porque una heurística resulta mejor o no en cada caso. Luego de comparar los resultados para cada tipo de entrada intentaremos elegir, si es posible, el tipo de búsqueda local que obtiene los mejores resultados en la mayoría de los casos.
 
