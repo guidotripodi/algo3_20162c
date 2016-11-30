@@ -1,13 +1,13 @@
-Queremos observar que tan bueno es el algoritmo propuesto en la práctica. Para esto realizaremos una serie de tests utilizando las entradas que se utilizaron en el ejercicio 3.
-La idea es tratar de encontrar la configuración ideal para que en promedio el algoritmo resuelva la mayoria de los casos eficientemente. Para lograr esto, experimentamos variando distintos parametros para cada entrada y obtener las respectivas conclusiones de los resultados obtenidos.\\
-Los parámetros de estudio fueron:
+Queremos observar que tan bueno es el algoritmo propuesto en la práctica.
+Para estudiar el desempeño del algoritmo utilizaremos las familias \textbf{Random} y \textbf{Gimnasios por grupos}. 
+La idea, además, es tratar de encontrar la configuración de Tabú Search ideal para que en promedio el algoritmo resuelva la mayoria de los casos eficientemente. Para lograr esto, se experimenta variando distintos parametros del algoritmo para cada entrada.
 
-\begin{enumerate}
+Los parámetros de estudio serán:
+
+\begin{itemize}
 \item  \textbf{Cantidad de iteraciones}: Tenemos que observar en promedio, cuantas iteraciones conviene tomar para obtener un buen resutado.
 \item \textbf{Tenor tabú}: Tenemos que observar que sucede al aumentar el tenor tabú, y hasta cuanto es conveniente hacerlo para obtener un buen resultado.
-\item \textbf{Atributos tabú}: Analizar que sucede al tomar como atributos tabú las aristas que cambiaron o las aristas nuevas
-\item \textbf{Función de aspiración}: Elegir la solución más tabú o la menos tabú.
-\end{enumerate}
+\end{itemize}
 
 Debemos aclarar, que tenor tabú fué establecido en cantidad de pokeparadas mas gimnasios. Este valor puede ser relativamente grande, pero cuanto más grande, más tiempo de resolución es necesario, con lo cual al final no es una cuestion de memoria, si no, una cuestion de tiempo de computos necesaria para correr el algoritmo.
 También se trabajó probando diferentes configuraciones de atributos tabú y función de aspiración, obteniendo en todos los casos los mismos resultados, por lo que al final se decidió dejar prefijado el estandar para tabú search que es aristas viejas como atributos tabú y solución menos tabú para la función de aspiración.\\
