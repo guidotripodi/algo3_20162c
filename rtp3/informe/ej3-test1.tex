@@ -3,18 +3,22 @@
 En el ejercicio dos se introdujeron dos familias nuevas: \textbf{Random} y \textbf{Gimnasios por grupo} que fueron explicadas apropiadamente. Como la idea es estudiar en promedio que sucede con las distancias al crecer la cantidad de elementos total del mapa (pokeparadas + gimnasios), las experimentaciones de este test se centrarán en tratar de mejorar esas distancias mediante las heurísticas introducidas en este punto ($2-opt$ y $Swap$).\\\\
 
 Para realizar los tests se tomaron dos rangos de tamaños:
-\begin{enumerate}
+\begin{itemize}
 \item Rango 1: 5 a 15 elementos (pokeparadas + gimnasios)
 \item Rango 2: 70 a 470 en intervalos de 50 elementos.
-\end{enumerate}
+\end{itemize}
 
 Para el Rango 1 se tomó cinco veces el total de elementos como cantidad de instancias aleatorias por cada tamaño y para el Rango 2 se tomó un 10\% del total de elementos como cantidad de instancias aleatorias.
 
-Se realizan las busquedas locales promediando los tiempos y distancias para todas las instancias de cada tamaño. Y se obtienen los porcentajes de mejora relativos a cada tamaño con respecto al promedio de las distancias del algoritmo goloso.
- 
-Para las primeras 16 instancias, se obtiene el promedio de distancias del algoritmo exacto y se calcula el error relativo en base a los promedios de las distancias obtenidas por el algoritmo goloso y las búsquedas locales.
+Se realizan las búsquedas locales promediando los tiempos y distancias para todas las instancias de cada tamaño. Y se obtienen los porcentajes de mejora relativos a cada tamaño con respecto al promedio de las distancias del algoritmo goloso.
 
-La idea inicial del Rango 1 era poder comparar contra el backtracking las distancias obtenidas por el algoritmo goloso y las búsquedas locales, pero para instancias de 17 elementos en adelante el algoritmo demoraba demasiado tiempo y se decidió recortar hasta 16 elementos. Por cuestiones de tiempo los rangos quedaron como inicialmente se planearon.\\
+Al igual que el error relativo, el porcentaje de mejora también se calcula en base a los promedios de las distancias. En este caso el promedio de las distancias del algoritmo goloso y el promedio de las distancias de las búquedas locales. Sean $promedio_{greedy}$ y $promedio_{ls}$ respectivamente. El porcentaje de mejora relativo se calcula de la siguiente manera:
+
+\begin{equation}
+\%Mejora_{rel} = \frac{promedio_{ls}}{promedio_{greedy}} \ast 100
+\end{equation}
+
+En el rango 1 podrá calcularse el error relativo para comparar la solución exacta con las heurísticas de búsqueda local.
 
 \subsubsection*{Random}
 
@@ -119,5 +123,3 @@ Los tiempos de ambas búsquedas locales son relativamente iguales. Teniendo en c
 
 Será particularmente importante observar en el siguiente ejercicio cuanto puede mejorar la distancia la meta heurística que será presentada, ya que queda bastante claro que los resultados del algoritmo goloso para este tipo de familia pueden ser extramadamente malos. 
 \\\\
-
-\textbf{Algún gráfico con instancias mayores a 470 elementos para mostrar que las hipótesis se cumplen?}
