@@ -363,12 +363,12 @@ Con respecto a la diferencia entre la soluciones que se obtienen en relaci\'on a
     \label{fig:randomgoloso}
     \end{figure}
 
-Podemos observar que habria que retestear tomando mas muestras!!
-
-BOX: --->
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
  \includegraphics[width=0.75\textwidth]{./EJ2/box2.png}
 \\{\textit{Errores absolutos por familia}}
 \end{center}
+
+
+En estos experimentos terminan evidenciando lo malo que puede ser una elección golosa. Dado que el metodo goloso está restringido a le evaluación de un conjunto determinado de caminos, es posible que ignore los que minimizan el recorrido total. Esta ignorancia lleva, como en el caso estudiado, a una solución cada vez más alejada de la optima (alcanzada por el backtraking) en las 15 dimensiones de instancias evaluadas.
