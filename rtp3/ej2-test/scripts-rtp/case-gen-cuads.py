@@ -331,15 +331,15 @@ def ddInstance(pp = 1, gms = 1):
 random.seed(45)
 
 fileNameWeak = "familiaWeak.txt"
-fileNameStrong = "familiaStrong.txt"
+#fileNameStrong = "familiaStrong.txt"
 
 acum = 0
-
-for i in xrange(5, 20):
+'''
+for i in xrange(5, 16):
 	lim = i
 	tam = i
 	
-	for j in xrange(1, tam):
+	for j in xrange(1, tam*2):
 		pp = randint(1, tam)
 		gms = tam-pp
 
@@ -357,7 +357,7 @@ for i in xrange(5, 20):
 		rOut = (r[0], r[1], kBag)
 		open(fileNameWeak, 'a').close()
 		saveInstance(rOut,fileNameWeak,"a")
-		
+
 		kBag = sum([p*c for p,c in zip(powers,cants)])
 		
 		rOut = (r[0], r[1], kBag)
@@ -365,15 +365,15 @@ for i in xrange(5, 20):
 		saveInstance(rOut,fileNameStrong,"a")
 
 		acum = acum + 1
-
-for i in xrange(20, 500, 50):
+'''
+for i in xrange(150, 501, 50):
 	lim = i
 	tam = i
 	
-	lim = lim*(0.10)
+	lim = lim*(0.50)
 	lim = int(lim)
 
-	for j in xrange(1, tam):
+	for j in xrange(1, lim):
 		pp = randint(1, tam)
 		gms = tam-pp
 
@@ -391,19 +391,14 @@ for i in xrange(20, 500, 50):
 		rOut = (r[0], r[1], kBag)
 		open(fileNameWeak, 'a').close()
 		saveInstance(rOut,fileNameWeak,"a")
-		
+		'''
 		kBag = sum([p*c for p,c in zip(powers,cants)])
 		
 		rOut = (r[0], r[1], kBag)
 		open(fileNameStrong, 'a').close()
 		saveInstance(rOut,fileNameStrong,"a")
-
+		'''
 		acum = acum + 1
-
-	if i == 120:
-		print(acum)
-	elif i == 270:
-		print(acum)
-			 
+		 
 print(acum)
 
