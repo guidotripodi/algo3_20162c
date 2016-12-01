@@ -4,7 +4,7 @@
 CC=g++
 
 # flags de compilación
-CFLAGS=-g -Wall -std=c++11
+CFLAGS=-g -Wall -std=c++11 -O3
 
 # flags de linkeo
 LDFLAGS=
