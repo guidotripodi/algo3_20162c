@@ -18,7 +18,7 @@ using namespace std;
 #define MAX_CANT_PP 100
 #define MAX_CANT_GYMS 101
 
-#define INSTANCIAS 677 
+#define INSTANCIAS 550 
 
 //tests para ej4
 //ALFA: cantidad de iterasciones maximas

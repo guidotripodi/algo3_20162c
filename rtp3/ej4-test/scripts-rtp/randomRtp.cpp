@@ -18,7 +18,7 @@ using namespace std;
 #define MAX_CANT_PP 100
 #define MAX_CANT_GYMS 101
 
-#define INSTANCIAS 2168
+#define INSTANCIAS 550 
 
 //tests para ej4
 //ALFA: cantidad de iterasciones maximas
@@ -153,13 +153,13 @@ int main(){
 			<< (float) (acumTiempos / inst) << ","
 			<< promGoloso << ","
 			<< promLocal<< ","
-			<< promPerc << "\n";
+			<< promPerc << ",";
 		
 		//CHARLIE
 		for(int i = 0; i < (int) acumIteraciones.size(); i++)
 		{
 			cout 
-				<< (i*0.5) + 0.1  << ","
+				<< (i*0.1) + 0.1  << ","
 				<< (float)(acumIteraciones[i] / inst) << ",";
 		}
 		cout << "\n";

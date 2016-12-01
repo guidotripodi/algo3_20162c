@@ -78,7 +78,7 @@ pair<long long, long long> correr(vector<int> solucionParcial, vector<long long>
 		auto end = ya();
 		tiempo = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
 		i++;
-		it += 0.05;
+		it += 0.1;
 		iteraciones.push_back(calcularCosto(solucionMejorada));
 	}
    
@@ -190,8 +190,8 @@ vector<int> tabuSearch(vector<int> solucionParcial, long long it, vector<long lo
         vector<int> mejorVecino;
         list<Arista> aristasModificadas;
         
-        list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
-        //list< pair< vector<int>, list<Arista> > > vecindad = vecindadSwap(solucionActual);
+        //list< pair< vector<int>, list<Arista> > > vecindad = vecindad2opt(solucionActual);
+        list< pair< vector<int>, list<Arista> > > vecindad = vecindadSwap(solucionActual);
         
         //list< pair< vector<int>, list<Arista> > > vecindad = vecindad3opt(solucionActual);
         if(vecindad.size() == 0) return mejorSolucion;

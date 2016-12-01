@@ -132,7 +132,7 @@ pair< pair<long long, long long>, long long > testear(int cant_gimnasios, int ca
 	//ALFA
 	if(cantGyms+cantPokeParadas > 20)
 	{
-		_maxIter = (cantGyms+cantPokeParadas)*0.3;
+		_maxIter = (cantGyms+cantPokeParadas)*0.5;
 	}
 	else
 	{
