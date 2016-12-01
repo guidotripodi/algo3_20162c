@@ -63,9 +63,19 @@ En relación a los tiempos $Swap$ insume aproximadamente un entre un 15\% y un 2
   \end{center}
   \vspace*{0.3cm} 
 
+  \vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+	\includegraphics[scale=0.50]{./EJ3/randomError.png}
+	\label{fig:randomError}	
+	\\{\textit{Error Relativo de cada búsqueda}}
+  \end{center}
+  \vspace*{0.3cm} 
+
+
 Para el Rango 2, podemos observar que a medida que el tamaño crece se observa una ligera tendencia de disminución en la mejora realizada por las búsquedas locales. Esto puede deberse al hecho de que cuanto más grande es la instancia más local se vuelve la solución realizada por el goloso y así mismo la búsqueda local solo llega a mínimos locales. Se observa igualmente un buen desempeño de la búsqueda local $2-opt$ pero con mejoras entre un 12\% y un 14\% en comparación al Rango 1. A su vez como se mencionó, para instancias mayores este porcentaje disminuye llegando a estar incluso por debajo del 12\%
 \\\\
  
+ Con respecto a los errores relativos de las búsquedas enunciadas, teniendo en cuenta la cantidad de instancias tomadas para cada uno de los tamaños, podemos concluir que, para tamaños grandes (tomando $n+m \geq 12$), 2-OPT presenta una ventaja considerable. Mientras que para tamaños pequeños Swap tiene un error inferior en la mayoria de los casos. Como la cantidad de instancias de los casos chicos son pocos en relaci\'on a los grandes, y nuestro inter\'es se centra cuando n+m tiene un valor grande, podemos concluir que la heurística 2-OPT presenta una mejora superior a la otra.
 \newpage
 \subsubsection*{Gimnasios por grupos}
 
@@ -113,6 +123,16 @@ En relación a los tiempos se observa que $Swap$ se encuentra entre un 15\% y un
   \end{center}
   \vspace*{0.3cm} 
  
+
+   \vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+	\includegraphics[scale=0.50]{./EJ3/familiaError.png}
+	\label{fig:gruposError}	
+	\\{\textit{Error Relativo de cada búsqueda}}
+  \end{center}
+  \vspace*{0.3cm} 
+  
+ 
 Para el Rango 2 se sigue observando un incremento extremadamente alto en las distancias obtenidas por el goloso. Y a su vez las mejoras realizadas por ambas búsquedas locales disminuyen conforme aumenta el tamaño. En principio se observa que no hay diferencias para instancias de 470 elementos. Debido a la discretización utilizada, este patron podría repetirse incluso a partir de los 400 elementos.
 
 Creemos que las distancias observadas son particularmente altas debido a como están organizados los gimnasios. Al estar las pokeparadas distribuidas por todo el mapa y los gimnasios más agrupados, el algoritmo goloso deberá recorrer enormes distancias para vencer gimnasios y volver a buscar pokeparadas en la mayoria de los casos. Además debemos recordar que el algoritmo goloso no hace particular uso de la mochila ya que su premisa es siempre vencer un gimnasio cuando sea posible.
@@ -120,6 +140,8 @@ Creemos que las distancias observadas son particularmente altas debido a como es
 Con respecto a la disminución en los porcentajes de mejora puede observarse lo mismo que en la familia $Random$, a medida que la instancia crece, la solución se hace cada vez más local y por lo tanto las mejoras tienden a ser mínimos locales. 
 
 Los tiempos de ambas búsquedas locales son relativamente iguales. Teniendo en cuenta la mínima ventaja de $Swap$ en cuanto a mejoras, podríamos decir que ambas búsquedas locales funcionan bien para intancias grandes.
+
+Refiriendonos a los errores relativos de las búsquedas enunciadas, no ser\'a posible concluir cual ser\'a mejor que la otra ya que ambas presentan errores similares, no se obtiene una marcada diferencia en varios casos entre ambas. Concluimos que para este tipo de caso, no existirá una preferencia entre las dos heurísticas en base a un mejor o peor error relativo.
 
 Será particularmente importante observar en el siguiente ejercicio cuanto puede mejorar la distancia la meta heurística que será presentada, ya que queda bastante claro que los resultados del algoritmo goloso para este tipo de familia pueden ser extramadamente malos. 
 \\\\
