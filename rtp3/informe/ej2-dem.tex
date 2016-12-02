@@ -267,7 +267,7 @@ Con respecto a la creación de casos para cada familia se idearon dos rangos ini
 
 \begin{itemize}
 \item Rango 1: de 5 a 15 elementos. Por cada instancia de tamaño $n$ se tomaron $n*5$ instancias aleatorias.
-\item Rango 2: desde 70 hasta 470 elementos en intervalos de 50 elementos. Por cada instancia de tamaño $n$ se tomó un 10\% del tamaño de la entrada. 
+\item Rango 2: desde 70 hasta 470 elementos en intervalos de 50 elementos. Por cada instancia de tamaño $n$ se tomó un 50\% del tamaño de la entrada. 
 \end{itemize}
 
 La cantidad de intancias dentro de cada tamaño será utilizada para promediar distancias y tiempos. En el caso del Rango 1 podremos calcular el error relativo de la solución del algoritmo goloso contra el exacto.\\
@@ -284,7 +284,7 @@ Error_{rel} = \frac{Error_{abs}}{promedio_{exacto}} \ast 100
 La idea del Rango 1 era poder calcular hasta con 20 elementos utilizando backtracking, pero debido a los elevados tiempos de resolución se fué achicando el tamaño de las instancias hasta 15 elementos. La cantidad de instancias tomadas por cada tamaño permite obtener promedios más consistentes para que las comparaciones contra el backtracking sean de la mejor calidad posible y puedan aportar información relevante.
 
 Dentro del Rango 2 los intervalos de 50 elementos podrían parecer ser demasiado, pero cuanto más se discretiza más tiempo de espera se necesita para correr todos los algoritmos que se verán en este informe. Como el objetivo principal es observar que sucede a medida que la entrada crece, se priorizó testear casos grandes resignando discretización.
-El 10\% como elección en la cantidad de ejemplos tomados en cada tamaño fué suficiente para obtener resultados consistentes y mantener controlados los tiempos de experientación.
+El 50\% como elección en la cantidad de ejemplos tomados en cada tamaño fué suficiente para obtener resultados consistentes y mantener controlados los tiempos de experientación.
 
 \newpage   
 
