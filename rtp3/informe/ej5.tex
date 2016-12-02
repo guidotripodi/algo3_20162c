@@ -73,7 +73,7 @@ Dejando de lado los tiempos exponenciales del backtracking, las heuristicas comp
 
 \subsubsection*{Calidad de solución}
 
-Al tener en cuenta la calidad de la solución, podemos ver que la solución golosa puede diferir de la exacta enormemente, como se explico con la familia por sectores en el punto 1. Al aplicar la búsqueda local se logra disminuir esta diferencia, que luego es nuevamente disminuida al aplicar Tabu Search:
+Al tener en cuenta la calidad de la solución, podemos ver que la solución golosa puede diferir de la exacta enormemente, como se explico con la familia por sectores en el punto 2. Al aplicar la búsqueda local se logra disminuir esta diferencia, que luego es nuevamente disminuida al aplicar Tabu Search:
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -99,8 +99,8 @@ Utilizando las instancias de tamaño pequeño en donde podemos obtrener de forma
   \end{center}
   \vspace*{0.3cm}
 
-
-
+En una escala mayor en numero de elementos, en la cual no se cuenta con datos exactos en cuanto a solución óptima, la comparación de resultados se dará en cuenta a la menor distancia lograda posible, efectuada por cada alternativa. Como ya sucedía anteriormente, la busqueda local mejora la solución de la heuristica golosa, asi como el Tabú lo hace con el resultado de la busqueda local. La mejora de las distancias de los caminos logrados en cada conjunto de instancias de distinto tamaño es aproximadamente de un $35\%$ en cuanto a lo devuelto por Tabú frente al goloso.
+%Ese ultimo porcentaje es debatible :P%
 
 \subsubsection{Concluciones}
 
@@ -112,4 +112,11 @@ Tanto la busqueda mediante SWAP como 2-OPT nos brindaron los mejores resultados.
 
 \textbf{Experimentaciones a realizar de interés}\\
 Dado que 2-OPT y SWAP obtuvieron resultados muy similares y que se implementó Tabú con el primero, es de interés desarrollar el mismo también en base a SWAP y poder realizar comparaciones entre las 2 impementaciones para poder observar su comportamierto y las diferencias que surgen entre ambos, buscando un mejor error.
+
+
+\subsubsection{Dificultades afrontadas}
+
+A lo largo del desarrollo del trabajo nos encontramos con ciertos obstaculos que tuvimos que ir sorteando:
+El primero de ellos fue el tiempo necesario para correr los tests: Al manejar un algoritmo de tiempo exponencial, como es el backtraking, tuvimos que limitarnos a un pequeño grupo de instancias para obtener las mediciones exactas para las comparaciones con otros algoritmos. La utilización de la optimizacion  en la compilacion de nivel 3 (-O3) ayudo en grán medida a correr los casos más grandes y poder agrandar un poco más la muestra.\\
+A la hora de tomar las mediciones de los experimentos, nos vimos con el problema de la cantidad de instancias de un mismo tamaño a tomar: siendo que no podemos tomar la misma cantidad por cada tamaño debido a que acarrea un desbalance de exactitud (las instancias más chicas tendrían más datos muestrales que las grandes), tuvimos que adaptar la muestra al n evaluado. Esto nos ocasionó un incremento substancial en la cantidad de instancias totales a evaluar, incrementando asi el tiempo de experimetación.
 
