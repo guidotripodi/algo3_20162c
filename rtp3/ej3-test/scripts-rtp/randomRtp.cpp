@@ -53,18 +53,18 @@ int main()
 	
 	int* tams = new int[INSTANCIAS];
 	long long* mejorasParciales = new long long[INSTANCIAS];
-	long long* mejorasSwap = new long long[INSTANCIAS];
+	//long long* mejorasSwap = new long long[INSTANCIAS];
 	long long* mejoras2opt = new long long[INSTANCIAS];
 
-	long long* tiemposSwap = new long long[INSTANCIAS];
+	//long long* tiemposSwap = new long long[INSTANCIAS];
 	long long* tiempos2opt = new long long[INSTANCIAS];
 	
 	
 	for(int j = 0; j < INSTANCIAS; j++)
 	{
-        vector<int> solucionSwap;
+        //vector<int> solucionSwap;
         vector<int> solucion2opt;
-        vector<int> solucion3opt;
+        //vector<int> solucion3opt;
         vector<int> solucionParcial;
         
         cin >> cantGyms >> cantPokeParadas >> capMochila;
@@ -135,19 +135,21 @@ int main()
 		//mejorar solucion
 		if( solucionParcial.size())
 		{
+			/*
 			auto start = ya();
 			solucionSwap = mejorarSwap(solucionParcial);
 			auto end = ya();
 			tiemposSwap[j] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
-			start = ya();
+			*/
+			auto start = ya();
 			solucion2opt = mejorar2opt(solucionParcial);
-			end = ya();
+			auto end = ya();
 			tiempos2opt[j] = chrono::duration_cast<std::chrono::nanoseconds>(end-start).count();
 		}
 		else
 		{
-			solucionSwap = solucionParcial;
-			tiemposSwap[j] = 0;
+			//solucionSwap = solucionParcial;
+			//tiemposSwap[j] = 0;
 			solucion2opt = solucionParcial;
 			tiempos2opt[j] = 0;
 		}
@@ -155,7 +157,7 @@ int main()
 		//guardar datos
 		tams[j] = cantGyms + cantPokeParadas; 
 		mejorasParciales[j] = calcularCosto(solucionParcial);
-		mejorasSwap[j] = calcularCosto(solucionSwap);
+	//	mejorasSwap[j] = calcularCosto(solucionSwap);
 		mejoras2opt[j] = calcularCosto(solucion2opt);
         
 		delete solucionInicial;
@@ -170,8 +172,8 @@ int main()
 	cout
 		<< "tamaño de instancia,"
 		<< "distancia goloso,"
-		<< "tiempo swap,"
-		<< "distancia swap,"
+	//	<< "tiempo swap,"
+	//	<< "distancia swap,"
 		<< "tiempo 2opt,"
 		<< "distancia 2opt,"
 		<< "\n";
@@ -182,9 +184,9 @@ int main()
 	{
 		cout 
 			<< tams[k] << "," 
-			<< mejorasParciales[k] << ","
-			<< tiemposSwap[k] << ","
-			<< mejorasSwap[k] << ",";
+			<< mejorasParciales[k] << ",";
+	//		<< tiemposSwap[k] << ","
+	//		<< mejorasSwap[k] << ",";
         
         
 		cout 
@@ -208,9 +210,9 @@ int main()
 	cout 
 		<< "tamaño,"
 		<< "promedio goloso,"
-		<< "promedio tiempos swap,"
-		<< "promedio distancias swap,"
-		<< "promedio porcentaje Swap,"
+	//	<< "promedio tiempos swap,"
+	//	<< "promedio distancias swap,"
+	//	<< "promedio porcentaje Swap,"
 		<< "promedio tiempos 2opt,"
 		<< "promedio distancias 2opt,"
 		<< "promedio porcentaje 2opt\n";
@@ -221,9 +223,9 @@ int main()
 		long long inst = 0;
 		int tam = tams[h];
 		long long goloso = 0;
-		long long acumTiemposSwap = 0;
+	//	long long acumTiemposSwap = 0;
 		long long acumTiempos2opt = 0;
-		long long acumMejoraSwap = 0;
+	//	long long acumMejoraSwap = 0;
 		long long acumMejora2opt = 0;
 		//float acumPercSwap = 0;
 		//float acumPerc2opt = 0;
@@ -238,8 +240,8 @@ int main()
 			else
 			{
 				goloso += mejorasParciales[h];
-				acumTiemposSwap += tiemposSwap[h];
-				acumMejoraSwap += mejorasSwap[h];
+	//			acumTiemposSwap += tiemposSwap[h];
+	//			acumMejoraSwap += mejorasSwap[h];
 
 				//acumPercSwap += (mejorasSwap[h] * 100 )/ mejorasParciales[h];
 				acumTiempos2opt += tiempos2opt[h];
@@ -252,14 +254,14 @@ int main()
 
 
 		float promGoloso = (float)(goloso / inst);
-		float promSwap = (float)(acumMejoraSwap / inst);
+	//	float promSwap = (float)(acumMejoraSwap / inst);
 		float prom2opt = (float)(acumMejora2opt / inst);
 		cout 
 			<< tam << ","
 			<< promGoloso << ","
-			<< (float)(acumTiemposSwap / inst) << ","
-			<< promSwap << ","
-			<< (float)(100 - ((promSwap * 100) / promGoloso)) << ","
+	//		<< (float)(acumTiemposSwap / inst) << ","
+	//		<< promSwap << ","
+	//		<< (float)(100 - ((promSwap * 100) / promGoloso)) << ","
 			<< (float)(acumTiempos2opt / inst) << ","
 			<< prom2opt << ","
 			<< (float)(100 - ((prom2opt * 100) / promGoloso )) << "\n";
@@ -268,10 +270,10 @@ int main()
 
 	delete[] tams;
 	delete[] mejorasParciales; 
-	delete[] mejorasSwap; 
+//	delete[] mejorasSwap; 
 	delete[] mejoras2opt; 
 
-	delete[] tiemposSwap; 
+//	delete[] tiemposSwap; 
 	delete[] tiempos2opt; 
 	return 0;
 }
