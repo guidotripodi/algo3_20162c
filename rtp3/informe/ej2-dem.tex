@@ -145,47 +145,50 @@ El objetivo de esta familia es plantear un caso en donde, de forma controlada, l
 
 Se puede observar en el \'ultimo gr\'afico como los resultados tienen valores diversos para casos pequeños. En las instancias de mayor tamaño, las solución óptima resulta de recorrer primero todas las pokeparadas y luego los gimnasios, ya que la cantidad de pociones necesarias para vencer a todos los gimnasios es igual a la cantidad total de pociones presentes en el mapa, sumado a que la distancia entre pokeparadas es muy inferior que entre pokeparadas y gimnasios.
 
-Al generarse un camino alternado para el goloso entre gimnasio y pokeparada, se le dan a todos los gimnasios la dificultad igual a la cantidad de pociones que aporta cada pokeparada y se crean la misma cantidad de gimnasios como de pokeparadas. En cuanto a la distribución de los mismos, se buscó una forma de estrella, en la cual cada pokeparada está alineada con 2 gimnasios y una segunda pokeparada. Dadas estas restricciones se observa lo siguiente:
+Al generarse un camino alternado para el goloso entre gimnasio y pokeparada, se le dan a todos los gimnasios la dificultad igual a la cantidad de pociones que aporta cada pokeparada y se crean la misma cantidad de gimnasios y de pokeparadas. 
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[width=0.75\textwidth]{./EJ2/dibujoorientativo.png}
-\\{\textit{Comparación solución golosa vs exacta}}
-  \end{center}
+En cuanto a la distribución de los mismos, se buscó una forma de estrella, en la cual cada pokeparada esté alineada con 2 gimnasios y una segunda pokeparada. 
 
-El camino goloso realiza un camino de longitud $\sum^{k}_{i=1}a + \sum^{j}_{i=1}c$ y el exacto $\sum^{n-1}_{i=1}b + \sum^{m-1}_{i=1}d + a$. Siendo $k$ el número de aristas como $a$ y $j$ como $c$, se tiene que $k + j = n+m-1$ (aristas en un camino de n+m elementos) y que $k=j+1$. Para que el algoritmo goloso difiera del exacto, se debe cumplir entonces la siguiente desigualdad:
-\[
-\sum^{k}_{i=1}a + \sum^{j}_{i=1}c \ge \sum^{n-1}_{i=1}b + \sum^{m-1}_{i=1}d + a
-\]
+%Dadas estas restricciones se observa lo siguiente:
 
-La cual equivale a decir:
+%\vspace*{0.3cm} \vspace*{0.3cm}
+%  \begin{center}
+%\includegraphics[width=0.75\textwidth]{./EJ2/dibujoorientativo.png}
+%\\{\textit{Comparación solución golosa vs exacta}}
+%  \end{center}
 
-\[
-\sum^{k}_{i=1}a + \sum^{j}_{i=1}c - a \ge (n-1)b + (m-1)d
-\]
+%El camino goloso realiza un camino de longitud $\sum^{k}_{i=1}a + \sum^{j}_{i=1}c$ y el exacto $\sum^{n-1}_{i=1}b + \sum^{m-1}_{i=1}d + a$. Siendo $k$ el número de aristas como $a$ y $j$ como $c$, se tiene que $k + j = n+m-1$ (aristas en un camino de n+m elementos) y que $k=j+1$. Para que el algoritmo goloso difiera del exacto, se debe cumplir entonces la siguiente desigualdad:
+%\[
+%\sum^{k}_{i=1}a + \sum^{j}_{i=1}c \ge \sum^{n-1}_{i=1}b + \sum^{m-1}_{i=1}d + a
+%\]
 
-\[
-\sum^{j}_{i=1}a + \sum^{j}_{i=1}c \ge (n-1)b + (m-1)d
-\]
+%La cual equivale a decir:
 
-\[
-j(a + c)\ge (n-1)b + (m-1)d
-\]
+%\[
+%\sum^{k}_{i=1}a + \sum^{j}_{i=1}c - a \ge (n-1)b + (m-1)d
+%\]
 
-Siendo que $n=m$ por como se construye la instancia, entonces:
+%\[
+%\sum^{j}_{i=1}a + \sum^{j}_{i=1}c \ge (n-1)b + (m-1)d
+%\]
 
+%\[
+%j(a + c)\ge (n-1)b + (m-1)d
+%\]
 
-\[
-j(a + c) \ge (n-1)(b + d)
-\]
+%Siendo que $n=m$ por como se construye la instancia, entonces:
 
-Finalmente, como $k = j + 1 \wedge k+j=n+m-1 \leftrightarrow j = n - 1 $, se resolverán distintos caminos siempre y cuando $a +c \ge b + d$. Con lo cual, para generar correctamente las instancias para esta famila, se considero dicha desigualdad.
+%\[
+%j(a + c) \ge (n-1)(b + d)
+%\]
 
-Podemos ver un ejemplo de la desigualdad de las soluciones presentes en las siguientes instancias corridas con el algoritmo goloso y el backtraking:
+%Finalmente, como $k = j + 1 \wedge k+j=n+m-1 \leftrightarrow j = n - 1 $, se resolverán distintos caminos siempre y cuando $a +c \ge b + d$. Con lo cual, para generar correctamente las instancias para esta famila, se considero dicha desigualdad.
+
+Podemos ver un ejemplo de la desigualdad de las soluciones presentes en las siguientes instancias corridas con el algoritmo goloso y el backtraking:\\\\
  
  
 \vspace*{0.3cm} \vspace*{0.3cm}
-\begin{figure} [!ht]
+\begin{figure}[h]
  \centering
   \subfloat[Algoritmo exacto]{
  \includegraphics[width=0.5\textwidth]{./EJ2/anillosDif.png}
@@ -198,23 +201,22 @@ Podemos ver un ejemplo de la desigualdad de las soluciones presentes en las sigu
  
 Los radios para entradas de hasta 8 elementos son distintos al resto de las instancias. En síntesis se puede ver para los tamaños de 10 a 14 elementos que se mantuvo la distancia recorrida en el algoritmo exacto: esto se debe al carácter del camino, que resulta de recorrer primero una circunferencia, luego dirigirse de forma recta a la circunferencia interior y recorrerla. Al no haber variabilidad en los radios, el tiempo insumido es aproximadamente el mismo. No así para el algoritmo goloso, ya que un incremento en la cantidad de elementos, conyeva un incremento de las idas y vueltas a realizar; aumentando notoriamente la distancia del recorrido.
 
+%\subsubsection*{Comparación entre errores de familias}
 
-\subsubsection*{Comparación entre errores de familias}
+%Teniendo un grupo de familias que provocan soluciones con errores al aplicar el algoritmo goloso, podemos ver lo siguiente entre la Familia 4 y la Familia 6:
 
-Teniendo un grupo de familias que provocan soluciones con errores al aplicar el algoritmo goloso, podemos ver lo siguiente entre la Familia 4 y la Familia 6:
+%\vspace*{0.3cm} \vspace*{0.3cm}
+% \begin{center}
+% \includegraphics[width=0.75\textwidth]{./EJ2/box.png}
+%\end{center}
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[width=0.75\textwidth]{./EJ2/box.png}
-\end{center}
+%Se evidencia el mejor desempeño del algoritmo sobre la familia 6, provocando un error medio mucho menor que la familia 4 (alrededor de 110\% mejor) y con una dispersión del mismo mucho más baja. 
 
-Se evidencia el mejor desempeño del algoritmo sobre la familia 6, provocando un error medio mucho menor que la familia 4 (alrededor de 110\% mejor) y con una dispersión del mismo mucho más baja. 
-
-De forma separada, debido a los rangos que se manejan, se decidió analizar la distribución de la Familia 7. Vale destacar que el error de la misma es muy inferior al de las dos anteriores y posee la menor varianza de todas. Esto se debe al carácter controlado de la misma, y su característica de posicionamiento: 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[width=0.75\textwidth]{./EJ2/box1.png}
-\end{center}
+%De forma separada, debido a los rangos que se manejan, se decidió analizar la distribución de la Familia 7. Vale destacar que el error de la misma es muy inferior al de las dos anteriores y posee la menor varianza de todas. Esto se debe al carácter controlado de la misma, y su característica de posicionamiento: 
+%\vspace*{0.3cm} \vspace*{0.3cm}
+% \begin{center}
+% \includegraphics[width=0.75\textwidth]{./EJ2/box1.png}
+%\end{center}
 
 \subsubsection*{Comparación entre tiempos de familias}
 
@@ -246,13 +248,14 @@ Luego, mostraremos como se comporta nuestro algoritmo en base a la complejidad c
 \\{\textit{Tiempo de ejecución entre familias}}
   \end{center}
   \vspace*{0.3cm}
-
   
 Es posible observar como las funciones resultantes del mejor y peor caso se encuentran por debajo de la cota de complejidad. Dicha complejidad fué calculada utilizando el m\'etodo de cuadrados m\'inimos generando una función que es tomada como cota dentro de nuestro orden de complejidad $(O(n+m)^3)$. 
 
 \subsubsection*{Familias random y Gimnasios por grupos}
 
-Como se comentó previamente en el ejercicio uno, las anteriores familias fueron de utilidad para analizar que sucede con el algoritmo goloso dado cierto tipo de entradas y porque no obtiene solución óptima en algunos casos, además de servir para analizar las podas tanto del algorito exacto como el goloso. Lo que no fué posible con estas familias es analizar que sucede en el promedio de casos con soluciones aleatorias, dado que eran familias totalmente controladas para poder observar particularidades. Por este motivo introducimos aquí dos familias nuevas con el objetivo de analizar casos promedio dentro de conjuntos de un cierto tamaño.\\
+Como se comentó previamente en el ejercicio uno, las familias 1 a 7 fueron de utilidad para analizar las cualidades y defectos del algoritmo backtracking y goloso y como actúan sus podas. 
+Dado que los ejemplos fueron creados especialmente con ese proposito no pudo analizarse en promedio su funcionamiento.
+Por este motivo introducimos aquí dos familias nuevas con el objetivo de analizar casos promedio dentro de conjuntos de un cierto tamaño.\\
 
 La primera es la familia Random, que como el nombre lo indica, todo es absolutamente random en los parámetros de entrada. Con este tipo de instancias podremos observar cual es el desempeño de los algoritmos en promedio.
 
