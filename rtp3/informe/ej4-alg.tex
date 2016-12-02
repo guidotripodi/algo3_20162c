@@ -13,8 +13,6 @@ Una vez hecho esto se actualiza el $mejorCosto$ y la $mejorSolucion$ si el recor
 
 El algoritmo finaliza cuando se alcanza la cantidad de iteraciones límite o la cantidad de iteraciones sin mejora límite. Una u otra dependen de la elección del usuario.
 
-\newpage
-
 \begin{algorithm}[H] %or another one check
  \Fn{tabuSearch()}{
  %     \SetAlgoLined
@@ -29,7 +27,7 @@ entero TenorTabu = MaxIter \\
 entero MaxNoMejora = 4 \\ 
 
  \For{iter < MaxIter $\wedge$ entero noMejora < maxNoMejora }{
-	 \hfill ciclo: O($MaxIter$)\\
+	 \hfill ciclo: O($Critero Parada$)\\
 	Recorrido mejorCandidato \hfill O(1) \\
   	Lista<Arista> aristasModificadas \hfill O(1)\\
   	entero costoMejorCandidato $\leftarrow$ -1 \hfill O(1)\\
@@ -71,7 +69,18 @@ entero MaxNoMejora = 4 \\
 	}\Else{
 		noMejora+=1\\
 	}
+		iter+=1 \\
+}
+agregarAtributosTabu(AristasModificadas)\\
+devolver mejorSolucion \\
+}
 
+\end{algorithm}
+	
+\begin{algorithm}[H]
+
+\Fn{agregarAtributosTabu(aristasModificadas)}{
+%     \SetAlgoLined
    \For{Arista a en aristasModificadas}{
 	 	\hfill Ciclo: O(1)\\
 	   atributosTabu.push(a) \hfill O(l$log(TenorTabu)$)\\
@@ -81,34 +90,31 @@ entero MaxNoMejora = 4 \\
 	   \hfill Ciclo: O(1)\\
 	   atributosTabu.pop() \hfill O($log(TenorTabu)$)\\
    }
-
-	iter+=1 \\
 }
 
-devolver mejorSolucion \\
-
-}
 
 \end{algorithm}
 
-Complejidad final: O(MaxIter * ( $n^5$ $\ast$ $log(TenorTabu)$ + $TenorTabu$)) = O($N+M$ $\ast$ ( $n^5$ $\ast$ $log(N+M)$ + $N+M$)) $\subset$ O($N+M$ $\ast$ ( $(N+M)^5$ $\ast$ $log(N+M)$ + $N+M$))
-\\
+Complejidad final: 
+ O($CriterioParada$ * ( $n^5$ $\ast$ $log(TenorTabu)$ + $TenorTabu$)) =  O($CriterioParada$ * ( $(N+M)^5$ $\ast$ $log(TenorTabu)$ + $TenorTabu$)) \\
 Siendo $N$ = cantidad pokeparadas y $M$ = cantidad gimnasios.\\
 
-En general a la hora de implemetar y experimentar, serán tomados porcentajes de $N+M$ para la cantidad de iteraciones límite y el tenor tabú ya que pueden ser valores muy grandes.\\
+En general a la hora de implementar y experimentar, serán tomados porcentajes de $N+M$ para la cantidad de iteraciones límite y el tenor tabú ya que pueden ser valores muy grandes.\\
 
 \subsubsection*{Detalles del algoritmo}
 
 \begin{itemize}
-\item Justificación de la cota de complejidad del ciclo principal: El algoritmo finaliza si se producen $maxNoMejora$ cantidad de iteraciones sin mejora de $costoInicial$ o si se alcanza $MaxIter$. 
+Justificación de la cota de complejidad del ciclo principal:
+\item $CriterioParada$: Este parametro determina cuantas veces ejecuta el ciclo principal de la busqurda tabu. Toma el minimo entre el valor $MaxIter$ y ($maxNoMejora$ - 1) * costoInicial.
+\item Este ultimo valor es cota superior de la cantidad de iteraciobnes ya que en peor caso pueden pasar ($maxNoMejora - 1$) iteraciones sin que se mejore la solucion. Y esta mejora es, en peor caso 1. Como el costo es mayor a cero, se itera como mucho ($maxNoMejora$ - 1) * $costoInicial$ veces.
+\item Luego, el algoritmo finaliza si se producen $maxNoMejora$ cantidad de iteraciones sin mejora de $costoInicial$ o si se alcanza $MaxIter$. 
 \item En el peor caso $n = N+M$ es decir, que la solución inicial del algoritmo tiene todas las pokeparadas y gimnasios del mapa.
-\item $MaxIter$ = $(N+M)$\% y $TenorTabu$ = $(N+M)$\%
 \item Arista = < Punto a , Punto b >
 \item Punto = < entero x, entero y >
-\item La función $costoTotal$ ya fue definida en el apartado del algoritmo del ejercicio 3.
+\item La función $calcularCosto$ ya fue definida en el apartado del algoritmo del ejercicio 3.
 \item La función $vecindadFiltrada$ devuelve una lista de tuplas. Cada tupla posee una de las soluciones vecinas (obtenida a partir de algún movimiento: 2opt, 3opt o swap) y las aristas que se modificaron para llegar a esa solución. La soluciones han sido previamente "filtradas"; es decir, una solucion solo puede estar en esta lista si es una solución válida para nuestro problema. Generar vecindades 2opt y swap tiene complejidad O($n^3$), en cambio las vecindades 3opt toman O($n^4$).
 	La cantidad de soluciones de cada vecindad está acotada de la misma manera que sus complejidades. En peor caso, se encontró una solucion válida en cada iteraci\'on.
 \item La función $funcionAspiracion$ devuelve dada una vecindad y los atributos tabú, el recorrido que menos atributos tabú tenga y además las aristas modificadas para obtener ese recorrido. Implica iterar sobre la vecindad y sobre los atributos tabú. 
 \item La funcion $tabuCount$ sirve para decidir si una solución es tabú o no y cuenta cuantos atributos tabú posee dando de esta manera una medida de "cuan tabú" es una solución. Se itera por las aristas de la solución en tiempo lineal.
-\item $attributosTabu$ está implementado sobre el set proveido por la STL de c++. Se observa una estructura de arbol rojinegro que puede buscar, insertar y borrar en un tiempo O($log(TenorTabu)$), y se mantiene la cantidad de elementos de este por debajo de $TenorTabu$.
+\item $atributosTabu$ está implementado sobre el set proveido por la STL de c++. Se observa una estructura de arbol rojinegro que puede buscar, insertar y borrar en un tiempo O($log(TenorTabu)$), y se mantiene la cantidad de elementos de este por debajo de $TenorTabu$.
 \end{itemize}
