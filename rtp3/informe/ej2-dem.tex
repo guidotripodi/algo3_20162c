@@ -344,14 +344,10 @@ Como se mencionó en repetidas oportunidades, al algoritmo goloso no saca partid
     \includegraphics[width=0.45\textwidth]{./EJ2/randomError.png}}
     \label{fig:randomgoloso}
     \end{figure}
-
-Se observa para esta familia un error considerable cuanto más grande es la instancia, llegando a estar por arriba del 100\% con respecto al resultado exacto para entradas de 13 elementos. El motivo puede deberse a la variabilidad de los parámetros de entrada que hacen que el algoritmo goloso tenga que tomar las peores desiciones. Es decir, la mayoría de las veces se recorren grandes distancias para vencer a un gimnasio luego de juntar pokeparadas.
+    
+Según podemos observar en los gráficos, las distancias del algoritmo goloso tienden a crecer mientras que la solución exacta se mantiene. Dado que los tamaños son pequeños y la familia es totalmente aleatoria, es probable que para las instancias generadas suceda que las distancias de las soluciones óptimas varíe poco, pero el algoritmo goloso siempre tiende a empeorar la solución cuanto más grande es la instancia. Esto último se verá mejor luego con tamaños de entrada mayores a 15 elementos.
 
 \subsubsection*{Comparación de bactracking y algoritmo goloso para la familia de Gimnasios por grupos} 
-
-Podemos observar en las figuras el mismo mapa, donde (a) indica el recorrido exacto y (b) el recorrido goloso. Hay dos grupos de gimnasios. Un grupo con tres gimnasios de poder ocho y otro grupo con dos gimnasios de poder cero.
-
-Con respecto a la diferencia entre la soluciones que se obtienen en relaci\'on a las \'optimas elebaramos los siguientes gráficos:\\
 
    \begin{figure}[h]
  \centering
@@ -363,12 +359,6 @@ Con respecto a la diferencia entre la soluciones que se obtienen en relaci\'on a
     \label{fig:randomgoloso}
     \end{figure}
 
+Se observa para esta familia un error considerable cuanto más grande es la instancia, llegando a estar por arriba del 100\% con respecto al resultado exacto para entradas de más de 11 elementos. El motivo lo atribuimos a la caracteristica de grupos que disponen los gimnasios. Es decir, la mayoría de las veces se recorren grandes distancias para vencer a un gimnasio luego de juntar pokeparadas. Esto último podría suceder al menos de dos formas; grupos de gimnasios densos que hacen que haya pocas pokeparadas entre ellos y grupos de gimnasios alejados de pokeparadas. En cualquier caso, se obliga al goloso a recorrer más distancia para obtener el poder suficiente para vencer al proximo gimnasio.\\
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[width=0.75\textwidth]{./EJ2/box2.png}
-\\{\textit{Errores absolutos por familia}}
-\end{center}
-
-
-En estos experimentos terminan evidenciando lo malo que puede ser una elección golosa. Dado que el metodo goloso está restringido a le evaluación de un conjunto determinado de caminos, es posible que ignore los que minimizan el recorrido total. Esta ignorancia lleva, como en el caso estudiado, a una solución cada vez más alejada de la optima (alcanzada por el backtraking) en las 15 dimensiones de instancias evaluadas.
+En estos experimentos se evidencia lo malo que puede ser la elección golosa. Dado que el metodo goloso está restringido a la evaluación de un conjunto determinado de caminos, es posible que ignore los que minimizan el recorrido total. Esta ignorancia lleva, como en el caso estudiado, a una solución cada vez más alejada de la óptima (alcanzada por el backtraking) en las 15 dimensiones de instancias evaluadas.
