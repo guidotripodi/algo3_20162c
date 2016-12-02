@@ -12,9 +12,8 @@ Los parámetros de estudio serán:
 \item \textbf{Tenor tabú}: Tenemos que observar que sucede al aumentar el tenor tabú, y hasta cuanto es conveniente hacerlo para obtener un buen resultado.
 \end{itemize}
 
-Para realizar los tests se generaron dos rangos de instancias:
-
 Para realizar los tests se tomaron dos rangos de tamaños:
+
 \begin{itemize}
 \item Rango 1: 5 a 15 elementos (pokeparadas + gimnasios)
 \item Rango 2: 20 a 100 en intervalos de 10 elementos.
@@ -40,7 +39,7 @@ Por lo tanto para realizar los tests, se configuró el algoritmo tabú de la sig
 \item Criterio de parada: iteraciones límite $T$ = C $\ast$ 0.10 si C >= 20, si no C.
 \end{itemize}
 
-El criterio de parada se eligió inicialmente en \textbf{cantidad de iteraciones límite} ya que con el segundo criterio de parada, \textbf{Repeticiones límite sin mejora} se requería bastante más tiempo de corrida. 
+El criterio de parada se eligió inicialmente en \textbf{cantidad de iteraciones límite} ya que con el segundo criterio de parada, \textbf{repeticiones límite sin mejora} se requería bastante más tiempo de corrida. 
 
 Entendemos que lo mejor hubiese sido probar con ambos criterios, aunque desestimamos que se hubiesen obtenido resultados diferentes, ya que el segundo criterio en si, como veremos luego, tiene una muy buena performance para valores de tenor pequeños.\\
 
@@ -101,6 +100,8 @@ Veamos que sucedió para ambas familias
     \includegraphics[width=0.45\textwidth]{./EJ4/criteriosTiemposRandom100.png}}
     \label{fig:randomMejora1}
 \end{figure}
+
+\newpage
 
 \begin{figure}[h] 
  \centering
@@ -204,7 +205,7 @@ En general puede verse que ninguna solución alcanza la distancia óptima para e
 
 Para los casos grandes solo podemos ver que tanto se mejora la solución con respecto al goloso, ya que es practicamente imposible correr backtracking sobre tamaños superios a 15 aristas teniendo que promediar instancias en tiempos razonables.\\
 
-Para poder realizar comparaciones, se corrieron las mismas instancias del Rango 2 de este punto con los algoritmos de búsqueda local que mejores resultados obtuvieron en el ejercicio tres.\\
+Para poder realizar comparaciones, se corrieron las mismas instancias del Rango 2 de este punto con los algoritmos de búsqueda local que mejores resultados obtuvieron en el ejercicio tres.\\\\
 
 \begin{figure}[h] 
  \centering
@@ -215,6 +216,8 @@ Para poder realizar comparaciones, se corrieron las mismas instancias del Rango 
     \includegraphics[width=0.45\textwidth]{./EJ4/tiempoGrandeFamilia.png}}
     \label{fig:randomMejora1}
 \end{figure}
+
+\newpage
 
 \begin{figure}[h] 
  \centering

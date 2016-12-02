@@ -105,9 +105,9 @@ En general a la hora de implementar y experimentar, serán tomados porcentajes d
 Justificación de la cota de complejidad del ciclo principal:
 \begin{itemize}
 
-\item $CriterioParada$: Este parametro determina cuantas veces ejecuta el ciclo principal de la busqurda tabu. Toma el minimo entre el valor $MaxIter$ y ($maxNoMejora$ - 1) * costoInicial.
-\item Este ultimo valor es cota superior de la cantidad de iteraciobnes ya que en peor caso pueden pasar ($maxNoMejora - 1$) iteraciones sin que se mejore la solucion. Y esta mejora es, en peor caso 1. Como el costo es mayor a cero, se itera como mucho ($maxNoMejora$ - 1) * $costoInicial$ veces.
-\item Luego, el algoritmo finaliza si se producen $maxNoMejora$ cantidad de iteraciones sin mejora de $costoInicial$ o si se alcanza $MaxIter$. 
+\item $CriterioParada$: Este parametro determina cuantas veces ejecuta el ciclo principal de la busqurda tabú. Toma el mínimo valor entre $MaxIter$ y ($maxNoMejora$ - 1) * costoInicial($S_o$).
+\item($maxNoMejora$ - 1) * costoInicial($S_o$) es cota superior de la cantidad de iteraciones ya que en el peor caso pueden pasar ($maxNoMejora - 1$) iteraciones sin que se mejore la solución. Una mejora, en peor caso es en una unidad. Como el costo es mayor a cero, se itera como mucho ($maxNoMejora$ - 1) * $costoInicial$ veces.
+\item Luego, el algoritmo finaliza si se producen $maxNoMejora$ cantidad de iteraciones sin mejora de $costoInicial$ o si se alcanza $MaxIter$.  Como se ha comentado, pueden utilizarse independientemente y es así como serán evaluados en este informe.
 \item En el peor caso $n = N+M$ es decir, que la solución inicial del algoritmo tiene todas las pokeparadas y gimnasios del mapa.
 \item Arista = < Punto a , Punto b >
 \item Punto = < entero x, entero y >
