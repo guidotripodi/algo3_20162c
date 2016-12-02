@@ -1,6 +1,21 @@
-Para este punto se desarrollaron nuevas instancias random distintas a las anteriores. La generación de nuevos casos de prueba es debido a que los anteriormente utilizados podrían formar una muestra aleatoria que beneficiase más a ciertos algoritmos que a otros. De esta forma podremos evidenciar las diferencias que haya entre las distintas aproximaciones.
+Para este punto se desarrollaron nuevas instancias random distintas a las anteriores. La generación de nuevos casos de prueba es debido a que los anteriormente utilizados podrían formar una muestra aleatoria que beneficiase más a ciertos algoritmos que a otros. De esta forma podremos evidenciar diferencias entre las distintas aproximaciones.
 
-El siguiente es un ejemplo de una instancia dentro de este conjunto nuevo, ejecutada en las 5 variantes:
+En este nuevo conjunto de instancias se generaron $5 \times N+M$ instancias de tamaño $5 \leq N+M \leq 20$. Luego se incrementaron la cantidad de elementos de 20 a 100 tomando intervalos intervalos de 10 en 10. Para esta segunda seccion se crearon un 50$\%$ de instancias para cada tamaño.
+Una vez que fueron ejecutadas todas las instancias por los respectivos algoritmos, a excepcion del backtraking el cual solo ejecuto de 5 a 15 por problemas de c\'omputo, se promedieron todas las instancias de cada tamaño para tener una mejor aproximaci\'on de las soluciones obtenidas. 
+
+Una vez que se obtuvieron los promedios tanto de las soluciones como de la medicion de tiempo de cada algoritmo, tomamos los porcentajes de mejora, y el porcentaje de error relativo para $5 \leq N+M \leq 15$ de las heurísticas, teniendo como valor real el resultado del Backtraking.
+
+Realizamos ciertas comparaciones para ver como se comportan las heurísticas teniendo en cuenta las conclusiones que pudimos obtener de los puntos anteriores y de esta forma obtener que heurística obtiene una mejor relación mejora de solución / tiempo.
+
+El siguiente es un ejemplo de una instancia dentro de este conjunto nuevo, ejecutada en las 4 variantes:
+
+  ----> Me falta hacer
+    \vspace*{0.3cm} \vspace*{0.3cm}
+  \begin{center}
+\includegraphics[scale=0.3]{./EJ5/caminoEj3opt.png}
+\\{\textit{Resultado Exacto}}
+  \end{center}
+  \vspace*{0.3cm}
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -23,17 +38,19 @@ El siguiente es un ejemplo de una instancia dentro de este conjunto nuevo, ejecu
   \end{center}
   \vspace*{0.3cm}
   
+    ----> Me falta hacer
     \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
 \includegraphics[scale=0.3]{./EJ5/caminoEj3opt.png}
-\\{\textit{Resultado 3-OPT}}
+\\{\textit{Resultado Tabu 2-OPT}}
   \end{center}
   \vspace*{0.3cm}
+
 
 \subsubsection{Comparaciones de tiempo entre heuristicas}
 
 Para corroborar la performance obtenida para este grupo de instancias se tomaron los tiempos que tarda cada algoritmo de busqueda local en obtener soluci\'on. 
-Dicho conjunto esta formado por un total de 50 instancias que van desde 5 elementos hasta 24 en total. Las mediciones de las instqancias de menor cantidad de elementos se compararon con la distancia exacta tomada con el backtracking. Para los casos de mayor tamaño, siendo que el tiempo de ejecución exponencial impidió la toma de mediciones, se compararon los resultados solo entre heurísticas.
+ Las mediciones de las instancias de menor cantidad de elementos se compararon con la distancia exacta tomada con el backtracking. Para los casos de mayor tamaño, siendo que el tiempo de ejecución exponencial impidió la toma de mediciones, se compararon los resultados solo entre heurísticas.
 
 
 \vspace*{0.3cm} \vspace*{0.3cm}
