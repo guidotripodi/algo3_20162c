@@ -1,6 +1,9 @@
 Queremos observar que tan bueno es el algoritmo propuesto en la práctica.
 Para estudiar el desempeño del algoritmo utilizaremos las familias \textbf{Random} y \textbf{Gimnasios por grupos}. 
-La idea, además, es tratar de encontrar la configuración de Tabú Search ideal para que en promedio el algoritmo resuelva la mayoria de los casos eficientemente. Para lograr esto, se experimenta variando distintos parametros del algoritmo para cada entrada.
+
+Nos interesa particularmente si el algoritmo logra sortear el principal problema que tiene búsqueda local que es justamente, la localidad de las soluciones.
+
+La idea, además, es tratar de encontrar la configuración de Tabú Search ideal para que en promedio el algoritmo resuelva la mayoría de los casos eficientemente. Para lograr esto, se experimenta variando distintos parametros del algoritmo para cada entrada.
 
 Los parámetros de estudio serán:
 
@@ -9,379 +12,215 @@ Los parámetros de estudio serán:
 \item \textbf{Tenor tabú}: Tenemos que observar que sucede al aumentar el tenor tabú, y hasta cuanto es conveniente hacerlo para obtener un buen resultado.
 \end{itemize}
 
-Debemos aclarar, que tenor tabú fué establecido en cantidad de pokeparadas mas gimnasios. Este valor puede ser relativamente grande, pero cuanto más grande, más tiempo de resolución es necesario, con lo cual al final no es una cuestion de memoria, si no, una cuestion de tiempo de computos necesaria para correr el algoritmo.
-También se trabajó probando diferentes configuraciones de atributos tabú y función de aspiración, obteniendo en todos los casos los mismos resultados, por lo que al final se decidió dejar prefijado el estandar para tabú search que es aristas viejas como atributos tabú y solución menos tabú para la función de aspiración.\\
+Para realizar los tests se generaron dos rangos de instancias:
 
-Se tomaron 20 mediciones por cada tipo de test y se tomó una media alfa podada de las mismas con $\alpha$ = 0.5 de manera de podar un 25\% de los datos a cada lado.  De esta forma se reduce la posibilidad de outliers en las muestras consideradas.
-
-Como fue enunciado en incisos anteriores de este trabajo las 4 familias en las que la heur\'istica golosa no otorga una soluci\'on \'optima son:
-
-\begin{enumerate}
-\item Familia 4
-\item Familia 6
-\item Familia 7
-\item Familia 8
-\end{enumerate}
-
-Estas ser\'an las únicas a ser a analizadas, ya que el resto son el resultado exacto o no tienen soluci\'on, con lo cual no aportan mayor relevancia.
- 
-\subsubsection*{Familia 4}
-
-Veamos algunos resultados de aplicar cada version de tabú search:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam4goloso.png}\\
- {            \textit{Soluci\'on Golosa}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam42opt.png}\\
- {            \textit{Soluci\'on 2-OPT}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam43opt.png}\\
- {            \textit{Soluci\'on 3-OPT}}
-  \end{center}
-  \vspace*{0.3cm}
-
-Nos parece interesante comparar los resultados de mejora y tiempo de las búsquedas locales y tabú search que utilicen la misma vecindad, para ver si tabú search mejora lo logrado por la búsqueda local o empeora el resultado. Esto será realizado para cada familia mencionada.\\
-
-Veamos como se comporta tabú 2-OPT con respecto a la heuristica de búsqueda local 2-OPT dentro de la familia 4:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativogym02opt.png}\\
- {            \textit{Gráfico \ 4.1 - 2-OPT vs Tabu 2-OPT sobre Familia 4}}
-  \end{center}
-  \vspace*{0.3cm}
-
-En cuanto a tiempo insumido vemos lo siguiente:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/medicion2optgym0.png}\\
- {            \textit{Gráfico \ 4.2 - 2-OPT vs Tabu 2-OPT sobre Familia 4}}
-  \end{center}
-  \vspace*{0.3cm}
-  
- Aplicando 3-OPT:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativogym03opt.png}\\
- {            \textit{Gráfico \ 4.3 - 3-OPT vs Tabu 3-OPT sobre Familia 4}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/medicion3optgym0.png}\\
- {            \textit{Gráfico \ 4.4 - 3-OPT vs Tabu 3-OPT sobre Familia 4}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Podemos observar que tabú search 2-OPT mejora lo realizado por la heuristica de búsqueda local 2-OPT. Los tiempos insumidos para lograrlo son elevados, pero en relación a la mejora es un resultado aceptable en la práctica. No así tabú search 3-OPT que apenas mejora lo realizado por búsqueda local 3-OPT y requiere tiempos elevados de corrida del algoritmo.\\
-  
-Para decidir que vecindad es mejor utilizar en tabú search, se comparará conjuntamente el tiempo de ejecución con la calidad de la solución. Para esta última tendremos en cuenta que los algoritmos, de devolver un resultado, serán válidos: esto quiere decir que cuanto menor distancia recorran las soluciones, mejor serán las mismas:
-
-Las soluciones obtenidas fueron las siguientes:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativogym0.png}\\
- {            \textit{Gráfico \ 4.5 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 4}}
-  \end{center}
-  \vspace*{0.3cm}
-
-En cuanto a tiempo insumido vemos lo siguiente:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparaciongym01.png}\\
- {            \textit{Gráfico \ 4.6 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 4}}
-  \end{center}
-  \vspace*{0.3cm}
-
-Se pudo observar como la heur\'istica Tabu 2-OPT mejoro considerablemente las soluciones para 2-OPT, mientras que en relaci\'on a Tabu 3-OPT y 3-OPT las soluciones obtenidas fueron similares. Teniendo en cuenta adem\'as, que para esta \'ultima el tiempo insumido fue considerablemente mayor que la b\'usqueda local.
-Por lo tanto, para esta familia puntualmente, a la hora de elegir una entre los dos Tabu, ser\'a m\'as eficiente en relaci\'on tiempo - calidad de soluci\'on la Tabu 2-OPT.
-
-
-\subsubsection*{Familia 6}
-
-Como enunciamos anteriormente esta familia tiene como caracter\'istica principal tener pokeparadas a ambos lados de gimnasios, generando que el resultado de la heur\'istica golosa de una soluci\'on muy alejada de la \'optima, por esta raz\'on luego de haber realizado nuevas heur\'isticas de b\'usquedas locales, puntualmente 2-OPT y 3-OPT, pudimos observar que se vio mejorada la soluci\'on. 
-
-Procederemos a ver, si con las nuevas heuristicas implementadas Tabu 2-OPT y 3-OPT la solucion que obtenemos se acerca o iguala a la \'optima.
-
-Veamos un ejemplo de como se mejora el camino obtenido por el goloso al utilizar Tabu 2-OPT y Tabu 3-OPT:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam6goloso.png}\\
- {            \textit{Soluci\'on Golosa}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam62opt.png}\\
- {            \textit{Soluci\'on TABU 2-OPT}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam63opt.png}\\
- {            \textit{Soluci\'on TABU 3-OPT}}
-  \end{center}
-  \vspace*{0.3cm}
-
-Luego de haber ejemplificado una instancia posible queremos ver como se comporta Tabu 2-OPT con respecto a la heur\'istica de busqueda local 2-OPT:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativosinorden2opt.png}\\
- {            \textit{Gráfico \ 4.7 - 2-OPT vs Tabu 2-OPT sobre Familia 6}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/medicion2optsinorden.png}\\
- {            \textit{Gráfico \ 4.8 - 2-OPT vs Tabu 2-OPT sobre Familia 6}}
-  \end{center}
-  \vspace*{0.3cm}
-
-Luego, para 3-OPT:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativogym03opt.png}\\
- {            \textit{Gráfico \ 4.9 - 3-OPT vs Tabu 3-OPT sobre Familia 6}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/medicion3optsinorden.png}\\
- {            \textit{Gráfico \ 4.10 - 3-OPT vs Tabu 3-OPT sobre Familia 6}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Habiendo chequeado dichos experimentos, pudimos observar que utilizando Tabu 2-OPT mejoramos considerablemente la soluci\'on obtenida por 2-OPT. A pesar de tener en cuenta que, en la medici\'on de tiempo insumido el tabu tarda m\'as, la calidad de soluci\'on obtenida es hasta 10 veces mejor que en la b\'usqueda, es por esto que, para esta familia puntual es preferible trabajar con Tabu 2-OPT que con la b\'usqueda en cuesti\'on. 
-Por otro lado, el otro Tabu, en ves de mejorar la soluci\'on en muchos casos nos otorga una soluci\'on inferior a la que ya ten\'iamos.
-  
-Comparando las soluciones de cada version de tabú search podemos observar lo siguiente:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativosinorden.png}\\
- {            \textit{Gráfico \ 4.11 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 6}}
-  \end{center}
-  \vspace*{0.3cm}
-
-En cuanto a tiempo insumido vemos lo siguiente:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparacionsinorden1.png}\\
- {            \textit{Gráfico \ 4.12 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 6}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Como mencionamos en las comparaciones de cada tabu con la respectiva busqueda local, Tabu 2-OPT tendr\'a un mejor desempeño en consideraci\'on al otro para esta familia analizada.
-
-\subsubsection*{Familia 7}
-
-Esta familia de instancias como fue mencionada presenta a los conjuntos de gimnasios y pokeparadas en dos anillos distintos.
-Como la solucion de la heur\'istica golosa ir\'a  de una pokeparada a un gimnasio todo el tiempo, la solucion obtenida distar\'a considerablemente de la optima ya que la misma se obtiene recorriendo primero el anillo de pokeparadas y luego el de gimnasios.
-
-Luego de haber obtenido una mejora en la soluci\'on con las b\'usquedas locales, intentaremos mejorar mas las soluci\'on del mismo utilizando las meta-heur\'isticas Tabu 2-OPT y Tabu 3-OPT.
-
-Una ejemplificaci\'on de como es transformado el camino resultante para esta familia es el siguiente:\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam7goloso.png}\\
- {            \textit{Soluci\'on Golosa}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam72opt.png}\\
- {            \textit{Soluci\'on TABU 2-OPT}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam73opt.png}\\
- {            \textit{Soluci\'on TABU 3-OPT}}
-  \end{center}
-  \vspace*{0.3cm}
-
-Veamos como se comporta Tabu 2-OPT con respecto a la heuristica de busqueda local 2-OPT:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativoanillos2opt.png}\\
- {            \textit{Gráfico \ 4.7 - 2-OPT vs Tabu 2-OPT sobre Familia 7}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/medicionanillos2opt.png}\\
- {            \textit{Gráfico \ 4.8 - 2-OPT vs Tabu 2-OPT sobre Familia 7}}
-  \end{center}
-  \vspace*{0.3cm}
-
-Luego, para 3-OPT:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativoanillos3opt.png}\\
- {            \textit{Gráfico \ 4.9 - 3-OPT vs Tabu 3-OPT sobre Familia 7}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/medicionanillos3opt.png}\\
- {            \textit{Gráfico \ 4.10 - 3-OPT vs Tabu 3-OPT sobre Familia 7}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Habiendo chequeado dichos experimentos, pudimos observar que para esta familia sucede algo muy similar que en la n\'umero 6 donde al utilizar Tabu 2-OPT la solucion obtenida es considerablemente mejor que la obtenida por 2-OPT. 
-Y al igual que en la familia anterior, el otro Tabu, presenta un peor desempeño. Ya que las soluciones obtenidas son hasta 3 veces peores que las obtenidas por la busqueda local 3-OPT.
- 
-Comparando las soluciones de cada version de tabú search podemos observar lo siguiente: 
-  
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativoanillos1.png}\\
- {            \textit{Gráfico \ 4.11 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 7}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativoanillos.png}\\
- {            \textit{Gráfico \ 4.12 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 7}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Dando por finalizada la comparaciones entre Tabu, como mencionamos, a la hora de trabajar con alguna de las dos para esta familia, la mejor en relaci\'on tiempo-calidad de soluci\'on ser\'a Tabu 2-OPT.
-
-\subsubsection*{Familia 8}
-
-Esta familia, como se denomino, es random, la misma fue implementada de la forma en la que siempre se obtenga soluci\'on, o sea, siempre exista la cantidad necesaria de Pokeparadas para vencer a todos los gimnasios y la capacidad de la mochila sea acorde a la cantidad de pociones necesarias para poder vencer al gimnasio mas poderoso.
-
-Por la particularidad de la misma, las soluciones y el tiempo insumido para obtener las mismas suele ser variable. Se intentar\'a por medio de las meta-heuristicas trabajadas mejorar en caso de ser posible la soluci\'on obtenida por el goloso.
-
-Un ejemplo de como es cambia el camino del goloso por las meta heur\'isticas es el siguiente:\\
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam8goloso.png}\\
- {            \textit{Soluci\'on Golosa}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam82opt.png}\\
- {            \textit{Soluci\'on TABU 2-OPT}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ4/fam83opt.png}\\
- {            \textit{Soluci\'on TABU 3-OPT}}
-  \end{center}
-  \vspace*{0.3cm}
-
-Veamos como se comporta Tabu 2-OPT con respecto a la heur\'istica de b\'usqueda local 2-OPT:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativorandom2opt.png}\\
- {            \textit{Gráfico \ 4.7 - 2-OPT vs Tabu 2-OPT sobre Familia 8}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/medicionrandom2opt.png}\\
- {            \textit{Gráfico \ 4.8 - 2-OPT vs Tabu 2-OPT sobre Familia 8}}
-  \end{center}
-  \vspace*{0.3cm}
-
-Luego, para 3-OPT:
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativorandom3opt.png}\\
- {            \textit{Gráfico \ 4.9 - 3-OPT vs Tabu 3-OPT sobre Familia 8}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/medicionrandom3opt.png}\\
- {            \textit{Gráfico \ 4.10 - 3-OPT vs Tabu 3-OPT sobre Familia 8}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Dada la particularidad de este caso, las soluciones obtenidas y el tiempo insumido es variante tanto para las heur\'isticas como para las meta-heur\'isticas. A pesar esto tanto Tabu 2-OPT como Tabu 3-OPT obtienen soluciones mejores.
-  
-Comparando las soluciones de cada versi\'on de tabú search podemos observar lo siguiente: 
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/comparativorandom.png}\\
- {            \textit{Gráfico \ 4.11 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 8}}
-  \end{center}
-  \vspace*{0.3cm}
-
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.5]{./EJ4/medicionrandom.png}\\
- {            \textit{Gráfico \ 4.12 - Tabu 2-OPT vs Tabu 3-OPT sobre Familia 8}}
-  \end{center}
-  \vspace*{0.3cm}
-  
-Dando por finalizada esta familia, a pesar de la oscilacion en los resultados y mediciones Tabu 2-OPT presento un mejor desempeño que el otro. 
-
-Como pudimos ver en este informe, para la mayoria de las familias es notoriamente mejor utilizar Tabu 2-OPT que Tabu 3-OPT ya que este ultimo insume un mayor tiempo en obtener soluciones, y dichas soluciones suelen ser siempre inferiores al primero.
-Debido a la oscilacion de la familia random podra ser elegida la busqueda local 2-OPT para esta misma ya que los valores obtenidos y el tiempo que insuma llegar a estos puede ser mayor para las meta-heuristicas trabajadas.
-
-A la hora de trabajar con estas familias y tener que elegir entre Tabu 3-OPT y la b\'usqueda respectiva, como vimos ser\'a preferible trabajar con la heur\'istica ya que esta obtendr\'a una mejor soluci\'on y en menor tiempo. Por el contrario, para el otro Tabu, obtendr\'a una solucion ampliamente mejor dejando de lado que el tiempo insumido pueda llegar a ser un poco mayor.
-
-
-En adicion a lo desarrollado, podemos ver que el tiempo de ejecución del algoritmo esta ligado plenamente a la cantidad de iteraciones que realiza el algoritmo.A estas iteraciones a su vez, como también determinan a la exactitud de la solución, se las debe acotar de forma tal que se pueda obtener un trade/off beneficioso entre tiempo de computo y solucion obtenida. Para este analisis amparamos 2 opciones:
+Para realizar los tests se tomaron dos rangos de tamaños:
 \begin{itemize}
-\item Corte por cantidad de iteraciones máxima: Esta variante implica determinar un numero máximo fijo de iteraciones (por ejemplo 100), determinando un tiempo fijo de ejecución máximo.
-\item Corte por criterio de calidad determinado: El criterio sería detectar cierta convergencia en la distancia minima lograda y cortar en ese limite. El criterio se basa en que si no se logra una mejora en la solución por 4 iteraciones, entonces se considera que no se puede mejorar la solucion.
+\item Rango 1: 5 a 15 elementos (pokeparadas + gimnasios)
+\item Rango 2: 20 a 100 en intervalos de 10 elementos.
 \end{itemize}
 
-La elección seleccionada fue la segunda. Esto se debe a que al analizar distintos tamaños de instancias, se podia ver que en las instancias de menor tamaño, se llegaba a una "meseta" de donde no se podia mejorar más la solucion, y las iteraciones restaantes, simplemente desperdiciaban tiempo de computo. Por otro lado, para instancias grandes, con muchos cambios posibles, se producia un corte en la mejora de la solución, ya que el algoritmo no llegaba a encontrar esa "meseta" por que cortaba las iteraciones antes de tiempo. 
+Para el Rango 1 se tomaron 5$\ast n$ instancias siendo $n$ el tamaño de entrada (pokeparadas + gimnasios) y para el Rango 2 se tomó el 50\% del tamaño de la entrada. El Rango 2 es más pequeño que en el punto tres, ya que tabú search requiere mucho más tiempo de resolución y por lo tanto se decidió tomar tamaños de hasta 100 elementos pero discretizar mejor.\\
 
-Al cambiar de metodología, se logró hacer que el algoritmo se adapte al tipo de instancia, dandole el tiempo suficiente para llegar a la "meseta" de cada instancia. Cabe destacar que esta elección de corte no determinaría una solución optima, ya que cada "meseta" simboliza un minimo en la funcion de mejoras, pero no se puede asumir que ese minimo también es un ínfimo.
+Todas las distancias y tiempos de las instancias de un mismo tamaño son promediadas para obtener porcentajes de mejora con respecto a la solucion promedio golosa y poder comparar los resultados con la solución exacta para el Rango 1.\\
 
+\subsubsection*{Tenor}
 
-  \begin{center}
- \includegraphics[scale=0.2]{./EJ4/mejora2.png}\\
- {            \textit{Instancias de distinto tamaño con cortes acordes a cada caso}}
-  \end{center}
-  \vspace*{0.3cm}
-  
+Comenzaremos analizando este parámetro para las familias \textbf{Random} y \textbf{Grupos de gimnasios}.
+Nos interesaba entender cual sería el comportamiento del algoritmo al aumentar el tenor tabú.
 
-  En el gráfico se puede observar el tiempo que cada instancia de un tamaño determinado (cada linea) haya su solución a travez del algoritmo, el decrecimiento implica que la solución mejora, y cuando se detecta que ya no se pudo mejorar por un período de 4 iteraciones, entonces corta y devuelve la solución hallada como la mejor. Claramente no se puede decir que se halla la mejor solución (es decir el que produce el infimo error) pero si un minimo local para cierta vecindad de soluciones.
+Dado que la lista tabú almacena aristas, tenemos que determinar un porcentaje de aristas limite para el tamaño de esta lista. Aquellas almacenadas serán marcadas como tabú y por lo tanto atributos no deseables en una solución.
+Por lo tanto Sea $C$ = $m+n$ = pokeparadas + gimnasios, el tamaño de la entrada, el mapa conformado por estos elementos tendra todas las aristas posibles, que son en total, $\frac{C \ast C-1}{2}$, entonces la cantidad de aristas que podremos marcar como tabú estará acotado por ese valor.\\
+Para este test decidimos probar con dos rangos de valores para el tenor, 1\% a 5\% y 10\% a 50\% de la cantidad de aristas totales en el mapa.
+
+Por lo tanto para realizar los tests, se configuró el algoritmo tabú de la siguiente manera:
+
+\begin{itemize}
+\item Tenor: variable desde C $\ast$ 0.01 hasta C $\ast$ 0.05 en intervalos de 0.01 y C $\ast$ 0.1 hasta C $\ast$ 0.5 en intervalos de 0.1
+\item Criterio de parada: iteraciones límite $T$ = C $\ast$ 0.10 si C >= 20, si no C.
+\end{itemize}
+
+El criterio de parada se eligió inicialmente en \textbf{cantidad de iteraciones límite} ya que con el segundo criterio de parada, \textbf{Repeticiones límite sin mejora} se requería bastante más tiempo de corrida. 
+
+Entendemos que lo mejor hubiese sido probar con ambos criterios, aunque desestimamos que se hubiesen obtenido resultados diferentes, ya que el segundo criterio en si, como veremos luego, tiene una muy buena performance para valores de tenor pequeños.\\
+
+Veamos los gráficos para los resultados de ambas familias y ambos rangos de entada.
+\\\\
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Rango 1: Familia Random]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/tenorRandom15c.png}}
+       \label{fig:randomDist1}
+  \subfloat[Rango 2: Familia Random]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/tenorRandom100.png}}
+    \label{fig:randomMejora1}
+\end{figure}
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Rango 1: Familia Grupos de gimnasios]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/tenorFamilia15c.png}}
+       \label{fig:randomDist1}
+  \subfloat[Rango 2: Familia Grupos de gimnasios]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/tenorFamilia100.png}}
+    \label{fig:randomMejora1}
+\end{figure}
+
+En los gráficos se pueden ver 9 columnas de distancias:
+
+\begin{enumerate}
+\item Goloso
+\item Tabú - 2opt con tenor 1\%
+\item Tabú - 2opt con tenor 5\%
+\item Tabú - 2opt con tenor 10\%
+\item Tabú - 2opt con tenor 50\%
+\item Tabú - Swap con tenor 1\%
+\item Tabú - Swap con tenor 5\%
+\item Tabú - Swap con tenor 10\%
+\item Tabú - Swap con tenor 50\%
+\end{enumerate}
+
+Como puede observarse, tener valores grandes de tenor no beneficia al resultado del algoritmo, más bien, todo lo contrario. Esto puede relacionarse con que valores grandes de tenor implica ser más restrictivo y darle al algoritmo mucha memoria tabú, y esto puede perjudicar las regiones que el algoritmo puede checkear. Por lo tanto conviene siempre tener valores pequeños del tenor, para ser restrictivos en regiones pequeñas y permitir al algoritmo alejarse hacia soluciones que tengan aristas que hayan sido tabú pero que hayan sido reemplazadas con nuevas aristas, lo que puede llevar a descubrir soluciones nuevas, es decir recorridos nuevos, que sean mejores.\\
+
+Por lo tanto determinamos que tomare entre un 1\% y un 10\% de las aristas totales es un buen valor para el tenor. En lo que sigue, trabajaremos con un 5\%.
+
+\subsection*{Iteraciones límite vs. Repeticiones límite sin mejora}
+
+La cantidad de iteraciones Límite fue testeó desde el 10\% al 50\% del tamaño de la entrada y la cantidad de repeticiones límite sin mejora desde 1 hasta 10.\\
+En principio, a la hora de realizar el test, la cantidad de iteraciones límite para obtener un valor que fuera de calidad era desconocido, así que lo que se verá en los gráficos refleja es una consecuencia de la cantidad de iteraciones límite elegida.
+
+Veamos que sucedió para ambas familias
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Distancias: Familia Random]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/criteriosDistanciasFamilia100.png}}
+       \label{fig:randomDist1}
+  \subfloat[Tiempos: Familia Random]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/criteriosTiemposRandom100.png}}
+    \label{fig:randomMejora1}
+\end{figure}
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Distancias: Familia Random]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/criteriosDistanciasRandom100.png}}
+       \label{fig:randomDist1}
+  \subfloat[Tiempos: Familia Random]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/criteriosTiemposRandom100.png}}
+    \label{fig:randomMejora1}
+\end{figure}
+
+En los gráficos se pueden ver 5 columnas:
+
+\begin{enumerate}
+\item Goloso
+\item Tabú - 2opt iteraciones límite.
+\item Tabú - 2opt repeticiones límite
+\item Tabú - Swap iteraciones límite
+\item Tabú - Swap repeticiones límite
+\end{enumerate}
+
+Puede verse claramente como repeticiones límite gana en ambas versiones de tabú search (2opt y Swap), aunque con un costo considerable de tiempo. Con iteraciones límite no se obtuvo una solución tan buena (es en general un 50\% , 60\% o 70\% peor, como es el caso de 2opt) aunque el resultado se obtiene en la mitad de tiempo. Para obtener un resultado mejor usando cantidad de iteraciones límite, deberá iterarse hasta encontrar un valor que haga que el resultado no mejore. Una forma trivial de saber cuantas iteraciones hay que tomar, sería contando la cantidad de iteraciones que hace el algoritmo usando repeticiones límite para varios casos del mismo tamaño y promediando los mismos. Si este valor puede compararse con algún parámetro, como podría ser un porcentaje del tamaño de entrada, podrían esablecerse rangos de valores donde vaya disminuyendo la distancia pero tenga que resignarse tiempo. De cualquier manera es una tarea que requiere mucho tiempo.
+
+Siendo que usando el criterio de corte de repeticiones límite, tabú-2opt es el que mejores soluciones brinda para ambas familias, para el caso de el criterio de corte por repetición podemos ver claramente que para valores grandes en la familia Random es tabú-Swap quien tiene los mejores resultados. Podemos ver esto en los siguientes gráficos.
+
+Veamos esto para 100 elementos.
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Distancias Random]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/mejorasDistRandom100.png}}
+       \label{fig:randomDist1}
+  \subfloat[Distancias Grupos de gimnasios]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/mejorasDistFamilia100.png}}
+    \label{fig:randomMejora1}
+\end{figure}
+
+Mientras que para Grupos de gimnasios tabú-2opt es la mejor opción con cualquier criterio de corte, para la familia Random, si se utiliza el criterio de corte por iteraciones límite puede verse que la mayor ventaja se dá utilizando tabú-Swap.
+Dado que la familia Random es muy general en cuanto a instancias posibles, y que en la mayoría de los casos 2opt fué el que mejores resultados dió, no sabemos como explicar porque sucede esto. 
+Creemos igualmente que si realizan más iteraciones,  tabú-2opt se verá beneficado de ello y tal como sucede en los otros casos.\\
+
+Claramente es difícil determinar un buen valor de iteraciones límite prematuramente, por lo tanto si se quiere estar seguro de obtener un muy buen resultado, cantidad de repeticiones límite es el mejor aliado.
+
+Veamos los siguientes gráficos que muestram que utilizando un valor de 2 como repeticiones límite es suficiente para la condición de corte.
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Distancias Random]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/cantRepRandom100.png}}
+       \label{fig:randomDist1}
+  \subfloat[Distancias Grupos de gimnasios]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/cantRepFamilia100.png}}
+    \label{fig:randomMejora1}
+\end{figure}
+
+Por lo tanto, la mejor configuración es usar cantidad de repeticiones límite igual a dos (aunque a costa del tiempo) y un valor de tenor igual al 5\% del tamaño de entrada.
+
+El problema del tiempo requerido para correr tabú search fué una constante durante toda la experimentación, hasta el final. Para poder mejorar este inconveniente y dado que los algoritmos fueron implementados utilizando el lenguaje C++, se recurrió a compilar los algoritmos utilizando el flag de optimización O3 que fué determinante a la hora de acelerar la corrida de los tests, que de otra forma nos hubiera limitado a promediar menos o generar casos de tests más pequeños en cuanto a tamaño.\\
+
+\subsection*{Comparación con solución de búsqueda local y solución exacta}
+
+En este apartado nos interesa comparar las mejores soluciones de tabú search para cada familia contra lo mejor encontrado por la búsqueda local y los tiempso requeridos para ello. Además, para el Rango 1 podremos saber que tan cerca se encuentra la solución tabú midiendo el error relativo.\\
+
+\subsubsection*{Error relativo Random}
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Error relativo Tabú 2opt vs. Búsqueda local 2opt]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/errorRelativoTabuRandom.png}}
+       \label{fig:randomDist1}
+  \subfloat[Tiempos Tabú 2opt vs. Búsqueda local 2opt]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/tiempoChicoRandom.png}}
+    \label{fig:randomMejora1}
+\end{figure}
+
+Podemos notar que para casos pequeños, es conveniente aplicar tabú search en la familia Grupos de gimnasios, donde  se obtienen errores cercanos al 20\% en comparación a los errores de la búsqueda local, que están en su mayoria por encima del 40\%. Esto aún considerando los tiempos necesarios de corrida para obtener estas soluciones, que son bastante superiores a los requeridos por la búsqueda local. 
+
+Sabemos por lo que hemos estudiado hasta el momento, que las soluciones obtenidas por el algoritmo goloso para la familia por grupos puede ser muy mala, y en casos pequeños siempre se puede mejorar mucho una solución y más utilizando un algoritmo que intenta escapar de los mínimos locales como tabú search.\\
+
+\subsubsection*{Error relativo Grupos de familia}
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Error relativo Tabú 2opt vs. Búsqueda local 2opt]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/errorRelativoTabuFamilia.png}}
+       \label{fig:randomDist1}
+  \subfloat[Tiempos Tabú 2opt vs. Búsqueda local 2opt]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/tiempoChicoFamilia.png}}
+    \label{fig:randomMejora1}
+\end{figure}
+
+Dado que la familia Random está conformada por casos más generales, no siempre todas las soluciones que el algoritmo goloso encuentra para cada ejemplo dentro de un tamaño pueden ser malas. Por lo tanto los errores son más variables y no una hay una diferencia muy marcada entre tabú search y la búsqueda local, aunque si puede verse que tabú siempre es mejor, con errores que no superan el 80\% mientras que para la mayoria de los casos la búsqueda local si se supera este valor.\\
+
+En general puede verse que ninguna solución alcanza la distancia óptima para estos tamaños. Encontrar este valor puede ser muy difícil incluso para tamaños pequeños, ya que si existen muchas combinacioens de soluciones válidas, tabú search podría tener que recorrerlas todas antes de llegar a la solución óptima.\\
+
+\subsubsection*{Porcentajes de mejora para casos grandes}
+
+Para los casos grandes solo podemos ver que tanto se mejora la solución con respecto al goloso, ya que es practicamente imposible correr backtracking sobre tamaños superios a 15 aristas teniendo que promediar instancias en tiempos razonables.\\
+
+Para poder realizar comparaciones, se corrieron las mismas instancias del Rango 2 de este punto con los algoritmos de búsqueda local que mejores resultados obtuvieron en el ejercicio tres.\\
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Porcentaje de mejora Tabú 2opt vs. Búsqueda local 2opt]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/mejoraFamilia.png}}
+       \label{fig:randomDist1}
+  \subfloat[Tiempos Tabú 2opt vs. Búsqueda local 2opt]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/tiempoGrandeFamilia.png}}
+    \label{fig:randomMejora1}
+\end{figure}
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Porcentaje de mejora Tabú 2opt vs. Búsqueda local 2opt]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/mejoraRandom.png}}
+       \label{fig:randomDist1}
+  \subfloat[Tiempos Tabú 2opt vs. Búsqueda local 2opt]{
+    \includegraphics[width=0.45\textwidth]{./EJ4/tiempoGrandeRandom.png}}
+    \label{fig:randomMejora1}
+\end{figure}
+
+Sin lugar a dudas, para instancias grandes, conviene utilizar tabú search, aunque deba pagarse un alto coste temporal. Puede verse que el porcentaje de mejora para ambas familias supera el 50\% mientras que con la búsqueda local se obtiene un porcentaje de mejora inferior al 20\% en ambos casos. Con lo cual, parece confirmarse que cuanto más grande la instancia, más local quedan las soluciones obtenidas por una heurística de búsqueda local, mientras que tabú search encuentra mejores soluciones analizando muchas más vecindades.
+
