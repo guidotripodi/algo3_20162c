@@ -122,11 +122,13 @@ En los gráficos se pueden ver 5 columnas:
 \item Tabú - Swap repeticiones límite
 \end{enumerate}
 
-Puede verse claramente como repeticiones límite gana en ambas versiones de tabú search (2opt y Swap), aunque con un costo considerable de tiempo. Con iteraciones límite no se obtuvo una solución tan buena (es en general un 50\% , 60\% o 70\% peor, como es el caso de 2opt) aunque el resultado se obtiene en la mitad de tiempo. Para obtener un resultado mejor usando cantidad de iteraciones límite, deberá iterarse hasta encontrar un valor que haga que el resultado no mejore. Una forma trivial de saber cuantas iteraciones hay que tomar, sería contando la cantidad de iteraciones que hace el algoritmo usando repeticiones límite para varios casos del mismo tamaño y promediando los mismos. Si este valor puede compararse con algún parámetro, como podría ser un porcentaje del tamaño de entrada, podrían esablecerse rangos de valores donde vaya disminuyendo la distancia pero tenga que resignarse tiempo. De cualquier manera es una tarea que requiere mucho tiempo.
+Puede verse claramente como repeticiones límite gana en ambas versiones de tabú search (2opt y Swap), aunque con un costo considerable de tiempo. Con iteraciones límite no se obtuvo una solución tan buena (es en general un 50\% , 60\% o 70\% peor, como es el caso de 2opt) aunque el resultado se obtiene en la mitad de tiempo. Para obtener un resultado mejor usando cantidad de iteraciones límite, deberá iterarse hasta encontrar un valor que haga que el resultado no mejore. 
+
+Una forma trivial de saber cuantas iteraciones hay que tomar, sería contando la cantidad de iteraciones que hace el algoritmo usando repeticiones límite para varios casos del mismo tamaño y promediando los mismos. Si este valor puede compararse con algún parámetro, como podría ser un porcentaje del tamaño de entrada, podrían esablecerse rangos de valores donde vaya disminuyendo la distancia pero tenga que resignarse tiempo. De cualquier manera es una tarea que requiere mucho tiempo.\\
 
 Siendo que usando el criterio de corte de repeticiones límite, tabú-2opt es el que mejores soluciones brinda para ambas familias, para el caso de el criterio de corte por repetición podemos ver claramente que para valores grandes en la familia Random es tabú-Swap quien tiene los mejores resultados. Podemos ver esto en los siguientes gráficos.
 
-Veamos esto para 100 elementos.
+Veamos esto para 100 elementos.\\
 
 \begin{figure}[h] 
  \centering
@@ -137,6 +139,8 @@ Veamos esto para 100 elementos.
     \includegraphics[width=0.45\textwidth]{./EJ4/mejorasDistFamilia100.png}}
     \label{fig:randomMejora1}
 \end{figure}
+
+\newpage
 
 Mientras que para Grupos de gimnasios tabú-2opt es la mejor opción con cualquier criterio de corte, para la familia Random, si se utiliza el criterio de corte por iteraciones límite puede verse que la mayor ventaja se dá utilizando tabú-Swap.
 Dado que la familia Random es muy general en cuanto a instancias posibles, y que en la mayoría de los casos 2opt fué el que mejores resultados dió, no sabemos como explicar porque sucede esto. 
