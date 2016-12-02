@@ -86,12 +86,12 @@ creo eleccion \hfill O(1) \\
 \textbf{\hfill Complejidad total: $O(1)$}\\ 
 \end{algorithm}
 
-\subsubsection{Nota 1}
+\subsubsection*{Nota 1}
 El ciclo con guarda \textit{esPosible} iterará \textit{n+m} veces (pokeparadas + gimnasios) dado que esta es la longitud del camino más largo posible. Cada iteración realizará en el peor de los casos n+m comparaciones, buscando el siguiente destino para formar el camino.
 
 Como se evalúan todos los inicios de caminos posibles, entonces el ciclo descripto arriba se ejecutará n+m veces.
 
-\subsubsection{Estructura interna para chequear elecciones y estados ocurridos}
+\subsubsection*{Estructura interna para chequear elecciones y estados ocurridos}
 
 Se trabajó con dos estructuras internas denominadas $MaestroPokemon$ y $Eleccion$, donde la primera tiene la informaci\'on sobre la cantidad de gimnasios y pokeparadas, la cantidad de gimnasios ya derrotados, la posici\'on actual, la cantidad de posiciones que posee en cada momento como tambi\'en la capacidad m\'axima de la mochila, y dos listas que poseen todos los destinos posibles visitados o no y otra con solo los visitados.
 Mientras que nuestra segunda estructura, como el nombre lo indica, nos otorga toda la informaci\'on necesaria para poder realizar la elecci\'on, como es el id de la misma para no ser repetida, la posici\'on en donde se encuentra, la cantidad de pociones necesarias en caso de ser un gimnasio y la distancia para llegar a dicha posici\'on desde cierto punto.

@@ -40,7 +40,7 @@ El siguiente es un ejemplo de una instancia dentro de este conjunto nuevo, ejecu
   \vspace*{0.3cm}
 
 
-\subsubsection{Comparaciones de tiempo entre heurísticas}
+\subsection{Comparaciones de tiempo entre heurísticas}
 
 Para corroborar la performance obtenida para este grupo de instancias se tomaron los tiempos que tarda cada algoritmo de búsqueda local en obtener soluci\'on. 
  Las mediciones de las instancias de menor cantidad de elementos se compararon con la distancia exacta tomada con el backtracking. Para los casos de mayor tamaño, siendo que el tiempo de ejecución exponencial impidió la toma de mediciones, se compararon los resultados solo entre heurísticas.
@@ -53,7 +53,7 @@ Para corroborar la performance obtenida para este grupo de instancias se tomaron
   \end{center}
   \vspace*{0.3cm}
 
-En una comparación de tiempo de ejecución contra el backtracking, podemos observar que el algoritmo exacto es mucho más caro en general que las aproximaciones heurísticas. Sin embargo, en el caso del Tabu search, para casos hasta 8 se ve que la solución del backtracking se logra en menor tiempo que la aproximada. No obstante, ya para casos más grandes se observa una fuerte diferenciación en los tiempos de ejecución.
+En una comparación de tiempo de ejecución contra el backtracking, podemos observar que el algoritmo exacto es mucho más caro en general que las aproximaciones heurísticas. Sin embargo, en el caso del Tabu search, para casos hasta 8 se ve que la solución del backtracking se logra en menor tiempo que la aproximada. No obstante, ya para casos más grandes se observa una fuerte diferenciación en los tiempos de ejecución de las heuristicas y la fuerza bruta, dado el caracter exponencial de la misma.
 
 \vspace*{0.3cm} \vspace*{0.3cm}
   \begin{center}
@@ -63,9 +63,9 @@ En una comparación de tiempo de ejecución contra el backtracking, podemos obse
   \vspace*{0.3cm}
 
 
-Dejando de lado los tiempos exponenciales del backtracking, las heurísticas comparadas ahora una frente a la otra con una mayor cantidad de instancias de diferente tamaño, permiten observar el mayor tiempo de ejecución de Tabu frente a la búsqueda 2-OPT, debido a que el primero utiliza la vecindad generada por el segundo. La referencia del algoritmo goloso nos permite dar cuenta del incremento base que tiene cada heurística para mejorar los resultados golosos.
+Dejando de lado los tiempos exponenciales del backtracking, las heurísticas comparadas ahora una frente a la otra con una mayor cantidad de instancias de diferente tamaño, permiten observar el mayor tiempo de ejecución de Tabu frente a la búsqueda 2-OPT, explicable debido a que el primero utiliza la vecindad generada por el segundo. La referencia del algoritmo goloso nos permite dar cuenta del incremento base que tiene cada heurística para mejorar los resultados golosos.
 
-\subsubsection*{Calidad de solución}
+\subsection{Calidad de solución}
 
 Al tener en cuenta la calidad de la solución, podemos ver que la solución golosa puede diferir de la exacta enormemente, como se explico con la familia por sectores en el punto 2. Al aplicar la búsqueda local se logra disminuir esta diferencia, que luego es nuevamente disminuida al aplicar Tabu Search:
 
@@ -110,7 +110,7 @@ Utilizando las instancias de tamaño pequeño en donde podemos obtener de forma 
 En una escala mayor en número de elementos, en la cual no se cuenta con datos exactos en cuanto a solución óptima, la comparación de resultados se dará en cuenta a la menor distancia lograda posible, efectuada por cada alternativa. Como ya sucedía anteriormente, la búsqueda local mejora la solución de la heurística golosa, asi como el Tabú lo hace con el resultado de la búsqueda local. La mejora de las distancias de los caminos logrados en cada conjunto de instancias de distinto tamaño es aproximadamente de un $35\%$ en cuanto a lo devuelto por Tabú frente al goloso.
 %Ese ultimo porcentaje es debatible :P%
 
-\subsubsection{Concluciones}
+\subsection{Conclusiones}
 
 La resolución de ciertos problemas a nivel exacto se tornan impracticables a partir de cierto tamaño del problema a analizar, con lo cual es necesario sacrificar exactitud, por obtener al menos una solución. Al intentar solucionar este problema mediante heurísticas, se recae en el hecho de que, dado que no se tiene idea de cual es la solución buscada, es necesario obtener cierta "confianza" de las soluciones que se puedan llegar a obtener.
 
@@ -122,9 +122,5 @@ Tanto la búsqueda mediante SWAP como 2-OPT nos brindaron los mejores resultados
 Dado que 2-OPT y SWAP obtuvieron resultados muy similares y que se implementó Tabú con el primero, es de interés desarrollar el mismo también en base a SWAP y poder realizar comparaciones entre las 2 implementaciones para poder observar su comportamierto y las diferencias que surgen entre ambos, buscando un mejor error.
 
 
-\subsubsection{Dificultades afrontadas}
 
-A lo largo del desarrollo del trabajo nos encontramos con ciertos obstáculos que tuvimos que ir sorteando:
-El primero de ellos fue el tiempo necesario para correr los tests: Al manejar un algoritmo de tiempo exponencial, como es el backtraking, tuvimos que limitarnos a un pequeño grupo de instancias para obtener las mediciones exactas para las comparaciones con otros algoritmos. La utilización de la optimización en la compilación de nivel 3 (-O3) ayudo en grán medida a correr los casos más grandes y poder agrandar un poco más la muestra.\\
-A la hora de tomar las mediciones de los experimentos, nos vimos con el problema de la cantidad de instancias de un mismo tamaño a tomar: siendo que no podemos tomar la misma cantidad por cada tamaño debido a que acarrea un desbalance de exactitud (las instancias más chicas tendrían más datos muestrales que las grandes), tuvimos que adaptar la muestra al n(n+m) evaluado. Esto nos ocasionó un incremento substancial en la cantidad de instancias totales a evaluar, incrementando asi el tiempo de experimetación.
 
