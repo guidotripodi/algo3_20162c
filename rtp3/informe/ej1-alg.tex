@@ -1,4 +1,4 @@
-Nuestro algoritmo cuenta con 3 secciones marcadas. En la cual se chequean las podas sin soluci\'on, en la segunda se consigue el camino, y en la \'ultima donde se devuelve dicho camino con la cantidad de nodos y distancia recorrida.\\
+Nuestro algoritmo cuenta con 3 secciones marcadas. La primera, en la cual se chequean las podas sin soluci\'on, en la segunda se consigue el camino, y la \'ultima donde se devuelve dicho camino con la cantidad de nodos y distancia recorrida.\\
 En detalle, para nuestra primer etapa, desarrollamos un ciclo para poder ver el poder que posee cada uno de los gimnasios, chequeando si la capacidad de la mochila soporta el poder de los mismos. A su vez, se va sumando el poder de cada gimnasio para luego chequear si la cantidad de pokeparadas alcanza para ganar en todos los gimnasios.\\
 Luego, en la segunda secci\'on, se realiza el backtraking propiamente dicho, en donde un ciclo itera hasta obtener el camino con distancia recorrida \'optima. Dicho camino es armado tomando ciertas elecciones posibles y en caso que se encuentre alg\'un camino mejor se vuelve para atrás en las elecciones necesarias para tomar otro camino donde la distancia recorrida sea menor. Esto se realizar\'a hasta obtener el camino de distancia m\'inima.
 Por \'ultimo, nuestra tercer secci\'on devolver\'a el camino obtenido con la distancia recorrida y la cantidad de nodos del camino.
@@ -8,7 +8,7 @@ Se muestra el pseudocodigo que ejemplifica lo comentado:
 \begin{algorithm}[H]
 \Fn{EJ1()}{
 crear cola decisiones para guardar elecciones\\
-eleccion contiene un id, posicion de la misma y distancia desde el punto anterior hasta el como tambien la cantidad de pociones hasta el momento\\
+eleccion contiene un id, posici\'on de la misma y distancia desde el punto anterior hasta el como tambien la cantidad de pociones hasta el momento\\
 sePudoDeshacerEleccion $\gets$ verdadero \hfill O(1) \\
 minimo $\gets$ -1 \hfill O(1)\\ 
 \While{sePudoDeshacerEleccion}{  

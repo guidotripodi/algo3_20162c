@@ -14,23 +14,31 @@ Se denomina $k-opt$ cuando especificamente se modifican $k$ aristas de la soluci
 
 En el informe previo a este recuperatorio se había trabajado además con $3-opt$, pero debido a los tiempos de cómputo requeridos por esta herística y los tiempos de entrega, se decidió no incluir la misma en la experimentación. Sólo se dejará el pseudo-código a modo informativo.
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ3/ejemplo2opt.png}\\
- {            \textit{Movimiento 2-opt}}
-  \end{center}
-  \vspace*{0.3cm}
+
+\begin{figure}[h] 
+ \centering
+  \subfloat[Camino original]{
+    \includegraphics[width=0.45\textwidth]{./EJ3/ejemplo2optorig.png}}
+       \label{fig:Movimiento 2-opt1}
+  \subfloat[Movimiento 2-opt]{
+    \includegraphics[width=0.45\textwidth]{./EJ3/ejemplo2opt.png}}
+    \label{fig:Movimiento 2-opt}
+\end{figure}
+
 
 Realizar un movimiento $2-opt$ como se explicó, es cambiar dos aristas de un recorrido por otras dos aristas diferentes, de manera tal que el resultado siga siendo un recorrido simple.
 En el ejemplo puede observarse el recorrido 1->2,3,4,5->6,7,8 y el movimiento realizado cambia las aristas (1,2) y (5,6) por las aristas (2,6) y (1,5), lo que invierte el tramo 2,3,4,5 a 5,4,3,2 obteniendo el recorrido 1,5,4,3,2,6,7,8.
   
-  \vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ3/ejemplo3optCaso1.png}\\
- {            \textit{Movimiento 3-opt}}
-  \end{center}
-  \vspace*{0.3cm}
-  
+\begin{figure}[h] 
+ \centering
+  \subfloat[Camino original]{
+    \includegraphics[width=0.45\textwidth]{./EJ3/ejemplo2optorig.png}}
+       \label{fig:Movimiento 3-opt1}
+  \subfloat[Movimiento 3-OPT]{
+    \includegraphics[width=0.45\textwidth]{./EJ3/ejemplo3optCaso1.png}}
+    \label{fig:Movimiento 3opt}
+\end{figure}
+
 Realizar un movimiento $3-opt$ genera más de una opción para las tres aristas elegidas.
 En el ejemplo podemos ver el recorrido 1->2,3->4,5->6,7,8 y se eligen las aristas (1,2), (3,4) y (5,6) intercambiandolas por (1,3), (2,5) y (4,6) y obteniendo el recorrido 1->3,2->5,4->6,7,8.
 
@@ -48,12 +56,16 @@ $3-opt$ requerirá que se tomen todas estas posibilidades si se busca no dejar n
 
 Además, realizando un simple swap de nodos, podemos obtener muy fácilmente soluciones que intercambian 2 o 4 aristas. Serán dos si los nodos intercambiados de posición son consecutivos y cuatro si no lo son.
 
-\vspace*{0.3cm} \vspace*{0.3cm}
-  \begin{center}
- \includegraphics[scale=0.3]{./EJ3/ejemploSwap.png}\\
- {            \textit{Movimiento swap}}
-  \end{center}
-  \vspace*{0.3cm}
+\begin{figure}[h] 
+ \centering
+  \subfloat[Camino original]{
+    \includegraphics[width=0.45\textwidth]{./EJ3/ejemplo2optorig.png}}
+       \label{fig:Movimiento swap2}
+  \subfloat[Movimiento Swap]{
+    \includegraphics[width=0.45\textwidth]{./EJ3/ejemploSwap.png}}
+    \label{fig:Movimiento Swap}
+\end{figure}
+
 
 En el ejemplo se toma el camino 1,2,3,4,5,6,7,8 y se intercambian 2 por 6 generando 1,6,3,4,5,2,7,8 y generando asi 4 aristas nuevas (1,6), (6,3), (5,2) y (2,7).\\
 
