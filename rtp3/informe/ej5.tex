@@ -3,7 +3,7 @@ Para este punto se desarrollaron nuevas instancias random distintas a las anteri
 En este nuevo conjunto de instancias se generaron $5 \times (N+M)$ instancias de tamaño $5 \leq N+M \leq 20$. Luego se incrementaron la cantidad de elementos de 20 a 100 tomando intervalos de 10 en 10. Para esta segunda secci\'on se crearon un 50$\%$ de instancias para cada tamaño.
 Una vez que fueron ejecutadas todas las instancias por los respectivos algoritmos, a excepci\'on del backtraking el cual solo ejecuto de 5 a 15 por problemas de c\'omputo, se promedieron todas las instancias de cada tamaño para tener una mejor aproximaci\'on de las soluciones obtenidas. 
 
-Una vez que se obtuvieron los promedios tanto de las soluciones como de la medici\'on de tiempo de cada algoritmo, tomamos los porcentajes de mejora, y el porcentaje de error relativo para $5 \leq N+M \leq 15$ de las heurísticas, teniendo como valor real el resultado del Backtraking.
+Una vez que se obtuvieron los promedios tanto de las soluciones como de la mediciones de tiempo de cada algoritmo, tomamos los porcentajes de mejora, y el porcentaje de error relativo para $5 \leq N+M \leq 15$ de las heurísticas, teniendo como valor real el resultado del Backtraking.
 
 Realizamos ciertas comparaciones para ver como se comportan las heurísticas teniendo en cuenta las conclusiones que pudimos obtener de los puntos anteriores y de esta forma obtener que heurística obtiene una mejor relación mejora de solución / tiempo.
 
@@ -90,7 +90,7 @@ Al tener en cuenta la calidad de la solución, podemos ver que la solución golo
   \end{center}
   \vspace*{0.3cm}
 
-Utilizando las instancias de tamaño pequeño en donde podemos obtrener de forma exacta el resultado óptimo, podemos ver como el error de la solución golosa puede llegar a superar hasta en un $150\%$ la mínima buscada. La búsqueda local logra disminuír este error hasta en un $50\%$ respecto al goloso, y la aplicación de Tabú search vuelve a mejorar este error de forma que no supera el $20\%$ en diferencia con el óptimo.
+Utilizando las instancias de tamaño pequeño en donde podemos obtener de forma exacta el resultado óptimo, podemos ver como el error de la solución golosa puede llegar a superar hasta en un $150\%$ la mínima buscada. La búsqueda local logra disminuír este error hasta en un $50\%$ respecto al goloso, y la aplicación de Tabú search vuelve a mejorar este error de forma que no supera el $20\%$ en diferencia con el óptimo.
 
 
 \vspace*{0.3cm} \vspace*{0.3cm}
@@ -119,12 +119,12 @@ Al experimentar con la heurística golosa, pudimos ver que su comportamiento lo 
 Tanto la búsqueda mediante SWAP como 2-OPT nos brindaron los mejores resultados. La base de 2-OPT de Tabú nos permitio incluso mejorar lo anteriormente logrado, siendo de esta forma la metodología preferida, en cuanto a calidad de solucion. No obstante, de no contar con tanto tiempo de cómputo, la decisi\'on se deberá llevar a cabo entre SWAP y 2-OPT, las cuales se empatan bastante en calidad vs. tiempo.\\
 
 \textbf{Experimentaciones a realizar de interés}\\
-Dado que 2-OPT y SWAP obtuvieron resultados muy similares y que se implementó Tabú con el primero, es de interés desarrollar el mismo también en base a SWAP y poder realizar comparaciones entre las 2 impementaciones para poder observar su comportamierto y las diferencias que surgen entre ambos, buscando un mejor error.
+Dado que 2-OPT y SWAP obtuvieron resultados muy similares y que se implementó Tabú con el primero, es de interés desarrollar el mismo también en base a SWAP y poder realizar comparaciones entre las 2 implementaciones para poder observar su comportamierto y las diferencias que surgen entre ambos, buscando un mejor error.
 
 
 \subsubsection{Dificultades afrontadas}
 
-A lo largo del desarrollo del trabajo nos encontramos con ciertos obstźculos que tuvimos que ir sorteando:
+A lo largo del desarrollo del trabajo nos encontramos con ciertos obstáculos que tuvimos que ir sorteando:
 El primero de ellos fue el tiempo necesario para correr los tests: Al manejar un algoritmo de tiempo exponencial, como es el backtraking, tuvimos que limitarnos a un pequeño grupo de instancias para obtener las mediciones exactas para las comparaciones con otros algoritmos. La utilización de la optimización en la compilación de nivel 3 (-O3) ayudo en grán medida a correr los casos más grandes y poder agrandar un poco más la muestra.\\
 A la hora de tomar las mediciones de los experimentos, nos vimos con el problema de la cantidad de instancias de un mismo tamaño a tomar: siendo que no podemos tomar la misma cantidad por cada tamaño debido a que acarrea un desbalance de exactitud (las instancias más chicas tendrían más datos muestrales que las grandes), tuvimos que adaptar la muestra al n(n+m) evaluado. Esto nos ocasionó un incremento substancial en la cantidad de instancias totales a evaluar, incrementando asi el tiempo de experimetación.
 
