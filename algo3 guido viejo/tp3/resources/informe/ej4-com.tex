@@ -1,7 +1,0 @@
-Con la idea utilizada en la demostración de finalización de nuestro algoritmo podemos generar una cota para la complejidad de los algoritmos planteados en esta sección. \\
-Si en nuestro algoritmo realizamos $K$ pasadas, quiere decir que mejoramos la solución en $K - 1$ pasadas, es decir, aumentamos la cantidad de aristas buenas en $K - 1$ pasadas. Como la cantidad de aristas buenas es como mínimo $0$ y como mucho $E$ y en cada pasada aumentamos en al menos $1$ la cantidad de aristas buenas, realizamos como mucho $O(E)$ pasadas. \\
-Como en cada pasada, iteramos los $V$ nodos, esto nos da que la complejidad de los algoritmos es $O(E * V * X)$ donde $X$ es lo que cuesta procesar un nodo en particular para intentar mejorar la solución. \\
-
-Para la primer vecindad, en el peor de los casos probamos con todos los colores. Probar con un color hace tantas operaciones como vecinos tenga un nodo, por lo que es $O(E)$, como lo hace para cada color, la complejidad termina siendo $O(E^2 * V * C)$, con  $C$ la cantidad total de colores. La complejidad de una iteración resulta $O(V * E * C)$\\
-
-Para la segunda vecindad, calcular el mejor color y setearlo tiene costo $O(E)$ (hace tantas operaciones como vecinos tenga), por lo que la complejidad termina siendo $O(E^2 * V)$. La complejidad de una iteración resulta $O(V * E)$. \\

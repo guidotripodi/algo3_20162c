@@ -1,8 +1,0 @@
-
-Para la resolución de este problema se utilizó la técnica de programación dinámica.
-Básicamente lo que hace el algoritmo es resolver el problema para menor tamaño, es decir, tomando los primeros $k$ pisos del edificio. Luego, para resolver el problema para los primeros $k+1$ pisos, reutiliza las soluciones para el edicio pero con menos pisos.
-
-En particular, el algoritmo calcula para cada piso, la máxima cantidad pisos por los que se puede pasar hasta llegar al mismo. Se puede demostrar por inducción que si tenemos resuelto el problema para los pisos de $1$ a $k$, la mejor solución para el piso $k+1$ equivale a sumarle $1$ a la mejor solución de entre los pisos de $1$ a $k$ desde los cuales se puede subir al piso $k+1$.
-
-
-

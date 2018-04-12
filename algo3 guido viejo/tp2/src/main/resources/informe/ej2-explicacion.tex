@@ -1,9 +1,0 @@
-Para entender la solucion a este problema, primero asumiremos que el tiempo que toma viajar en un portal es de $1$ unidad (el mismo que toma recorrer un metro).
-
-Ahora, tomamos el grafo en el que los nodos corresponden a las posiciones dentro de cada piso y dos nodos estan conectados si corresponden a posiciones contiguas o si estan conectados por un portal.
-Como en este grafo el costo de un camino coincide con su longitud, este problema puede ser resuelto mediante el algoritmo BFS, ya que este recorre ordenadamente los nodos del grafo, visitando primero los que estan a menor longitud del nodo inicial (que en este caso coincide con el costo). Por lo tanto, si modificamos el algoritmo de manera que calcule el costo para cada nodo que se visita basandose en en el costo del nodo de donde proviene, podemos calcular el costo del nodo final y resolver lo que pide el problema.
-
-
-Como en el problema original el costo de cada portal es de dos unidades debemos adaptar la solución anterior para que funcione para el problema original. Para hacer esto podemos agregar un nuevo nodo entre cada par de nodos equivalentes a portales conectados y con esto logramos que funcione la misma idea.
-
-Cabe aclarar que esta idea de solución solo funciona porque los costos de cada conexion entre los nodos de nuestro grafo son enteros, por lo que se pueden agregar "nodos imaginarios" para lograr que coincidan los valores de costo de un camino con su distancia. Si estas distancias son muy grandes, el algoritmo propuesto y su generacion de "nodos imaginarios" podria aumentar la complejidad del algoritmo. No es el caso del ejercicio, ya que las distancias estan acotadas.
