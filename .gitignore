@@ -3,7 +3,6 @@
 *.toc
 *.out
 *~
-*.pdf
 *.DS_Store
 *.o
 *.swp
